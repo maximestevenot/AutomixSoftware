@@ -1,1 +1,1 @@
-﻿Dossier contenant les documents de suivit du projet.
+﻿Dossier contenant les documents de suivi du projet.
