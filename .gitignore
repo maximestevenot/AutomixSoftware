@@ -243,3 +243,12 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+vamp-plugin-sdk-2.6/.hg_archival.txt
+vamp-plugin-sdk-2.6/.hgignore
+vamp-plugin-sdk-2.6/.hgtags
+vamp-plugin-sdk-2.6/CHANGELOG
+vamp-plugin-sdk-2.6/INSTALL
+vamp-plugin-sdk-2.6/README.compat
+vamp-plugin-sdk-2.6/rdf/ToDo
+vamp-plugin-sdk-2.6/skeleton/Makefile.inc
+vamp-plugin-sdk-2.6/skeleton/Makefile.linux
