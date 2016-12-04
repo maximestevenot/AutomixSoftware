@@ -12,10 +12,12 @@ namespace AMResources {
 		{
 		private :
 			unsigned int _bpm;
+			unsigned int _duration;
 		};
 
 		std::string _path;
 		Data _data;
+		std::string _name;
 
 	};
 }
