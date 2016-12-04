@@ -37,45 +37,13 @@ namespace AutoMix_UI {
 
 	protected:
 
-
-	protected:
-
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	private: System::Windows::Forms::GroupBox^  _featuresGroupBox;
 	private: System::Windows::Forms::ListBox^  _musicListBox;
 
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::TextBox^  _bpmTextArea;
 	private: System::Windows::Forms::TextBox^  _bpmValueTextArea;
-
 
 	private: System::Windows::Forms::TextBox^  _durationValueTextArea;
 	private: System::Windows::Forms::TextBox^  _durationTextArea;
@@ -90,28 +58,6 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::TextBox^  _folderPathTextBox;
 	private: System::Windows::Forms::TextBox^  _folderPathValueTextBox;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	protected:
 
@@ -368,23 +314,23 @@ namespace AutoMix_UI {
 #pragma endregion
 
 
-private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
-	if (result == System::Windows::Forms::DialogResult::OK) {
-		_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
+	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
+		if (result == System::Windows::Forms::DialogResult::OK) {
+			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
+		}
 	}
-}
 
 
-private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-}
+	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
 
 
-private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	Application::Exit();
-}
+	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+		Application::Exit();
+	}
 
 
-};
+	};
 
 }

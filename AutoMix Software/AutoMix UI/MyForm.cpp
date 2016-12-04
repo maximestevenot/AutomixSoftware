@@ -1,8 +1,9 @@
 #include "MyForm.h"
+#include "Track.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
-
+using namespace AMResources;
 
 [STAThread]
 void Main(array<String^>^ args)
