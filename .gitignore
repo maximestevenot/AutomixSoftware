@@ -243,6 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
 vamp-plugin-sdk-2.6/.hg_archival.txt
 vamp-plugin-sdk-2.6/.hgignore
 vamp-plugin-sdk-2.6/.hgtags
