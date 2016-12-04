@@ -1,5 +1,6 @@
 #include "MyForm.h"
 #include "Track.h"
+#include "TrackCollection.h"
 
 using namespace System;
 using namespace System::Windows::Forms;

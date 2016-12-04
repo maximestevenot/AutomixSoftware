@@ -326,7 +326,7 @@ namespace AutoMix_UI {
 
 		if (result == System::Windows::Forms::DialogResult::OK) {
 
-			TrackCollection *TC = new TrackCollection();
+			TrackCollection *TC = TrackCollection::getInstance();
 
 			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
 
@@ -376,9 +376,20 @@ namespace AutoMix_UI {
 
 	private: System::Void _musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 
-		String^ curItem = _musicListBox->SelectedItem->ToString;
+		String^ curItem = _musicListBox->SelectedItem->ToString();
 
+		std::string str = convertString(curItem);
 
+		TrackCollection * TC = TrackCollection::getInstance();
+
+		for (Track t : *(TC->getCollection()))
+		{
+			if (!str.compare(t.getName()))
+			{
+				_bpmValueTextArea->Text = t.getBPM().ToString();
+				_durationValueTextArea->Text = t.getBPM().ToString();
+			}
+		}
 	}
 };
 
