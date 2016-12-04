@@ -1,4 +1,6 @@
 #pragma once
+#include "Track.h"
+#include "TrackCollection.h"
 
 namespace AutoMix_UI {
 
@@ -10,6 +12,7 @@ namespace AutoMix_UI {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+	using namespace AMResources;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -106,7 +109,7 @@ namespace AutoMix_UI {
 			// 
 			this->_principalPanel->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->_principalPanel->Location = System::Drawing::Point(0, 24);
-			this->_principalPanel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_principalPanel->Margin = System::Windows::Forms::Padding(2);
 			this->_principalPanel->Name = L"_principalPanel";
 			// 
 			// _principalPanel.Panel1
@@ -131,10 +134,11 @@ namespace AutoMix_UI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListBox->FormattingEnabled = true;
 			this->_musicListBox->Location = System::Drawing::Point(54, 87);
-			this->_musicListBox->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_musicListBox->Margin = System::Windows::Forms::Padding(2);
 			this->_musicListBox->Name = L"_musicListBox";
 			this->_musicListBox->Size = System::Drawing::Size(202, 277);
 			this->_musicListBox->TabIndex = 0;
+			this->_musicListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::_musicListBox_SelectedIndexChanged);
 			// 
 			// _folderPathValueTextBox
 			// 
@@ -165,10 +169,10 @@ namespace AutoMix_UI {
 			this->_featuresGroupBox->Controls->Add(this->_bpmValueTextArea);
 			this->_featuresGroupBox->Controls->Add(this->_bpmTextArea);
 			this->_featuresGroupBox->Location = System::Drawing::Point(46, 155);
-			this->_featuresGroupBox->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_featuresGroupBox->Margin = System::Windows::Forms::Padding(2);
 			this->_featuresGroupBox->Name = L"_featuresGroupBox";
-			this->_featuresGroupBox->Padding = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->_featuresGroupBox->Size = System::Drawing::Size(232, 148);
+			this->_featuresGroupBox->Padding = System::Windows::Forms::Padding(2);
+			this->_featuresGroupBox->Size = System::Drawing::Size(233, 148);
 			this->_featuresGroupBox->TabIndex = 0;
 			this->_featuresGroupBox->TabStop = false;
 			this->_featuresGroupBox->Text = L"Features";
@@ -181,9 +185,9 @@ namespace AutoMix_UI {
 			this->_durationValueTextArea->BackColor = System::Drawing::SystemColors::Control;
 			this->_durationValueTextArea->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_durationValueTextArea->Location = System::Drawing::Point(72, 86);
-			this->_durationValueTextArea->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_durationValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationValueTextArea->Name = L"_durationValueTextArea";
-			this->_durationValueTextArea->Size = System::Drawing::Size(68, 13);
+			this->_durationValueTextArea->Size = System::Drawing::Size(69, 13);
 			this->_durationValueTextArea->TabIndex = 3;
 			// 
 			// _durationTextArea
@@ -194,9 +198,9 @@ namespace AutoMix_UI {
 			this->_durationTextArea->BackColor = System::Drawing::SystemColors::Control;
 			this->_durationTextArea->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_durationTextArea->Location = System::Drawing::Point(18, 86);
-			this->_durationTextArea->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_durationTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationTextArea->Name = L"_durationTextArea";
-			this->_durationTextArea->Size = System::Drawing::Size(52, 13);
+			this->_durationTextArea->Size = System::Drawing::Size(53, 13);
 			this->_durationTextArea->TabIndex = 2;
 			this->_durationTextArea->Text = L"Duration :";
 			// 
@@ -208,9 +212,9 @@ namespace AutoMix_UI {
 			this->_bpmValueTextArea->BackColor = System::Drawing::SystemColors::Control;
 			this->_bpmValueTextArea->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_bpmValueTextArea->Location = System::Drawing::Point(72, 44);
-			this->_bpmValueTextArea->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_bpmValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmValueTextArea->Name = L"_bpmValueTextArea";
-			this->_bpmValueTextArea->Size = System::Drawing::Size(68, 13);
+			this->_bpmValueTextArea->Size = System::Drawing::Size(69, 13);
 			this->_bpmValueTextArea->TabIndex = 1;
 			// 
 			// _bpmTextArea
@@ -221,9 +225,9 @@ namespace AutoMix_UI {
 			this->_bpmTextArea->BackColor = System::Drawing::SystemColors::Control;
 			this->_bpmTextArea->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_bpmTextArea->Location = System::Drawing::Point(18, 44);
-			this->_bpmTextArea->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->_bpmTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmTextArea->Name = L"_bpmTextArea";
-			this->_bpmTextArea->Size = System::Drawing::Size(52, 13);
+			this->_bpmTextArea->Size = System::Drawing::Size(53, 13);
 			this->_bpmTextArea->TabIndex = 0;
 			this->_bpmTextArea->Text = L"BPM :";
 			// 
@@ -296,7 +300,7 @@ namespace AutoMix_UI {
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->MinimumSize = System::Drawing::Size(666, 562);
 			this->Name = L"MyForm";
 			this->Text = L"AutoMix";
@@ -322,7 +326,7 @@ namespace AutoMix_UI {
 
 		if (result == System::Windows::Forms::DialogResult::OK) {
 
-			typename AMResources::TrackCollection *TC = new TrackCollection();
+			TrackCollection *TC = new TrackCollection();
 
 			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
 
@@ -340,11 +344,14 @@ namespace AutoMix_UI {
 
 					String^ fileName = safe_cast<String^>(files->Current);
 
-					typename AMResources::Track *track = new Track(convertString(fileName));
+					Track *track = new Track(convertString(fileName));
 
-					String^ str = gcnew String(track->getName().c_str);
+					int last_slash_idx = fileName->LastIndexOf("\\");
+					String^ str = fileName->Remove(0, last_slash_idx + 1);
 
 					_musicListBox->Items->Add(str);
+
+					TC->add(*track);
 
 				}
 
@@ -367,6 +374,12 @@ namespace AutoMix_UI {
 	}
 
 
-	};
+	private: System::Void _musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+
+		String^ curItem = _musicListBox->SelectedItem->ToString;
+
+
+	}
+};
 
 }

@@ -5,13 +5,13 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
+
 namespace AMResources {
 
 	std::string nameFromPath(std::string path)
 	{
 		size_t last_slash_idx = path.find_last_of("\\");
 		return path.erase(0, last_slash_idx + 1);
-		/*return path;*/
 	}
 
 	std::string convertString(String^ str)
@@ -19,7 +19,6 @@ namespace AMResources {
 		char* str2 = (char*)(void*)Marshal::StringToHGlobalAnsi(str);
 		std::string str3 = std::string(str2);
 		return str3;
-		/*std::string str3 = " hello";
-		return str3;*/
 	}
+
 }
