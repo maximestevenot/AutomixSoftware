@@ -8,6 +8,7 @@ namespace AutoMix_UI {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -318,6 +319,20 @@ namespace AutoMix_UI {
 		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
 		if (result == System::Windows::Forms::DialogResult::OK) {
 			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
+			String^ path = gcnew String(_inputMusicFolderBrowserDialog->SelectedPath);
+			if (Directory::Exists(path))
+			{
+				array<String^>^fileEntries = Directory::GetFiles(path);
+				IEnumerator^ files = fileEntries->GetEnumerator();
+				while (files->MoveNext())
+				{
+					String^ fileName = safe_cast<String^>(files->Current);
+					String^ filePath = safe_cast<String^>(files->Current);
+					int last_slash_idx = fileName->LastIndexOf("\\");
+					fileName = fileName->Remove(0, last_slash_idx + 1);
+					_musicListBox->Items->Add(fileName);
+				}
+			}
 		}
 	}
 
