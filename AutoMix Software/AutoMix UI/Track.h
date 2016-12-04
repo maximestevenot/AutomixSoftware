@@ -6,11 +6,11 @@ namespace AMResources {
 
 	public class Track
 	{
-	private :
+	private:
 
-		class Data 
+		class Data
 		{
-		private :
+		private:
 			unsigned int _bpm;
 			unsigned int _duration;
 		};
@@ -19,5 +19,11 @@ namespace AMResources {
 		Data _data;
 		std::string _name;
 
+		friend std::ostream & operator<<(std::ostream &, const Track &);
 	};
+
+	std::ostream & operator<<(std::ostream & out, const Track & track) {
+		out << track._name;
+		return out;
+	}
 }
