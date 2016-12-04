@@ -34,7 +34,7 @@
     authorization.
 */
 
-#include <vamp-sdk/FFT.h>
+#include <vamp-plugin-sdk-2.6/vamp-sdk/FFT.h>
 
 #include <cmath>
 

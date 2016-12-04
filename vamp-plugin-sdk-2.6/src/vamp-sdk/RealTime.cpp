@@ -57,7 +57,7 @@ using std::endl;
 #include <sys/time.h>
 #endif
 
-#include <vamp-sdk/RealTime.h>
+#include <vamp-plugin-sdk-2.6/vamp-sdk/RealTime.h>
 
 _VAMP_SDK_PLUGSPACE_BEGIN(RealTime.cpp)
 

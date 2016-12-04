@@ -64,7 +64,7 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Release\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Documents\Cours\ENSICAEN\2A\Projets\Projet 2A\#GIT\projet_2a\vamp-plugin-sdk-2.6;$(IncludePath)</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>D:\Documents\Cours\ENSICAEN\2A\Projets\Projet 2A\#GIT\projet_2a\vamp-plugin-sdk-2.6;$(IncludePath)</IncludePath>
