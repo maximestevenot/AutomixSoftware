@@ -3,4 +3,3 @@
 #include "stdafx.h"
 
 #include "AutoMix Data Extraction.h"
-
