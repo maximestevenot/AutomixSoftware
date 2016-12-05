@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{18CCFBAF-3A9A-4A32-883D-4CDF70960BD9}</ProjectGuid>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>AutoMixDataExtraction</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>.\marsyas;.\;$(IncludePath)</IncludePath>
+    <LibraryPath>.\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>.\marsyas;.\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>marsyas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoMix Data Extraction.h" />
+    <ClInclude Include="marsyas\basis.h" />
+    <ClInclude Include="marsyas\Collection.h" />
+    <ClInclude Include="marsyas\Color.h" />
+    <ClInclude Include="marsyas\CommandLineOptions.h" />
+    <ClInclude Include="marsyas\common_header.h" />
+    <ClInclude Include="marsyas\common_source.h" />
+    <ClInclude Include="marsyas\Communicator.h" />
+    <ClInclude Include="marsyas\Conversions.h" />
+    <ClInclude Include="marsyas\debug\debugger.h" />
+    <ClInclude Include="marsyas\debug\file_io.h" />
+    <ClInclude Include="marsyas\debug\record.h" />
+    <ClInclude Include="marsyas\debug\recorder.h" />
+    <ClInclude Include="marsyas\dsound.h" />
+    <ClInclude Include="marsyas\ERBTools.h" />
+    <ClInclude Include="marsyas\export.h" />
+    <ClInclude Include="marsyas\expr\ExCommon.h" />
+    <ClInclude Include="marsyas\expr\ExNode.h" />
+    <ClInclude Include="marsyas\expr\ExParser.h" />
+    <ClInclude Include="marsyas\expr\Expr.h" />
+    <ClInclude Include="marsyas\expr\ExScanner.h" />
+    <ClInclude Include="marsyas\expr\ExSymTbl.h" />
+    <ClInclude Include="marsyas\expr\ExVal.h" />
+    <ClInclude Include="marsyas\fft.h" />
+    <ClInclude Include="marsyas\FileName.h" />
+    <ClInclude Include="marsyas\Heap.h" />
+    <ClInclude Include="marsyas\lu.h" />
+    <ClInclude Include="marsyas\marohtml.h" />
+    <ClInclude Include="marsyas\marojson.h" />
+    <ClInclude Include="marsyas\marostring.h" />
+    <ClInclude Include="marsyas\marosvg.h" />
+    <ClInclude Include="marsyas\maroxml.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\basis.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Collection.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Color.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\CommandLineOptions.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\common_header.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\common_source.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Communicator.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Conversions.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\debugger.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\file_io.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\record.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\recorder.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\dsound.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\ERBTools.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\export.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExCommon.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExNode.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExParser.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\Expr.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExScanner.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExSymTbl.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExVal.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\fft.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\FileName.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Heap.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\lu.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marohtml.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marojson.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marostring.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marosvg.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\maroxml.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\MATLABengine.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\mididevices.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\MrsLog.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\NumericLib.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\peakView.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\PeUtilities.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\QGMMModel.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\qt5\marsyasqt_common.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\qt5\marsystem_wrapper.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\any.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\atomic_control.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\controller.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\osc_receiver.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\osc_transmitter.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\packet_queue.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\queue.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\realvec_queue.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\runner.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\stage.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\udp_receiver.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\udp_transmitter.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realvec.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvEvent.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvExpr.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvGetUpd.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvValUpd.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\Repeat.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\Scheduler.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmControlValue.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmParam.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmRealTime.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmSampleCount.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTime.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTimer.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTimerManager.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmVirtualTime.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\script\manager.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\script\script.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\static_vq_codebook.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\statistics.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Stk.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\StrobeList.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControl.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlAccessor.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlManager.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlValue.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarSystem.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarSystemManager.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Thread.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\TimeLine.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Transcriber.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\TranscriberExtract.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\types.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\vmblock.h" />
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\WekaData.h" />
+    <ClInclude Include="marsyas\MATLABengine.h" />
+    <ClInclude Include="marsyas\mididevices.h" />
+    <ClInclude Include="marsyas\MrsLog.h" />
+    <ClInclude Include="marsyas\NumericLib.h" />
+    <ClInclude Include="marsyas\peakView.h" />
+    <ClInclude Include="marsyas\PeUtilities.h" />
+    <ClInclude Include="marsyas\QGMMModel.h" />
+    <ClInclude Include="marsyas\qt5\marsyasqt_common.h" />
+    <ClInclude Include="marsyas\qt5\marsystem_wrapper.h" />
+    <ClInclude Include="marsyas\realtime\any.h" />
+    <ClInclude Include="marsyas\realtime\atomic_control.h" />
+    <ClInclude Include="marsyas\realtime\controller.h" />
+    <ClInclude Include="marsyas\realtime\osc_receiver.h" />
+    <ClInclude Include="marsyas\realtime\osc_transmitter.h" />
+    <ClInclude Include="marsyas\realtime\packet_queue.h" />
+    <ClInclude Include="marsyas\realtime\queue.h" />
+    <ClInclude Include="marsyas\realtime\realvec_queue.h" />
+    <ClInclude Include="marsyas\realtime\runner.h" />
+    <ClInclude Include="marsyas\realtime\stage.h" />
+    <ClInclude Include="marsyas\realtime\udp_receiver.h" />
+    <ClInclude Include="marsyas\realtime\udp_transmitter.h" />
+    <ClInclude Include="marsyas\realvec.h" />
+    <ClInclude Include="marsyas\sched\EvEvent.h" />
+    <ClInclude Include="marsyas\sched\EvExpr.h" />
+    <ClInclude Include="marsyas\sched\EvGetUpd.h" />
+    <ClInclude Include="marsyas\sched\EvValUpd.h" />
+    <ClInclude Include="marsyas\sched\Repeat.h" />
+    <ClInclude Include="marsyas\sched\Scheduler.h" />
+    <ClInclude Include="marsyas\sched\TmControlValue.h" />
+    <ClInclude Include="marsyas\sched\TmParam.h" />
+    <ClInclude Include="marsyas\sched\TmRealTime.h" />
+    <ClInclude Include="marsyas\sched\TmSampleCount.h" />
+    <ClInclude Include="marsyas\sched\TmTime.h" />
+    <ClInclude Include="marsyas\sched\TmTimer.h" />
+    <ClInclude Include="marsyas\sched\TmTimerManager.h" />
+    <ClInclude Include="marsyas\sched\TmVirtualTime.h" />
+    <ClInclude Include="marsyas\script\manager.h" />
+    <ClInclude Include="marsyas\script\script.h" />
+    <ClInclude Include="marsyas\static_vq_codebook.h" />
+    <ClInclude Include="marsyas\statistics.h" />
+    <ClInclude Include="marsyas\Stk.h" />
+    <ClInclude Include="marsyas\StrobeList.h" />
+    <ClInclude Include="marsyas\system\MarControl.h" />
+    <ClInclude Include="marsyas\system\MarControlAccessor.h" />
+    <ClInclude Include="marsyas\system\MarControlManager.h" />
+    <ClInclude Include="marsyas\system\MarControlValue.h" />
+    <ClInclude Include="marsyas\system\MarSystem.h" />
+    <ClInclude Include="marsyas\system\MarSystemManager.h" />
+    <ClInclude Include="marsyas\Thread.h" />
+    <ClInclude Include="marsyas\TimeLine.h" />
+    <ClInclude Include="marsyas\Transcriber.h" />
+    <ClInclude Include="marsyas\TranscriberExtract.h" />
+    <ClInclude Include="marsyas\types.h" />
+    <ClInclude Include="marsyas\vmblock.h" />
+    <ClInclude Include="marsyas\WekaData.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="AutoMix Data Extraction.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">D:\Fichiers\Documents\projet_2a\marsyas\marsyas-0.5.0-win32\include\marsyas;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

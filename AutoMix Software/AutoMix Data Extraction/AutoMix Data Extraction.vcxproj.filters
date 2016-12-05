@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoMix Data Extraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\debugger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\file_io.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\record.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\debug\recorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\Expr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExSymTbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\expr\ExVal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\qt5\marsyasqt_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\qt5\marsystem_wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\any.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\atomic_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\osc_receiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\osc_transmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\packet_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\realvec_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\runner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\stage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\udp_receiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realtime\udp_transmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvExpr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvGetUpd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\EvValUpd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\Repeat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\Scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmControlValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmRealTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmSampleCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmTimerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\sched\TmVirtualTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\script\manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\script\script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlAccessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarControlValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\system\MarSystemManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\basis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Collection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\CommandLineOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\common_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\common_source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Communicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\dsound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\ERBTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\fft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\FileName.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\lu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marohtml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marojson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marostring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\marosvg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\maroxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\MATLABengine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\mididevices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\MrsLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\NumericLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\peakView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\PeUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\QGMMModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\realvec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\static_vq_codebook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Stk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\StrobeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\TimeLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\Transcriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\TranscriberExtract.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\vmblock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marsyas-0.5.0-win32\include\marsyas\WekaData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\debug\debugger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\debug\file_io.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\debug\record.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\debug\recorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\Expr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExScanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExSymTbl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\expr\ExVal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\qt5\marsyasqt_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\qt5\marsystem_wrapper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\any.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\atomic_control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\osc_receiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\osc_transmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\packet_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\realvec_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\runner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\stage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\udp_receiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realtime\udp_transmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\EvEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\EvExpr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\EvGetUpd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\EvValUpd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\Repeat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\Scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmControlValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmRealTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmSampleCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmTimerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\sched\TmVirtualTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\script\manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\script\script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarControlAccessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarControlManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarControlValue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\system\MarSystemManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\basis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Collection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\CommandLineOptions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\common_header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\common_source.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Communicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\dsound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\ERBTools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\export.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\fft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\FileName.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\lu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marohtml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marojson.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marostring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\marosvg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\maroxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\MATLABengine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\mididevices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\MrsLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\NumericLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\peakView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\PeUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\QGMMModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\realvec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\static_vq_codebook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\statistics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Stk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\StrobeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\TimeLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\Transcriber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\TranscriberExtract.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\vmblock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsyas\WekaData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AutoMix Data Extraction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
