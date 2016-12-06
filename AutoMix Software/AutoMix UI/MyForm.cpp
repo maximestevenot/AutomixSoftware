@@ -4,7 +4,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
-using namespace AMResources;
+using namespace AM_Resources;
 
 [STAThread]
 void Main(array<String^>^ args)

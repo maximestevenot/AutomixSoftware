@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Runtime::InteropServices;
 
 
-namespace AMResources {
+namespace AM_Utils {
 
 	std::string nameFromPath(std::string path)
 	{

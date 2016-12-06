@@ -1,62 +1,36 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 #include "Utils.h"
 
-
-namespace AMResources {
+namespace AM_Resources {
 
 	public class Track
 	{
 	private:
 
-		class Data
+		struct Data
 		{
-		public:
-
-			unsigned int _bpm;
-			unsigned int _duration;
-
-			Data()
-			{
-				_bpm = 0;
-				_duration = 0;
-			}
+			unsigned int _bpm = 0;
+			unsigned int _duration = 0;
 		};
 
+		Data * _data;
 
 		std::string _path;
-		Data *_data;
 		std::string _name;
-
-		friend std::ostream & operator<<(std::ostream &, const Track &);
 
 	public:
 
-		Track(std::string path)
-		{
-			_path = path;
-			_data = new Data();
-			_name = nameFromPath(path);
-		}
+		Track();
+		Track(std::string path);
 
-		std::string getName()
-		{
-			return _name;
-		}
-
-		int getBPM()
-		{
-			return _data->_bpm;
-		}
-
-		int getDuration() {
-			return _data->_duration;
-		}
+		std::string getName() const;
+		unsigned int getBPM() const;
+		unsigned int getDuration() const;
 	};
 
-	std::ostream & operator<<(std::ostream & out, const Track & track) {
-		out << track._name;
-		return out;
-	}
+	std::ostream & operator<<(std::ostream & out, const Track & track);
+
 }

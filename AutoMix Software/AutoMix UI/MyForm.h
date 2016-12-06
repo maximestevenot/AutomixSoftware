@@ -4,7 +4,6 @@
 
 namespace AutoMix_UI {
 
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -12,7 +11,8 @@ namespace AutoMix_UI {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
-	using namespace AMResources;
+	using namespace AM_Resources;
+	using namespace AM_Utils;
 
 	/// <summary>
 	/// Summary for MyForm
@@ -23,9 +23,7 @@ namespace AutoMix_UI {
 		MyForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			_trackCollection = new TrackCollection();
 		}
 
 	protected:
@@ -40,7 +38,7 @@ namespace AutoMix_UI {
 			}
 		}
 
-	protected:
+	private: TrackCollection* _trackCollection;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -63,8 +61,6 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::TextBox^  _folderPathTextBox;
 	private: System::Windows::Forms::TextBox^  _folderPathValueTextBox;
-
-	protected:
 
 	private:
 		/// <summary>
@@ -335,14 +331,11 @@ namespace AutoMix_UI {
 		}
 #pragma endregion
 
-
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
 		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
 
 		if (result == System::Windows::Forms::DialogResult::OK) {
-
-			TrackCollection *TC = TrackCollection::getInstance();
 
 			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
 
@@ -361,52 +354,40 @@ namespace AutoMix_UI {
 					String^ fileName = safe_cast<String^>(files->Current);
 
 					int last_point = fileName->LastIndexOf(".");
-					
+
 					String^ ext = fileName->Remove(0, last_point + 1);
 
 					ext = ext->ToLower();
 					if (ext->Contains("mp3")) {
 
-						Track *track = new Track(convertString(fileName));
+						Track track = Track(convertString(fileName));
 
 						int last_slash_idx = fileName->LastIndexOf("\\");
 						String^ str = fileName->Remove(0, last_slash_idx + 1);
 
 						_musicListBox->Items->Add(str);
-
-						TC->add(*track);
+						_trackCollection->add(track);
 					}
-
 				}
-
 			}
-
 		}
-
 	}
 
+	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
 
-
-
-
-	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-
-
-	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) 
+	{
 		Application::Exit();
 	}
 
-
-	private: System::Void _musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+	private: System::Void _musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) 
+	{
 
 		String^ curItem = _musicListBox->SelectedItem->ToString();
 
 		std::string str = convertString(curItem);
 
-		TrackCollection * TC = TrackCollection::getInstance();
-
-		for (Track t : *(TC->getCollection()))
+		for (Track t : *(_trackCollection))
 		{
 			if (!str.compare(t.getName()))
 			{
@@ -415,8 +396,9 @@ namespace AutoMix_UI {
 			}
 		}
 	}
-private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-}
-};
+
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
+
+	};
 
 }

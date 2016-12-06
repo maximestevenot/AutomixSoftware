@@ -13,16 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\AM Resources">
+    <Filter Include="Source Files\AM_Resources">
+      <UniqueIdentifier>{34e4b443-72fb-4786-b2b1-02de807d6caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AM_Resources">
       <UniqueIdentifier>{a16441c7-450b-4780-aa4d-00e842791dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AM_Utils">
+      <UniqueIdentifier>{6e32b658-86e2-48b4-8518-aa7ff55ce71b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AM_Utils">
+      <UniqueIdentifier>{cd43c8c6-4c25-4530-a016-56b257c959ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TrackCollection.cpp">
+      <Filter>Source Files\AM_Resources</Filter>
+    </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\AM_Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Track.cpp">
+      <Filter>Source Files\AM_Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -30,13 +45,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Track.h">
-      <Filter>Header Files\AM Resources</Filter>
+      <Filter>Header Files\AM_Resources</Filter>
     </ClInclude>
     <ClInclude Include="TrackCollection.h">
-      <Filter>Header Files\AM Resources</Filter>
+      <Filter>Header Files\AM_Resources</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Header Files\AM Resources</Filter>
+      <Filter>Header Files\AM_Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
