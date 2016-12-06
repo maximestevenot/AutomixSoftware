@@ -120,8 +120,8 @@ namespace AutoMix_UI {
 			this->_principalPanel->Panel2->Controls->Add(this->_folderPathTextBox);
 			this->_principalPanel->Panel2->Controls->Add(this->_featuresGroupBox);
 			this->_principalPanel->Panel2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->_principalPanel->Size = System::Drawing::Size(651, 501);
-			this->_principalPanel->SplitterDistance = 298;
+			this->_principalPanel->Size = System::Drawing::Size(1264, 657);
+			this->_principalPanel->SplitterDistance = 578;
 			this->_principalPanel->SplitterWidth = 3;
 			this->_principalPanel->TabIndex = 1;
 			// 
@@ -133,10 +133,10 @@ namespace AutoMix_UI {
 			this->_musicListBox->BackColor = System::Drawing::SystemColors::WindowFrame;
 			this->_musicListBox->ForeColor = System::Drawing::SystemColors::ControlLight;
 			this->_musicListBox->FormattingEnabled = true;
-			this->_musicListBox->Location = System::Drawing::Point(54, 87);
+			this->_musicListBox->Location = System::Drawing::Point(10, 10);
 			this->_musicListBox->Margin = System::Windows::Forms::Padding(2);
 			this->_musicListBox->Name = L"_musicListBox";
-			this->_musicListBox->Size = System::Drawing::Size(202, 277);
+			this->_musicListBox->Size = System::Drawing::Size(556, 641);
 			this->_musicListBox->TabIndex = 0;
 			this->_musicListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::_musicListBox_SelectedIndexChanged);
 			// 
@@ -146,6 +146,7 @@ namespace AutoMix_UI {
 			this->_folderPathValueTextBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_folderPathValueTextBox->ForeColor = System::Drawing::SystemColors::ControlLight;
 			this->_folderPathValueTextBox->Location = System::Drawing::Point(121, 50);
+			this->_folderPathValueTextBox->MaxLength = 100000;
 			this->_folderPathValueTextBox->Name = L"_folderPathValueTextBox";
 			this->_folderPathValueTextBox->Size = System::Drawing::Size(216, 13);
 			this->_folderPathValueTextBox->TabIndex = 2;
@@ -171,11 +172,11 @@ namespace AutoMix_UI {
 			this->_featuresGroupBox->Controls->Add(this->_bpmValueTextArea);
 			this->_featuresGroupBox->Controls->Add(this->_bpmTextArea);
 			this->_featuresGroupBox->ForeColor = System::Drawing::SystemColors::ControlLight;
-			this->_featuresGroupBox->Location = System::Drawing::Point(46, 155);
+			this->_featuresGroupBox->Location = System::Drawing::Point(16, 155);
 			this->_featuresGroupBox->Margin = System::Windows::Forms::Padding(2);
 			this->_featuresGroupBox->Name = L"_featuresGroupBox";
 			this->_featuresGroupBox->Padding = System::Windows::Forms::Padding(2);
-			this->_featuresGroupBox->Size = System::Drawing::Size(234, 148);
+			this->_featuresGroupBox->Size = System::Drawing::Size(656, 304);
 			this->_featuresGroupBox->TabIndex = 0;
 			this->_featuresGroupBox->TabStop = false;
 			this->_featuresGroupBox->Text = L"Features";
@@ -191,7 +192,7 @@ namespace AutoMix_UI {
 			this->_durationValueTextArea->Location = System::Drawing::Point(72, 86);
 			this->_durationValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationValueTextArea->Name = L"_durationValueTextArea";
-			this->_durationValueTextArea->Size = System::Drawing::Size(70, 13);
+			this->_durationValueTextArea->Size = System::Drawing::Size(492, 13);
 			this->_durationValueTextArea->TabIndex = 3;
 			// 
 			// _durationTextArea
@@ -205,7 +206,7 @@ namespace AutoMix_UI {
 			this->_durationTextArea->Location = System::Drawing::Point(18, 86);
 			this->_durationTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationTextArea->Name = L"_durationTextArea";
-			this->_durationTextArea->Size = System::Drawing::Size(54, 13);
+			this->_durationTextArea->Size = System::Drawing::Size(476, 13);
 			this->_durationTextArea->TabIndex = 2;
 			this->_durationTextArea->Text = L"Duration :";
 			// 
@@ -220,7 +221,7 @@ namespace AutoMix_UI {
 			this->_bpmValueTextArea->Location = System::Drawing::Point(72, 44);
 			this->_bpmValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmValueTextArea->Name = L"_bpmValueTextArea";
-			this->_bpmValueTextArea->Size = System::Drawing::Size(70, 13);
+			this->_bpmValueTextArea->Size = System::Drawing::Size(492, 13);
 			this->_bpmValueTextArea->TabIndex = 1;
 			// 
 			// _bpmTextArea
@@ -234,7 +235,7 @@ namespace AutoMix_UI {
 			this->_bpmTextArea->Location = System::Drawing::Point(18, 44);
 			this->_bpmTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmTextArea->Name = L"_bpmTextArea";
-			this->_bpmTextArea->Size = System::Drawing::Size(54, 13);
+			this->_bpmTextArea->Size = System::Drawing::Size(476, 13);
 			this->_bpmTextArea->TabIndex = 0;
 			this->_bpmTextArea->Text = L"BPM :";
 			// 
@@ -249,7 +250,7 @@ namespace AutoMix_UI {
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
-			this->menuStrip1->Size = System::Drawing::Size(651, 24);
+			this->menuStrip1->Size = System::Drawing::Size(1264, 24);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -271,7 +272,7 @@ namespace AutoMix_UI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::_openToolStripMenuItem_Click);
 			// 
@@ -297,7 +298,7 @@ namespace AutoMix_UI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
 			// 
 			// MyForm
@@ -305,13 +306,13 @@ namespace AutoMix_UI {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->ClientSize = System::Drawing::Size(651, 525);
+			this->ClientSize = System::Drawing::Size(1264, 681);
 			this->Controls->Add(this->_principalPanel);
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->MinimumSize = System::Drawing::Size(666, 562);
+			this->MinimumSize = System::Drawing::Size(768, 432);
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix";
