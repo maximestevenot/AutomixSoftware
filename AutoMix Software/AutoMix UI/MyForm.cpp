@@ -1,3 +1,6 @@
+#include <string>
+#include <iostream>
+
 #include "MyForm.h"
 #include "Track.h"
 #include "TrackCollection.h"
@@ -27,7 +30,7 @@ namespace AutoMix_UI {
 	{
 		String^ currentItem = _musicListBox->SelectedItem->ToString();
 
-		Track selectedTrack = _trackCollection->searchByName(convertString(currentItem));
+		Track selectedTrack = _trackCollection->searchByName(toStdString(currentItem));
 
 		_bpmValueTextArea->Text = selectedTrack.getBPM().ToString();
 		_durationValueTextArea->Text = selectedTrack.getBPM().ToString();
@@ -62,21 +65,16 @@ namespace AutoMix_UI {
 		while (files->MoveNext())
 		{
 
-			String^ fileName = safe_cast<String^>(files->Current);
+			String^ filePath = safe_cast<String^>(files->Current);
+			String^ extension = extractExtension(filePath);
 
-			int last_point = fileName->LastIndexOf(".");
-			String^ ext = fileName->Remove(0, last_point + 1);
-			ext = ext->ToLower();
+			if (extension->Contains("mp3")) { //TODO make it better
 
-			if (ext->Contains("mp3")) {
-
-				Track track = Track(convertString(fileName));
-
-				int last_slash_idx = fileName->LastIndexOf("\\");
-				String^ str = fileName->Remove(0, last_slash_idx + 1);
-
-				_musicListBox->Items->Add(str);
+				Track track = Track(toStdString(filePath));
 				_trackCollection->add(track);
+
+				_musicListBox->Items->Add(toManagedString(track.getName()));
+
 			}
 		}
 	}

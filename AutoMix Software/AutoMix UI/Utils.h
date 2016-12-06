@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
 
-namespace AM_Utils {
+namespace AM_StringUtils {
 	std::string nameFromPath(std::string path);
 
-	std::string convertString(System::String^ str);
+	std::string toStdString(System::String^);
+	System::String^ toManagedString(std::string);
 
+	System::String^ extractExtension(System::String^ fileName);
 }
