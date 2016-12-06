@@ -12,6 +12,8 @@ namespace AM_Resources {
 
 	public:
 		void add(Track);
+		Track searchByName(std::string name);
+
 		//friend std::ostream & operator<<(std::ostream &, const TrackCollection &);
 	};
 }

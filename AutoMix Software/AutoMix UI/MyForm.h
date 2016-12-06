@@ -332,74 +332,15 @@ namespace AutoMix_UI {
 		}
 #pragma endregion
 
-	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-
-		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
-
-		if (result == System::Windows::Forms::DialogResult::OK) {
-
-			_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
-
-			String^ path = gcnew String(_inputMusicFolderBrowserDialog->SelectedPath);
-
-			if (Directory::Exists(path))
-			{
-
-				array<String^>^fileEntries = Directory::GetFiles(path);
-
-				IEnumerator^ files = fileEntries->GetEnumerator();
-
-				while (files->MoveNext())
-				{
-
-					String^ fileName = safe_cast<String^>(files->Current);
-
-					int last_point = fileName->LastIndexOf(".");
-
-					String^ ext = fileName->Remove(0, last_point + 1);
-
-					ext = ext->ToLower();
-					if (ext->Contains("mp3")) {
-
-						Track track = Track(convertString(fileName));
-
-						int last_slash_idx = fileName->LastIndexOf("\\");
-						String^ str = fileName->Remove(0, last_slash_idx + 1);
-
-						_musicListBox->Items->Add(str);
-						_trackCollection->add(track);
-					}
-				}
-			}
-		}
-	}
-
+	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
 
-	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) 
-	{
-		Application::Exit();
-	}
+	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _musicListBox_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e);
+	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
-	private: System::Void _musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) 
-	{
-
-		String^ curItem = _musicListBox->SelectedItem->ToString();
-
-		std::string str = convertString(curItem);
-
-		for (Track t : *(_trackCollection))
-		{
-			if (!str.compare(t.getName()))
-			{
-				_bpmValueTextArea->Text = t.getBPM().ToString();
-				_durationValueTextArea->Text = t.getBPM().ToString();
-			}
-		}
-	}
-
-	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
-
+	private:
+		System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
 	};
 
 }
