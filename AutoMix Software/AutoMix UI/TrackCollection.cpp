@@ -4,7 +4,8 @@
 using namespace std;
 
 namespace AM_Resources {
-	void TrackCollection::add(Track track) {
+	void TrackCollection::add(Track track) 
+	{
 		this->push_back(track);
 	}
 
@@ -21,11 +22,15 @@ namespace AM_Resources {
 		return Track();
 	}
 
-	//	std::ostream & operator<<(std::ostream & out, const TrackCollection & trackCollection)
-//	{
-//		for (Track t : trackCollection._trackCollection) {
-//			out << t;
-//		}
-//		return out;
-//	}
+	std::ostream & operator<<(std::ostream & out, const TrackCollection & trackCollection) {
+
+		out << "-----\n";
+		for (Track t : trackCollection)
+		{
+			out << t.getName() << endl;
+		}
+		out << "-----\n";
+
+		return out;
+	}
 }

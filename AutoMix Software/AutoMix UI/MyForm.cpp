@@ -47,37 +47,36 @@ namespace AutoMix_UI {
 			return;
 		}
 
-		_folderPathValueTextBox->Text = _inputMusicFolderBrowserDialog->SelectedPath;
+		String^ path = _inputMusicFolderBrowserDialog->SelectedPath;
 
-		String^ path = gcnew String(_inputMusicFolderBrowserDialog->SelectedPath);
+		if (!Directory::Exists(path))
+		{
+			//TODO display error
+			return;
+		}
 
-		if (Directory::Exists(path))
+		array<String^>^fileEntries = Directory::GetFiles(path);
+
+		IEnumerator^ files = fileEntries->GetEnumerator();
+
+		while (files->MoveNext())
 		{
 
-			array<String^>^fileEntries = Directory::GetFiles(path);
+			String^ fileName = safe_cast<String^>(files->Current);
 
-			IEnumerator^ files = fileEntries->GetEnumerator();
+			int last_point = fileName->LastIndexOf(".");
+			String^ ext = fileName->Remove(0, last_point + 1);
+			ext = ext->ToLower();
 
-			while (files->MoveNext())
-			{
+			if (ext->Contains("mp3")) {
 
-				String^ fileName = safe_cast<String^>(files->Current);
+				Track track = Track(convertString(fileName));
 
-				int last_point = fileName->LastIndexOf(".");
+				int last_slash_idx = fileName->LastIndexOf("\\");
+				String^ str = fileName->Remove(0, last_slash_idx + 1);
 
-				String^ ext = fileName->Remove(0, last_point + 1);
-
-				ext = ext->ToLower();
-				if (ext->Contains("mp3")) {
-
-					Track track = Track(convertString(fileName));
-
-					int last_slash_idx = fileName->LastIndexOf("\\");
-					String^ str = fileName->Remove(0, last_slash_idx + 1);
-
-					_musicListBox->Items->Add(str);
-					_trackCollection->add(track);
-				}
+				_musicListBox->Items->Add(str);
+				_trackCollection->add(track);
 			}
 		}
 	}
