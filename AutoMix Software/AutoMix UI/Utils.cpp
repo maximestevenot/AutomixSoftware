@@ -5,7 +5,7 @@
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
-namespace AM_Utils {
+namespace AM_StringUtils {
 
 	std::string nameFromPath(std::string path)
 	{
@@ -21,11 +21,26 @@ namespace AM_Utils {
 		return extension->ToLower();
 	}
 
-	std::string convertString(String^ str)
+	std::string toStdString(String^ inputString)
 	{
-		char* str2 = (char*)(void*)Marshal::StringToHGlobalAnsi(str);
-		std::string str3 = std::string(str2);
-		return str3;
+		char* tempString = (char*)(void*)Marshal::StringToHGlobalAnsi(inputString);
+		std::string outputString = std::string(tempString);
+
+		return outputString;
+	}
+	System::String^ toManagedString(std::string inputString) 
+	{
+		String^ outputString = gcnew String(inputString.c_str());
+		return outputString;
+	}
+
+	System::String^ extractExtension(System::String^ fileName)
+	{
+		int last_dot_index = fileName->LastIndexOf(".");
+		String^ extension = fileName->Remove(0, last_dot_index + 1);
+		extension = extension->ToLower();
+		
+		return extension;
 	}
 
 }

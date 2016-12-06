@@ -12,7 +12,7 @@ namespace AutoMix_UI {
 	using namespace System::Drawing;
 	using namespace System::IO;
 	using namespace AM_Resources;
-	using namespace AM_Utils;
+	using namespace AM_StringUtils;
 
 	/// <summary>
 	/// Summary for MyForm

@@ -3,7 +3,7 @@
 
 namespace AM_Resources {
 
-	using namespace AM_Utils;
+	using namespace AM_StringUtils;
 
 	Track::Track() {
 		_data = new Data();
@@ -12,7 +12,7 @@ namespace AM_Resources {
 	Track::Track(std::string path) : Track()
 	{
 		_path = path;
-		_name = AM_Utils::nameFromPath(path);
+		_name = AM_StringUtils::nameFromPath(path);
 	}
 
 	std::string Track::getName() const
