@@ -26,14 +26,17 @@ namespace AutoMix_UI {
 		Application::Exit();
 	}
 
+
+
+
 	System::Void MyForm::_musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
 	{
-		String^ currentItem = _musicListBox->SelectedItem->ToString();
+		/*String^ currentItem = _musicListView->SelectedItem->ToString();
 
 		Track selectedTrack = _trackCollection->searchByName(toStdString(currentItem));
 
 		_bpmValueTextArea->Text = selectedTrack.getBPM().ToString();
-		_durationValueTextArea->Text = selectedTrack.getBPM().ToString();
+		_durationValueTextArea->Text = selectedTrack.getBPM().ToString();*/
 	}
 
 	System::Void MyForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -91,8 +94,11 @@ namespace AutoMix_UI {
 
 				Track track = Track(toStdString(filePath));
 				_trackCollection->add(track);
+				ListViewItem^ lvitem = gcnew ListViewItem(toManagedString(track.getName()));
+				lvitem->SubItems->Add(track.getDuration().ToString());
+				lvitem->SubItems->Add(track.getBPM().ToString());
 
-				_musicListBox->Items->Add(toManagedString(track.getName()));
+				_musicListView->Items->Add(lvitem);
 
 			}
 		}
