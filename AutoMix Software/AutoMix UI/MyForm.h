@@ -59,8 +59,13 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
-	private: System::Windows::Forms::TextBox^  _folderPathTextBox;
-	private: System::Windows::Forms::TextBox^  _folderPathValueTextBox;
+
+
+	private: System::Windows::Forms::StatusStrip^  _statusStrip;
+	private: System::Windows::Forms::Button^  _extractionButton;
+	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
+
+
 
 	private:
 		/// <summary>
@@ -78,8 +83,7 @@ namespace AutoMix_UI {
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->_principalPanel = (gcnew System::Windows::Forms::SplitContainer());
 			this->_musicListBox = (gcnew System::Windows::Forms::ListBox());
-			this->_folderPathValueTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->_folderPathTextBox = (gcnew System::Windows::Forms::TextBox());
+			this->_extractionButton = (gcnew System::Windows::Forms::Button());
 			this->_featuresGroupBox = (gcnew System::Windows::Forms::GroupBox());
 			this->_durationValueTextArea = (gcnew System::Windows::Forms::TextBox());
 			this->_durationTextArea = (gcnew System::Windows::Forms::TextBox());
@@ -93,6 +97,8 @@ namespace AutoMix_UI {
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_inputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
+			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
+			this->_outputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_principalPanel))->BeginInit();
 			this->_principalPanel->Panel1->SuspendLayout();
 			this->_principalPanel->Panel2->SuspendLayout();
@@ -116,8 +122,7 @@ namespace AutoMix_UI {
 			// _principalPanel.Panel2
 			// 
 			this->_principalPanel->Panel2->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->_principalPanel->Panel2->Controls->Add(this->_folderPathValueTextBox);
-			this->_principalPanel->Panel2->Controls->Add(this->_folderPathTextBox);
+			this->_principalPanel->Panel2->Controls->Add(this->_extractionButton);
 			this->_principalPanel->Panel2->Controls->Add(this->_featuresGroupBox);
 			this->_principalPanel->Panel2->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
 			this->_principalPanel->Size = System::Drawing::Size(1264, 657);
@@ -136,31 +141,23 @@ namespace AutoMix_UI {
 			this->_musicListBox->Location = System::Drawing::Point(10, 10);
 			this->_musicListBox->Margin = System::Windows::Forms::Padding(2);
 			this->_musicListBox->Name = L"_musicListBox";
-			this->_musicListBox->Size = System::Drawing::Size(556, 641);
+			this->_musicListBox->Size = System::Drawing::Size(556, 615);
 			this->_musicListBox->TabIndex = 0;
 			this->_musicListBox->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::_musicListBox_SelectedIndexChanged);
 			// 
-			// _folderPathValueTextBox
+			// _extractionButton
 			// 
-			this->_folderPathValueTextBox->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->_folderPathValueTextBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->_folderPathValueTextBox->ForeColor = System::Drawing::SystemColors::ControlLight;
-			this->_folderPathValueTextBox->Location = System::Drawing::Point(121, 50);
-			this->_folderPathValueTextBox->MaxLength = 100000;
-			this->_folderPathValueTextBox->Name = L"_folderPathValueTextBox";
-			this->_folderPathValueTextBox->Size = System::Drawing::Size(216, 13);
-			this->_folderPathValueTextBox->TabIndex = 2;
-			// 
-			// _folderPathTextBox
-			// 
-			this->_folderPathTextBox->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->_folderPathTextBox->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->_folderPathTextBox->ForeColor = System::Drawing::SystemColors::ControlLight;
-			this->_folderPathTextBox->Location = System::Drawing::Point(46, 50);
-			this->_folderPathTextBox->Name = L"_folderPathTextBox";
-			this->_folderPathTextBox->Size = System::Drawing::Size(69, 13);
-			this->_folderPathTextBox->TabIndex = 1;
-			this->_folderPathTextBox->Text = L"Folder Path :";
+			this->_extractionButton->AccessibleName = L"_extractionButton";
+			this->_extractionButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->_extractionButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_extractionButton->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->_extractionButton->Location = System::Drawing::Point(311, 44);
+			this->_extractionButton->Name = L"_extractionButton";
+			this->_extractionButton->Size = System::Drawing::Size(120, 61);
+			this->_extractionButton->TabIndex = 1;
+			this->_extractionButton->Text = L"Exporter";
+			this->_extractionButton->UseVisualStyleBackColor = false;
+			this->_extractionButton->Click += gcnew System::EventHandler(this, &MyForm::_extractionButton_Click);
 			// 
 			// _featuresGroupBox
 			// 
@@ -176,7 +173,7 @@ namespace AutoMix_UI {
 			this->_featuresGroupBox->Margin = System::Windows::Forms::Padding(2);
 			this->_featuresGroupBox->Name = L"_featuresGroupBox";
 			this->_featuresGroupBox->Padding = System::Windows::Forms::Padding(2);
-			this->_featuresGroupBox->Size = System::Drawing::Size(656, 304);
+			this->_featuresGroupBox->Size = System::Drawing::Size(658, 304);
 			this->_featuresGroupBox->TabIndex = 0;
 			this->_featuresGroupBox->TabStop = false;
 			this->_featuresGroupBox->Text = L"Features";
@@ -192,7 +189,7 @@ namespace AutoMix_UI {
 			this->_durationValueTextArea->Location = System::Drawing::Point(72, 86);
 			this->_durationValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationValueTextArea->Name = L"_durationValueTextArea";
-			this->_durationValueTextArea->Size = System::Drawing::Size(492, 13);
+			this->_durationValueTextArea->Size = System::Drawing::Size(494, 13);
 			this->_durationValueTextArea->TabIndex = 3;
 			// 
 			// _durationTextArea
@@ -206,7 +203,7 @@ namespace AutoMix_UI {
 			this->_durationTextArea->Location = System::Drawing::Point(18, 86);
 			this->_durationTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_durationTextArea->Name = L"_durationTextArea";
-			this->_durationTextArea->Size = System::Drawing::Size(476, 13);
+			this->_durationTextArea->Size = System::Drawing::Size(478, 13);
 			this->_durationTextArea->TabIndex = 2;
 			this->_durationTextArea->Text = L"Duration :";
 			// 
@@ -221,7 +218,7 @@ namespace AutoMix_UI {
 			this->_bpmValueTextArea->Location = System::Drawing::Point(72, 44);
 			this->_bpmValueTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmValueTextArea->Name = L"_bpmValueTextArea";
-			this->_bpmValueTextArea->Size = System::Drawing::Size(492, 13);
+			this->_bpmValueTextArea->Size = System::Drawing::Size(494, 13);
 			this->_bpmValueTextArea->TabIndex = 1;
 			// 
 			// _bpmTextArea
@@ -235,7 +232,7 @@ namespace AutoMix_UI {
 			this->_bpmTextArea->Location = System::Drawing::Point(18, 44);
 			this->_bpmTextArea->Margin = System::Windows::Forms::Padding(2);
 			this->_bpmTextArea->Name = L"_bpmTextArea";
-			this->_bpmTextArea->Size = System::Drawing::Size(476, 13);
+			this->_bpmTextArea->Size = System::Drawing::Size(478, 13);
 			this->_bpmTextArea->TabIndex = 0;
 			this->_bpmTextArea->Text = L"BPM :";
 			// 
@@ -298,8 +295,18 @@ namespace AutoMix_UI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
+			// 
+			// _statusStrip
+			// 
+			this->_statusStrip->AccessibleName = L"_statusStrip";
+			this->_statusStrip->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_statusStrip->Location = System::Drawing::Point(0, 659);
+			this->_statusStrip->Name = L"_statusStrip";
+			this->_statusStrip->Size = System::Drawing::Size(1264, 22);
+			this->_statusStrip->TabIndex = 3;
+			this->_statusStrip->Text = L"statusStrip1";
 			// 
 			// MyForm
 			// 
@@ -307,6 +314,7 @@ namespace AutoMix_UI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->_principalPanel);
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -319,7 +327,6 @@ namespace AutoMix_UI {
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			this->_principalPanel->Panel1->ResumeLayout(false);
 			this->_principalPanel->Panel2->ResumeLayout(false);
-			this->_principalPanel->Panel2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_principalPanel))->EndInit();
 			this->_principalPanel->ResumeLayout(false);
 			this->_featuresGroupBox->ResumeLayout(false);
@@ -341,6 +348,7 @@ namespace AutoMix_UI {
 
 	private:
 		System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void _extractionButton_Click(System::Object^  sender, System::EventArgs^  e);
+};
 
 }

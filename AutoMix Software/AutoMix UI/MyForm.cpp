@@ -41,6 +41,23 @@ namespace AutoMix_UI {
 		loadTracksFromDirectory(sender, e);
 	}
 
+	System::Void MyForm::_extractionButton_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		System::Windows::Forms::DialogResult result = _outputMusicFolderBrowserDialog->ShowDialog();
+
+		if (result != System::Windows::Forms::DialogResult::OK) {
+			return;
+		}
+
+		String^ path = _outputMusicFolderBrowserDialog->SelectedPath;
+
+		if (!Directory::Exists(path))
+		{
+			//TODO display error
+			return;
+		}
+	}
+
 	System::Void MyForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
 	{
 
@@ -57,6 +74,8 @@ namespace AutoMix_UI {
 			//TODO display error
 			return;
 		}
+
+		_statusStrip->Items->Add(path);
 
 		array<String^>^fileEntries = Directory::GetFiles(path);
 
