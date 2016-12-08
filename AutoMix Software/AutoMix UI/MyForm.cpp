@@ -28,23 +28,12 @@ namespace AutoMix_UI {
 
 
 
-
-	System::Void MyForm::_musicListBox_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e)
-	{
-		/*String^ currentItem = _musicListView->SelectedItem->ToString();
-
-		Track selectedTrack = _trackCollection->searchByName(toStdString(currentItem));
-
-		_bpmValueTextArea->Text = selectedTrack.getBPM().ToString();
-		_durationValueTextArea->Text = selectedTrack.getBPM().ToString();*/
-	}
-
 	System::Void MyForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracksFromDirectory(sender, e);
 	}
 
-	System::Void MyForm::_extractionButton_Click(System::Object^  sender, System::EventArgs^  e)
+	System::Void MyForm::_outputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		System::Windows::Forms::DialogResult result = _outputMusicFolderBrowserDialog->ShowDialog();
 
@@ -61,6 +50,11 @@ namespace AutoMix_UI {
 		}
 	}
 
+	System::Void MyForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		loadTracksFromDirectory(sender, e);
+	}
+	
 	System::Void MyForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
 	{
 

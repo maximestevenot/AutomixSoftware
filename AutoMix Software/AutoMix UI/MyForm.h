@@ -70,6 +70,9 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::ColumnHeader^  Durée;
 	private: System::Windows::Forms::ColumnHeader^  BPM;
 	private: System::Windows::Forms::ColumnHeader^  Nom;
+	private: System::Windows::Forms::Button^  _imputButton;
+	private: System::Windows::Forms::Button^  _outputButton;
+
 
 
 
@@ -108,6 +111,8 @@ namespace AutoMix_UI {
 			this->Nom = (gcnew System::Windows::Forms::ColumnHeader());
 			this->Durée = (gcnew System::Windows::Forms::ColumnHeader());
 			this->BPM = (gcnew System::Windows::Forms::ColumnHeader());
+			this->_imputButton = (gcnew System::Windows::Forms::Button());
+			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -196,9 +201,9 @@ namespace AutoMix_UI {
 			});
 			this->_musicListView->ForeColor = System::Drawing::SystemColors::ControlLight;
 			this->_musicListView->FullRowSelect = true;
-			this->_musicListView->Location = System::Drawing::Point(0, 351);
+			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
-			this->_musicListView->Size = System::Drawing::Size(1264, 305);
+			this->_musicListView->Size = System::Drawing::Size(1264, 381);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
@@ -219,12 +224,40 @@ namespace AutoMix_UI {
 			this->BPM->Text = L"BPM";
 			this->BPM->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
+			// _imputButton
+			// 
+			this->_imputButton->AccessibleName = L"_inputButton";
+			this->_imputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
+			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_imputButton->Location = System::Drawing::Point(285, 113);
+			this->_imputButton->Name = L"_imputButton";
+			this->_imputButton->Size = System::Drawing::Size(131, 63);
+			this->_imputButton->TabIndex = 5;
+			this->_imputButton->Text = L"Importer";
+			this->_imputButton->UseVisualStyleBackColor = false;
+			this->_imputButton->Click += gcnew System::EventHandler(this, &MyForm::_imputButton_Click);
+			// 
+			// _outputButton
+			// 
+			this->_outputButton->AccessibleName = L"_outputButton";
+			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_outputButton->Location = System::Drawing::Point(794, 113);
+			this->_outputButton->Name = L"_outputButton";
+			this->_outputButton->Size = System::Drawing::Size(131, 63);
+			this->_outputButton->TabIndex = 6;
+			this->_outputButton->Text = L"Générer le mix";
+			this->_outputButton->UseVisualStyleBackColor = false;
+			this->_outputButton->Click += gcnew System::EventHandler(this, &MyForm::_outputButton_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->_outputButton);
+			this->Controls->Add(this->_imputButton);
 			this->Controls->Add(this->_musicListView);
 			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->menuStrip1);
@@ -248,12 +281,12 @@ namespace AutoMix_UI {
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
 
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _musicListBox_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
 	private:
 		System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _extractionButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
 };
 
 }
