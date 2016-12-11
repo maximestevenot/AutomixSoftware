@@ -2,7 +2,7 @@
 #include "AudioDataExtractionMock.h"
 
 namespace AutoMixDataManagement {
-
+	
 	AudioDataExtractionMock::AudioDataExtractionMock()
 	{
 	}

@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F6A47A44-07AE-4456-BAFB-9C36364A1E0F}</ProjectGuid>
+    <ProjectGuid>{64EBE816-9C56-4F07-A209-D27E403EC6C1}</ProjectGuid>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>AutoMixDataManagement</RootNamespace>
+    <RootNamespace>AutomixWrapper</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -74,6 +74,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\DataExctracionLibrary\DataExctracionLibrary;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\DataExctracionLibrary\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,6 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <AdditionalLibraryDirectories>..\..\DataExctracionLibrary\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,30 +135,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioDataExtractionMock.h" />
-    <ClInclude Include="AudioDataExtractionProxy.h" />
-    <ClInclude Include="AutoMixDataManagement.h" />
-    <ClInclude Include="IAudioDataExtraction.h" />
+    <ClInclude Include="Automix Wrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
-    <ClInclude Include="Track.h" />
-    <ClInclude Include="TrackCollection.h" />
-    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="AudioDataExtractionMock.cpp" />
-    <ClCompile Include="AudioDataExtractionProxy.cpp" />
-    <ClCompile Include="AutoMixDataManagement.cpp" />
-    <ClCompile Include="Track.cpp" />
+    <ClCompile Include="Automix Wrapper.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TrackCollection.cpp" />
-    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -165,11 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Automix Wrapper\Automix Wrapper.vcxproj">
-      <Project>{64ebe816-9c56-4f07-a209-d27e403ec6c1}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
