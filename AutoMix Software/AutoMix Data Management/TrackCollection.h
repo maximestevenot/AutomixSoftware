@@ -1,17 +1,17 @@
 #pragma once
 
 #include "Track.h"
-#include <vector>
 
 namespace AutoMixDataManagement {
+	using namespace System::Collections::Generic;
 
-	typedef std::vector<Track> track_collection;
+	typedef List<Track^> track_collection;
 
-	class TrackCollection : public track_collection
+	public ref class TrackCollection : public track_collection
 	{
 	public:
-		void add(Track);
-		Track searchByName(std::string name);
+		void add(Track^);
+		Track^ searchByName(String^ name);
 	};
 
 }

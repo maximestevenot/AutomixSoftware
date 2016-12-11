@@ -8,12 +8,12 @@ namespace AutoMixDataManagement {
 		_realSubject = gcnew AudioDataExtractionMock();
 	}
 
-	void AudioDataExtractionProxy::extractBPM(Track & track)
+	void AudioDataExtractionProxy::extractBPM(Track^ track)
 	{
 		_realSubject->extractBPM(track);
 	}
 
-	void AudioDataExtractionProxy::extractBPM(TrackCollection & trackCollection)
+	void AudioDataExtractionProxy::extractBPM(TrackCollection^ trackCollection)
 	{
 		_realSubject->extractBPM(trackCollection);
 	}

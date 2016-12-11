@@ -4,31 +4,33 @@
 
 namespace AutoMixDataManagement {
 
-	class Track
+	using namespace System;
+
+	public ref class Track
 	{
 	public:
 		Track();
-		Track(std::string path);
+		Track(String^ path);
 
 		~Track();
 
-		std::string getName() const;
-		unsigned int getBPM() const;
-		unsigned int getDuration() const;
+		String^ getName();
+		unsigned int getBPM();
+		unsigned int getDuration();
 
 		void setBPM(unsigned int value);
 
 	private:
 
-		struct Data
+		ref struct Data
 		{
 			unsigned int bpm = 0;
 			unsigned int duration = 0;
 		};
 
-		Data * _data;
-		std::string _path;
-		std::string _name;
+		Data^ _data;
+		String^ _path;
+		String^ _name;
 	};
 
 }

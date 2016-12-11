@@ -3,22 +3,22 @@
 
 namespace AutoMixDataManagement {
 
-	void TrackCollection::add(Track track)
+	void TrackCollection::add(Track^ track)
 	{
-		this->push_back(track);
+		Add(track);
 	}
 
-	Track TrackCollection::searchByName(std::string name)
+	Track^ TrackCollection::searchByName(String^ name)
 	{
-		for (Track t : *this)
+		for each (auto t in this)
 		{
-			if (name.compare(t.getName()) == 0)
+			if (name->CompareTo(t->getName()))
 			{
 				return t;
 			}
 		}
 
-		return Track();
+		return nullptr;
 	}
 
 }

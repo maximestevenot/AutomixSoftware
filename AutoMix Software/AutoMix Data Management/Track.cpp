@@ -5,30 +5,29 @@ namespace AutoMixDataManagement {
 
 	Track::Track()
 	{
-		_data = new Data();
+		_data = gcnew Data();
 	}
 
-	Track::Track(std::string path)
+	Track::Track(String^ path)
 	{
 		_path = path;
 	}
-
-
+	
 	Track::~Track()
 	{
 	}
 
-	std::string Track::getName() const
+	String^ Track::getName() 
 	{
 		return _name;
 	}
 
-	unsigned int Track::getBPM() const
+	unsigned int Track::getBPM() 
 	{
 		return _data->bpm;
 	}
 
-	unsigned int Track::getDuration() const
+	unsigned int Track::getDuration() 
 	{
 		return _data->duration;
 	}

@@ -7,14 +7,14 @@ namespace AutoMixDataManagement {
 	{
 	}
 
-	void AudioDataExtractionMock::extractBPM(Track & track)
+	void AudioDataExtractionMock::extractBPM(Track^ track)
 	{
-		track.setBPM(128);
+		track->setBPM(128);
 	}
 
-	void AudioDataExtractionMock::extractBPM(TrackCollection & trackCollection)
+	void AudioDataExtractionMock::extractBPM(TrackCollection^ trackCollection)
 	{
-		for (Track t : trackCollection)
+		for each (auto t in trackCollection)
 		{
 			extractBPM(t);
 		}

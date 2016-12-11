@@ -4,13 +4,13 @@
 
 namespace AutoMixDataManagement {
 
-	ref class AudioDataExtractionMock : public IAudioDataExtraction
+	public ref class AudioDataExtractionMock : public IAudioDataExtraction
 	{
 	public:
 		AudioDataExtractionMock();
 
-		void extractBPM(Track &) override;
-		void extractBPM(TrackCollection &) override;
+		void extractBPM(Track^) override;
+		void extractBPM(TrackCollection^) override;
 
 	};
 
