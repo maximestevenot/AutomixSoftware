@@ -3,6 +3,8 @@
 
 namespace AutoMixDataManagement {
 
+	using namespace System;
+
 	void TrackCollection::add(Track^ track)
 	{
 		Add(track);

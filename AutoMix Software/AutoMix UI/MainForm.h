@@ -1,7 +1,5 @@
 #pragma once
 
-#include <AutoMixDataManagement.h>
-
 namespace AutoMix_UI {
 
 	using namespace System;
@@ -22,7 +20,7 @@ namespace AutoMix_UI {
 		MainForm(void)
 		{
 			InitializeComponent();
-			IAudioDataExtraction^ engine = gcnew AudioDataExtractionProxy();
+			_trackCollection = gcnew TrackCollection();
 		}
 
 	protected:
@@ -37,7 +35,7 @@ namespace AutoMix_UI {
 			}
 		}
 
-		//private: TrackCollection* _trackCollection;
+	private: TrackCollection^ _trackCollection;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 

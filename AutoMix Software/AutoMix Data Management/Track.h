@@ -1,20 +1,16 @@
 #pragma once
 
-#include <string>
-
 namespace AutoMixDataManagement {
-
-	using namespace System;
 
 	public ref class Track
 	{
 	public:
 		Track();
-		Track(String^ path);
+		Track(System::String^ path);
 
 		~Track();
 
-		String^ getName();
+		System::String^ getName();
 		unsigned int getBPM();
 		unsigned int getDuration();
 
@@ -29,8 +25,8 @@ namespace AutoMixDataManagement {
 		};
 
 		Data^ _data;
-		String^ _path;
-		String^ _name;
+		System::String^ _path;
+		System::String^ _name;
 	};
 
 }

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "MainForm.h"
 
-#include "MainForm.h"
-
 using namespace System;
 using namespace System::Windows::Forms;
 

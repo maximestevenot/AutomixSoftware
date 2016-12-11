@@ -1,5 +1,7 @@
 #include "stdafx.h"
+
 #include "AudioDataExtractionProxy.h"
+#include "AudioDataExtractionMock.h"
 
 namespace AutoMixDataManagement {
 

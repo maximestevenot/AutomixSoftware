@@ -163,6 +163,11 @@
   <ItemGroup>
     <Image Include="app.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoMix Data Management\AutoMix Data Management.vcxproj">
+      <Project>{f6a47a44-07ae-4456-bafb-9c36364a1e0f}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

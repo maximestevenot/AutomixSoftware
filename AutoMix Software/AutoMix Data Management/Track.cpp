@@ -3,6 +3,8 @@
 
 namespace AutoMixDataManagement {
 
+	using namespace System;
+
 	Track::Track()
 	{
 		_data = gcnew Data();
@@ -12,22 +14,22 @@ namespace AutoMixDataManagement {
 	{
 		_path = path;
 	}
-	
+
 	Track::~Track()
 	{
 	}
 
-	String^ Track::getName() 
+	String^ Track::getName()
 	{
 		return _name;
 	}
 
-	unsigned int Track::getBPM() 
+	unsigned int Track::getBPM()
 	{
 		return _data->bpm;
 	}
 
-	unsigned int Track::getDuration() 
+	unsigned int Track::getDuration()
 	{
 		return _data->duration;
 	}

@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoMix AI", "AutoMix AI\AutoMix AI.vcxproj", "{7D6FF8D6-B131-434F-ADD7-AC76B2A9B6C2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AutoMix UI", "AutoMix UI\AutoMix UI.vcxproj", "{9064DC03-084E-4167-8475-E364BE4DB061}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6A47A44-07AE-4456-BAFB-9C36364A1E0F} = {F6A47A44-07AE-4456-BAFB-9C36364A1E0F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
