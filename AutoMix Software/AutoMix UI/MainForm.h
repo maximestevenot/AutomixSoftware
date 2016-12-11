@@ -1,6 +1,6 @@
 #pragma once
 
-namespace AutoMix_UI {
+namespace AutoMixUI {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -21,6 +21,7 @@ namespace AutoMix_UI {
 		{
 			InitializeComponent();
 			_trackCollection = gcnew TrackCollection();
+			_dataExtractionEngine = gcnew AudioDataExtractionProxy();
 		}
 
 	protected:
@@ -35,7 +36,9 @@ namespace AutoMix_UI {
 			}
 		}
 
-	private: TrackCollection^ _trackCollection;
+	private:
+		TrackCollection^ _trackCollection;
+		IAudioDataExtraction^ _dataExtractionEngine;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -47,7 +50,6 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
 
-
 	private: System::Windows::Forms::StatusStrip^  _statusStrip;
 
 	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
@@ -58,15 +60,6 @@ namespace AutoMix_UI {
 	private: System::Windows::Forms::ColumnHeader^  Nom;
 	private: System::Windows::Forms::Button^  _imputButton;
 	private: System::Windows::Forms::Button^  _outputButton;
-
-
-
-
-
-
-
-
-
 
 
 	private:
@@ -267,8 +260,7 @@ namespace AutoMix_UI {
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
-	private:
-		System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	};

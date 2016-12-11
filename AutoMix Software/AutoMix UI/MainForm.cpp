@@ -1,17 +1,14 @@
-#include "stdafx.h"
 #include "MainForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
 
-namespace AutoMix_UI {
+namespace AutoMixUI {
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		Application::Exit();
 	}
-
-
 
 	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
@@ -43,43 +40,50 @@ namespace AutoMix_UI {
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
 	{
 
-		//System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
+		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
 
-		//if (result != System::Windows::Forms::DialogResult::OK) {
-		//	return;
-		//}
+		if (result != System::Windows::Forms::DialogResult::OK) {
+			return;
+		}
 
-		//String^ path = _inputMusicFolderBrowserDialog->SelectedPath;
+		String^ path = _inputMusicFolderBrowserDialog->SelectedPath;
 
-		//if (!Directory::Exists(path))
-		//{
-		//	//TODO display error
-		//	return;
-		//}
+		if (!Directory::Exists(path))
+		{
+			//TODO display error
+			return;
+		}
 
-		//_statusStrip->Items->Add(path);
+		_statusStrip->Items->Add(path);
 
-		//array<String^>^fileEntries = Directory::GetFiles(path);
+		array<String^>^fileEntries = Directory::GetFiles(path);
 
-		//IEnumerator^ files = fileEntries->GetEnumerator();
+		IEnumerator^ files = fileEntries->GetEnumerator();
 
-		//while (files->MoveNext())
-		//{
+		while (files->MoveNext())
+		{
 
-		//	String^ filePath = safe_cast<String^>(files->Current);
-		//	String^ extension = extractExtension(filePath);
+			String^ filePath = safe_cast<String^>(files->Current);
 
-		//	if (extension->Contains("mp3")) { //TODO make it better
+			int lastDotIndex = filePath->LastIndexOf(".");
+			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
+			
 
-		//		Track track = Track(toStdString(filePath));
-		//		_trackCollection->add(track);
-		//		ListViewItem^ lvitem = gcnew ListViewItem(toManagedString(track.getName()));
-		//		lvitem->SubItems->Add(track.getDuration().ToString());
-		//		lvitem->SubItems->Add(track.getBPM().ToString());
+			if (extension->Contains("mp3")) { //TODO make it better
 
-		//		_musicListView->Items->Add(lvitem);
+				Track^ track = gcnew Track(filePath);
 
-		//	}
-		//}
+				_dataExtractionEngine->extractBPM(track);
+
+				_trackCollection->add(track);
+
+				ListViewItem^ lvitem = gcnew ListViewItem(track->getName());
+				lvitem->SubItems->Add(track->getDuration().ToString());
+				lvitem->SubItems->Add(track->getBPM().ToString());
+
+				_musicListView->Items->Add(lvitem);
+
+			}
+		}
 	}
 }
