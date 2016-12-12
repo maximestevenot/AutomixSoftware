@@ -95,7 +95,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>..\marsyas-0.5.0-win32\lib\marsyas.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"..\\marsyas-0.5.0-win32\\lib\\marsyas.lib";%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\marsyas-0.5.0-win32\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

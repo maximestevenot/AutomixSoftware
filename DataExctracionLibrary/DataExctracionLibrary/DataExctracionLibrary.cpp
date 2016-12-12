@@ -17,5 +17,5 @@ DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary=0;
 DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void)
 {
 	double d = Marsyas::ERBTools::Freq2ERB(1000);
-	return 175.0;
+	return 15*d;
 }

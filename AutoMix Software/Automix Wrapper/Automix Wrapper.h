@@ -1,20 +1,23 @@
 // Automix Wrapper.h
 #pragma once
-#pragma comment(lib, "..\\..\\DataExctracionLibrary\\Debug\\DataExctracionLibrary.lib")
 
 #include <DataExctracionLibrary.h>
 
-using namespace System;
-using namespace System::Runtime::InteropServices;
-
-[DllImport("..\\..\\DataExctracionLibrary\\Debug\\DataExctracionLibrary.dll", EntryPoint="?fnDataExctracionLibrary@@YANXZ")]
-extern double fnDataExctracionLibrary(void);
+#define DATA_EXTRACTION_LIB "..\\..\\DataExctracionLibrary\\Debug\\DataExctracionLibrary.dll"
 
 namespace AutoMixWrapper {
 
-	public ref class Class1 {
-	public:
-		static double safe_fnDataExctracionLibrary();
-	};
+	using namespace System;
+	using namespace System::Runtime::InteropServices;
 
+	[DllImport(DATA_EXTRACTION_LIB, EntryPoint = "?fnDataExctracionLibrary@@YANXZ")]
+	extern double fnDataExctracionLibrary(void);
+
+	public ref class DataExctractionLibrary
+	{
+	public:
+
+		static double safe_fnDataExctracionLibrary();
+
+	};
 }

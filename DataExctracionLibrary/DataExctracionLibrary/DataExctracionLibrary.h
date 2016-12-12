@@ -11,8 +11,6 @@
 #define DATAEXCTRACIONLIBRARY_API __declspec(dllimport)
 #endif
 
-#pragma comment(lib, "..\\marsyas-0.5.0-win32\\lib\\marsyas.lib")
-
 extern DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary;
 
-DATAEXCTRACIONLIBRARY_API int fnDataExctracionLibrary(int p);
+DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void);
