@@ -9,7 +9,8 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractBPM(Track^ track)
 	{
-		track->setBPM(128);
+		int bpm = (int) AutoMixWrapper::Class1::safe_fnDataExctracionLibrary();
+			track->setBPM(bpm);
 	}
 
 	void AudioDataExtractionMock::extractBPM(TrackCollection^ trackCollection)

@@ -175,12 +175,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\marsyas-0.5.0-win32\lib\marsyas.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\marsyas-0.5.0-win32\lib\marsyas.dll" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -4,6 +4,7 @@
 // that uses this DLL. This way any other project whose source files include this file see 
 // DATAEXCTRACIONLIBRARY_API functions as being imported from a DLL, whereas this DLL sees symbols
 // defined with this macro as being exported.
+
 #ifdef DATAEXCTRACIONLIBRARY_EXPORTS
 #define DATAEXCTRACIONLIBRARY_API __declspec(dllexport)
 #else
@@ -14,4 +15,4 @@
 
 extern DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary;
 
-DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void);
+DATAEXCTRACIONLIBRARY_API int fnDataExctracionLibrary(int p);

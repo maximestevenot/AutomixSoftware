@@ -39,10 +39,4 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\marsyas-0.5.0-win32\lib\marsyas.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\marsyas-0.5.0-win32\lib\marsyas.dll" />
-  </ItemGroup>
 </Project>

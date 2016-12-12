@@ -11,7 +11,7 @@ using namespace std;
 
 int main()
 {
-	cout << fnDataExctracionLibrary() << endl;
+	cout << fnDataExctracionLibrary(10) << endl;
 
 	while (1);
     return 0;

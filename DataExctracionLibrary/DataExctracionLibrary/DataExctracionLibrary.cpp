@@ -17,7 +17,5 @@ DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary=0;
 DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void)
 {
 	double d = Marsyas::ERBTools::Freq2ERB(1000);
-	//Marsyas::TranscriberExtract t;
-	Marsyas::TimeLine toto;
-	return d;
+	return 175.0;
 }
