@@ -7,6 +7,8 @@
 #include <basis.h>
 #include <types.h>
 #include <ERBTools.h>
+#include <TranscriberExtract.h>
+#include <TimeLine.h>
 
 // This is an example of an exported variable
 DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary=0;
@@ -15,6 +17,7 @@ DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary=0;
 DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void)
 {
 	double d = Marsyas::ERBTools::Freq2ERB(1000);
-
+	//Marsyas::TranscriberExtract t;
+	Marsyas::TimeLine toto;
 	return d;
 }
