@@ -128,19 +128,19 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(153, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(143, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -154,7 +154,7 @@ namespace AutoMixUI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
 			// 
 			// _statusStrip
@@ -171,7 +171,8 @@ namespace AutoMixUI {
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
 			this->_musicListView->AllowColumnReorder = true;
-			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
@@ -206,7 +207,6 @@ namespace AutoMixUI {
 			// _imputButton
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
-			this->_imputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_imputButton->Location = System::Drawing::Point(285, 113);
 			this->_imputButton->Name = L"_imputButton";
@@ -219,7 +219,7 @@ namespace AutoMixUI {
 			// _outputButton
 			// 
 			this->_outputButton->AccessibleName = L"_outputButton";
-			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_outputButton->Location = System::Drawing::Point(794, 113);
 			this->_outputButton->Name = L"_outputButton";
@@ -243,7 +243,7 @@ namespace AutoMixUI {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->MinimumSize = System::Drawing::Size(768, 432);
+			this->MinimumSize = System::Drawing::Size(1280, 720);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix";
