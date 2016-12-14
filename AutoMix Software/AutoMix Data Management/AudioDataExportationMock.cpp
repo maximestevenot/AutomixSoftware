@@ -7,7 +7,6 @@
 
 using namespace System;
 using namespace System::IO;
-using namespace System::Text;
 
 namespace AutoMixDataManagement {
 
@@ -16,16 +15,11 @@ namespace AutoMixDataManagement {
 		_path = path;
 	}
 
-	void AudioDataExportationMock::exportTrackList(TrackCollection^) {
-		FileStream^ file = File::Open(_path, FileMode::Open, FileAccess::Write, FileShare::None);
-		try {
-			array<Byte>^info = (gcnew UTF8Encoding(true))->GetBytes(_path);
-			file->Write(info, 0, info->Length);
-		}
-		finally{
-			if (file) {
-				delete(IDisposable^)file;
+	void AudioDataExportationMock::exportTrackList(TrackCollection^ tracks) {
+		StreamWriter^ sw = gcnew StreamWriter(_path);
+		for each(Track^ t in tracks) {
+				sw->WriteLine(t->getName());
 			}
-		}
+		sw->Close();
 	}
 }

@@ -11,5 +11,6 @@
 #include "IAudioDataExportation.h"
 #include "AudioDataExtractionProxy.h"
 #include "AudioDataExportationProxy.h"
+#include "AudioDataExportationMock.h"
 
 #endif // !AUTOMIX_DATA_MANAGEMENT_H
