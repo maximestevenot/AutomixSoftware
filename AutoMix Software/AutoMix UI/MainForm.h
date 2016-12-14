@@ -39,6 +39,7 @@ namespace AutoMixUI {
 	private:
 		TrackCollection^ _trackCollection;
 		IAudioDataExtraction^ _dataExtractionEngine;
+		IAudioExportation^ _audioExportationEngine;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -54,12 +55,18 @@ namespace AutoMixUI {
 
 	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::ListView^  _musicListView;
+	private: System::Windows::Forms::ColumnHeader^  collectionDuration;
+	private: System::Windows::Forms::ColumnHeader^  collectionBPM;
 
-	private: System::Windows::Forms::ColumnHeader^  Durée;
-	private: System::Windows::Forms::ColumnHeader^  BPM;
-	private: System::Windows::Forms::ColumnHeader^  Nom;
+
+
+
+	private: System::Windows::Forms::ColumnHeader^  collectionName;
+
+
 	private: System::Windows::Forms::Button^  _imputButton;
 	private: System::Windows::Forms::Button^  _outputButton;
+	private: System::Windows::Forms::PictureBox^  pictureBox1;
 
 
 	private:
@@ -87,12 +94,14 @@ namespace AutoMixUI {
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
 			this->_outputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->_musicListView = (gcnew System::Windows::Forms::ListView());
-			this->Nom = (gcnew System::Windows::Forms::ColumnHeader());
-			this->Durée = (gcnew System::Windows::Forms::ColumnHeader());
-			this->BPM = (gcnew System::Windows::Forms::ColumnHeader());
+			this->collectionName = (gcnew System::Windows::Forms::ColumnHeader());
+			this->collectionDuration = (gcnew System::Windows::Forms::ColumnHeader());
+			this->collectionBPM = (gcnew System::Windows::Forms::ColumnHeader());
 			this->_imputButton = (gcnew System::Windows::Forms::Button());
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -128,19 +137,19 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(146, 22);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(156, 26);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(143, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(153, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(156, 26);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -176,8 +185,8 @@ namespace AutoMixUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
-				this->Nom, this->Durée,
-					this->BPM
+				this->collectionName,
+					this->collectionDuration, this->collectionBPM
 			});
 			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -190,31 +199,31 @@ namespace AutoMixUI {
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
 			// 
-			// Nom
+			// collectionName
 			// 
-			this->Nom->Text = L"Nom";
-			this->Nom->Width = 681;
+			this->collectionName->Text = L"Name";
+			this->collectionName->Width = 681;
 			// 
-			// Durée
+			// collectionDuration
 			// 
-			this->Durée->Text = L"Durée";
-			this->Durée->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->Durée->Width = 162;
+			this->collectionDuration->Text = L"Duration";
+			this->collectionDuration->Width = 162;
 			// 
-			// BPM
+			// collectionBPM
 			// 
-			this->BPM->Text = L"BPM";
-			this->BPM->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->collectionBPM->Text = L"BPM";
 			// 
 			// _imputButton
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
 			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->_imputButton->Location = System::Drawing::Point(285, 113);
+			this->_imputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_imputButton->Location = System::Drawing::Point(70, 114);
 			this->_imputButton->Name = L"_imputButton";
-			this->_imputButton->Size = System::Drawing::Size(131, 63);
+			this->_imputButton->Size = System::Drawing::Size(147, 78);
 			this->_imputButton->TabIndex = 5;
-			this->_imputButton->Text = L"Importer";
+			this->_imputButton->Text = L"Import Tracks";
 			this->_imputButton->UseVisualStyleBackColor = false;
 			this->_imputButton->Click += gcnew System::EventHandler(this, &MainForm::_imputButton_Click);
 			// 
@@ -223,13 +232,26 @@ namespace AutoMixUI {
 			this->_outputButton->AccessibleName = L"_outputButton";
 			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->_outputButton->Location = System::Drawing::Point(794, 113);
+			this->_outputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_outputButton->Location = System::Drawing::Point(1050, 114);
 			this->_outputButton->Name = L"_outputButton";
-			this->_outputButton->Size = System::Drawing::Size(131, 63);
+			this->_outputButton->Size = System::Drawing::Size(147, 78);
 			this->_outputButton->TabIndex = 6;
-			this->_outputButton->Text = L"Générer le mix";
+			this->_outputButton->Text = L"Generate Mix";
 			this->_outputButton->UseVisualStyleBackColor = false;
 			this->_outputButton->Click += gcnew System::EventHandler(this, &MainForm::_outputButton_Click);
+			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
+			this->pictureBox1->Location = System::Drawing::Point(311, 38);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(653, 226);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->pictureBox1->TabIndex = 7;
+			this->pictureBox1->TabStop = false;
 			// 
 			// MainForm
 			// 
@@ -237,6 +259,7 @@ namespace AutoMixUI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->_outputButton);
 			this->Controls->Add(this->_imputButton);
 			this->Controls->Add(this->_musicListView);
@@ -248,10 +271,11 @@ namespace AutoMixUI {
 			this->MinimumSize = System::Drawing::Size(1280, 720);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AutoMix";
+			this->Text = L"AutoMix Software";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -265,6 +289,7 @@ namespace AutoMixUI {
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 
 	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	};

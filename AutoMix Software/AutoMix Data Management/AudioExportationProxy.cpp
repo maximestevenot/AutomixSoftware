@@ -11,9 +11,21 @@ namespace AutoMixDataManagement {
 		_realSubject = gcnew AudioExportationMock(_path);
 	}
 
-	void AudioExportationProxy::exportTrackList(TrackCollection^ tracks) 
+	void AudioExportationProxy::exportTrackList(TrackCollection^ tracks)
 	{
-		_realSubject->exportTrackList(tracks);
+		if (!tracks)
+		{
+			return;
+		}
+
+		try 
+		{
+			_realSubject->exportTrackList(tracks);
+		}
+		catch (System::IO::IOException^)
+		{
+			System::Diagnostics::Debug::WriteLine("Impossible d'écrire dans le fichier spécifié.");
+		}
 	}
 
 }

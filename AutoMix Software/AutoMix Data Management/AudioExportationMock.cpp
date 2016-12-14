@@ -13,7 +13,7 @@ namespace AutoMixDataManagement {
 
 	void AudioExportationMock::exportTrackList(TrackCollection^ tracks) 
 	{
-		StreamWriter^ sw = gcnew StreamWriter(_path + "TEST.txt");
+		StreamWriter^ sw = gcnew StreamWriter(_path + ".txt");
 
 		for each(Track^ t in tracks) 
 		{

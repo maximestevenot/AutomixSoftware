@@ -17,19 +17,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_outputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		System::Windows::Forms::DialogResult result = _outputMusicFolderBrowserDialog->ShowDialog();
-
-		if (result != System::Windows::Forms::DialogResult::OK) {
-			return;
-		}
-
-		String^ path = _outputMusicFolderBrowserDialog->SelectedPath;
-
-		if (!Directory::Exists(path))
-		{
-			//TODO display error
-			return;
-		}
+		exportTrackList(sender, e);
 	}
 
 	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -67,7 +55,7 @@ namespace AutoMixUI {
 
 			int lastDotIndex = filePath->LastIndexOf(".");
 			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
-			
+
 
 			if (extension->Contains("mp3")) { //TODO make it better
 
@@ -84,6 +72,25 @@ namespace AutoMixUI {
 				_musicListView->Items->Add(lvitem);
 
 			}
+		}
+	}
+
+	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
+	{
+		Stream^ myStream;
+		SaveFileDialog^ dialog = gcnew SaveFileDialog;
+
+		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+		dialog->FilterIndex = 1;
+
+		dialog->FileName = "Auto Mix";
+		dialog->DefaultExt = "mp3";
+		dialog->RestoreDirectory = true;
+
+		if (dialog->ShowDialog() == ::DialogResult::OK)
+		{
+			_audioExportationEngine = gcnew AudioExportationProxy(dialog->FileName);
+			_audioExportationEngine->exportTrackList(_trackCollection);
 		}
 	}
 }
