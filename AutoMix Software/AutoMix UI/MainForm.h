@@ -179,7 +179,9 @@ namespace AutoMixUI {
 				this->Nom, this->Durée,
 					this->BPM
 			});
-			this->_musicListView->ForeColor = System::Drawing::SystemColors::ControlLight;
+			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_musicListView->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->_musicListView->FullRowSelect = true;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
