@@ -13,8 +13,10 @@ namespace AutoMixDataManagement {
 		System::String^ getName();
 		unsigned int getBPM();
 		unsigned int getDuration();
+		System::String^ displayDuration();
 
 		void setBPM(unsigned int value);
+		void setDuration(unsigned int value);
 
 	private:
 

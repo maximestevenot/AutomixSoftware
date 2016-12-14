@@ -124,6 +124,7 @@ namespace AutoMixUI {
 			// 
 			// _openToolStripMenuItem
 			// 
+			this->_openToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_openToolStripMenuItem.Image")));
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
@@ -170,14 +171,17 @@ namespace AutoMixUI {
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
 			this->_musicListView->AllowColumnReorder = true;
-			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
+			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
 				this->Nom, this->Durée,
 					this->BPM
 			});
-			this->_musicListView->ForeColor = System::Drawing::SystemColors::ControlLight;
+			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_musicListView->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->_musicListView->FullRowSelect = true;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
@@ -205,7 +209,6 @@ namespace AutoMixUI {
 			// _imputButton
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
-			this->_imputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left));
 			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_imputButton->Location = System::Drawing::Point(285, 113);
 			this->_imputButton->Name = L"_imputButton";
@@ -218,7 +221,7 @@ namespace AutoMixUI {
 			// _outputButton
 			// 
 			this->_outputButton->AccessibleName = L"_outputButton";
-			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_outputButton->Location = System::Drawing::Point(794, 113);
 			this->_outputButton->Name = L"_outputButton";
@@ -239,9 +242,10 @@ namespace AutoMixUI {
 			this->Controls->Add(this->_musicListView);
 			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->MinimumSize = System::Drawing::Size(768, 432);
+			this->MinimumSize = System::Drawing::Size(1280, 720);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix";
