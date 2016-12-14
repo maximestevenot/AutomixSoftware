@@ -9,8 +9,12 @@ namespace AutoMixDataManagement {
 	public:
 
 		AudioDataExtractionProxy();
+
 		void extractBPM(Track^) override;
 		void extractBPM(TrackCollection^) override;
+
+		void extractDuration(Track^) override;
+		void extractDuration(TrackCollection^) override;
 
 	private:
 		IAudioDataExtraction^ _realSubject;

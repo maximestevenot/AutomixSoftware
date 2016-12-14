@@ -14,6 +14,9 @@ namespace AutoMixDataManagement {
 
 		virtual void extractBPM(Track^) abstract;
 		virtual void extractBPM(TrackCollection^) abstract;
+
+		virtual void extractDuration(Track^) abstract;
+		virtual void extractDuration(TrackCollection^) abstract;
 	};
 
 }

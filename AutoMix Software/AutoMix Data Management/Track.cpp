@@ -29,59 +29,11 @@ namespace AutoMixDataManagement {
 
 	String^ Track::displayDuration()
 	{
-		unsigned int duration = _data->duration;
-		int seconds = 0;
-		int minutes = 0;
-		int hours = 0;
-		String^ stringDuration = gcnew String("");
+		TimeSpan ts = TimeSpan::FromMilliseconds(_data->duration);
+		String^ stringDuration = ts.ToString();
+		int dotIndex = stringDuration->LastIndexOf(".");
 
-		while (duration >= 3600)
-		{
-			hours++;
-			duration = duration - 3600;
-		}
-		
-		while (duration >= 60)
-		{
-			minutes++;
-			duration = duration - 60;
-		}
-
-		seconds = duration;
-
-		String^ stringSeconds;
-		String^ stringMinutes;
-		String^ stringHours;
-
-		if (seconds < 10)
-		{
-			stringSeconds = stringSeconds->Concat("0", seconds.ToString());
-		} else
-		{
-			stringSeconds = gcnew String(seconds.ToString());
-		}
-
-		if (minutes < 10)
-		{
-			stringMinutes = stringMinutes->Concat("0", minutes.ToString());
-		}
-		else
-		{
-			stringMinutes = gcnew String(minutes.ToString());
-		}
-
-		if (hours < 10)
-		{
-			stringHours = stringHours->Concat("0", hours.ToString());
-		}
-		else
-		{
-			stringHours = gcnew String(hours.ToString());
-		}
-
-		stringDuration = stringDuration->Concat(stringHours, ":", stringMinutes, ":", stringSeconds);
-		
-		return stringDuration;
+		return stringDuration->Substring(0, dotIndex);
 	}
 
 	unsigned int Track::getBPM()

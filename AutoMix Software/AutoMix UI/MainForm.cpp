@@ -62,6 +62,7 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 
 				_dataExtractionEngine->extractBPM(track);
+				_dataExtractionEngine->extractDuration(track);
 
 				_trackCollection->add(track);
 
