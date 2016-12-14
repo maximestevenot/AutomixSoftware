@@ -1,1 +1,0 @@
-Working directory of Visual Studio solution
