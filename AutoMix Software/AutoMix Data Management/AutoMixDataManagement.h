@@ -8,6 +8,8 @@
 #include "TrackCollection.h"
 
 #include "IAudioDataExtraction.h"
+#include "IAudioDataExportation.h"
 #include "AudioDataExtractionProxy.h"
+#include "AudioDataExportationProxy.h"
 
 #endif // !AUTOMIX_DATA_MANAGEMENT_H
