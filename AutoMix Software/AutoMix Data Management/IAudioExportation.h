@@ -4,13 +4,13 @@
 
 namespace AutoMixDataManagement {
 
-	public ref class IAudioDataExportation abstract
+	public ref class IAudioExportation abstract
 	{
 
 	public:
-		//IAudioDataExportation() {}
+		//IAudioExportation() {}
 
-		//virtual ~IAudioDataExportation() {}
+		//virtual ~IAudioExportation() {}
 
 		virtual void exportTrackList(TrackCollection^) abstract;
 	};

@@ -1,16 +1,18 @@
 #include "stdafx.h"
-#include "AudioDataExportationProxy.h"
 
+#include "AutoMixDataManagement.h"
+#include "AudioExportationMock.h"
 
 namespace AutoMixDataManagement {
 
-	AudioDataExportationProxy::AudioDataExportationProxy(System::String ^ path)
+	AudioExportationProxy::AudioExportationProxy(System::String ^ path)
 	{
 		_path = path;
-		_realSubject = gcnew AudioDataExportationMock(_path);
+		_realSubject = gcnew AudioExportationMock(_path);
 	}
 
-	void AudioDataExportationProxy::exportTrackList(TrackCollection^ tracks) {
+	void AudioExportationProxy::exportTrackList(TrackCollection^ tracks) 
+	{
 		_realSubject->exportTrackList(tracks);
 	}
 
