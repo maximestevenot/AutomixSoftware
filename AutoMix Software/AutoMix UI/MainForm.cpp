@@ -38,41 +38,24 @@ namespace AutoMixUI {
 
 		if (!Directory::Exists(path))
 		{
-			//TODO display error
 			return;
 		}
 
 		_statusStrip->Items->Add(path);
+		_presenter->loadTracks(Directory::GetFiles(path));
+	}
 
-		array<String^>^fileEntries = Directory::GetFiles(path);
+	System::Void MainForm::update(TrackCollection^ collection)
+	{
+		_musicListView->Items->Clear();
 
-		IEnumerator^ files = fileEntries->GetEnumerator();
-
-		while (files->MoveNext())
+		for each (auto track in collection)
 		{
+			ListViewItem^ lvitem = gcnew ListViewItem(track->getName());
+			lvitem->SubItems->Add(track->displayDuration());
+			lvitem->SubItems->Add(track->getBPM().ToString());
 
-			String^ filePath = safe_cast<String^>(files->Current);
-
-			int lastDotIndex = filePath->LastIndexOf(".");
-			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
-
-
-			if (extension->Contains("mp3")) { //TODO make it better
-
-				Track^ track = gcnew Track(filePath);
-
-				_dataExtractionEngine->extractBPM(track);
-				_dataExtractionEngine->extractDuration(track);
-
-				_trackCollection->add(track);
-
-				ListViewItem^ lvitem = gcnew ListViewItem(track->getName());
-				lvitem->SubItems->Add(track->displayDuration());
-				lvitem->SubItems->Add(track->getBPM().ToString());
-
-				_musicListView->Items->Add(lvitem);
-
-			}
+			_musicListView->Items->Add(lvitem);
 		}
 	}
 
@@ -90,8 +73,7 @@ namespace AutoMixUI {
 
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
-			_audioExportationEngine = gcnew AudioExportationProxy(dialog->FileName);
-			_audioExportationEngine->exportTrackList(_trackCollection);
+			_presenter->exportTrackList(dialog->FileName);
 		}
 	}
 }

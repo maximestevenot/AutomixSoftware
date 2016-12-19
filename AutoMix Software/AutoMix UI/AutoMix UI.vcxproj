@@ -136,11 +136,14 @@
   <ItemGroup>
     <ClCompile Include="AutoMixUI.cpp" />
     <ClCompile Include="MainForm.cpp" />
+    <ClCompile Include="Presenter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Presenter.h" />
+    <ClInclude Include="UsingCollectionView.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoMix Data Management\AutoMix Data Management.vcxproj">

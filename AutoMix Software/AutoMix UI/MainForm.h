@@ -1,5 +1,8 @@
 #pragma once
 
+#include "UsingCollectionView.h"
+#include "Presenter.h"
+
 namespace AutoMixUI {
 
 	using namespace System;
@@ -14,14 +17,13 @@ namespace AutoMixUI {
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
-	public ref class MainForm : public System::Windows::Forms::Form
+	public ref class MainForm : public System::Windows::Forms::Form, public UsingCollectionView
 	{
 	public:
 		MainForm(void)
 		{
 			InitializeComponent();
-			_trackCollection = gcnew TrackCollection();
-			_dataExtractionEngine = gcnew AudioDataExtractionProxy();
+			_presenter = gcnew Presenter(this);
 		}
 
 	protected:
@@ -37,9 +39,7 @@ namespace AutoMixUI {
 		}
 
 	private:
-		TrackCollection^ _trackCollection;
-		IAudioDataExtraction^ _dataExtractionEngine;
-		IAudioExportation^ _audioExportationEngine;
+		Presenter^ _presenter;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -281,6 +281,8 @@ namespace AutoMixUI {
 
 		}
 #pragma endregion
+	public: System::Void update(TrackCollection^) override;
+
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
@@ -292,6 +294,7 @@ namespace AutoMixUI {
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
+
 	};
 
 }
