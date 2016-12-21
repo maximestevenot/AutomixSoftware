@@ -74,8 +74,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\DataExctracionLibrary\DataExctracionLibrary;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\DataExctracionLibrary\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\DataExtractionLibrary\DataExtractionLibrary;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\DataExtractionLibrary\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>..\..\DataExctracionLibrary\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\DataExtractionLibrary\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -5,9 +5,9 @@
 
 namespace AutoMixWrapper {
 
-	double DataExctractionLibrary::safe_fnDataExctracionLibrary()
+	double DataExctractionLibrary::safe_fnDataExtractionLibrary()
 	{
-		double d = fnDataExctracionLibrary();
+		double d = fnDataExtractionLibrary();
 		return d;
 	}
 

@@ -1,8 +1,8 @@
-// DataExctracionLibrary.cpp : Defines the exported functions for the DLL application.
+// DataExtractionLibrary.cpp : Defines the exported functions for the DLL application.
 //
 
 #include "stdafx.h"
-#include "DataExctracionLibrary.h"
+#include "DataExtractionLibrary.h"
 
 #include <basis.h>
 #include <types.h>
@@ -11,10 +11,10 @@
 #include <TimeLine.h>
 
 // This is an example of an exported variable
-DATAEXCTRACIONLIBRARY_API int nDataExctracionLibrary=0;
+DATAEXTRACTIONLIBRARY_API int nDataExtractionLibrary=0;
 
 // This is an example of an exported function.
-DATAEXCTRACIONLIBRARY_API double fnDataExctracionLibrary(void)
+DATAEXTRACTIONLIBRARY_API double fnDataExtractionLibrary(void)
 {
 	double d = Marsyas::ERBTools::Freq2ERB(1000);
 	return 15*d;
