@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataExctracionLibrary", "DataExctracionLibrary\DataExctracionLibrary.vcxproj", "{13B81176-C237-429A-A51F-933D02A1EBA9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataExtractionLibrary", "DataExtractionLibrary\DataExtractionLibrary.vcxproj", "{13B81176-C237-429A-A51F-933D02A1EBA9}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleTest", "ConsoleTest\ConsoleTest.vcxproj", "{73921674-61AF-45D0-9BDC-7A9837E24E8F}"
 	ProjectSection(ProjectDependencies) = postProject

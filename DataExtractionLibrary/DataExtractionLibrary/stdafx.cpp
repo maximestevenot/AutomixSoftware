@@ -1,5 +1,5 @@
 // stdafx.cpp : source file that includes just the standard includes
-// DataExctracionLibrary.pch will be the pre-compiled header
+// DataExtractionLibrary.pch will be the pre-compiled header
 // stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"

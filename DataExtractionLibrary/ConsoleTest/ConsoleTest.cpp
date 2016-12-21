@@ -2,16 +2,16 @@
 //
 
 #include "stdafx.h"
-#include <DataExctracionLibrary.h>
+#include <DataExtractionLibrary.h>
 #include <iostream>
 
-#pragma comment(lib, "..\\Debug\\DataExctracionLibrary.lib")
+#pragma comment(lib, "..\\Debug\\DataExtractionLibrary.lib")
 
 using namespace std;
 
 int main()
 {
-	cout << fnDataExctracionLibrary() << endl;
+	cout << fnDataExtractionLibrary() << endl;
 
 	while (1);
     return 0;
