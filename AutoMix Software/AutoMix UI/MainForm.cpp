@@ -27,7 +27,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
 	{
-
+		_inputMusicFolderBrowserDialog->ShowNewFolderButton = false;
 		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
 
 		if (result != System::Windows::Forms::DialogResult::OK) {
