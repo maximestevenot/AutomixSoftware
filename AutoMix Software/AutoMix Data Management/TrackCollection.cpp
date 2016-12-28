@@ -23,4 +23,37 @@ namespace AutoMixDataManagement {
 		return nullptr;
 	}
 
+	void TrackCollection::orderByName()
+	{
+		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByName));
+	}
+
+	void TrackCollection::orderByDescendingName()
+	{
+		orderByName();
+		Reverse();
+	}
+
+	void TrackCollection::orderByDuration()
+	{
+		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByDuration));
+	}
+
+	void TrackCollection::orderByDescendingDuration()
+	{
+		orderByDuration();
+		Reverse();
+	}
+
+	void TrackCollection::orderByBPM()
+	{
+		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByBPM));
+	}
+
+	void TrackCollection::orderByDescendingBPM()
+	{
+		orderByBPM();
+		Reverse();
+	}
+
 }
