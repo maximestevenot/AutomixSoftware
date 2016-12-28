@@ -13,7 +13,7 @@ build:
   stage: build
   script:
   - echo building...
-  - 'devenv %Solution% /Build "Debug|x86"'
+  - 'devenv "%Solution%" /Build "Debug|x86"'
   except:
   - tags
 
