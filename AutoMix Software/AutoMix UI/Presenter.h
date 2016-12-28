@@ -1,5 +1,5 @@
 #pragma once
-#include "UsingCollectionView.h"
+#include "ViewWithTrackCollection.h"
 
 namespace AutoMixUI {
 	using namespace AutoMixDataManagement;
@@ -8,14 +8,14 @@ namespace AutoMixUI {
 	{
 	public:
 		Presenter();
-		Presenter(UsingCollectionView^);
+		Presenter(ViewWithTrackCollection^);
 		void notify();
 
 		void loadTracks(array<System::String^>^);
 		void exportTrackList(System::String^);
 
 	private:
-		System::Collections::Generic::List<UsingCollectionView^>^ _views;
+		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 
 		TrackCollection^ _trackCollection;
 		IAudioDataExtraction^ _dataExtractionEngine;

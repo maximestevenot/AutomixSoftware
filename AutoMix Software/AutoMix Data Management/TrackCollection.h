@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Track.h"
+#include "TracksComparison.h"
 
 namespace AutoMixDataManagement {
 
@@ -9,8 +10,14 @@ namespace AutoMixDataManagement {
 	public ref class TrackCollection : public track_collection
 	{
 	public:
-		void add(Track^);
 		Track^ searchByName(System::String^ name);
+
+		void sortByName();
+		void sortByDescendingName();
+		void sortByDuration();
+		void sortByDescendingDuration();
+		void sortByBPM();
+		void sortByDescendingBPM();
 	};
 
 }

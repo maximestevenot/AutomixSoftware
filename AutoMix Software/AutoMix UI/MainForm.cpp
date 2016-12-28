@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+using namespace System::Collections;
 
 namespace AutoMixUI {
 
@@ -23,6 +24,12 @@ namespace AutoMixUI {
 	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracksFromDirectory(sender, e);
+	}
+
+	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
+	{
+		// NOT IMPLEMENTED YET
+
 	}
 
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)

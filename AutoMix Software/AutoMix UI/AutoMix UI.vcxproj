@@ -143,7 +143,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Presenter.h" />
-    <ClInclude Include="UsingCollectionView.h" />
+    <ClInclude Include="ViewWithTrackCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">

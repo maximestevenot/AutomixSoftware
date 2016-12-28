@@ -1,19 +1,18 @@
 #include "Presenter.h"
 
-
 namespace AutoMixUI {
 	using namespace System;
 	using namespace System::Collections;
 
 	Presenter::Presenter()
 	{
-		_views = gcnew Generic::List<UsingCollectionView^> ();
+		_views = gcnew Generic::List<ViewWithTrackCollection^>();
 		_trackCollection = gcnew TrackCollection();
 		_dataExtractionEngine = gcnew AudioDataExtractionProxy();
 		_audioExportationEngine = nullptr;
 	}
 
-	Presenter::Presenter(UsingCollectionView^ view) : Presenter()
+	Presenter::Presenter(ViewWithTrackCollection^ view) : Presenter()
 	{
 		_views->Add(view);
 	}
@@ -40,9 +39,11 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 				_dataExtractionEngine->extractBPM(track);
 				_dataExtractionEngine->extractDuration(track);
-				_trackCollection->add(track);
+				_trackCollection->Add(track);
 			}
 		}
+
+		_trackCollection->sortByName();
 		notify();
 	}
 

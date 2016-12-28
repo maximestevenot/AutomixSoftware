@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UsingCollectionView.h"
+#include "ViewWithTrackCollection.h"
 #include "Presenter.h"
 
 namespace AutoMixUI {
@@ -17,7 +17,7 @@ namespace AutoMixUI {
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
-	public ref class MainForm : public System::Windows::Forms::Form, public UsingCollectionView
+	public ref class MainForm : public System::Windows::Forms::Form, public ViewWithTrackCollection
 	{
 	public:
 		MainForm(void)
@@ -137,19 +137,19 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(153, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(143, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(146, 22);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -179,7 +179,6 @@ namespace AutoMixUI {
 			// _musicListView
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
-			this->_musicListView->AllowColumnReorder = true;
 			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -198,6 +197,7 @@ namespace AutoMixUI {
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
+			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &AutoMixUI::MainForm::_musicListView_ColumnClick);
 			// 
 			// collectionName
 			// 
@@ -294,7 +294,7 @@ namespace AutoMixUI {
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
-
+	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
 	};
 
 }
