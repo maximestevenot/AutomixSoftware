@@ -13,7 +13,7 @@ build:
   stage: build
   script:
   - echo building...
-  - 'msbuild /p:Configuration=Debug;Architecture=x86 "%Solution%"'
+  - 'devenv %Solution% /Build "Debug|x86"'
   except:
   - tags
 
