@@ -70,7 +70,7 @@
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
     <ClInclude Include="TracksComparison.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Collections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +105,7 @@
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
     <ClCompile Include="TracksComparison.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Collectons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

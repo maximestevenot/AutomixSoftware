@@ -32,7 +32,7 @@
     <ClInclude Include="Presenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UsingCollectionView.h">
+    <ClInclude Include="ViewWithTrackCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
