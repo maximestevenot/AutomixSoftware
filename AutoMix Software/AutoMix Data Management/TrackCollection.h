@@ -10,15 +10,14 @@ namespace AutoMixDataManagement {
 	public ref class TrackCollection : public track_collection
 	{
 	public:
-		void add(Track^);
 		Track^ searchByName(System::String^ name);
 
-		void orderByName();
-		void orderByDescendingName();
-		void orderByDuration();
-		void orderByDescendingDuration();
-		void orderByBPM();
-		void orderByDescendingBPM();
+		void sortByName();
+		void sortByDescendingName();
+		void sortByDuration();
+		void sortByDescendingDuration();
+		void sortByBPM();
+		void sortByDescendingBPM();
 	};
 
 }

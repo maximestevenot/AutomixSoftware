@@ -5,16 +5,11 @@ namespace AutoMixDataManagement {
 
 	using namespace System;
 
-	void TrackCollection::add(Track^ track)
-	{
-		Add(track);
-	}
-
 	Track^ TrackCollection::searchByName(String^ name)
 	{
 		for each (auto t in this)
 		{
-			if (name->CompareTo(t->Name))
+			if (name->Equals(t->Name))
 			{
 				return t;
 			}
@@ -23,36 +18,36 @@ namespace AutoMixDataManagement {
 		return nullptr;
 	}
 
-	void TrackCollection::orderByName()
+	void TrackCollection::sortByName()
 	{
 		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByName));
 	}
 
-	void TrackCollection::orderByDescendingName()
+	void TrackCollection::sortByDescendingName()
 	{
-		orderByName();
+		sortByName();
 		Reverse();
 	}
 
-	void TrackCollection::orderByDuration()
+	void TrackCollection::sortByDuration()
 	{
 		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByDuration));
 	}
 
-	void TrackCollection::orderByDescendingDuration()
+	void TrackCollection::sortByDescendingDuration()
 	{
-		orderByDuration();
+		sortByDuration();
 		Reverse();
 	}
 
-	void TrackCollection::orderByBPM()
+	void TrackCollection::sortByBPM()
 	{
 		Sort(gcnew Comparison<Track^>(TracksComparison::compareTracksByBPM));
 	}
 
-	void TrackCollection::orderByDescendingBPM()
+	void TrackCollection::sortByDescendingBPM()
 	{
-		orderByBPM();
+		sortByBPM();
 		Reverse();
 	}
 
