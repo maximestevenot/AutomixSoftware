@@ -12,7 +12,7 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractBPM(Track^ track)
 	{
-		track->setBPM(_randomGenerator->Next(95, 150));
+		track->BPM = _randomGenerator->Next(95, 150);
 	}
 
 	void AudioDataExtractionMock::extractBPM(TrackCollection^ trackCollection)
@@ -25,7 +25,7 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractDuration(Track^ track)
 	{
-		track->setDuration(_randomGenerator->Next(90000, 300000));
+		track->Duration = _randomGenerator->Next(90000, 300000);
 	}
 
 	void AudioDataExtractionMock::extractDuration(TrackCollection^ trackCollection)

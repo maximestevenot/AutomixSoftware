@@ -51,9 +51,9 @@ namespace AutoMixUI {
 
 		for each (auto track in collection)
 		{
-			ListViewItem^ lvitem = gcnew ListViewItem(track->getName());
+			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
 			lvitem->SubItems->Add(track->displayDuration());
-			lvitem->SubItems->Add(track->getBPM().ToString());
+			lvitem->SubItems->Add(track->BPM.ToString());
 
 			_musicListView->Items->Add(lvitem);
 		}

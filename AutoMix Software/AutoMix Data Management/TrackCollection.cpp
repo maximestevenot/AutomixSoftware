@@ -14,7 +14,7 @@ namespace AutoMixDataManagement {
 	{
 		for each (auto t in this)
 		{
-			if (name->CompareTo(t->getName()))
+			if (name->CompareTo(t->Name))
 			{
 				return t;
 			}

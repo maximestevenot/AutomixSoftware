@@ -5,11 +5,11 @@
 namespace AutoMixDataManagement {
 
 	using namespace System;
-	using namespace AutomixDataManagement;
 
 	Track::Track()
 	{
-		_data = gcnew Data();
+		Duration = 0;
+		BPM = 0;
 	}
 
 	Track::Track(String^ path) : Track()
@@ -18,42 +18,22 @@ namespace AutoMixDataManagement {
 		_name = nameFromPath(path);
 	}
 
-	Track::~Track()
-	{
-	}
-
-	String^ Track::getName()
+	String^ Track::Name::get() 
 	{
 		return _name;
 	}
 
+	String^ Track::Path::get()
+	{
+		return _path;
+	}
+
 	String^ Track::displayDuration()
 	{
-		TimeSpan ts = TimeSpan::FromMilliseconds(_data->duration);
+		TimeSpan ts = TimeSpan::FromMilliseconds(Duration);
 		String^ stringDuration = ts.ToString();
 		int dotIndex = stringDuration->LastIndexOf(".");
 
 		return stringDuration->Substring(0, dotIndex);
 	}
-
-	unsigned int Track::getBPM()
-	{
-		return _data->bpm;
-	}
-
-	unsigned int Track::getDuration()
-	{
-		return _data->duration;
-	}
-
-	void Track::setBPM(unsigned int value)
-	{
-		_data->bpm = value;
-	}
-
-	void Track::setDuration(unsigned int value)
-	{
-		_data->duration = value;
-	}
-
 }

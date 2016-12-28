@@ -5,31 +5,20 @@ namespace AutoMixDataManagement {
 	public ref class Track
 	{
 	public:
+
 		Track();
 		Track(System::String^ path);
 
-		~Track();
+		property unsigned int BPM;
+		property unsigned int Duration;
 
-		System::String^ getName();
-		unsigned int getBPM();
-		unsigned int getDuration();
+		property System::String^ Name { System::String^ get(); }
+		property System::String^ Path { System::String^ get(); }
+
 		System::String^ displayDuration();
 
-		void setBPM(unsigned int value);
-		void setDuration(unsigned int value);
-
 	private:
-
-		ref struct Data
-		{
-			unsigned int bpm = 0;
-			unsigned int duration = 0;
-		};
-
-		Data^ _data;
-		System::String^ _path;
 		System::String^ _name;
+		System::String^ _path;
 	};
-
 }
-

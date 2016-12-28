@@ -17,7 +17,7 @@ namespace AutoMixDataManagement {
 
 		for each(Track^ t in tracks) 
 		{
-			sw->WriteLine(t->getName());
+			sw->WriteLine(t->Name);
 		}
 		sw->Close();
 	}
