@@ -1,0 +1,36 @@
+variables:
+  Solution: "Automix Software\\AutoMix Software.sln"
+
+before_script:
+  - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
+
+stages:
+  - build
+  # - test
+  - deploy
+
+build:
+  stage: build
+  script:
+  - echo building...
+  - 'devenv "%Solution%" /Build "Debug|x86"'
+  except:
+  - tags
+
+# test:
+  # stage: test
+  # script:
+  # - echo testing...
+  # - 'msbuild /p:Configuration=Debug;Architecture=x86 "%Solution%"'
+  # - dir /s /b *.Tests.dll | findstr /r Tests\\*\\bin\\ > testcontainers.txt
+  # - 'for /f %%f in (testcontainers.txt) do mstest.exe /testcontainer:"%%f"'
+  # except:
+  # - tags
+
+deploy:
+  stage: deploy
+  script:
+  - echo deploying...
+  - 'msbuild /p:Configuration=Debug;Architecture=x86 "%Solution%" /t:publish'
+  only:
+  - production
