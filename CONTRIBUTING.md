@@ -118,4 +118,4 @@ Some of our developers are more specialized in different fields of this project.
 
  - **Guillaume HANNES**, *Audio analysis* - <hannes@ecole.ensicaen.fr>
  - **Louis CARLIER**, *User Interface* - <lcarlier@ecole.ensicaen.fr>
- - **Pierre Gabon**, *Audio management* - <gabon@ecole.ensicaen.fr>
+ - **Pierre GABON**, *Audio management* - <gabon@ecole.ensicaen.fr>
