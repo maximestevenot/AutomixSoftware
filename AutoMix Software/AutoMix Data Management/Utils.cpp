@@ -1,19 +1,19 @@
 #include "stdafx.h"
 #include "Utils.h"
 
-namespace AutomixDataManagement {
+namespace AutoMixDataManagement {
 
-		using namespace System;
+	using namespace System;
 
-		String^ nameFromPath(String^ path)
-		{
-			int index = path->LastIndexOf("\\");
-			return path->Substring(index + 1);
-		}
-
-		String^ getExtension(String^ fileName)
-		{
-			int lastDotIndex = fileName->LastIndexOf(".");
-			return fileName->Substring(lastDotIndex + 1)->ToLower();
-		}
+	String^ nameFromPath(String^ path)
+	{
+		int index = path->LastIndexOf("\\");
+		return path->Substring(index + 1);
 	}
+
+	String^ getExtension(String^ fileName)
+	{
+		int lastDotIndex = fileName->LastIndexOf(".");
+		return fileName->Substring(lastDotIndex + 1)->ToLower();
+	}
+}

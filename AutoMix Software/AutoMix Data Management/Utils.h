@@ -1,9 +1,9 @@
 #pragma once
 
-namespace AutomixDataManagement {
+namespace AutoMixDataManagement {
 
-		System::String^ nameFromPath(System::String^ path);
+	System::String^ nameFromPath(System::String^ path);
 
-		System::String^ getExtension(System::String^ fileName);
+	System::String^ getExtension(System::String^ fileName);
 
-	}
+}
