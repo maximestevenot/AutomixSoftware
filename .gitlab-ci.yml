@@ -1,5 +1,7 @@
 variables:
-  Solution: "Automix Software\\AutoMix Software.sln"
+  AutoMix: "Automix Software\\AutoMix Software.sln"
+  IOLib: "InputOutputLibrary\\InputOutputLibrary.sln"
+  ExtractLib: "DataExtractionLibrary\\DataExtractionLibrary.sln"
 
 before_script:
   - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
@@ -13,7 +15,9 @@ build:
   stage: build
   script:
   - echo building...
-  - 'devenv "%Solution%" /Build "Debug|x86"'
+  - 'devenv "%AutoMix%" /Build "Debug|x86"'
+  - 'devenv "%IOLib%" /Build "Debug|x86"'
+  - 'devenv "%ExtractLib%" /Build "Debug|x86"'
   except:
   - tags
 
@@ -21,7 +25,7 @@ build:
   # stage: test
   # script:
   # - echo testing...
-  # - 'msbuild /p:Configuration=Debug;Architecture=x86 "%Solution%"'
+  # - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%"'
   # - dir /s /b *.Tests.dll | findstr /r Tests\\*\\bin\\ > testcontainers.txt
   # - 'for /f %%f in (testcontainers.txt) do mstest.exe /testcontainer:"%%f"'
   # except:
@@ -31,6 +35,6 @@ deploy:
   stage: deploy
   script:
   - echo deploying...
-  - 'msbuild /p:Configuration=Debug;Architecture=x86 "%Solution%" /t:publish'
+  - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%" /t:publish'
   only:
   - production
