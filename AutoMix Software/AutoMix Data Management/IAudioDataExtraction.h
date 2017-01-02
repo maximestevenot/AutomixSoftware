@@ -12,8 +12,6 @@ namespace AutoMixDataManagement {
 
 		//virtual ~IAudioDataExtraction() {}
 
-		virtual void setPath(System::String^) abstract;
-
 		virtual void extractBPM(Track^) abstract;
 		virtual void extractBPM(TrackCollection^) abstract;
 

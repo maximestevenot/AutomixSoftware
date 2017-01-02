@@ -9,8 +9,6 @@ namespace AutoMixDataManagement {
 	public:
 		AudioDataExtractionMock();
 
-		void setPath(System::String ^) override;
-
 		void extractBPM(Track^) override;
 		void extractBPM(TrackCollection^) override;
 
@@ -21,7 +19,8 @@ namespace AutoMixDataManagement {
 		void extractKey(TrackCollection^) override;
 
 	private:
-		System::String^ _textFile;
+		System::String^ _textFile = "";
+		void setPath(Track^ track);
 
 	};
 

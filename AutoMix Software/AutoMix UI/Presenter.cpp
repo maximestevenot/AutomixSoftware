@@ -28,8 +28,6 @@ namespace AutoMixUI {
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 
-		_dataExtractionEngine->setPath(fileEntries[0]->Substring(0, fileEntries[0]->LastIndexOf("\\")));
-
 		while (files->MoveNext())
 		{
 			String^ filePath = safe_cast<String^>(files->Current);

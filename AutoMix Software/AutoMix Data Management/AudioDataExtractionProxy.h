@@ -10,8 +10,6 @@ namespace AutoMixDataManagement {
 
 		AudioDataExtractionProxy();
 
-		void setPath(System::String^) override;
-
 		void extractBPM(Track^) override;
 		void extractBPM(TrackCollection^) override;
 
