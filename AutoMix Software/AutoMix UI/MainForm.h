@@ -67,6 +67,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _imputButton;
 	private: System::Windows::Forms::Button^  _outputButton;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::ColumnHeader^  collectionKey;
 
 
 	private:
@@ -100,6 +101,7 @@ namespace AutoMixUI {
 			this->_imputButton = (gcnew System::Windows::Forms::Button());
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -183,9 +185,9 @@ namespace AutoMixUI {
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
+			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
 				this->collectionName,
-					this->collectionDuration, this->collectionBPM
+					this->collectionDuration, this->collectionBPM, this->collectionKey
 			});
 			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -197,7 +199,7 @@ namespace AutoMixUI {
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
-			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &AutoMixUI::MainForm::_musicListView_ColumnClick);
+			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::_musicListView_ColumnClick);
 			// 
 			// collectionName
 			// 
@@ -212,6 +214,7 @@ namespace AutoMixUI {
 			// collectionBPM
 			// 
 			this->collectionBPM->Text = L"BPM";
+			this->collectionBPM->Width = 72;
 			// 
 			// _imputButton
 			// 
@@ -252,6 +255,11 @@ namespace AutoMixUI {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 7;
 			this->pictureBox1->TabStop = false;
+			// 
+			// collectionKey
+			// 
+			this->collectionKey->Text = L"Key";
+			this->collectionKey->Width = 71;
 			// 
 			// MainForm
 			// 
