@@ -28,6 +28,8 @@ namespace AutoMixUI {
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 
+		_dataExtractionEngine->setPath(fileEntries[0]->Substring(0, fileEntries[0]->LastIndexOf("\\")));
+
 		while (files->MoveNext())
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
@@ -37,11 +39,13 @@ namespace AutoMixUI {
 			if (extension->Contains("mp3"))  //TODO make it better
 			{
 				Track^ track = gcnew Track(filePath);
-				_dataExtractionEngine->extractBPM(track);
-				_dataExtractionEngine->extractDuration(track);
 				_trackCollection->Add(track);
 			}
 		}
+
+		_dataExtractionEngine->extractBPM(_trackCollection);
+		_dataExtractionEngine->extractDuration(_trackCollection);
+		_dataExtractionEngine->extractKey(_trackCollection);
 
 		_trackCollection->sortByName();
 		notify();

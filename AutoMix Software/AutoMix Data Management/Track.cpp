@@ -10,6 +10,7 @@ namespace AutoMixDataManagement {
 	{
 		Duration = 0;
 		BPM = 0;
+		Key = "";
 	}
 
 	Track::Track(String^ path) : Track()
@@ -34,6 +35,10 @@ namespace AutoMixDataManagement {
 		String^ stringDuration = ts.ToString();
 		int dotIndex = stringDuration->LastIndexOf(".");
 
-		return stringDuration->Substring(0, dotIndex);
+		if (dotIndex > 0)
+		{
+			stringDuration = stringDuration->Substring(0, dotIndex);
+		}
+		return stringDuration;
 	}
 }
