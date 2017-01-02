@@ -37,11 +37,13 @@ namespace AutoMixUI {
 			if (extension->Contains("mp3"))  //TODO make it better
 			{
 				Track^ track = gcnew Track(filePath);
-				_dataExtractionEngine->extractBPM(track);
-				_dataExtractionEngine->extractDuration(track);
 				_trackCollection->Add(track);
 			}
 		}
+
+		_dataExtractionEngine->extractBPM(_trackCollection);
+		_dataExtractionEngine->extractDuration(_trackCollection);
+		_dataExtractionEngine->extractKey(_trackCollection);
 
 		_trackCollection->sortByName();
 		notify();

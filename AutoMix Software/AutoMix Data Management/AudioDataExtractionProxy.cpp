@@ -30,4 +30,14 @@ namespace AutoMixDataManagement {
 		_realSubject->extractDuration(trackCollection);
 	}
 
+	void AudioDataExtractionProxy::extractKey(Track^ track)
+	{
+		_realSubject->extractKey(track);
+	}
+
+	void AudioDataExtractionProxy::extractKey(TrackCollection^ trackCollection)
+	{
+		_realSubject->extractKey(trackCollection);
+	}
+
 }

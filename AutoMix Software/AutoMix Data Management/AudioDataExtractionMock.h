@@ -15,8 +15,12 @@ namespace AutoMixDataManagement {
 		void extractDuration(Track^) override;
 		void extractDuration(TrackCollection^) override;
 
+		void extractKey(Track^) override;
+		void extractKey(TrackCollection^) override;
+
 	private:
-		System::Random^ _randomGenerator;
+		System::String^ _textFile = "";
+		void setPath(Track^ track);
 
 	};
 

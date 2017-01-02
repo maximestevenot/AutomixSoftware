@@ -16,6 +16,9 @@ namespace AutoMixDataManagement {
 		void extractDuration(Track^) override;
 		void extractDuration(TrackCollection^) override;
 
+		void extractKey(Track^) override;
+		void extractKey(TrackCollection^) override;
+
 	private:
 		IAudioDataExtraction^ _realSubject;
 	};
