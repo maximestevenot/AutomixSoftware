@@ -9,13 +9,17 @@ namespace AutoMixDataManagement {
 	{
 	}
 
-	void AudioDataExtractionMock::setPath(String^ path)
+	void AudioDataExtractionMock::setPath(Track^ track)
 	{
-		_textFile = path + "\\samples.txt";
+		_textFile = track->Path->Substring(0, track->Path->LastIndexOf("\\")) + "\\samples.txt";
 	}
 
 	void AudioDataExtractionMock::extractBPM(Track^ track)
 	{
+		if (_textFile == "")
+		{
+			setPath(track);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{
@@ -36,6 +40,10 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractBPM(TrackCollection^ trackCollection)
 	{
+		if (_textFile == "")
+		{
+			setPath(trackCollection[0]);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{
@@ -54,6 +62,10 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractDuration(Track^ track)
 	{
+		if (_textFile == "")
+		{
+			setPath(track);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{
@@ -74,6 +86,10 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractDuration(TrackCollection^ trackCollection)
 	{
+		if (_textFile == "")
+		{
+			setPath(trackCollection[0]);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{
@@ -92,6 +108,10 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractKey(Track^ track)
 	{
+		if (_textFile == "")
+		{
+			setPath(track);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{
@@ -112,6 +132,10 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtractionMock::extractKey(TrackCollection^ trackCollection)
 	{
+		if (_textFile == "")
+		{
+			setPath(trackCollection[0]);
+		}
 		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
 		if (!reader)
 		{

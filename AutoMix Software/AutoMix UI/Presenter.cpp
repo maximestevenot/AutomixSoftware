@@ -27,8 +27,6 @@ namespace AutoMixUI {
 	void Presenter::loadTracks(array<System::String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
-		
-		_dataExtractionEngine->setPath(fileEntries[0]->Substring(0, fileEntries[0]->LastIndexOf("\\")));
 
 		while (files->MoveNext())
 		{
