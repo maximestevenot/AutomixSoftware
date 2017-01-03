@@ -41,6 +41,13 @@ The .exe file will be built in the *Debug* directory.
 
 ----------
 
+## Project Follow-Up
+
+To view the project meetings reports or any other document not relative to the source code and documentation, please checkout to the *[suivi_projet](../tree/suivi_projet/Suivi%20de%20projet)* branch.  
+This branch contains all the needed files for the project follow-up.
+
+----------
+
 ## Built With
 
  - [Visual Studio](https://www.visualstudio.com/) - The IDE used.

@@ -20,7 +20,10 @@ More info [here](https://isocpp.org/wiki/faq/coding-standards) and [here](https:
 
 ### Formatted text files
 
-If you need to make a structured document, you should consider [Markdown](https://en.wikipedia.org/wiki/Markdown).  
+Any document relative to the project follow-up must be put in the *[suivi_projet](../tree/suivi_projet/Suivi%20de%20projet)* branch.  
+We like to use [Microsoft Office](https://www.office.com/) documents in this branch.
+
+Otherwise, if you need to make a structured document, you should consider [Markdown](https://en.wikipedia.org/wiki/Markdown).  
 For example, this document uses the Markdown syntax.
 
 For longer texts or presentations, [LaTeX](http://latex-project.org/) and HTML+CSS(+JS) could be good options.
@@ -85,7 +88,7 @@ When you're ready to start working on a new feature, create a new branch from *d
 
 ```
 cd projet_2a
-git checkout -b feature/your-feature develop
+git checkout -b feature/your-feature origin/develop
 ```
 
 Write your code and when the feature is ready, merge *origin/develop* into your local branch :
