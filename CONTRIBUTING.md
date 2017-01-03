@@ -20,7 +20,7 @@ More info [here](https://isocpp.org/wiki/faq/coding-standards) and [here](https:
 
 ### Formatted text files
 
-Any document relative to the project follow-up must be put in the *[suivi_projet](../tree/suivi_projet/Suivi%20de%20projet)* branch.  
+Any document relative to the project follow-up must be put in the *[suivi_projet](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/tree/suivi_projet/Suivi%20de%20projet)* branch.  
 We like to use [Microsoft Office](https://www.office.com/) documents in this branch.
 
 Otherwise, if you need to make a structured document, you should consider [Markdown](https://en.wikipedia.org/wiki/Markdown).  
