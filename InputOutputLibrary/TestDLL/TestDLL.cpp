@@ -9,8 +9,8 @@
 
 int main()
 {
-	mp3_to_wav(L"C:\\Users\\gabon\\Music\\wanna_be_like_you_sim_gretina.mp3", L"C:\\Users\\gabon\\Music\\wav\\wanna_be_like_you_sim_gretina.wav");
-	wav_to_mp3("C:\\Users\\gabon\\Music\\wav\\wanna_be_like_you_sim_gretina.wav", "C:\\Users\\gabon\\Music\\wav\\wanna_be_like_you_sim_gretina.mp3");
+	mp3_to_wav(L"Bob Marley - Three Little Birds.mp3", L"../Debug/Bob Marley - Three Little Birds_wav_export.mp3");
+	wav_to_mp3("../Debug/Bob Marley - Three Little Birds_wav_export.mp3", "../Debug/Bob Marley - Three Little Birds_mp3_export.mp3");
     return 0;
 }
 
