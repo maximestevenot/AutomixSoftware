@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "InputOutputLibrary.h"
+
 
 
 // Il s'agit d'un exemple de variable exportée
@@ -86,6 +86,41 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 
 	return SUCCEEDED(hr) ? 0 : 1;
 };
+
+
+INPUTOUTPUTLIBRARY_API int lame_encoding(char* sourcefile, char* destinationfile)
+{
+	int read, write;
+
+	FILE *wav = fopen(sourcefile, "rb");
+	FILE *mp3 = fopen(destinationfile, "wb");
+
+	const int WAV_SIZE = 8192;
+	const int MP3_SIZE = 8192;
+
+	short int wav_buffer[WAV_SIZE * 2];
+	unsigned char mp3_buffer[MP3_SIZE];
+
+	lame_t lame = lame_init();
+	lame_set_in_samplerate(lame, 44100);
+	lame_set_VBR(lame, vbr_default);
+	lame_init_params(lame);
+
+	do {
+		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wav);
+		if (read == 0)
+			write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
+		else
+			write = lame_encode_buffer_interleaved(lame, wav_buffer, read, mp3_buffer, MP3_SIZE);
+		fwrite(mp3_buffer, write, 1, mp3);
+	} while (read != 0);
+
+	lame_close(lame);
+	fclose(mp3);
+	fclose(wav);
+
+	return 0;
+}
 
 
 // Il s'agit du constructeur d'une classe qui a été exportée.
