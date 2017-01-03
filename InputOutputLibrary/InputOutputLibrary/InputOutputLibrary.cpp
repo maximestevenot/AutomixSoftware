@@ -88,7 +88,7 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 };
 
 
-INPUTOUTPUTLIBRARY_API int lame_encoding(char* sourcefile, char* destinationfile)
+INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
 {
 	int read, write;
 
@@ -119,7 +119,7 @@ INPUTOUTPUTLIBRARY_API int lame_encoding(char* sourcefile, char* destinationfile
 	fclose(mp3);
 	fclose(wav);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
