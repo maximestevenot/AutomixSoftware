@@ -21,3 +21,4 @@ extern INPUTOUTPUTLIBRARY_API int nInputOutputLibrary;
 
 //INPUTOUTPUTLIBRARY_API int fnInputOutputLibrary(void);
 INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationfile);
+INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile);

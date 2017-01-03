@@ -16,13 +16,14 @@
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme
 #define WINVER _WIN32_WINNT_WIN7
 
-#include <windows.h>
+
 #include <mfapi.h>
 #include <mfidl.h>
 #include <mfreadwrite.h>
 #include <stdio.h>
 #include <mferror.h>
-
+#include "InputOutputLibrary.h"
+#include <lame.h>
 
 template <class T> void SafeRelease(T **ppT)
 {

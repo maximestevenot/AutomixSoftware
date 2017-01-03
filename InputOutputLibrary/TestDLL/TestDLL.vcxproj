@@ -79,8 +79,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\gabon\Documents\AutoMix\InputOutputLibrary\Debug;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\gabon\Documents\AutoMix\InputOutputLibrary\InputOutputLibrary;$(IncludePath)</IncludePath>
+    <LibraryPath>..\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\InputOutputLibrary;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
