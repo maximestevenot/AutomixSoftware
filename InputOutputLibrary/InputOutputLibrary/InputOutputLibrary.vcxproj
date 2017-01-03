@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\gabon\Documents\lame-3.99.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\gabon\Documents\AutoMix\InputOutputLibrary;C:\Users\gabon\Documents\lame-3.99.5\output\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\lame;$(IncludePath)</IncludePath>
+    <LibraryPath>../;./lame;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,7 +95,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>mfplat.lib;mfreadwrite.lib;mfuuid.lib;libmpghip-static.lib;libmp3lame-static.lib;libmp3lame.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\gabon\Documents\lame-3.99.5\output\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./lame;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
