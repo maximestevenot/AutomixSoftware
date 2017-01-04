@@ -4,16 +4,19 @@
 Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
 Unauthorized copying of this file, or any file in this project, via any
 medium is strictly prohibited.
+For any questions, please contact Maxime STEVENOT at
+stevenot@ecole.ensicaen.fr
 
-			      AUTOMIX - TERMS AND CONDITIONS
+		AUTOMIX - TERMS AND CONDITIONS
 
   1. Preamble.
   
   This Agreement, signed on Jan 3, 2017 (hereinafter: Effective Date)
-governs the relationship between a software user, (hereinafter: Licensee)
-and LesProjecteurs, a partnership between Maxime STEVENOT, Guillaume
-HANNES, Jordan ERNULT, Louis CARLIER & Pierre GABON under the laws of
-whose principal place of business is Caen, FRANCE (hereinafter: Licensor).
+governs the relationship between a AutoMix Software user, (hereinafter:
+Licensee) and LesProjecteurs, a partnership between Maxime STEVENOT,
+Guillaume HANNES, Jordan ERNULT, Louis CARLIER & Pierre GABON under the
+laws of whose principal place of business is Caen, FRANCE (hereinafter:
+Licensor).
 
   This Agreement sets the terms, rights, restrictions and obligations on
 using AutoMix (hereinafter: The Software) created and owned by Licensor,
@@ -59,7 +62,7 @@ software used while running Software.
 
     2.6. With Attribution Requirements﻿:
 	Copyright (C) 2016-2017	LesProjecteurs - All Rights Reserved
-	Maxime STEVENOT, Guillaume HANNES,	Jordan ERNULT, Louis CARLIER, Pierre GABON
+	Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
 
   3. Term & Termination.
   
@@ -81,11 +84,9 @@ this Agreement, including Licensee’s license in the case where Licensee :
 	
   4. Payment.
   
-  In consideration of the License granted under clause 2, Licensee shall pay
-Licensor a fee, via Credit-Card, PayPal or any other mean which Licensor may
-deem adequate. Failure to perform payment shall construe as material breach
-of this Agreement unless both Licensor and Licensee sign an agreement granting
-the Licensee a license.
+  In consideration of the License granted under clause 2, Licensor shall sign 
+an agreement granting the Licensee a license and requires no payment as The
+Software is free of charges.
 
   5. Upgrades, Updates and Fixes.
   
@@ -130,13 +131,14 @@ Software.
 	
     6.2. Feature Request: Licensee may request additional features in Software,
 	provided, however, that (i) Licensee shall waive any claim or right in such
-	feature should feature be developed by Licensor; (ii) Licensee shall be prohibited
-	from developing the feature, or disclose such feature request, or feature, to any
-	3rd party directly competing with Licensor or any 3rd party which may be, following
-	the development of such feature, in direct competition with Licensor; (iii) Licensee
-	warrants that feature does not infringe any 3rd party patent, trademark, trade-
-	secret or any other intellectual property right; and (iv) Licensee developed,
-	envisioned or created the feature solely by himself.
+	feature should feature be developed by Licensor; (ii) Licensee shall be
+	prohibited from developing the feature, or disclose such feature request, or
+	feature, to any 3rd party directly competing with Licensor or any 3rd party
+	which may be, following the development of such feature, in direct competition
+	with Licensor; (iii) Licensee warrants that feature does not infringe any 3rd
+	party patent, trademark, trade- secret or any other intellectual property
+	right; and (iv) Licensee developed, envisioned or created the feature solely
+	by himself.
 	
   7. Liability.
   
@@ -195,3 +197,11 @@ to any settlement in relation to such lawsuit or claim.
 relation to this license and to compensate Licensor for any legal fees, cost or
 attorney fees should any claim brought by Licensee against Licensor be denied,
 in part or in full.
+  
+  12. Important note.
+
+  The Software uses 3rd party libraries licensed under GNU GPLv3 or superior and
+Licensor herby grants Licensee the right to access any part of the source code.
+To do so, just contact Maxime STEVENOT at stevenot@ecole.ensicaen.fr. Licensor shall
+not claim property on any of these libraries and make source code and documentaion
+accessible for users.
