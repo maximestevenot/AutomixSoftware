@@ -6,9 +6,6 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t * wszSourceFile, const wchar
 {
 	HeapSetInformation(nullptr, HeapEnableTerminationOnCorruption, nullptr, 0);
 
-	//const WCHAR *wszSourceFile = sourcefile;
-	//const WCHAR *wszTargetFile = destinationfile;
-
 	const LONG MAX_AUDIO_DURATION_MSEC = 18000000; // 5 hours max
 
 	HRESULT hr = S_OK;
@@ -77,8 +74,13 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destin
 {
 	int read, write;
 
-	FILE *wav = fopen(sourcefile, "rb");
-	FILE *mp3 = fopen(destinationfile, "wb");
+	FILE * wavFile = fopen(sourcefile, "rb");
+	FILE * mp3File = fopen(destinationfile, "wb");
+
+	if (!mp3File || !wavFile)
+	{
+		return 0;
+	}
 
 	const int WAV_SIZE = 8192;
 	const int MP3_SIZE = 8192;
@@ -93,7 +95,7 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destin
 
 	do 
 	{
-		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wav);
+		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wavFile);
 		if (read == 0) 
 		{
 			write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
@@ -102,12 +104,12 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destin
 		{
 			write = lame_encode_buffer_interleaved(lame, wav_buffer, read, mp3_buffer, MP3_SIZE);
 		}
-		fwrite(mp3_buffer, write, 1, mp3);
+		fwrite(mp3_buffer, write, 1, mp3File);
 	} while (read != 0);
 
 	lame_close(lame);
-	fclose(mp3);
-	fclose(wav);
+	fclose(mp3File);
+	fclose(wavFile);
 
 	return 1;
 }
