@@ -2,12 +2,12 @@
 
 #include "stdafx.h"
 
-INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationfile)
+INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t * wszSourceFile, const wchar_t * wszTargetFile)
 {
 	HeapSetInformation(nullptr, HeapEnableTerminationOnCorruption, nullptr, 0);
 
-	const WCHAR *wszSourceFile = sourcefile;
-	const WCHAR *wszTargetFile = destinationfile;
+	//const WCHAR *wszSourceFile = sourcefile;
+	//const WCHAR *wszTargetFile = destinationfile;
 
 	const LONG MAX_AUDIO_DURATION_MSEC = 18000000; // 5 hours max
 
@@ -76,7 +76,7 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile)
 {
 	int read, write;
-	printf("%s", sourcefile);
+
 	FILE *wav = fopen(sourcefile, "rb");
 	FILE *mp3 = fopen(destinationfile, "wb");
 

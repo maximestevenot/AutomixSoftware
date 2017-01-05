@@ -11,5 +11,5 @@
 #define INPUTOUTPUTLIBRARY_API __declspec(dllimport)
 #endif
 
-extern "C" INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationfile);
+extern "C" INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t* sourcefile, const wchar_t* destinationfile);
 extern "C" INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile);

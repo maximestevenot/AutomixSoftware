@@ -6,7 +6,6 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-
 #include "stdafx.h"
 #include "SafeDataExtractionLibrary.h"
 
