@@ -74,8 +74,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\..\DataExtractionLibrary\DataExtractionLibrary;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\DataExtractionLibrary\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\DataExtractionLibrary\DataExtractionLibrary;..\..\InputOutputLibrary\InputOutputLibrary;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\InputOutputLibrary\Debug;..\..\DataExtractionLibrary\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,7 +95,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <AdditionalLibraryDirectories>..\..\DataExtractionLibrary\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\InputOutputLibrary\Debug;..\..\DataExtractionLibrary\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -137,11 +137,16 @@
   <ItemGroup>
     <ClInclude Include="Automix Wrapper.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SafeDataExtractionLibrary.h" />
+    <ClInclude Include="SafeInputOutputException.h" />
+    <ClInclude Include="SafeInputOutputLibrary.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Automix Wrapper.cpp" />
+    <ClCompile Include="SafeDataExtractionLibrary.cpp" />
+    <ClCompile Include="SafeInputOutputLibrary.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

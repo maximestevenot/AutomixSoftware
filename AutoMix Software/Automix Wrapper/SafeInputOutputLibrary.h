@@ -6,5 +6,15 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
+#pragma once
+#include "Automix Wrapper.h"
 
-#include "stdafx.h"
+namespace AutoMixWrapper {
+
+	public ref class SafeInputOutputLibrary
+	{
+	public:
+		void wavToMp3(System::String^ inputFile, System::String^ outputFile);
+		void mp3ToWav(System::String^ inputFile, System::String^ outputFile);
+	};
+}

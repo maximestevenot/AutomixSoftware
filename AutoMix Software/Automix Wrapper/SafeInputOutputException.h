@@ -8,9 +8,26 @@
 
 #pragma once
 
-#include <DataExtractionLibrary.h>
-#include <InputOutputLibrary.h>
+namespace AutoMixWrapper {
 
-#define DATA_EXTRACTION_LIB "..\\..\\DataExtractionLibrary\\Debug\\DataExtractionLibrary.dll"
+	using namespace System;
 
-#define INPUT_OUTPUT_LIB "..\\..\\InputOutputLibrary\\Debug\\InputOutputLibrary.dll"
+	public ref class SafeInputOutputException : public Exception
+	{
+	public:
+		SafeInputOutputException()
+		{
+		}
+
+		SafeInputOutputException(String^ message)
+			: Exception(message)
+		{
+		}
+
+		SafeInputOutputException(String^ message, Exception^ inner)
+			: Exception(message, inner)
+		{
+		}
+	};
+
+}

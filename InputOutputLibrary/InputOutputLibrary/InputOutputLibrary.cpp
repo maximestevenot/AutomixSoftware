@@ -1,28 +1,10 @@
 // InputOutputLibrary.cpp : définit les fonctions exportées pour l'application DLL.
-//
 
 #include "stdafx.h"
 
-
-
-// Il s'agit d'un exemple de variable exportée
-INPUTOUTPUTLIBRARY_API int nInputOutputLibrary=0;
-
-// Il s'agit d'un exemple de fonction exportée.
-INPUTOUTPUTLIBRARY_API int fnInputOutputLibrary(void)
-{
-    return 42;
-}
-
-
-INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationfile)
+INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t * wszSourceFile, const wchar_t * wszTargetFile)
 {
 	HeapSetInformation(nullptr, HeapEnableTerminationOnCorruption, nullptr, 0);
-
-
-	const WCHAR *wszSourceFile = sourcefile;
-	const WCHAR *wszTargetFile = destinationfile;
-
 
 	const LONG MAX_AUDIO_DURATION_MSEC = 18000000; // 5 hours max
 
@@ -87,13 +69,17 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 	return SUCCEEDED(hr) ? 0 : 1;
 };
 
-
-INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
+INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile)
 {
 	int read, write;
 
-	FILE *wav = fopen(sourcefile, "rb");
-	FILE *mp3 = fopen(destinationfile, "wb");
+	FILE * wavFile = fopen(sourcefile, "rb");
+	FILE * mp3File = fopen(destinationfile, "wb");
+
+	if (!mp3File || !wavFile)
+	{
+		return 1;
+	}
 
 	const int WAV_SIZE = 8192;
 	const int MP3_SIZE = 8192;
@@ -106,26 +92,23 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
 	lame_set_VBR(lame, vbr_default);
 	lame_init_params(lame);
 
-	do {
-		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wav);
-		if (read == 0)
+	do 
+	{
+		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wavFile);
+		if (read == 0) 
+		{
 			write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-		else
+		}
+		else 
+		{
 			write = lame_encode_buffer_interleaved(lame, wav_buffer, read, mp3_buffer, MP3_SIZE);
-		fwrite(mp3_buffer, write, 1, mp3);
+		}
+		fwrite(mp3_buffer, write, 1, mp3File);
 	} while (read != 0);
 
 	lame_close(lame);
-	fclose(mp3);
-	fclose(wav);
+	fclose(mp3File);
+	fclose(wavFile);
 
-	return EXIT_SUCCESS;
-}
-
-
-// Il s'agit du constructeur d'une classe qui a été exportée.
-// consultez InputOutputLibrary.h pour la définition de la classe
-CInputOutputLibrary::CInputOutputLibrary()
-{
-    return;
+	return 0;
 }
