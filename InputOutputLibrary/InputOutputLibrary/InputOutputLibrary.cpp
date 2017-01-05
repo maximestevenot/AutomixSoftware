@@ -1,28 +1,13 @@
 // InputOutputLibrary.cpp : définit les fonctions exportées pour l'application DLL.
-//
 
 #include "stdafx.h"
-
-
-
-// Il s'agit d'un exemple de variable exportée
-INPUTOUTPUTLIBRARY_API int nInputOutputLibrary=0;
-
-// Il s'agit d'un exemple de fonction exportée.
-INPUTOUTPUTLIBRARY_API int fnInputOutputLibrary(void)
-{
-    return 42;
-}
-
 
 INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationfile)
 {
 	HeapSetInformation(nullptr, HeapEnableTerminationOnCorruption, nullptr, 0);
 
-
 	const WCHAR *wszSourceFile = sourcefile;
 	const WCHAR *wszTargetFile = destinationfile;
-
 
 	const LONG MAX_AUDIO_DURATION_MSEC = 18000000; // 5 hours max
 
@@ -84,7 +69,7 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 	MFShutdown();
 	CoUninitialize();
 
-	return SUCCEEDED(hr) ? 0 : 1;
+	return SUCCEEDED(hr) ? 1 : 0;
 };
 
 
@@ -106,12 +91,17 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
 	lame_set_VBR(lame, vbr_default);
 	lame_init_params(lame);
 
-	do {
+	do 
+	{
 		read = fread(wav_buffer, 2 * sizeof(short int), WAV_SIZE, wav);
-		if (read == 0)
+		if (read == 0) 
+		{
 			write = lame_encode_flush(lame, mp3_buffer, MP3_SIZE);
-		else
+		}
+		else 
+		{
 			write = lame_encode_buffer_interleaved(lame, wav_buffer, read, mp3_buffer, MP3_SIZE);
+		}
 		fwrite(mp3_buffer, write, 1, mp3);
 	} while (read != 0);
 
@@ -119,13 +109,5 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
 	fclose(mp3);
 	fclose(wav);
 
-	return EXIT_SUCCESS;
-}
-
-
-// Il s'agit du constructeur d'une classe qui a été exportée.
-// consultez InputOutputLibrary.h pour la définition de la classe
-CInputOutputLibrary::CInputOutputLibrary()
-{
-    return;
+	return 1;
 }
