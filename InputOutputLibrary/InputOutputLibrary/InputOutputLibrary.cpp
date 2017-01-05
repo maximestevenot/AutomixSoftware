@@ -73,10 +73,10 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(wchar_t* sourcefile, wchar_t* destinationf
 };
 
 
-INPUTOUTPUTLIBRARY_API int wav_to_mp3(char* sourcefile, char* destinationfile)
+INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile)
 {
 	int read, write;
-
+	printf("%s", sourcefile);
 	FILE *wav = fopen(sourcefile, "rb");
 	FILE *mp3 = fopen(destinationfile, "wb");
 
