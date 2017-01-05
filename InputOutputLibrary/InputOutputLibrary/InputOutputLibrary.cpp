@@ -66,7 +66,7 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t * wszSourceFile, const wchar
 	MFShutdown();
 	CoUninitialize();
 
-	return SUCCEEDED(hr) ? 1 : 0;
+	return SUCCEEDED(hr) ? 0 : 1;
 };
 
 INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile)
@@ -78,7 +78,7 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destin
 
 	if (!mp3File || !wavFile)
 	{
-		return 0;
+		return 1;
 	}
 
 	const int WAV_SIZE = 8192;
@@ -110,5 +110,5 @@ INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destin
 	fclose(mp3File);
 	fclose(wavFile);
 
-	return 1;
+	return 0;
 }

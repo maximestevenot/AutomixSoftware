@@ -8,6 +8,7 @@
 
 #include "stdafx.h"
 #include "SafeInputOutputLibrary.h"
+#include "SafeInputOutputException.h"
 
 namespace AutoMixWrapper {
 
@@ -24,11 +25,19 @@ namespace AutoMixWrapper {
 	{
 		int returnCode = wav_to_mp3(inputFile, outputFile);
 
+		if (returnCode != 0)
+		{
+			throw gcnew SafeInputOutputException("wav_to_mp3 exited abnormally with code : " + returnCode);
+		}
+
 	}
 	void SafeInputOutputLibrary::mp3ToWav(System::String ^ inputFile, System::String ^ outputFile)
 	{
 		int returnCode = mp3_to_wav(inputFile, outputFile);
-		System::Diagnostics::Debug::WriteLine(returnCode);
-		//TODO add exception 
+
+		if (returnCode != 0)
+		{
+			throw gcnew SafeInputOutputException("mp3_to_wav exited abnormally with code : " + returnCode);
+		}
 	}
 }

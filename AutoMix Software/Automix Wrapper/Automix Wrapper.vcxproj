@@ -138,6 +138,7 @@
     <ClInclude Include="Automix Wrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SafeDataExtractionLibrary.h" />
+    <ClInclude Include="SafeInputOutputException.h" />
     <ClInclude Include="SafeInputOutputLibrary.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
