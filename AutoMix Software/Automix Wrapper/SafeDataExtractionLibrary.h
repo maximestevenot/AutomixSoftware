@@ -14,8 +14,6 @@ namespace AutoMixWrapper {
 
 	public ref class SafeDataExtractionLibrary
 	{
-	public:
-		static double fnDataExtractionLibrary();
 	};
 
 }

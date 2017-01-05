@@ -15,15 +15,14 @@ namespace AutoMixWrapper {
 	using namespace System::Runtime::InteropServices;
 
 	[DllImport(INPUT_OUTPUT_LIB, CharSet = CharSet::Ansi, EntryPoint = "wav_to_mp3")]
-	extern "C" INPUTOUTPUTLIBRARY_API int wav_to_mp3(String ^  pSsourcefile, String ^  pDestinationfile);
+	extern "C" INPUTOUTPUTLIBRARY_API int wav_to_mp3(String ^ pSsourcefile, String ^ pDestinationfile);
 
 	[DllImport(INPUT_OUTPUT_LIB, CharSet = CharSet::Auto, EntryPoint = "mp3_to_wav")]
-	extern "C" INPUTOUTPUTLIBRARY_API int mp3_to_wav(String ^  pSsourcefile, String ^  pDestinationfile);
+	extern "C" INPUTOUTPUTLIBRARY_API int mp3_to_wav(String ^ pSsourcefile, String ^ pDestinationfile);
 
 	void SafeInputOutputLibrary::wavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
 		int returnCode = wav_to_mp3(inputFile, outputFile);
-		//TODO add exception 
 
 	}
 	void SafeInputOutputLibrary::mp3ToWav(System::String ^ inputFile, System::String ^ outputFile)

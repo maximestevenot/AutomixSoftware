@@ -69,7 +69,6 @@ INPUTOUTPUTLIBRARY_API int mp3_to_wav(const wchar_t * wszSourceFile, const wchar
 	return SUCCEEDED(hr) ? 1 : 0;
 };
 
-
 INPUTOUTPUTLIBRARY_API int wav_to_mp3(const char* sourcefile, const char* destinationfile)
 {
 	int read, write;

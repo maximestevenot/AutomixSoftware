@@ -14,13 +14,4 @@ namespace AutoMixWrapper {
 	using namespace System;
 	using namespace System::Runtime::InteropServices;
 
-	[DllImport(DATA_EXTRACTION_LIB, EntryPoint = "?fnDataExtractionLibrary@@YANXZ")]
-	extern double fnDataExtractionLibrary(void);
-
-	double SafeDataExtractionLibrary::fnDataExtractionLibrary()
-	{
-		double d = fnDataExtractionLibrary();
-		return d;
-	}
-
 }
