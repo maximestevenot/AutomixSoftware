@@ -139,6 +139,7 @@
     <ClInclude Include="AudioDataExtractionProxy.h" />
     <ClInclude Include="AudioExportationMock.h" />
     <ClInclude Include="AudioExportationProxy.h" />
+    <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
     <ClInclude Include="IAudioExportation.h" />
@@ -155,6 +156,7 @@
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
     <ClCompile Include="AudioExportationMock.cpp" />
     <ClCompile Include="AudioExportationProxy.cpp" />
+    <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

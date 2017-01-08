@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TrackCollection.h"
+#include "AudioIO.h"
 
 namespace AutoMixDataManagement {
 
@@ -49,6 +50,11 @@ namespace AutoMixDataManagement {
 	{
 		sortByBPM();
 		Reverse();
+	}
+
+	void TrackCollection::exportToMP3(String ^ outputFile)
+	{
+		AudioIO::simpleMP3Export(this, outputFile);
 	}
 
 }

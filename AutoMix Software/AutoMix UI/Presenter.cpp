@@ -51,7 +51,8 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::String^ destinationFile)
 	{
-		_audioExportationEngine = gcnew AudioExportationProxy(destinationFile);
-		_audioExportationEngine->exportTrackList(_trackCollection);
+		//_audioExportationEngine = gcnew AudioExportationProxy(destinationFile);
+		//_audioExportationEngine->exportTrackList(_trackCollection);
+		_trackCollection->exportToMP3(destinationFile);
 	}
 }

@@ -72,6 +72,9 @@
     <ClInclude Include="TracksComparison.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="AudioIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="TracksComparison.cpp">
       <Filter>Source Files\Collectons</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioIO.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
