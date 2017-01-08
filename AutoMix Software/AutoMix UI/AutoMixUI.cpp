@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Windows::Forms;
+using namespace AutoMixDataManagement;
 
 [STAThread]
 void Main(array<String^>^ args)

@@ -19,14 +19,8 @@
     <Filter Include="Header Files\Collections">
       <UniqueIdentifier>{94641035-2438-419d-8882-6e4e92923f85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Exportation">
-      <UniqueIdentifier>{17051fe2-35d9-4be1-a914-43b2334392cd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Extraction">
       <UniqueIdentifier>{b964afa7-bd00-4275-a2fd-cdb7988aa6f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Exportation">
-      <UniqueIdentifier>{8ca95fef-2b18-4ee7-8bc1-8ed454b0762d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Extraction">
       <UniqueIdentifier>{3b9cb886-0e51-45f8-a1a7-e5cdaa867242}</UniqueIdentifier>
@@ -45,15 +39,6 @@
     <ClInclude Include="Track.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
-    <ClInclude Include="AudioExportationMock.h">
-      <Filter>Header Files\Exportation</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioExportationProxy.h">
-      <Filter>Header Files\Exportation</Filter>
-    </ClInclude>
-    <ClInclude Include="IAudioExportation.h">
-      <Filter>Header Files\Exportation</Filter>
-    </ClInclude>
     <ClInclude Include="Stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -71,6 +56,9 @@
     </ClInclude>
     <ClInclude Include="TracksComparison.h">
       <Filter>Header Files\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioIO.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,12 +80,6 @@
     <ClCompile Include="TrackCollection.cpp">
       <Filter>Source Files\Collectons</Filter>
     </ClCompile>
-    <ClCompile Include="AudioExportationMock.cpp">
-      <Filter>Source Files\Exportation</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioExportationProxy.cpp">
-      <Filter>Source Files\Exportation</Filter>
-    </ClCompile>
     <ClCompile Include="AudioDataExtractionProxy.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
@@ -106,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="TracksComparison.cpp">
       <Filter>Source Files\Collectons</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioIO.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

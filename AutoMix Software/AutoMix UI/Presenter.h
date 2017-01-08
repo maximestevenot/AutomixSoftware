@@ -19,6 +19,5 @@ namespace AutoMixUI {
 
 		TrackCollection^ _trackCollection;
 		IAudioDataExtraction^ _dataExtractionEngine;
-		IAudioExportation^ _audioExportationEngine;
 	};
 }

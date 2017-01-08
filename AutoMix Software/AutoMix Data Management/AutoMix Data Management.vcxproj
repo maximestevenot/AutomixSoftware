@@ -94,6 +94,10 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -115,6 +119,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(ProjectDir)$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -127,6 +134,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="NAudio">
+      <HintPath>External\NAudio-1.8.0\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>External\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -134,11 +147,9 @@
   <ItemGroup>
     <ClInclude Include="AudioDataExtractionMock.h" />
     <ClInclude Include="AudioDataExtractionProxy.h" />
-    <ClInclude Include="AudioExportationMock.h" />
-    <ClInclude Include="AudioExportationProxy.h" />
+    <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
-    <ClInclude Include="IAudioExportation.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
@@ -150,8 +161,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AudioDataExtractionMock.cpp" />
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
-    <ClCompile Include="AudioExportationMock.cpp" />
-    <ClCompile Include="AudioExportationProxy.cpp" />
+    <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
