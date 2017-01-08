@@ -128,7 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="NAudio">
-      <HintPath>..\NAudio-1.8.0\NAudio.dll</HintPath>
+      <HintPath>..\..\NAudio-1.8.0\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>..\..\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

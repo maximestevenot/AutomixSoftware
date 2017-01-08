@@ -8,12 +8,13 @@ namespace AutoMixDataManagement {
 	using namespace System::IO;
 	using namespace NAudio;
 	using namespace NAudio::Wave;
+	using namespace NAudio::Lame;
 
 	AudioIO::AudioIO()
 	{
 	}
 
-	void AudioIO::MP3Export(TrackCollection ^ trackCollection, String ^ outputFile)
+	void AudioIO::Mp3Export(TrackCollection ^ trackCollection, String ^ outputFile)
 	{
 		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStrem = gcnew FileStream(outputFile, FileMode::Create);
@@ -46,5 +47,20 @@ namespace AutoMixDataManagement {
 		}
 
 		sw->Close();
+	}
+
+	void AudioIO::Mp3ToWav(String^ inputFile, String^ outputFile)
+	{
+		Mp3FileReader^ reader = gcnew Mp3FileReader(inputFile);
+		WaveFileWriter::CreateWaveFile(outputFile, reader);
+	}
+
+	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
+	{
+		ID3TagData^ tag = gcnew ID3TagData(); //TODO add gestion of metadata
+
+		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
+		reader->CopyTo(writer);
 	}
 }
