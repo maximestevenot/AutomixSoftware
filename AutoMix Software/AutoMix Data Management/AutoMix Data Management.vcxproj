@@ -94,6 +94,10 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -115,6 +119,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(ProjectDir)$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -128,10 +135,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="NAudio">
-      <HintPath>..\..\NAudio-1.8.0\NAudio.dll</HintPath>
+      <HintPath>External\NAudio-1.8.0\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="NAudio.Lame">
-      <HintPath>..\..\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
+      <HintPath>External\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
