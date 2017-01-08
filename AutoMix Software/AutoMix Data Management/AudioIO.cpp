@@ -13,7 +13,7 @@ namespace AutoMixDataManagement {
 	{
 	}
 
-	void AudioIO::simpleMP3Export(TrackCollection ^ trackCollection, String ^ outputFile)
+	void AudioIO::MP3Export(TrackCollection ^ trackCollection, String ^ outputFile)
 	{
 		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStrem = gcnew FileStream(outputFile, FileMode::Create);
@@ -35,5 +35,16 @@ namespace AutoMixDataManagement {
 				outputStrem->Write(frame->RawData, 0, frame->RawData->Length);
 			}
 		}
+	}
+	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
+	{
+		StreamWriter^ sw = gcnew StreamWriter(outputFile);
+
+		for each(auto t in trackCollection)
+		{
+			sw->WriteLine(t->Name);
+		}
+
+		sw->Close();
 	}
 }

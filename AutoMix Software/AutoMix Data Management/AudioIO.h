@@ -6,6 +6,7 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		AudioIO();
-		static void simpleMP3Export(TrackCollection^ trackCollection, System::String^ outputFile);
+		static void MP3Export(TrackCollection^ trackCollection, System::String^ outputFile);
+		static void TextExport(TrackCollection^ trackCollection, System::String^ outputFile);
 	};
 }

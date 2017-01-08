@@ -54,7 +54,7 @@ namespace AutoMixDataManagement {
 
 	void TrackCollection::exportToMP3(String ^ outputFile)
 	{
-		AudioIO::simpleMP3Export(this, outputFile);
+		AudioIO::MP3Export(this, outputFile);
 	}
 
 }
