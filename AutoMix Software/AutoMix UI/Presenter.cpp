@@ -9,7 +9,6 @@ namespace AutoMixUI {
 		_views = gcnew Generic::List<ViewWithTrackCollection^>();
 		_trackCollection = gcnew TrackCollection();
 		_dataExtractionEngine = gcnew AudioDataExtractionProxy();
-		_audioExportationEngine = nullptr;
 	}
 
 	Presenter::Presenter(ViewWithTrackCollection^ view) : Presenter()
@@ -51,8 +50,6 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::String^ destinationFile)
 	{
-		//_audioExportationEngine = gcnew AudioExportationProxy(destinationFile);
-		//_audioExportationEngine->exportTrackList(_trackCollection);
 		_trackCollection->exportToMP3(destinationFile);
 	}
 }

@@ -140,12 +140,9 @@
   <ItemGroup>
     <ClInclude Include="AudioDataExtractionMock.h" />
     <ClInclude Include="AudioDataExtractionProxy.h" />
-    <ClInclude Include="AudioExportationMock.h" />
-    <ClInclude Include="AudioExportationProxy.h" />
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
-    <ClInclude Include="IAudioExportation.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
@@ -157,8 +154,6 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AudioDataExtractionMock.cpp" />
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
-    <ClCompile Include="AudioExportationMock.cpp" />
-    <ClCompile Include="AudioExportationProxy.cpp" />
     <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
     <ClCompile Include="Stdafx.cpp">
