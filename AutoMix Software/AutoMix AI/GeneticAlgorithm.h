@@ -17,6 +17,7 @@ namespace AutoMixAI
 
 		static int NUMBER_OF_ITERATION = 50;
 		static int POPULATION_SIZE = 100;
+		static int MUTATION_PROBABILITY = 10; // Probabilty of mutation out of 100
 
 		void sortTrackByGeneticAlgorithm(TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
@@ -25,6 +26,7 @@ namespace AutoMixAI
 		void sortPopulation(population^, int, int);
 		void createChildAndPutThemIntoPopulation(population^);
 		TrackCollection^ createChildrenFromParents(TrackCollection^, TrackCollection^);
+		void mutatePopulation(population^);
 	}
 }
 

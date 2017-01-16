@@ -130,5 +130,27 @@ namespace AutoMixAI
 			}
 			return children;
 		}
+
+		void mutatePopulation(population^ pop)
+		{
+			for (int k = 0; k < pop->Count ; k++)
+			{
+				System::Random^ rand = gcnew System::Random();
+				if (rand->Next(100) < MUTATION_PROBABILITY)
+				{
+					TrackCollection^ mutant = pop[k];
+					Track^ temp;
+					System::Random^ rand1 = gcnew System::Random();
+					System::Random^ rand2 = gcnew System::Random();
+					int index1 = rand1->Next(mutant->Count);
+					int index2 = rand2->Next(mutant->Count);
+					temp = mutant[index1];
+					mutant[index1] = mutant[index2];
+					mutant[index2] = temp;
+					pop[k] = mutant;
+				}
+			}
+			
+		}
 	}
 }
