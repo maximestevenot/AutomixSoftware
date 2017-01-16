@@ -18,14 +18,14 @@ namespace AutoMixAI
 		{
 			population^ pop = createInitialPopulation(trackCollection);
 			sortPopulation(pop, 0, pop->Count);
-			pop->Reverse;
+			pop->Reverse();
 			
 			for (int k = 0; k < NUMBER_OF_ITERATION; k++)
 			{
 				createChildAndPutThemIntoPopulation(pop);
 				mutatePopulation(pop);
 				sortPopulation(pop, 0, pop->Count);
-				pop->Reverse;
+				pop->Reverse();
 				pop = pop->GetRange(0, POPULATION_SIZE);
 			}
 			return pop[0];
@@ -55,6 +55,7 @@ namespace AutoMixAI
 				}
 				pop->Add(individual);
 			}
+			return pop;
 		}
 
 		int computeIndividualEvaluation(TrackCollection^ individual)
