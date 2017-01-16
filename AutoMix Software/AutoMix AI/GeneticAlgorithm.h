@@ -13,7 +13,14 @@ namespace AutoMixAI
 	using namespace AutoMixDataManagement;
 	namespace GeneticAlgorithm
 	{
+		typedef System::Collections::Generic::List<TrackCollection^> population;
+
+		static int NUMBER_OF_ITERATION = 50;
+		static int POPULATION_SIZE = 100;
+
 		void sortTrackByGeneticAlgorithm(TrackCollection^);
+		int computeTracksDistance(Track^, Track^);
+		void createInitialPopulation(TrackCollection^, population^);
 	}
 }
 

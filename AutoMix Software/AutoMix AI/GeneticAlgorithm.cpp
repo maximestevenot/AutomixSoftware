@@ -18,5 +18,26 @@ namespace AutoMixAI
 		{
 			
 		}
+
+		void createInitialPopulation(TrackCollection^ trackCollection, population^ pop)
+		{
+			pop = gcnew population();
+			for (int k = 0;k<POPULATION_SIZE;k++)
+			{
+				TrackCollection^ individual = gcnew TrackCollection();
+				for (int i = 0; i<trackCollection->Count; i++)
+				{
+					individual->Add(trackCollection[i]);
+				}
+				for (int i = 0;i<individual->Count;i++)
+				{
+					System::Random^ rand = gcnew System::Random();
+					Track^ track = individual[i];
+					individual->Remove(track);
+					individual->Insert(rand->Next(individual->Count), track);
+				}
+				pop->Add(individual);
+			}
+		}
 	}
 }
