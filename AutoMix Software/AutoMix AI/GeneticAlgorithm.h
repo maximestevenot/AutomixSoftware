@@ -19,9 +19,9 @@ namespace AutoMixAI
 		static int POPULATION_SIZE = 100;
 		static int MUTATION_PROBABILITY = 10; // Probabilty of mutation out of 100
 
-		void sortTrackByGeneticAlgorithm(TrackCollection^);
+		TrackCollection^ sortTrackByGeneticAlgorithm(TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
-		void createInitialPopulation(TrackCollection^, population^);
+		population^ createInitialPopulation(TrackCollection^);
 		int computeIndividualEvaluation(TrackCollection^);
 		void sortPopulation(population^, int, int);
 		void createChildAndPutThemIntoPopulation(population^);

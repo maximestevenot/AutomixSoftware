@@ -14,9 +14,21 @@ namespace AutoMixAI
 {
 	namespace GeneticAlgorithm
 	{
-		void sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
+		TrackCollection^ sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
 		{
+			population^ pop = createInitialPopulation(trackCollection);
+			sortPopulation(pop, 0, pop->Count);
+			pop->Reverse;
 			
+			for (int k = 0; k < NUMBER_OF_ITERATION; k++)
+			{
+				createChildAndPutThemIntoPopulation(pop);
+				mutatePopulation(pop);
+				sortPopulation(pop, 0, pop->Count);
+				pop->Reverse;
+				pop = pop->GetRange(0, POPULATION_SIZE);
+			}
+			return pop[0];
 		}
 
 		int computeTracksDistance(Track^ track1, Track^ track2)
@@ -24,9 +36,9 @@ namespace AutoMixAI
 			return 0;
 		}
 
-		void createInitialPopulation(TrackCollection^ trackCollection, population^ pop)
+		population^ createInitialPopulation(TrackCollection^ trackCollection)
 		{
-			pop = gcnew population();
+			population^ pop = gcnew population();
 			for (int k = 0;k<POPULATION_SIZE;k++)
 			{
 				TrackCollection^ individual = gcnew TrackCollection();
@@ -93,7 +105,6 @@ namespace AutoMixAI
 
 		void createChildAndPutThemIntoPopulation(population^ pop)
 		{
-			pop->Reverse();
 			for (int k = 0;k<(pop->Count)/2;k++)
 			{
 				TrackCollection^ children1 = createChildrenFromParents(pop[k], pop[k + 1]);
