@@ -8,13 +8,13 @@
 
 #include "stdafx.h"
 #include "AudioDataExtractionProxy.h"
-#include "AudioDataExtractionMock.h"
+#include "AudioDataExtraction.h"
 
 namespace AutoMixDataManagement {
 
 	AudioDataExtractionProxy::AudioDataExtractionProxy()
 	{
-		_realSubject = gcnew AudioDataExtractionMock();
+		_realSubject = gcnew AudioDataExtraction();
 	}
 
 	void AudioDataExtractionProxy::extractData(Track^ track)
