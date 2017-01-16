@@ -90,5 +90,45 @@ namespace AutoMixAI
 				sortPopulation(population, i, end);
 			}
 		}
+
+		void createChildAndPutThemIntoPopulation(population^ pop)
+		{
+			pop->Reverse();
+			for (int k = 0;k<(pop->Count)/2;k++)
+			{
+				TrackCollection^ children1 = createChildrenFromParents(pop[k], pop[k + 1]);
+				TrackCollection^ children2 = createChildrenFromParents(pop[k + 1], pop[k]);
+				pop->Add(children1);
+				pop->Add(children2);
+			}
+		}
+
+		TrackCollection^ createChildrenFromParents(TrackCollection^ parent1, TrackCollection^ parent2)
+		{
+			TrackCollection^ children = gcnew TrackCollection();
+			for (int k = 0; k < (parent1->Count)/2 ; k++)
+			{
+				children->Add(parent1[k]);
+			}
+
+			for (int i = (parent1->Count)/2 ; i< parent1->Count ; i++)
+			{
+				if (children->Contains(parent2[i]))
+				{
+					for (int j = 0; j < parent1->Count; j++)
+					{
+						if ((!children->Contains(parent1[j]))&&(!parent2->GetRange((parent1->Count)/2, parent1->Count)->Contains(parent1[j])))
+						{
+							children->Add(parent1[j]);
+						}
+					}
+				}
+				else
+				{
+					children->Add(parent2[i]);
+				}
+			}
+			return children;
+		}
 	}
 }

@@ -23,6 +23,8 @@ namespace AutoMixAI
 		void createInitialPopulation(TrackCollection^, population^);
 		int computeIndividualEvaluation(TrackCollection^);
 		void sortPopulation(population^, int, int);
+		void createChildAndPutThemIntoPopulation(population^);
+		TrackCollection^ createChildrenFromParents(TrackCollection^, TrackCollection^);
 	}
 }
 
