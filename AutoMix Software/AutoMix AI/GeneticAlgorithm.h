@@ -22,6 +22,7 @@ namespace AutoMixAI
 		int computeTracksDistance(Track^, Track^);
 		void createInitialPopulation(TrackCollection^, population^);
 		int computeIndividualEvaluation(TrackCollection^);
+		void sortPopulation(population^, int, int);
 	}
 }
 

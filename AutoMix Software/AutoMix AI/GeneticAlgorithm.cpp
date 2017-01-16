@@ -54,5 +54,10 @@ namespace AutoMixAI
 			}
 			return result;
 		}
+
+		void sortPopulation(population^ population, int begin, int end)
+		{
+			
+		}
 	}
 }
