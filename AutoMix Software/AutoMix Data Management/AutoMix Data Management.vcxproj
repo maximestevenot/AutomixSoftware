@@ -145,7 +145,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioDataExtractionMock.h" />
+    <ClInclude Include="AudioDataExtraction.h" />
     <ClInclude Include="AudioDataExtractionProxy.h" />
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
@@ -159,7 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="AudioDataExtractionMock.cpp" />
+    <ClCompile Include="AudioDataExtraction.cpp" />
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
     <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />

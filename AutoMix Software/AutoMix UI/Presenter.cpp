@@ -48,9 +48,7 @@ namespace AutoMixUI {
 			}
 		}
 
-		_dataExtractionEngine->extractBPM(_trackCollection);
-		_dataExtractionEngine->extractDuration(_trackCollection);
-		_dataExtractionEngine->extractKey(_trackCollection);
+		_dataExtractionEngine->extractData(_trackCollection);
 
 		_trackCollection->sortByName();
 		notify();
