@@ -21,6 +21,7 @@ namespace AutoMixAI
 		void sortTrackByGeneticAlgorithm(TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
 		void createInitialPopulation(TrackCollection^, population^);
+		int computeIndividualEvaluation(TrackCollection^);
 	}
 }
 

@@ -19,6 +19,11 @@ namespace AutoMixAI
 			
 		}
 
+		int computeTracksDistance(Track^ track1, Track^ track2)
+		{
+			return 0;
+		}
+
 		void createInitialPopulation(TrackCollection^ trackCollection, population^ pop)
 		{
 			pop = gcnew population();
@@ -38,6 +43,16 @@ namespace AutoMixAI
 				}
 				pop->Add(individual);
 			}
+		}
+
+		int computeIndividualEvaluation(TrackCollection^ individual)
+		{
+			int result = 0;
+			for (int k = 0;k<(individual->Count)-1;k++)
+			{
+				result = result + computeTracksDistance(individual[k], individual[k + 1]);
+			}
+			return result;
 		}
 	}
 }
