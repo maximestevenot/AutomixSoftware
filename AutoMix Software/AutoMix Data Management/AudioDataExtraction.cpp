@@ -7,68 +7,39 @@
 // You should have received a copy of the License along with this program.
 
 #include "stdafx.h"
-#include "AudioDataExtractionMock.h"
+#include "AudioDataExtraction.h"
 
+#undef GetTempPath
+
+using namespace System::Diagnostics;
+using namespace System::IO;
 using namespace System;
 
 namespace AutoMixDataManagement {
 
-	AudioDataExtractionMock::AudioDataExtractionMock()
+	AudioDataExtraction::AudioDataExtraction()
+	{
+		String^ extractorpath = System::IO::Directory::GetCurrentDirectory() + "\\essentia_streaming_extractor_music.exe";
+		String^ temppath = Path::GetTempPath() + "AutomixSoftware";
+		if (!Directory::Exists(temppath)) {
+			_tempDirectory = Directory::CreateDirectory(temppath);
+		}
+		_startInfo = gcnew ProcessStartInfo(extractorpath);
+		_startInfo->UseShellExecute = false;
+		_startInfo->WorkingDirectory = _tempDirectory->FullName;
+		_startInfo->WindowStyle = ProcessWindowStyle::Hidden;
+	}
+
+	AudioDataExtraction::~AudioDataExtraction()
+	{
+		_tempDirectory->Delete();
+	}
+
+	void AudioDataExtraction::extractData(Track^ track)
 	{
 	}
 
-	void AudioDataExtractionMock::setPath(Track^ track)
+	void AudioDataExtraction::extractData(TrackCollection^ trackCollection)
 	{
-		_textFile = track->Path->Substring(0, track->Path->LastIndexOf("\\")) + "\\samples.txt";
-	}
-
-	void AudioDataExtractionMock::extractData(Track^ track)
-	{
-		if (_textFile == "")
-		{
-			setPath(track);
-		}
-		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
-		if (!reader)
-		{
-			throw "Path to data mock not set or cannot open text file.";
-		}
-		do
-		{
-			String^ line = reader->ReadLine();
-			int nameSize = line->LastIndexOf(".mp3") + 4;
-			if (track->Name->Contains(line->Substring(0, nameSize)))
-			{
-				line = line->Substring(nameSize + 1);
-				track->Duration = Convert::ToInt32(line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[0]);
-				track->BPM = Convert::ToInt32(line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[1]);
-				track->Key = line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[2];
-			}
-		} while (reader->Peek() >= 0);
-		reader->Close();
-	}
-
-	void AudioDataExtractionMock::extractData(TrackCollection^ trackCollection)
-	{
-		if (_textFile == "")
-		{
-			setPath(trackCollection[0]);
-		}
-		IO::StreamReader ^ reader = gcnew IO::StreamReader(_textFile);
-		if (!reader)
-		{
-			throw "Path to data mock not set or cannot open text file.";
-		}
-		do
-		{
-			String^ line = reader->ReadLine();
-			int nameSize = line->LastIndexOf(".mp3") + 4;
-			Track^ t = trackCollection->searchByName(line->Substring(0, nameSize));
-			line = line->Substring(nameSize + 1);
-			t->Duration = Convert::ToInt32(line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[0]);
-			t->BPM = Convert::ToInt32(line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[1]);
-			t->Key = line->Split(gcnew array<wchar_t>{ ' ', '\n', '\r'})[2];
-		} while (reader->Peek() >= 0);
-		reader->Close();
 	}
 }

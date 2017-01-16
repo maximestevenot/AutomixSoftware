@@ -9,20 +9,22 @@
 #pragma once
 
 #include "AutoMixDataManagement.h"
+#include <Windows.h>
 
 namespace AutoMixDataManagement {
 
-	public ref class AudioDataExtractionMock : public IAudioDataExtraction
+	public ref class AudioDataExtraction : public IAudioDataExtraction
 	{
 	public:
-		AudioDataExtractionMock();
+		AudioDataExtraction();
+		~AudioDataExtraction();
 
 		void extractData(Track^) override;
 		void extractData(TrackCollection^) override;
 
 	private:
-		System::String^ _textFile = "";
-		void setPath(Track^ track);
+		System::Diagnostics::ProcessStartInfo^ _startInfo;
+		System::IO::DirectoryInfo^ _tempDirectory;
 
 	};
 
