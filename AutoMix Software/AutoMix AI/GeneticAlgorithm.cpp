@@ -57,7 +57,38 @@ namespace AutoMixAI
 
 		void sortPopulation(population^ population, int begin, int end)
 		{
-			
+			int i = begin;
+			int j = end;
+			TrackCollection^ temp;
+			TrackCollection^ pivot = population[(i + j) / 2];
+
+			while(i <= j)
+			{
+				while (computeIndividualEvaluation(population[i]) < computeIndividualEvaluation(pivot))
+				{
+					i++;
+				}
+				while (computeIndividualEvaluation(population[j]) > computeIndividualEvaluation(pivot))
+				{
+					j--;
+				}
+				if (i <= j)
+				{
+					temp = population[i];
+					population[i] = population[j];
+					population[j] = temp;
+					i++;
+					j--;
+				}
+			}		
+			if (begin < j)
+			{
+				sortPopulation(population, begin, j);
+			}
+			if (i < end)
+			{
+				sortPopulation(population, i, end);
+			}
 		}
 	}
 }
