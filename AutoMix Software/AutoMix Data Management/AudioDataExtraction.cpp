@@ -36,6 +36,7 @@ namespace AutoMixDataManagement {
 			gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
 			stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
 		sw->Close();
+		_startInfo->Arguments = ".json " + _tempDirectory->FullName + "\\profile.yaml ";
 	}
 
 	AudioDataExtraction::~AudioDataExtraction()
@@ -45,7 +46,7 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtraction::extractData(Track^ track)
 	{
-		String^ parameters = track->Path + " " + track->Name + ".json " + _tempDirectory->FullName + "\\profile.yaml ";
+		String^ parameters = track->Path + " " + track->Name + _startInfo->Arguments;
 		_startInfo->Arguments = parameters;
 		Process^ extractor = gcnew Process;
 		extractor->StartInfo = _startInfo;
@@ -55,24 +56,17 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtraction::extractData(TrackCollection^ trackCollection)
 	{
-		TrackCollection::Enumerator i = trackCollection->GetEnumerator();
 		Track^ last = gcnew Track();
+		TrackCollection::Enumerator i = trackCollection->GetEnumerator();
+		TrackCollection::Enumerator j = i;
 		while (i.MoveNext())
 		{
-			last = i.Current;
+			j = i;
 		}
 		i.Reset();
 		i.MoveNext();
 
-		Lambda2Delegate<> deleg = [&](TrackCollection::Enumerator* ii) {
-			extractData(this, ii->Current);
-			ii->MoveNext();
-		};
-		parallel_for_each(i.Current, last, deleg);
-	}
-
-	static void extractData(AudioDataExtraction instance, TrackCollection::Enumerator* i)
-	{
-
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(_startInfo);
+		parallel_for(i, j, gcnew Action<TrackCollection::Enumerator>(d, &DelegateAudioDataExtraction::extractDelegate));
 	}
 }

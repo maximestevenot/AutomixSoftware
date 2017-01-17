@@ -9,9 +9,9 @@
 #pragma once
 
 #include "AutoMixDataManagement.h"
+#include "DelegateAudioDataExtraction.h"
 #include <Windows.h>
 #include <ppl.h>
-#include "Lambda2Delegate.h"
 
 delegate void ExtractDelegate();
 
