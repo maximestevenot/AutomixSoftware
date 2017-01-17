@@ -10,6 +10,7 @@
 
 #include "AutoMixDataManagement.h"
 #include <Windows.h>
+#include <ppl.h>
 
 namespace AutoMixDataManagement {
 

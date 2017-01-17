@@ -14,6 +14,7 @@
 using namespace System::Diagnostics;
 using namespace System::IO;
 using namespace System;
+using namespace Concurrency;
 
 namespace AutoMixDataManagement {
 
@@ -28,6 +29,13 @@ namespace AutoMixDataManagement {
 		_startInfo->UseShellExecute = false;
 		_startInfo->WorkingDirectory = _tempDirectory->FullName;
 		_startInfo->WindowStyle = ProcessWindowStyle::Hidden;
+
+		String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
+		StreamWriter^ sw = gcnew StreamWriter(profileName);
+		sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
+			gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
+			stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
+		sw->Close();
 	}
 
 	AudioDataExtraction::~AudioDataExtraction()
@@ -37,9 +45,27 @@ namespace AutoMixDataManagement {
 
 	void AudioDataExtraction::extractData(Track^ track)
 	{
+		String^ parameters = track->Path + " " + track->Name + ".json " + _tempDirectory->FullName + "\\profile.yaml ";
+		_startInfo->Arguments = parameters;
+		Process^ extractor = gcnew Process;
+		extractor->StartInfo = _startInfo;
+		extractor->Start();
+		extractor->WaitForExit();
 	}
 
 	void AudioDataExtraction::extractData(TrackCollection^ trackCollection)
 	{
+		TrackCollection::Enumerator i = trackCollection->GetEnumerator();
+		Track^ last = gcnew Track();
+		while (i.MoveNext())
+		{
+			last = i.Current;
+		}
+		i.Reset();
+		i.MoveNext();
+		parallel_for_each(i.Current, last, [&](Track^ track) {
+			extractData(track);
+			i.MoveNext();
+		});
 	}
 }
