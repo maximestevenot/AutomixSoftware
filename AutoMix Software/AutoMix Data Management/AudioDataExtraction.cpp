@@ -63,9 +63,16 @@ namespace AutoMixDataManagement {
 		}
 		i.Reset();
 		i.MoveNext();
-		parallel_for_each(i.Current, last, [&](Track^ track) {
-			extractData(track);
-			i.MoveNext();
-		});
+
+		Lambda2Delegate<> deleg = [&](TrackCollection::Enumerator* ii) {
+			extractData(this, ii->Current);
+			ii->MoveNext();
+		};
+		parallel_for_each(i.Current, last, deleg);
+	}
+
+	static void extractData(AudioDataExtraction instance, TrackCollection::Enumerator* i)
+	{
+
 	}
 }

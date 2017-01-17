@@ -11,6 +11,9 @@
 #include "AutoMixDataManagement.h"
 #include <Windows.h>
 #include <ppl.h>
+#include "Lambda2Delegate.h"
+
+delegate void ExtractDelegate();
 
 namespace AutoMixDataManagement {
 
@@ -26,7 +29,6 @@ namespace AutoMixDataManagement {
 	private:
 		System::Diagnostics::ProcessStartInfo^ _startInfo;
 		System::IO::DirectoryInfo^ _tempDirectory;
-
 	};
 
 }

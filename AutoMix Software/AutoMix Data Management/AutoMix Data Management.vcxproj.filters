@@ -60,6 +60,9 @@
     <ClInclude Include="AudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
+    <ClInclude Include="Lambda2Delegate.h">
+      <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">

@@ -150,6 +150,7 @@
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
+    <ClInclude Include="Lambda2Delegate.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
