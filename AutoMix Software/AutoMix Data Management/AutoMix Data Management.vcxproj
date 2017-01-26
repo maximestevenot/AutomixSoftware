@@ -150,6 +150,7 @@
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
+    <ClInclude Include="IDataBase.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
     <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
+    <ClCompile Include="IDataBase.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

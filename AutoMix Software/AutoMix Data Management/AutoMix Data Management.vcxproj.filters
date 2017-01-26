@@ -60,6 +60,9 @@
     <ClInclude Include="AudioIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IDataBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -90,6 +93,9 @@
       <Filter>Source Files\Collectons</Filter>
     </ClCompile>
     <ClCompile Include="AudioIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IDataBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
