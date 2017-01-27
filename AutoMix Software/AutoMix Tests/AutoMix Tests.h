@@ -12,12 +12,12 @@ using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace AutoMixTests {
 
-	[TestClassExample]
+	[TestClass]
 	public ref class TestClassExample
 	{
 
 	public:
-		[TestExample]
+		[TestMethod]
 		void TestExample();
 	};
 }
