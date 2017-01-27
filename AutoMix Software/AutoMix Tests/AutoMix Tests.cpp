@@ -16,18 +16,11 @@ using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace AutoMixTests
 {
-	[TestClass]
-	public ref class TestClass
+	void TestClassExample::TestExample()
 	{
-
-	public:
-		[TestMethod]
-		void TestMethod()
-		{
-			// TODO: Add your test code here
-			Assert::AreEqual("titi", "titi");
-		}
-	};
+		// TODO: Add your test code here
+		Assert::AreEqual("toto", "toto");
+	}
 }
 
 

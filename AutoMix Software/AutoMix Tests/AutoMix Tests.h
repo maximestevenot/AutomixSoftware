@@ -8,12 +8,16 @@
 
 #pragma once
 
-using namespace System;
+using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace AutoMixTests {
 
-	public ref class Class1
+	[TestClassExample]
+	public ref class TestClassExample
 	{
-		// TODO: ajoutez ici vos méthodes pour cette classe.
+
+	public:
+		[TestExample]
+		void TestExample();
 	};
 }
