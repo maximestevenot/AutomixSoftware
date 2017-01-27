@@ -25,6 +25,7 @@ build:
   artifacts:
     paths:
       - Automix Software/Debug
+    expire_in: 20 minutes
 
 
 test:
