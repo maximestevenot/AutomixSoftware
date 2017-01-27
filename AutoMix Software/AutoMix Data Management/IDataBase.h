@@ -13,7 +13,7 @@ namespace DataBase {
 		void connectToDatabase(System::String^);
 		void createTable(System::String^, System::String^, AutoMixDataManagement::Track^);
 		void addTrack(AutoMixDataManagement::Track^);
-		AutoMixDataManagement::TrackCollection^ getTracksInDataBase(AutoMixDataManagement::Track^);
+		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
 	private:
 		SQLiteConnection^ _dbConnection = nullptr;
 	};

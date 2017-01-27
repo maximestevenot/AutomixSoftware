@@ -3,7 +3,9 @@
 
 using namespace System;
 using namespace System::Data::SQLite;
+using namespace System::Collections::Generic;
 using namespace AutoMixDataManagement;
+
 namespace DataBase {
 
 	IDataBase::IDataBase()
@@ -13,7 +15,7 @@ namespace DataBase {
 
 	void IDataBase::createNewDatabase()
 	{
-		SQLiteConnection::CreateFile("MyDatabase.sqlite");
+		SQLiteConnection::CreateFile("MyDatabase.db");
 	}
 
 	void IDataBase::connectToDatabase(String^ path) 
@@ -36,14 +38,14 @@ namespace DataBase {
 		command->ExecuteNonQuery();
 	}
 
-	TrackCollection^ IDataBase::getTracksInDataBase(Track^) {
-		TrackCollection^ result = gcnew TrackCollection();
+	List<String^>^ IDataBase::getTracksInDataBase() {
+		List<String^>^ result = gcnew List<String^>();
 		String^ sql = "insert into " + "" + "values ('" + "" + "" + "')";
 		SQLiteCommand^ command = gcnew SQLiteCommand(sql, _dbConnection);
 		command->ExecuteNonQuery();
 		SQLiteDataReader^ reader = command->ExecuteReader();
 		while (reader->Read()) {
-			result->Add(gcnew Track(""));
+			result->Add(reader->GetString(1));
 		}
 		return result;
 	}
