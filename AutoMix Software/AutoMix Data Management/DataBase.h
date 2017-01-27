@@ -10,13 +10,13 @@
 #include "Track.h"
 #include "TrackCollection.h"
 
-namespace DataBase {
+namespace AutoMixDataManagement {
 
-	ref class IDataBase
+	public ref class DataBase
 	{
-		
+
 	public:
-		IDataBase();
+		DataBase();
 		void createNewDatabase();
 		void connectToDatabase(System::String^);
 		void createTable(System::String^, System::String^, AutoMixDataManagement::Track^);

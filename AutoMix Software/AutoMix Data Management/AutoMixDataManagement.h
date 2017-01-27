@@ -13,3 +13,5 @@
 
 #include "IAudioDataExtraction.h"
 #include "AudioDataExtractionProxy.h"
+
+#include "DataBase.h"

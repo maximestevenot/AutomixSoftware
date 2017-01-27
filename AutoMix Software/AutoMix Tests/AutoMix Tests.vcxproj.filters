@@ -27,14 +27,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AutoMix Tests.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Stdafx.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBaseTests.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="AutoMix Tests.h">
+      <Filter>Fichiers d%27en-tête\Data Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="Stdafx.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBaseTests.cpp">
+      <Filter>Fichiers sources\Data Management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
