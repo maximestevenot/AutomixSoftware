@@ -15,6 +15,6 @@ namespace DataBase {
 		void addTrack(AutoMixDataManagement::Track^);
 		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
 	private:
-		SQLiteConnection^ _dbConnection = nullptr;
+		System::Data::SQLite::SQLiteConnection^ _dbConnection;
 	};
 }

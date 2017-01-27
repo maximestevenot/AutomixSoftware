@@ -26,7 +26,7 @@ namespace DataBase {
 
 	void IDataBase::createTable(String^ nom,String^ type, Track^ track)
 	{
-		System::String sql("");
+		System::String^ sql("");
 		SQLiteCommand^ command = gcnew SQLiteCommand(sql, _dbConnection);
 		command->ExecuteNonQuery();
 	}
