@@ -2,39 +2,41 @@ variables:
   AutoMix: "Automix Software\\AutoMix Software.sln"
   IOLib: "InputOutputLibrary\\InputOutputLibrary.sln"
   ExtractLib: "DataExtractionLibrary\\DataExtractionLibrary.sln"
+  TestsLib: "Automix Software\\Debug\\AutoMix Tests.dll"
+  TestsFile: "Automix Software\\TestResults\\tests.xml"
 
 before_script:
   - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
 
 stages:
   - build
-  # - test
+  - test
   - deploy
 
 build:
   stage: build
   script:
-  - echo building...
-  - 'devenv "%AutoMix%" /Build "Debug|x86"'
-  - 'devenv "%IOLib%" /Build "Debug|x86"'
-  - 'devenv "%ExtractLib%" /Build "Debug|x86"'
+    - echo building...
+    - 'devenv "%AutoMix%" /Build "Debug|x86"'
+    - 'devenv "%IOLib%" /Build "Debug|x86"'
+    - 'devenv "%ExtractLib%" /Build "Debug|x86"'
   except:
-  - tags
+    - tags
 
-# test:
-  # stage: test
-  # script:
-  # - echo testing...
-  # - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%"'
-  # - dir /s /b *.Tests.dll | findstr /r Tests\\*\\bin\\ > testcontainers.txt
-  # - 'for /f %%f in (testcontainers.txt) do mstest.exe /testcontainer:"%%f"'
-  # except:
-  # - tags
+test:
+  stage: test
+  script:
+    - echo testing...
+    - 'mkdir "Automix Software\\TestResults"'
+    - 'mstest.exe /testcontainer:"%TestsLib%" /resultsfile:"%TestsFile%"'
+  allow_failure: true
+  except:
+    - tags
 
 deploy:
   stage: deploy
   script:
-  - echo deploying...
-  - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%" /t:publish'
+    - echo deploying...
+    - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%" /t:publish'
   only:
-  - production
+    - production
