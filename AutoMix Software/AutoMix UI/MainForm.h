@@ -76,6 +76,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _outputButton;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
 	private: System::Windows::Forms::ColumnHeader^  collectionKey;
+	private: System::Windows::Forms::Button^  _sortButton;
 
 
 	private:
@@ -106,10 +107,11 @@ namespace AutoMixUI {
 			this->collectionName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionDuration = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionBPM = (gcnew System::Windows::Forms::ColumnHeader());
+			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->_imputButton = (gcnew System::Windows::Forms::Button());
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
+			this->_sortButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -224,6 +226,11 @@ namespace AutoMixUI {
 			this->collectionBPM->Text = L"BPM";
 			this->collectionBPM->Width = 72;
 			// 
+			// collectionKey
+			// 
+			this->collectionKey->Text = L"Key";
+			this->collectionKey->Width = 71;
+			// 
 			// _imputButton
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
@@ -245,7 +252,7 @@ namespace AutoMixUI {
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->_outputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_outputButton->Location = System::Drawing::Point(1050, 114);
+			this->_outputButton->Location = System::Drawing::Point(1054, 67);
 			this->_outputButton->Name = L"_outputButton";
 			this->_outputButton->Size = System::Drawing::Size(147, 78);
 			this->_outputButton->TabIndex = 6;
@@ -264,10 +271,20 @@ namespace AutoMixUI {
 			this->pictureBox1->TabIndex = 7;
 			this->pictureBox1->TabStop = false;
 			// 
-			// collectionKey
+			// _sortButton
 			// 
-			this->collectionKey->Text = L"Key";
-			this->collectionKey->Width = 71;
+			this->_sortButton->AccessibleName = L"_sortButton";
+			this->_sortButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->_sortButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_sortButton->Location = System::Drawing::Point(1054, 174);
+			this->_sortButton->Name = L"_sortButton";
+			this->_sortButton->Size = System::Drawing::Size(147, 78);
+			this->_sortButton->TabIndex = 8;
+			this->_sortButton->Text = L"Sort";
+			this->_sortButton->UseVisualStyleBackColor = false;
+			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::_sortButton_click);
 			// 
 			// MainForm
 			// 
@@ -275,6 +292,7 @@ namespace AutoMixUI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
 			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->_outputButton);
 			this->Controls->Add(this->_imputButton);
@@ -308,9 +326,11 @@ namespace AutoMixUI {
 
 	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
-	};
+	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
+};
 
 }
