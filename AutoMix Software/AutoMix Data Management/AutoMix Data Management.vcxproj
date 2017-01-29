@@ -96,7 +96,7 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(SolutionDir)\AutoMix UI"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
