@@ -46,7 +46,7 @@ namespace DataManagementTests
 	}
 	
 	
-	void DataBaseTests::getTracksInDataBase()
+	void DataBaseTests::getTracksInDataBaseTest()
 	{
 		String^ myDB = "myDataBase.sqlite";
 		DataBase^ db = gcnew DataBase(myDB);
