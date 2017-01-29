@@ -20,7 +20,6 @@ namespace AutoMixTests
 	{
 		// TODO: Add your test code here
 		Assert::AreEqual("toto", "toto");
-		Assert::AreEqual("toto", "titi");
 	}
 }
 
