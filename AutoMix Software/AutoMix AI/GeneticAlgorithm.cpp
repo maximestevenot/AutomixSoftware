@@ -15,15 +15,16 @@ namespace AutoMixAI
 	TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
 	{
 		population^ pop = createInitialPopulation(trackCollection);
-		sortPopulation(pop, 0, pop->Count);
-		pop->Reverse();
-
+		sortPopulation(pop, 0, pop->Count-1);
+		
 		for (int k = 0; k < NUMBER_OF_ITERATION; k++)
 		{
+			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
+			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
+			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE-1]));
 			createChildAndPutThemIntoPopulation(pop);
 			mutatePopulation(pop);
-			sortPopulation(pop, 0, pop->Count);
-			pop->Reverse();
+			sortPopulation(pop, 0, pop->Count-1);
 			pop = pop->GetRange(0, POPULATION_SIZE);
 		}
 		return pop[0];
@@ -31,12 +32,13 @@ namespace AutoMixAI
 
 	int GeneticAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
 	{
-		return System::Math::Abs((int)(track1->BPM - track2->BPM));
+		return System::Math::Abs((int)(track1->BPM - track2->BPM))*10;
 	}
 
 	population^ GeneticAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
 	{
 		population^ pop = gcnew population();
+		System::Random^ rand = gcnew System::Random();
 		for (int k = 0; k < POPULATION_SIZE; k++)
 		{
 			TrackCollection^ individual = gcnew TrackCollection();
@@ -46,7 +48,6 @@ namespace AutoMixAI
 			}
 			for (int i = 0; i < individual->Count; i++)
 			{
-				System::Random^ rand = gcnew System::Random();
 				Track^ track = individual[i];
 				individual->Remove(track);
 				individual->Insert(rand->Next(individual->Count), track);
@@ -104,7 +105,8 @@ namespace AutoMixAI
 
 	void GeneticAlgorithm::createChildAndPutThemIntoPopulation(population^ pop)
 	{
-		for (int k = 0; k < (pop->Count) / 2; k++)
+		int count = pop->Count;
+		for (int k = 0; k < count / 2; k++)
 		{
 			TrackCollection^ children1 = createChildrenFromParents(pop[k], pop[k + 1]);
 			TrackCollection^ children2 = createChildrenFromParents(pop[k + 1], pop[k]);
@@ -127,7 +129,7 @@ namespace AutoMixAI
 			{
 				for (int j = 0; j < parent1->Count; j++)
 				{
-					if ((!children->Contains(parent1[j])) && (!parent2->GetRange((parent1->Count) / 2, parent1->Count)->Contains(parent1[j])))
+					if ((!children->Contains(parent1[j])) && (!parent2->GetRange((parent1->Count) / 2, (parent1->Count)/2)->Contains(parent1[j])))
 					{
 						children->Add(parent1[j]);
 					}
@@ -143,17 +145,17 @@ namespace AutoMixAI
 
 	void GeneticAlgorithm::mutatePopulation(population^ pop)
 	{
+		System::Random^ rand = gcnew System::Random();
 		for (int k = 0; k < pop->Count; k++)
 		{
-			System::Random^ rand = gcnew System::Random();
+			
 			if (rand->Next(100) < MUTATION_PROBABILITY)
 			{
 				TrackCollection^ mutant = pop[k];
 				Track^ temp;
-				System::Random^ rand1 = gcnew System::Random();
-				System::Random^ rand2 = gcnew System::Random();
-				int index1 = rand1->Next(mutant->Count);
-				int index2 = rand2->Next(mutant->Count);
+				
+				int index1 = rand->Next(mutant->Count);
+				int index2 = rand->Next(mutant->Count);
 				temp = mutant[index1];
 				mutant[index1] = mutant[index2];
 				mutant[index2] = temp;

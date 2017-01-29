@@ -37,6 +37,7 @@ namespace AutoMixUI {
 	{
 		GeneticAlgorithm^ al = gcnew GeneticAlgorithm();
 		_trackCollection = al->sortTrackByGeneticAlgorithm(_trackCollection);
+		notify();
 	}
 
 	void Presenter::loadTracks(array<System::String^>^ fileEntries)
