@@ -11,6 +11,7 @@
 namespace AutoMixUI {
 	using namespace System;
 	using namespace System::Collections;
+	using namespace AutoMixAI;
 
 	Presenter::Presenter()
 	{
@@ -31,10 +32,17 @@ namespace AutoMixUI {
 			view->update(_trackCollection);
 		}
 	}
+
+	void Presenter::sortTrackCollectionWithGeneticAlgorithm()
+	{
+		GeneticAlgorithm^ al = gcnew GeneticAlgorithm();
+		_trackCollection = al->sortTrackByGeneticAlgorithm(_trackCollection);
+		notify();
+	}
+
 	void Presenter::loadTracks(array<System::String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
-
 		while (files->MoveNext())
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
@@ -48,9 +56,7 @@ namespace AutoMixUI {
 			}
 		}
 
-		_dataExtractionEngine->extractBPM(_trackCollection);
-		_dataExtractionEngine->extractDuration(_trackCollection);
-		_dataExtractionEngine->extractKey(_trackCollection);
+		_dataExtractionEngine->extractData(_trackCollection);
 
 		_trackCollection->sortByName();
 		notify();

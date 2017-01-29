@@ -16,6 +16,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
+		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 		Application::Exit();
 	}
 
@@ -34,10 +35,20 @@ namespace AutoMixUI {
 		loadTracksFromDirectory(sender, e);
 	}
 
+	System::Void MainForm::_sortButton_click(System::Object^ sender, System::EventArgs^ e)
+	{
+		sortTracksWithGeneticAlgorithm(sender, e);
+	}
+
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
 	{
 		// NOT IMPLEMENTED YET
 
+	}
+
+	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
+	{
+		_presenter->sortTrackCollectionWithGeneticAlgorithm();
 	}
 
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)

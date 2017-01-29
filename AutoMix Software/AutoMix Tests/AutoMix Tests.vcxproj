@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="AutoMix Tests.h" />
     <ClInclude Include="DataBaseTests.h" />
+    <ClInclude Include="ExtractionTest.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
   </ItemGroup>
@@ -142,6 +143,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AutoMix Tests.cpp" />
     <ClCompile Include="DataBaseTests.cpp" />
+    <ClCompile Include="ExtractionTest.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
