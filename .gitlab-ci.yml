@@ -34,7 +34,6 @@ test:
     - echo testing...
     - 'mkdir "Automix Software\\TestResults"'
     - 'mstest.exe /testcontainer:"%TestsLib%" /resultsfile:"%TestsFile%"'
-  allow_failure: true
   except:
     - tags
 

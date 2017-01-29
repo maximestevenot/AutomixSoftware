@@ -10,8 +10,7 @@
 #include "AutoMix Tests.h"
 
 using namespace System;
-using namespace System::Text;
-using namespace System::Collections::Generic;
+using namespace System::IO;
 using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace AutoMixTests

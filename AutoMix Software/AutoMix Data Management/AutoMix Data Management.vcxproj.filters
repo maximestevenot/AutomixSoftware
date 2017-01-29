@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Collectons">
-      <UniqueIdentifier>{68051813-56ff-4118-a828-af427aade7ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Collections">
       <UniqueIdentifier>{94641035-2438-419d-8882-6e4e92923f85}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,9 @@
     </Filter>
     <Filter Include="Source Files\Extraction">
       <UniqueIdentifier>{3b9cb886-0e51-45f8-a1a7-e5cdaa867242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collections">
+      <UniqueIdentifier>{68051813-56ff-4118-a828-af427aade7ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,9 +48,6 @@
     <ClInclude Include="AudioDataExtractionProxy.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
-    <ClInclude Include="AudioDataExtractionMock.h">
-      <Filter>Header Files\Extraction</Filter>
-    </ClInclude>
     <ClInclude Include="IAudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
@@ -59,6 +56,15 @@
     </ClInclude>
     <ClInclude Include="AudioIO.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioDataExtraction.h">
+      <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
+    <ClInclude Include="DelegateAudioDataExtraction.h">
+      <Filter>Header Files\Extraction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -75,22 +81,28 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Track.cpp">
-      <Filter>Source Files\Collectons</Filter>
+      <Filter>Source Files\Collections</Filter>
     </ClCompile>
     <ClCompile Include="TrackCollection.cpp">
-      <Filter>Source Files\Collectons</Filter>
+      <Filter>Source Files\Collections</Filter>
     </ClCompile>
     <ClCompile Include="AudioDataExtractionProxy.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
-    <ClCompile Include="AudioDataExtractionMock.cpp">
-      <Filter>Source Files\Extraction</Filter>
-    </ClCompile>
     <ClCompile Include="TracksComparison.cpp">
-      <Filter>Source Files\Collectons</Filter>
+      <Filter>Source Files\Collections</Filter>
     </ClCompile>
     <ClCompile Include="AudioIO.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioDataExtraction.cpp">
+      <Filter>Source Files\Extraction</Filter>
+    </ClCompile>
+    <ClCompile Include="DelegateAudioDataExtraction.cpp">
+      <Filter>Source Files\Extraction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
