@@ -14,5 +14,11 @@ namespace DataManagementTests {
 		
 		[TestMethod]
 		void addValueTest();
+		
+		[TestMethod]
+		void clear();
+
+		[TestMethod]
+		void getTracks();
 	};
 }

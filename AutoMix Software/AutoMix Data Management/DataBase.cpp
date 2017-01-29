@@ -16,7 +16,7 @@ using namespace System::Collections::Generic;
 
 namespace AutoMixDataManagement {
 
-	DataBase::DataBase() : DataBase("MyBase.sqlite"){}
+	DataBase::DataBase() : DataBase("MyBase.sqlite") {}
 
 	DataBase::DataBase(String^ path)
 	{
@@ -27,7 +27,7 @@ namespace AutoMixDataManagement {
 			connectToDatabase(path);
 			createTable();
 		}
-		
+
 		else
 		{
 			connectToDatabase(path);
@@ -52,7 +52,7 @@ namespace AutoMixDataManagement {
 
 	void DataBase::createTable()
 	{
-		String^ query = "CREATE TABLE tracks (name TEXT PRIMARY KEY, duration TEXT, bpm TEXT, key TEXT)";
+		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, duration TEXT, bpm TEXT, key TEXT)";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
@@ -60,19 +60,34 @@ namespace AutoMixDataManagement {
 	void DataBase::addTrack(Track^ track)
 	{
 		String^ query = "INSERT INTO tracks (name, duration, bpm, key)";
-		query += "VALUES ( '" + track->Name + "','" + track->Duration + "','" + track->BPM + "','"  + track->Key + "')";
+		query += "VALUES ( '" + track->Name + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
 
-	List<String^>^ DataBase::getTracksInDataBase() {
-		List<String^>^ result = gcnew List<String^>();
-		String^ sql = "insert into " + "" + "values ('" + "" + "" + "')";
-		SQLiteCommand^ command = gcnew SQLiteCommand(sql, _dbConnection);
+	void DataBase::clear()
+	{
+		String^ query = "DELETE FROM tracks";
+		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
+
+		String^ query2 = "DELETE FROM sqlite_sequence WHERE name='tracks'";
+		SQLiteCommand^ command2 = gcnew SQLiteCommand(query2, _dbConnection);
+		command2->ExecuteNonQuery();
+	}
+
+	List<String^>^ DataBase::getTracksInDataBase() 
+	{
+		List<String^>^ result = gcnew List<String^>();
+
+		String^ query = "SELECT name FROM tracks";
+		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+		command->ExecuteNonQuery();
+		
 		SQLiteDataReader^ reader = command->ExecuteReader();
-		while (reader->Read()) {
-			result->Add(reader->GetString(1));
+		while (reader->Read()) 
+		{
+			result->Add(reader->GetString(0));
 		}
 		return result;
 	}

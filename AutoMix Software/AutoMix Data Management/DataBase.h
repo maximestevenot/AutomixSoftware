@@ -21,6 +21,8 @@ namespace AutoMixDataManagement {
 		~DataBase();
 		void addTrack(AutoMixDataManagement::Track^);
 
+		void clear();
+
 		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
 
 	private:
