@@ -101,6 +101,9 @@
     <ClCompile Include="AudioDataExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
+    <ClCompile Include="DelegateAudioDataExtraction.cpp">
+      <Filter>Source Files\Extraction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

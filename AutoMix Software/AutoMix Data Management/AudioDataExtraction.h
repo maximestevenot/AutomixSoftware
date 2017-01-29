@@ -11,9 +11,10 @@
 #include "AutoMixDataManagement.h"
 #include "DelegateAudioDataExtraction.h"
 
-delegate void ExtractDelegate();
 
 namespace AutoMixDataManagement {
+
+	delegate void ExtractDelegate();
 
 	public ref class AudioDataExtraction : public IAudioDataExtraction
 	{

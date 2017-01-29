@@ -96,7 +96,7 @@
     </Link>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)"</Command>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(SolutionDir)\AutoMix UI"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -140,6 +140,9 @@
     <Reference Include="NAudio.Lame">
       <HintPath>External\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>External\Json.NET\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite">
@@ -177,6 +180,7 @@
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
     <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
+    <ClCompile Include="DelegateAudioDataExtraction.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
