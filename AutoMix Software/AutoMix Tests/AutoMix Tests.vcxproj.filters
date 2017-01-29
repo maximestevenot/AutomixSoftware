@@ -36,6 +36,9 @@
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="ExtractionTest.h">
+      <Filter>Fichiers d%27en-tête\Data Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoMix Tests.cpp">
@@ -46,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="Stdafx.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtractionTest.cpp">
+      <Filter>Fichiers sources\Data Management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

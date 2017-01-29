@@ -25,6 +25,7 @@ namespace AutoMixDataManagement {
 		if (!Directory::Exists(temppath)) {
 			_tempDirectory = Directory::CreateDirectory(temppath);
 		} else {
+			System::IO::Directory::Delete(temppath, true);
 			_tempDirectory = Directory::CreateDirectory(temppath);
 		}
 		_startInfo = gcnew ProcessStartInfo(extractorpath);
