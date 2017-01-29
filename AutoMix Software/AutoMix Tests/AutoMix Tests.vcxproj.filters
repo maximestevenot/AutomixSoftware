@@ -51,7 +51,7 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="GeneticAlgorithmTests.cpp">
-      <Filter>Fichiers sources\Data Management</Filter>
+      <Filter>Fichiers sources\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

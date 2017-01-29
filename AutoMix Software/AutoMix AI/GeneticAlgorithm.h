@@ -13,13 +13,15 @@ namespace AutoMixAI
 	using namespace AutoMixDataManagement;
 	typedef System::Collections::Generic::List<TrackCollection^> population;
 
-	static int NUMBER_OF_ITERATION = 200;
-	static int POPULATION_SIZE = 150;
-	static int MUTATION_PROBABILITY = 70; // Probabilty of mutation out of 100
+	
 
 	public ref class GeneticAlgorithm
 	{
 	public :
+		static int NUMBER_OF_ITERATION = 200;
+		static int POPULATION_SIZE = 150;
+		static int MUTATION_PROBABILITY = 70; // Probabilty of mutation out of 100
+
 		TrackCollection^ sortTrackByGeneticAlgorithm(TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
 		population^ createInitialPopulation(TrackCollection^);
