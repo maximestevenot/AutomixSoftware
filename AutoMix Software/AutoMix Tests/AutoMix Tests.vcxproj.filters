@@ -36,6 +36,9 @@
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="GeneticAlgorithmTests.h">
+      <Filter>Fichiers d%27en-tête\AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoMix Tests.cpp">
