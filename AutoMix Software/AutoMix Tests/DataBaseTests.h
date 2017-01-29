@@ -11,5 +11,8 @@ namespace DataManagementTests {
 	public:
 		[TestMethod]
 		void dataBaseCreationTest();
+		
+		[TestMethod]
+		void addValueTest();
 	};
 }

@@ -52,15 +52,16 @@ namespace AutoMixDataManagement {
 
 	void DataBase::createTable()
 	{
-		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY, name TEXT, duration TEXT, bpm TEXT, key TEXT)";
+		String^ query = "CREATE TABLE tracks (name TEXT PRIMARY KEY, duration TEXT, bpm TEXT, key TEXT)";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
 
 	void DataBase::addTrack(Track^ track)
 	{
-		String^ sql = "insert into " + "" + "values ('" + "" + "" + "')";
-		SQLiteCommand^ command = gcnew SQLiteCommand(sql, _dbConnection);
+		String^ query = "INSERT INTO tracks (name, duration, bpm, key)";
+		query += "VALUES ( '" + track->Name + "','" + track->Duration + "','" + track->BPM + "','"  + track->Key + "')";
+		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
 
