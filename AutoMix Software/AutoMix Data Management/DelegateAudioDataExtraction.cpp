@@ -37,6 +37,7 @@ namespace AutoMixDataManagement {
 		} 
 		catch (FileNotFoundException^ e)
 		{
+			e->Message;
 			//trackcollection delete track
 		}
 	}

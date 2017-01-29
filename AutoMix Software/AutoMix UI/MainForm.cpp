@@ -88,7 +88,6 @@ namespace AutoMixUI {
 
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
 	{
-		Stream^ myStream;
 		SaveFileDialog^ dialog = gcnew SaveFileDialog;
 
 		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
