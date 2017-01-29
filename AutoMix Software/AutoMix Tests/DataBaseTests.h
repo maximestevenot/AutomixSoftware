@@ -19,9 +19,6 @@ namespace DataManagementTests {
 		void clearDataBase();
 
 		[TestMethod]
-		void getTracksInDataBaseTest();
-
-		[TestMethod]
 		void extractDataFromDataBase();
 	};
 }
