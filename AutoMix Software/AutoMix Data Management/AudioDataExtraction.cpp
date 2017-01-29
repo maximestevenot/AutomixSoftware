@@ -11,62 +11,51 @@
 
 #undef GetTempPath
 
+using namespace System::Threading::Tasks;
 using namespace System::Diagnostics;
 using namespace System::IO;
 using namespace System;
-using namespace Concurrency;
 
 namespace AutoMixDataManagement {
 
 	AudioDataExtraction::AudioDataExtraction()
 	{
-		String^ extractorpath = System::IO::Directory::GetCurrentDirectory() + "\\essentia_streaming_extractor_music.exe";
+		String^ extractorpath = Directory::GetCurrentDirectory() + "\\essentia_streaming_extractor_music.exe";
 		String^ temppath = Path::GetTempPath() + "AutomixSoftware";
 		if (!Directory::Exists(temppath)) {
+			_tempDirectory = Directory::CreateDirectory(temppath);
+		} else {
 			_tempDirectory = Directory::CreateDirectory(temppath);
 		}
 		_startInfo = gcnew ProcessStartInfo(extractorpath);
 		_startInfo->UseShellExecute = false;
 		_startInfo->WorkingDirectory = _tempDirectory->FullName;
 		_startInfo->WindowStyle = ProcessWindowStyle::Hidden;
+		_startInfo->CreateNoWindow = true;
 
 		String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
 		StreamWriter^ sw = gcnew StreamWriter(profileName);
 		sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
-			gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
-			stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
+    gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
+    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
 		sw->Close();
-		_startInfo->Arguments = ".json " + _tempDirectory->FullName + "\\profile.yaml ";
-	}
-
-	AudioDataExtraction::~AudioDataExtraction()
-	{
-		_tempDirectory->Delete();
 	}
 
 	void AudioDataExtraction::extractData(Track^ track)
 	{
-		String^ parameters = track->Path + " " + track->Name + _startInfo->Arguments;
+		String^ parameters = "\"" + track->Path + "\" \"" + track->Name + ".json\" \"" + _tempDirectory->FullName + "\\profile.yaml\"";
 		_startInfo->Arguments = parameters;
 		Process^ extractor = gcnew Process;
 		extractor->StartInfo = _startInfo;
 		extractor->Start();
 		extractor->WaitForExit();
 	}
-
+	
 	void AudioDataExtraction::extractData(TrackCollection^ trackCollection)
 	{
-		Track^ last = gcnew Track();
-		TrackCollection::Enumerator i = trackCollection->GetEnumerator();
-		TrackCollection::Enumerator j = i;
-		while (i.MoveNext())
-		{
-			j = i;
-		}
-		i.Reset();
-		i.MoveNext();
-
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(_startInfo);
-		parallel_for(i, j, gcnew Action<TrackCollection::Enumerator>(d, &DelegateAudioDataExtraction::extractDelegate));
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(_startInfo, _tempDirectory);
+		ParallelOptions^ po = gcnew ParallelOptions();
+		po->MaxDegreeOfParallelism = 4;
+		Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::extractDelegate));
 	}
 }

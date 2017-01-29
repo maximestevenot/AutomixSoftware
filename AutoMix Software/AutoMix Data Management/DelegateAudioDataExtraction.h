@@ -3,12 +3,11 @@
 public ref class DelegateAudioDataExtraction
 {
 public:
-	DelegateAudioDataExtraction(System::Diagnostics::ProcessStartInfo^ startInfo):_startInfo(startInfo) {}
+	DelegateAudioDataExtraction(System::Diagnostics::ProcessStartInfo^ startInfo, System::IO::DirectoryInfo^ tempDirectory):_startInfo(startInfo), _tempDirectory(tempDirectory) {}
 
-	void extractDelegate(AutoMixDataManagement::TrackCollection::Enumerator i)
+	void extractDelegate(AutoMixDataManagement::Track^ track)
 	{
-		System::String^ parameters = i.Current->Path + " " + i.Current->Name + _startInfo->Arguments;
-		_startInfo->Arguments = parameters;
+		_startInfo->Arguments = "\"" + track->Path + "\" \"" + track->Name + ".json\" \"" + _tempDirectory->FullName + "\\profile.yaml\"";
 		System::Diagnostics::Process^ extractor = gcnew System::Diagnostics::Process;
 		extractor->StartInfo = _startInfo;
 		extractor->Start();
@@ -17,4 +16,5 @@ public:
 
 private:
 	System::Diagnostics::ProcessStartInfo^ _startInfo;
+	System::IO::DirectoryInfo^ _tempDirectory;
 };

@@ -10,8 +10,6 @@
 
 #include "AutoMixDataManagement.h"
 #include "DelegateAudioDataExtraction.h"
-#include <Windows.h>
-#include <ppl.h>
 
 delegate void ExtractDelegate();
 
@@ -21,7 +19,6 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		AudioDataExtraction();
-		~AudioDataExtraction();
 
 		void extractData(Track^) override;
 		void extractData(TrackCollection^) override;

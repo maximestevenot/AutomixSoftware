@@ -16,6 +16,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
+		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 		Application::Exit();
 	}
 
