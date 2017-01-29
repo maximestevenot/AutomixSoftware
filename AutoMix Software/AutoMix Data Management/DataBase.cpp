@@ -10,24 +10,37 @@
 #include "DataBase.h"
 
 using namespace System;
+using namespace System::IO;
 using namespace System::Data::SQLite;
 using namespace System::Collections::Generic;
 
 namespace AutoMixDataManagement {
 
-	DataBase::DataBase()
+	DataBase::DataBase() : DataBase("MyBase.sqlite"){}
+
+	DataBase::DataBase(String^ path)
 	{
+		if (!File::Exists(path))
+		{
+			SQLiteConnection::CreateFile(path);
+		}
+		
+		connectToDatabase(path);
 
 	}
 
-	void DataBase::createNewDatabase()
+	DataBase::~DataBase()
 	{
-		SQLiteConnection::CreateFile("MyDatabase.db");
+		if (_dbConnection)
+		{
+			_dbConnection->Close();
+		}
 	}
 
 	void DataBase::connectToDatabase(String^ path)
 	{
-		_dbConnection = gcnew SQLiteConnection(path);
+		String^ connectionString = ("Data Source=" + path + ";Version=3;");
+		_dbConnection = gcnew SQLiteConnection(connectionString);
 		_dbConnection->Open();
 	}
 

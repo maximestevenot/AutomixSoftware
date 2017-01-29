@@ -17,12 +17,18 @@ namespace AutoMixDataManagement {
 
 	public:
 		DataBase();
-		void createNewDatabase();
-		void connectToDatabase(System::String^);
+		DataBase(System::String^ path);
+		~DataBase();
+
 		void createTable(System::String^, System::String^, AutoMixDataManagement::Track^);
 		void addTrack(AutoMixDataManagement::Track^);
+
 		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
+
 	private:
+
+		void connectToDatabase(System::String^);
+
 		System::Data::SQLite::SQLiteConnection^ _dbConnection;
 	};
 }
