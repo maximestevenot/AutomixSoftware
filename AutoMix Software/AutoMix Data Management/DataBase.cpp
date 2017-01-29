@@ -22,10 +22,16 @@ namespace AutoMixDataManagement {
 	{
 		if (!File::Exists(path))
 		{
+			_dbPath = path;
 			SQLiteConnection::CreateFile(path);
+			connectToDatabase(path);
+			createTable();
 		}
 		
-		connectToDatabase(path);
+		else
+		{
+			connectToDatabase(path);
+		}
 
 	}
 
@@ -44,10 +50,10 @@ namespace AutoMixDataManagement {
 		_dbConnection->Open();
 	}
 
-	void DataBase::createTable(String^ nom, String^ type, Track^ track)
+	void DataBase::createTable()
 	{
-		System::String^ sql("");
-		SQLiteCommand^ command = gcnew SQLiteCommand(sql, _dbConnection);
+		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY, name TEXT, duration TEXT, bpm TEXT, key TEXT)";
+		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
 

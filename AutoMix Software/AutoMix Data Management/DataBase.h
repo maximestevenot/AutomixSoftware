@@ -19,8 +19,6 @@ namespace AutoMixDataManagement {
 		DataBase();
 		DataBase(System::String^ path);
 		~DataBase();
-
-		void createTable(System::String^, System::String^, AutoMixDataManagement::Track^);
 		void addTrack(AutoMixDataManagement::Track^);
 
 		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
@@ -28,7 +26,9 @@ namespace AutoMixDataManagement {
 	private:
 
 		void connectToDatabase(System::String^);
+		void createTable();
 
+		System::String^ _dbPath;
 		System::Data::SQLite::SQLiteConnection^ _dbConnection;
 	};
 }
