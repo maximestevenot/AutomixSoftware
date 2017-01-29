@@ -57,10 +57,9 @@ namespace DataManagementTests
 		myTrack->Key = "15";
 
 		db->addTrack(myTrack);
-		db->addTrack(myTrack);
 
 		List<String^>^ namesList = db->getTracksInDataBase();
-		Assert::IsTrue(namesList->Count == 2);
+		Assert::IsFalse(namesList->Count == 0);
 	}
 
 	void DataBaseTests::extractDataFromDataBase()
