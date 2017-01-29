@@ -25,9 +25,10 @@ namespace AutoMixDataManagement {
 		extractor->WaitForExit();
 		StreamReader^ file = File::OpenText(_tempDirectory->FullName + "\\" + track->Name + ".json");
 		JsonTextReader^ reader = gcnew JsonTextReader(file);
-		Linq::JObject^ object = (Linq::JObject^)Linq::JToken::ReadFrom(reader);
-		track->Duration = Convert::ToInt32(Convert::ToSingle((String^)(object["metadata"]["audio_properties"]["length"])) * 1000);
-		track->BPM = Convert::ToInt32((String^)(object["rhythm"]["bpm"]));
-		track->Key = (String^)(object["tonal"]["key_key"]) + (String^)(object["tonal"]["key_scale"]);
+		Linq::JObject^ obj = (Linq::JObject^)Linq::JToken::ReadFrom(reader);
+
+		track->Duration = Convert::ToUInt32((double)obj["metadata"]["audio_properties"]["length"] * 1000);
+		track->BPM = Convert::ToUInt32((int)(obj["rhythm"]["bpm"]));
+		track->Key = (String^)(obj["tonal"]["key_key"]) + (String^)(obj["tonal"]["key_scale"]);
 	}
 }
