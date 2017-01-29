@@ -44,7 +44,8 @@ namespace DataManagementTests
 		db->addTrack(myTrack);
 		db->clear();
 	}
-
+	
+	
 	void DataBaseTests::getTracks()
 	{
 		String^ myDB = "myDataBase.sqlite";
@@ -60,5 +61,25 @@ namespace DataManagementTests
 
 		List<String^>^ namesList = db->getTracksInDataBase();
 		Assert::IsTrue(namesList->Count == 2);
+	}
+
+	void DataBaseTests::extractDataTest()
+	{
+		String^ myDB = "myDataBase.sqlite";
+		DataBase^ db = gcnew DataBase(myDB);
+
+		Track^ myTrack = gcnew Track("test.mp3");
+		myTrack->BPM = 128;
+		myTrack->Duration = 1000;
+		myTrack->Key = "15";
+
+		db->addTrack(myTrack);
+
+		Track^ extractedTrack = gcnew Track("test.mp3");
+		db->extractData(extractedTrack);
+
+		Assert::AreEqual(myTrack->Duration, extractedTrack->Duration);
+		Assert::AreEqual(myTrack->BPM, extractedTrack->BPM);
+		Assert::AreEqual(myTrack->Key, extractedTrack->Key);
 	}
 }

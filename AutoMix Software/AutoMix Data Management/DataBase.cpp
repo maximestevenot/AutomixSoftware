@@ -52,15 +52,15 @@ namespace AutoMixDataManagement {
 
 	void DataBase::createTable()
 	{
-		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, duration TEXT, bpm TEXT, key TEXT)";
+		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT)";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
 
 	void DataBase::addTrack(Track^ track)
 	{
-		String^ query = "INSERT INTO tracks (name, duration, bpm, key)";
-		query += "VALUES ( '" + track->Name + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
+		String^ query = "INSERT INTO tracks (path, duration, bpm, key)";
+		query += "VALUES ( '" + track->Path + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 	}
@@ -76,11 +76,26 @@ namespace AutoMixDataManagement {
 		command2->ExecuteNonQuery();
 	}
 
+	void DataBase::extractData(Track^ track)
+	{
+		String^ query = "SELECT duration, bpm, key FROM tracks WHERE path = '" + track->Path + "'";
+		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+		command->ExecuteNonQuery();
+
+		SQLiteDataReader^ reader = command->ExecuteReader();
+		if (reader->Read())
+		{
+			track->Duration = Convert::ToUInt32(reader->GetString(0));
+			track->BPM = Convert::ToUInt32(reader->GetString(1));
+			track->Key = reader->GetString(2);
+		}
+
+	}
 	List<String^>^ DataBase::getTracksInDataBase() 
 	{
 		List<String^>^ result = gcnew List<String^>();
 
-		String^ query = "SELECT name FROM tracks";
+		String^ query = "SELECT path FROM tracks";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
 		

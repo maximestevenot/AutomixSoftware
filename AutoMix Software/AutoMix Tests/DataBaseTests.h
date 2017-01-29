@@ -20,5 +20,8 @@ namespace DataManagementTests {
 
 		[TestMethod]
 		void getTracks();
+
+		[TestMethod]
+		void extractDataTest();
 	};
 }
