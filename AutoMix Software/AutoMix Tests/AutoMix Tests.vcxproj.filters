@@ -33,6 +33,9 @@
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="GeneticAlgorithmTests.h">
+      <Filter>Fichiers d%27en-tête\AI</Filter>
+    </ClInclude>
     <ClInclude Include="DataBaseTests.h">
       <Filter>Fichiers d%27en-tête\Data Management</Filter>
     </ClInclude>
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Stdafx.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneticAlgorithmTests.cpp">
+      <Filter>Fichiers sources\AI</Filter>
     </ClCompile>
     <ClCompile Include="DataBaseTests.cpp">
       <Filter>Fichiers sources\Data Management</Filter>

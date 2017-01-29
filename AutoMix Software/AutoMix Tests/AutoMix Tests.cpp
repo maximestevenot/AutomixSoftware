@@ -19,6 +19,7 @@ namespace AutoMixTests
 	{
 		// TODO: Add your test code here
 		Assert::AreEqual("toto", "toto");
+		Assert::AreNotEqual("toto", "titi");
 	}
 }
 

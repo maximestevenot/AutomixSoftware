@@ -32,7 +32,25 @@ namespace AutoMixAI
 
 	int GeneticAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
 	{
-		return System::Math::Abs((int)(track1->BPM - track2->BPM))*10;
+		unsigned int distance;
+
+		bool major1 = track1->Key->Contains("d");
+		bool major2 = track2->Key->Contains("d");
+		System::String^ key2 = track2->Key->Substring(0, track2->Key->Length-1);
+		System::String^ key1 = track1->Key->Substring(0, track1->Key->Length-1);
+		double key1int = double::Parse(key1);
+		double key2int = double::Parse(key2);
+
+		distance = System::Math::Abs((int)(track2->BPM - track1->BPM)) * 10; //BPM 10 fois plus important que clé
+		if (major1 == major2)
+		{
+			distance += System::Math::Abs(key1int - key2int);
+		}
+		else
+		{
+			distance += 100;
+		}
+		return distance;
 	}
 
 	population^ GeneticAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
