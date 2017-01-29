@@ -10,18 +10,18 @@ namespace DataManagementTests {
 
 	public:
 		[TestMethod]
-		void dataBaseCreationTest();
+		void dataBaseCreation();
 		
 		[TestMethod]
-		void addValueTest();
+		void addValueInDataBase();
 		
 		[TestMethod]
-		void clear();
+		void clearDataBase();
 
 		[TestMethod]
-		void getTracks();
+		void getTracksInDataBase();
 
 		[TestMethod]
-		void extractDataTest();
+		void extractDataFromDataBase();
 	};
 }

@@ -9,7 +9,7 @@ using namespace AutoMixDataManagement;
 
 namespace DataManagementTests
 {
-	void DataBaseTests::dataBaseCreationTest()
+	void DataBaseTests::dataBaseCreation()
 	{
 		String^ myDB = "myDataBase.sqlite";
 
@@ -17,7 +17,7 @@ namespace DataManagementTests
 		Assert::IsTrue(File::Exists(myDB));
 	}
 
-	void DataBaseTests::addValueTest()
+	void DataBaseTests::addValueInDataBase()
 	{
 		String^ myDB = "myDataBase.sqlite";
 		DataBase^ db = gcnew DataBase(myDB);
@@ -31,7 +31,7 @@ namespace DataManagementTests
 		db->addTrack(myTrack);
 	}
 
-	void DataBaseTests::clear()
+	void DataBaseTests::clearDataBase()
 	{
 		String^ myDB = "myDataBase.sqlite";
 		DataBase^ db = gcnew DataBase(myDB);
@@ -46,7 +46,7 @@ namespace DataManagementTests
 	}
 	
 	
-	void DataBaseTests::getTracks()
+	void DataBaseTests::getTracksInDataBase()
 	{
 		String^ myDB = "myDataBase.sqlite";
 		DataBase^ db = gcnew DataBase(myDB);
@@ -63,7 +63,7 @@ namespace DataManagementTests
 		Assert::IsTrue(namesList->Count == 2);
 	}
 
-	void DataBaseTests::extractDataTest()
+	void DataBaseTests::extractDataFromDataBase()
 	{
 		String^ myDB = "myDataBase.sqlite";
 		DataBase^ db = gcnew DataBase(myDB);

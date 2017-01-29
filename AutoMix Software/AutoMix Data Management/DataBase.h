@@ -19,12 +19,10 @@ namespace AutoMixDataManagement {
 		DataBase();
 		DataBase(System::String^ path);
 		~DataBase();
+
 		void addTrack(AutoMixDataManagement::Track^);
-
 		void clear();
-
 		void extractData(AutoMixDataManagement::Track^ track);
-
 		System::Collections::Generic::List<System::String^>^ getTracksInDataBase();
 
 	private:
