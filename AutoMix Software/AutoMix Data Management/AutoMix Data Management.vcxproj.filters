@@ -63,11 +63,14 @@
     <ClInclude Include="DelegateAudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
-    <ClInclude Include="ExecutableExtraction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IExtraction.h">
       <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecutableExtraction.h">
+      <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBaseExtraction.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +111,9 @@
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
     <ClCompile Include="ExecutableExtraction.cpp">
+      <Filter>Source Files\Extraction</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBaseExtraction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

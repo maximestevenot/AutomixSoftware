@@ -1,6 +1,8 @@
 #pragma once
 
 #include "AutoMixDataManagement.h"
+#include "ExecutableExtraction.h"
+#include "DataBaseExtraction.h"
 
 namespace AutoMixDataManagement {
 

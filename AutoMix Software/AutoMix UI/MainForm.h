@@ -306,6 +306,7 @@ namespace AutoMixUI {
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix Software";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
@@ -331,6 +332,7 @@ namespace AutoMixUI {
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
 	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 };
 
 }
