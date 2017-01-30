@@ -80,4 +80,17 @@ namespace DataManagementTests
 	//	List<String^>^ namesList = db->getTracksInDataBase();
 	//}
 
+	void DataBaseTests::isInDataBase() {
+		String^ myDB = "myDataBase.sqlite";
+		DataBase^ db = gcnew DataBase(myDB);
+
+		Track^ myTrack = gcnew Track("test.mp3");
+		myTrack->BPM = 128;
+		myTrack->Duration = 1000;
+		myTrack->Key = "15";
+		db->clear();
+		Assert::IsFalse(db->isInDataBase(myTrack));
+		db->addTrack(myTrack);
+		Assert::IsTrue(db->isInDataBase(myTrack));
+	}
 }
