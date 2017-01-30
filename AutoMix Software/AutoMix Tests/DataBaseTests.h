@@ -20,5 +20,8 @@ namespace DataManagementTests {
 
 		[TestMethod]
 		void extractDataFromDataBase();
+		
+		[TestMethod]
+		void isInDataBase();
 	};
 }
