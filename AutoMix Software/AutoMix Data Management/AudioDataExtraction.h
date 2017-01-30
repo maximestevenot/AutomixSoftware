@@ -16,15 +16,16 @@ namespace AutoMixDataManagement {
 
 	delegate void ExtractDelegate();
 
-	public ref class AudioDataExtraction : public IAudioDataExtraction
+	public ref class AudioDataExtraction
 	{
 	public:
-		AudioDataExtraction();
 
-		void extractData(Track^) override;
-		void extractData(TrackCollection^) override;
+		AudioDataExtraction();
+		void extractData(TrackCollection^);
 
 	private:
+
+		void initExecConfiguration();
 		System::Diagnostics::ProcessStartInfo^ _startInfo;
 		System::IO::DirectoryInfo^ _tempDirectory;
 	};

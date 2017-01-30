@@ -156,7 +156,8 @@
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
     <ClInclude Include="DelegateAudioDataExtraction.h" />
-    <ClInclude Include="IAudioDataExtraction.h" />
+    <ClInclude Include="ExecutableExtraction.h" />
+    <ClInclude Include="IExtraction.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
@@ -182,6 +183,7 @@
     <ClCompile Include="AutoMixDataManagement.cpp" />
     <ClCompile Include="DelegateAudioDataExtraction.cpp" />
     <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="ExecutableExtraction.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

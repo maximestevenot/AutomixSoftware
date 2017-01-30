@@ -48,9 +48,6 @@
     <ClInclude Include="AudioDataExtractionProxy.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
-    <ClInclude Include="IAudioDataExtraction.h">
-      <Filter>Header Files\Extraction</Filter>
-    </ClInclude>
     <ClInclude Include="TracksComparison.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
@@ -64,6 +61,12 @@
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
     <ClInclude Include="DelegateAudioDataExtraction.h">
+      <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
+    <ClInclude Include="ExecutableExtraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
   </ItemGroup>
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="DelegateAudioDataExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
+    </ClCompile>
+    <ClCompile Include="ExecutableExtraction.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
