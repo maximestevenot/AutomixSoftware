@@ -19,9 +19,9 @@ namespace AutoMixDataManagement {
 		DataBase();
 		DataBase(System::String^ path);
 
-		void addTrack(AutoMixDataManagement::Track^);
+		void addTrack(Track^);
 		void clear();
-		void extractData(AutoMixDataManagement::Track^ track);
+		void extractData(Track^ track);
 		bool isInDataBase(Track^);
 	private:
 

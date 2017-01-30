@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "DelegateAudioDataExtraction.h"
-#include "ExecutableExtraction.h"
 
 
 namespace AutoMixDataManagement {
@@ -18,7 +17,16 @@ namespace AutoMixDataManagement {
 	}
 	void DelegateAudioDataExtraction::delegateExtraction(Track ^ track)
 	{
-		IExtraction^ ex = gcnew ExecutableExtraction(_tempDirectory);
+		IExtraction^ ex;
+		DataBase^ db = gcnew DataBase();
+		if (db->isInDataBase(track))
+		{
+			ex = gcnew DataBaseExtraction(db);
+		}
+		else
+		{
+			ex = gcnew ExecutableExtraction(_tempDirectory);
+		}
 		ex->extractData(track);
 	}
 

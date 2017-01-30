@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoMix Tests.h" />
+    <ClInclude Include="DataDelegateTests.h" />
     <ClInclude Include="GeneticAlgorithmTests.h" />
     <ClInclude Include="DataBaseTests.h" />
     <ClInclude Include="ExtractionTest.h" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AutoMix Tests.cpp" />
+    <ClCompile Include="DataDelegateTests.cpp" />
     <ClCompile Include="GeneticAlgorithmTests.cpp" />
     <ClCompile Include="DataBaseTests.cpp" />
     <ClCompile Include="ExtractionTest.cpp" />
