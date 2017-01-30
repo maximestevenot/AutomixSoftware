@@ -16,7 +16,7 @@ using namespace System::Collections::Generic;
 
 namespace AutoMixDataManagement {
 
-	DataBase::DataBase() : DataBase("MyBase.sqlite") {}
+	DataBase::DataBase() : DataBase("AutoMixSoftware.db") {}
 
 	DataBase::DataBase(String^ path)
 	{
@@ -35,38 +35,39 @@ namespace AutoMixDataManagement {
 
 	}
 
-	DataBase::~DataBase()
-	{
-		if (_dbConnection)
-		{
-			_dbConnection->Close();
-		}
-	}
-
 	void DataBase::connectToDatabase(String^ path)
 	{
 		String^ connectionString = ("Data Source=" + path + ";Version=3;");
 		_dbConnection = gcnew SQLiteConnection(connectionString);
-		_dbConnection->Open();
 	}
 
 	void DataBase::createTable()
 	{
+		_dbConnection->Open();
+
 		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT)";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
+
+		_dbConnection->Close();
 	}
 
 	void DataBase::addTrack(Track^ track)
 	{
+		_dbConnection->Open();
+
 		String^ query = "INSERT INTO tracks (path, duration, bpm, key)";
 		query += "VALUES ( '" + track->Path + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
+
+		_dbConnection->Close();
 	}
 
 	void DataBase::clear()
 	{
+		_dbConnection->Open();
+
 		String^ query = "DELETE FROM tracks";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
@@ -74,10 +75,14 @@ namespace AutoMixDataManagement {
 		String^ query2 = "DELETE FROM sqlite_sequence WHERE name='tracks'";
 		SQLiteCommand^ command2 = gcnew SQLiteCommand(query2, _dbConnection);
 		command2->ExecuteNonQuery();
+
+		_dbConnection->Close();
 	}
 
 	void DataBase::extractData(Track^ track)
 	{
+		_dbConnection->Open();
+
 		String^ query = "SELECT duration, bpm, key FROM tracks WHERE path = '" + track->Path + "'";
 		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 		command->ExecuteNonQuery();
@@ -90,9 +95,12 @@ namespace AutoMixDataManagement {
 			track->Key = reader->GetString(2);
 		}
 
+		_dbConnection->Close();
 	}
 	List<String^>^ DataBase::getTracksInDataBase() 
 	{
+		_dbConnection->Open();
+
 		List<String^>^ result = gcnew List<String^>();
 
 		String^ query = "SELECT path FROM tracks";
@@ -104,6 +112,8 @@ namespace AutoMixDataManagement {
 		{
 			result->Add(reader->GetString(0));
 		}
+
+		_dbConnection->Close();
 		return result;
 	}
 

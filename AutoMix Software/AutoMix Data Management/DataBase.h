@@ -18,7 +18,6 @@ namespace AutoMixDataManagement {
 	public:
 		DataBase();
 		DataBase(System::String^ path);
-		~DataBase();
 
 		void addTrack(AutoMixDataManagement::Track^);
 		void clear();
