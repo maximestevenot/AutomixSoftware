@@ -12,16 +12,10 @@
 
 namespace AutoMixDataManagement {
 
-	public ref class IAudioDataExtraction abstract
+	public ref class IExtraction abstract
 	{
-
 	public:
-		//IAudioDataExtraction() {}
-
-		//virtual ~IAudioDataExtraction() {}
-
 		virtual void extractData(Track^) abstract;
-		virtual void extractData(TrackCollection^) abstract;
 	};
 
 }

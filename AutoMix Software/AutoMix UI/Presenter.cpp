@@ -17,7 +17,7 @@ namespace AutoMixUI {
 	{
 		_views = gcnew Generic::List<ViewWithTrackCollection^>();
 		_trackCollection = gcnew TrackCollection();
-		_dataExtractionEngine = gcnew AudioDataExtractionProxy();
+		_dataExtractionEngine = gcnew AudioDataExtraction();
 	}
 
 	Presenter::Presenter(ViewWithTrackCollection^ view) : Presenter()

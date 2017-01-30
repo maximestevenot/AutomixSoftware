@@ -9,19 +9,18 @@
 #pragma once
 
 #include "AutoMixDataManagement.h"
+#include "AudioDataExtraction.h"
 
 namespace AutoMixDataManagement {
 
-	public ref class AudioDataExtractionProxy : public IAudioDataExtraction
-	{
-	public:
+	//public ref class AudioDataExtractionProxy
+	//{
+	////public:
 
-		AudioDataExtractionProxy();
+	////	AudioDataExtractionProxy();
+	////	void extractData(TrackCollection^);
 
-		void extractData(Track^) override;
-		void extractData(TrackCollection^) override;
-
-	private:
-		IAudioDataExtraction^ _realSubject;
-	};
+	////private:
+	////	AudioDataExtraction^ _realSubject;
+	////};
 }

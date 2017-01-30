@@ -27,6 +27,6 @@ namespace AutoMixUI {
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 
 		TrackCollection^ _trackCollection;
-		IAudioDataExtraction^ _dataExtractionEngine;
+		AudioDataExtraction^ _dataExtractionEngine;
 	};
 }
