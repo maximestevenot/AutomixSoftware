@@ -27,6 +27,8 @@ namespace AutoMixDataManagement {
 		void sortByBPM();
 		void sortByDescendingBPM();
 
+		void purge();
+
 		void exportToMP3(System::String^ outputFile);
 	};
 

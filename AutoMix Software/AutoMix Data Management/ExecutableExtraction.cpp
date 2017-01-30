@@ -40,11 +40,16 @@ namespace AutoMixDataManagement {
 			track->Duration = Convert::ToUInt32((double)obj["metadata"]["audio_properties"]["length"] * 1000);
 			track->BPM = Convert::ToUInt32((int)(obj["rhythm"]["bpm"]));
 			track->Key = (String^)(obj["tonal"]["key_key"]) + (String^)(obj["tonal"]["key_scale"]);
+
+			reader->Close();
+			file->Close();
+
+			DataBase^ db = gcnew DataBase();
+			db->addTrack(track);
 		}
 		catch (FileNotFoundException^ e)
 		{
 			e->Message;
-			//trackcollection delete track
 		}
 	}
 

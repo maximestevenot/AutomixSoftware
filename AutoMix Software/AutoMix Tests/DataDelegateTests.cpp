@@ -5,7 +5,6 @@ using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 using namespace AutoMixDataManagement;
 using namespace System::IO;
 using namespace System;
-using namespace System::Data::SQLite;
 
 namespace DataManagementTests
 {
@@ -39,6 +38,5 @@ namespace DataManagementTests
 		Assert::AreEqual(myTrack->Duration, extractedTrack->Duration);
 		Assert::AreEqual(myTrack->BPM, extractedTrack->BPM);
 		Assert::AreEqual(myTrack->Key, extractedTrack->Key);
-		//Assert::IsFalse(sqlite3_threadsafe() == 0);
 	}
 }

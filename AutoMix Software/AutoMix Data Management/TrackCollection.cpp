@@ -60,6 +60,17 @@ namespace AutoMixDataManagement {
 		Reverse();
 	}
 
+	void TrackCollection::purge()
+	{
+		for each (Track^ t in this)
+		{
+			if (t->Duration == 0)
+			{
+				this->Remove(t);
+			}
+		}
+	}
+
 	void TrackCollection::exportToMP3(String ^ outputFile)
 	{
 		AudioIO::Mp3Export(this, outputFile);
