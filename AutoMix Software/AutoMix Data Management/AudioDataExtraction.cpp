@@ -21,6 +21,7 @@ namespace AutoMixDataManagement {
 
 	AudioDataExtraction::AudioDataExtraction()
 	{
+		gcnew DataBase();
 		initExecConfiguration();
 	}
 
