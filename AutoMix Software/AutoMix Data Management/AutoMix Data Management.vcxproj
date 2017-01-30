@@ -155,6 +155,7 @@
     <ClInclude Include="AudioDataExtractionProxy.h" />
     <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
+    <ClInclude Include="DataBaseExtraction.h" />
     <ClInclude Include="DelegateAudioDataExtraction.h" />
     <ClInclude Include="ExecutableExtraction.h" />
     <ClInclude Include="IExtraction.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
     <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
+    <ClCompile Include="DataBaseExtraction.cpp" />
     <ClCompile Include="DelegateAudioDataExtraction.cpp" />
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="ExecutableExtraction.cpp" />
