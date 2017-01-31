@@ -4,6 +4,9 @@ variables:
   ExtractLib: "DataExtractionLibrary\\DataExtractionLibrary.sln"
   TestsLib: "Automix Software\\Debug\\AutoMix Tests.dll"
   TestsFile: "Automix Software\\TestResults\\tests.xml"
+  ReleaseDir: "Automix Software\\Debug\\"
+  DebugMode: "Debug|x86"
+  ReleaseMode: "Debug|x86"
 
 before_script:
   - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
@@ -17,9 +20,9 @@ build:
   stage: build
   script:
     - echo building...
-    - 'devenv "%AutoMix%" /Build "Debug|x86"'
-    - 'devenv "%IOLib%" /Build "Debug|x86"'
-    - 'devenv "%ExtractLib%" /Build "Debug|x86"'
+    - 'devenv "%IOLib%" /Build "%DebugMode%"'
+    - 'devenv "%ExtractLib%" /Build "%DebugMode%"'
+    - 'devenv "%AutoMix%" /Build "%DebugMode%"'
   except:
     - tags
   artifacts:
@@ -41,6 +44,16 @@ deploy:
   stage: deploy
   script:
     - echo deploying...
-    - 'msbuild /p:Configuration=Debug;Architecture=x86 "%AutoMix%" /t:publish'
+    - 'devenv "%IOLib%" /Build "%ReleaseMode%"'
+    - 'devenv "%ExtractLib%" /Build "%ReleaseMode%"'
+    - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
+    - 'cd "%ReleaseDir%"'
+    - 'for %%i in (*.exe *.dll) do attrib -a *.%%i /s'
+    - 'del *.* /s /a:a /q'
+    - 'attrib +a *.* /s'
+  artifacts:
+    paths:
+      - %ReleaseDir%
+    expire_in: 1 week
   only:
-    - production
+    - master
