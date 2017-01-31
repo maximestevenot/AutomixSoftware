@@ -48,7 +48,7 @@ deploy:
     - 'devenv "%ExtractLib%" /Build "%ReleaseMode%"'
     - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
     - 'cd "%ReleaseDir%"'
-    - 'for %%i in (*.exe *.dll) do attrib -a *.%%i /s'
+    - 'for %%i in (*.exe *.dll) do attrib -a %%i /s'
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
   artifacts:
