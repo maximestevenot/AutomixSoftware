@@ -53,7 +53,7 @@ deploy:
     - 'attrib +a *.* /s'
   artifacts:
     paths:
-      - %ReleaseDir%
+      - "%ReleaseDir%"
     expire_in: 1 week
   only:
     - master
