@@ -8,25 +8,14 @@
 
 #pragma once
 
-#include "AutoMixDataManagement.h"
-#include "DelegateAudioDataExtraction.h"
+#include "TrackCollection.h"
 
 namespace AutoMixDataManagement {
 
-	delegate void ExtractDelegate();
-
-	public ref class AudioDataExtraction : public IAudioDataExtraction
+	public ref class IAudioDataExtraction abstract
 	{
 	public:
-
-		AudioDataExtraction();
-		void extractData(TrackCollection^) override;
-
-	private:
-
-		void initExecConfiguration();
-		System::Diagnostics::ProcessStartInfo^ _startInfo;
-		System::IO::DirectoryInfo^ _tempDirectory;
+		virtual void extractData(TrackCollection^) abstract;
 	};
 
 }
