@@ -12,5 +12,6 @@
 #include "TrackCollection.h"
 
 #include "IExtraction.h"
+#include "IAudioDataExtraction.h"
 
 #include "DataBase.h"

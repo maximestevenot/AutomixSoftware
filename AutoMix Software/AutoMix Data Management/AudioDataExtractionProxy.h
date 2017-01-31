@@ -13,14 +13,15 @@
 
 namespace AutoMixDataManagement {
 
-	//public ref class AudioDataExtractionProxy
-	//{
-	////public:
+	public ref class AudioDataExtractionProxy : public IAudioDataExtraction
+	{
+		public:
 
-	////	AudioDataExtractionProxy();
-	////	void extractData(TrackCollection^);
+			AudioDataExtractionProxy();
+			void extractData(TrackCollection^) override;
 
-	////private:
-	////	AudioDataExtraction^ _realSubject;
-	////};
+		private:
+			IAudioDataExtraction^ _realSubject;
+	};
+
 }

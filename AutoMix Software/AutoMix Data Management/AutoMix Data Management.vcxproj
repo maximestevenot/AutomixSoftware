@@ -158,6 +158,7 @@
     <ClInclude Include="DataBaseExtraction.h" />
     <ClInclude Include="DelegateAudioDataExtraction.h" />
     <ClInclude Include="ExecutableExtraction.h" />
+    <ClInclude Include="IAudioDataExtraction.h" />
     <ClInclude Include="IExtraction.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="resource.h" />

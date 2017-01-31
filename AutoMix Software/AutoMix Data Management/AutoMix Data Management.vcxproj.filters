@@ -70,7 +70,10 @@
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
     <ClInclude Include="DataBaseExtraction.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Extraction</Filter>
+    </ClInclude>
+    <ClInclude Include="IAudioDataExtraction.h">
+      <Filter>Header Files\Extraction</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -114,7 +117,7 @@
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
     <ClCompile Include="DataBaseExtraction.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Extraction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
