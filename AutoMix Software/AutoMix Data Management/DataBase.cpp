@@ -34,7 +34,7 @@ namespace AutoMixDataManagement {
 		}
 
 	}
-	
+
 	void DataBase::connectToDatabase(String^ path)
 	{
 		String^ connectionString = ("Data Source=" + path + ";Version=3;");
@@ -44,72 +44,111 @@ namespace AutoMixDataManagement {
 	void DataBase::createTable()
 	{
 		_dbConnection->Open();
-		
-		String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT)";
-		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
-		command->ExecuteNonQuery();
-		
+
+		try
+		{
+			String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT)";
+			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+			command->ExecuteNonQuery();
+		}
+		catch (...)
+		{
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to create tracks table");
+		}
+
 		_dbConnection->Close();
 	}
 
 	void DataBase::addTrack(Track^ track)
 	{
 		_dbConnection->Open();
-		
-		String^ query = "INSERT INTO tracks (path, duration, bpm, key)";
-		query += "VALUES ( '" + track->Path + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
-		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
-		command->ExecuteNonQuery();
-		
+
+		try
+		{
+			String^ query = "INSERT INTO tracks (path, duration, bpm, key)";
+			query += "VALUES ( '" + track->Path + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
+			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+			command->ExecuteNonQuery();
+		}
+		catch (...)
+		{
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to insert :" + track->Path);
+		}
+
 		_dbConnection->Close();
 	}
 
 	void DataBase::clear()
 	{
 		_dbConnection->Open();
-		
-		String^ query = "DELETE FROM tracks";
-		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
-		command->ExecuteNonQuery();
 
-		String^ query2 = "DELETE FROM sqlite_sequence WHERE name='tracks'";
-		SQLiteCommand^ command2 = gcnew SQLiteCommand(query2, _dbConnection);
-		command2->ExecuteNonQuery();
-		
+		try
+		{
+			String^ query = "DELETE FROM tracks";
+			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+			command->ExecuteNonQuery();
+
+			String^ query2 = "DELETE FROM sqlite_sequence WHERE name='tracks'";
+			SQLiteCommand^ command2 = gcnew SQLiteCommand(query2, _dbConnection);
+			command2->ExecuteNonQuery();
+		}
+		catch (...)
+		{
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to clean database");
+		}
+
 		_dbConnection->Close();
 	}
 
 	void DataBase::extractData(Track^ track)
 	{
 		_dbConnection->Open();
-		
-		String^ query = "SELECT duration, bpm, key FROM tracks WHERE path = '" + track->Path + "'";
-		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
-		command->ExecuteNonQuery();
 
-		SQLiteDataReader^ reader = command->ExecuteReader();
-		if (reader->Read())
+		try
 		{
-			track->Duration = Convert::ToUInt32(reader->GetString(0));
-			track->BPM = Convert::ToUInt32(reader->GetString(1));
-			track->Key = reader->GetString(2);
+			String^ query = "SELECT duration, bpm, key FROM tracks WHERE path = '" + track->Path + "'";
+			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+			command->ExecuteNonQuery();
+
+			SQLiteDataReader^ reader = command->ExecuteReader();
+			if (reader->Read())
+			{
+				track->Duration = Convert::ToUInt32(reader->GetString(0));
+				track->BPM = Convert::ToUInt32(reader->GetString(1));
+				track->Key = reader->GetString(2);
+			}
 		}
+		catch (...)
+		{
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to extract data of : " + track->Path);
+		}
+
 		_dbConnection->Close();
 	}
 
 	bool DataBase::isInDataBase(Track^ track) {
 		_dbConnection->Open();
-		String^ query = "SELECT path FROM tracks";
-		SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
-		command->ExecuteNonQuery();
-		SQLiteDataReader^ reader = command->ExecuteReader();
-		while (reader->Read())
-		{
-			if (reader->GetString(0) == track->Path) {
-				_dbConnection->Close();
-				return true;
+
+		try {
+			String^ query = "SELECT path FROM tracks";
+			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
+			command->ExecuteNonQuery();
+
+			SQLiteDataReader^ reader = command->ExecuteReader();
+			while (reader->Read())
+			{
+				if (reader->GetString(0) == track->Path)
+				{
+					_dbConnection->Close();
+					return true;
+				}
 			}
 		}
+		catch (...)
+		{
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to search : " + track->Path);
+		}
+
 		_dbConnection->Close();
 		return false;
 	}
