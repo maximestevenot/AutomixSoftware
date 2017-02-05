@@ -51,6 +51,7 @@ namespace AutoMixUI {
 		BackgroundWorker^ bw = (BackgroundWorker^) sender;
 		System::String^ path = (System::String^) e->Argument;
 		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
+		
 		if (bw->CancellationPending)
 		{
 			e->Cancel = true;
