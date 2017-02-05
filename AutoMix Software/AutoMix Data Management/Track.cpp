@@ -24,7 +24,7 @@ namespace AutoMixDataManagement {
 	Track::Track(String^ path) : Track()
 	{
 		_path = path;
-		_name = nameFromPath(path);
+		_name = Utils::nameFromPath(path);
 	}
 
 	String^ Track::Name::get() 

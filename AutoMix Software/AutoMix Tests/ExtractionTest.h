@@ -11,5 +11,8 @@ namespace DataManagementTests {
 	public:
 		[TestMethod]
 		void extractionCreationTest();
+
+		[TestMethod]
+		void keyConversionTest();
 	};
 }
