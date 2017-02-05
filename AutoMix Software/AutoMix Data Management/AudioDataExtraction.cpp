@@ -31,7 +31,7 @@ namespace AutoMixDataManagement {
 		ParallelOptions^ po = gcnew ParallelOptions();
 		po->MaxDegreeOfParallelism = 4;
 		Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
-		trackCollection->purge();
+		/*trackCollection->purge();*/
 	}
 
 	void AudioDataExtraction::initExecConfiguration()
