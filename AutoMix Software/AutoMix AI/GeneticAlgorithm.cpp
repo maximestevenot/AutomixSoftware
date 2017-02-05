@@ -9,9 +9,11 @@
 #include "stdafx.h"
 #include "GeneticAlgorithm.h"
 
+using namespace System;
 
 namespace AutoMixAI
 {
+
 	TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
 	{
 		population^ pop = createInitialPopulation(trackCollection);
@@ -32,25 +34,34 @@ namespace AutoMixAI
 
 	int GeneticAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
 	{
-		unsigned int distance;
+		double distance;
 
-		bool major1 = track1->Key->Contains("d");
-		bool major2 = track2->Key->Contains("d");
-		System::String^ key2 = track2->Key->Substring(0, track2->Key->Length-1);
-		System::String^ key1 = track1->Key->Substring(0, track1->Key->Length-1);
-		double key1int = double::Parse(key1);
-		double key2int = double::Parse(key2);
+		bool haveSameScale;
+		double digitalTrack1Key;
+		double digitalTrack2Key;
+
+		try
+		{
+			haveSameScale = (track1->Key->Contains("d") == track2->Key->Contains("d"));
+			digitalTrack1Key = Double::Parse(track1->Key->Remove(track1->Key->Length - 1));
+			digitalTrack2Key = Double::Parse(track2->Key->Remove(track2->Key->Length - 1));
+		}
+		catch (...)
+		{
+			return Int32::MaxValue;
+		}
 
 		distance = System::Math::Abs((int)(track2->BPM - track1->BPM)) * 10; //BPM 10 fois plus important que clé
-		if (major1 == major2)
+
+		if (haveSameScale)
 		{
-			distance += System::Math::Abs(key1int - key2int);
+			distance += System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
 		}
 		else
 		{
 			distance += 100;
 		}
-		return distance;
+		return (int) distance;
 	}
 
 	population^ GeneticAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
