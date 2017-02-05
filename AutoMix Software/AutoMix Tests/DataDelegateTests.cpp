@@ -4,6 +4,7 @@
 using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 using namespace AutoMixDataManagement;
 using namespace System::IO;
+using namespace System::Threading;
 using namespace System;
 
 namespace DataManagementTests
@@ -22,7 +23,7 @@ namespace DataManagementTests
 			System::IO::Directory::Delete(temppath, true);
 			tempDirectory = Directory::CreateDirectory(temppath);
 		}
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(tempDirectory);
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(gcnew ComponentModel::BackgroundWorker(), gcnew CancellationTokenSource(), tempDirectory);
 
 		Track^ myTrack = gcnew Track("test.mp3");
 		myTrack->BPM = 128;

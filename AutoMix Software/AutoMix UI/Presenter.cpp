@@ -25,7 +25,7 @@ namespace AutoMixUI {
 		_views->Add(view);
 	}
 
-	void Presenter::notify()
+	void Presenter::notify(TrackCollection^ collection)
 	{
 		for each (auto view in _views)
 		{
@@ -37,13 +37,13 @@ namespace AutoMixUI {
 	{
 		GeneticAlgorithm^ al = gcnew GeneticAlgorithm();
 		_trackCollection = al->sortTrackByGeneticAlgorithm(_trackCollection);
-		notify();
+		notify(_trackCollection);
 	}
 
-	void Presenter::loadTracks(array<System::String^>^ fileEntries)
+	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
-		while (files->MoveNext())
+		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
 			int lastDotIndex = filePath->LastIndexOf(".");
@@ -56,13 +56,13 @@ namespace AutoMixUI {
 			}
 		}
 
-		_dataExtractionEngine->extractData(_trackCollection);
+		_dataExtractionEngine->extractData(bw, _trackCollection);
 
 		_trackCollection->sortByName();
-		notify();
+		return _trackCollection;
 	}
 
-	void Presenter::exportTrackList(System::String^ destinationFile)
+	void Presenter::exportTrackList(String^ destinationFile)
 	{
 		_trackCollection->exportToMP3(destinationFile);
 	}

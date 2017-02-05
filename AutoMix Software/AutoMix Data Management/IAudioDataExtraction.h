@@ -15,7 +15,7 @@ namespace AutoMixDataManagement {
 	public ref class IAudioDataExtraction abstract
 	{
 	public:
-		virtual void extractData(TrackCollection^) abstract;
+		virtual void extractData(System::ComponentModel::BackgroundWorker^, TrackCollection^) abstract;
 	};
 
 }
