@@ -15,3 +15,5 @@
 #include "IAudioDataExtraction.h"
 
 #include "DataBase.h"
+
+#include "Utils.h"

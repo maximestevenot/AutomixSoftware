@@ -5,19 +5,19 @@ namespace AutoMixDataManagement {
 
 	using namespace System;
 
-	String^ nameFromPath(String^ path)
+	String^ Utils::nameFromPath(String ^ path)
 	{
 		int index = path->LastIndexOf("\\");
 		return path->Substring(index + 1);
 	}
 
-	String^ getExtension(String^ fileName)
+	String^ Utils::getExtension(String^ fileName)
 	{
 		int lastDotIndex = fileName->LastIndexOf(".");
 		return fileName->Substring(lastDotIndex + 1)->ToLower();
 	}
 
-	String^ convertToCamelotKey(String^ key, String^ scale)
+	String^ Utils::convertToOpenKey(String^ key, String^ scale)
 	{
 		if (String::IsNullOrEmpty(key) || String::IsNullOrEmpty(scale))
 		{
