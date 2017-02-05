@@ -56,7 +56,7 @@ namespace AutoMixUI {
 			}
 		}
 
-		_dataExtractionEngine->extractData(_trackCollection);
+		_dataExtractionEngine->extractData(bw, _trackCollection);
 
 		_trackCollection->sortByName();
 		return _trackCollection;

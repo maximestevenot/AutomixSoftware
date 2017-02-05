@@ -8,7 +8,7 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		DataBaseExtraction(DataBase^);
-		void extractData(Track^ track) override;
+		void extractData(System::ComponentModel::BackgroundWorker^, System::Threading::CancellationTokenSource^, Track^ track) override;
 		
 	private:
 		DataBase^ _dataBase;

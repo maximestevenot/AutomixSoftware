@@ -20,7 +20,7 @@ namespace AutoMixDataManagement {
 	public:
 
 		AudioDataExtraction();
-		void extractData(TrackCollection^) override;
+		void extractData(System::ComponentModel::BackgroundWorker^, TrackCollection^) override;
 
 	private:
 

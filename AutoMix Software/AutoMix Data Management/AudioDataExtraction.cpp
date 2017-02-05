@@ -12,6 +12,7 @@
 #undef GetTempPath
 
 using namespace System::Threading::Tasks;
+using namespace System::Threading;
 using namespace System::Diagnostics;
 using namespace System::IO;
 using namespace System;
@@ -25,13 +26,22 @@ namespace AutoMixDataManagement {
 		initExecConfiguration();
 	}
 
-	void AudioDataExtraction::extractData(TrackCollection^ trackCollection)
+	void AudioDataExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(_tempDirectory);
+		CancellationTokenSource^ cts = gcnew CancellationTokenSource();
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(bw, cts, _tempDirectory);
 		ParallelOptions^ po = gcnew ParallelOptions();
-		po->MaxDegreeOfParallelism = Math::Ceiling(System::Environment::ProcessorCount / 2.);
-		Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
-		/*trackCollection->purge();*/
+		po->CancellationToken = cts->Token;
+		po->MaxDegreeOfParallelism = (int) Math::Ceiling(System::Environment::ProcessorCount / 2.);
+		try
+		{
+			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
+			/*trackCollection->purge();*/
+		}
+		catch (OperationCanceledException^)
+		{
+			return;
+		}
 	}
 
 	void AudioDataExtraction::initExecConfiguration()

@@ -13,7 +13,7 @@ namespace AutoMixDataManagement {
 		_dataBase = dataBase;
 	}
 
-	void DataBaseExtraction::extractData(Track^ track)
+	void DataBaseExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, System::Threading::CancellationTokenSource^ cts, Track^ track)
 	{
 		_dataBase->extractData(track);
 	}

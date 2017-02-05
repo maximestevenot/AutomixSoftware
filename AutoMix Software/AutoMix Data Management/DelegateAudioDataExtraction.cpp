@@ -11,23 +11,35 @@
 
 
 namespace AutoMixDataManagement {
-	DelegateAudioDataExtraction::DelegateAudioDataExtraction(System::IO::DirectoryInfo^ tempDirectory)
+	DelegateAudioDataExtraction::DelegateAudioDataExtraction(System::ComponentModel::BackgroundWorker^ bw, System::Threading::CancellationTokenSource^ cts, System::IO::DirectoryInfo^ tempDirectory)
 	{
 		_tempDirectory = tempDirectory;
+		_bw = bw;
+		_cts = cts;
 	}
 	void DelegateAudioDataExtraction::delegateExtraction(Track ^ track)
 	{
-		IExtraction^ ex;
-		DataBase^ db = gcnew DataBase();
-		if (db->isInDataBase(track))
+		if (!_cts->IsCancellationRequested)
 		{
-			ex = gcnew DataBaseExtraction(db);
+			IExtraction^ ex;
+			DataBase^ db = gcnew DataBase();
+			if (db->isInDataBase(track))
+			{
+				ex = gcnew DataBaseExtraction(db);
+			}
+			else
+			{
+				ex = gcnew ExecutableExtraction(_tempDirectory);
+			}
+			if (!_bw->CancellationPending)
+			{
+				ex->extractData(_bw, _cts, track);
+			}
+			else
+			{
+				_cts->Cancel();
+			}
 		}
-		else
-		{
-			ex = gcnew ExecutableExtraction(_tempDirectory);
-		}
-		ex->extractData(track);
 	}
 
 }

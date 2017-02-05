@@ -18,7 +18,7 @@ namespace AutoMixDataManagement {
 		public:
 
 			AudioDataExtractionProxy();
-			void extractData(TrackCollection^) override;
+			void extractData(System::ComponentModel::BackgroundWorker^, TrackCollection^) override;
 
 		private:
 			IAudioDataExtraction^ _realSubject;
