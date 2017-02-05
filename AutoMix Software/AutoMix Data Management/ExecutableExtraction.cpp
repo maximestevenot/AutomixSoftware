@@ -42,10 +42,7 @@ namespace AutoMixDataManagement {
 
 			String^ key = (String^)(obj["tonal"]["key_key"]);
 			String^ scale = (String^)(obj["tonal"]["key_scale"]);
-			System::Diagnostics::Debug::WriteLine(key);
-			System::Diagnostics::Debug::WriteLine(scale);
-
-			track->Key = key + scale;
+			track->Key = Utils::convertToOpenKey(key, scale);
 
 			reader->Close();
 			file->Close();
