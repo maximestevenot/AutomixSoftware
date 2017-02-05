@@ -109,6 +109,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(SolutionDir)\AutoMix UI"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,7 +123,7 @@
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(ProjectDir)$(OutDir)"</Command>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -132,6 +135,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="NAudio">
