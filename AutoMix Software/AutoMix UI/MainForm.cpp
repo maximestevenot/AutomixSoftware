@@ -46,7 +46,7 @@ namespace AutoMixUI {
 		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 	}
 
-	System::Void MainForm::backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^) sender;
 		System::String^ path = (System::String^) e->Argument;
@@ -58,7 +58,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	System::Void MainForm::_backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
@@ -78,11 +78,11 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		backgroundWorker1->CancelAsync();
-		backgroundWorker2->CancelAsync();
+		_backgroundWorker1->CancelAsync();
+		_backgroundWorker2->CancelAsync();
 	}
 
-	System::Void MainForm::backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		e->Result = _presenter->sortTrackCollectionWithGeneticAlgorithm(bw);
@@ -92,7 +92,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::backgroundWorker2_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	System::Void MainForm::_backgroundWorker2_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
@@ -118,7 +118,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
-		backgroundWorker2->RunWorkerAsync();
+		_backgroundWorker2->RunWorkerAsync();
 	}
 
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
@@ -138,7 +138,7 @@ namespace AutoMixUI {
 		}
 
 		_statusStrip->Items->Add(path);
-		backgroundWorker1->RunWorkerAsync(path);
+		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
 	System::Void MainForm::update(TrackCollection^ collection)

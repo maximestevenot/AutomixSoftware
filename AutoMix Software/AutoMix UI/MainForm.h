@@ -78,8 +78,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ColumnHeader^  collectionKey;
 	private: System::Windows::Forms::Button^  _sortButton;
 	private: System::Windows::Forms::ToolStripMenuItem^  _cancelToolStripMenuItem;
-	private: System::ComponentModel::BackgroundWorker^  backgroundWorker1;
-	private: System::ComponentModel::BackgroundWorker^  backgroundWorker2;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker1;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker2;
+
+
 
 
 
@@ -120,8 +122,8 @@ namespace AutoMixUI {
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
-			this->backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -159,7 +161,7 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(230, 22);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(234, 26);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
@@ -167,19 +169,19 @@ namespace AutoMixUI {
 			// 
 			this->_cancelToolStripMenuItem->Name = L"_cancelToolStripMenuItem";
 			this->_cancelToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
-			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(230, 22);
+			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(234, 26);
 			this->_cancelToolStripMenuItem->Text = L"&Cancel All Operations";
 			this->_cancelToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(227, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(231, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(230, 22);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(234, 26);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -304,17 +306,17 @@ namespace AutoMixUI {
 			this->_sortButton->UseVisualStyleBackColor = false;
 			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::_sortButton_click);
 			// 
-			// backgroundWorker1
+			// _backgroundWorker1
 			// 
-			this->backgroundWorker1->WorkerSupportsCancellation = true;
-			this->backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::backgroundWorker1_DoWork);
-			this->backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::backgroundWorker1_RunWorkerCompleted);
+			this->_backgroundWorker1->WorkerSupportsCancellation = true;
+			this->_backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
+			this->_backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
 			// 
-			// backgroundWorker2
+			// _backgroundWorker2
 			// 
-			this->backgroundWorker2->WorkerSupportsCancellation = true;
-			this->backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::backgroundWorker2_DoWork);
-			this->backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::backgroundWorker2_RunWorkerCompleted);
+			this->_backgroundWorker2->WorkerSupportsCancellation = true;
+			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
+			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -363,11 +365,11 @@ namespace AutoMixUI {
 	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
 	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-	private: System::Void backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void backgroundWorker1_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker1_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
 	private: System::Void _cancelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
 };
 
 }
