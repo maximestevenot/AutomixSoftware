@@ -40,10 +40,10 @@ namespace AutoMixUI {
 		notify();
 	}
 
-	void Presenter::loadTracks(array<System::String^>^ fileEntries)
+	void Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
-		while (files->MoveNext())
+		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
 			int lastDotIndex = filePath->LastIndexOf(".");
@@ -62,7 +62,7 @@ namespace AutoMixUI {
 		notify();
 	}
 
-	void Presenter::exportTrackList(System::String^ destinationFile)
+	void Presenter::exportTrackList(String^ destinationFile)
 	{
 		_trackCollection->exportToMP3(destinationFile);
 	}
