@@ -78,6 +78,35 @@ namespace AutoMixUI {
 	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		backgroundWorker1->CancelAsync();
+		backgroundWorker2->CancelAsync();
+	}
+
+	System::Void MainForm::backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		e->Result = _presenter->sortTrackCollectionWithGeneticAlgorithm(bw);
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
+	}
+
+	System::Void MainForm::backgroundWorker2_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			MessageBox::Show("Operation was canceled");
+		}
+		else if (e->Error != nullptr)
+		{
+			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
+			MessageBox::Show(msg);
+		}
+		else
+		{
+			_presenter->notify((TrackCollection^)e->Result);
+			// RemoveProgressBar
+		}
 	}
 
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
@@ -88,7 +117,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
-		_presenter->sortTrackCollectionWithGeneticAlgorithm();
+		backgroundWorker2->RunWorkerAsync();
 	}
 
 	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)

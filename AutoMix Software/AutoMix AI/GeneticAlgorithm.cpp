@@ -14,13 +14,17 @@ using namespace System;
 namespace AutoMixAI
 {
 
-	TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
+TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
 		population^ pop = createInitialPopulation(trackCollection);
 		sortPopulation(pop, 0, pop->Count - 1);
 
 		for (int k = 0; k < NUMBER_OF_ITERATION; k++)
 		{
+			if (bw->CancellationPending)
+			{
+				break;
+			}
 			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
 			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
 			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));

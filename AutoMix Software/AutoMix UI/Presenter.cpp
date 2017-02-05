@@ -33,11 +33,11 @@ namespace AutoMixUI {
 		}
 	}
 
-	void Presenter::sortTrackCollectionWithGeneticAlgorithm()
+	TrackCollection^ Presenter::sortTrackCollectionWithGeneticAlgorithm(ComponentModel::BackgroundWorker^ bw)
 	{
 		GeneticAlgorithm^ al = gcnew GeneticAlgorithm();
-		_trackCollection = al->sortTrackByGeneticAlgorithm(_trackCollection);
-		notify(_trackCollection);
+		_trackCollection = al->sortTrackByGeneticAlgorithm(bw, _trackCollection);
+		return _trackCollection;
 	}
 
 	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
