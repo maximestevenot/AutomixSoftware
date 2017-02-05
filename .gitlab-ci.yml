@@ -1,7 +1,5 @@
 variables:
   AutoMix: "Automix Software\\AutoMix Software.sln"
-  IOLib: "InputOutputLibrary\\InputOutputLibrary.sln"
-  ExtractLib: "DataExtractionLibrary\\DataExtractionLibrary.sln"
   TestsLib: "Automix Software\\Debug\\AutoMix Tests.dll"
   TestsFile: "Automix Software\\TestResults\\tests.xml"
   ReleaseDir: "Automix Software\\Debug\\"
@@ -20,8 +18,6 @@ build:
   stage: build
   script:
     - echo building...
-    - 'devenv "%IOLib%" /Build "%DebugMode%"'
-    - 'devenv "%ExtractLib%" /Build "%DebugMode%"'
     - 'devenv "%AutoMix%" /Build "%DebugMode%"'
   except:
     - tags
@@ -44,8 +40,6 @@ deploy:
   stage: deploy
   script:
     - echo deploying...
-    - 'devenv "%IOLib%" /Build "%ReleaseMode%"'
-    - 'devenv "%ExtractLib%" /Build "%ReleaseMode%"'
     - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
     - 'cd "%ReleaseDir%"'
     - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
