@@ -2,9 +2,9 @@ variables:
   AutoMix: "Automix Software\\AutoMix Software.sln"
   TestsLib: "Automix Software\\Debug\\AutoMix Tests.dll"
   TestsFile: "Automix Software\\TestResults\\tests.xml"
-  ReleaseDir: "Automix Software\\Debug\\"
+  ReleaseDir: "Automix Software\\Release\\"
   DebugMode: "Debug|x86"
-  ReleaseMode: "Debug|x86"
+  ReleaseMode: "Release|x86"
 
 before_script:
   - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
