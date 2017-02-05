@@ -50,7 +50,7 @@ namespace AutoMixUI {
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^) sender;
 		System::String^ path = (System::String^) e->Argument;
-		_presenter->loadTracks(bw, Directory::GetFiles(path));
+		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
 		if (bw->CancellationPending)
 		{
 			e->Cancel = true;
@@ -70,6 +70,7 @@ namespace AutoMixUI {
 		}
 		else
 		{
+			_presenter->notify((TrackCollection^) e->Result);
 			// RemoveProgressBar
 		}
 	}

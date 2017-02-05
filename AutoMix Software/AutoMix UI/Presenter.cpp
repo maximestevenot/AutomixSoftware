@@ -25,7 +25,7 @@ namespace AutoMixUI {
 		_views->Add(view);
 	}
 
-	void Presenter::notify()
+	void Presenter::notify(TrackCollection^ collection)
 	{
 		for each (auto view in _views)
 		{
@@ -37,10 +37,10 @@ namespace AutoMixUI {
 	{
 		GeneticAlgorithm^ al = gcnew GeneticAlgorithm();
 		_trackCollection = al->sortTrackByGeneticAlgorithm(_trackCollection);
-		notify();
+		notify(_trackCollection);
 	}
 
-	void Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
+	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 		while (files->MoveNext() && !bw->CancellationPending)
@@ -59,7 +59,7 @@ namespace AutoMixUI {
 		_dataExtractionEngine->extractData(_trackCollection);
 
 		_trackCollection->sortByName();
-		notify();
+		return _trackCollection;
 	}
 
 	void Presenter::exportTrackList(String^ destinationFile)
