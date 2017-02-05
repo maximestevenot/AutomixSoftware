@@ -36,7 +36,6 @@ namespace AutoMixDataManagement {
 		try
 		{
 			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
-			/*trackCollection->purge();*/
 		}
 		catch (OperationCanceledException^)
 		{

@@ -54,8 +54,11 @@ namespace AutoMixDataManagement {
 				reader->Close();
 				file->Close();
 
-				DataBase^ db = gcnew DataBase();
-				db->addTrack(track);
+				if (track->BPM > 0)
+				{
+					DataBase^ db = gcnew DataBase();
+					db->addTrack(track);
+				}
 			}
 			catch (FileNotFoundException^ e)
 			{
