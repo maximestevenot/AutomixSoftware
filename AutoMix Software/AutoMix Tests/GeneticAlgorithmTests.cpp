@@ -156,7 +156,7 @@ namespace GeneticAlgorithmTests
 		tc->Add(track1);
 		tc->Add(track2);
 		GeneticAlgorithm^ ga = gcnew GeneticAlgorithm();
-		TrackCollection^ tc1 = ga->sortTrackByGeneticAlgorithm(tc);
+		TrackCollection^ tc1 = ga->sortTrackByGeneticAlgorithm(gcnew ComponentModel::BackgroundWorker(), tc);
 		Assert::IsTrue(tc1->Count == tc->Count);
 	}
 }

@@ -12,13 +12,17 @@
 
 namespace AutoMixAI
 {
-	TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(TrackCollection^ trackCollection)
+	TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
 		population^ pop = createInitialPopulation(trackCollection);
 		sortPopulation(pop, 0, pop->Count-1);
 		
 		for (int k = 0; k < NUMBER_OF_ITERATION; k++)
 		{
+			if (bw->CancellationPending)
+			{
+				break;
+			}
 			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
 			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
 			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE-1]));
@@ -44,7 +48,7 @@ namespace AutoMixAI
 		distance = System::Math::Abs((int)(track2->BPM - track1->BPM)) * 10; //BPM 10 fois plus important que clé
 		if (major1 == major2)
 		{
-			distance += System::Math::Abs(key1int - key2int);
+			distance += (int) System::Math::Abs(key1int - key2int);
 		}
 		else
 		{

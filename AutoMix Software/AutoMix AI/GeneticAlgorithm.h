@@ -22,7 +22,7 @@ namespace AutoMixAI
 		static int POPULATION_SIZE = 150;
 		static int MUTATION_PROBABILITY = 70; // Probabilty of mutation out of 100
 
-		TrackCollection^ sortTrackByGeneticAlgorithm(TrackCollection^);
+		TrackCollection^ sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^, TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
 		population^ createInitialPopulation(TrackCollection^);
 		int computeIndividualEvaluation(TrackCollection^);
