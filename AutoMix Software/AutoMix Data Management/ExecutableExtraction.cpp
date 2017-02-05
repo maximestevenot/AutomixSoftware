@@ -39,7 +39,13 @@ namespace AutoMixDataManagement {
 
 			track->Duration = Convert::ToUInt32((double)obj["metadata"]["audio_properties"]["length"] * 1000);
 			track->BPM = Convert::ToUInt32((int)(obj["rhythm"]["bpm"]));
-			track->Key = (String^)(obj["tonal"]["key_key"]) + (String^)(obj["tonal"]["key_scale"]);
+
+			String^ key = (String^)(obj["tonal"]["key_key"]);
+			String^ scale = (String^)(obj["tonal"]["key_scale"]);
+			System::Diagnostics::Debug::WriteLine(key);
+			System::Diagnostics::Debug::WriteLine(scale);
+
+			track->Key = key + scale;
 
 			reader->Close();
 			file->Close();
