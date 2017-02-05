@@ -17,9 +17,9 @@ namespace AutoMixDataManagement {
 		_realSubject = gcnew AudioDataExtraction();
 	}
 
-	void AudioDataExtractionProxy::extractData(TrackCollection^ trackCollection)
+	void AudioDataExtractionProxy::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
-		_realSubject->extractData(trackCollection);
+		_realSubject->extractData(bw, trackCollection);
 	}
 
 }

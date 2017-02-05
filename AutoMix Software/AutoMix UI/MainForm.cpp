@@ -11,6 +11,8 @@
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Collections;
+using namespace System::ComponentModel;
+using namespace System::Threading;
 
 namespace AutoMixUI {
 
@@ -44,6 +46,40 @@ namespace AutoMixUI {
 		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 	}
 
+	System::Void MainForm::backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		BackgroundWorker^ bw = (BackgroundWorker^) sender;
+		System::String^ path = (System::String^) e->Argument;
+		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
+	}
+
+	System::Void MainForm::backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			MessageBox::Show("Operation was canceled");
+		}
+		else if (e->Error != nullptr)
+		{
+			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
+			MessageBox::Show(msg);
+		}
+		else
+		{
+			_presenter->notify((TrackCollection^) e->Result);
+			// RemoveProgressBar
+		}
+	}
+
+	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		backgroundWorker1->CancelAsync();
+	}
+
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
 	{
 		// NOT IMPLEMENTED YET
@@ -72,7 +108,7 @@ namespace AutoMixUI {
 		}
 
 		_statusStrip->Items->Add(path);
-		_presenter->loadTracks(Directory::GetFiles(path));
+		backgroundWorker1->RunWorkerAsync(path);
 	}
 
 	System::Void MainForm::update(TrackCollection^ collection)
