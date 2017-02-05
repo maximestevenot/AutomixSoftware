@@ -54,7 +54,7 @@ namespace AutoMixDataManagement {
 				reader->Close();
 				file->Close();
 
-				if (track->BPM > 0)
+				if (track->BPM > 0 && track->Duration > 0)
 				{
 					DataBase^ db = gcnew DataBase();
 					db->addTrack(track);
