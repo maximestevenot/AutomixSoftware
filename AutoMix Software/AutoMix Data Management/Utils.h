@@ -2,8 +2,12 @@
 
 namespace AutoMixDataManagement {
 
-	System::String^ nameFromPath(System::String^ path);
-
-	System::String^ getExtension(System::String^ fileName);
-
+	public ref class Utils
+	{
+	public:
+		
+		static System::String^ nameFromPath(System::String^ path);
+		static System::String^ getExtension(System::String^ fileName);
+		static System::String^ convertToOpenKey(System::String^ key, System::String^ scale);
+	};
 }
