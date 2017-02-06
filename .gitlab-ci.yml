@@ -46,6 +46,7 @@ deploy:
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
     - 'del *Test*'
+    - 'dir'
     - 'cd ..\\..'
   artifacts:
     paths:
