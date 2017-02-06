@@ -36,7 +36,10 @@ namespace AutoMixDataManagement {
 		Process^ extractor = gcnew Process;
 		extractor->StartInfo = _startInfo;
 		extractor->Start();
-		while (!bw->CancellationPending && !extractor->HasExited);
+		while (!bw->CancellationPending && !extractor->HasExited)
+		{
+			System::Threading::Thread::Sleep(100);
+		}
 		if (bw->CancellationPending && !extractor->HasExited)
 		{
 			extractor->Kill();
