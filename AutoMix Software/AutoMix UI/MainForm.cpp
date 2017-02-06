@@ -77,6 +77,11 @@ namespace AutoMixUI {
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
+	System::Void MainForm::_clearDBToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		_presenter->clearDataBase();
+	}
+
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
 	{
 		// NOT IMPLEMENTED YET
@@ -190,7 +195,9 @@ namespace AutoMixUI {
 		_outputButton->Enabled = false;
 		_imputButton->Enabled = false;
 		_sortButton->Enabled = false;
+
 		_openToolStripMenuItem->Enabled = false;
+		optionsToolStripMenuItem->Enabled = false;
 	}
 
 	System::Void MainForm::enableButtons()
@@ -198,7 +205,9 @@ namespace AutoMixUI {
 		_outputButton->Enabled = true;
 		_imputButton->Enabled = true;
 		_sortButton->Enabled = true;
+
 		_openToolStripMenuItem->Enabled = true;
+		optionsToolStripMenuItem->Enabled = true;
 	}
 
 	System::Void MainForm::showCancelDialog()
