@@ -115,7 +115,7 @@ namespace AutoMixUI {
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
-		enableButtons();
+		switchButtonsOnWorkerStop();
 	}
 
 	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -143,12 +143,12 @@ namespace AutoMixUI {
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
-		enableButtons();
+		switchButtonsOnWorkerStop();
 	}
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
-		disableButtons();
+		switchButtonsOnWorkerStart();
 		_backgroundWorker2->RunWorkerAsync();
 	}
 
@@ -169,7 +169,7 @@ namespace AutoMixUI {
 		}
 
 		_toolStripCurrentDir->Text = path;
-		disableButtons();
+		switchButtonsOnWorkerStart();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
@@ -190,22 +190,24 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::disableButtons()
+	System::Void MainForm::switchButtonsOnWorkerStart()
 	{
+		_cancelToolStripMenuItem->Enabled = true;
+
 		_outputButton->Enabled = false;
 		_imputButton->Enabled = false;
 		_sortButton->Enabled = false;
-
 		_openToolStripMenuItem->Enabled = false;
 		optionsToolStripMenuItem->Enabled = false;
 	}
 
-	System::Void MainForm::enableButtons()
+	System::Void MainForm::switchButtonsOnWorkerStop()
 	{
+		_cancelToolStripMenuItem->Enabled = false;
+
 		_outputButton->Enabled = true;
 		_imputButton->Enabled = true;
 		_sortButton->Enabled = true;
-
 		_openToolStripMenuItem->Enabled = true;
 		optionsToolStripMenuItem->Enabled = true;
 	}

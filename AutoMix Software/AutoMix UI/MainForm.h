@@ -32,6 +32,10 @@ namespace AutoMixUI {
 		{
 			InitializeComponent();
 			_presenter = gcnew Presenter(this);
+
+			_cancelToolStripMenuItem->Enabled = false;
+			_outputButton->Enabled = false;
+			_sortButton->Enabled = false;
 		}
 
 	protected:
@@ -102,6 +106,8 @@ namespace AutoMixUI {
 			this->toolStripSeparator = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_quitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_clearDBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_inputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
@@ -120,8 +126,6 @@ namespace AutoMixUI {
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
 			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->_clearDBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -160,7 +164,7 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
@@ -168,19 +172,19 @@ namespace AutoMixUI {
 			// 
 			this->_cancelToolStripMenuItem->Name = L"_cancelToolStripMenuItem";
 			this->_cancelToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
-			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_cancelToolStripMenuItem->Text = L"&Cancel All Operations";
 			this->_cancelToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(231, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(227, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -192,6 +196,20 @@ namespace AutoMixUI {
 			this->optionsToolStripMenuItem->Text = L"&Options";
 			this->optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
 			// 
+			// dataBaseToolStripMenuItem
+			// 
+			this->dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBToolStripMenuItem });
+			this->dataBaseToolStripMenuItem->Name = L"dataBaseToolStripMenuItem";
+			this->dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->dataBaseToolStripMenuItem->Text = L"&Database";
+			// 
+			// _clearDBToolStripMenuItem
+			// 
+			this->_clearDBToolStripMenuItem->Name = L"_clearDBToolStripMenuItem";
+			this->_clearDBToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_clearDBToolStripMenuItem->Text = L"&Clear";
+			this->_clearDBToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
+			// 
 			// _helpToolStripMenuItem
 			// 
 			this->_helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_aboutToolStripMenuItem });
@@ -202,7 +220,7 @@ namespace AutoMixUI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
 			this->_aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_aboutToolStripMenuItem_Click);
 			// 
@@ -342,20 +360,6 @@ namespace AutoMixUI {
 			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
 			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
 			// 
-			// dataBaseToolStripMenuItem
-			// 
-			this->dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBToolStripMenuItem });
-			this->dataBaseToolStripMenuItem->Name = L"dataBaseToolStripMenuItem";
-			this->dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->dataBaseToolStripMenuItem->Text = L"&Data Base";
-			// 
-			// _clearDBToolStripMenuItem
-			// 
-			this->_clearDBToolStripMenuItem->Name = L"_clearDBToolStripMenuItem";
-			this->_clearDBToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->_clearDBToolStripMenuItem->Text = L"&Clear";
-			this->_clearDBToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -392,8 +396,8 @@ namespace AutoMixUI {
 		System::Void update(TrackCollection^) override;
 
 	private:
-		System::Void disableButtons();
-		System::Void enableButtons();
+		System::Void switchButtonsOnWorkerStart();
+		System::Void switchButtonsOnWorkerStop();
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
 		System::Void exitApplication();
