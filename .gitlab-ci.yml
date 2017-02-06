@@ -19,12 +19,13 @@ build:
   script:
     - echo building...
     - 'devenv "%AutoMix%" /Build "%DebugMode%"'
+  dependencies: []
   except:
     - tags
   artifacts:
     paths:
       - Automix Software/Debug
-    expire_in: 20 minutes
+    expire_in: 10 minutes
 
 
 test:
@@ -33,6 +34,8 @@ test:
     - echo testing...
     - 'mkdir "Automix Software\\TestResults"'
     - 'mstest.exe /testcontainer:"%TestsLib%" /resultsfile:"%TestsFile%"'
+  dependencies:
+    - build
   except:
     - tags
 
@@ -45,9 +48,12 @@ deploy:
     - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
+    - 'del *Test*'
+    - 'cd ..\\..'
+  dependencies: []
   artifacts:
     paths:
-      - "%ReleaseDir%"
+      - Automix Software/Release
     expire_in: 1 week
   only:
     - master
