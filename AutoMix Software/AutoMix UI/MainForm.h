@@ -348,17 +348,20 @@ namespace AutoMixUI {
 
 		}
 #pragma endregion
-	public: System::Void update(TrackCollection^) override;
-	private: 
+	public:
+		System::Void update(TrackCollection^) override;
+
+	private:
 		System::Void disableButtons();
 		System::Void enableButtons();
+		System::Void showCancelDialog();
+		System::Void showErrorDialog(System::String^);
+		System::Void exitApplication();
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
-
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-
 	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);

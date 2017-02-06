@@ -16,12 +16,43 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	System::Void MainForm::update(TrackCollection^ collection)
+	{
+		_musicListView->Items->Clear();
+
+		for each (auto track in collection)
+		{
+			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
+			lvitem->SubItems->Add(track->displayDuration());
+			lvitem->SubItems->Add(track->BPM.ToString());
+			lvitem->SubItems->Add(track->Key);
+
+			_musicListView->Items->Add(lvitem);
+		}
+	}
+
+	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		_backgroundWorker1->CancelAsync();
+		_backgroundWorker2->CancelAsync();
+	}
+
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		Application::Exit();
+		exitApplication();
+	}
+
+	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
+	{
+		exitApplication();
 	}
 
 	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		loadTracksFromDirectory(sender, e);
+	}
+
+	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracksFromDirectory(sender, e);
 	}
@@ -31,19 +62,9 @@ namespace AutoMixUI {
 		exportTrackList(sender, e);
 	}
 
-	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
-	{
-		loadTracksFromDirectory(sender, e);
-	}
-
 	System::Void MainForm::_sortButton_click(System::Object^ sender, System::EventArgs^ e)
 	{
 		sortTracksWithGeneticAlgorithm(sender, e);
-	}
-
-	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
-	{
-		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 	}
 
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -62,12 +83,11 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
-			MessageBox::Show("Operation was canceled");
+			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
 		{
-			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
-			MessageBox::Show(msg);
+			showErrorDialog(e->Error->Message);
 		}
 		else
 		{
@@ -75,12 +95,6 @@ namespace AutoMixUI {
 			// RemoveProgressBar
 		}
 		enableButtons();
-	}
-
-	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
-	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
 	}
 
 	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -97,12 +111,11 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
-			MessageBox::Show("Operation was canceled");
+			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
 		{
-			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
-			MessageBox::Show(msg);
+			showErrorDialog(e->Error->Message);
 		}
 		else
 		{
@@ -145,18 +158,20 @@ namespace AutoMixUI {
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
-	System::Void MainForm::update(TrackCollection^ collection)
+	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
 	{
-		_musicListView->Items->Clear();
+		SaveFileDialog^ dialog = gcnew SaveFileDialog;
 
-		for each (auto track in collection)
+		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+		dialog->FilterIndex = 1;
+
+		dialog->FileName = "Auto Mix";
+		dialog->DefaultExt = "mp3";
+		dialog->RestoreDirectory = true;
+
+		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
-			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
-			lvitem->SubItems->Add(track->displayDuration());
-			lvitem->SubItems->Add(track->BPM.ToString());
-			lvitem->SubItems->Add(track->Key);
-
-			_musicListView->Items->Add(lvitem);
+			_presenter->exportTrackList(dialog->FileName);
 		}
 	}
 
@@ -176,20 +191,29 @@ namespace AutoMixUI {
 		_openToolStripMenuItem->Enabled = true;
 	}
 
-	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
+	System::Void MainForm::showCancelDialog()
 	{
-		SaveFileDialog^ dialog = gcnew SaveFileDialog;
+		String^ msg = "Operation was canceled";
+		String^ caption = "Cancel";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Stop);
+	}
 
-		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
-		dialog->FilterIndex = 1;
+	System::Void MainForm::showErrorDialog(String^ errorMessage)
+	{
+		String^ msg = String::Format("An error occurred: {0}", errorMessage);
+		String^ caption = "Error";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 
-		dialog->FileName = "Auto Mix";
-		dialog->DefaultExt = "mp3";
-		dialog->RestoreDirectory = true;
-
-		if (dialog->ShowDialog() == ::DialogResult::OK)
+	System::Void MainForm::exitApplication()
+	{
+		_backgroundWorker1->CancelAsync();
+		_backgroundWorker2->CancelAsync();
+		try
 		{
-			_presenter->exportTrackList(dialog->FileName);
+			System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
 		}
+		catch (...) {}
+		Application::Exit();
 	}
 }
