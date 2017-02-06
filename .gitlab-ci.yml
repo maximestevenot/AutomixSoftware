@@ -49,7 +49,7 @@ deploy:
     - 'cd ..\\..'
   artifacts:
     paths:
-      - %ReleaseDir%
+      - Automix Software/Release
     expire_in: 5 minutes
   only:
     - feature/test_ci
