@@ -58,20 +58,12 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
-
 	private: System::Windows::Forms::StatusStrip^  _statusStrip;
-
 	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::ListView^  _musicListView;
 	private: System::Windows::Forms::ColumnHeader^  collectionDuration;
 	private: System::Windows::Forms::ColumnHeader^  collectionBPM;
-
-
-
-
 	private: System::Windows::Forms::ColumnHeader^  collectionName;
-
-
 	private: System::Windows::Forms::Button^  _imputButton;
 	private: System::Windows::Forms::Button^  _outputButton;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
@@ -80,13 +72,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _cancelToolStripMenuItem;
 	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker1;
 	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker2;
+	private: System::Windows::Forms::ToolStripProgressBar^  _toolStripProgressBar;
 
 
-
-
-
-
-
+	private: System::Windows::Forms::ToolStripStatusLabel^  _toolStripCurrentDir;
 
 	private:
 		/// <summary>
@@ -124,7 +113,10 @@ namespace AutoMixUI {
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
 			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_toolStripCurrentDir = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->_toolStripProgressBar = (gcnew System::Windows::Forms::ToolStripProgressBar());
 			this->menuStrip1->SuspendLayout();
+			this->_statusStrip->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -161,7 +153,7 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
@@ -169,19 +161,19 @@ namespace AutoMixUI {
 			// 
 			this->_cancelToolStripMenuItem->Name = L"_cancelToolStripMenuItem";
 			this->_cancelToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
-			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_cancelToolStripMenuItem->Text = L"&Cancel All Operations";
 			this->_cancelToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(231, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(227, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(234, 26);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -195,13 +187,17 @@ namespace AutoMixUI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
 			// 
 			// _statusStrip
 			// 
 			this->_statusStrip->AccessibleName = L"_statusStrip";
 			this->_statusStrip->BackColor = System::Drawing::SystemColors::GrayText;
+			this->_statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_toolStripProgressBar,
+					this->_toolStripCurrentDir
+			});
 			this->_statusStrip->Location = System::Drawing::Point(0, 660);
 			this->_statusStrip->Name = L"_statusStrip";
 			this->_statusStrip->Size = System::Drawing::Size(1264, 22);
@@ -318,6 +314,18 @@ namespace AutoMixUI {
 			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
 			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
 			// 
+			// _toolStripCurrentDir
+			// 
+			this->_toolStripCurrentDir->Margin = System::Windows::Forms::Padding(5, 3, 0, 2);
+			this->_toolStripCurrentDir->Name = L"_toolStripCurrentDir";
+			this->_toolStripCurrentDir->Size = System::Drawing::Size(0, 17);
+			// 
+			// _toolStripProgressBar
+			// 
+			this->_toolStripProgressBar->Margin = System::Windows::Forms::Padding(3, 3, 1, 3);
+			this->_toolStripProgressBar->Name = L"_toolStripProgressBar";
+			this->_toolStripProgressBar->Size = System::Drawing::Size(150, 16);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -342,6 +350,8 @@ namespace AutoMixUI {
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->_statusStrip->ResumeLayout(false);
+			this->_statusStrip->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();

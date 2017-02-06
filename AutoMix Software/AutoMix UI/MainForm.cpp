@@ -153,7 +153,7 @@ namespace AutoMixUI {
 			return;
 		}
 
-		_statusStrip->Items->Add(path);
+		_toolStripCurrentDir->Text = path;
 		disableButtons();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
