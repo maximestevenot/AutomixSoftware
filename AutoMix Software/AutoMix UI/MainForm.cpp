@@ -48,10 +48,10 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
-		BackgroundWorker^ bw = (BackgroundWorker^) sender;
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ path = (System::String^) e->Argument;
 		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
-		
+
 		if (bw->CancellationPending)
 		{
 			e->Cancel = true;
@@ -71,9 +71,10 @@ namespace AutoMixUI {
 		}
 		else
 		{
-			_presenter->notify((TrackCollection^) e->Result);
+			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
+		enableButtons();
 	}
 
 	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
@@ -108,6 +109,7 @@ namespace AutoMixUI {
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
+		enableButtons();
 	}
 
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
@@ -118,6 +120,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
+		disableButtons();
 		_backgroundWorker2->RunWorkerAsync();
 	}
 
@@ -138,6 +141,7 @@ namespace AutoMixUI {
 		}
 
 		_statusStrip->Items->Add(path);
+		disableButtons();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
@@ -154,6 +158,22 @@ namespace AutoMixUI {
 
 			_musicListView->Items->Add(lvitem);
 		}
+	}
+
+	System::Void MainForm::disableButtons()
+	{
+		_outputButton->Enabled = false;
+		_imputButton->Enabled = false;
+		_sortButton->Enabled = false;
+		_openToolStripMenuItem->Enabled = false;
+	}
+
+	System::Void MainForm::enableButtons()
+	{
+		_outputButton->Enabled = true;
+		_imputButton->Enabled = true;
+		_sortButton->Enabled = true;
+		_openToolStripMenuItem->Enabled = true;
 	}
 
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)

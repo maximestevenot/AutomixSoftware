@@ -195,7 +195,7 @@ namespace AutoMixUI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
 			// 
 			// _statusStrip
@@ -349,7 +349,9 @@ namespace AutoMixUI {
 		}
 #pragma endregion
 	public: System::Void update(TrackCollection^) override;
-
+	private: 
+		System::Void disableButtons();
+		System::Void enableButtons();
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
@@ -370,6 +372,6 @@ namespace AutoMixUI {
 	private: System::Void _cancelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
-};
+	};
 
 }
