@@ -42,10 +42,11 @@ deploy:
     - echo deploying...
     - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
     - 'cd "%ReleaseDir%"'
-    - 'for %i in (*.exe *.dll) do attrib -a "%i" /s'
+    - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
-    - del *Test*
+    - 'del *Test*'
+    - 'cd ..\\..'
   artifacts:
     paths:
       - "%ReleaseDir%"
