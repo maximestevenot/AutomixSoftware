@@ -24,7 +24,7 @@ build:
   artifacts:
     paths:
       - Automix Software/Debug
-    expire_in: 20 minutes
+    expire_in: 10 minutes
 
 
 test:
@@ -42,12 +42,13 @@ deploy:
     - echo deploying...
     - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
     - 'cd "%ReleaseDir%"'
-    - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
+    - 'for %i in (*.exe *.dll) do attrib -a "%i" /s'
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
+    - del *Test*
   artifacts:
     paths:
       - "%ReleaseDir%"
-    expire_in: 1 week
+    expire_in: 5 minutes
   only:
     - feature/test_ci
