@@ -46,11 +46,10 @@ deploy:
     - 'del *.* /s /a:a /q'
     - 'attrib +a *.* /s'
     - 'del *Test*'
-    - 'dir'
     - 'cd ..\\..'
   artifacts:
     paths:
-      - "%ReleaseDir%"
+      - %ReleaseDir%
     expire_in: 5 minutes
   only:
     - feature/test_ci
