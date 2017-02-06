@@ -187,8 +187,9 @@ namespace AutoMixUI {
 			// _aboutToolStripMenuItem
 			// 
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
-			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
+			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
+			this->_aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_aboutToolStripMenuItem_Click);
 			// 
 			// _statusStrip
 			// 
@@ -385,6 +386,7 @@ namespace AutoMixUI {
 	private: System::Void _cancelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 
 }

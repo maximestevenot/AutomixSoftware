@@ -67,6 +67,22 @@ namespace AutoMixUI {
 		sortTracksWithGeneticAlgorithm(sender, e);
 	}
 
+	System::Void MainForm::_aboutToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		String^ msg = "AutoMix Software Beta 1.0\n\n";
+		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
+		msg += "Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT,\nLouis CARLIER, Pierre GABON";
+
+		String^ caption = "About";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+
+	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
+	{
+		// NOT IMPLEMENTED YET
+
+	}
+
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
@@ -123,12 +139,6 @@ namespace AutoMixUI {
 			// RemoveProgressBar
 		}
 		enableButtons();
-	}
-
-	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
-	{
-		// NOT IMPLEMENTED YET
-
 	}
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
