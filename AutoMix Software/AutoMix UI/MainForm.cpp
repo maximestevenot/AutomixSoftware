@@ -16,12 +16,43 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	System::Void MainForm::update(TrackCollection^ collection)
+	{
+		_musicListView->Items->Clear();
+
+		for each (auto track in collection)
+		{
+			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
+			lvitem->SubItems->Add(track->displayDuration());
+			lvitem->SubItems->Add(track->BPM.ToString());
+			lvitem->SubItems->Add(track->Key);
+
+			_musicListView->Items->Add(lvitem);
+		}
+	}
+
+	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		_backgroundWorker1->CancelAsync();
+		_backgroundWorker2->CancelAsync();
+	}
+
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		Application::Exit();
+		exitApplication();
+	}
+
+	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
+	{
+		exitApplication();
 	}
 
 	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	{
+		loadTracksFromDirectory(sender, e);
+	}
+
+	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracksFromDirectory(sender, e);
 	}
@@ -31,27 +62,38 @@ namespace AutoMixUI {
 		exportTrackList(sender, e);
 	}
 
-	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
-	{
-		loadTracksFromDirectory(sender, e);
-	}
-
 	System::Void MainForm::_sortButton_click(System::Object^ sender, System::EventArgs^ e)
 	{
 		sortTracksWithGeneticAlgorithm(sender, e);
 	}
 
-	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
+	System::Void MainForm::_aboutToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
+		String^ msg = "AutoMix Software Beta 1.0\n\n";
+		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
+		msg += "Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT,\nLouis CARLIER, Pierre GABON";
+
+		String^ caption = "About";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+
+	System::Void MainForm::_clearDBToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		_presenter->clearDataBase();
+	}
+
+	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
+	{
+		// NOT IMPLEMENTED YET
+
 	}
 
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
-		BackgroundWorker^ bw = (BackgroundWorker^) sender;
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ path = (System::String^) e->Argument;
 		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
-		
+
 		if (bw->CancellationPending)
 		{
 			e->Cancel = true;
@@ -62,24 +104,18 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
-			MessageBox::Show("Operation was canceled");
+			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
 		{
-			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
-			MessageBox::Show(msg);
+			showErrorDialog(e->Error->Message);
 		}
 		else
 		{
-			_presenter->notify((TrackCollection^) e->Result);
+			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
-	}
-
-	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
-	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
+		switchButtonsOnWorkerStop();
 	}
 
 	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -96,28 +132,23 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
-			MessageBox::Show("Operation was canceled");
+			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
 		{
-			String^ msg = String::Format("An error occurred: {0}", e->Error->Message);
-			MessageBox::Show(msg);
+			showErrorDialog(e->Error->Message);
 		}
 		else
 		{
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
-	}
-
-	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
-	{
-		// NOT IMPLEMENTED YET
-
+		switchButtonsOnWorkerStop();
 	}
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
+		switchButtonsOnWorkerStart();
 		_backgroundWorker2->RunWorkerAsync();
 	}
 
@@ -137,23 +168,9 @@ namespace AutoMixUI {
 			return;
 		}
 
-		_statusStrip->Items->Add(path);
+		_toolStripCurrentDir->Text = path;
+		switchButtonsOnWorkerStart();
 		_backgroundWorker1->RunWorkerAsync(path);
-	}
-
-	System::Void MainForm::update(TrackCollection^ collection)
-	{
-		_musicListView->Items->Clear();
-
-		for each (auto track in collection)
-		{
-			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
-			lvitem->SubItems->Add(track->displayDuration());
-			lvitem->SubItems->Add(track->BPM.ToString());
-			lvitem->SubItems->Add(track->Key);
-
-			_musicListView->Items->Add(lvitem);
-		}
 	}
 
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
@@ -171,5 +188,53 @@ namespace AutoMixUI {
 		{
 			_presenter->exportTrackList(dialog->FileName);
 		}
+	}
+
+	System::Void MainForm::switchButtonsOnWorkerStart()
+	{
+		_cancelToolStripMenuItem->Enabled = true;
+
+		_outputButton->Enabled = false;
+		_imputButton->Enabled = false;
+		_sortButton->Enabled = false;
+		_openToolStripMenuItem->Enabled = false;
+		optionsToolStripMenuItem->Enabled = false;
+	}
+
+	System::Void MainForm::switchButtonsOnWorkerStop()
+	{
+		_cancelToolStripMenuItem->Enabled = false;
+
+		_outputButton->Enabled = true;
+		_imputButton->Enabled = true;
+		_sortButton->Enabled = true;
+		_openToolStripMenuItem->Enabled = true;
+		optionsToolStripMenuItem->Enabled = true;
+	}
+
+	System::Void MainForm::showCancelDialog()
+	{
+		String^ msg = "Operation was canceled";
+		String^ caption = "Cancel";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Stop);
+	}
+
+	System::Void MainForm::showErrorDialog(String^ errorMessage)
+	{
+		String^ msg = String::Format("An error occurred: {0}", errorMessage);
+		String^ caption = "Error";
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+
+	System::Void MainForm::exitApplication()
+	{
+		_backgroundWorker1->CancelAsync();
+		_backgroundWorker2->CancelAsync();
+		try
+		{
+			System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
+		}
+		catch (...) {}
+		Application::Exit();
 	}
 }

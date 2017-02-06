@@ -66,4 +66,11 @@ namespace AutoMixUI {
 	{
 		_trackCollection->exportToMP3(destinationFile);
 	}
+
+	void Presenter::clearDataBase() 
+	{
+		DataBase^ db = gcnew DataBase();
+		db->clear();
+	}
+
 }
