@@ -19,6 +19,7 @@ build:
   script:
     - echo building...
     - 'devenv "%AutoMix%" /Build "%DebugMode%"'
+  dependencies: []
   except:
     - tags
   artifacts:
@@ -33,6 +34,8 @@ test:
     - echo testing...
     - 'mkdir "Automix Software\\TestResults"'
     - 'mstest.exe /testcontainer:"%TestsLib%" /resultsfile:"%TestsFile%"'
+  dependencies:
+    - build
   except:
     - tags
 
@@ -47,6 +50,7 @@ deploy:
     - 'attrib +a *.* /s'
     - 'del *Test*'
     - 'cd ..\\..'
+  dependencies: []
   artifacts:
     paths:
       - Automix Software/Release
