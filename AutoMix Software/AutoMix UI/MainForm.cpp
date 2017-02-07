@@ -35,6 +35,7 @@ namespace AutoMixUI {
 	{
 		_backgroundWorker1->CancelAsync();
 		_backgroundWorker2->CancelAsync();
+		_backgroundWorker3->CancelAsync();
 	}
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
@@ -118,9 +119,8 @@ namespace AutoMixUI {
 		else
 		{
 			_presenter->notify((TrackCollection^)e->Result);
-			// RemoveProgressBar
 		}
-		switchButtonsOnWorkerStop();
+		onWorkerStop();
 	}
 
 	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -151,24 +151,37 @@ namespace AutoMixUI {
 		else
 		{
 			_presenter->notify((TrackCollection^)e->Result);
-			// RemoveProgressBar
 		}
-		switchButtonsOnWorkerStop();
+		onWorkerStop();
 	}
 
 	System::Void MainForm::_backgroundWorker3_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
-		return System::Void();
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		System::String^ fileName = (System::String^) e->Argument;
+		_presenter->exportTrackList(bw, fileName);
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
 	}
 
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
-		return System::Void();
+		if (e->Cancelled)
+		{
+			showCancelDialog();
+		}
+		else if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+		onWorkerStop();
 	}
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
-		switchButtonsOnWorkerStart();
+		onWorkerStart();
 		_backgroundWorker2->RunWorkerAsync();
 	}
 
@@ -189,7 +202,7 @@ namespace AutoMixUI {
 		}
 
 		_toolStripCurrentDir->Text = path;
-		switchButtonsOnWorkerStart();
+		onWorkerStart();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
@@ -206,11 +219,12 @@ namespace AutoMixUI {
 
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
-			_presenter->exportTrackList(dialog->FileName);
+			onWorkerStart();
+			_backgroundWorker3->RunWorkerAsync(dialog->FileName);
 		}
 	}
 
-	System::Void MainForm::switchButtonsOnWorkerStart()
+	System::Void MainForm::onWorkerStart()
 	{
 		_cancelToolStripMenuItem->Enabled = true;
 
@@ -223,7 +237,7 @@ namespace AutoMixUI {
 		_toolStripProgressBar->Visible = true;
 	}
 
-	System::Void MainForm::switchButtonsOnWorkerStop()
+	System::Void MainForm::onWorkerStop()
 	{
 		_cancelToolStripMenuItem->Enabled = false;
 

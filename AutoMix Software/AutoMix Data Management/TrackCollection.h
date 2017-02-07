@@ -30,7 +30,7 @@ namespace AutoMixDataManagement {
 
 		void purge();
 
-		void exportToMP3(System::String^ outputFile);
+		void exportToMP3(System::ComponentModel::BackgroundWorker^, System::String^ outputFile);
 	};
 
 }

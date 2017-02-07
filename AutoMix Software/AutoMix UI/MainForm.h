@@ -409,8 +409,8 @@ namespace AutoMixUI {
 		System::Void update(TrackCollection^) override;
 
 	private:
-		System::Void switchButtonsOnWorkerStart();
-		System::Void switchButtonsOnWorkerStop();
+		System::Void onWorkerStart();
+		System::Void onWorkerStop();
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
 		System::Void exitApplication();

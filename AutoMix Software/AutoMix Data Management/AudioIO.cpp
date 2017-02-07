@@ -22,7 +22,7 @@ namespace AutoMixDataManagement {
 	{
 	}
 
-	void AudioIO::Mp3Export(TrackCollection ^ trackCollection, String ^ outputFile)
+	void AudioIO::Mp3Export( TrackCollection ^ trackCollection, System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
 	{
 		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStrem = gcnew FileStream(outputFile, FileMode::Create);
@@ -30,6 +30,10 @@ namespace AutoMixDataManagement {
 		for each (auto track in trackCollection)
 		{
 
+			if (bw->CancellationPending)
+			{
+				break;
+			}
 			Mp3FileReader^ reader = gcnew Mp3FileReader(track->Path);
 
 			if ((outputStrem->Position == 0) && (reader->Id3v2Tag != nullptr))
@@ -44,6 +48,7 @@ namespace AutoMixDataManagement {
 				outputStrem->Write(frame->RawData, 0, frame->RawData->Length);
 			}
 		}
+		outputStrem->Close();
 	}
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{

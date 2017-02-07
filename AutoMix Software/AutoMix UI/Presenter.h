@@ -20,7 +20,7 @@ namespace AutoMixUI {
 		void notify(TrackCollection^);
 
 		TrackCollection^ loadTracks(System::ComponentModel::BackgroundWorker^, array<System::String^>^);
-		void exportTrackList(System::String^);
+		void exportTrackList(System::ComponentModel::BackgroundWorker^, System::String^);
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
 
