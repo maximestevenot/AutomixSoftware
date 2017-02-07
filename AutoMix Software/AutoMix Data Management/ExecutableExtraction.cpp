@@ -32,7 +32,7 @@ namespace AutoMixDataManagement {
 
 	void ExecutableExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, System::Threading::CancellationTokenSource^ cts, Track ^ track)
 	{
-		_startInfo->Arguments = "\"" + track->Path + "\" \"" + track->Name + ".json\" \"" + _tempDirectory->FullName + "\\profile.yaml\"";
+		_startInfo->Arguments = "\"" + track->Path + "\" \"" + track->Id + ".json\" \"" + _tempDirectory->FullName + "\\profile.yaml\"";
 		Process^ extractor = gcnew Process;
 		extractor->StartInfo = _startInfo;
 		extractor->Start();
@@ -51,7 +51,7 @@ namespace AutoMixDataManagement {
 
 			try
 			{
-				StreamReader^ file = File::OpenText(_tempDirectory->FullName + "\\" + track->Name + ".json");
+				StreamReader^ file = File::OpenText(_tempDirectory->FullName + "\\" + track->Id + ".json");
 				JsonTextReader^ reader = gcnew JsonTextReader(file);
 				Linq::JObject^ obj = (Linq::JObject^)Linq::JToken::ReadFrom(reader);
 

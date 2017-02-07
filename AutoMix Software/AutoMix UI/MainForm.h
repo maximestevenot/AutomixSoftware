@@ -200,13 +200,13 @@ namespace AutoMixUI {
 			// 
 			this->dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBToolStripMenuItem });
 			this->dataBaseToolStripMenuItem->Name = L"dataBaseToolStripMenuItem";
-			this->dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
 			this->dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBToolStripMenuItem
 			// 
 			this->_clearDBToolStripMenuItem->Name = L"_clearDBToolStripMenuItem";
-			this->_clearDBToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_clearDBToolStripMenuItem->Size = System::Drawing::Size(101, 22);
 			this->_clearDBToolStripMenuItem->Text = L"&Clear";
 			this->_clearDBToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
 			// 
@@ -350,8 +350,10 @@ namespace AutoMixUI {
 			// 
 			// _backgroundWorker1
 			// 
+			this->_backgroundWorker1->WorkerReportsProgress = true;
 			this->_backgroundWorker1->WorkerSupportsCancellation = true;
 			this->_backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
+			this->_backgroundWorker1->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker1_ProgressChanged);
 			this->_backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
 			// 
 			// _backgroundWorker2
@@ -421,6 +423,7 @@ namespace AutoMixUI {
 	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
 	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _clearDBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void _backgroundWorker1_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+};
 
 }
