@@ -84,6 +84,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  optionsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  dataBaseToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _clearDBToolStripMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker3;
 
 
 	private:
@@ -127,6 +128,7 @@ namespace AutoMixUI {
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
 			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker3 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->menuStrip1->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -359,9 +361,17 @@ namespace AutoMixUI {
 			// 
 			// _backgroundWorker2
 			// 
+			this->_backgroundWorker2->WorkerReportsProgress = true;
 			this->_backgroundWorker2->WorkerSupportsCancellation = true;
 			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
+			this->_backgroundWorker2->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
 			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
+			// 
+			// _backgroundWorker3
+			// 
+			this->_backgroundWorker3->WorkerSupportsCancellation = true;
+			this->_backgroundWorker3->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
+			this->_backgroundWorker3->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -425,6 +435,9 @@ namespace AutoMixUI {
 	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _clearDBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _backgroundWorker1_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker2_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker3_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker3_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
 };
 
 }

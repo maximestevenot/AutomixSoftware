@@ -32,6 +32,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 			mutatePopulation(pop);
 			sortPopulation(pop, 0, pop->Count - 1);
 			pop = pop->GetRange(0, POPULATION_SIZE);
+			bw->ReportProgress((int)100*k / NUMBER_OF_ITERATION);
 		}
 		return pop[0];
 	}
@@ -61,7 +62,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 
 		if (haveSameScale)
 		{
-			int distance_abs = System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
+			int distance_abs = (int) System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
 			if (distance_abs > 6) {
 				distance_abs = 12 - distance_abs;
 			}

@@ -82,11 +82,6 @@ namespace AutoMixUI {
 		_presenter->clearDataBase();
 	}
 
-	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
-	{
-		_toolStripProgressBar->Value += e->ProgressPercentage;
-	}
-
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
 	{
 		// NOT IMPLEMENTED YET
@@ -105,6 +100,11 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value += e->ProgressPercentage;
+	}
+
 	System::Void MainForm::_backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
@@ -120,8 +120,6 @@ namespace AutoMixUI {
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
-		_toolStripProgressBar->Visible = false;
-		_toolStripProgressBar->Value = 0;
 		switchButtonsOnWorkerStop();
 	}
 
@@ -133,6 +131,11 @@ namespace AutoMixUI {
 		{
 			e->Cancel = true;
 		}
+	}
+
+	System::Void MainForm::_backgroundWorker2_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
 	System::Void MainForm::_backgroundWorker2_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
@@ -151,6 +154,16 @@ namespace AutoMixUI {
 			// RemoveProgressBar
 		}
 		switchButtonsOnWorkerStop();
+	}
+
+	System::Void MainForm::_backgroundWorker3_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		return System::Void();
+	}
+
+	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		return System::Void();
 	}
 
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
@@ -176,8 +189,6 @@ namespace AutoMixUI {
 		}
 
 		_toolStripCurrentDir->Text = path;
-		_toolStripProgressBar->Value = 0;
-		_toolStripProgressBar->Visible = true;
 		switchButtonsOnWorkerStart();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}
@@ -208,6 +219,8 @@ namespace AutoMixUI {
 		_sortButton->Enabled = false;
 		_openToolStripMenuItem->Enabled = false;
 		optionsToolStripMenuItem->Enabled = false;
+		_toolStripProgressBar->Value = 0;
+		_toolStripProgressBar->Visible = true;
 	}
 
 	System::Void MainForm::switchButtonsOnWorkerStop()
@@ -219,6 +232,8 @@ namespace AutoMixUI {
 		_sortButton->Enabled = true;
 		_openToolStripMenuItem->Enabled = true;
 		optionsToolStripMenuItem->Enabled = true;
+		_toolStripProgressBar->Visible = false;
+		_toolStripProgressBar->Value = 0;
 	}
 
 	System::Void MainForm::showCancelDialog()
