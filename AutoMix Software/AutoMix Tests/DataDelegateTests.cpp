@@ -31,7 +31,7 @@ namespace DataManagementTests
 			System::IO::Directory::Delete(temppath, true);
 			tempDirectory = Directory::CreateDirectory(temppath);
 		}
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(gcnew ComponentModel::BackgroundWorker(), gcnew CancellationTokenSource(), tempDirectory);
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(gcnew ComponentModel::BackgroundWorker(), 1, gcnew CancellationTokenSource(), tempDirectory);
 
 		Track^ myTrack = gcnew Track("test.mp3");
 		myTrack->BPM = 128;

@@ -84,7 +84,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
-		return System::Void();
+		_toolStripProgressBar->Value += e->ProgressPercentage;
 	}
 
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
@@ -120,6 +120,8 @@ namespace AutoMixUI {
 			_presenter->notify((TrackCollection^)e->Result);
 			// RemoveProgressBar
 		}
+		_toolStripProgressBar->Visible = false;
+		_toolStripProgressBar->Value = 0;
 		switchButtonsOnWorkerStop();
 	}
 
@@ -174,6 +176,8 @@ namespace AutoMixUI {
 		}
 
 		_toolStripCurrentDir->Text = path;
+		_toolStripProgressBar->Value = 0;
+		_toolStripProgressBar->Visible = true;
 		switchButtonsOnWorkerStart();
 		_backgroundWorker1->RunWorkerAsync(path);
 	}

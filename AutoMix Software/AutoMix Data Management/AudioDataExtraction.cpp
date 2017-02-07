@@ -29,7 +29,7 @@ namespace AutoMixDataManagement {
 	void AudioDataExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
 		CancellationTokenSource^ cts = gcnew CancellationTokenSource();
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(bw, cts, _tempDirectory);
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(bw, trackCollection->Count,cts, _tempDirectory);
 		ParallelOptions^ po = gcnew ParallelOptions();
 		po->CancellationToken = cts->Token;
 		po->MaxDegreeOfParallelism = (int) Math::Ceiling(System::Environment::ProcessorCount / 2.);

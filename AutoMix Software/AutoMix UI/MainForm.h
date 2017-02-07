@@ -36,6 +36,7 @@ namespace AutoMixUI {
 			_cancelToolStripMenuItem->Enabled = false;
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
+			_toolStripProgressBar->Visible = false;
 		}
 
 	protected:

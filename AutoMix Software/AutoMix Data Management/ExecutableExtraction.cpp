@@ -30,7 +30,7 @@ namespace AutoMixDataManagement {
 		_startInfo->CreateNoWindow = true;
 	}
 
-	void ExecutableExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, System::Threading::CancellationTokenSource^ cts, Track ^ track)
+	void ExecutableExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, Track ^ track)
 	{
 		_startInfo->Arguments = "\"" + track->Path + "\" \"" + track->Id + ".json\" \"" + _tempDirectory->FullName + "\\profile.yaml\"";
 		Process^ extractor = gcnew Process;
@@ -76,6 +76,7 @@ namespace AutoMixDataManagement {
 				e->Message;
 			}
 		}
+		bw->ReportProgress((int)100 / nbTracks);
 	}
 
 }
