@@ -82,6 +82,11 @@ namespace AutoMixUI {
 		_presenter->clearDataBase();
 	}
 
+	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		return System::Void();
+	}
+
 	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
 	{
 		// NOT IMPLEMENTED YET
