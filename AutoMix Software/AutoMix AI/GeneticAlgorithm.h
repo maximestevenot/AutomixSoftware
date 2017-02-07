@@ -19,8 +19,11 @@ namespace AutoMixAI
 	{
 	public :
 		static int NUMBER_OF_ITERATION = 200;
-		static int POPULATION_SIZE = 150;
-		static int MUTATION_PROBABILITY = 70; // Probabilty of mutation out of 100
+		static int POPULATION_SIZE = 200;
+		static int MUTATION_PROBABILITY = 80; // Probabilty of mutation out of 100
+		static int BPM_COEFFICIENT = 1200;
+		static int KEY_NUMBER_COEFFICIENT = 15;
+		static int KEY_TONALITY_COEFFICIENT = 300;
 
 		TrackCollection^ sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^, TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
