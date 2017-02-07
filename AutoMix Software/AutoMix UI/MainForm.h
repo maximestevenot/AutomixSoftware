@@ -301,6 +301,7 @@ namespace AutoMixUI {
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
 			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_imputButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_imputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_imputButton->Location = System::Drawing::Point(70, 114);
@@ -316,6 +317,7 @@ namespace AutoMixUI {
 			this->_outputButton->AccessibleName = L"_outputButton";
 			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_outputButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_outputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_outputButton->Location = System::Drawing::Point(1054, 67);
@@ -342,6 +344,7 @@ namespace AutoMixUI {
 			this->_sortButton->AccessibleName = L"_sortButton";
 			this->_sortButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_sortButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_sortButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_sortButton->Location = System::Drawing::Point(1054, 174);
