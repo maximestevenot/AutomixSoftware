@@ -52,7 +52,7 @@ namespace AutoMixUI {
 			if (extension->Contains("mp3"))  //TODO make it better
 			{
 				Track^ track = gcnew Track(filePath);
-				_trackCollection->Add(track);
+				_trackCollection->safeAdd(track);
 			}
 		}
 
