@@ -18,7 +18,8 @@ namespace AutoMixDataManagement {
 	public ref class TrackCollection : public track_collection
 	{
 	public:
-		Track^ searchByName(System::String^ name);
+		void safeAdd(Track^);
+		bool search(Track^ track);
 
 		void sortByName();
 		void sortByDescendingName();
