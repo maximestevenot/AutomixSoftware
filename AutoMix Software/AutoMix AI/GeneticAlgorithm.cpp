@@ -54,18 +54,18 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		}
 		catch (...)
 		{
-			return Int32::MaxValue / 2000;
+			return -1;
 		}
 
-		double distance = System::Math::Abs((track2BPM - track1BPM)) * 1000; //BPM 10 fois plus important que clé
+		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPM_COEFFICIENT;
 
 		if (haveSameScale)
 		{
-			distance += System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
+			distance += System::Math::Abs(digitalTrack1Key - digitalTrack2Key) * KEY_NUMBER_COEFFICIENT;
 		}
 		else
 		{
-			distance += 100;
+			distance += KEY_TONALITY_COEFFICIENT;
 		}
 		return (int)distance;
 	}
