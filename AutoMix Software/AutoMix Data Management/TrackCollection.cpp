@@ -14,17 +14,25 @@ namespace AutoMixDataManagement {
 
 	using namespace System;
 
-	Track^ TrackCollection::searchByName(String^ name)
+	void TrackCollection::safeAdd(Track^ track)
 	{
-		for each (auto t in this)
+		if (!search(track))
 		{
-			if (name->Equals(t->Name))
+			Add(track);
+		}
+	}
+
+	bool TrackCollection::search(Track^ track)
+	{
+		for each (Track^ t in this)
+		{
+			if (track->Path->Equals(t->Path))
 			{
-				return t;
+				return true;
 			}
 		}
 
-		return nullptr;
+		return false;
 	}
 
 	void TrackCollection::sortByName()
