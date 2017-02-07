@@ -17,7 +17,7 @@ namespace AutoMixUI {
 	public:
 		Presenter();
 		Presenter(ViewWithTrackCollection^);
-		void notify(TrackCollection^);
+		void notify();
 
 		TrackCollection^ loadTracks(System::ComponentModel::BackgroundWorker^, array<System::String^>^);
 		void exportTrackList(System::ComponentModel::BackgroundWorker^, System::String^);

@@ -25,7 +25,7 @@ namespace AutoMixUI {
 		_views->Add(view);
 	}
 
-	void Presenter::notify(TrackCollection^ collection)
+	void Presenter::notify()
 	{
 		for each (auto view in _views)
 		{
@@ -56,9 +56,8 @@ namespace AutoMixUI {
 			}
 		}
 
-		_dataExtractionEngine->extractData(bw, _trackCollection);
-
 		_trackCollection->sortByName();
+		_dataExtractionEngine->extractData(bw, _trackCollection);
 		return _trackCollection;
 	}
 
