@@ -61,7 +61,11 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 
 		if (haveSameScale)
 		{
-			distance += System::Math::Abs(digitalTrack1Key - digitalTrack2Key) * KEY_NUMBER_COEFFICIENT;
+			int distance_abs = System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
+			if (distance_abs > 6) {
+				distance_abs = 12 - distance_abs;
+			}
+			distance += distance_abs * KEY_NUMBER_COEFFICIENT;
 		}
 		else
 		{
