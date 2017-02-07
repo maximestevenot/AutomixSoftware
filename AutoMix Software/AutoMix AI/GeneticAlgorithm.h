@@ -23,7 +23,7 @@ namespace AutoMixAI
 		static int MUTATION_PROBABILITY = 80; // Probabilty of mutation out of 100
 		static int BPM_COEFFICIENT = 1200;
 		static int KEY_NUMBER_COEFFICIENT = 30;
-		static int KEY_TONALITY_COEFFICIENT = 750;
+		static int KEY_TONALITY_COEFFICIENT = 850;
 
 		TrackCollection^ sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^, TrackCollection^);
 		int computeTracksDistance(Track^, Track^);
