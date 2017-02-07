@@ -93,6 +93,7 @@ namespace AutoMixUI {
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ path = (System::String^) e->Argument;
+		_presenter->notify();
 		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
 
 		if (bw->CancellationPending)
@@ -104,6 +105,7 @@ namespace AutoMixUI {
 	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
 		_toolStripProgressBar->Value += e->ProgressPercentage;
+		_presenter->notify();
 	}
 
 	System::Void MainForm::_backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
@@ -118,7 +120,7 @@ namespace AutoMixUI {
 		}
 		else
 		{
-			_presenter->notify((TrackCollection^)e->Result);
+			_presenter->notify();
 		}
 		onWorkerStop();
 	}
@@ -150,7 +152,7 @@ namespace AutoMixUI {
 		}
 		else
 		{
-			_presenter->notify((TrackCollection^)e->Result);
+			_presenter->notify();
 		}
 		onWorkerStop();
 	}
