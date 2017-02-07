@@ -26,6 +26,7 @@ namespace AutoMixDataManagement {
 	{
 		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStrem = gcnew FileStream(outputFile, FileMode::Create);
+		int cpt = 1;
 
 		for each (auto track in trackCollection)
 		{
@@ -47,6 +48,8 @@ namespace AutoMixDataManagement {
 			{
 				outputStrem->Write(frame->RawData, 0, frame->RawData->Length);
 			}
+
+			bw->ReportProgress((int)100*cpt++ / trackCollection->Count);
 		}
 		outputStrem->Close();
 	}

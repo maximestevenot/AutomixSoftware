@@ -369,8 +369,10 @@ namespace AutoMixUI {
 			// 
 			// _backgroundWorker3
 			// 
+			this->_backgroundWorker3->WorkerReportsProgress = true;
 			this->_backgroundWorker3->WorkerSupportsCancellation = true;
 			this->_backgroundWorker3->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
+			this->_backgroundWorker3->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
 			this->_backgroundWorker3->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
 			// 
 			// MainForm
@@ -438,6 +440,7 @@ namespace AutoMixUI {
 	private: System::Void _backgroundWorker2_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 	private: System::Void _backgroundWorker3_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void _backgroundWorker3_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _backgroundWorker3_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 };
 
 }

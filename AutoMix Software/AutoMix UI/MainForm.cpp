@@ -166,6 +166,11 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::_backgroundWorker3_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value = e->ProgressPercentage;
+	}
+
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
