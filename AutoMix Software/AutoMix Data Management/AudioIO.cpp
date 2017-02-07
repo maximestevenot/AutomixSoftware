@@ -49,7 +49,7 @@ namespace AutoMixDataManagement {
 				outputStrem->Write(frame->RawData, 0, frame->RawData->Length);
 			}
 
-			bw->ReportProgress((int)100*cpt++ / trackCollection->Count);
+			bw->ReportProgress((int)1000*cpt++ / trackCollection->Count);
 		}
 		outputStrem->Close();
 	}

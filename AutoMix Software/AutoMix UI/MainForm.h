@@ -244,6 +244,7 @@ namespace AutoMixUI {
 			// _toolStripProgressBar
 			// 
 			this->_toolStripProgressBar->Margin = System::Windows::Forms::Padding(3, 3, 1, 3);
+			this->_toolStripProgressBar->Maximum = 1000;
 			this->_toolStripProgressBar->Name = L"_toolStripProgressBar";
 			this->_toolStripProgressBar->Size = System::Drawing::Size(150, 16);
 			// 

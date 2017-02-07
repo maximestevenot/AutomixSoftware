@@ -32,7 +32,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 			mutatePopulation(pop);
 			sortPopulation(pop, 0, pop->Count - 1);
 			pop = pop->GetRange(0, POPULATION_SIZE);
-			bw->ReportProgress((int)100*k / NUMBER_OF_ITERATION);
+			bw->ReportProgress((int)1000*k / NUMBER_OF_ITERATION);
 		}
 		return pop[0];
 	}

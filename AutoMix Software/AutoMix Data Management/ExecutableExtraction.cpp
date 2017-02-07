@@ -76,7 +76,7 @@ namespace AutoMixDataManagement {
 				e->Message;
 			}
 		}
-		bw->ReportProgress((int)100 / nbTracks);
+		bw->ReportProgress((int)1000 / nbTracks);
 	}
 
 }
