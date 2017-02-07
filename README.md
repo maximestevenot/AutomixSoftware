@@ -2,6 +2,10 @@
 
 This project aims to create a virtual and intelligent DJ to help customers create their own mix so they can enjoy any music without interruption.
 
+## Development version
+
+[![build status](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/badges/develop/build.svg)](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/commits/develop)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.  
@@ -80,5 +84,3 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our coding style, 
 For AutoMix Software  
 Copyright (c) 2016-2017, ENSICAEN All rights reserved.  
 This project is licensed under Proprietary License - see the [LICENSE.md](LICENSE.md) file for details.
-
-[![build status](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/badges/develop/build.svg)](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/commits/develop)
