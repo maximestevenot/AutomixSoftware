@@ -11,12 +11,14 @@
 
 
 namespace AutoMixDataManagement {
-	DelegateAudioDataExtraction::DelegateAudioDataExtraction(System::ComponentModel::BackgroundWorker^ bw, System::Threading::CancellationTokenSource^ cts, System::IO::DirectoryInfo^ tempDirectory)
+	DelegateAudioDataExtraction::DelegateAudioDataExtraction(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, System::IO::DirectoryInfo^ tempDirectory)
 	{
 		_tempDirectory = tempDirectory;
 		_bw = bw;
 		_cts = cts;
+		_nbtracks = nbTracks;
 	}
+
 	void DelegateAudioDataExtraction::delegateExtraction(Track ^ track)
 	{
 		if (!_cts->IsCancellationRequested)
@@ -33,7 +35,7 @@ namespace AutoMixDataManagement {
 			}
 			if (!_bw->CancellationPending)
 			{
-				ex->extractData(_bw, _cts, track);
+				ex->extractData(_bw, _nbtracks, _cts, track);
 			}
 			else
 			{

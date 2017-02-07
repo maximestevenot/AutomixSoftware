@@ -62,9 +62,9 @@ namespace AutoMixUI {
 		return _trackCollection;
 	}
 
-	void Presenter::exportTrackList(String^ destinationFile)
+	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
-		_trackCollection->exportToMP3(destinationFile);
+		_trackCollection->exportToMP3(bw, destinationFile);
 	}
 
 	void Presenter::clearDataBase() 

@@ -14,7 +14,7 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		AudioIO();
-		static void Mp3Export(TrackCollection^ trackCollection, System::String^ outputFile);
+		static void Mp3Export( TrackCollection^ trackCollection, System::ComponentModel::BackgroundWorker^ bw, System::String^ outputFile);
 		static void TextExport(TrackCollection^ trackCollection, System::String^ outputFile);
 
 		static void Mp3ToWav(System::String^ inputFile, System::String^ outputFile);

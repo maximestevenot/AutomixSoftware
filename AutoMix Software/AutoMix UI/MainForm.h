@@ -36,6 +36,7 @@ namespace AutoMixUI {
 			_cancelToolStripMenuItem->Enabled = false;
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
+			_toolStripProgressBar->Visible = false;
 		}
 
 	protected:
@@ -83,6 +84,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  optionsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  dataBaseToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _clearDBToolStripMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker3;
 
 
 	private:
@@ -126,6 +128,7 @@ namespace AutoMixUI {
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
 			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker3 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->menuStrip1->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -241,6 +244,7 @@ namespace AutoMixUI {
 			// _toolStripProgressBar
 			// 
 			this->_toolStripProgressBar->Margin = System::Windows::Forms::Padding(3, 3, 1, 3);
+			this->_toolStripProgressBar->Maximum = 1000;
 			this->_toolStripProgressBar->Name = L"_toolStripProgressBar";
 			this->_toolStripProgressBar->Size = System::Drawing::Size(150, 16);
 			// 
@@ -358,9 +362,19 @@ namespace AutoMixUI {
 			// 
 			// _backgroundWorker2
 			// 
+			this->_backgroundWorker2->WorkerReportsProgress = true;
 			this->_backgroundWorker2->WorkerSupportsCancellation = true;
 			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
+			this->_backgroundWorker2->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
 			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
+			// 
+			// _backgroundWorker3
+			// 
+			this->_backgroundWorker3->WorkerReportsProgress = true;
+			this->_backgroundWorker3->WorkerSupportsCancellation = true;
+			this->_backgroundWorker3->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
+			this->_backgroundWorker3->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
+			this->_backgroundWorker3->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -398,8 +412,8 @@ namespace AutoMixUI {
 		System::Void update(TrackCollection^) override;
 
 	private:
-		System::Void switchButtonsOnWorkerStart();
-		System::Void switchButtonsOnWorkerStop();
+		System::Void onWorkerStart();
+		System::Void onWorkerStop();
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
 		System::Void exitApplication();
@@ -424,6 +438,10 @@ namespace AutoMixUI {
 	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _clearDBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _backgroundWorker1_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker2_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker3_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker3_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _backgroundWorker3_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 };
 
 }

@@ -79,9 +79,9 @@ namespace AutoMixDataManagement {
 		}
 	}
 
-	void TrackCollection::exportToMP3(String ^ outputFile)
+	void TrackCollection::exportToMP3(System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
 	{
-		AudioIO::Mp3Export(this, outputFile);
+		AudioIO::Mp3Export(this, bw, outputFile);
 	}
 
 }
