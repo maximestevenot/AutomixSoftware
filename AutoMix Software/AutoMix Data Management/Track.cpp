@@ -10,6 +10,7 @@
 #include "Track.h"
 #include "Utils.h"
 
+
 namespace AutoMixDataManagement {
 
 	using namespace System;
@@ -19,6 +20,7 @@ namespace AutoMixDataManagement {
 		Duration = 0;
 		BPM = 0;
 		Key = "";
+		_id = TRACKS_COUNT++;
 	}
 
 	Track::Track(String^ path) : Track()
@@ -35,6 +37,11 @@ namespace AutoMixDataManagement {
 	String^ Track::Path::get()
 	{
 		return _path;
+	}
+
+	unsigned int Track::Id::get()
+	{
+		return _id;
 	}
 
 	String^ Track::displayDuration()

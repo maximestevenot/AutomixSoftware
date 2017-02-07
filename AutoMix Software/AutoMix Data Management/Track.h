@@ -23,11 +23,14 @@ namespace AutoMixDataManagement {
 
 		property System::String^ Name { System::String^ get(); }
 		property System::String^ Path { System::String^ get(); }
+		property unsigned int Id { unsigned int get(); }
 
 		System::String^ displayDuration();
 
 	private:
+		static unsigned int TRACKS_COUNT = 0;
 		System::String^ _name;
 		System::String^ _path;
+		unsigned int _id;
 	};
 }
