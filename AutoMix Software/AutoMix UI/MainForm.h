@@ -419,6 +419,7 @@ namespace AutoMixUI {
 		System::Void onWorkerStop();
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
+		bool showExitDialog();
 		System::Void exitApplication();
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}

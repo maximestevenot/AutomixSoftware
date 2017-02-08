@@ -40,12 +40,29 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		exitApplication();
+		if (showExitDialog())
+		{
+			exitApplication();
+		}
 	}
 
 	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
 	{
-		exitApplication();
+		if (e->CloseReason == CloseReason::UserClosing)
+		{
+			if (showExitDialog())
+			{
+				exitApplication();
+			}
+			else
+			{
+				e->Cancel = true;
+			}
+		}
+		else
+		{
+			exitApplication();
+		}
 	}
 
 	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
@@ -271,10 +288,18 @@ namespace AutoMixUI {
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
+	bool MainForm::showExitDialog()
+	{
+		String^ msg = "Are you sure you want to quit ?";
+		String^ caption = "Exit";
+		return MessageBox::Show(msg, caption, MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes;
+	}
+
 	System::Void MainForm::exitApplication()
 	{
 		_backgroundWorker1->CancelAsync();
 		_backgroundWorker2->CancelAsync();
+		_backgroundWorker3->CancelAsync();
 		try
 		{
 			System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
