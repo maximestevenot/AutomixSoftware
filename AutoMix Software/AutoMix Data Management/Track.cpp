@@ -1,59 +1,59 @@
+// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
+// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
+// 
+// This file is part of AutoMix Software.
+// 
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+// You should have received a copy of the License along with this program.
+
 #include "stdafx.h"
 #include "Track.h"
 #include "Utils.h"
 
+
 namespace AutoMixDataManagement {
 
 	using namespace System;
-	using namespace AutomixDataManagement;
 
 	Track::Track()
 	{
-		_data = gcnew Data();
+		Duration = 0;
+		BPM = 0;
+		Key = "";
+		_id = TRACKS_COUNT++;
 	}
 
 	Track::Track(String^ path) : Track()
 	{
 		_path = path;
-		_name = nameFromPath(path);
+		_name = Utils::nameFromPath(path);
 	}
 
-	Track::~Track()
-	{
-	}
-
-	String^ Track::getName()
+	String^ Track::Name::get() 
 	{
 		return _name;
 	}
 
+	String^ Track::Path::get()
+	{
+		return _path;
+	}
+
+	unsigned int Track::Id::get()
+	{
+		return _id;
+	}
+
 	String^ Track::displayDuration()
 	{
-		TimeSpan ts = TimeSpan::FromMilliseconds(_data->duration);
+		TimeSpan ts = TimeSpan::FromMilliseconds(Duration);
 		String^ stringDuration = ts.ToString();
 		int dotIndex = stringDuration->LastIndexOf(".");
 
-		return stringDuration->Substring(0, dotIndex);
+		if (dotIndex > 0)
+		{
+			stringDuration = stringDuration->Substring(0, dotIndex);
+		}
+		return stringDuration;
 	}
-
-	unsigned int Track::getBPM()
-	{
-		return _data->bpm;
-	}
-
-	unsigned int Track::getDuration()
-	{
-		return _data->duration;
-	}
-
-	void Track::setBPM(unsigned int value)
-	{
-		_data->bpm = value;
-	}
-
-	void Track::setDuration(unsigned int value)
-	{
-		_data->duration = value;
-	}
-
 }

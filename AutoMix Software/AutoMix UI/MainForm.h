@@ -1,4 +1,15 @@
+// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
+// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
+// 
+// This file is part of AutoMix Software.
+// 
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+// You should have received a copy of the License along with this program.
+
 #pragma once
+
+#include "ViewWithTrackCollection.h"
+#include "Presenter.h"
 
 namespace AutoMixUI {
 
@@ -14,14 +25,18 @@ namespace AutoMixUI {
 	/// <summary>
 	/// Summary for MainForm
 	/// </summary>
-	public ref class MainForm : public System::Windows::Forms::Form
+	public ref class MainForm : public System::Windows::Forms::Form, public ViewWithTrackCollection
 	{
 	public:
 		MainForm(void)
 		{
 			InitializeComponent();
-			_trackCollection = gcnew TrackCollection();
-			_dataExtractionEngine = gcnew AudioDataExtractionProxy();
+			_presenter = gcnew Presenter(this);
+
+			_cancelToolStripMenuItem->Enabled = false;
+			_outputButton->Enabled = false;
+			_sortButton->Enabled = false;
+			_toolStripProgressBar->Visible = false;
 		}
 
 	protected:
@@ -37,9 +52,7 @@ namespace AutoMixUI {
 		}
 
 	private:
-		TrackCollection^ _trackCollection;
-		IAudioDataExtraction^ _dataExtractionEngine;
-		IAudioExportation^ _audioExportationEngine;
+		Presenter^ _presenter;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -50,23 +63,28 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutToolStripMenuItem;
 	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
-
 	private: System::Windows::Forms::StatusStrip^  _statusStrip;
-
 	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::ListView^  _musicListView;
 	private: System::Windows::Forms::ColumnHeader^  collectionDuration;
 	private: System::Windows::Forms::ColumnHeader^  collectionBPM;
-
-
-
-
 	private: System::Windows::Forms::ColumnHeader^  collectionName;
-
-
 	private: System::Windows::Forms::Button^  _imputButton;
 	private: System::Windows::Forms::Button^  _outputButton;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::ColumnHeader^  collectionKey;
+	private: System::Windows::Forms::Button^  _sortButton;
+	private: System::Windows::Forms::ToolStripMenuItem^  _cancelToolStripMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker1;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker2;
+	private: System::Windows::Forms::ToolStripProgressBar^  _toolStripProgressBar;
+
+
+	private: System::Windows::Forms::ToolStripStatusLabel^  _toolStripCurrentDir;
+	private: System::Windows::Forms::ToolStripMenuItem^  optionsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  dataBaseToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  _clearDBToolStripMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker3;
 
 
 	private:
@@ -86,21 +104,33 @@ namespace AutoMixUI {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->_fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_openToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_cancelToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_quitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_clearDBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_inputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
+			this->_toolStripProgressBar = (gcnew System::Windows::Forms::ToolStripProgressBar());
+			this->_toolStripCurrentDir = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->_outputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->_musicListView = (gcnew System::Windows::Forms::ListView());
 			this->collectionName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionDuration = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionBPM = (gcnew System::Windows::Forms::ColumnHeader());
+			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->_imputButton = (gcnew System::Windows::Forms::Button());
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->_sortButton = (gcnew System::Windows::Forms::Button());
+			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_backgroundWorker3 = (gcnew System::ComponentModel::BackgroundWorker());
 			this->menuStrip1->SuspendLayout();
+			this->_statusStrip->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -108,9 +138,9 @@ namespace AutoMixUI {
 			// 
 			this->menuStrip1->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->_fileToolStripMenuItem,
-					this->_helpToolStripMenuItem
+					this->optionsToolStripMenuItem, this->_helpToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -121,9 +151,9 @@ namespace AutoMixUI {
 			// 
 			// _fileToolStripMenuItem
 			// 
-			this->_fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->_fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->_openToolStripMenuItem,
-					this->toolStripSeparator, this->_quitToolStripMenuItem
+					this->_cancelToolStripMenuItem, this->toolStripSeparator, this->_quitToolStripMenuItem
 			});
 			this->_fileToolStripMenuItem->ForeColor = System::Drawing::SystemColors::ControlText;
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
@@ -137,21 +167,51 @@ namespace AutoMixUI {
 			this->_openToolStripMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_openToolStripMenuItem->Name = L"_openToolStripMenuItem";
 			this->_openToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_openToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_openToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_openToolStripMenuItem->Text = L"&Open";
 			this->_openToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
+			// 
+			// _cancelToolStripMenuItem
+			// 
+			this->_cancelToolStripMenuItem->Name = L"_cancelToolStripMenuItem";
+			this->_cancelToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
+			this->_cancelToolStripMenuItem->Size = System::Drawing::Size(230, 22);
+			this->_cancelToolStripMenuItem->Text = L"&Cancel All Operations";
+			this->_cancelToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(153, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(227, 6);
 			// 
 			// _quitToolStripMenuItem
 			// 
 			this->_quitToolStripMenuItem->Name = L"_quitToolStripMenuItem";
-			this->_quitToolStripMenuItem->Size = System::Drawing::Size(156, 26);
+			this->_quitToolStripMenuItem->Size = System::Drawing::Size(230, 22);
 			this->_quitToolStripMenuItem->Text = L"&Quit";
 			this->_quitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
+			// 
+			// optionsToolStripMenuItem
+			// 
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->dataBaseToolStripMenuItem });
+			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
+			this->optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
+			this->optionsToolStripMenuItem->Text = L"&Options";
+			this->optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
+			// 
+			// dataBaseToolStripMenuItem
+			// 
+			this->dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBToolStripMenuItem });
+			this->dataBaseToolStripMenuItem->Name = L"dataBaseToolStripMenuItem";
+			this->dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
+			this->dataBaseToolStripMenuItem->Text = L"&Database";
+			// 
+			// _clearDBToolStripMenuItem
+			// 
+			this->_clearDBToolStripMenuItem->Name = L"_clearDBToolStripMenuItem";
+			this->_clearDBToolStripMenuItem->Size = System::Drawing::Size(101, 22);
+			this->_clearDBToolStripMenuItem->Text = L"&Clear";
+			this->_clearDBToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
 			// 
 			// _helpToolStripMenuItem
 			// 
@@ -165,28 +225,45 @@ namespace AutoMixUI {
 			this->_aboutToolStripMenuItem->Name = L"_aboutToolStripMenuItem";
 			this->_aboutToolStripMenuItem->Size = System::Drawing::Size(107, 22);
 			this->_aboutToolStripMenuItem->Text = L"&About";
+			this->_aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_aboutToolStripMenuItem_Click);
 			// 
 			// _statusStrip
 			// 
 			this->_statusStrip->AccessibleName = L"_statusStrip";
 			this->_statusStrip->BackColor = System::Drawing::SystemColors::GrayText;
-			this->_statusStrip->Location = System::Drawing::Point(0, 659);
+			this->_statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_toolStripProgressBar,
+					this->_toolStripCurrentDir
+			});
+			this->_statusStrip->Location = System::Drawing::Point(0, 660);
 			this->_statusStrip->Name = L"_statusStrip";
 			this->_statusStrip->Size = System::Drawing::Size(1264, 22);
 			this->_statusStrip->TabIndex = 3;
 			this->_statusStrip->Text = L"statusStrip1";
 			// 
+			// _toolStripProgressBar
+			// 
+			this->_toolStripProgressBar->Margin = System::Windows::Forms::Padding(3, 3, 1, 3);
+			this->_toolStripProgressBar->Maximum = 1000;
+			this->_toolStripProgressBar->Name = L"_toolStripProgressBar";
+			this->_toolStripProgressBar->Size = System::Drawing::Size(150, 16);
+			// 
+			// _toolStripCurrentDir
+			// 
+			this->_toolStripCurrentDir->Margin = System::Windows::Forms::Padding(5, 3, 0, 2);
+			this->_toolStripCurrentDir->Name = L"_toolStripCurrentDir";
+			this->_toolStripCurrentDir->Size = System::Drawing::Size(0, 17);
+			// 
 			// _musicListView
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
-			this->_musicListView->AllowColumnReorder = true;
 			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(3) {
+			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
 				this->collectionName,
-					this->collectionDuration, this->collectionBPM
+					this->collectionDuration, this->collectionBPM, this->collectionKey
 			});
 			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -198,6 +275,7 @@ namespace AutoMixUI {
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
+			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::_musicListView_ColumnClick);
 			// 
 			// collectionName
 			// 
@@ -212,11 +290,18 @@ namespace AutoMixUI {
 			// collectionBPM
 			// 
 			this->collectionBPM->Text = L"BPM";
+			this->collectionBPM->Width = 72;
+			// 
+			// collectionKey
+			// 
+			this->collectionKey->Text = L"Key";
+			this->collectionKey->Width = 71;
 			// 
 			// _imputButton
 			// 
 			this->_imputButton->AccessibleName = L"_inputButton";
 			this->_imputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_imputButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_imputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_imputButton->Location = System::Drawing::Point(70, 114);
@@ -232,9 +317,10 @@ namespace AutoMixUI {
 			this->_outputButton->AccessibleName = L"_outputButton";
 			this->_outputButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->_outputButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_outputButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_outputButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_outputButton->Location = System::Drawing::Point(1050, 114);
+			this->_outputButton->Location = System::Drawing::Point(1054, 67);
 			this->_outputButton->Name = L"_outputButton";
 			this->_outputButton->Size = System::Drawing::Size(147, 78);
 			this->_outputButton->TabIndex = 6;
@@ -253,12 +339,53 @@ namespace AutoMixUI {
 			this->pictureBox1->TabIndex = 7;
 			this->pictureBox1->TabStop = false;
 			// 
+			// _sortButton
+			// 
+			this->_sortButton->AccessibleName = L"_sortButton";
+			this->_sortButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->_sortButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_sortButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_sortButton->Location = System::Drawing::Point(1054, 174);
+			this->_sortButton->Name = L"_sortButton";
+			this->_sortButton->Size = System::Drawing::Size(147, 78);
+			this->_sortButton->TabIndex = 8;
+			this->_sortButton->Text = L"Sort";
+			this->_sortButton->UseVisualStyleBackColor = false;
+			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::_sortButton_click);
+			// 
+			// _backgroundWorker1
+			// 
+			this->_backgroundWorker1->WorkerReportsProgress = true;
+			this->_backgroundWorker1->WorkerSupportsCancellation = true;
+			this->_backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
+			this->_backgroundWorker1->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker1_ProgressChanged);
+			this->_backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
+			// 
+			// _backgroundWorker2
+			// 
+			this->_backgroundWorker2->WorkerReportsProgress = true;
+			this->_backgroundWorker2->WorkerSupportsCancellation = true;
+			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
+			this->_backgroundWorker2->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
+			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
+			// 
+			// _backgroundWorker3
+			// 
+			this->_backgroundWorker3->WorkerReportsProgress = true;
+			this->_backgroundWorker3->WorkerSupportsCancellation = true;
+			this->_backgroundWorker3->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
+			this->_backgroundWorker3->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
+			this->_backgroundWorker3->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->ClientSize = System::Drawing::Size(1264, 681);
+			this->ClientSize = System::Drawing::Size(1264, 682);
+			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->_outputButton);
 			this->Controls->Add(this->_imputButton);
@@ -272,26 +399,53 @@ namespace AutoMixUI {
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix Software";
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
+			this->_statusStrip->ResumeLayout(false);
+			this->_statusStrip->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+	public:
+		System::Void update(TrackCollection^) override;
+
+	private:
+		System::Void onWorkerStart();
+		System::Void onWorkerStop();
+		System::Void showCancelDialog();
+		System::Void showErrorDialog(System::String^);
+		bool showExitDialog();
+		System::Void exitApplication();
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
-
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-
 	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
+	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+	private: System::Void _backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker1_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _cancelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _clearDBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _backgroundWorker1_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker2_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void _backgroundWorker3_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void _backgroundWorker3_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void _backgroundWorker3_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+};
 
 }

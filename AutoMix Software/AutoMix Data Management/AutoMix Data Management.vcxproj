@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F6A47A44-07AE-4456-BAFB-9C36364A1E0F}</ProjectGuid>
+    <ProjectGuid>{57876097-6068-4A0C-8140-38B16F184979}</ProjectGuid>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>AutoMixDataManagement</RootNamespace>
@@ -92,8 +92,12 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>"..\\..\\DataExctracionLibrary\\Debug\\DataExctracionLibrary.lib"</AdditionalDependencies>
+      <AdditionalDependencies />
     </Link>
+    <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(SolutionDir)\AutoMix UI"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -105,6 +109,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(SolutionDir)\AutoMix UI"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,6 +122,9 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -125,41 +135,73 @@
     <Link>
       <AdditionalDependencies />
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y  "$(ProjectDir)External\NAudio.Lame.1.0.4\content\libmp3lame.32.dll" "$(OutDir)" &amp; xcopy /y  "$(ProjectDir)External\Essentia\essentia_streaming_extractor_music.exe" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Reference Include="NAudio">
+      <HintPath>External\NAudio-1.8.0\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>External\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>External\Json.NET\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>External\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AudioExportationMock.h" />
-    <ClInclude Include="AudioExportationProxy.h" />
-    <ClInclude Include="AudioDataExtractionMock.h" />
+    <ClInclude Include="AudioDataExtraction.h" />
     <ClInclude Include="AudioDataExtractionProxy.h" />
+    <ClInclude Include="AudioIO.h" />
     <ClInclude Include="AutoMixDataManagement.h" />
-    <ClInclude Include="IAudioExportation.h" />
+    <ClInclude Include="DataBaseExtraction.h" />
+    <ClInclude Include="DelegateAudioDataExtraction.h" />
+    <ClInclude Include="ExecutableExtraction.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
+    <ClInclude Include="IExtraction.h" />
+    <ClInclude Include="DataBase.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="TrackCollection.h" />
+    <ClInclude Include="TracksComparison.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
-    <ClCompile Include="AudioExportationMock.cpp" />
-    <ClCompile Include="AudioDataExtractionMock.cpp" />
+    <ClCompile Include="AudioDataExtraction.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</CompileAsManaged>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="AudioDataExtractionProxy.cpp" />
-    <ClCompile Include="AudioExportationProxy.cpp" />
+    <ClCompile Include="AudioIO.cpp" />
     <ClCompile Include="AutoMixDataManagement.cpp" />
-    <ClCompile Include="Track.cpp" />
+    <ClCompile Include="DataBaseExtraction.cpp" />
+    <ClCompile Include="DelegateAudioDataExtraction.cpp" />
+    <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="ExecutableExtraction.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Track.cpp" />
     <ClCompile Include="TrackCollection.cpp" />
+    <ClCompile Include="TracksComparison.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Automix Wrapper\Automix Wrapper.vcxproj">
-      <Project>{64ebe816-9c56-4f07-a209-d27e403ec6c1}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
