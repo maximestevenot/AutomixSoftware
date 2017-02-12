@@ -17,6 +17,8 @@ namespace AutoMixDataManagement {
 		Track();
 		Track(System::String^ path);
 
+		static Track^ CopyFrom(Track^);
+
 		property unsigned int BPM;
 		property unsigned int Duration;
 		property System::String^ Key;

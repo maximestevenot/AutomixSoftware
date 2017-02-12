@@ -68,6 +68,16 @@ namespace AutoMixDataManagement {
 		Reverse();
 	}
 
+	TrackCollection ^ TrackCollection::CopyFrom(TrackCollection ^ old)
+	{
+		TrackCollection^ newCollection = gcnew TrackCollection();
+		for each (Track^ t in old)
+		{
+			newCollection->Add(Track::CopyFrom(t));
+		}
+		return newCollection;
+	}
+
 	void TrackCollection::purge()
 	{
 		for each (Track^ t in this)
@@ -76,6 +86,14 @@ namespace AutoMixDataManagement {
 			{
 				this->Remove(t);
 			}
+		}
+	}
+
+	void TrackCollection::concat(TrackCollection ^ orig)
+	{
+		for each (Track^ t in orig)
+		{
+			safeAdd(t);
 		}
 	}
 

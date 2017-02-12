@@ -43,6 +43,7 @@ namespace AutoMixUI {
 	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
+		TrackCollection^ collection = gcnew TrackCollection();
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
@@ -52,12 +53,16 @@ namespace AutoMixUI {
 			if (extension->Contains("mp3"))  //TODO make it better
 			{
 				Track^ track = gcnew Track(filePath);
-				_trackCollection->safeAdd(track);
+				collection->safeAdd(track);
 			}
 		}
 
+		collection->sortByName();
+		_dataExtractionEngine->extractData(bw, collection);
+		_trackCollection->concat(TrackCollection::CopyFrom(collection));
+		_trackCollection->purge();
 		_trackCollection->sortByName();
-		_dataExtractionEngine->extractData(bw, _trackCollection);
+		_trackCollection->purge();
 		return _trackCollection;
 	}
 
