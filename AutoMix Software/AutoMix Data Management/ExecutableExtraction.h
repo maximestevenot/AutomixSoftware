@@ -20,7 +20,9 @@ namespace AutoMixDataManagement {
 		void extractData(System::ComponentModel::BackgroundWorker^, int, System::Threading::CancellationTokenSource^, Track^ track) override;
 
 	private:
+		static unsigned int DoubleToUIntLists(double);
 		System::Diagnostics::ProcessStartInfo^ _startInfo;
+		System::Diagnostics::ProcessStartInfo^ _startInfoFade;
 		System::IO::DirectoryInfo^ _tempDirectory;
 	};
 

@@ -29,6 +29,14 @@ namespace AutoMixDataManagement {
 		_startInfo->WorkingDirectory = _tempDirectory->FullName;
 		_startInfo->WindowStyle = ProcessWindowStyle::Hidden;
 		_startInfo->CreateNoWindow = true;
+
+		extractorpath = Directory::GetCurrentDirectory() + "\\essentia_standard_fadedetection.exe";
+		_startInfoFade = gcnew ProcessStartInfo(extractorpath);
+		_startInfoFade->UseShellExecute = false;
+		_startInfoFade->WorkingDirectory = _tempDirectory->FullName;
+		_startInfoFade->WindowStyle = ProcessWindowStyle::Hidden;
+		_startInfoFade->CreateNoWindow = true;
+		_startInfoFade->RedirectStandardOutput = true;
 	}
 
 	void ExecutableExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, Track ^ track)
@@ -67,40 +75,114 @@ namespace AutoMixDataManagement {
 				track->Samplerate = Convert::ToUInt32((int)(obj["metadata"]["audio_properties"]["sample_rate"]));
 
 				Linq::JArray^ beats = Linq::JArray::FromObject(obj["rhythm"]["beats_position"]);
-				List<unsigned int>^ beatlist = beats->ToObject<List<unsigned int>^>();
+				List<double>^ doublebeatlist = beats->ToObject<List<double>^>();
+				List<unsigned int>^ beatlist = doublebeatlist->ConvertAll<unsigned int>(gcnew Converter<double, unsigned int>(DoubleToUIntLists));
 				array<unsigned int>^ beatarray = gcnew array<unsigned int>(beatlist->Count);
 				beatlist->CopyTo(beatarray);
 				track->Beats = beatarray;
 
-				System::Collections::Generic::List<unsigned int>^ myList = gcnew System::Collections::Generic::List<unsigned int>();
-				myList->Add(1);
-				myList->Add(2);
-				myList->Add(3);
-				myList->Add(4);
-				array<unsigned int>^ myArray = gcnew array<unsigned int>(myList->Count);
-				myList->CopyTo(myArray);
-				track->FadeIns = myArray;
-				track->FadeOuts = myArray;
-
 				reader->Close();
 				file->Close();
-
-				if (track->BPM > 0 && track->Duration > 0)
-				{
-					DataBase^ db = gcnew DataBase();
-					db->addTrack(track);
-				}
-				Debug::WriteLine(track->Samplerate);
-				Debug::WriteLine(track->Beats->ToString());
-				Debug::WriteLine(track->Danceability);
-				Debug::WriteLine(track->FadeIns);
 			}
 			catch (FileNotFoundException^ e)
 			{
 				e->Message;
 			}
 		}
+
+		if (!bw->CancellationPending)
+		{
+			_startInfoFade->Arguments = "\"" + track->Path + "\"";
+			Process^ fadeExtractor = gcnew Process;
+			fadeExtractor->StartInfo = _startInfoFade;
+			fadeExtractor->Start();
+
+			StreamReader^ reader = fadeExtractor->StandardOutput;
+			String^ output = reader->ReadToEnd();
+
+			while (!bw->CancellationPending && !fadeExtractor->HasExited)
+			{
+				System::Threading::Thread::Sleep(100);
+			}
+			if (bw->CancellationPending && !fadeExtractor->HasExited)
+			{
+				fadeExtractor->Kill();
+				cts->Cancel();
+			}
+			else if (!bw->CancellationPending)
+			{
+				Threading::Thread::Sleep(100);
+
+				int in = output->IndexOf("fade ins:");
+				int out = output->IndexOf("fade outs:");
+				array<char>^ delimiterChars = { ' ', ',', '[', ']', '\n' };
+				System::Collections::Generic::List<unsigned int>^ fadeInList = gcnew System::Collections::Generic::List<unsigned int>();
+				if (in == -1)
+				{
+					fadeInList->Add(0);
+				}
+				else
+				{
+					int upperBound;
+					if (out == -1)
+					{
+						upperBound = output->Length;
+					}
+					else
+					{
+						upperBound = out;
+					}
+					String^ subIn = output->Substring(in, upperBound-in);
+					array<String^>^ valuesIn = subIn->Split();
+					for each (String^ value in valuesIn)
+					{
+						double number;
+						if (Double::TryParse(value, number))
+						{
+							fadeInList->Add((int)(number * 1000));
+						}
+					}
+				}
+				array<unsigned int>^ FadeInArray = gcnew array<unsigned int>(fadeInList->Count);
+				fadeInList->CopyTo(FadeInArray);
+				track->FadeIns = FadeInArray;
+
+				System::Collections::Generic::List<unsigned int>^ fadeOutList = gcnew System::Collections::Generic::List<unsigned int>();
+				if (out == -1)
+				{
+					fadeOutList->Add(track->Duration);
+				}
+				else
+				{
+					String^ subOut = output->Substring(out);
+					array<String^>^ valuesOut = subOut->Split();
+					for each (String^ value in valuesOut)
+					{
+						double number;
+						if (Double::TryParse(value, number))
+						{
+							fadeInList->Add((int)(number * 1000));
+						}
+					}
+				}
+				array<unsigned int>^ FadeOutArray = gcnew array<unsigned int>(fadeOutList->Count);
+				fadeOutList->CopyTo(FadeOutArray);
+				track->FadeOuts = FadeOutArray;
+
+				if (track->BPM > 0 && track->Duration > 0)
+				{
+					DataBase^ db = gcnew DataBase();
+					db->addTrack(track);
+				}
+			}
+			reader->Close();
+		}
 		bw->ReportProgress((int)1000 / nbTracks);
+	}
+
+	unsigned int ExecutableExtraction::DoubleToUIntLists(double old)
+	{
+		return (int)(old * 1000);
 	}
 
 }
