@@ -9,6 +9,7 @@
 #include "stdafx.h"
 #include "ExecutableExtraction.h"
 
+using namespace System::Collections::Generic;
 using namespace System::Threading::Tasks;
 using namespace System::Diagnostics;
 using namespace System::IO;
@@ -62,6 +63,25 @@ namespace AutoMixDataManagement {
 				String^ scale = (String^)(obj["tonal"]["key_scale"]);
 				track->Key = Utils::convertToOpenKey(key, scale);
 
+				track->Danceability = Convert::ToDouble((double)obj["rhythm"]["danceability"]);
+				track->Samplerate = Convert::ToUInt32((int)(obj["metadata"]["audio_properties"]["sample_rate"]));
+
+				Linq::JArray^ beats = Linq::JArray::FromObject(obj["rhythm"]["beats_position"]);
+				List<unsigned int>^ beatlist = beats->ToObject<List<unsigned int>^>();
+				array<unsigned int>^ beatarray = gcnew array<unsigned int>(beatlist->Count);
+				beatlist->CopyTo(beatarray);
+				track->Beats = beatarray;
+
+				System::Collections::Generic::List<unsigned int>^ myList = gcnew System::Collections::Generic::List<unsigned int>();
+				myList->Add(1);
+				myList->Add(2);
+				myList->Add(3);
+				myList->Add(4);
+				array<unsigned int>^ myArray = gcnew array<unsigned int>(myList->Count);
+				myList->CopyTo(myArray);
+				track->FadeIns = myArray;
+				track->FadeOuts = myArray;
+
 				reader->Close();
 				file->Close();
 
@@ -70,6 +90,10 @@ namespace AutoMixDataManagement {
 					DataBase^ db = gcnew DataBase();
 					db->addTrack(track);
 				}
+				Debug::WriteLine(track->Samplerate);
+				Debug::WriteLine(track->Beats->ToString());
+				Debug::WriteLine(track->Danceability);
+				Debug::WriteLine(track->FadeIns);
 			}
 			catch (FileNotFoundException^ e)
 			{
