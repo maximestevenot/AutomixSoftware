@@ -57,11 +57,10 @@ namespace AutoMixUI {
 			}
 		}
 
-		collection->sortByName();
-		_dataExtractionEngine->extractData(bw, collection);
-		_trackCollection->concat(TrackCollection::CopyFrom(collection));
-		_trackCollection->purge();
+		_trackCollection->concat(collection);
 		_trackCollection->sortByName();
+		_dataExtractionEngine->extractData(bw, collection);
+		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
 		_trackCollection->purge();
 		return _trackCollection;
 	}

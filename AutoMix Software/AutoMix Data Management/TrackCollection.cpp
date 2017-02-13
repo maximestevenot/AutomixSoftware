@@ -78,15 +78,14 @@ namespace AutoMixDataManagement {
 		return newCollection;
 	}
 
+	bool TrackCollection::IsNull(Track ^ t)
+	{
+		return (t->Duration == 0);
+	}
+
 	void TrackCollection::purge()
 	{
-		for each (Track^ t in this)
-		{
-			if (t->Duration == 0)
-			{
-				this->Remove(t);
-			}
-		}
+		RemoveAll(gcnew Predicate<Track^>(IsNull));
 	}
 
 	void TrackCollection::concat(TrackCollection ^ orig)

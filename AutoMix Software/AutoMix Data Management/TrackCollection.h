@@ -33,6 +33,9 @@ namespace AutoMixDataManagement {
 		void concat(TrackCollection^);
 
 		void exportToMP3(System::ComponentModel::BackgroundWorker^, System::String^ outputFile);
+
+	private:
+		static bool IsNull(Track^);
 	};
 
 }
