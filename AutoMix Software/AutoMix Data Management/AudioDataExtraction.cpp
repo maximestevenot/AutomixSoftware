@@ -61,8 +61,8 @@ namespace AutoMixDataManagement {
 		String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
 		StreamWriter^ sw = gcnew StreamWriter(profileName);
 		sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
-    gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
-    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
+    gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\"]\ntonal :\n\
+    stats : [\"mean\"]");
 		sw->Close();
 	}
 }

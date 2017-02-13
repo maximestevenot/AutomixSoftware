@@ -35,6 +35,11 @@ namespace AutoMixDataManagement {
 		newTrack->Duration = old->Duration;
 		newTrack->BPM = old->BPM;
 		newTrack->Key = String::Copy(old->Key);
+		newTrack->Danceability = old->Danceability;
+		newTrack->Samplerate = old->Samplerate;
+		Array::Copy(old->Beats, newTrack->Beats, old->Beats->Length);
+		Array::Copy(old->FadeIns, newTrack->FadeIns, old->FadeIns->Length);
+		Array::Copy(old->FadeOuts, newTrack->FadeOuts, old->FadeOuts->Length);
 		return newTrack;
 	}
 
