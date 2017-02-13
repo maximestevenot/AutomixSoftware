@@ -29,6 +29,15 @@ namespace AutoMixDataManagement {
 		_name = Utils::nameFromPath(path);
 	}
 
+	Track ^ Track::CopyFrom(Track ^ old)
+	{
+		Track^ newTrack = gcnew Track(String::Copy(old->Path));
+		newTrack->Duration = old->Duration;
+		newTrack->BPM = old->BPM;
+		newTrack->Key = String::Copy(old->Key);
+		return newTrack;
+	}
+
 	String^ Track::Name::get() 
 	{
 		return _name;

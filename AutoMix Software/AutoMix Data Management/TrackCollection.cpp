@@ -68,14 +68,31 @@ namespace AutoMixDataManagement {
 		Reverse();
 	}
 
+	TrackCollection ^ TrackCollection::CopyFrom(TrackCollection ^ old)
+	{
+		TrackCollection^ newCollection = gcnew TrackCollection();
+		for each (Track^ t in old)
+		{
+			newCollection->Add(Track::CopyFrom(t));
+		}
+		return newCollection;
+	}
+
+	bool TrackCollection::IsNull(Track ^ t)
+	{
+		return (t->Duration == 0);
+	}
+
 	void TrackCollection::purge()
 	{
-		for each (Track^ t in this)
+		RemoveAll(gcnew Predicate<Track^>(IsNull));
+	}
+
+	void TrackCollection::concat(TrackCollection ^ orig)
+	{
+		for each (Track^ t in orig)
 		{
-			if (t->Duration == 0)
-			{
-				this->Remove(t);
-			}
+			safeAdd(t);
 		}
 	}
 

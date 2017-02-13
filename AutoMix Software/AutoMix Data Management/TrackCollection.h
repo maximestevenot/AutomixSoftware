@@ -28,9 +28,14 @@ namespace AutoMixDataManagement {
 		void sortByBPM();
 		void sortByDescendingBPM();
 
+		static TrackCollection^ CopyFrom(TrackCollection^);
 		void purge();
+		void concat(TrackCollection^);
 
 		void exportToMP3(System::ComponentModel::BackgroundWorker^, System::String^ outputFile);
+
+	private:
+		static bool IsNull(Track^);
 	};
 
 }
