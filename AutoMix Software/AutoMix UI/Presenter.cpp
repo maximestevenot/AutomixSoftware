@@ -47,10 +47,8 @@ namespace AutoMixUI {
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
-			int lastDotIndex = filePath->LastIndexOf(".");
-			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
 
-			if (extension->Contains("mp3"))  //TODO make it better
+			if (Utils::getExtension(filePath)->Contains("mp3"))
 			{
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
