@@ -212,6 +212,14 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::selectAllToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		for each(ListViewItem^ item in _musicListView->Items)
+		{
+			item->Selected = true;
+		}
+	}
+
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)

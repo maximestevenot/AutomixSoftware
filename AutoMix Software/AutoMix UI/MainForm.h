@@ -86,6 +86,8 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolTip^  _toolTip;
 	private: System::Windows::Forms::ContextMenuStrip^  _listViewcontextMenu;
 	private: System::Windows::Forms::ToolStripMenuItem^  _toolStripDeleteTrack;
+	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
+
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -127,6 +129,7 @@ namespace AutoMixUI {
 			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->_listViewcontextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->_toolStripDeleteTrack = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_selectAllToolStrip = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_imputButton = (gcnew System::Windows::Forms::Button());
 			this->_outputButton = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -311,9 +314,12 @@ namespace AutoMixUI {
 			// 
 			// _listViewcontextMenu
 			// 
-			this->_listViewcontextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_toolStripDeleteTrack });
+			this->_listViewcontextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_toolStripDeleteTrack,
+					this->_selectAllToolStrip
+			});
 			this->_listViewcontextMenu->Name = L"_listViewcontextMenu";
-			this->_listViewcontextMenu->Size = System::Drawing::Size(153, 48);
+			this->_listViewcontextMenu->Size = System::Drawing::Size(165, 70);
 			this->_listViewcontextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::_listViewcontextMenu_Opening);
 			// 
 			// _toolStripDeleteTrack
@@ -321,9 +327,18 @@ namespace AutoMixUI {
 			this->_toolStripDeleteTrack->Enabled = false;
 			this->_toolStripDeleteTrack->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_toolStripDeleteTrack.Image")));
 			this->_toolStripDeleteTrack->Name = L"_toolStripDeleteTrack";
-			this->_toolStripDeleteTrack->Size = System::Drawing::Size(152, 22);
+			this->_toolStripDeleteTrack->ShortcutKeys = System::Windows::Forms::Keys::Delete;
+			this->_toolStripDeleteTrack->Size = System::Drawing::Size(164, 22);
 			this->_toolStripDeleteTrack->Text = L"&Remove";
 			this->_toolStripDeleteTrack->Click += gcnew System::EventHandler(this, &MainForm::toolStripDeleteTrack_Click);
+			// 
+			// _selectAllToolStrip
+			// 
+			this->_selectAllToolStrip->Name = L"_selectAllToolStrip";
+			this->_selectAllToolStrip->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::A));
+			this->_selectAllToolStrip->Size = System::Drawing::Size(164, 22);
+			this->_selectAllToolStrip->Text = L"Select All";
+			this->_selectAllToolStrip->Click += gcnew System::EventHandler(this, &MainForm::selectAllToolStripMenuItem_Click);
 			// 
 			// _imputButton
 			// 
@@ -480,6 +495,7 @@ namespace AutoMixUI {
 	private: System::Void _backgroundWorker3_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 	private: System::Void toolStripDeleteTrack_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _listViewcontextMenu_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
+	private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 };
 
 }
