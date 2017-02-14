@@ -168,7 +168,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		catch (...)
 		{
-			Diagnostics::Debug::WriteLine("DB ERROR when trying to search : " + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to isPresent : " + track->Path);
 		}
 
 		_dbConnection->Close();
