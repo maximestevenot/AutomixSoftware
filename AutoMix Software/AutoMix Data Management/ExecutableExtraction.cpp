@@ -132,7 +132,7 @@ namespace AutoMixDataManagement {
 					{
 						upperBound = out;
 					}
-					String^ subIn = output->Substring(in + 9, upperBound-in);
+					String^ subIn = output->Substring(in + 9, upperBound-in-9);
 					array<String^>^ valuesIn = subIn->Split(sep, StringSplitOptions::RemoveEmptyEntries);
 					for each (String^ value in valuesIn)
 					{
