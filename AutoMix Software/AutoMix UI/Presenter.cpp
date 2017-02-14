@@ -59,9 +59,18 @@ namespace AutoMixUI {
 		_trackCollection->concat(collection);
 		_trackCollection->sortByName();
 		_dataExtractionEngine->extractData(bw, collection);
-		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
+		getMyRightsBack();
 		_trackCollection->purge();
 		return _trackCollection;
+	}
+
+	void Presenter::removeTracks(Generic::List<String^>^ selection)
+	{
+		for each (String^ name in selection)
+		{
+			_trackCollection->Remove(name);
+		}
+		notify();
 	}
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
@@ -75,4 +84,8 @@ namespace AutoMixUI {
 		db->clear();
 	}
 
+	void Presenter::getMyRightsBack()
+	{
+		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
+	}
 }

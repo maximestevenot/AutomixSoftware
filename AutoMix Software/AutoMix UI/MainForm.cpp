@@ -191,12 +191,18 @@ namespace AutoMixUI {
 
 	System::Void MainForm::toolStripDeleteTrack_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		return System::Void();
+		Generic::List<String^>^ selection = gcnew Generic::List<String^>();
+
+		for each (ListViewItem^ item in _musicListView->SelectedItems)
+		{
+			selection->Add(item->Text);
+		}
+		_presenter->removeTracks(selection);
 	}
 
 	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
 	{
-		if (_musicListView->SelectedItems->Count != 0) 
+		if (_musicListView->SelectedItems->Count != 0)
 		{
 			_toolStripDeleteTrack->Enabled = true;
 		}
@@ -232,7 +238,7 @@ namespace AutoMixUI {
 		dialog->FilterIndex = 1;
 		dialog->Multiselect = true;
 
-		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
+		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		{
 			onWorkerStart();
 			_backgroundWorker1->RunWorkerAsync(dialog->FileNames);

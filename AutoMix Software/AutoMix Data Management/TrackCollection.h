@@ -19,8 +19,10 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		void safeAdd(Track^);
-		bool search(Track^ track);
+		bool isPresent(Track^ track);
+		Track^ search(System::String^);
 
+		void Remove(System::String^);
 		void sortByName();
 		void sortByDescendingName();
 		void sortByDuration();
