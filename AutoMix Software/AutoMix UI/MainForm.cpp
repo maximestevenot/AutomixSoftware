@@ -225,10 +225,8 @@ namespace AutoMixUI {
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
 	{
 		SaveFileDialog^ dialog = gcnew SaveFileDialog;
-
 		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
 		dialog->FilterIndex = 1;
-
 		dialog->FileName = "Auto Mix";
 		dialog->DefaultExt = "mp3";
 		dialog->RestoreDirectory = true;
