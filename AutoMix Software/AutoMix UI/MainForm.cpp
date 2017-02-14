@@ -110,7 +110,25 @@ namespace AutoMixUI {
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		array<String^>^ fileNames = (array<String^>^) e->Argument;
-		e->Result = _presenter->loadTracks(bw, fileNames);
+		TrackCollection^ col = _presenter->loadTracks(bw, fileNames);
+		for each (Track ^ i in col)
+		{
+			Diagnostics::Debug::WriteLine(i->Name);
+			Diagnostics::Debug::WriteLine(i->Danceability);
+			Diagnostics::Debug::WriteLine(i->Samplerate);
+			for each (unsigned int j in i->Beats)
+			{
+				Diagnostics::Debug::WriteLine(j);
+			}
+			for each (unsigned int j in i->FadeIns)
+			{
+				Diagnostics::Debug::WriteLine(j);
+			}
+			for each (unsigned int j in i->FadeOuts)
+			{
+				Diagnostics::Debug::WriteLine(j);
+			}
+		}
 
 		if (bw->CancellationPending)
 		{
