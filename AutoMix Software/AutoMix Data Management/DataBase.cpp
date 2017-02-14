@@ -146,7 +146,7 @@ namespace AutoMixDataManagement {
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to search : " + track->Path);
+			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to isPresent : " + track->Path);
 		}
 
 		_dbConnection->Close();

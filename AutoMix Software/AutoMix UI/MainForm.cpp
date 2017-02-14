@@ -189,6 +189,37 @@ namespace AutoMixUI {
 		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
+	System::Void MainForm::toolStripDeleteTrack_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		Generic::List<String^>^ selection = gcnew Generic::List<String^>();
+
+		for each (ListViewItem^ item in _musicListView->SelectedItems)
+		{
+			selection->Add(item->Text);
+		}
+		_presenter->removeTracks(selection);
+	}
+
+	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
+	{
+		if (_musicListView->SelectedItems->Count != 0)
+		{
+			_toolStripDeleteTrack->Enabled = true;
+		}
+		else
+		{
+			_toolStripDeleteTrack->Enabled = false;
+		}
+	}
+
+	System::Void MainForm::selectAllToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		for each(ListViewItem^ item in _musicListView->Items)
+		{
+			item->Selected = true;
+		}
+	}
+
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
@@ -215,7 +246,7 @@ namespace AutoMixUI {
 		dialog->FilterIndex = 1;
 		dialog->Multiselect = true;
 
-		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
+		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		{
 			onWorkerStart();
 			_backgroundWorker1->RunWorkerAsync(dialog->FileNames);
