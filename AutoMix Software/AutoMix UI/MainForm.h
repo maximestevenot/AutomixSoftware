@@ -62,9 +62,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _quitToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutToolStripMenuItem;
-	private: System::Windows::Forms::FolderBrowserDialog^  _inputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::StatusStrip^  _statusStrip;
-	private: System::Windows::Forms::FolderBrowserDialog^  _outputMusicFolderBrowserDialog;
 	private: System::Windows::Forms::ListView^  _musicListView;
 	private: System::Windows::Forms::ColumnHeader^  collectionDuration;
 	private: System::Windows::Forms::ColumnHeader^  collectionBPM;
@@ -115,11 +113,9 @@ namespace AutoMixUI {
 			this->_clearDBToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->_inputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
 			this->_toolStripProgressBar = (gcnew System::Windows::Forms::ToolStripProgressBar());
 			this->_toolStripCurrentDir = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->_outputMusicFolderBrowserDialog = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->_musicListView = (gcnew System::Windows::Forms::ListView());
 			this->collectionName = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionDuration = (gcnew System::Windows::Forms::ColumnHeader());
@@ -435,7 +431,7 @@ namespace AutoMixUI {
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void loadTracks(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);

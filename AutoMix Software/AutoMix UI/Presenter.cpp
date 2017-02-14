@@ -44,13 +44,12 @@ namespace AutoMixUI {
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 		TrackCollection^ collection = gcnew TrackCollection();
+
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
-			int lastDotIndex = filePath->LastIndexOf(".");
-			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
 
-			if (extension->Contains("mp3"))  //TODO make it better
+			if (Utils::getExtension(filePath)->Contains("mp3"))
 			{
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
@@ -70,7 +69,7 @@ namespace AutoMixUI {
 		_trackCollection->exportToMP3(bw, destinationFile);
 	}
 
-	void Presenter::clearDataBase() 
+	void Presenter::clearDataBase()
 	{
 		DataBase^ db = gcnew DataBase();
 		db->clear();
