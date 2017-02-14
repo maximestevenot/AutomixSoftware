@@ -67,12 +67,12 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		loadTracksFromDirectory(sender, e);
+		loadTracks(sender, e);
 	}
 
 	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
 	{
-		loadTracksFromDirectory(sender, e);
+		loadTracks(sender, e);
 	}
 
 	System::Void MainForm::_outputButton_Click(System::Object^  sender, System::EventArgs^  e)
@@ -109,8 +109,8 @@ namespace AutoMixUI {
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
-		System::String^ path = (System::String^) e->Argument;
-		e->Result = _presenter->loadTracks(bw, Directory::GetFiles(path));
+		array<String^>^ fileNames = (array<String^>^) e->Argument;
+		e->Result = _presenter->loadTracks(bw, fileNames);
 
 		if (bw->CancellationPending)
 		{
@@ -208,34 +208,25 @@ namespace AutoMixUI {
 		_backgroundWorker2->RunWorkerAsync();
 	}
 
-	System::Void MainForm::loadTracksFromDirectory(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::loadTracks(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		_inputMusicFolderBrowserDialog->ShowNewFolderButton = false;
-		System::Windows::Forms::DialogResult result = _inputMusicFolderBrowserDialog->ShowDialog();
+		OpenFileDialog^ dialog = gcnew OpenFileDialog();
+		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+		dialog->FilterIndex = 1;
+		dialog->Multiselect = true;
 
-		if (result != System::Windows::Forms::DialogResult::OK) {
-			return;
-		}
-
-		String^ path = _inputMusicFolderBrowserDialog->SelectedPath;
-
-		if (!Directory::Exists(path))
+		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
 		{
-			return;
+			onWorkerStart();
+			_backgroundWorker1->RunWorkerAsync(dialog->FileNames);
 		}
-
-		_toolStripCurrentDir->Text = path;
-		onWorkerStart();
-		_backgroundWorker1->RunWorkerAsync(path);
 	}
 
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
 	{
 		SaveFileDialog^ dialog = gcnew SaveFileDialog;
-
 		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
 		dialog->FilterIndex = 1;
-
 		dialog->FileName = "Auto Mix";
 		dialog->DefaultExt = "mp3";
 		dialog->RestoreDirectory = true;

@@ -10,7 +10,6 @@
 #include "ViewWithTrackCollection.h"
 
 namespace AutoMixUI {
-	using namespace AutoMixDataManagement;
 
 	public ref class Presenter
 	{
@@ -27,7 +26,7 @@ namespace AutoMixUI {
 	private:
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 
-		TrackCollection^ _trackCollection;
-		IAudioDataExtraction^ _dataExtractionEngine;
+		AutoMixDataManagement::TrackCollection^ _trackCollection;
+		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
 	};
 }
