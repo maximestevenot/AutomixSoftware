@@ -435,7 +435,7 @@ namespace AutoMixUI {
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void loadTracksFromDirectory(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void loadTracks(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);

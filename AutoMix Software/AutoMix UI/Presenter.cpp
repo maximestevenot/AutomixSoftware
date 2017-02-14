@@ -44,6 +44,7 @@ namespace AutoMixUI {
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 		TrackCollection^ collection = gcnew TrackCollection();
+
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
@@ -68,7 +69,7 @@ namespace AutoMixUI {
 		_trackCollection->exportToMP3(bw, destinationFile);
 	}
 
-	void Presenter::clearDataBase() 
+	void Presenter::clearDataBase()
 	{
 		DataBase^ db = gcnew DataBase();
 		db->clear();
