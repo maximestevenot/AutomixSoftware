@@ -47,13 +47,14 @@ namespace AutoMixDataManagement {
 
 		try
 		{
-			String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT)";
+			String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT, \
+danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to create tracks table");
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to create tracks table");
 		}
 
 		_dbConnection->Close();
@@ -61,18 +62,34 @@ namespace AutoMixDataManagement {
 
 	void DataBase::addTrack(Track^ track)
 	{
+		String^ beats = "";
+		for each (unsigned int i in track->Beats)
+		{
+			beats += Convert::ToString(i) + " ";
+		}
+		String^ fadeins = "";
+		for each (unsigned int i in track->FadeIns)
+		{
+			fadeins += Convert::ToString(i) + " ";
+		}
+		String^ fadeouts = "";
+		for each (unsigned int i in track->FadeOuts)
+		{
+			fadeouts += Convert::ToString(i) + " ";
+		}
+
 		_dbConnection->Open();
 
 		try
 		{
-			String^ query = "INSERT INTO tracks (path, duration, bpm, key)";
-			query += "VALUES ( '" + track->Path + "','" + track->Duration + "','" + track->BPM + "','" + track->Key + "')";
+			String^ query = "INSERT INTO tracks (path, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts)";
+			query += "VALUES ( \"" + track->Path + "\",\"" + track->Duration + "\",\"" + track->BPM + "\",\"" + track->Key + "\",\"" + track->Danceability + "\",\"" + track->Samplerate + "\",\"" + beats + "\",\"" + fadeins + "\",\"" + fadeouts + "\")";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to insert :" + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to insert :" + track->Path);
 		}
 
 		_dbConnection->Close();
@@ -94,7 +111,7 @@ namespace AutoMixDataManagement {
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to clean database");
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to clean database");
 		}
 
 		_dbConnection->Close();
@@ -106,7 +123,7 @@ namespace AutoMixDataManagement {
 
 		try
 		{
-			String^ query = "SELECT duration, bpm, key FROM tracks WHERE path = '" + track->Path + "'";
+			String^ query = "SELECT duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts FROM tracks WHERE path = '" + track->Path + "'";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 
@@ -116,11 +133,16 @@ namespace AutoMixDataManagement {
 				track->Duration = Convert::ToUInt32(reader->GetString(0));
 				track->BPM = Convert::ToUInt32(reader->GetString(1));
 				track->Key = reader->GetString(2);
+				track->Danceability = Convert::ToDouble(reader->GetString(3));
+				track->Samplerate = Convert::ToUInt32(reader->GetString(4));
+				track->Beats = extractFromString(reader->GetString(5));
+				track->FadeIns = extractFromString(reader->GetString(6));
+				track->FadeOuts = extractFromString(reader->GetString(7));
 			}
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to extract data of : " + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to extract data of : " + track->Path);
 		}
 
 		_dbConnection->Close();
@@ -146,11 +168,25 @@ namespace AutoMixDataManagement {
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to isPresent : " + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to isPresent : " + track->Path);
 		}
 
 		_dbConnection->Close();
 		return false;
+	}
+
+	array<unsigned int>^ DataBase::extractFromString(String^ orig)
+	{
+		array<Char>^ sep = gcnew array<Char>{ ' ' };
+		List<unsigned int>^ resultList = gcnew List<unsigned int>();
+		array<String^>^ Values = orig->Split(sep, StringSplitOptions::RemoveEmptyEntries);
+		for each (String^ value in Values)
+		{
+			resultList->Add(Convert::ToUInt32(value));
+		}
+		array<unsigned int>^ resultArray = gcnew array<unsigned int>(resultList->Count);
+		resultList->CopyTo(resultArray);
+		return resultArray;
 	}
 
 }
