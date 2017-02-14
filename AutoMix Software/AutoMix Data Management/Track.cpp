@@ -10,16 +10,20 @@
 #include "Track.h"
 #include "Utils.h"
 
+using namespace System;
 
 namespace AutoMixDataManagement {
-
-	using namespace System;
 
 	Track::Track()
 	{
 		Duration = 0;
 		BPM = 0;
 		Key = "";
+		Danceability = 0;
+		Samplerate = 0;
+		Beats = gcnew array<unsigned int>(1);
+		FadeIns = gcnew array<unsigned int>(1);
+		FadeOuts = gcnew array<unsigned int>(1);
 		_id = TRACKS_COUNT++;
 	}
 
@@ -35,6 +39,14 @@ namespace AutoMixDataManagement {
 		newTrack->Duration = old->Duration;
 		newTrack->BPM = old->BPM;
 		newTrack->Key = String::Copy(old->Key);
+		newTrack->Danceability = old->Danceability;
+		newTrack->Samplerate = old->Samplerate;
+		newTrack->Beats = gcnew array<unsigned int>(old->Beats->Length);
+		newTrack->FadeIns = gcnew array<unsigned int>(old->FadeIns->Length);
+		newTrack->FadeOuts = gcnew array<unsigned int>(old->FadeOuts->Length);
+		Array::Copy(old->Beats, newTrack->Beats, old->Beats->Length);
+		Array::Copy(old->FadeIns, newTrack->FadeIns, old->FadeIns->Length);
+		Array::Copy(old->FadeOuts, newTrack->FadeOuts, old->FadeOuts->Length);
 		return newTrack;
 	}
 
