@@ -115,7 +115,7 @@ namespace AutoMixDataManagement {
 
 				int in = output->IndexOf("fade ins:");
 				int out = output->IndexOf("fade outs:");
-				array<char>^ delimiterChars = { ' ', ',', '[', ']', '\n' };
+				array<Char>^ sep = gcnew array<Char>{ ' ', ',', '[', ']', '\n' };
 				System::Collections::Generic::List<unsigned int>^ fadeInList = gcnew System::Collections::Generic::List<unsigned int>();
 				if (in == -1)
 				{
@@ -132,12 +132,12 @@ namespace AutoMixDataManagement {
 					{
 						upperBound = out;
 					}
-					String^ subIn = output->Substring(in, upperBound-in);
-					array<String^>^ valuesIn = subIn->Split();
+					String^ subIn = output->Substring(in + 9, upperBound-in);
+					array<String^>^ valuesIn = subIn->Split(sep, StringSplitOptions::RemoveEmptyEntries);
 					for each (String^ value in valuesIn)
 					{
 						double number;
-						if (Double::TryParse(value, number))
+						if (Double::TryParse(value, Globalization::NumberStyles::Number, Globalization::CultureInfo::CreateSpecificCulture("en-US"), number))
 						{
 							fadeInList->Add((int)(number * 1000));
 						}
@@ -154,14 +154,14 @@ namespace AutoMixDataManagement {
 				}
 				else
 				{
-					String^ subOut = output->Substring(out);
-					array<String^>^ valuesOut = subOut->Split();
+					String^ subOut = output->Substring(out + 10);
+					array<String^>^ valuesOut = subOut->Split(sep, StringSplitOptions::RemoveEmptyEntries);
 					for each (String^ value in valuesOut)
 					{
 						double number;
-						if (Double::TryParse(value, number))
+						if (Double::TryParse(value, Globalization::NumberStyles::Number, Globalization::CultureInfo::CreateSpecificCulture("en-US"), number))
 						{
-							fadeInList->Add((int)(number * 1000));
+							fadeOutList->Add((int)(number * 1000));
 						}
 					}
 				}
