@@ -189,6 +189,23 @@ namespace AutoMixUI {
 		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
+	System::Void MainForm::toolStripDeleteTrack_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		return System::Void();
+	}
+
+	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
+	{
+		if (_musicListView->SelectedItems->Count != 0) 
+		{
+			_toolStripDeleteTrack->Enabled = true;
+		}
+		else
+		{
+			_toolStripDeleteTrack->Enabled = false;
+		}
+	}
+
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
