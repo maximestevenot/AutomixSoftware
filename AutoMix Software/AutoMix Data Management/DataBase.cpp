@@ -54,7 +54,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to create tracks table");
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to create tracks table");
 		}
 
 		_dbConnection->Close();
@@ -89,7 +89,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to insert :" + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to insert :" + track->Path);
 		}
 
 		_dbConnection->Close();
@@ -111,7 +111,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to clean database");
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to clean database");
 		}
 
 		_dbConnection->Close();
@@ -135,14 +135,14 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 				track->Key = reader->GetString(2);
 				track->Danceability = Convert::ToDouble(reader->GetString(3));
 				track->Samplerate = Convert::ToUInt32(reader->GetString(4));
-				extractFromString(reader->GetString(5), track->Beats);
-				extractFromString(reader->GetString(6), track->FadeIns);
-				extractFromString(reader->GetString(7), track->FadeOuts);
+				track->Beats = extractFromString(reader->GetString(5));
+				track->FadeIns = extractFromString(reader->GetString(6));
+				track->FadeOuts = extractFromString(reader->GetString(7));
 			}
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to extract data of : " + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to extract data of : " + track->Path);
 		}
 
 		_dbConnection->Close();
@@ -168,17 +168,17 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		catch (...)
 		{
-			System::Diagnostics::Debug::WriteLine("DB ERROR when trying to search : " + track->Path);
+			Diagnostics::Debug::WriteLine("DB ERROR when trying to search : " + track->Path);
 		}
 
 		_dbConnection->Close();
 		return false;
 	}
 
-	void DataBase::extractFromString(String^ orig, array<unsigned int>^ dest)
+	array<unsigned int>^ DataBase::extractFromString(String^ orig)
 	{
 		array<Char>^ sep = gcnew array<Char>{ ' ' };
-		System::Collections::Generic::List<unsigned int>^ resultList = gcnew System::Collections::Generic::List<unsigned int>();
+		List<unsigned int>^ resultList = gcnew List<unsigned int>();
 		array<String^>^ Values = orig->Split(sep, StringSplitOptions::RemoveEmptyEntries);
 		for each (String^ value in Values)
 		{
@@ -186,7 +186,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		}
 		array<unsigned int>^ resultArray = gcnew array<unsigned int>(resultList->Count);
 		resultList->CopyTo(resultArray);
-		dest = resultArray;
+		return resultArray;
 	}
 
 }
