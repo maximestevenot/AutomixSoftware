@@ -128,11 +128,9 @@ namespace AutoMixUI {
 		{
 			showErrorDialog(e->Error->Message);
 		}
-		else
-		{
-			_presenter->notify();
-		}
+
 		onWorkerStop();
+		_presenter->notify();
 	}
 
 	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -243,8 +241,10 @@ namespace AutoMixUI {
 					if (dropIndex != dragItem->Index)
 					{
 						Point clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
+
 						_musicListView->Items->Remove(dragItem);
 						_musicListView->Items->Insert(dropIndex, dragItem);
+						_presenter->moveTrack(dropIndex, dragItem->Text);
 					}
 				}
 			}
