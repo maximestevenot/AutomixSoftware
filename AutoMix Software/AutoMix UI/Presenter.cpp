@@ -73,6 +73,19 @@ namespace AutoMixUI {
 		notify();
 	}
 
+	void Presenter::moveTrack(int index, String^ name)
+	{
+		if (index < 0 && index >= _trackCollection->Count)
+		{
+			notify();
+			return;
+		}
+
+		Track^ t = _trackCollection->search(name);
+		_trackCollection->Remove(t);
+		_trackCollection->Insert(index, t);
+	}
+
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
 		_trackCollection->exportToMP3(bw, destinationFile);
