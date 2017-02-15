@@ -54,6 +54,16 @@ namespace AutoMixUI {
 	private:
 		Presenter^ _presenter;
 
+		enum class InsertionModeType
+		{
+			Before,
+			After
+		};
+
+		property int InsertionIndex;
+		property InsertionModeType InsertionMode;
+		property bool IsRowDragInProgress;
+
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
@@ -271,6 +281,7 @@ namespace AutoMixUI {
 			// _musicListView
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
+			this->_musicListView->AllowDrop = true;
 			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -291,6 +302,10 @@ namespace AutoMixUI {
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
 			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::_musicListView_ColumnClick);
+			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::_musicListView_ItemDrag);
+			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragDrop);
+			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragEnter);
+			this->_musicListView->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragOver);
 			// 
 			// collectionName
 			// 
@@ -319,7 +334,7 @@ namespace AutoMixUI {
 					this->_selectAllToolStrip
 			});
 			this->_listViewcontextMenu->Name = L"_listViewcontextMenu";
-			this->_listViewcontextMenu->Size = System::Drawing::Size(165, 70);
+			this->_listViewcontextMenu->Size = System::Drawing::Size(165, 48);
 			this->_listViewcontextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::_listViewcontextMenu_Opening);
 			// 
 			// _toolStripDeleteTrack
@@ -496,6 +511,10 @@ namespace AutoMixUI {
 	private: System::Void toolStripDeleteTrack_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _listViewcontextMenu_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
 	private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _musicListView_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void _musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void _musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
+	private: System::Void _musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 };
 
 }

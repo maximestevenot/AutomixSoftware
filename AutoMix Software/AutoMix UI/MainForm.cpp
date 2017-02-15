@@ -220,6 +220,108 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::_musicListView_DragEnter(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ e)
+	{
+		e->Effect = e->AllowedEffect;
+	}
+
+	System::Void MainForm::_musicListView_DragDrop(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
+	{
+		if (this->IsRowDragInProgress)
+		{
+			try
+			{
+				ListViewItem^ dropItem;
+
+				dropItem = this->InsertionIndex != -1 ? _musicListView->Items[this->InsertionIndex] : nullptr;
+
+				if (dropItem != nullptr)
+				{
+
+					ListViewItem^ dragItem = (ListViewItem^)drgevent->Data->GetData(ListViewItem::typeid);
+					int dropIndex = dropItem->Index;
+
+					if (dragItem->Index < dropIndex)
+					{
+						dropIndex--;
+					}
+					if (this->InsertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
+					{
+						dropIndex++;
+					}
+
+					if (dropIndex != dragItem->Index)
+					{
+
+						Point clientPoint;
+
+						clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
+
+
+						_musicListView->Items->Remove(dragItem);
+						_musicListView->Items->Insert(dropIndex, dragItem);
+					}
+				}
+			}
+			finally
+			{
+				this->InsertionIndex = -1;
+				this->IsRowDragInProgress = false;
+				this->Invalidate();
+			}
+		}
+	}
+
+	System::Void MainForm::_musicListView_ItemDrag(System::Object ^ sender, System::Windows::Forms::ItemDragEventArgs ^ e)
+	{
+		if (_musicListView->Items->Count > 1)
+		{
+			this->IsRowDragInProgress = true;
+			this->DoDragDrop(e->Item, DragDropEffects::Move);
+		}
+	}
+
+	System::Void MainForm::_musicListView_DragOver(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
+	{
+
+		if (this->IsRowDragInProgress)
+		{
+			int insertionIndex;
+			InsertionModeType insertionMode;
+			ListViewItem^ dropItem;
+			Point clientPoint;
+
+			clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
+
+			dropItem = _musicListView->GetItemAt(0, Math::Min(clientPoint.Y, _musicListView->Items[_musicListView->Items->Count - 1]->GetBounds(ItemBoundsPortion::Entire).Bottom - 1));
+
+			if (dropItem != nullptr)
+			{
+				Rectangle bounds;
+
+				bounds = dropItem->GetBounds(ItemBoundsPortion::Entire);
+				insertionIndex = dropItem->Index;
+				insertionMode = clientPoint.Y < bounds.Top + (bounds.Height / 2) ? InsertionModeType::Before : InsertionModeType::After;
+
+				drgevent->Effect = DragDropEffects::Move;
+			}
+			else
+			{
+				insertionIndex = -1;
+				insertionMode = this->InsertionMode;
+
+				drgevent->Effect = DragDropEffects::None;
+			}
+
+			if (insertionIndex != this->InsertionIndex || insertionMode != this->InsertionMode)
+			{
+				this->InsertionMode = insertionMode;
+				this->InsertionIndex = insertionIndex;
+				this->Invalidate();
+			}
+		}
+	}
+
 	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
