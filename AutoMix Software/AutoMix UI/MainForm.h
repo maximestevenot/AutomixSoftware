@@ -37,6 +37,7 @@ namespace AutoMixUI {
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
+			InsertionLineColor = Color::AliceBlue;
 		}
 
 	protected:
@@ -53,6 +54,17 @@ namespace AutoMixUI {
 
 	private:
 		Presenter^ _presenter;
+
+		enum class InsertionModeType
+		{
+			Before,
+			After
+		};
+
+		property int InsertionIndex;
+		property InsertionModeType InsertionMode;
+		property bool IsRowDragInProgress;
+		property Color InsertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -271,6 +283,7 @@ namespace AutoMixUI {
 			// _musicListView
 			// 
 			this->_musicListView->AccessibleName = L"_musicListView";
+			this->_musicListView->AllowDrop = true;
 			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
@@ -284,13 +297,17 @@ namespace AutoMixUI {
 				static_cast<System::Byte>(0)));
 			this->_musicListView->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->_musicListView->FullRowSelect = true;
+			this->_musicListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
 			this->_musicListView->Size = System::Drawing::Size(1264, 381);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
-			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::_musicListView_ColumnClick);
+			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::_musicListView_ItemDrag);
+			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragDrop);
+			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragEnter);
+			this->_musicListView->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragOver);
 			// 
 			// collectionName
 			// 
@@ -319,7 +336,7 @@ namespace AutoMixUI {
 					this->_selectAllToolStrip
 			});
 			this->_listViewcontextMenu->Name = L"_listViewcontextMenu";
-			this->_listViewcontextMenu->Size = System::Drawing::Size(165, 70);
+			this->_listViewcontextMenu->Size = System::Drawing::Size(165, 48);
 			this->_listViewcontextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::_listViewcontextMenu_Opening);
 			// 
 			// _toolStripDeleteTrack
@@ -468,6 +485,8 @@ namespace AutoMixUI {
 		System::Void showErrorDialog(System::String^);
 		bool showExitDialog();
 		System::Void exitApplication();
+		System::Void MainForm::DrawInsertionLine();
+		System::Void MainForm::DrawInsertionLine(int x1, int y, int width);
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
@@ -478,7 +497,6 @@ namespace AutoMixUI {
 	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
 	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void _backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
@@ -496,6 +514,10 @@ namespace AutoMixUI {
 	private: System::Void toolStripDeleteTrack_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _listViewcontextMenu_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
 	private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void _musicListView_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void _musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void _musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
+	private: System::Void _musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 };
 
 }

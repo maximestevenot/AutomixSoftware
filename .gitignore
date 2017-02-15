@@ -255,3 +255,4 @@ vamp-plugin-sdk-2.6/skeleton/Makefile.inc
 vamp-plugin-sdk-2.6/skeleton/Makefile.linux
 AutoMix Software/AutoMix UI/essentia_streaming_extractor_music.exe
 AutoMix Software/AutoMix UI/AutoMixSoftware.db
+AutoMix Software/AutoMix UI/essentia_standard_fadedetection.exe
