@@ -194,7 +194,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
 	{
-		if (_musicListView->SelectedItems->Count != 0)
+		if (!AnOperationRunning && _musicListView->SelectedItems->Count != 0)
 		{
 			_toolStripDeleteTrack->Enabled = true;
 		}
@@ -375,8 +375,9 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onWorkerStart()
 	{
-		_cancelToolStripMenuItem->Enabled = true;
+		AnOperationRunning = true;
 
+		_cancelToolStripMenuItem->Enabled = true;
 		_outputButton->Enabled = false;
 		_imputButton->Enabled = false;
 		_sortButton->Enabled = false;
@@ -390,8 +391,9 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onWorkerStop()
 	{
-		_cancelToolStripMenuItem->Enabled = false;
+		AnOperationRunning = false;
 
+		_cancelToolStripMenuItem->Enabled = false;
 		_outputButton->Enabled = true;
 		_imputButton->Enabled = true;
 		_sortButton->Enabled = true;
