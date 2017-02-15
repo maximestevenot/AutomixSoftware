@@ -74,8 +74,11 @@ namespace AutoMixUI {
 
 		_trackCollection->concat(collection);
 		_trackCollection->sortByName();
+		bw->ReportProgress(0);
+	
 		_dataExtractionEngine->extractData(bw, collection);
 		getMyRightsBack();
+	
 		_trackCollection->purge();
 		return _trackCollection;
 	}
