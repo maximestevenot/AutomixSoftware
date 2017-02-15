@@ -37,6 +37,7 @@ namespace AutoMixUI {
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
+			InsertionLineColor = Color::Red;
 		}
 
 	protected:
@@ -63,6 +64,7 @@ namespace AutoMixUI {
 		property int InsertionIndex;
 		property InsertionModeType InsertionMode;
 		property bool IsRowDragInProgress;
+		property Color InsertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 
@@ -483,6 +485,8 @@ namespace AutoMixUI {
 		System::Void showErrorDialog(System::String^);
 		bool showExitDialog();
 		System::Void exitApplication();
+		System::Void MainForm::DrawInsertionLine();
+		System::Void MainForm::DrawInsertionLine(int x1, int y, int width);
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}

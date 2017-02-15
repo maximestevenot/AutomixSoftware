@@ -231,9 +231,7 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				ListViewItem^ dropItem;
-
-				dropItem = this->InsertionIndex != -1 ? _musicListView->Items[this->InsertionIndex] : nullptr;
+				ListViewItem^ dropItem = this->InsertionIndex != -1 ? _musicListView->Items[this->InsertionIndex] : nullptr;
 
 				if (dropItem != nullptr)
 				{
@@ -252,12 +250,7 @@ namespace AutoMixUI {
 
 					if (dropIndex != dragItem->Index)
 					{
-
-						Point clientPoint;
-
-						clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
-
-
+						Point clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
 						_musicListView->Items->Remove(dragItem);
 						_musicListView->Items->Insert(dropIndex, dragItem);
 					}
@@ -267,7 +260,7 @@ namespace AutoMixUI {
 			{
 				this->InsertionIndex = -1;
 				this->IsRowDragInProgress = false;
-				this->Invalidate();
+				_musicListView->Invalidate();
 			}
 		}
 	}
@@ -288,28 +281,24 @@ namespace AutoMixUI {
 		{
 			int insertionIndex;
 			InsertionModeType insertionMode;
-			ListViewItem^ dropItem;
-			Point clientPoint;
 
-			clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
-
-			dropItem = _musicListView->GetItemAt(0, Math::Min(clientPoint.Y, _musicListView->Items[_musicListView->Items->Count - 1]->GetBounds(ItemBoundsPortion::Entire).Bottom - 1));
+			Point clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
+			ListViewItem^ dropItem = _musicListView->GetItemAt(0, Math::Min(clientPoint.Y, _musicListView->Items[_musicListView->Items->Count - 1]->GetBounds(ItemBoundsPortion::Entire).Bottom - 1));
 
 			if (dropItem != nullptr)
 			{
-				Rectangle bounds;
-
-				bounds = dropItem->GetBounds(ItemBoundsPortion::Entire);
+				Rectangle bounds = dropItem->GetBounds(ItemBoundsPortion::Entire);
 				insertionIndex = dropItem->Index;
 				insertionMode = clientPoint.Y < bounds.Top + (bounds.Height / 2) ? InsertionModeType::Before : InsertionModeType::After;
 
 				drgevent->Effect = DragDropEffects::Move;
+				DrawInsertionLine();
 			}
+
 			else
 			{
 				insertionIndex = -1;
 				insertionMode = this->InsertionMode;
-
 				drgevent->Effect = DragDropEffects::None;
 			}
 
@@ -317,7 +306,7 @@ namespace AutoMixUI {
 			{
 				this->InsertionMode = insertionMode;
 				this->InsertionIndex = insertionIndex;
-				this->Invalidate();
+				_musicListView->Invalidate();
 			}
 		}
 	}
@@ -429,5 +418,57 @@ namespace AutoMixUI {
 		}
 		catch (...) {}
 		Application::Exit();
+	}
+
+	System::Void MainForm::DrawInsertionLine()
+	{
+		if (this->InsertionIndex != -1)
+		{
+			int index;
+
+			index = this->InsertionIndex;
+
+			if (index >= 0 && index < _musicListView->Items->Count)
+			{
+				Rectangle bounds;
+				int x;
+				int y;
+				int width;
+
+				bounds = _musicListView->Items[index]->GetBounds(ItemBoundsPortion::Entire);
+				x = 0; // aways fit the line to the client area, regardless of how the user is scrolling
+				y = this->InsertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
+				width = Math::Min(bounds.Width - bounds.Left, this->ClientSize.Width); // again, make sure the full width fits in the client area
+
+				this->DrawInsertionLine(x, y, width);
+			}
+		}
+	}
+
+	System::Void MainForm::DrawInsertionLine(int x1, int y, int width)
+	{
+		Graphics^ g = _musicListView->CreateGraphics();
+		array<Point>^ leftArrowHead;
+		array<Point>^ rightArrowHead;
+		int arrowHeadSize;
+		int x2;
+
+		x2 = x1 + width;
+		arrowHeadSize = 7;
+		leftArrowHead = gcnew array<Point>
+		{
+			Point(x1, y - (arrowHeadSize / 2)), Point(x1 + arrowHeadSize, y), Point(x1, y + (arrowHeadSize / 2))
+		};
+		rightArrowHead = gcnew array<Point>
+		{
+			Point(x2, y - (arrowHeadSize / 2)), Point(x2 - arrowHeadSize, y), Point(x2, y + (arrowHeadSize / 2))
+		};
+
+		Pen^ pen = gcnew Pen(this->InsertionLineColor);
+
+		g->DrawLine(pen, x1, y, x2 - 1, y);
+		SolidBrush^ brush = gcnew SolidBrush(this->InsertionLineColor);
+		g->FillPolygon(brush, leftArrowHead);
+		g->FillPolygon(brush, rightArrowHead);
 	}
 }
