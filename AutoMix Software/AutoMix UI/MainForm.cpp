@@ -214,12 +214,33 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_musicListView_DragEnter(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ e)
 	{
-		e->Effect = e->AllowedEffect;
+		if (e->Data->GetDataPresent(DataFormats::FileDrop))
+		{
+			e->Effect = DragDropEffects::Copy;
+			IsDragImportInProgress = true;
+		}
 	}
 
 	System::Void MainForm::_musicListView_DragDrop(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
 	{
-		if (this->IsRowDragInProgress)
+		if (IsDragImportInProgress)
+		{
+			try
+			{
+				array<String^>^ fileNames = (array<String^>^) drgevent->Data->GetData(DataFormats::FileDrop);
+				for each (auto s in fileNames) {
+					Diagnostics::Debug::WriteLine(s);
+				}
+				onWorkerStart();
+				_backgroundWorker1->RunWorkerAsync(fileNames);
+			}
+			finally
+			{
+				IsDragImportInProgress = false;
+			}
+		}
+
+		else if (IsRowDragInProgress)
 		{
 			try
 			{

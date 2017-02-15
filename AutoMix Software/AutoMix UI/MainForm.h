@@ -37,6 +37,7 @@ namespace AutoMixUI {
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
+
 			InsertionLineColor = Color::AliceBlue;
 		}
 
@@ -64,6 +65,7 @@ namespace AutoMixUI {
 		property int InsertionIndex;
 		property InsertionModeType InsertionMode;
 		property bool IsRowDragInProgress;
+		property bool IsDragImportInProgress;
 		property Color InsertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
