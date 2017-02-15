@@ -37,7 +37,7 @@ namespace AutoMixUI {
 			_outputButton->Enabled = false;
 			_sortButton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
-			InsertionLineColor = Color::Red;
+			InsertionLineColor = Color::AliceBlue;
 		}
 
 	protected:
@@ -297,13 +297,13 @@ namespace AutoMixUI {
 				static_cast<System::Byte>(0)));
 			this->_musicListView->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->_musicListView->FullRowSelect = true;
+			this->_musicListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
 			this->_musicListView->Size = System::Drawing::Size(1264, 381);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
-			this->_musicListView->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &MainForm::_musicListView_ColumnClick);
 			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::_musicListView_ItemDrag);
 			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragDrop);
 			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragEnter);
@@ -497,7 +497,6 @@ namespace AutoMixUI {
 	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e);
 	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 	private: System::Void _backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);

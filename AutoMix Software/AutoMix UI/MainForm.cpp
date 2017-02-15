@@ -100,12 +100,6 @@ namespace AutoMixUI {
 		_presenter->clearDataBase();
 	}
 
-	System::Void MainForm::_musicListView_ColumnClick(System::Object^ sender, ColumnClickEventArgs^ e)
-	{
-		// NOT IMPLEMENTED YET
-
-	}
-
 	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
@@ -231,11 +225,9 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				ListViewItem^ dropItem = this->InsertionIndex != -1 ? _musicListView->Items[this->InsertionIndex] : nullptr;
-
+				ListViewItem^ dropItem = InsertionIndex != -1 ? _musicListView->Items[InsertionIndex] : nullptr;
 				if (dropItem != nullptr)
 				{
-
 					ListViewItem^ dragItem = (ListViewItem^)drgevent->Data->GetData(ListViewItem::typeid);
 					int dropIndex = dropItem->Index;
 
@@ -243,7 +235,7 @@ namespace AutoMixUI {
 					{
 						dropIndex--;
 					}
-					if (this->InsertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
+					if (InsertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
 					{
 						dropIndex++;
 					}
@@ -258,8 +250,8 @@ namespace AutoMixUI {
 			}
 			finally
 			{
-				this->InsertionIndex = -1;
-				this->IsRowDragInProgress = false;
+				InsertionIndex = -1;
+				IsRowDragInProgress = false;
 				_musicListView->Invalidate();
 			}
 		}
@@ -269,22 +261,22 @@ namespace AutoMixUI {
 	{
 		if (_musicListView->Items->Count > 1)
 		{
-			this->IsRowDragInProgress = true;
-			this->DoDragDrop(e->Item, DragDropEffects::Move);
+			IsRowDragInProgress = true;
+			DoDragDrop(e->Item, DragDropEffects::Move);
 		}
 	}
 
 	System::Void MainForm::_musicListView_DragOver(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
 	{
 
-		if (this->IsRowDragInProgress)
+		if (IsRowDragInProgress)
 		{
 			int insertionIndex;
 			InsertionModeType insertionMode;
 
 			Point clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
-			ListViewItem^ dropItem = _musicListView->GetItemAt(0, Math::Min(clientPoint.Y, _musicListView->Items[_musicListView->Items->Count - 1]->GetBounds(ItemBoundsPortion::Entire).Bottom - 1));
 
+			ListViewItem^ dropItem = _musicListView->GetItemAt(0, Math::Min(clientPoint.Y, _musicListView->Items[_musicListView->Items->Count - 1]->GetBounds(ItemBoundsPortion::Entire).Bottom - 1));
 			if (dropItem != nullptr)
 			{
 				Rectangle bounds = dropItem->GetBounds(ItemBoundsPortion::Entire);
@@ -304,8 +296,8 @@ namespace AutoMixUI {
 
 			if (insertionIndex != this->InsertionIndex || insertionMode != this->InsertionMode)
 			{
-				this->InsertionMode = insertionMode;
-				this->InsertionIndex = insertionIndex;
+				InsertionMode = insertionMode;
+				InsertionIndex = insertionIndex;
 				_musicListView->Invalidate();
 			}
 		}
@@ -422,11 +414,11 @@ namespace AutoMixUI {
 
 	System::Void MainForm::DrawInsertionLine()
 	{
-		if (this->InsertionIndex != -1)
+		if (InsertionIndex != -1)
 		{
 			int index;
 
-			index = this->InsertionIndex;
+			index = InsertionIndex;
 
 			if (index >= 0 && index < _musicListView->Items->Count)
 			{
@@ -436,9 +428,9 @@ namespace AutoMixUI {
 				int width;
 
 				bounds = _musicListView->Items[index]->GetBounds(ItemBoundsPortion::Entire);
-				x = 0; // aways fit the line to the client area, regardless of how the user is scrolling
-				y = this->InsertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
-				width = Math::Min(bounds.Width - bounds.Left, this->ClientSize.Width); // again, make sure the full width fits in the client area
+				x = 0;
+				y = InsertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
+				width = Math::Min(bounds.Width - bounds.Left, ClientSize.Width);
 
 				this->DrawInsertionLine(x, y, width);
 			}
