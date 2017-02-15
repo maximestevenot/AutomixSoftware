@@ -194,7 +194,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
 	{
-		if (_musicListView->SelectedItems->Count != 0)
+		if (!AnOperationRunning && _musicListView->SelectedItems->Count != 0)
 		{
 			_toolStripDeleteTrack->Enabled = true;
 		}
@@ -214,12 +214,33 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_musicListView_DragEnter(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ e)
 	{
-		e->Effect = e->AllowedEffect;
+		if (e->Data->GetDataPresent(DataFormats::FileDrop))
+		{
+			e->Effect = DragDropEffects::Copy;
+			IsDragImportInProgress = true;
+		}
 	}
 
 	System::Void MainForm::_musicListView_DragDrop(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
 	{
-		if (this->IsRowDragInProgress)
+		if (IsDragImportInProgress)
+		{
+			try
+			{
+				array<String^>^ fileNames = (array<String^>^) drgevent->Data->GetData(DataFormats::FileDrop);
+				for each (auto s in fileNames) {
+					Diagnostics::Debug::WriteLine(s);
+				}
+				onWorkerStart();
+				_backgroundWorker1->RunWorkerAsync(fileNames);
+			}
+			finally
+			{
+				IsDragImportInProgress = false;
+			}
+		}
+
+		else if (IsRowDragInProgress)
 		{
 			try
 			{
@@ -354,8 +375,9 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onWorkerStart()
 	{
-		_cancelToolStripMenuItem->Enabled = true;
+		AnOperationRunning = true;
 
+		_cancelToolStripMenuItem->Enabled = true;
 		_outputButton->Enabled = false;
 		_imputButton->Enabled = false;
 		_sortButton->Enabled = false;
@@ -363,12 +385,15 @@ namespace AutoMixUI {
 		optionsToolStripMenuItem->Enabled = false;
 		_toolStripProgressBar->Value = 0;
 		_toolStripProgressBar->Visible = true;
+
+		_musicListView->AllowDrop = false;
 	}
 
 	System::Void MainForm::onWorkerStop()
 	{
-		_cancelToolStripMenuItem->Enabled = false;
+		AnOperationRunning = false;
 
+		_cancelToolStripMenuItem->Enabled = false;
 		_outputButton->Enabled = true;
 		_imputButton->Enabled = true;
 		_sortButton->Enabled = true;
@@ -376,6 +401,8 @@ namespace AutoMixUI {
 		optionsToolStripMenuItem->Enabled = true;
 		_toolStripProgressBar->Visible = false;
 		_toolStripProgressBar->Value = 0;
+
+		_musicListView->AllowDrop = true;
 	}
 
 	System::Void MainForm::showCancelDialog()
