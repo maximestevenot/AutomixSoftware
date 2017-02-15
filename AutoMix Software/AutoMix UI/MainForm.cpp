@@ -384,6 +384,8 @@ namespace AutoMixUI {
 		optionsToolStripMenuItem->Enabled = false;
 		_toolStripProgressBar->Value = 0;
 		_toolStripProgressBar->Visible = true;
+
+		_musicListView->AllowDrop = false;
 	}
 
 	System::Void MainForm::onWorkerStop()
@@ -397,6 +399,8 @@ namespace AutoMixUI {
 		optionsToolStripMenuItem->Enabled = true;
 		_toolStripProgressBar->Visible = false;
 		_toolStripProgressBar->Value = 0;
+
+		_musicListView->AllowDrop = true;
 	}
 
 	System::Void MainForm::showCancelDialog()

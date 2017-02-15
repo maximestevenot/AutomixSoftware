@@ -49,7 +49,23 @@ namespace AutoMixUI {
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
 
-			if (Utils::getExtension(filePath)->Contains("mp3"))
+			if (IO::Directory::Exists(filePath))
+			{
+				IEnumerator^ dirFiles = IO::Directory::GetFiles(filePath)->GetEnumerator();
+
+				while (dirFiles->MoveNext() && !bw->CancellationPending)
+				{
+					String^ dirFilePath = safe_cast<String^>(dirFiles->Current);
+
+					if (Utils::getExtension(dirFilePath)->Contains("mp3"))
+					{
+						Track^ track = gcnew Track(dirFilePath);
+						collection->safeAdd(track);
+					}
+				}
+			}
+
+			else if (Utils::getExtension(filePath)->Contains("mp3"))
 			{
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
