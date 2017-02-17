@@ -244,7 +244,7 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				ListViewItem^ dropItem = InsertionIndex != -1 ? _musicListView->Items[InsertionIndex] : nullptr;
+				ListViewItem^ dropItem = _insertionIndex != -1 ? _musicListView->Items[_insertionIndex] : nullptr;
 				if (dropItem != nullptr)
 				{
 					ListViewItem^ dragItem = (ListViewItem^)drgevent->Data->GetData(ListViewItem::typeid);
@@ -254,7 +254,7 @@ namespace AutoMixUI {
 					{
 						dropIndex--;
 					}
-					if (InsertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
+					if (_insertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
 					{
 						dropIndex++;
 					}
@@ -271,7 +271,7 @@ namespace AutoMixUI {
 			}
 			finally
 			{
-				InsertionIndex = -1;
+				_insertionIndex = -1;
 				IsRowDragInProgress = false;
 				_musicListView->Invalidate();
 			}
@@ -311,14 +311,14 @@ namespace AutoMixUI {
 			else
 			{
 				insertionIndex = -1;
-				insertionMode = this->InsertionMode;
+				insertionMode = this->_insertionMode;
 				drgevent->Effect = DragDropEffects::None;
 			}
 
-			if (insertionIndex != this->InsertionIndex || insertionMode != this->InsertionMode)
+			if (insertionIndex != this->_insertionIndex || insertionMode != this->_insertionMode)
 			{
-				InsertionMode = insertionMode;
-				InsertionIndex = insertionIndex;
+				_insertionMode = insertionMode;
+				_insertionIndex = insertionIndex;
 				_musicListView->Invalidate();
 			}
 		}
@@ -444,11 +444,11 @@ namespace AutoMixUI {
 
 	System::Void MainForm::drawInsertionLine()
 	{
-		if (InsertionIndex != -1)
+		if (_insertionIndex != -1)
 		{
 			int index;
 
-			index = InsertionIndex;
+			index = _insertionIndex;
 
 			if (index >= 0 && index < _musicListView->Items->Count)
 			{
@@ -459,7 +459,7 @@ namespace AutoMixUI {
 
 				bounds = _musicListView->Items[index]->GetBounds(ItemBoundsPortion::Entire);
 				x = 0;
-				y = InsertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
+				y = _insertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
 				width = Math::Min(bounds.Width - bounds.Left, ClientSize.Width);
 
 				this->drawInsertionLine(x, y, width);
@@ -486,10 +486,10 @@ namespace AutoMixUI {
 			Point(x2, y - (arrowHeadSize / 2)), Point(x2 - arrowHeadSize, y), Point(x2, y + (arrowHeadSize / 2))
 		};
 
-		Pen^ pen = gcnew Pen(this->InsertionLineColor);
+		Pen^ pen = gcnew Pen(this->_insertionLineColor);
 
 		g->DrawLine(pen, x1, y, x2 - 1, y);
-		SolidBrush^ brush = gcnew SolidBrush(this->InsertionLineColor);
+		SolidBrush^ brush = gcnew SolidBrush(this->_insertionLineColor);
 		g->FillPolygon(brush, leftArrowHead);
 		g->FillPolygon(brush, rightArrowHead);
 	}

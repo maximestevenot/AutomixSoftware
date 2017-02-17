@@ -39,7 +39,7 @@ namespace AutoMixUI {
 			_toolStripProgressBar->Visible = false;
 			AnOperationRunning = false;
 
-			InsertionLineColor = Color::LightGray;
+			_insertionLineColor = Color::LightGray;
 		}
 
 	protected:
@@ -54,12 +54,22 @@ namespace AutoMixUI {
 			}
 		}
 
+	public:
+
+		property bool AnOperationRunning
+		{
+			bool get() { return _anOperationRunning; }
+		private: 
+			void set(bool value) { _anOperationRunning = value; }
+		}
+
+
 	private:
 		Presenter^ _presenter;
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;
-		property bool AnOperationRunning;
+		bool _anOperationRunning;
 
 		enum class InsertionModeType
 		{
@@ -67,9 +77,9 @@ namespace AutoMixUI {
 			After
 		};
 
-		property int InsertionIndex;
-		property InsertionModeType InsertionMode;
-		property Color InsertionLineColor;
+		int _insertionIndex;
+		InsertionModeType _insertionMode;
+		Color _insertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
