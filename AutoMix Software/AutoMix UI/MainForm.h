@@ -198,15 +198,15 @@ namespace AutoMixUI {
 			this->_importMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_importMenuItem->Name = L"_importMenuItem";
 			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(155, 22);
+			this->_importMenuItem->Size = System::Drawing::Size(159, 26);
 			this->_importMenuItem->Text = L"&Open...";
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
-			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
-			this->_cancelMenuItem->Size = System::Drawing::Size(155, 22);
+			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Z));
+			this->_cancelMenuItem->Size = System::Drawing::Size(159, 26);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
@@ -214,13 +214,13 @@ namespace AutoMixUI {
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(152, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(156, 6);
 			// 
 			// _quitMenuItem
 			// 
 			this->_quitMenuItem->Name = L"_quitMenuItem";
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
-			this->_quitMenuItem->Size = System::Drawing::Size(155, 22);
+			this->_quitMenuItem->Size = System::Drawing::Size(159, 26);
 			this->_quitMenuItem->Text = L"&Quit";
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
