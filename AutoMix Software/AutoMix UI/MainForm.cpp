@@ -31,14 +31,14 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onCancelMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
-		_backgroundWorker3->CancelAsync();
+		_importBackgroundWorker->CancelAsync();
+		_sortBackgroundWorker->CancelAsync();
+		_exportBackgroundWorker->CancelAsync();
 	}
 
-	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onQuitMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		if (showExitDialog())
 		{
@@ -46,7 +46,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::MainForm_FormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
+	System::Void MainForm::onMainFormClosing(System::Object ^ sender, System::Windows::Forms::FormClosingEventArgs ^ e)
 	{
 		if (e->CloseReason == CloseReason::UserClosing)
 		{
@@ -65,27 +65,27 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+	System::Void MainForm::onImportMenuItemClick(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracks(sender, e);
 	}
 
-	System::Void MainForm::_imputButton_Click(System::Object^  sender, System::EventArgs^  e)
+	System::Void MainForm::onImportButtonClick(System::Object^  sender, System::EventArgs^  e)
 	{
 		loadTracks(sender, e);
 	}
 
-	System::Void MainForm::_outputButton_Click(System::Object^  sender, System::EventArgs^  e)
+	System::Void MainForm::onExportButtonClick(System::Object^  sender, System::EventArgs^  e)
 	{
 		exportTrackList(sender, e);
 	}
 
-	System::Void MainForm::_sortButton_click(System::Object^ sender, System::EventArgs^ e)
+	System::Void MainForm::onSortButtonClick(System::Object^ sender, System::EventArgs^ e)
 	{
-		sortTracksWithGeneticAlgorithm(sender, e);
+		sortTrackList(sender, e);
 	}
 
-	System::Void MainForm::_aboutToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onAboutMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		String^ msg = "AutoMix Software Beta 1.0\n\n";
 		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
@@ -95,12 +95,12 @@ namespace AutoMixUI {
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
-	System::Void MainForm::_clearDBToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onClearDBMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		_presenter->clearDataBase();
 	}
 
-	System::Void MainForm::_backgroundWorker1_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::importBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		array<String^>^ fileNames = (array<String^>^) e->Argument;
@@ -112,13 +112,13 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_backgroundWorker1_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	System::Void MainForm::importBW_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
 		_toolStripProgressBar->Value += e->ProgressPercentage;
 		_presenter->notify();
 	}
 
-	System::Void MainForm::_backgroundWorker1_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	System::Void MainForm::importBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
@@ -133,7 +133,7 @@ namespace AutoMixUI {
 		_presenter->notify();
 	}
 
-	System::Void MainForm::_backgroundWorker2_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::sortBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		e->Result = _presenter->sortTrackCollectionWithGeneticAlgorithm(bw);
@@ -143,12 +143,12 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_backgroundWorker2_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	System::Void MainForm::sortBW_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
 		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
-	System::Void MainForm::_backgroundWorker2_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	System::Void MainForm::sortBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
@@ -165,7 +165,7 @@ namespace AutoMixUI {
 		onWorkerStop();
 	}
 
-	System::Void MainForm::_backgroundWorker3_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::exportBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ fileName = (System::String^) e->Argument;
@@ -176,12 +176,12 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_backgroundWorker3_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	System::Void MainForm::exportBW_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
 		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
-	System::Void MainForm::toolStripDeleteTrack_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onDeleteTrackToolStripClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		Generic::List<String^>^ selection = gcnew Generic::List<String^>();
 
@@ -192,19 +192,19 @@ namespace AutoMixUI {
 		_presenter->removeTracks(selection);
 	}
 
-	System::Void MainForm::_listViewcontextMenu_Opening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
+	System::Void MainForm::onTrackContextMenuOpening(System::Object ^ sender, System::ComponentModel::CancelEventArgs ^ e)
 	{
 		if (!AnOperationRunning && _musicListView->SelectedItems->Count != 0)
 		{
-			_toolStripDeleteTrack->Enabled = true;
+			_deleteTrackToolStrip->Enabled = true;
 		}
 		else
 		{
-			_toolStripDeleteTrack->Enabled = false;
+			_deleteTrackToolStrip->Enabled = false;
 		}
 	}
 
-	System::Void MainForm::selectAllToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onSelectAllMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		for each(ListViewItem^ item in _musicListView->Items)
 		{
@@ -212,7 +212,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_musicListView_DragEnter(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ e)
+	System::Void MainForm::musicListView_DragEnter(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ e)
 	{
 		if (e->Data->GetDataPresent(DataFormats::FileDrop))
 		{
@@ -221,7 +221,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_musicListView_DragDrop(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
+	System::Void MainForm::musicListView_DragDrop(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
 	{
 		if (IsDragImportInProgress)
 		{
@@ -232,7 +232,7 @@ namespace AutoMixUI {
 					Diagnostics::Debug::WriteLine(s);
 				}
 				onWorkerStart();
-				_backgroundWorker1->RunWorkerAsync(fileNames);
+				_importBackgroundWorker->RunWorkerAsync(fileNames);
 			}
 			finally
 			{
@@ -244,7 +244,7 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				ListViewItem^ dropItem = InsertionIndex != -1 ? _musicListView->Items[InsertionIndex] : nullptr;
+				ListViewItem^ dropItem = _insertionIndex != -1 ? _musicListView->Items[_insertionIndex] : nullptr;
 				if (dropItem != nullptr)
 				{
 					ListViewItem^ dragItem = (ListViewItem^)drgevent->Data->GetData(ListViewItem::typeid);
@@ -254,7 +254,7 @@ namespace AutoMixUI {
 					{
 						dropIndex--;
 					}
-					if (InsertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
+					if (_insertionMode == InsertionModeType::After && dragItem->Index < _musicListView->Items->Count - 1)
 					{
 						dropIndex++;
 					}
@@ -271,14 +271,14 @@ namespace AutoMixUI {
 			}
 			finally
 			{
-				InsertionIndex = -1;
+				_insertionIndex = -1;
 				IsRowDragInProgress = false;
 				_musicListView->Invalidate();
 			}
 		}
 	}
 
-	System::Void MainForm::_musicListView_ItemDrag(System::Object ^ sender, System::Windows::Forms::ItemDragEventArgs ^ e)
+	System::Void MainForm::musicListView_ItemDrag(System::Object ^ sender, System::Windows::Forms::ItemDragEventArgs ^ e)
 	{
 		if (_musicListView->Items->Count > 1)
 		{
@@ -287,7 +287,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::_musicListView_DragOver(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
+	System::Void MainForm::musicListView_DragOver(System::Object ^ sender, System::Windows::Forms::DragEventArgs ^ drgevent)
 	{
 
 		if (IsRowDragInProgress)
@@ -305,26 +305,26 @@ namespace AutoMixUI {
 				insertionMode = clientPoint.Y < bounds.Top + (bounds.Height / 2) ? InsertionModeType::Before : InsertionModeType::After;
 
 				drgevent->Effect = DragDropEffects::Move;
-				DrawInsertionLine();
+				drawInsertionLine();
 			}
 
 			else
 			{
 				insertionIndex = -1;
-				insertionMode = this->InsertionMode;
+				insertionMode = this->_insertionMode;
 				drgevent->Effect = DragDropEffects::None;
 			}
 
-			if (insertionIndex != this->InsertionIndex || insertionMode != this->InsertionMode)
+			if (insertionIndex != this->_insertionIndex || insertionMode != this->_insertionMode)
 			{
-				InsertionMode = insertionMode;
-				InsertionIndex = insertionIndex;
+				_insertionMode = insertionMode;
+				_insertionIndex = insertionIndex;
 				_musicListView->Invalidate();
 			}
 		}
 	}
 
-	System::Void MainForm::_backgroundWorker3_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
@@ -337,10 +337,10 @@ namespace AutoMixUI {
 		onWorkerStop();
 	}
 
-	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
+	System::Void MainForm::sortTrackList(System::Object^ sender, System::EventArgs^ e)
 	{
 		onWorkerStart();
-		_backgroundWorker2->RunWorkerAsync();
+		_sortBackgroundWorker->RunWorkerAsync();
 	}
 
 	System::Void MainForm::loadTracks(System::Object ^ sender, System::EventArgs ^ e)
@@ -353,7 +353,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		{
 			onWorkerStart();
-			_backgroundWorker1->RunWorkerAsync(dialog->FileNames);
+			_importBackgroundWorker->RunWorkerAsync(dialog->FileNames);
 		}
 	}
 
@@ -369,7 +369,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
-			_backgroundWorker3->RunWorkerAsync(dialog->FileName);
+			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}
 
@@ -377,12 +377,13 @@ namespace AutoMixUI {
 	{
 		AnOperationRunning = true;
 
-		_cancelToolStripMenuItem->Enabled = true;
-		_outputButton->Enabled = false;
-		_imputButton->Enabled = false;
+		_cancelMenuItem->Enabled = true;
+		_generateButton->Enabled = false;
+		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
-		_openToolStripMenuItem->Enabled = false;
-		optionsToolStripMenuItem->Enabled = false;
+
+		_importMenuItem->Enabled = false;
+		_optionsToolStripMenuItem->Enabled = false;
 		_toolStripProgressBar->Value = 0;
 		_toolStripProgressBar->Visible = true;
 
@@ -393,12 +394,13 @@ namespace AutoMixUI {
 	{
 		AnOperationRunning = false;
 
-		_cancelToolStripMenuItem->Enabled = false;
-		_outputButton->Enabled = true;
-		_imputButton->Enabled = true;
+		_cancelMenuItem->Enabled = false;
+		_generateButton->Enabled = true;
+		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
-		_openToolStripMenuItem->Enabled = true;
-		optionsToolStripMenuItem->Enabled = true;
+
+		_importMenuItem->Enabled = true;
+		_optionsToolStripMenuItem->Enabled = true;
 		_toolStripProgressBar->Visible = false;
 		_toolStripProgressBar->Value = 0;
 
@@ -428,9 +430,10 @@ namespace AutoMixUI {
 
 	System::Void MainForm::exitApplication()
 	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
-		_backgroundWorker3->CancelAsync();
+		_importBackgroundWorker->CancelAsync();
+		_sortBackgroundWorker->CancelAsync();
+		_exportBackgroundWorker->CancelAsync();
+
 		try
 		{
 			System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);
@@ -439,13 +442,13 @@ namespace AutoMixUI {
 		Application::Exit();
 	}
 
-	System::Void MainForm::DrawInsertionLine()
+	System::Void MainForm::drawInsertionLine()
 	{
-		if (InsertionIndex != -1)
+		if (_insertionIndex != -1)
 		{
 			int index;
 
-			index = InsertionIndex;
+			index = _insertionIndex;
 
 			if (index >= 0 && index < _musicListView->Items->Count)
 			{
@@ -456,15 +459,15 @@ namespace AutoMixUI {
 
 				bounds = _musicListView->Items[index]->GetBounds(ItemBoundsPortion::Entire);
 				x = 0;
-				y = InsertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
+				y = _insertionMode == InsertionModeType::Before ? bounds.Top : bounds.Bottom;
 				width = Math::Min(bounds.Width - bounds.Left, ClientSize.Width);
 
-				this->DrawInsertionLine(x, y, width);
+				this->drawInsertionLine(x, y, width);
 			}
 		}
 	}
 
-	System::Void MainForm::DrawInsertionLine(int x1, int y, int width)
+	System::Void MainForm::drawInsertionLine(int x1, int y, int width)
 	{
 		Graphics^ g = _musicListView->CreateGraphics();
 		array<Point>^ leftArrowHead;
@@ -483,10 +486,10 @@ namespace AutoMixUI {
 			Point(x2, y - (arrowHeadSize / 2)), Point(x2 - arrowHeadSize, y), Point(x2, y + (arrowHeadSize / 2))
 		};
 
-		Pen^ pen = gcnew Pen(this->InsertionLineColor);
+		Pen^ pen = gcnew Pen(this->_insertionLineColor);
 
 		g->DrawLine(pen, x1, y, x2 - 1, y);
-		SolidBrush^ brush = gcnew SolidBrush(this->InsertionLineColor);
+		SolidBrush^ brush = gcnew SolidBrush(this->_insertionLineColor);
 		g->FillPolygon(brush, leftArrowHead);
 		g->FillPolygon(brush, rightArrowHead);
 	}
