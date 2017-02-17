@@ -42,6 +42,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		bool haveSameScale;
 		double digitalTrack1Key, digitalTrack2Key;
 		double track1BPM, track2BPM;
+		double track1Danceability, track2Danceability;
 
 		try
 		{
@@ -52,6 +53,8 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 
 			track1BPM = (double)track1->BPM;
 			track2BPM = (double)track2->BPM;
+			track1Danceability = (double)track1->Danceability;
+			track2Danceability = (double)track2->Danceability;
 		}
 		catch (...)
 		{
@@ -59,6 +62,8 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		}
 
 		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPM_COEFFICIENT;
+
+		distance += System::Math::Abs((track1Danceability - track2Danceability)) * DANCEABILITY_COEFFICIENT;
 
 		if (haveSameScale)
 		{
@@ -70,7 +75,10 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		}
 		else
 		{
-			distance += KEY_TONALITY_COEFFICIENT;
+			if (!(digitalTrack1Key == digitalTrack2Key)) {
+				distance += KEY_TONALITY_COEFFICIENT;
+			}
+			
 		}
 		return (int)distance;
 	}
@@ -79,7 +87,8 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 	{
 		population^ pop = gcnew population();
 		System::Random^ rand = gcnew System::Random();
-		for (int k = 0; k < POPULATION_SIZE; k++)
+		pop->Add(trackCollection);
+		for (int k = 1; k < POPULATION_SIZE; k++)
 		{
 			TrackCollection^ individual = gcnew TrackCollection();
 			for (int i = 0; i < trackCollection->Count; i++)
