@@ -377,12 +377,13 @@ namespace AutoMixUI {
 	{
 		AnOperationRunning = true;
 
-		_cancelToolStripMenuItem->Enabled = true;
-		_outputButton->Enabled = false;
-		_imputButton->Enabled = false;
+		_cancelMenuItem->Enabled = true;
+		_generateButton->Enabled = false;
+		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
-		_openToolStripMenuItem->Enabled = false;
-		optionsToolStripMenuItem->Enabled = false;
+
+		_importMenuItem->Enabled = false;
+		_optionsToolStripMenuItem->Enabled = false;
 		_toolStripProgressBar->Value = 0;
 		_toolStripProgressBar->Visible = true;
 
@@ -393,12 +394,13 @@ namespace AutoMixUI {
 	{
 		AnOperationRunning = false;
 
-		_cancelToolStripMenuItem->Enabled = false;
-		_outputButton->Enabled = true;
-		_imputButton->Enabled = true;
+		_cancelMenuItem->Enabled = false;
+		_generateButton->Enabled = true;
+		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
-		_openToolStripMenuItem->Enabled = true;
-		optionsToolStripMenuItem->Enabled = true;
+
+		_importMenuItem->Enabled = true;
+		_optionsToolStripMenuItem->Enabled = true;
 		_toolStripProgressBar->Visible = false;
 		_toolStripProgressBar->Value = 0;
 
