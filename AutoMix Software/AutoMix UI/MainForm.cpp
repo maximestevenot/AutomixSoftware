@@ -196,11 +196,11 @@ namespace AutoMixUI {
 	{
 		if (!AnOperationRunning && _musicListView->SelectedItems->Count != 0)
 		{
-			_toolStripDeleteTrack->Enabled = true;
+			_deleteTrackToolStrip->Enabled = true;
 		}
 		else
 		{
-			_toolStripDeleteTrack->Enabled = false;
+			_deleteTrackToolStrip->Enabled = false;
 		}
 	}
 

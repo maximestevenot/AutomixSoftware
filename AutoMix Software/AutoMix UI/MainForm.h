@@ -99,7 +99,7 @@ namespace AutoMixUI {
 	private: System::ComponentModel::BackgroundWorker^  _exportBackgroundWorker;
 	private: System::Windows::Forms::ToolTip^  _toolTip;
 	private: System::Windows::Forms::ContextMenuStrip^  _trackContextMenu;
-	private: System::Windows::Forms::ToolStripMenuItem^  _toolStripDeleteTrack;
+	private: System::Windows::Forms::ToolStripMenuItem^  _deleteTrackToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
 	private: System::ComponentModel::IContainer^  components;
 
@@ -138,7 +138,7 @@ namespace AutoMixUI {
 			this->collectionBPM = (gcnew System::Windows::Forms::ColumnHeader());
 			this->collectionKey = (gcnew System::Windows::Forms::ColumnHeader());
 			this->_trackContextMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->_toolStripDeleteTrack = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_deleteTrackToolStrip = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_selectAllToolStrip = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_importButton = (gcnew System::Windows::Forms::Button());
 			this->_generateButton = (gcnew System::Windows::Forms::Button());
@@ -329,22 +329,22 @@ namespace AutoMixUI {
 			// _trackContextMenu
 			// 
 			this->_trackContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->_toolStripDeleteTrack,
+				this->_deleteTrackToolStrip,
 					this->_selectAllToolStrip
 			});
 			this->_trackContextMenu->Name = L"_listViewcontextMenu";
 			this->_trackContextMenu->Size = System::Drawing::Size(165, 48);
 			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::_listViewcontextMenu_Opening);
 			// 
-			// _toolStripDeleteTrack
+			// _deleteTrackToolStrip
 			// 
-			this->_toolStripDeleteTrack->Enabled = false;
-			this->_toolStripDeleteTrack->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_toolStripDeleteTrack.Image")));
-			this->_toolStripDeleteTrack->Name = L"_toolStripDeleteTrack";
-			this->_toolStripDeleteTrack->ShortcutKeys = System::Windows::Forms::Keys::Delete;
-			this->_toolStripDeleteTrack->Size = System::Drawing::Size(164, 22);
-			this->_toolStripDeleteTrack->Text = L"&Remove";
-			this->_toolStripDeleteTrack->Click += gcnew System::EventHandler(this, &MainForm::toolStripDeleteTrack_Click);
+			this->_deleteTrackToolStrip->Enabled = false;
+			this->_deleteTrackToolStrip->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_deleteTrackToolStrip.Image")));
+			this->_deleteTrackToolStrip->Name = L"_deleteTrackToolStrip";
+			this->_deleteTrackToolStrip->ShortcutKeys = System::Windows::Forms::Keys::Delete;
+			this->_deleteTrackToolStrip->Size = System::Drawing::Size(164, 22);
+			this->_deleteTrackToolStrip->Text = L"&Remove";
+			this->_deleteTrackToolStrip->Click += gcnew System::EventHandler(this, &MainForm::toolStripDeleteTrack_Click);
 			// 
 			// _selectAllToolStrip
 			// 
