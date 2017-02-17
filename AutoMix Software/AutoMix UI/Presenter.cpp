@@ -35,8 +35,11 @@ namespace AutoMixUI {
 
 	TrackCollection^ Presenter::sortTrackCollectionWithGeneticAlgorithm(ComponentModel::BackgroundWorker^ bw)
 	{
-		GeneticAlgorithm^ _geneticAlgorithm = gcnew GeneticAlgorithm();
-		_trackCollection = _geneticAlgorithm->sortTrackByGeneticAlgorithm(bw, _trackCollection);
+		if (_trackCollection->Count > 1)
+		{
+			GeneticAlgorithm^ _geneticAlgorithm = gcnew GeneticAlgorithm();
+			_trackCollection = _geneticAlgorithm->sortTrackByGeneticAlgorithm(bw, _trackCollection);
+		}
 		return _trackCollection;
 	}
 
@@ -75,10 +78,10 @@ namespace AutoMixUI {
 		_trackCollection->concat(collection);
 		_trackCollection->sortByName();
 		bw->ReportProgress(0);
-	
+
 		_dataExtractionEngine->extractData(bw, collection);
 		getMyRightsBack();
-	
+
 		_trackCollection->purge();
 		return _trackCollection;
 	}
@@ -107,7 +110,10 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
-		_trackCollection->exportToMP3(bw, destinationFile);
+		if (_trackCollection->Count >= 1)
+		{
+			_trackCollection->exportToMP3(bw, destinationFile);
+		}
 	}
 
 	void Presenter::clearDataBase()
