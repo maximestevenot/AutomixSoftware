@@ -33,9 +33,9 @@ namespace AutoMixUI {
 
 	System::Void MainForm::_cancelToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
-		_backgroundWorker3->CancelAsync();
+		_importBackgroundWorker->CancelAsync();
+		_sortBackgroundWorker->CancelAsync();
+		_exportBackgroundWorker->CancelAsync();
 	}
 
 	System::Void MainForm::_quitToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
@@ -232,7 +232,7 @@ namespace AutoMixUI {
 					Diagnostics::Debug::WriteLine(s);
 				}
 				onWorkerStart();
-				_backgroundWorker1->RunWorkerAsync(fileNames);
+				_importBackgroundWorker->RunWorkerAsync(fileNames);
 			}
 			finally
 			{
@@ -340,7 +340,7 @@ namespace AutoMixUI {
 	System::Void MainForm::sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e)
 	{
 		onWorkerStart();
-		_backgroundWorker2->RunWorkerAsync();
+		_sortBackgroundWorker->RunWorkerAsync();
 	}
 
 	System::Void MainForm::loadTracks(System::Object ^ sender, System::EventArgs ^ e)
@@ -353,7 +353,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 		{
 			onWorkerStart();
-			_backgroundWorker1->RunWorkerAsync(dialog->FileNames);
+			_importBackgroundWorker->RunWorkerAsync(dialog->FileNames);
 		}
 	}
 
@@ -369,7 +369,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
-			_backgroundWorker3->RunWorkerAsync(dialog->FileName);
+			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}
 
@@ -430,9 +430,10 @@ namespace AutoMixUI {
 
 	System::Void MainForm::exitApplication()
 	{
-		_backgroundWorker1->CancelAsync();
-		_backgroundWorker2->CancelAsync();
-		_backgroundWorker3->CancelAsync();
+		_importBackgroundWorker->CancelAsync();
+		_sortBackgroundWorker->CancelAsync();
+		_exportBackgroundWorker->CancelAsync();
+
 		try
 		{
 			System::IO::Directory::Delete(Path::GetTempPath() + "AutomixSoftware", true);

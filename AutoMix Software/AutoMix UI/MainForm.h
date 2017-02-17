@@ -97,9 +97,12 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ColumnHeader^  collectionKey;
 	private: System::Windows::Forms::Button^  _sortButton;
 	private: System::Windows::Forms::ToolStripMenuItem^  _cancelMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _importBackgroundWorker;
 
-	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker1;
-	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker2;
+
+
+	private: System::ComponentModel::BackgroundWorker^  _sortBackgroundWorker;
+
 	private: System::Windows::Forms::ToolStripProgressBar^  _toolStripProgressBar;
 
 
@@ -107,10 +110,11 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _optionsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _dataBaseToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _clearDBMenuItem;
+	private: System::ComponentModel::BackgroundWorker^  _exportBackgroundWorker;
 
 
 
-	private: System::ComponentModel::BackgroundWorker^  _backgroundWorker3;
+
 	private: System::Windows::Forms::ToolTip^  _toolTip;
 	private: System::Windows::Forms::ContextMenuStrip^  _trackContextMenu;
 
@@ -163,9 +167,9 @@ namespace AutoMixUI {
 			this->_generateButton = (gcnew System::Windows::Forms::Button());
 			this->_logo = (gcnew System::Windows::Forms::PictureBox());
 			this->_sortButton = (gcnew System::Windows::Forms::Button());
-			this->_backgroundWorker1 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->_backgroundWorker2 = (gcnew System::ComponentModel::BackgroundWorker());
-			this->_backgroundWorker3 = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_importBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
@@ -208,7 +212,7 @@ namespace AutoMixUI {
 			this->_importMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_importMenuItem->Name = L"_importMenuItem";
 			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_importMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_importMenuItem->Text = L"&Open...";
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
 			// 
@@ -216,7 +220,7 @@ namespace AutoMixUI {
 			// 
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
 			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
-			this->_cancelMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_cancelMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
@@ -224,13 +228,13 @@ namespace AutoMixUI {
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(156, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(152, 6);
 			// 
 			// _quitMenuItem
 			// 
 			this->_quitMenuItem->Name = L"_quitMenuItem";
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
-			this->_quitMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_quitMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_quitMenuItem->Text = L"&Quit";
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
 			// 
@@ -246,13 +250,13 @@ namespace AutoMixUI {
 			// 
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
-			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
 			this->_dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBMenuItem
 			// 
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
-			this->_clearDBMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
 			// 
@@ -266,7 +270,7 @@ namespace AutoMixUI {
 			// _aboutMenuItem
 			// 
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
-			this->_aboutMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_aboutMenuItem->Size = System::Drawing::Size(116, 22);
 			this->_aboutMenuItem->Text = L"&About...";
 			this->_aboutMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_aboutToolStripMenuItem_Click);
 			// 
@@ -435,29 +439,29 @@ namespace AutoMixUI {
 			this->_sortButton->UseVisualStyleBackColor = false;
 			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::_sortButton_click);
 			// 
-			// _backgroundWorker1
+			// _importBackgroundWorker
 			// 
-			this->_backgroundWorker1->WorkerReportsProgress = true;
-			this->_backgroundWorker1->WorkerSupportsCancellation = true;
-			this->_backgroundWorker1->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
-			this->_backgroundWorker1->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker1_ProgressChanged);
-			this->_backgroundWorker1->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
+			this->_importBackgroundWorker->WorkerReportsProgress = true;
+			this->_importBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_importBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
+			this->_importBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker1_ProgressChanged);
+			this->_importBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
 			// 
-			// _backgroundWorker2
+			// _sortBackgroundWorker
 			// 
-			this->_backgroundWorker2->WorkerReportsProgress = true;
-			this->_backgroundWorker2->WorkerSupportsCancellation = true;
-			this->_backgroundWorker2->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
-			this->_backgroundWorker2->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
-			this->_backgroundWorker2->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
+			this->_sortBackgroundWorker->WorkerReportsProgress = true;
+			this->_sortBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_sortBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
+			this->_sortBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
+			this->_sortBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
 			// 
-			// _backgroundWorker3
+			// _exportBackgroundWorker
 			// 
-			this->_backgroundWorker3->WorkerReportsProgress = true;
-			this->_backgroundWorker3->WorkerSupportsCancellation = true;
-			this->_backgroundWorker3->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
-			this->_backgroundWorker3->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
-			this->_backgroundWorker3->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
+			this->_exportBackgroundWorker->WorkerReportsProgress = true;
+			this->_exportBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_exportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
+			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
+			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
