@@ -56,7 +56,6 @@ namespace AutoMixUI {
 
 	private:
 		Presenter^ _presenter;
-	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;
@@ -72,59 +71,37 @@ namespace AutoMixUI {
 		property InsertionModeType InsertionMode;
 		property Color InsertionLineColor;
 
-
-
+	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
-
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator;
 	private: System::Windows::Forms::ToolStripMenuItem^  _quitMenuItem;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _aboutMenuItem;
-
 	private: System::Windows::Forms::StatusStrip^  _statusStrip;
 	private: System::Windows::Forms::ListView^  _musicListView;
 	private: System::Windows::Forms::ColumnHeader^  collectionDuration;
 	private: System::Windows::Forms::ColumnHeader^  collectionBPM;
 	private: System::Windows::Forms::ColumnHeader^  collectionName;
 	private: System::Windows::Forms::Button^  _importButton;
-
 	private: System::Windows::Forms::Button^  _generateButton;
-
 	private: System::Windows::Forms::PictureBox^  _logo;
-
 	private: System::Windows::Forms::ColumnHeader^  collectionKey;
 	private: System::Windows::Forms::Button^  _sortButton;
 	private: System::Windows::Forms::ToolStripMenuItem^  _cancelMenuItem;
 	private: System::ComponentModel::BackgroundWorker^  _importBackgroundWorker;
-
-
-
 	private: System::ComponentModel::BackgroundWorker^  _sortBackgroundWorker;
-
 	private: System::Windows::Forms::ToolStripProgressBar^  _toolStripProgressBar;
-
-
 	private: System::Windows::Forms::ToolStripStatusLabel^  _toolStripCurrentDir;
 	private: System::Windows::Forms::ToolStripMenuItem^  _optionsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _dataBaseToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _clearDBMenuItem;
 	private: System::ComponentModel::BackgroundWorker^  _exportBackgroundWorker;
-
-
-
-
 	private: System::Windows::Forms::ToolTip^  _toolTip;
 	private: System::Windows::Forms::ContextMenuStrip^  _trackContextMenu;
-
 	private: System::Windows::Forms::ToolStripMenuItem^  _toolStripDeleteTrack;
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
-
-
-
 	private: System::ComponentModel::IContainer^  components;
-
 
 	private:
 		/// <summary>
@@ -202,7 +179,6 @@ namespace AutoMixUI {
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
 			this->_fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->_fileToolStripMenuItem->Text = L"&File";
-			this->_fileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_fileToolStripMenuItem_Click);
 			// 
 			// _importMenuItem
 			// 
@@ -510,7 +486,7 @@ namespace AutoMixUI {
 		System::Void MainForm::DrawInsertionLine(int x1, int y, int width);
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
-	private: System::Void _fileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {}
+
 	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void loadTracks(System::Object^  sender, System::EventArgs^  e);
@@ -539,6 +515,6 @@ namespace AutoMixUI {
 	private: System::Void _musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 	private: System::Void _musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void _musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-};
+	};
 
 }
