@@ -190,7 +190,7 @@ namespace AutoMixUI {
 			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
 			this->_importMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_importMenuItem->Text = L"&Open...";
-			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_openToolStripMenuItem_Click);
+			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
@@ -199,7 +199,7 @@ namespace AutoMixUI {
 			this->_cancelMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
-			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_cancelToolStripMenuItem_Click);
+			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
 			// 
 			// toolStripSeparator
 			// 
@@ -212,7 +212,7 @@ namespace AutoMixUI {
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
 			this->_quitMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_quitMenuItem->Text = L"&Quit";
-			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_quitToolStripMenuItem_Click);
+			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
 			// _optionsToolStripMenuItem
 			// 
@@ -220,7 +220,7 @@ namespace AutoMixUI {
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
 			this->_optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->_optionsToolStripMenuItem->Text = L"&Options";
-			this->_optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
+			this->_optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
 			// _dataBaseToolStripMenuItem
 			// 
@@ -234,7 +234,7 @@ namespace AutoMixUI {
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
 			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
-			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_clearDBToolStripMenuItem_Click);
+			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
 			// _helpToolStripMenuItem
 			// 
@@ -248,7 +248,7 @@ namespace AutoMixUI {
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
 			this->_aboutMenuItem->Size = System::Drawing::Size(116, 22);
 			this->_aboutMenuItem->Text = L"&About...";
-			this->_aboutMenuItem->Click += gcnew System::EventHandler(this, &MainForm::_aboutToolStripMenuItem_Click);
+			this->_aboutMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutMenuItemClick);
 			// 
 			// _statusStrip
 			// 
@@ -301,10 +301,10 @@ namespace AutoMixUI {
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
-			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::_musicListView_ItemDrag);
-			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragDrop);
-			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragEnter);
-			this->_musicListView->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::_musicListView_DragOver);
+			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::musicListView_ItemDrag);
+			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragDrop);
+			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragEnter);
+			this->_musicListView->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragOver);
 			// 
 			// collectionName
 			// 
@@ -334,7 +334,7 @@ namespace AutoMixUI {
 			});
 			this->_trackContextMenu->Name = L"_listViewcontextMenu";
 			this->_trackContextMenu->Size = System::Drawing::Size(165, 48);
-			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::_listViewcontextMenu_Opening);
+			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::onTrackContextMenuOpening);
 			// 
 			// _deleteTrackToolStrip
 			// 
@@ -344,7 +344,7 @@ namespace AutoMixUI {
 			this->_deleteTrackToolStrip->ShortcutKeys = System::Windows::Forms::Keys::Delete;
 			this->_deleteTrackToolStrip->Size = System::Drawing::Size(164, 22);
 			this->_deleteTrackToolStrip->Text = L"&Remove";
-			this->_deleteTrackToolStrip->Click += gcnew System::EventHandler(this, &MainForm::toolStripDeleteTrack_Click);
+			this->_deleteTrackToolStrip->Click += gcnew System::EventHandler(this, &MainForm::onDeleteTrackToolStripClick);
 			// 
 			// _selectAllToolStrip
 			// 
@@ -352,7 +352,7 @@ namespace AutoMixUI {
 			this->_selectAllToolStrip->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::A));
 			this->_selectAllToolStrip->Size = System::Drawing::Size(164, 22);
 			this->_selectAllToolStrip->Text = L"Select All";
-			this->_selectAllToolStrip->Click += gcnew System::EventHandler(this, &MainForm::selectAllToolStripMenuItem_Click);
+			this->_selectAllToolStrip->Click += gcnew System::EventHandler(this, &MainForm::onSelectAllMenuItemClick);
 			// 
 			// _importButton
 			// 
@@ -368,7 +368,7 @@ namespace AutoMixUI {
 			this->_importButton->Text = L"Import Tracks";
 			this->_toolTip->SetToolTip(this->_importButton, L"Click to import new tracks");
 			this->_importButton->UseVisualStyleBackColor = false;
-			this->_importButton->Click += gcnew System::EventHandler(this, &MainForm::_imputButton_Click);
+			this->_importButton->Click += gcnew System::EventHandler(this, &MainForm::onImportButtonClick);
 			// 
 			// _generateButton
 			// 
@@ -385,7 +385,7 @@ namespace AutoMixUI {
 			this->_generateButton->Text = L"Generate Mix";
 			this->_toolTip->SetToolTip(this->_generateButton, L"Click to export an mp3 file");
 			this->_generateButton->UseVisualStyleBackColor = false;
-			this->_generateButton->Click += gcnew System::EventHandler(this, &MainForm::_outputButton_Click);
+			this->_generateButton->Click += gcnew System::EventHandler(this, &MainForm::onExportButtonClick);
 			// 
 			// _logo
 			// 
@@ -413,31 +413,31 @@ namespace AutoMixUI {
 			this->_sortButton->Text = L"Sort";
 			this->_toolTip->SetToolTip(this->_sortButton, L"Click to sort tracks using AutoMix AI");
 			this->_sortButton->UseVisualStyleBackColor = false;
-			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::_sortButton_click);
+			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::onSortButtonClick);
 			// 
 			// _importBackgroundWorker
 			// 
 			this->_importBackgroundWorker->WorkerReportsProgress = true;
 			this->_importBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_importBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker1_DoWork);
-			this->_importBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker1_ProgressChanged);
-			this->_importBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker1_RunWorkerCompleted);
+			this->_importBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::importBW_DoWork);
+			this->_importBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::importBW_ProgressChanged);
+			this->_importBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::importBW_RunWorkerCompleted);
 			// 
 			// _sortBackgroundWorker
 			// 
 			this->_sortBackgroundWorker->WorkerReportsProgress = true;
 			this->_sortBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_sortBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker2_DoWork);
-			this->_sortBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker2_ProgressChanged);
-			this->_sortBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker2_RunWorkerCompleted);
+			this->_sortBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::sortBW_DoWork);
+			this->_sortBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::sortBW_ProgressChanged);
+			this->_sortBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::sortBW_RunWorkerCompleted);
 			// 
 			// _exportBackgroundWorker
 			// 
 			this->_exportBackgroundWorker->WorkerReportsProgress = true;
 			this->_exportBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_exportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::_backgroundWorker3_DoWork);
-			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::_backgroundWorker3_ProgressChanged);
-			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::_backgroundWorker3_RunWorkerCompleted);
+			this->_exportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::exportBW_DoWork);
+			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
+			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -459,7 +459,7 @@ namespace AutoMixUI {
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"AutoMix Software";
-			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::MainForm_FormClosing);
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::onMainFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->_menuStrip->ResumeLayout(false);
 			this->_menuStrip->PerformLayout();
@@ -478,43 +478,52 @@ namespace AutoMixUI {
 	private:
 		System::Void onWorkerStart();
 		System::Void onWorkerStop();
+
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
 		bool showExitDialog();
+
 		System::Void exitApplication();
-		System::Void MainForm::DrawInsertionLine();
-		System::Void MainForm::DrawInsertionLine(int x1, int y, int width);
+
+		System::Void loadTracks(System::Object^  sender, System::EventArgs^  e);
+		System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
+		System::Void sortTrackList(System::Object^ sender, System::EventArgs^ e);
+
+		System::Void MainForm::drawInsertionLine();
+		System::Void MainForm::drawInsertionLine(int x1, int y, int width);
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {}
 
-	private: System::Void _quitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _openToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void loadTracks(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void exportTrackList(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void sortTracksWithGeneticAlgorithm(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void _imputButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _outputButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _sortButton_click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void MainForm_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-	private: System::Void _backgroundWorker1_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void _backgroundWorker1_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
-	private: System::Void _cancelToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _backgroundWorker2_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void _backgroundWorker2_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
-	private: System::Void _aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _clearDBToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _backgroundWorker1_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
-	private: System::Void _backgroundWorker2_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
-	private: System::Void _backgroundWorker3_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void _backgroundWorker3_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
-	private: System::Void _backgroundWorker3_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
-	private: System::Void toolStripDeleteTrack_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _listViewcontextMenu_Opening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
-	private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void _musicListView_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-	private: System::Void _musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-	private: System::Void _musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
-	private: System::Void _musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void onQuitMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onImportMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onImportButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onExportButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSortButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onCancelMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onAboutMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onClearDBMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onDeleteTrackToolStripClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSelectAllMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+
+	private: System::Void importBW_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void importBW_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void importBW_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+
+	private: System::Void sortBW_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void sortBW_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void sortBW_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+
+	private: System::Void exportBW_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void exportBW_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void exportBW_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+
+	private: System::Void onTrackContextMenuOpening(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e);
+	private: System::Void onMainFormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+
+	private: System::Void musicListView_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
+	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 	};
 
 }
