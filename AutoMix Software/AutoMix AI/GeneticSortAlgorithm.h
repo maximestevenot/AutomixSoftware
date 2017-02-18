@@ -26,7 +26,7 @@ namespace AutoMixAI
 		GeneticSortAlgorithm(TrackDistance^ distance);
 		GeneticSortAlgorithm(TrackDistance^ distance, unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty);
 
-		void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
+		AutoMixDataManagement::TrackCollection^ sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
 
 		int computeTracksDistance(AutoMixDataManagement::Track^, AutoMixDataManagement::Track^);
 
@@ -36,7 +36,6 @@ namespace AutoMixAI
 		initonly int POPULATION_SIZE;
 		initonly double MUTATION_PROBABILITY; // Probabilty of mutation out of 100
 
-		AutoMixDataManagement::TrackCollection^ GeneticSortAlgorithm::geneticSort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^);
 		Population^ createInitialPopulation(AutoMixDataManagement::TrackCollection^);
 		int computeIndividualEvaluation(AutoMixDataManagement::TrackCollection^);
 		void sortPopulation(Population^, int, int);

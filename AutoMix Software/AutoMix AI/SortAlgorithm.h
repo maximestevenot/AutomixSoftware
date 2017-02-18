@@ -21,7 +21,7 @@ namespace AutoMixAI
 
 		SortAlgorithm(TrackDistance^ distance);
 
-		virtual void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) abstract;
+		virtual AutoMixDataManagement::TrackCollection^ sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) abstract;
 
 	private:
 		TrackDistance^ _distance;

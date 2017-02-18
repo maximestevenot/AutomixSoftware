@@ -24,12 +24,7 @@ namespace AutoMixAI
 		MUTATION_PROBABILITY = mutationProbabilty;
 	}
 
-	void GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
-	{
-		trackCollection = geneticSort(bw, trackCollection);
-	}
-
-	TrackCollection^ GeneticSortAlgorithm::geneticSort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
+	TrackCollection^ GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
 		Population^ pop = createInitialPopulation(trackCollection);
 		sortPopulation(pop, 0, pop->Count - 1);
