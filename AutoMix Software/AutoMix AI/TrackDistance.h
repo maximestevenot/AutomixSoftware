@@ -13,7 +13,22 @@ namespace AutoMixAI
 
 	public ref class TrackDistance abstract
 	{
+
 	public:
+
+		property double BPMPriority;
+		property double KeyNumberPriority;
+		property double KeyTonalityPriority;
+		property double DanceabilityPriority;
+
+		TrackDistance()
+		{
+			BPMPriority = 1200;
+			KeyNumberPriority = 30;
+			KeyTonalityPriority = 800;
+			DanceabilityPriority = 10;
+		}
+
 		virtual double compute(AutoMixDataManagement::Track^ t1, AutoMixDataManagement::Track^ t2) abstract;
 	};
 

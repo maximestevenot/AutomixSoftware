@@ -1,3 +1,11 @@
+// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
+// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
+// 
+// This file is part of AutoMix Software.
+// 
+// Unauthorized copying of this file, via any medium is strictly prohibited.
+// You should have received a copy of the License along with this program.
+
 #include "stdafx.h"
 #include "SimpleDistance.h"
 
@@ -30,9 +38,9 @@ namespace AutoMixAI {
 			return -1;
 		}
 
-		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPM_COEFFICIENT;
+		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPMPriority;
 
-		distance += System::Math::Abs((track1Danceability - track2Danceability)) * DANCEABILITY_COEFFICIENT;
+		distance += System::Math::Abs((track1Danceability - track2Danceability)) * DanceabilityPriority;
 
 		if (haveSameScale)
 		{
@@ -40,12 +48,12 @@ namespace AutoMixAI {
 			if (distance_abs > 6) {
 				distance_abs = 12 - distance_abs;
 			}
-			distance += distance_abs * KEY_NUMBER_COEFFICIENT;
+			distance += distance_abs * KeyNumberPriority;
 		}
 		else
 		{
 			if (!(digitalTrack1Key == digitalTrack2Key)) {
-				distance += KEY_TONALITY_COEFFICIENT;
+				distance += KeyTonalityPriority;
 			}
 
 		}
