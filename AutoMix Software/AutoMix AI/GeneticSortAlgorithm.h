@@ -17,20 +17,24 @@ namespace AutoMixAI
 	public ref class GeneticSortAlgorithm : public SortAlgorithm
 	{
 	public:
-		static int NUMBER_OF_ITERATION = 150;
-		static int POPULATION_SIZE = 200;
-		static int MUTATION_PROBABILITY = 90; // Probabilty of mutation out of 100
 
 		static int BPM_COEFFICIENT = 1200;
 		static int KEY_NUMBER_COEFFICIENT = 30;
 		static int KEY_TONALITY_COEFFICIENT = 800;
 		static int DANCEABILITY_COEFFICIENT = 10;
 
+		GeneticSortAlgorithm();
+		GeneticSortAlgorithm(unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty);
+
 		void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
+
 		int computeTracksDistance(AutoMixDataManagement::Track^, AutoMixDataManagement::Track^);
 
-
 	private:
+
+		initonly int NUMBER_OF_ITERATION;
+		initonly int POPULATION_SIZE;
+		initonly double MUTATION_PROBABILITY; // Probabilty of mutation out of 100
 
 		AutoMixDataManagement::TrackCollection^ GeneticSortAlgorithm::geneticSort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^);
 		Population^ createInitialPopulation(AutoMixDataManagement::TrackCollection^);

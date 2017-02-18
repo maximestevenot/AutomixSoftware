@@ -14,9 +14,22 @@ using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
+	GeneticSortAlgorithm::GeneticSortAlgorithm() : GeneticSortAlgorithm(150, 200, 90) {}
+
+	GeneticSortAlgorithm::GeneticSortAlgorithm(unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty)
+	{
+		NUMBER_OF_ITERATION = numberOfIteration;
+		POPULATION_SIZE = populationSize;
+		MUTATION_PROBABILITY = mutationProbabilty;
+	}
 
 	void GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
+
+		System::Diagnostics::Debug::WriteLine(NUMBER_OF_ITERATION);
+		System::Diagnostics::Debug::WriteLine(POPULATION_SIZE);
+		System::Diagnostics::Debug::WriteLine(MUTATION_PROBABILITY);
+
 		trackCollection = geneticSort(bw, trackCollection);
 	}
 
@@ -31,9 +44,11 @@ namespace AutoMixAI
 			{
 				break;
 			}
-			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
-			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
-			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));
+
+			//System::Diagnostics::Debug::WriteLine("iteration {0}", k);
+			//System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
+			//System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));
+
 			createChildAndPutThemIntoPopulation(pop);
 			mutatePopulation(pop);
 			sortPopulation(pop, 0, pop->Count - 1);
