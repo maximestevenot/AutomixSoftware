@@ -6,12 +6,16 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-// AutoMix AI.h
-
 #pragma once
 
-#include "GeneticSortAlgorithm.h"
-#include "SortAlgorithm.h"
+namespace AutoMixAI
+{
 
-#include "resource.h"
-#include "Stdafx.h"
+	public ref class SortAlgorithm abstract
+	{
+	public:
+		virtual void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) abstract;
+	};
+
+}
+

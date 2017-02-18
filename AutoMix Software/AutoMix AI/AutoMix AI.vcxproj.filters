@@ -24,7 +24,10 @@
     <ClInclude Include="AutoMixAI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneticAlgorithm.h">
+    <ClInclude Include="SortAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneticSortAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,7 +41,7 @@
     <ClCompile Include="AutoMixAI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneticAlgorithm.cpp">
+    <ClCompile Include="GeneticSortAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

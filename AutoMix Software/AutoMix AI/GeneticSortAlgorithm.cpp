@@ -7,16 +7,22 @@
 // You should have received a copy of the License along with this program.
 
 #include "stdafx.h"
-#include "GeneticAlgorithm.h"
+#include "GeneticSortAlgorithm.h"
 
 using namespace System;
+using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
 
-TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
+	void GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
-		population^ pop = createInitialPopulation(trackCollection);
+		trackCollection = geneticSort(bw, trackCollection);
+	}
+
+	TrackCollection^ GeneticSortAlgorithm::geneticSort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
+	{
+		Population^ pop = createInitialPopulation(trackCollection);
 		sortPopulation(pop, 0, pop->Count - 1);
 
 		for (int k = 0; k < NUMBER_OF_ITERATION; k++)
@@ -32,12 +38,12 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 			mutatePopulation(pop);
 			sortPopulation(pop, 0, pop->Count - 1);
 			pop = pop->GetRange(0, POPULATION_SIZE);
-			bw->ReportProgress((int)1000*k / NUMBER_OF_ITERATION);
+			bw->ReportProgress((int)1000 * k / NUMBER_OF_ITERATION);
 		}
 		return pop[0];
 	}
 
-	int GeneticAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
+	int GeneticSortAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
 	{
 		bool haveSameScale;
 		double digitalTrack1Key, digitalTrack2Key;
@@ -67,7 +73,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 
 		if (haveSameScale)
 		{
-			int distance_abs = (int) System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
+			int distance_abs = (int)System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
 			if (distance_abs > 6) {
 				distance_abs = 12 - distance_abs;
 			}
@@ -78,14 +84,14 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 			if (!(digitalTrack1Key == digitalTrack2Key)) {
 				distance += KEY_TONALITY_COEFFICIENT;
 			}
-			
+
 		}
 		return (int)distance;
 	}
 
-	population^ GeneticAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
+	Population^ GeneticSortAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
 	{
-		population^ pop = gcnew population();
+		Population^ pop = gcnew Population();
 		System::Random^ rand = gcnew System::Random();
 		pop->Add(trackCollection);
 		for (int k = 1; k < POPULATION_SIZE; k++)
@@ -106,7 +112,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		return pop;
 	}
 
-	int GeneticAlgorithm::computeIndividualEvaluation(TrackCollection^ individual)
+	int GeneticSortAlgorithm::computeIndividualEvaluation(TrackCollection^ individual)
 	{
 		int result = 0;
 		for (int k = 0; k < (individual->Count) - 1; k++)
@@ -116,7 +122,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		return result;
 	}
 
-	void GeneticAlgorithm::sortPopulation(population^ population, int begin, int end)
+	void GeneticSortAlgorithm::sortPopulation(Population^ population, int begin, int end)
 	{
 		int i = begin;
 		int j = end;
@@ -152,7 +158,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		}
 	}
 
-	void GeneticAlgorithm::createChildAndPutThemIntoPopulation(population^ pop)
+	void GeneticSortAlgorithm::createChildAndPutThemIntoPopulation(Population^ pop)
 	{
 		int count = pop->Count;
 		for (int k = 0; k < count / 2; k++)
@@ -164,7 +170,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		}
 	}
 
-	TrackCollection^ GeneticAlgorithm::createChildrenFromParents(TrackCollection^ parent1, TrackCollection^ parent2)
+	TrackCollection^ GeneticSortAlgorithm::createChildrenFromParents(TrackCollection^ parent1, TrackCollection^ parent2)
 	{
 		TrackCollection^ children = gcnew TrackCollection();
 		for (int k = 0; k < (parent1->Count) / 2; k++)
@@ -192,7 +198,7 @@ TrackCollection^ GeneticAlgorithm::sortTrackByGeneticAlgorithm(System::Component
 		return children;
 	}
 
-	void GeneticAlgorithm::mutatePopulation(population^ pop)
+	void GeneticSortAlgorithm::mutatePopulation(Population^ pop)
 	{
 		System::Random^ rand = gcnew System::Random();
 		for (int k = 0; k < pop->Count; k++)
