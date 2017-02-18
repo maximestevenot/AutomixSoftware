@@ -23,8 +23,8 @@ namespace AutoMixAI
 		static int KEY_TONALITY_COEFFICIENT = 800;
 		static int DANCEABILITY_COEFFICIENT = 10;
 
-		GeneticSortAlgorithm();
-		GeneticSortAlgorithm(unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty);
+		GeneticSortAlgorithm(TrackDistance^ distance);
+		GeneticSortAlgorithm(TrackDistance^ distance, unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty);
 
 		void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
 

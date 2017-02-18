@@ -14,9 +14,10 @@ using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
-	GeneticSortAlgorithm::GeneticSortAlgorithm() : GeneticSortAlgorithm(150, 200, 90) {}
+	GeneticSortAlgorithm::GeneticSortAlgorithm(TrackDistance^ distance) : GeneticSortAlgorithm(distance, 150, 200, 90) {}
 
-	GeneticSortAlgorithm::GeneticSortAlgorithm(unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty)
+	GeneticSortAlgorithm::GeneticSortAlgorithm(TrackDistance^ distance, unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty)
+		: SortAlgorithm(distance)
 	{
 		NUMBER_OF_ITERATION = numberOfIteration;
 		POPULATION_SIZE = populationSize;
@@ -25,11 +26,6 @@ namespace AutoMixAI
 
 	void GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
-
-		System::Diagnostics::Debug::WriteLine(NUMBER_OF_ITERATION);
-		System::Diagnostics::Debug::WriteLine(POPULATION_SIZE);
-		System::Diagnostics::Debug::WriteLine(MUTATION_PROBABILITY);
-
 		trackCollection = geneticSort(bw, trackCollection);
 	}
 
@@ -60,7 +56,9 @@ namespace AutoMixAI
 
 	int GeneticSortAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
 	{
-		bool haveSameScale;
+
+		return (int) Distance->compute(track1, track2);
+		/*bool haveSameScale;
 		double digitalTrack1Key, digitalTrack2Key;
 		double track1BPM, track2BPM;
 		double track1Danceability, track2Danceability;
@@ -101,7 +99,7 @@ namespace AutoMixAI
 			}
 
 		}
-		return (int)distance;
+		return (int)distance;*/
 	}
 
 	Population^ GeneticSortAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)

@@ -8,23 +8,13 @@
 
 #pragma once
 
-#include "TrackDistance.h"
-
 namespace AutoMixAI
 {
 
-	public ref class SortAlgorithm abstract
+	public ref class TrackDistance abstract
 	{
 	public:
-
-		property TrackDistance^ Distance { TrackDistance^ get(); }
-
-		SortAlgorithm(TrackDistance^ distance);
-
-		virtual void sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) abstract;
-
-	private:
-		TrackDistance^ _distance;
+		virtual double compute(AutoMixDataManagement::Track^ t1, AutoMixDataManagement::Track^ t2) abstract;
 	};
 
 }

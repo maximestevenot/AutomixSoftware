@@ -25,7 +25,7 @@ namespace GeneticAlgorithmTests
 		Track^ track2 = gcnew Track("test2.mp3");
 		track2->BPM = 150;
 		track2->Key = "6m";
-		GeneticSortAlgorithm^ ga = gcnew GeneticSortAlgorithm();
+		GeneticSortAlgorithm^ ga = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
 		int distance = ga->computeTracksDistance(track1, track2);
 		Assert::IsTrue(distance >= 0);
 	}
