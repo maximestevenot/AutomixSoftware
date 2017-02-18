@@ -49,54 +49,6 @@ namespace AutoMixAI
 		return pop[0];
 	}
 
-	int GeneticSortAlgorithm::computeTracksDistance(Track^ track1, Track^ track2)
-	{
-
-		return (int) Distance->compute(track1, track2);
-		/*bool haveSameScale;
-		double digitalTrack1Key, digitalTrack2Key;
-		double track1BPM, track2BPM;
-		double track1Danceability, track2Danceability;
-
-		try
-		{
-			haveSameScale = (track1->Key->Contains("d") == track2->Key->Contains("d"));
-
-			digitalTrack1Key = Double::Parse(track1->Key->Remove(track1->Key->Length - 1));
-			digitalTrack2Key = Double::Parse(track2->Key->Remove(track2->Key->Length - 1));
-
-			track1BPM = (double)track1->BPM;
-			track2BPM = (double)track2->BPM;
-			track1Danceability = (double)track1->Danceability;
-			track2Danceability = (double)track2->Danceability;
-		}
-		catch (...)
-		{
-			return -1;
-		}
-
-		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPM_COEFFICIENT;
-
-		distance += System::Math::Abs((track1Danceability - track2Danceability)) * DANCEABILITY_COEFFICIENT;
-
-		if (haveSameScale)
-		{
-			int distance_abs = (int)System::Math::Abs(digitalTrack1Key - digitalTrack2Key);
-			if (distance_abs > 6) {
-				distance_abs = 12 - distance_abs;
-			}
-			distance += distance_abs * KEY_NUMBER_COEFFICIENT;
-		}
-		else
-		{
-			if (!(digitalTrack1Key == digitalTrack2Key)) {
-				distance += KEY_TONALITY_COEFFICIENT;
-			}
-
-		}
-		return (int)distance;*/
-	}
-
 	Population^ GeneticSortAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
 	{
 		Population^ pop = gcnew Population();
@@ -120,12 +72,13 @@ namespace AutoMixAI
 		return pop;
 	}
 
-	int GeneticSortAlgorithm::computeIndividualEvaluation(TrackCollection^ individual)
+	double GeneticSortAlgorithm::computeIndividualEvaluation(TrackCollection^ individual)
 	{
-		int result = 0;
+		double result = 0;
 		for (int k = 0; k < (individual->Count) - 1; k++)
 		{
-			result = result + computeTracksDistance(individual[k], individual[k + 1]);
+			result += Distance->compute(individual[k], individual[k + 1]);
+			//result = result + computeTracksDistance(individual[k], individual[k + 1]);
 		}
 		return result;
 	}

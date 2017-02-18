@@ -18,17 +18,10 @@ namespace AutoMixAI
 	{
 	public:
 
-		static int BPM_COEFFICIENT = 1200;
-		static int KEY_NUMBER_COEFFICIENT = 30;
-		static int KEY_TONALITY_COEFFICIENT = 800;
-		static int DANCEABILITY_COEFFICIENT = 10;
-
 		GeneticSortAlgorithm(TrackDistance^ distance);
 		GeneticSortAlgorithm(TrackDistance^ distance, unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty);
 
 		AutoMixDataManagement::TrackCollection^ sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
-
-		int computeTracksDistance(AutoMixDataManagement::Track^, AutoMixDataManagement::Track^);
 
 	private:
 
@@ -37,7 +30,7 @@ namespace AutoMixAI
 		initonly double MUTATION_PROBABILITY; // Probabilty of mutation out of 100
 
 		Population^ createInitialPopulation(AutoMixDataManagement::TrackCollection^);
-		int computeIndividualEvaluation(AutoMixDataManagement::TrackCollection^);
+		double computeIndividualEvaluation(AutoMixDataManagement::TrackCollection^);
 		void sortPopulation(Population^, int, int);
 		void createChildAndPutThemIntoPopulation(Population^);
 		AutoMixDataManagement::TrackCollection^ createChildrenFromParents(AutoMixDataManagement::TrackCollection^, AutoMixDataManagement::TrackCollection^);
