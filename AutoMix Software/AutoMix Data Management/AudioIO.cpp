@@ -25,8 +25,17 @@ namespace AutoMixDataManagement {
 	void AudioIO::Mp3Export( TrackCollection ^ trackCollection, System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
 	{
 		List<String^>^ filesList = gcnew List<String^>();
-		Stream^ outputStrem = gcnew FileStream(outputFile, FileMode::Create);
+		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 		int cpt = 1;
+
+		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
+		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
+		tags->Add("TPE1", Environment::UserName);
+		tags->Add("TYER", DateTime::Now.Year.ToString());
+		tags->Add("TSSE", "AutoMix Software with NAudio");
+		tags->Add("COMM", "Created with AutoMix");
+		Id3v2Tag^ tag = Id3v2Tag::Create(tags);
+		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
 
 		for each (auto track in trackCollection)
 		{
@@ -36,22 +45,16 @@ namespace AutoMixDataManagement {
 				break;
 			}
 			Mp3FileReader^ reader = gcnew Mp3FileReader(track->Path);
-
-			if ((outputStrem->Position == 0) && (reader->Id3v2Tag != nullptr))
-			{
-				outputStrem->Write(reader->Id3v2Tag->RawData, 0, reader->Id3v2Tag->RawData->Length);
-			}
-
 			Mp3Frame^ frame;
 
 			while ((frame = reader->ReadNextFrame()) != nullptr)
 			{
-				outputStrem->Write(frame->RawData, 0, frame->RawData->Length);
+				outputStream->Write(frame->RawData, 0, frame->RawData->Length);
 			}
 
 			bw->ReportProgress((int)1000*cpt++ / trackCollection->Count);
 		}
-		outputStrem->Close();
+		outputStream->Close();
 	}
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
