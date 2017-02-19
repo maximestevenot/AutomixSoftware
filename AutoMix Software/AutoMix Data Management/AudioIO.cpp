@@ -28,13 +28,7 @@ namespace AutoMixDataManagement {
 		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 		int cpt = 1;
 
-		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
-		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
-		tags->Add("TPE1", Environment::UserName);
-		tags->Add("TYER", DateTime::Now.Year.ToString());
-		tags->Add("TSSE", "AutoMix Software with NAudio");
-		tags->Add("COMM", "Created with AutoMix");
-		Id3v2Tag^ tag = Id3v2Tag::Create(tags);
+		Id3v2Tag^ tag = CreateMp3Tag(outputFile);
 		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
 
 		for each (auto track in trackCollection)
@@ -81,5 +75,18 @@ namespace AutoMixDataManagement {
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
 		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
 		reader->CopyTo(writer);
+	}
+
+	Id3v2Tag^ AudioIO::CreateMp3Tag(String^ outputFile)
+	{
+
+		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
+		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
+		tags->Add("TPE1", Environment::UserName);
+		tags->Add("TYER", DateTime::Now.Year.ToString());
+		tags->Add("TSSE", "AutoMix Software with NAudio");
+		tags->Add("COMM", "Created with AutoMix");
+		Id3v2Tag^ tag = Id3v2Tag::Create(tags);
+		return tag;
 	}
 }
