@@ -21,26 +21,7 @@ namespace GeneticAlgorithmTests {
 		void computeTracksDistanceTest();
 
 		[TestMethod]
-		void createInitialPopulationTest();
-
-		[TestMethod]
-		void computeIndividualEvaluationTest();
-
-		[TestMethod]
-		void sortPopulationTest();
-
-		[TestMethod]
-		void createChildrenFromParentsTest();
-
-		[TestMethod]
-		void createChildAndPutThemIntoPopulationTest();
-
-		[TestMethod]
-		void mutatePopulationTest();
-
-		[TestMethod]
 		void sortTrackByGeneticAlgorithmTest();
-
 		
 	};
 }

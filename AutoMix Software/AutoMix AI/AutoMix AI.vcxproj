@@ -134,15 +134,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SimpleDistance.h" />
+    <ClInclude Include="SortAlgorithm.h" />
     <ClInclude Include="AutoMixAI.h" />
-    <ClInclude Include="GeneticAlgorithm.h" />
+    <ClInclude Include="GeneticSortAlgorithm.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="TrackDistance.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AutoMixAI.cpp" />
-    <ClCompile Include="GeneticAlgorithm.cpp" />
+    <ClCompile Include="GeneticSortAlgorithm.cpp" />
+    <ClCompile Include="SimpleDistance.cpp" />
+    <ClCompile Include="SortAlgorithm.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -6,12 +6,18 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-// AutoMix AI.h
-
-#pragma once
-
-#include "GeneticSortAlgorithm.h"
+#include "stdafx.h"
 #include "SortAlgorithm.h"
 
-#include "resource.h"
-#include "Stdafx.h"
+namespace AutoMixAI {
+
+	SortAlgorithm::SortAlgorithm(TrackDistance^ distance)
+	{
+		_distance = distance;
+	}
+
+	TrackDistance^ SortAlgorithm::Distance::get()
+	{
+		return _distance;
+	}
+}

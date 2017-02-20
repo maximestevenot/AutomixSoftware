@@ -37,8 +37,8 @@ namespace AutoMixUI {
 	{
 		if (_trackCollection->Count > 1)
 		{
-			GeneticAlgorithm^ _geneticAlgorithm = gcnew GeneticAlgorithm();
-			_trackCollection = _geneticAlgorithm->sortTrackByGeneticAlgorithm(bw, _trackCollection);
+			GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
+			_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
 		}
 		return _trackCollection;
 	}
