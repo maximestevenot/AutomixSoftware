@@ -24,8 +24,8 @@ namespace AutoMixAI
 		TrackDistance()
 		{
 			BPMPriority = 1200;
-			KeyNumberPriority = 30;
-			KeyTonalityPriority = 800;
+			KeyNumberPriority = 20;
+			KeyTonalityPriority = 2000;
 			DanceabilityPriority = 10;
 		}
 

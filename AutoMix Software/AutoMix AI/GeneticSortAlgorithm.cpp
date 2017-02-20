@@ -14,7 +14,7 @@ using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
-	GeneticSortAlgorithm::GeneticSortAlgorithm(TrackDistance^ distance) : GeneticSortAlgorithm(distance, 150, 200, 90) {}
+	GeneticSortAlgorithm::GeneticSortAlgorithm(TrackDistance^ distance) : GeneticSortAlgorithm(distance, 175, 175, 85) {}
 
 	GeneticSortAlgorithm::GeneticSortAlgorithm(TrackDistance^ distance, unsigned int numberOfIteration, unsigned int populationSize, double mutationProbabilty)
 		: SortAlgorithm(distance)
@@ -36,9 +36,9 @@ namespace AutoMixAI
 				break;
 			}
 
-			//System::Diagnostics::Debug::WriteLine("iteration {0}", k);
-			//System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
-			//System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));
+			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
+			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
+			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));
 
 			createChildAndPutThemIntoPopulation(pop);
 			mutatePopulation(pop);
