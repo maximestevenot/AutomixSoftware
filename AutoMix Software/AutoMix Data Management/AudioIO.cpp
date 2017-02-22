@@ -52,6 +52,7 @@ namespace AutoMixDataManagement {
 		}
 		outputStream->Close();
 	}
+
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
@@ -84,12 +85,17 @@ namespace AutoMixDataManagement {
 		Mp3FileReader^ reader = gcnew Mp3FileReader(path);
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
+		int readFrame = 0;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{
-			int originalLength = audioData->Length;
-			Array::Resize<Byte>(audioData, originalLength + frame->RawData->Length);
-			Array::Copy(frame->RawData, 0, audioData, originalLength, frame->RawData->Length);
+			if (!readFrame)
+			{
+				int originalLength = audioData->Length;
+				Array::Resize<Byte>(audioData, originalLength + frame->RawData->Length);
+				Array::Copy(frame->RawData, 0, audioData, originalLength, frame->RawData->Length);
+			}
+			readFrame = (readFrame + 1) % 3;
 		}
 
 		MD5^ md5Hash = MD5::Create();

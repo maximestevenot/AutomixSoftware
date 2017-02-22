@@ -16,6 +16,7 @@ namespace AutoMixDataManagement {
 
 		Track();
 		Track(System::String^ path);
+		Track(System::String^ path, System::String^ checksum);
 
 		static Track^ CopyFrom(Track^);
 

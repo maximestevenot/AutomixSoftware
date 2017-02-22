@@ -42,9 +42,16 @@ namespace AutoMixDataManagement {
 		}
 	}
 
+	Track::Track(System::String ^ path, System::String ^ checksum) : Track()
+	{
+		_path = path;
+		_name = Utils::nameFromPath(path);
+		_checksum = checksum;
+	}
+
 	Track ^ Track::CopyFrom(Track ^ old)
 	{
-		Track^ newTrack = gcnew Track(String::Copy(old->Path));
+		Track^ newTrack = gcnew Track(String::Copy(old->Path), String::Copy(old->Checksum));
 		newTrack->Duration = old->Duration;
 		newTrack->BPM = old->BPM;
 		newTrack->Key = String::Copy(old->Key);
