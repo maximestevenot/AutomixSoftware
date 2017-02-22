@@ -20,7 +20,7 @@ namespace AutoMixDataManagement {
 		static void Mp3ToWav(System::String^ inputFile, System::String^ outputFile);
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile);
 
-		static System::String^ Mp3Md5Hash(Track^ track);
+		static System::String^ Mp3Md5Hash(System::String^ path);
 
 		static NAudio::Wave::Id3v2Tag^ CreateMp3Tag(System::String^ outputFile);
 	};

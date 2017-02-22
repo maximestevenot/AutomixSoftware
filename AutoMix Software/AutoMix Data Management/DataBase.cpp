@@ -159,7 +159,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 			SQLiteDataReader^ reader = command->ExecuteReader();
 			while (reader->Read())
 			{
-				if (reader->GetString(0) == track->Checksum)
+				if (reader->GetString(0)->Equals(track->Checksum))
 				{
 					_dbConnection->Close();
 					return true;

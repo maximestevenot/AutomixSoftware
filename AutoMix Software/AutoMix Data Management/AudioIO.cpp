@@ -79,9 +79,9 @@ namespace AutoMixDataManagement {
 		reader->CopyTo(writer);
 	}
 
-	System::String^ AudioIO::Mp3Md5Hash(Track ^ track)
+	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
 	{
-		Mp3FileReader^ reader = gcnew Mp3FileReader(track->Path);
+		Mp3FileReader^ reader = gcnew Mp3FileReader(path);
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 
