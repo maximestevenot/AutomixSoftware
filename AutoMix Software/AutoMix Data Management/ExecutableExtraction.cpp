@@ -8,7 +8,6 @@
 
 #include "stdafx.h"
 #include "ExecutableExtraction.h"
-#include "AudioIO.h"
 
 using namespace System::Collections::Generic;
 using namespace System::Threading::Tasks;
@@ -172,7 +171,6 @@ namespace AutoMixDataManagement {
 
 				if (track->BPM > 0 && track->Duration > 0)
 				{
-					System::Diagnostics::Debug::WriteLine(AudioIO::Mp3Md5Hash(track));
 					DataBase^ db = gcnew DataBase();
 					db->addTrack(track);
 				}

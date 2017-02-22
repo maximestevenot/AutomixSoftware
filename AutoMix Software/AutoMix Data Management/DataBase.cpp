@@ -47,7 +47,7 @@ namespace AutoMixDataManagement {
 
 		try
 		{
-			String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, duration TEXT, bpm TEXT, key TEXT, \
+			String^ query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, checksum TEXT, duration TEXT, bpm TEXT, key TEXT, \
 danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
@@ -82,8 +82,8 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 
 		try
 		{
-			String^ query = "INSERT INTO tracks (path, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts)";
-			query += "VALUES ( \"" + track->Path + "\",\"" + track->Duration + "\",\"" + track->BPM + "\",\"" + track->Key + "\",\"" + track->Danceability + "\",\"" + track->Samplerate + "\",\"" + beats + "\",\"" + fadeins + "\",\"" + fadeouts + "\")";
+			String^ query = "INSERT INTO tracks (checksum, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts)";
+			query += "VALUES ( \"" + track->Checksum + "\",\"" + track->Duration + "\",\"" + track->BPM + "\",\"" + track->Key + "\",\"" + track->Danceability + "\",\"" + track->Samplerate + "\",\"" + beats + "\",\"" + fadeins + "\",\"" + fadeouts + "\")";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 		}
@@ -123,7 +123,7 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 
 		try
 		{
-			String^ query = "SELECT duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts FROM tracks WHERE path = '" + track->Path + "'";
+			String^ query = "SELECT duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts FROM tracks WHERE checksum = '" + track->Checksum + "'";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 
@@ -152,14 +152,14 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 		_dbConnection->Open();
 
 		try {
-			String^ query = "SELECT path FROM tracks";
+			String^ query = "SELECT checksum FROM tracks";
 			SQLiteCommand^ command = gcnew SQLiteCommand(query, _dbConnection);
 			command->ExecuteNonQuery();
 
 			SQLiteDataReader^ reader = command->ExecuteReader();
 			while (reader->Read())
 			{
-				if (reader->GetString(0) == track->Path)
+				if (reader->GetString(0) == track->Checksum)
 				{
 					_dbConnection->Close();
 					return true;
