@@ -86,6 +86,7 @@ namespace AutoMixDataManagement {
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 		int readFrame = 0;
+		int nbFrames = reader->Length / 1152 / 4 / 1000;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{
@@ -95,7 +96,7 @@ namespace AutoMixDataManagement {
 				Array::Resize<Byte>(audioData, originalLength + frame->RawData->Length);
 				Array::Copy(frame->RawData, 0, audioData, originalLength, frame->RawData->Length);
 			}
-			readFrame = (readFrame + 1) % 3;
+			readFrame = (readFrame + 1) % nbFrames;
 		}
 
 		MD5^ md5Hash = MD5::Create();
