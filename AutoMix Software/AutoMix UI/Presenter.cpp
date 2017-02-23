@@ -73,6 +73,7 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
 			}
+			bw->ReportProgress((int)500 / fileEntries->Length);
 		}
 
 		_trackCollection->concat(collection);

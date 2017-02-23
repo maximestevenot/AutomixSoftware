@@ -26,7 +26,7 @@ namespace AutoMixDataManagement {
 	{
 		for each (Track^ t in this)
 		{
-			if (track->Path->Equals(t->Path))
+			if (track->Checksum->Equals(t->Checksum) || track->Checksum->Equals(t->Checksum))
 			{
 				return true;
 			}

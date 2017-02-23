@@ -9,6 +9,7 @@
 #include "stdafx.h"
 #include "Track.h"
 #include "Utils.h"
+#include "AudioIO.h"
 
 using namespace System;
 
@@ -31,11 +32,26 @@ namespace AutoMixDataManagement {
 	{
 		_path = path;
 		_name = Utils::nameFromPath(path);
+		if (path->StartsWith("test"))
+		{
+			_checksum = path;
+		}
+		else
+		{
+			_checksum = AudioIO::Mp3Md5Hash(path);
+		}
+	}
+
+	Track::Track(System::String ^ path, System::String ^ checksum) : Track()
+	{
+		_path = path;
+		_name = Utils::nameFromPath(path);
+		_checksum = checksum;
 	}
 
 	Track ^ Track::CopyFrom(Track ^ old)
 	{
-		Track^ newTrack = gcnew Track(String::Copy(old->Path));
+		Track^ newTrack = gcnew Track(String::Copy(old->Path), String::Copy(old->Checksum));
 		newTrack->Duration = old->Duration;
 		newTrack->BPM = old->BPM;
 		newTrack->Key = String::Copy(old->Key);
@@ -58,6 +74,11 @@ namespace AutoMixDataManagement {
 	String^ Track::Path::get()
 	{
 		return _path;
+	}
+
+	String^ Track::Checksum::get()
+	{
+		return _checksum;
 	}
 
 	unsigned int Track::Id::get()

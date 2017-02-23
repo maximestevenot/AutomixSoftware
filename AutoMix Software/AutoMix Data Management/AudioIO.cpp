@@ -17,6 +17,8 @@ namespace AutoMixDataManagement {
 	using namespace NAudio;
 	using namespace NAudio::Wave;
 	using namespace NAudio::Lame;
+	using namespace System::Security::Cryptography;
+
 
 	AudioIO::AudioIO()
 	{
@@ -50,6 +52,7 @@ namespace AutoMixDataManagement {
 		}
 		outputStream->Close();
 	}
+
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
@@ -75,6 +78,37 @@ namespace AutoMixDataManagement {
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
 		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
 		reader->CopyTo(writer);
+	}
+
+	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
+	{
+		Mp3FileReader^ reader = gcnew Mp3FileReader(path);
+		Mp3Frame^ frame;
+		array<Byte>^ audioData = gcnew array<Byte>(0);
+		int readFrame = 0;
+		int nbFrames = reader->Length / 1152 / 4 / 1000;
+
+		while ((frame = reader->ReadNextFrame()) != nullptr)
+		{
+			if (!readFrame)
+			{
+				int originalLength = audioData->Length;
+				Array::Resize<Byte>(audioData, originalLength + frame->RawData->Length);
+				Array::Copy(frame->RawData, 0, audioData, originalLength, frame->RawData->Length);
+			}
+			readFrame = (readFrame + 1) % nbFrames;
+		}
+
+		MD5^ md5Hash = MD5::Create();
+		array<Byte>^ audioDataHash = md5Hash->ComputeHash(audioData);
+		Text::StringBuilder^ sBuilder = gcnew Text::StringBuilder();
+
+		for (int i = 0; i < audioDataHash->Length; i++)
+		{
+			sBuilder->Append(audioDataHash[i].ToString("x2"));
+		}
+
+		return sBuilder->ToString();
 	}
 
 	Id3v2Tag^ AudioIO::CreateMp3Tag(String^ outputFile)

@@ -177,7 +177,7 @@ namespace AutoMixDataManagement {
 			}
 			reader->Close();
 		}
-		bw->ReportProgress((int)1000 / nbTracks);
+		bw->ReportProgress((int)500 / nbTracks);
 	}
 
 	unsigned int ExecutableExtraction::DoubleToUIntLists(double old)
