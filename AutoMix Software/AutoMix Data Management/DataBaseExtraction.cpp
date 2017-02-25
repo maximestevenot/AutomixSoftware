@@ -24,6 +24,6 @@ namespace AutoMixDataManagement {
 	void DataBaseExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, Track^ track)
 	{
 		_dataBase->extractData(track);
-		bw->ReportProgress((int)1000 / nbTracks);
+		bw->ReportProgress((int)500 / nbTracks);
 	}
 }
