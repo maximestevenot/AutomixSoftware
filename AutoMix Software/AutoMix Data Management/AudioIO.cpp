@@ -82,11 +82,20 @@ namespace AutoMixDataManagement {
 
 	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
 	{
-		Mp3FileReader^ reader = gcnew Mp3FileReader(path);
+		Mp3FileReader^ reader;
+		try {
+			reader = gcnew Mp3FileReader(path);
+		}
+		catch (InvalidOperationException^ ex)
+		{
+			System::Diagnostics::Debug::WriteLine(String::Format("Error when reading {0}", path));
+			System::Diagnostics::Debug::WriteLine(ex->Message);
+			return "";
+		}
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 		int readFrame = 0;
-		int nbFrames = reader->Length / 1152 / 4 / 1000;
+		int nbFrames = (int) reader->Length / 1152 / 4 / 1000;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{

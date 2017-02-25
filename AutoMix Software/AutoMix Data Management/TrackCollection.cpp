@@ -16,7 +16,7 @@ namespace AutoMixDataManagement {
 
 	void TrackCollection::safeAdd(Track^ track)
 	{
-		if (!isPresent(track))
+		if (!isPresent(track) && !String::IsNullOrEmpty(track->Checksum))
 		{
 			Add(track);
 		}
@@ -80,7 +80,7 @@ namespace AutoMixDataManagement {
 
 	bool TrackCollection::IsNull(Track ^ t)
 	{
-		return (t->Duration == 0);
+		return (t->Duration == 0 || String::IsNullOrEmpty(t->Checksum));
 	}
 
 	void TrackCollection::purge()
