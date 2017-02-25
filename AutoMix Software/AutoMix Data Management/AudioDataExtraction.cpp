@@ -24,6 +24,7 @@ namespace AutoMixDataManagement {
 	{
 		gcnew DataBase();
 		initExecConfiguration();
+		exploredTracks = 0;
 	}
 
 	void AudioDataExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
@@ -36,6 +37,7 @@ namespace AutoMixDataManagement {
 		try
 		{
 			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
+			exploredTracks = 0;
 		}
 		catch (OperationCanceledException^)
 		{

@@ -8,8 +8,10 @@
 
 #include "stdafx.h"
 #include "DataBaseExtraction.h"
+#include "AudioDataExtraction.h"
 
 using namespace System::Threading::Tasks;
+using namespace System::Threading;
 using namespace System::Diagnostics;
 using namespace System::IO;
 using namespace System;
@@ -24,6 +26,7 @@ namespace AutoMixDataManagement {
 	void DataBaseExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, Track^ track)
 	{
 		_dataBase->extractData(track);
-		bw->ReportProgress((int)500 / nbTracks);
+		Interlocked::Increment(AudioDataExtraction::exploredTracks);
+		bw->ReportProgress((int)500 + 500 * AudioDataExtraction::exploredTracks / nbTracks);
 	}
 }

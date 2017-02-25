@@ -114,7 +114,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::importBW_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
 	{
-		_toolStripProgressBar->Value += e->ProgressPercentage;
+		_toolStripProgressBar->Value = e->ProgressPercentage;
 		_presenter->notify();
 	}
 

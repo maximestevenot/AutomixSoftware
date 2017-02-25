@@ -95,7 +95,7 @@ namespace AutoMixDataManagement {
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 		int readFrame = 0;
-		int nbFrames = (int) reader->Length / 1152 / 4 / 1000;
+		int nbFrames = (int) reader->Length / 1152 / 4 / 1000 + 1;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{

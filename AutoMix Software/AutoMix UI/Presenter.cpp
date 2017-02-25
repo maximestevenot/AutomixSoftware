@@ -47,6 +47,7 @@ namespace AutoMixUI {
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
 		TrackCollection^ collection = gcnew TrackCollection();
+		int cpt = 1;
 
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
@@ -73,7 +74,7 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
 			}
-			bw->ReportProgress((int)500 / fileEntries->Length);
+			bw->ReportProgress((int)500*cpt++ / fileEntries->Length);
 		}
 
 		_trackCollection->concat(collection);
