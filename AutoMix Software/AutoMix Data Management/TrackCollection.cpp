@@ -16,17 +16,17 @@ namespace AutoMixDataManagement {
 
 	void TrackCollection::safeAdd(Track^ track)
 	{
-		if (!search(track))
+		if (!isPresent(track) && !String::IsNullOrEmpty(track->Checksum))
 		{
 			Add(track);
 		}
 	}
 
-	bool TrackCollection::search(Track^ track)
+	bool TrackCollection::isPresent(Track^ track)
 	{
 		for each (Track^ t in this)
 		{
-			if (track->Path->Equals(t->Path))
+			if (track->Checksum->Equals(t->Checksum) || track->Checksum->Equals(t->Checksum))
 			{
 				return true;
 			}
@@ -68,14 +68,31 @@ namespace AutoMixDataManagement {
 		Reverse();
 	}
 
+	TrackCollection ^ TrackCollection::CopyFrom(TrackCollection ^ old)
+	{
+		TrackCollection^ newCollection = gcnew TrackCollection();
+		for each (Track^ t in old)
+		{
+			newCollection->Add(Track::CopyFrom(t));
+		}
+		return newCollection;
+	}
+
+	bool TrackCollection::IsNull(Track ^ t)
+	{
+		return (t->Duration == 0 || String::IsNullOrEmpty(t->Checksum));
+	}
+
 	void TrackCollection::purge()
 	{
-		for each (Track^ t in this)
+		RemoveAll(gcnew Predicate<Track^>(IsNull));
+	}
+
+	void TrackCollection::concat(TrackCollection ^ orig)
+	{
+		for each (Track^ t in orig)
 		{
-			if (t->Duration == 0)
-			{
-				this->Remove(t);
-			}
+			safeAdd(t);
 		}
 	}
 
@@ -84,4 +101,24 @@ namespace AutoMixDataManagement {
 		AudioIO::Mp3Export(this, bw, outputFile);
 	}
 
+	void TrackCollection::Remove(System::String^ name)
+	{
+		Track^ temp = search(name);
+		if (temp)
+		{
+			Remove(temp);
+		}
+	}
+
+	Track^ TrackCollection::search(String^ name)
+	{
+		for each (Track^ t in this)
+		{
+			if (t->Name->Equals(name))
+			{
+				return t;
+			}
+		}
+		return nullptr;
+	}
 }

@@ -16,11 +16,20 @@ namespace AutoMixDataManagement {
 
 		Track();
 		Track(System::String^ path);
+		Track(System::String^ path, System::String^ checksum);
+
+		static Track^ CopyFrom(Track^);
 
 		property unsigned int BPM;
 		property unsigned int Duration;
 		property System::String^ Key;
+		property double Danceability;
+		property unsigned int Samplerate;
+		property array<unsigned int>^ Beats;
+		property array<unsigned int>^ FadeIns;
+		property array<unsigned int>^ FadeOuts;
 
+		property System::String^ Checksum { System::String^ get(); }
 		property System::String^ Name { System::String^ get(); }
 		property System::String^ Path { System::String^ get(); }
 		property unsigned int Id { unsigned int get(); }
@@ -31,6 +40,7 @@ namespace AutoMixDataManagement {
 		static unsigned int TRACKS_COUNT = 0;
 		System::String^ _name;
 		System::String^ _path;
+		System::String^ _checksum;
 		unsigned int _id;
 	};
 }

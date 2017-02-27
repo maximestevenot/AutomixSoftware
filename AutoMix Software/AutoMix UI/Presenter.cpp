@@ -35,41 +35,97 @@ namespace AutoMixUI {
 
 	TrackCollection^ Presenter::sortTrackCollectionWithGeneticAlgorithm(ComponentModel::BackgroundWorker^ bw)
 	{
-		GeneticAlgorithm^ _geneticAlgorithm = gcnew GeneticAlgorithm();
-		_trackCollection = _geneticAlgorithm->sortTrackByGeneticAlgorithm(bw, _trackCollection);
+		if (_trackCollection->Count > 1)
+		{
+			GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
+			_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
+		}
 		return _trackCollection;
 	}
 
 	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
 		IEnumerator^ files = fileEntries->GetEnumerator();
+		TrackCollection^ collection = gcnew TrackCollection();
+		int cpt = 1;
+
 		while (files->MoveNext() && !bw->CancellationPending)
 		{
 			String^ filePath = safe_cast<String^>(files->Current);
-			int lastDotIndex = filePath->LastIndexOf(".");
-			String^ extension = filePath->Substring(lastDotIndex + 1)->ToLower();
 
-			if (extension->Contains("mp3"))  //TODO make it better
+			if (IO::Directory::Exists(filePath))
+			{
+				IEnumerator^ dirFiles = IO::Directory::GetFiles(filePath)->GetEnumerator();
+
+				while (dirFiles->MoveNext() && !bw->CancellationPending)
+				{
+					String^ dirFilePath = safe_cast<String^>(dirFiles->Current);
+
+					if (Utils::getExtension(dirFilePath)->Contains("mp3"))
+					{
+						Track^ track = gcnew Track(dirFilePath);
+						collection->safeAdd(track);
+					}
+				}
+			}
+
+			else if (Utils::getExtension(filePath)->Contains("mp3"))
 			{
 				Track^ track = gcnew Track(filePath);
-				_trackCollection->safeAdd(track);
+				collection->safeAdd(track);
 			}
+			bw->ReportProgress((int)500*cpt++ / fileEntries->Length);
 		}
 
+		_trackCollection->concat(collection);
 		_trackCollection->sortByName();
-		_dataExtractionEngine->extractData(bw, _trackCollection);
+		bw->ReportProgress(500);
+
+		_dataExtractionEngine->extractData(bw, collection);
+		getMyRightsBack();
+
+		_trackCollection->purge();
 		return _trackCollection;
+	}
+
+	void Presenter::removeTracks(Generic::List<String^>^ selection)
+	{
+		for each (String^ name in selection)
+		{
+			_trackCollection->Remove(name);
+		}
+		notify();
+	}
+
+	void Presenter::moveTrack(int index, String^ name)
+	{
+		if (index < 0 && index >= _trackCollection->Count)
+		{
+			notify();
+			return;
+		}
+
+		Track^ t = _trackCollection->search(name);
+		_trackCollection->Remove(t);
+		_trackCollection->Insert(index, t);
 	}
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
-		_trackCollection->exportToMP3(bw, destinationFile);
+		if (_trackCollection->Count >= 1)
+		{
+			_trackCollection->exportToMP3(bw, destinationFile);
+		}
 	}
 
-	void Presenter::clearDataBase() 
+	void Presenter::clearDataBase()
 	{
 		DataBase^ db = gcnew DataBase();
 		db->clear();
 	}
 
+	void Presenter::getMyRightsBack()
+	{
+		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
+	}
 }

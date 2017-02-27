@@ -9,17 +9,22 @@
 #include "stdafx.h"
 #include "Track.h"
 #include "Utils.h"
+#include "AudioIO.h"
 
+using namespace System;
 
 namespace AutoMixDataManagement {
-
-	using namespace System;
 
 	Track::Track()
 	{
 		Duration = 0;
 		BPM = 0;
 		Key = "";
+		Danceability = 0;
+		Samplerate = 0;
+		Beats = gcnew array<unsigned int>(1);
+		FadeIns = gcnew array<unsigned int>(1);
+		FadeOuts = gcnew array<unsigned int>(1);
 		_id = TRACKS_COUNT++;
 	}
 
@@ -27,6 +32,38 @@ namespace AutoMixDataManagement {
 	{
 		_path = path;
 		_name = Utils::nameFromPath(path);
+		if (path->StartsWith("test"))
+		{
+			_checksum = path;
+		}
+		else
+		{
+			_checksum = AudioIO::Mp3Md5Hash(path);
+		}
+	}
+
+	Track::Track(System::String ^ path, System::String ^ checksum) : Track()
+	{
+		_path = path;
+		_name = Utils::nameFromPath(path);
+		_checksum = checksum;
+	}
+
+	Track ^ Track::CopyFrom(Track ^ old)
+	{
+		Track^ newTrack = gcnew Track(String::Copy(old->Path), String::Copy(old->Checksum));
+		newTrack->Duration = old->Duration;
+		newTrack->BPM = old->BPM;
+		newTrack->Key = String::Copy(old->Key);
+		newTrack->Danceability = old->Danceability;
+		newTrack->Samplerate = old->Samplerate;
+		newTrack->Beats = gcnew array<unsigned int>(old->Beats->Length);
+		newTrack->FadeIns = gcnew array<unsigned int>(old->FadeIns->Length);
+		newTrack->FadeOuts = gcnew array<unsigned int>(old->FadeOuts->Length);
+		Array::Copy(old->Beats, newTrack->Beats, old->Beats->Length);
+		Array::Copy(old->FadeIns, newTrack->FadeIns, old->FadeIns->Length);
+		Array::Copy(old->FadeOuts, newTrack->FadeOuts, old->FadeOuts->Length);
+		return newTrack;
 	}
 
 	String^ Track::Name::get() 
@@ -37,6 +74,11 @@ namespace AutoMixDataManagement {
 	String^ Track::Path::get()
 	{
 		return _path;
+	}
+
+	String^ Track::Checksum::get()
+	{
+		return _checksum;
 	}
 
 	unsigned int Track::Id::get()

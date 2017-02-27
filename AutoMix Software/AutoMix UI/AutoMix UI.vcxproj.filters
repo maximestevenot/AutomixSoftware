@@ -35,9 +35,15 @@
     <ClInclude Include="ViewWithTrackCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UserDocForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserDocForm.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

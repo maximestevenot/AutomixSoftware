@@ -34,6 +34,11 @@ namespace DataManagementTests
 		myTrack->BPM = 128;
 		myTrack->Duration = 1000;
 		myTrack->Key = "14";
+		myTrack->Samplerate = 44100;
+		myTrack->Danceability = 1.356555515;
+		myTrack->Beats = gcnew array<unsigned int>{0, 1, 2};
+		myTrack->FadeIns = gcnew array<unsigned int>{2, 3, 5};
+		myTrack->FadeOuts = gcnew array<unsigned int>{3, 4, 6};
 
 		db->addTrack(myTrack);
 		db->addTrack(myTrack);
@@ -48,6 +53,11 @@ namespace DataManagementTests
 		myTrack->BPM = 128;
 		myTrack->Duration = 1000;
 		myTrack->Key = "15";
+		myTrack->Samplerate = 44100;
+		myTrack->Danceability = 1.356555515;
+		myTrack->Beats = gcnew array<unsigned int>{0, 1, 2};
+		myTrack->FadeIns = gcnew array<unsigned int>{2, 3, 5};
+		myTrack->FadeOuts = gcnew array<unsigned int>{3, 4, 6};
 
 		db->addTrack(myTrack);
 		db->clear();
@@ -62,6 +72,11 @@ namespace DataManagementTests
 		myTrack->BPM = 128;
 		myTrack->Duration = 1000;
 		myTrack->Key = "15";
+		myTrack->Samplerate = 44100;
+		myTrack->Danceability = 1.356555515;
+		myTrack->Beats = gcnew array<unsigned int>{0, 1, 2};
+		myTrack->FadeIns = gcnew array<unsigned int>{2, 3, 5};
+		myTrack->FadeOuts = gcnew array<unsigned int>{3, 4, 6};
 
 		db->addTrack(myTrack);
 
@@ -71,6 +86,14 @@ namespace DataManagementTests
 		Assert::AreEqual(myTrack->Duration, extractedTrack->Duration);
 		Assert::AreEqual(myTrack->BPM, extractedTrack->BPM);
 		Assert::AreEqual(myTrack->Key, extractedTrack->Key);
+		Assert::AreEqual(myTrack->Samplerate, extractedTrack->Samplerate);
+		Assert::AreEqual(myTrack->Danceability, extractedTrack->Danceability);
+		for (int i = 0; i < 3; i++)
+		{
+			Assert::AreEqual(myTrack->Beats[i], extractedTrack->Beats[i]);
+			Assert::AreEqual(myTrack->FadeIns[i], extractedTrack->FadeIns[i]);
+			Assert::AreEqual(myTrack->FadeOuts[i], extractedTrack->FadeOuts[i]);
+		}
 	}
 
 	void DataBaseTests::isInDataBase() {
@@ -81,6 +104,11 @@ namespace DataManagementTests
 		myTrack->BPM = 128;
 		myTrack->Duration = 1000;
 		myTrack->Key = "15";
+		myTrack->Samplerate = 44100;
+		myTrack->Danceability = 1.356555515;
+		myTrack->Beats = gcnew array<unsigned int>{0, 1, 2};
+		myTrack->FadeIns = gcnew array<unsigned int>{2, 3, 5};
+		myTrack->FadeOuts = gcnew array<unsigned int>{3, 4, 6};
 		db->clear();
 		Assert::IsFalse(db->isInDataBase(myTrack));
 		db->addTrack(myTrack);

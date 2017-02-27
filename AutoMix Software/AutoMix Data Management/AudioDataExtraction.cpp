@@ -24,6 +24,7 @@ namespace AutoMixDataManagement {
 	{
 		gcnew DataBase();
 		initExecConfiguration();
+		exploredTracks = 0;
 	}
 
 	void AudioDataExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
@@ -33,6 +34,7 @@ namespace AutoMixDataManagement {
 		ParallelOptions^ po = gcnew ParallelOptions();
 		po->CancellationToken = cts->Token;
 		po->MaxDegreeOfParallelism = (int) Math::Ceiling(System::Environment::ProcessorCount / 2.);
+		exploredTracks = 0;
 		try
 		{
 			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
@@ -61,8 +63,8 @@ namespace AutoMixDataManagement {
 		String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
 		StreamWriter^ sw = gcnew StreamWriter(profileName);
 		sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
-    gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]\ntonal :\n\
-    stats : [\"mean\", \"var\", \"median\", \"min\", \"max\"]");
+    gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\"]\ntonal :\n\
+    stats : [\"mean\"]");
 		sw->Close();
 	}
 }

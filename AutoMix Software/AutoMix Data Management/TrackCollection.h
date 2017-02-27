@@ -19,8 +19,10 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		void safeAdd(Track^);
-		bool search(Track^ track);
+		bool isPresent(Track^ track);
+		Track^ search(System::String^);
 
+		void Remove(System::String^);
 		void sortByName();
 		void sortByDescendingName();
 		void sortByDuration();
@@ -28,9 +30,14 @@ namespace AutoMixDataManagement {
 		void sortByBPM();
 		void sortByDescendingBPM();
 
+		static TrackCollection^ CopyFrom(TrackCollection^);
 		void purge();
+		void concat(TrackCollection^);
 
 		void exportToMP3(System::ComponentModel::BackgroundWorker^, System::String^ outputFile);
+
+	private:
+		static bool IsNull(Track^);
 	};
 
 }

@@ -48,6 +48,12 @@
     <ClInclude Include="DataDelegateTests.h">
       <Filter>Fichiers d%27en-tête\Data Management</Filter>
     </ClInclude>
+    <ClInclude Include="TrackTests.h">
+      <Filter>Fichiers d%27en-tête\Data Management</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackCollectionTests.h">
+      <Filter>Fichiers d%27en-tête\Data Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoMix Tests.cpp">
@@ -69,6 +75,12 @@
       <Filter>Fichiers sources\Data Management</Filter>
     </ClCompile>
     <ClCompile Include="DataDelegateTests.cpp">
+      <Filter>Fichiers sources\Data Management</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackTests.cpp">
+      <Filter>Fichiers sources\Data Management</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackCollectionTests.cpp">
       <Filter>Fichiers sources\Data Management</Filter>
     </ClCompile>
   </ItemGroup>

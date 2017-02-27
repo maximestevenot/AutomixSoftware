@@ -28,6 +28,8 @@ namespace AutoMixDataManagement {
 		void connectToDatabase(System::String^);
 		void createTable();
 
+		static array<unsigned int>^ extractFromString(System::String^);
+
 		System::String^ _dbPath;
 		System::Data::SQLite::SQLiteConnection^ _dbConnection;
 	};

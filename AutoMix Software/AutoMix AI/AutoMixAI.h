@@ -10,6 +10,8 @@
 
 #pragma once
 
-#include "GeneticAlgorithm.h"
+#include "GeneticSortAlgorithm.h"
+#include "SortAlgorithm.h"
+
 #include "resource.h"
 #include "Stdafx.h"
