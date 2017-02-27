@@ -34,10 +34,10 @@ namespace AutoMixDataManagement {
 		ParallelOptions^ po = gcnew ParallelOptions();
 		po->CancellationToken = cts->Token;
 		po->MaxDegreeOfParallelism = (int) Math::Ceiling(System::Environment::ProcessorCount / 2.);
+		exploredTracks = 0;
 		try
 		{
 			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
-			exploredTracks = 0;
 		}
 		catch (OperationCanceledException^)
 		{
