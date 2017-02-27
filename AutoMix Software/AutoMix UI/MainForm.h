@@ -59,7 +59,7 @@ namespace AutoMixUI {
 		property bool AnOperationRunning
 		{
 			bool get() { return _anOperationRunning; }
-		private: 
+		private:
 			void set(bool value) { _anOperationRunning = value; }
 		}
 
@@ -111,6 +111,8 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ContextMenuStrip^  _trackContextMenu;
 	private: System::Windows::Forms::ToolStripMenuItem^  _deleteTrackToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
+	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -158,6 +160,8 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -206,7 +210,7 @@ namespace AutoMixUI {
 			// 
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
 			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Z));
-			this->_cancelMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_cancelMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
@@ -214,13 +218,13 @@ namespace AutoMixUI {
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(156, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(152, 6);
 			// 
 			// _quitMenuItem
 			// 
 			this->_quitMenuItem->Name = L"_quitMenuItem";
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
-			this->_quitMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_quitMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_quitMenuItem->Text = L"&Quit";
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
@@ -248,7 +252,10 @@ namespace AutoMixUI {
 			// 
 			// _helpToolStripMenuItem
 			// 
-			this->_helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_aboutMenuItem });
+			this->_helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->aboutCharacteristicsToolStripMenuItem,
+					this->toolStripSeparator1, this->_aboutMenuItem
+			});
 			this->_helpToolStripMenuItem->Name = L"_helpToolStripMenuItem";
 			this->_helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->_helpToolStripMenuItem->Text = L"&Help";
@@ -256,8 +263,8 @@ namespace AutoMixUI {
 			// _aboutMenuItem
 			// 
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
-			this->_aboutMenuItem->Size = System::Drawing::Size(116, 22);
-			this->_aboutMenuItem->Text = L"&About...";
+			this->_aboutMenuItem->Size = System::Drawing::Size(194, 22);
+			this->_aboutMenuItem->Text = L"About &application...";
 			this->_aboutMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutMenuItemClick);
 			// 
 			// _statusStrip
@@ -449,6 +456,18 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
+			// aboutCharacteristicsToolStripMenuItem
+			// 
+			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
+			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
+			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
+			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			// 
+			// toolStripSeparator1
+			// 
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(191, 6);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -511,6 +530,7 @@ namespace AutoMixUI {
 	private: System::Void onSortButtonClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onCancelMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onAboutMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onAboutCharacteristicsMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onClearDBMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onDeleteTrackToolStripClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onSelectAllMenuItemClick(System::Object^  sender, System::EventArgs^  e);
@@ -534,6 +554,7 @@ namespace AutoMixUI {
 	private: System::Void musicListView_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+
 	};
 
 }
