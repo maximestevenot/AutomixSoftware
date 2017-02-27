@@ -7,6 +7,7 @@
 // You should have received a copy of the License along with this program.
 
 #include "MainForm.h"
+#include "UserDocForm.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -93,6 +94,11 @@ namespace AutoMixUI {
 
 		String^ caption = "About";
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+
+	System::Void AutoMixUI::MainForm::onAboutCharacteristicsMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		UserDocForm().ShowDialog();
 	}
 
 	System::Void MainForm::onClearDBMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)

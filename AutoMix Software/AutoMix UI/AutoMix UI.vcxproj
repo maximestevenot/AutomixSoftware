@@ -145,17 +145,24 @@
     <ClCompile Include="AutoMixUI.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Presenter.cpp" />
+    <ClCompile Include="UserDocForm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Presenter.h" />
+    <ClInclude Include="UserDocForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="ViewWithTrackCollection.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserDocForm.resx">
+      <DependentUpon>UserDocForm.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
