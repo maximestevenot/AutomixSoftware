@@ -37,10 +37,6 @@
 			<Name>AutoMix Data Management</Name>
 			<Project>{57876097-6068-4A0C-8140-38B16F184979}</Project>
 		</ProjectReference>
-		<ProjectReference Include="..\AutoMix Tests\AutoMix Tests.vcxproj">
-			<Name>AutoMix Tests</Name>
-			<Project>{125F61B9-8758-4927-AAF1-5AB198DB0026}</Project>
-		</ProjectReference>
 		<ProjectReference Include="..\AutoMix UI\AutoMix UI.vcxproj">
 			<Name>AutoMix UI</Name>
 			<Project>{81E83039-E139-4170-9BA7-6F942DF84808}</Project>

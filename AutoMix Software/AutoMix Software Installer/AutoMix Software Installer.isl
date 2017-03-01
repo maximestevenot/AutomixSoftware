@@ -225,6 +225,7 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
+		<row><td>DOTNETVERSION45FULL</td><td>DotNet45Full</td></row>
 	</table>
 
 	<table name="BBControl">
@@ -341,7 +342,6 @@
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>AutoMix_AI.Primary_Output</td><td>{F4DECE48-0324-4F7B-9FEB-592D392D855B}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_ai.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>AutoMix_Data_Management.Primary_Output</td><td>{3D6C8730-C64B-4229-9752-A93D7AFBE7BC}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_data_management.prim</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>AutoMix_Tests.Primary_Output</td><td>{B390A05F-E491-498D-A3FC-758FC58BE322}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_tests.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>AutoMix_UI.Primary_Output</td><td>{2F21EF0F-B8A4-4AB5-BB3B-1FD8864406AD}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_ui.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISO19770_LocalTag</td><td>{8B125ECC-9C40-4DEC-80B0-00A99EF8784D}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISO19770_SystemTag</td><td>{FA857035-6896-400B-8856-AF413541E49A}</td><td>CommonAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -352,6 +352,7 @@
 		<row><td>essentia_standard_fadedetection.exe</td><td>{691B2B5D-0C1A-4CA9-84C6-CC3E922B3D22}</td><td>INSTALLDIR</td><td>2</td><td/><td>essentia_standard_fadedetect</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>essentia_streaming_extractor_music.exe</td><td>{D667C3BD-5B1F-4B7B-A81C-73A74A040663}</td><td>INSTALLDIR</td><td>2</td><td/><td>essentia_streaming_extractor</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>libmp3lame.32.dll</td><td>{3482313F-1202-4300-998E-E03FA629CDFB}</td><td>INSTALLDIR</td><td>2</td><td/><td>libmp3lame.32.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>vcruntime140.dll</td><td>{F846AA9D-7356-4620-B7F2-8087DA3736E2}</td><td>INSTALLDIR</td><td>2</td><td/><td>vcruntime140.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -931,7 +932,7 @@
 		<row><td>DatabaseFolder</td><td>ChangeFolder</td><td>SpawnDialog</td><td>InstallChangeFolder</td><td>1</td><td>1</td></row>
 		<row><td>DatabaseFolder</td><td>ChangeFolder</td><td>[_BrowseProperty]</td><td>DATABASEDIR</td><td>1</td><td>2</td></row>
 		<row><td>DatabaseFolder</td><td>Next</td><td>NewDialog</td><td>SetupType</td><td>1</td><td>1</td></row>
-		<row><td>DestinationFolder</td><td>Back</td><td>NewDialog</td><td>CustomerInformation</td><td>NOT Installed</td><td>0</td></row>
+		<row><td>DestinationFolder</td><td>Back</td><td>NewDialog</td><td>LicenseAgreement</td><td>NOT Installed</td><td>0</td></row>
 		<row><td>DestinationFolder</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>1</td></row>
 		<row><td>DestinationFolder</td><td>ChangeFolder</td><td>SpawnDialog</td><td>InstallChangeFolder</td><td>1</td><td>1</td></row>
 		<row><td>DestinationFolder</td><td>ChangeFolder</td><td>[_BrowseProperty]</td><td>INSTALLDIR</td><td>1</td><td>2</td></row>
@@ -952,7 +953,7 @@
 		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>DoAction</td><td>ISPrint</td><td>1</td><td>0</td></row>
-		<row><td>LicenseAgreement</td><td>Next</td><td>NewDialog</td><td>CustomerInformation</td><td>AgreeToLicense = "Yes"</td><td>0</td></row>
+		<row><td>LicenseAgreement</td><td>Next</td><td>NewDialog</td><td>DestinationFolder</td><td>AgreeToLicense = "Yes"</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>NewDialog</td><td>MaintenanceWelcome</td><td>1</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>MaintenanceType</td><td>Next</td><td>NewDialog</td><td>CustomSetup</td><td>_IsMaintenance = "Change"</td><td>12</td></row>
@@ -1063,7 +1064,6 @@
 		<row><td>CommonAppDataFolder</td><td>ISO19770_SystemTag</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_AI.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_Data_Management.Primary_Output</td></row>
-		<row><td>INSTALLDIR</td><td>AutoMix_Tests.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_UI.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>ISO19770_LocalTag</td></row>
 		<row><td>INSTALLDIR</td><td>ISO19770_SystemTag</td></row>
@@ -1074,6 +1074,7 @@
 		<row><td>INSTALLDIR</td><td>essentia_standard_fadedetection.exe</td></row>
 		<row><td>INSTALLDIR</td><td>essentia_streaming_extractor_music.exe</td></row>
 		<row><td>INSTALLDIR</td><td>libmp3lame.32.dll</td></row>
+		<row><td>INSTALLDIR</td><td>vcruntime140.dll</td></row>
 	</table>
 
 	<table name="CustomAction">
@@ -1888,7 +1889,6 @@
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>AutoMix_AI.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>AutoMix_Data_Management.Primary_Output</td></row>
-		<row><td>AlwaysInstall</td><td>AutoMix_Tests.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>AutoMix_UI.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>NAudio.dll</td></row>
@@ -1897,6 +1897,7 @@
 		<row><td>AlwaysInstall</td><td>essentia_standard_fadedetection.exe</td></row>
 		<row><td>AlwaysInstall</td><td>essentia_streaming_extractor_music.exe</td></row>
 		<row><td>AlwaysInstall</td><td>libmp3lame.32.dll</td></row>
+		<row><td>AlwaysInstall</td><td>vcruntime140.dll</td></row>
 	</table>
 
 	<table name="File">
@@ -1913,7 +1914,6 @@
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>automix_ai.primary_output</td><td>AutoMix_AI.Primary_Output</td><td>AutoMix AI.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix AI&gt;|Built</td><td>3</td><td/></row>
 		<row><td>automix_data_management.prim</td><td>AutoMix_Data_Management.Primary_Output</td><td>AutoMix Data Management.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix Data Management&gt;|Built</td><td>3</td><td/></row>
-		<row><td>automix_tests.primary_output</td><td>AutoMix_Tests.Primary_Output</td><td>AutoMix Tests.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix Tests&gt;|Built</td><td>3</td><td/></row>
 		<row><td>automix_ui.primary_output</td><td>AutoMix_UI.Primary_Output</td><td>AutoMix UI.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix UI&gt;|Built</td><td>3</td><td/></row>
 		<row><td>essentia_standard_fadedetect</td><td>essentia_standard_fadedetection.exe</td><td>ESSENT~1.EXE|essentia_standard_fadedetection.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Essentia\essentia_standard_fadedetection.exe</td><td>1</td><td/></row>
 		<row><td>essentia_streaming_extractor</td><td>essentia_streaming_extractor_music.exe</td><td>ESSENT~1.EXE|essentia_streaming_extractor_music.exe</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Essentia\essentia_streaming_extractor_music.exe</td><td>1</td><td/></row>
@@ -1923,6 +1923,7 @@
 		<row><td>newtonsoft.json.dll</td><td>Newtonsoft.Json.dll</td><td>NEWTON~1.DLL|Newtonsoft.Json.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Json.NET\Newtonsoft.Json.dll</td><td>1</td><td/></row>
 		<row><td>newtonsoft.json.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NEWTON~1.XML|Newtonsoft.Json.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Json.NET\Newtonsoft.Json.xml</td><td>1</td><td/></row>
 		<row><td>system.data.sqlite.dll</td><td>System.Data.SQLite.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\System.Data.SQLite.dll</td><td>1</td><td/></row>
+		<row><td>vcruntime140.dll</td><td>vcruntime140.dll</td><td>VCRUNT~1.DLL|vcruntime140.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Software Installer\vcruntime140.dll</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2066,7 +2067,6 @@
 		<col def="S0">Miscellaneous</col>
 		<row><td>AutoMix_AI.Primary_Output</td><td/><td/><td>_942C316A_2FBD_46E4_9A59_F7D0A3B157A0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>AutoMix_Data_Management.Primary_Output</td><td/><td/><td>_1E8AFA07_3E57_4FC7_B60D_BB3BE92095BC_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>AutoMix_Tests.Primary_Output</td><td/><td/><td>_91236903_F71A_4BBD_A382_E6AF7010FC5E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>AutoMix_UI.Primary_Output</td><td/><td/><td>_C7CDEC81_AB0D_4F6A_8501_929F9D7C8B42_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISO19770_LocalTag</td><td/><td/><td>_3F95F94F_6B34_4C26_B23C_82CA6415A349_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISO19770_SystemTag</td><td/><td/><td>_CEEEA1C8_28A4_43FA_A53A_9856C86E1C69_FILTER</td><td/><td/><td/><td/></row>
@@ -2077,6 +2077,7 @@
 		<row><td>essentia_standard_fadedetection.exe</td><td/><td/><td>_72B0E5D1_9674_4C92_9714_85F2D8E4AD8A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>essentia_streaming_extractor_music.exe</td><td/><td/><td>_710FAB82_BCE5_4E1E_B241_95CEE78E5D28_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>libmp3lame.32.dll</td><td/><td/><td>_DC782D3C_71C3_48BF_812B_117DF8F892FD_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>vcruntime140.dll</td><td/><td/><td>_2824B380_217F_4228_9EB5_561AA2FAC5D7_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2155,6 +2156,7 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s255">ISMergeModule_</col>
 		<col key="yes" def="i2">Language_</col>
+		<row><td>AlwaysInstall</td><td>Microsoft_VC140_CRT_ARM.1E03A48E_86C6_3411_A7BF_B4F738C8D1D4</td><td>0</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft_VC140_MFC_x86.5840D246_3D34_3071_9C86_D071F20CB55F</td><td>0</td></row>
 	</table>
 
@@ -2278,6 +2280,7 @@
 		<col def="s255">Name</col>
 		<col def="S255">Destination</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>Microsoft_VC140_CRT_ARM.1E03A48E_86C6_3411_A7BF_B4F738C8D1D4</td><td>0</td><td>Visual C++ 14.0 CRT (ARM)</td><td/><td/></row>
 		<row><td>Microsoft_VC140_MFC_x86.5840D246_3D34_3071_9C86_D071F20CB55F</td><td>0</td><td>Visual C++ 14.0 MFC (x86)</td><td/><td/></row>
 	</table>
 
@@ -2671,9 +2674,10 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>161866605</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>161817587</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>161854419</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
@@ -3483,7 +3487,7 @@
 		<row><td>IDS_PROGMSG_XML_UPDATE_FILE</td><td>1033</td><td>Updating XML file %s...</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>161865354</td></row>
-		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>161831789</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>AUTOMI~2|AutoMix Software</td><td>0</td><td/><td>161866483</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>161865354</td></row>
@@ -3773,8 +3777,8 @@
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td/><td>0</td><td/><td>161865354</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>http://www.LesProjecteurs.com</td><td>0</td><td/><td>161866605</td></row>
-		<row><td>ID_STRING3</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>161866605</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>http://www.LesProjecteurs.com</td><td>0</td><td/><td>161817587</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>161817587</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>161837933</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>161865354</td></row>
 	</table>
@@ -3892,6 +3896,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
+		<row><td>_Built1_23A65542C2AF41D49FC26F8976C0F03B.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
 		<row><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
 	</table>
 
@@ -4086,6 +4091,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
 		<row><td>(Not Version9X) And (Not ((VersionNT&gt;=400 And VersionNT&lt;=502) Or (VersionNT&gt;=600 And VersionNT&lt;=603 And MsiNTProductType&gt;1)))</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_OS##</td></row>
+		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
 	</table>
 
 	<table name="ListBox">
@@ -4416,7 +4422,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{3FD29E0E-E2A8-4177-A80F-8151C3231A43}</td><td/></row>
@@ -4461,6 +4467,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
+		<row><td>DotNet45Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Version</td><td>2</td></row>
 	</table>
 
 	<table name="Registry">
@@ -4567,8 +4574,8 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>automi_1_automix_software_installer</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>automi_1_automix_software_installer</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_23A65542C2AF41D49FC26F8976C0F03B.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
