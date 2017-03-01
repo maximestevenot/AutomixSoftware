@@ -2155,7 +2155,6 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s255">ISMergeModule_</col>
 		<col key="yes" def="i2">Language_</col>
-		<row><td>AlwaysInstall</td><td>Microsoft_VC140_CRT_x86.E281B893_10D7_34CE_BB0E_B69D88E154A5</td><td>0</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft_VC140_MFC_x86.5840D246_3D34_3071_9C86_D071F20CB55F</td><td>0</td></row>
 	</table>
 
@@ -2279,7 +2278,6 @@
 		<col def="s255">Name</col>
 		<col def="S255">Destination</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>Microsoft_VC140_CRT_x86.E281B893_10D7_34CE_BB0E_B69D88E154A5</td><td>0</td><td>Visual C++ 14.0 CRT (x86)</td><td/><td/></row>
 		<row><td>Microsoft_VC140_MFC_x86.5840D246_3D34_3071_9C86_D071F20CB55F</td><td>0</td><td>Visual C++ 14.0 MFC (x86)</td><td/><td/></row>
 	</table>
 
@@ -2639,6 +2637,7 @@
 		<col def="I2">Order</col>
 		<col def="I2">ISSetupLocation</col>
 		<col def="S255">ISReleaseFlags</col>
+		<row><td>_27F7FBCC_AB52_4841_9177_618F9EFD8456_</td><td>Microsoft .NET Framework 4.6 Full.prq</td><td/><td/><td/></row>
 	</table>
 
 	<table name="ISSetupType">
@@ -3892,7 +3891,8 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
+		<row><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4567,7 +4567,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>automi_1_automix_software_installer</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>automi_1_automix_software_installer</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
