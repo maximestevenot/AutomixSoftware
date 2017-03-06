@@ -54,6 +54,6 @@ deploy:
   artifacts:
     paths:
       - Automix Software/Release
-    expire_in: 1 week
+    expire_in: 2 weeks
   only:
     - master
