@@ -57,3 +57,4 @@ deploy:
     expire_in: 2 weeks
   only:
     - master
+    - installer
