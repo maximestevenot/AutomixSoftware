@@ -66,9 +66,7 @@ Global
 		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Debug|x64.ActiveCfg = SingleImage
 		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Debug|x86.ActiveCfg = SingleImage
 		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Release|x64.ActiveCfg = SingleImage
-		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Release|x64.Build.0 = SingleImage
 		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Release|x86.ActiveCfg = SingleImage
-		{F27EAE01-E8D9-4020-9933-F874E72A341A}.Release|x86.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

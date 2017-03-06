@@ -44,17 +44,16 @@ deploy:
   script:
     - echo deploying...
     - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
-    # - 'cd "%ReleaseDir%"'
-    # - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
-    # - 'del *.* /s /a:a /q'
-    # - 'attrib +a *.* /s'
-    # - 'del *Test*'
-    # - 'cd ..\\..'
+    - 'cd "%ReleaseDir%"'
+    - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
+    - 'del *.* /s /a:a /q'
+    - 'attrib +a *.* /s'
+    - 'del *Test*'
+    - 'cd ..\\..'
   dependencies: []
   artifacts:
     paths:
-      - Automix Software/AutoMix Software Installer/AutoMix Software Installer/Express/SingleImage/DiskImages/DISK1
-    expire_in: 2 hours
+      - Automix Software/Release
+    expire_in: 2 weeks
   only:
     - master
-    - feature/installer
