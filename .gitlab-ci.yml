@@ -54,7 +54,7 @@ deploy:
   artifacts:
     paths:
       - Automix Software/AutoMix Software Installer/AutoMix Software Installer/Express/SingleImage/DiskImages/DISK1
-    expire_in: 2 weeks
+    expire_in: 2 hours
   only:
     - master
-    - installer
+    - feature/installer
