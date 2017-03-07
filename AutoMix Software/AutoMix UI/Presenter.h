@@ -25,6 +25,10 @@ namespace AutoMixUI {
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
 
+		void playMix(System::String^);
+		void pauseMix();
+		void stopMix();
+
 		void getMyRightsBack();
 
 	private:

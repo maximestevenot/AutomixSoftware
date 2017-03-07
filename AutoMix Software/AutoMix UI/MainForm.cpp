@@ -330,6 +330,55 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::onPlayerButtonClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		onWorkerStart();
+		_playerExportBackgroundWorker->RunWorkerAsync(Path::GetTempPath() + "AutomixSoftware\\preview.mp3");
+	}
+
+	System::Void MainForm::playerBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		System::String^ fileName = (System::String^) e->Argument;
+		_presenter->exportTrackList(bw, fileName);
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
+	}
+
+	System::Void MainForm::playerBackgroundWorker_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value = e->ProgressPercentage;
+	}
+
+	System::Void MainForm::playerBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			showCancelDialog();
+		}
+		else if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+		onWorkerStop();
+		_playerPlayBackgroundWorker->RunWorkerAsync(Path::GetTempPath() + "AutomixSoftware\\preview.mp3");
+	}
+
+	System::Void MainForm::playerPlayBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		return System::Void();
+	}
+
+	System::Void MainForm::playerPlayBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+	}
+
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
@@ -387,6 +436,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = false;
 		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
+		_playerbutton->Enabled = false;
 
 		_importMenuItem->Enabled = false;
 		_optionsToolStripMenuItem->Enabled = false;
@@ -404,6 +454,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = true;
 		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
+		_playerbutton->Enabled = true;
 
 		_importMenuItem->Enabled = true;
 		_optionsToolStripMenuItem->Enabled = true;

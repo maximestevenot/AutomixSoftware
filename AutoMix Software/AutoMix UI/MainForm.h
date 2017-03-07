@@ -66,6 +66,7 @@ namespace AutoMixUI {
 
 	private:
 		Presenter^ _presenter;
+		AutoMixDataManagement::MP3Playing^ _mp3playing;
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;
@@ -113,6 +114,9 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+	private: System::Windows::Forms::Button^  _playerbutton;
+	private: System::ComponentModel::BackgroundWorker^  _playerExportBackgroundWorker;
+	private: System::ComponentModel::BackgroundWorker^  _playerPlayBackgroundWorker;
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -140,6 +144,8 @@ namespace AutoMixUI {
 			this->_dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_clearDBMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_aboutMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
 			this->_toolStripProgressBar = (gcnew System::Windows::Forms::ToolStripProgressBar());
@@ -160,8 +166,9 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->_playerbutton = (gcnew System::Windows::Forms::Button());
+			this->_playerExportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_playerPlayBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -202,7 +209,7 @@ namespace AutoMixUI {
 			this->_importMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->_importMenuItem->Name = L"_importMenuItem";
 			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_importMenuItem->Size = System::Drawing::Size(155, 22);
 			this->_importMenuItem->Text = L"&Open...";
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
@@ -259,6 +266,18 @@ namespace AutoMixUI {
 			this->_helpToolStripMenuItem->Name = L"_helpToolStripMenuItem";
 			this->_helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->_helpToolStripMenuItem->Text = L"&Help";
+			// 
+			// aboutCharacteristicsToolStripMenuItem
+			// 
+			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
+			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
+			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
+			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			// 
+			// toolStripSeparator1
+			// 
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(191, 6);
 			// 
 			// _aboutMenuItem
 			// 
@@ -378,7 +397,7 @@ namespace AutoMixUI {
 			this->_importButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_importButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_importButton->Location = System::Drawing::Point(70, 114);
+			this->_importButton->Location = System::Drawing::Point(70, 67);
 			this->_importButton->Name = L"_importButton";
 			this->_importButton->Size = System::Drawing::Size(147, 78);
 			this->_importButton->TabIndex = 5;
@@ -395,7 +414,7 @@ namespace AutoMixUI {
 			this->_generateButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_generateButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_generateButton->Location = System::Drawing::Point(1054, 67);
+			this->_generateButton->Location = System::Drawing::Point(1054, 174);
 			this->_generateButton->Name = L"_generateButton";
 			this->_generateButton->Size = System::Drawing::Size(147, 78);
 			this->_generateButton->TabIndex = 6;
@@ -423,7 +442,7 @@ namespace AutoMixUI {
 			this->_sortButton->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_sortButton->Location = System::Drawing::Point(1054, 174);
+			this->_sortButton->Location = System::Drawing::Point(70, 174);
 			this->_sortButton->Name = L"_sortButton";
 			this->_sortButton->Size = System::Drawing::Size(147, 78);
 			this->_sortButton->TabIndex = 8;
@@ -456,17 +475,36 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
-			// aboutCharacteristicsToolStripMenuItem
+			// _playerbutton
 			// 
-			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
-			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
-			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
-			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			this->_playerbutton->AccessibleName = L"_playerbutton";
+			this->_playerbutton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->_playerbutton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_playerbutton->Location = System::Drawing::Point(1054, 67);
+			this->_playerbutton->Name = L"_playerbutton";
+			this->_playerbutton->Size = System::Drawing::Size(147, 78);
+			this->_playerbutton->TabIndex = 9;
+			this->_playerbutton->Text = L"Play Mix";
+			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
+			this->_playerbutton->UseVisualStyleBackColor = false;
+			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
-			// toolStripSeparator1
+			// _playerExportBackgroundWorker
 			// 
-			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(191, 6);
+			this->_playerExportBackgroundWorker->WorkerReportsProgress = true;
+			this->_playerExportBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_playerExportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
+			this->_playerExportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
+			this->_playerExportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
+			// 
+			// _playerPlayBackgroundWorker
+			// 
+			this->_playerPlayBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_playerPlayBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerPlayBackgroundWorker_DoWork);
+			this->_playerPlayBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerPlayBackgroundWorker_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -476,11 +514,12 @@ namespace AutoMixUI {
 			this->ClientSize = System::Drawing::Size(1264, 682);
 			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->_logo);
-			this->Controls->Add(this->_generateButton);
 			this->Controls->Add(this->_importButton);
 			this->Controls->Add(this->_musicListView);
 			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->_menuStrip);
+			this->Controls->Add(this->_playerbutton);
+			this->Controls->Add(this->_generateButton);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->_menuStrip;
 			this->Margin = System::Windows::Forms::Padding(2);
@@ -555,6 +594,12 @@ namespace AutoMixUI {
 	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 
-	};
+	private: System::Void onPlayerButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void playerBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void playerBackgroundWorker_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void playerBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+	private: System::Void playerPlayBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void playerPlayBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+};
 
 }

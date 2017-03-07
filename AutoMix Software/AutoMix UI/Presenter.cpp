@@ -124,6 +124,21 @@ namespace AutoMixUI {
 		db->clear();
 	}
 
+	void Presenter::playMix(System::String ^)
+	{
+		throw gcnew System::NotImplementedException();
+	}
+
+	void Presenter::pauseMix()
+	{
+		throw gcnew System::NotImplementedException();
+	}
+
+	void Presenter::stopMix()
+	{
+		throw gcnew System::NotImplementedException();
+	}
+
 	void Presenter::getMyRightsBack()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
