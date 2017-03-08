@@ -78,7 +78,6 @@ namespace AutoMixAI
 		for (int k = 0; k < (individual->Count) - 1; k++)
 		{
 			result += Distance->compute(individual[k], individual[k + 1]);
-			//result = result + computeTracksDistance(individual[k], individual[k + 1]);
 		}
 		return result;
 	}
