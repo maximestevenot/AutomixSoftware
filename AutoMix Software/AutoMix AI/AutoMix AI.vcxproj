@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SimpleDistance.h" />
+    <ClInclude Include="SimulatedAnnealingSortAlgorithm.h" />
     <ClInclude Include="SortAlgorithm.h" />
     <ClInclude Include="AutoMixAI.h" />
     <ClInclude Include="GeneticSortAlgorithm.h" />
@@ -147,6 +148,7 @@
     <ClCompile Include="AutoMixAI.cpp" />
     <ClCompile Include="GeneticSortAlgorithm.cpp" />
     <ClCompile Include="SimpleDistance.cpp" />
+    <ClCompile Include="SimulatedAnnealingSortAlgorithm.cpp" />
     <ClCompile Include="SortAlgorithm.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
