@@ -49,7 +49,7 @@ software used while running Software.
 
     2.3. Binary Restricted: Licensee may sublicense Software as a part of
 	a larger work containing more than Software, distributed solely in
-	bject or Binary form under a personal, non-sublicensable, limited 
+	object or Binary form under a personal, non-sublicensable, limited 
 	license. Such redistribution shall be limited to unlimited codebases.
 
     2.4. Non Assignable & Non-Transferable: Licensee may not assign or
@@ -203,5 +203,5 @@ in part or in full.
   The Software uses 3rd party libraries licensed under GNU GPLv3 or superior and
 Licensor herby grants Licensee the right to access any part of the source code.
 To do so, just contact Maxime STEVENOT at stevenot@ecole.ensicaen.fr. Licensor shall
-not claim property on any of these libraries and make source code and documentaion
+not claim property on any of these libraries and make source code and documentation
 accessible for users.
