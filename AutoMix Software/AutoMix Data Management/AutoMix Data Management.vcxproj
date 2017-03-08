@@ -172,6 +172,7 @@
     <ClInclude Include="Track.h" />
     <ClInclude Include="TrackCollection.h" />
     <ClInclude Include="TracksComparison.h" />
+    <ClInclude Include="Transition.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +203,7 @@
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="TrackCollection.cpp" />
     <ClCompile Include="TracksComparison.cpp" />
+    <ClCompile Include="Transition.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

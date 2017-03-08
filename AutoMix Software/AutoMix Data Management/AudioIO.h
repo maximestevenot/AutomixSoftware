@@ -23,5 +23,6 @@ namespace AutoMixDataManagement {
 		static System::String^ Mp3Md5Hash(System::String^ path);
 
 		static NAudio::Wave::Id3v2Tag^ CreateMp3Tag(System::String^ outputFile);
+
 	};
 }
