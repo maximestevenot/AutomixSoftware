@@ -16,8 +16,15 @@ namespace AutoMixDataManagement {
 		void play();
 		void pause();
 		void stop();
+
+		static void SetPosition(NAudio::Wave::WaveStream^ strm, long position);
+		static void SetPosition(NAudio::Wave::WaveStream^ strm, double seconds);
+		static void SetPosition(NAudio::Wave::WaveStream^ strm, System::TimeSpan time);
+		static void Seek(NAudio::Wave::WaveStream^ strm, double offset);
+
 	private:
 		NAudio::Wave::IWavePlayer^ _waveOutDevice;
+		NAudio::Wave::AudioFileReader^ _audioFileReader;
 	};
 }
 

@@ -19,9 +19,9 @@ namespace AutoMixDataManagement {
 	MP3Playing::MP3Playing(String^ file)
 	{
 		_waveOutDevice = gcnew WaveOut();
-		AudioFileReader^ audioFileReader = gcnew AudioFileReader(file);
+		_audioFileReader = gcnew AudioFileReader(file);
 
-		_waveOutDevice->Init(audioFileReader);
+		_waveOutDevice->Init(_audioFileReader);
 	}
 
 	void MP3Playing::play()
@@ -37,5 +37,29 @@ namespace AutoMixDataManagement {
 	void MP3Playing::stop()
 	{
 		_waveOutDevice->Stop();
+		_waveOutDevice->Dispose();
+		_audioFileReader->Dispose();
+	}
+
+	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, long position)
+	{
+		long adj = position % strm->WaveFormat->BlockAlign;
+		long newPos = Math::Max((long long)0, Math::Min(strm->Length,(long long) position - adj));
+		strm->Position = newPos;
+	}
+
+	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, double seconds)
+	{
+		strm->Position = (long)(seconds * strm->WaveFormat->AverageBytesPerSecond);
+	}
+
+	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, System::TimeSpan time)
+	{
+		strm->Position = time.TotalSeconds;
+	}
+
+	void MP3Playing::Seek(NAudio::Wave::WaveStream ^ strm, double offset)
+	{
+		strm->Position = strm->Position + (long)(offset * strm->WaveFormat->AverageBytesPerSecond);
 	}
 }
