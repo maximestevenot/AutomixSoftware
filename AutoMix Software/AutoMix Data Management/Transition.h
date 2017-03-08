@@ -7,10 +7,15 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		Transition();
+		void createFile(System::String^ outputFile);
+
+	private:
 		void fadeIn(Track^ track1, Track^ track2);
 		void fadeOut(Track^ track1, Track^ track2);
-	private:
-		NAudio::Wave::SampleProviders::FadeInOutSampleProvider^ _transition;
+
+		Mp3FileReader^ _reader;
+		TrackCollection^ _trackList;
+		NAudio::Wave::SampleProviders::FadeInOutSampleProvider^ _finalWave;
+		NAudio::Wave::WaveStream^ _stream;
 	};
 }
-
