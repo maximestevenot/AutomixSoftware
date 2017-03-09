@@ -48,6 +48,9 @@
     <ClInclude Include="TrackDistance.h">
       <Filter>Header Files\Distances</Filter>
     </ClInclude>
+    <ClInclude Include="SimulatedAnnealingSortAlgorithm.h">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -67,6 +70,9 @@
     </ClCompile>
     <ClCompile Include="SimpleDistance.cpp">
       <Filter>Source Files\Distances</Filter>
+    </ClCompile>
+    <ClCompile Include="SimulatedAnnealingSortAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -139,6 +139,7 @@
     <ClInclude Include="DataBaseTests.h" />
     <ClInclude Include="ExtractionTest.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SimulatedAnnealingAlgorithmTests.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="TrackCollectionTests.h" />
     <ClInclude Include="TrackTests.h" />
@@ -150,6 +151,7 @@
     <ClCompile Include="GeneticAlgorithmTests.cpp" />
     <ClCompile Include="DataBaseTests.cpp" />
     <ClCompile Include="ExtractionTest.cpp" />
+    <ClCompile Include="SimulatedAnnealingAlgorithmTests.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
