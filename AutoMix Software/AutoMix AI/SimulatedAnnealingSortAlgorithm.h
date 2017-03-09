@@ -19,7 +19,7 @@ namespace AutoMixAI
 	public:
 		SimulatedAnnealingSortAlgorithm(TrackDistance^ distance);
 
-		SimulatedAnnealingSortAlgorithm(TrackDistance^ distance, int stopTemperature, int beginTemperature, float decayFactor);
+		SimulatedAnnealingSortAlgorithm(TrackDistance^ distance, int stopTemperature, int beginTemperature, float decayFactor, int numberOfIteration);
 
 		AutoMixDataManagement::TrackCollection^ sort(System::ComponentModel::BackgroundWorker^, AutoMixDataManagement::TrackCollection^) override;
 
@@ -28,6 +28,7 @@ namespace AutoMixAI
 		initonly int STOPTEMPERATURE;
 		initonly int BEGINTEMPERATURE;
 		initonly float DECAYFACTOR;
+		initonly int NUMBEROFITERATION;
 
 
 		double computeIndividualEvaluation(AutoMixDataManagement::TrackCollection^);

@@ -14,43 +14,57 @@ using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
-	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance) : SimulatedAnnealingSortAlgorithm(distance, 1, 40, 0.9)
+	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance) : SimulatedAnnealingSortAlgorithm(distance, 1, 35, 0.93, 15)
 	{
 	}
 
-	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance, int stopTemperature, int beginTemperature, float decayFactor) : SortAlgorithm(distance)
+	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance, int stopTemperature, int beginTemperature, float decayFactor, int numberOfIteration) : SortAlgorithm(distance)
 	{
 		STOPTEMPERATURE = stopTemperature;
 		BEGINTEMPERATURE = beginTemperature;
 		DECAYFACTOR = decayFactor;
+		NUMBEROFITERATION = numberOfIteration;
 	}
 
 	TrackCollection^ SimulatedAnnealingSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{	
 		int nb_track = trackCollection->Count;
 		int N = (nb_track / 2) * (nb_track / 2);
+		TrackCollection^ result = trackCollection;
 		TrackCollection^ temp;
 		System::Random^ rand = gcnew System::Random();
 
-		float temperature = BEGINTEMPERATURE;
-
-		while (temperature > STOPTEMPERATURE) {
-			for (int i = 0; i < N; i++) {
-
-				temp = createPotentialTrackCollection(trackCollection);
-				double dE = computeIndividualEvaluation(temp) - computeIndividualEvaluation(trackCollection);
-
-				if (dE < 0) {
-					trackCollection = temp;
-				}
-				else {
-					if (rand->Next(100) < (System::Math::Exp(-dE / temperature) * 100)) {
-						trackCollection = temp;
-					}
-				}
-
+		for (int k = 0; k < NUMBEROFITERATION; k++) {
+			
+			if (bw->CancellationPending)
+			{
+				break;
 			}
-			temperature = temperature * DECAYFACTOR;
+			float temperature = BEGINTEMPERATURE;
+
+			while (temperature > STOPTEMPERATURE) {
+				for (int i = 0; i < N; i++) {
+
+					temp = createPotentialTrackCollection(result);
+					double dE = computeIndividualEvaluation(temp) - computeIndividualEvaluation(result);
+
+					if (dE < 0) {
+						result = temp;
+					}
+					else {
+						if (rand->Next(100) < (System::Math::Exp(-dE / temperature) * 100)) {
+							result = temp;
+						}
+					}
+
+				}
+				temperature = temperature * DECAYFACTOR;
+			}
+			if (computeIndividualEvaluation(result) < computeIndividualEvaluation(trackCollection)) {
+				trackCollection = result;
+			}
+			bw->ReportProgress((int)1000 * k / NUMBEROFITERATION);
+			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(trackCollection));
 		}
 
 		return trackCollection;

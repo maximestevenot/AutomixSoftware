@@ -36,16 +36,13 @@ namespace AutoMixAI
 				break;
 			}
 
-			System::Diagnostics::Debug::WriteLine("iteration {0}", k);
-			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
-			System::Diagnostics::Debug::WriteLine("dernier {0}", computeIndividualEvaluation(pop[POPULATION_SIZE - 1]));
-
 			createChildAndPutThemIntoPopulation(pop);
 			mutatePopulation(pop);
 			sortPopulation(pop, 0, pop->Count - 1);
 			pop = pop->GetRange(0, POPULATION_SIZE);
 			bw->ReportProgress((int)1000 * k / NUMBER_OF_ITERATION);
 		}
+		System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
 		return pop[0];
 	}
 
