@@ -330,6 +330,19 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		Button^ modifiedButton = (Button^)sender;
+		if (!modifiedButton->Enabled)
+		{
+			modifiedButton->BackColor = Color::FromArgb(100, 0, 100);
+		}
+		else
+		{
+			modifiedButton->BackColor = Color::DarkViolet;
+		}
+	}
+
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)

@@ -587,21 +587,7 @@ namespace AutoMixUI {
 	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 
-	private: System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e) {
-		Button^ temp = (Button^)sender;
-		if (!temp->Enabled) 
-		{
-			temp->BackColor = Color::FromArgb(100,0,100);
-		}
-		else
-		{
-			temp->BackColor = Color::DarkViolet;
-		}
-	}
-	private: System::Void _sortButton_EnabledChanged(System::Object^  sender, System::EventArgs^  e) {
-	}
-	private: System::Void _generateButton_EnabledChanged(System::Object^  sender, System::EventArgs^  e) {
-	}
+	private: System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e);
 	};
 
 }
