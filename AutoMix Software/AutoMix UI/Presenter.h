@@ -26,6 +26,7 @@ namespace AutoMixUI {
 		void clearDataBase();
 
 		void playMix(System::String^);
+		void resumeMix();
 		void pauseMix();
 		void stopMix();
 
@@ -36,5 +37,7 @@ namespace AutoMixUI {
 
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
 		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
+
+		AutoMixDataManagement::MP3Playing^ _mp3Playing;
 	};
 }

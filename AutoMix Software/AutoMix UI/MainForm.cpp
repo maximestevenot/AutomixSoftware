@@ -332,15 +332,31 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onPlayerButtonClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		onWorkerStart();
-		_playerExportBackgroundWorker->RunWorkerAsync(Path::GetTempPath() + "AutomixSoftware\\preview.mp3");
+		//onWorkerStart();
+		_playerExportBackgroundWorker->RunWorkerAsync();
 	}
 
 	System::Void MainForm::playerBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
-		System::String^ fileName = (System::String^) e->Argument;
-		_presenter->exportTrackList(bw, fileName);
+		if (!_isPlayerPlaying)
+		{
+			try
+			{
+				_presenter->exportTrackList(bw, _exportPath);
+				_presenter->playMix(_exportPath);
+			}
+			catch (System::IO::IOException^)
+			{
+				_presenter->resumeMix();
+			}
+			_isPlayerPlaying = true;
+		}
+		else
+		{
+			_presenter->pauseMix();
+			_isPlayerPlaying = false;
+		}
 		if (bw->CancellationPending)
 		{
 			e->Cancel = true;
@@ -363,12 +379,22 @@ namespace AutoMixUI {
 			showErrorDialog(e->Error->Message);
 		}
 		onWorkerStop();
-		_playerPlayBackgroundWorker->RunWorkerAsync(Path::GetTempPath() + "AutomixSoftware\\preview.mp3");
+		//_playerPlayBackgroundWorker->RunWorkerAsync(_isPlayerPlaying);
 	}
 
 	System::Void MainForm::playerPlayBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
 	{
-		return System::Void();
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		bool isPlaying = (bool) e->Argument;
+		System::Diagnostics::Debug::WriteLine(isPlaying);
+		isPlaying = true;
+		System::Diagnostics::Debug::WriteLine(isPlaying);
+		System::Diagnostics::Debug::WriteLine(_isPlayerPlaying);
+		_presenter->playMix(_exportPath);
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
 	}
 
 	System::Void MainForm::playerPlayBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)

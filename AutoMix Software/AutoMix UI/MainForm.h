@@ -66,7 +66,9 @@ namespace AutoMixUI {
 
 	private:
 		Presenter^ _presenter;
-		AutoMixDataManagement::MP3Playing^ _mp3playing;
+
+		bool _isPlayerPlaying = false;
+		System::String^ _exportPath = System::IO::Path::GetTempPath() + "AutomixSoftware\\preview.mp3";
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;

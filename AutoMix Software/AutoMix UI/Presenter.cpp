@@ -124,19 +124,25 @@ namespace AutoMixUI {
 		db->clear();
 	}
 
-	void Presenter::playMix(System::String ^)
+	void Presenter::playMix(System::String ^ fileName)
 	{
-		throw gcnew System::NotImplementedException();
+		_mp3Playing = gcnew AutoMixDataManagement::MP3Playing(fileName);
+		_mp3Playing->play();
+	}
+
+	void Presenter::resumeMix()
+	{
+		_mp3Playing->play();
 	}
 
 	void Presenter::pauseMix()
 	{
-		throw gcnew System::NotImplementedException();
+		_mp3Playing->pause();
 	}
 
 	void Presenter::stopMix()
 	{
-		throw gcnew System::NotImplementedException();
+		_mp3Playing->stop();
 	}
 
 	void Presenter::getMyRightsBack()
