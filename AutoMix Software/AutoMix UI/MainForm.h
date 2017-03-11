@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ViewWithTrackCollection.h"
+#include "AutoMixColorTable.h"
 #include "Presenter.h"
 
 namespace AutoMixUI {
@@ -31,6 +32,9 @@ namespace AutoMixUI {
 		MainForm(void)
 		{
 			InitializeComponent();
+			_menuStrip->RenderMode = ToolStripRenderMode::Professional;
+			_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+
 			_presenter = gcnew Presenter(this);
 
 			_cancelMenuItem->Enabled = false;
@@ -83,7 +87,7 @@ namespace AutoMixUI {
 
 	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
+
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator;
 	private: System::Windows::Forms::ToolStripMenuItem^  _quitMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
@@ -113,6 +117,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -132,7 +137,6 @@ namespace AutoMixUI {
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->_menuStrip = (gcnew System::Windows::Forms::MenuStrip());
 			this->_fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->_importMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_cancelMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_quitMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -162,6 +166,7 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->_importMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -190,29 +195,17 @@ namespace AutoMixUI {
 				this->_importMenuItem,
 					this->_cancelMenuItem, this->toolStripSeparator, this->_quitMenuItem
 			});
-			this->_fileToolStripMenuItem->ForeColor = System::Drawing::Color::DarkGray;
+			this->_fileToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
 			this->_fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->_fileToolStripMenuItem->Text = L"&File";
 			// 
-			// _importMenuItem
-			// 
-			this->_importMenuItem->BackColor = System::Drawing::SystemColors::Control;
-			this->_importMenuItem->Checked = true;
-			this->_importMenuItem->CheckState = System::Windows::Forms::CheckState::Indeterminate;
-			this->_importMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_importMenuItem.Image")));
-			this->_importMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->_importMenuItem->Name = L"_importMenuItem";
-			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(159, 26);
-			this->_importMenuItem->Text = L"&Open...";
-			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
-			// 
 			// _cancelMenuItem
 			// 
+			this->_cancelMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
 			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Z));
-			this->_cancelMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_cancelMenuItem->Size = System::Drawing::Size(162, 22);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
@@ -220,18 +213,20 @@ namespace AutoMixUI {
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(156, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(159, 6);
 			// 
 			// _quitMenuItem
 			// 
+			this->_quitMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_quitMenuItem->Name = L"_quitMenuItem";
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
-			this->_quitMenuItem->Size = System::Drawing::Size(159, 26);
+			this->_quitMenuItem->Size = System::Drawing::Size(162, 22);
 			this->_quitMenuItem->Text = L"&Quit";
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
 			// _optionsToolStripMenuItem
 			// 
+			this->_optionsToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_dataBaseToolStripMenuItem });
 			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
@@ -242,14 +237,16 @@ namespace AutoMixUI {
 			// _dataBaseToolStripMenuItem
 			// 
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
+			this->_dataBaseToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
-			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
+			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBMenuItem
 			// 
+			this->_clearDBMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
-			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
+			this->_clearDBMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
@@ -266,6 +263,7 @@ namespace AutoMixUI {
 			// 
 			// aboutCharacteristicsToolStripMenuItem
 			// 
+			this->aboutCharacteristicsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
 			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
 			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
@@ -278,6 +276,7 @@ namespace AutoMixUI {
 			// 
 			// _aboutMenuItem
 			// 
+			this->_aboutMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
 			this->_aboutMenuItem->Size = System::Drawing::Size(194, 22);
 			this->_aboutMenuItem->Text = L"About &application...";
@@ -496,6 +495,15 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::exportBW_DoWork);
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
+			// 
+			// _importMenuItem
+			// 
+			this->_importMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_importMenuItem->Name = L"_importMenuItem";
+			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
+			this->_importMenuItem->Size = System::Drawing::Size(162, 22);
+			this->_importMenuItem->Text = L"&Import...";
+			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// MainForm
 			// 
