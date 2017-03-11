@@ -126,6 +126,27 @@ namespace AutoMixUI {
 		db->clear();
 	}
 
+	void Presenter::playMix(System::String ^ fileName)
+	{
+		_mp3Playing = gcnew AutoMixDataManagement::MP3Playing(fileName);
+		_mp3Playing->play();
+	}
+
+	void Presenter::resumeMix()
+	{
+		_mp3Playing->play();
+	}
+
+	void Presenter::pauseMix()
+	{
+		_mp3Playing->pause();
+	}
+
+	void Presenter::stopMix()
+	{
+		_mp3Playing->stop();
+	}
+
 	void Presenter::getMyRightsBack()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);

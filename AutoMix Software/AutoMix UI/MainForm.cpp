@@ -38,6 +38,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 	}
 
 	System::Void MainForm::onQuitMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -137,6 +139,7 @@ namespace AutoMixUI {
 		}
 
 		onWorkerStop();
+		stopPlayer();
 		_presenter->notify();
 	}
 
@@ -170,6 +173,7 @@ namespace AutoMixUI {
 			_presenter->notify();
 		}
 		onWorkerStop();
+		stopPlayer();
 	}
 
 	System::Void MainForm::exportBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -331,6 +335,78 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::onPlayerButtonClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		onWorkerStart();
+		_playerbutton->Enabled = true;
+		if (!_isPlayerPlaying)
+		{
+			_playerbutton->Text = "Pause Mix";
+		}
+		else
+		{
+			_playerbutton->Text = "Play Mix";
+		}
+		_playerBackgroundWorker->RunWorkerAsync();
+	}
+
+	System::Void MainForm::playerBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		if (!_isPlayerPlaying)
+		{
+			try
+			{
+				_presenter->exportTrackList(bw, _exportPath);
+				_presenter->playMix(_exportPath);
+			}
+			catch (System::IO::IOException^)
+			{
+				_presenter->resumeMix();
+			}
+			_isPlayerPlaying = true;
+			_playerExists = true;
+		}
+		else
+		{
+			_presenter->pauseMix();
+			_isPlayerPlaying = false;
+		}
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
+	}
+
+	System::Void MainForm::playerBackgroundWorker_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value = e->ProgressPercentage;
+	}
+
+	System::Void MainForm::playerBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			showCancelDialog();
+		}
+		else if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+		onWorkerStop();
+	}
+
+	System::Void MainForm::stopPlayer()
+	{
+		if (_playerExists)
+		{
+			_presenter->stopMix();
+			_isPlayerPlaying = false;
+			_playerExists = false;
+		}
+		_playerbutton->Text = "Play Mix";
+	}
+
 	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		Button^ modifiedButton = (Button^)sender;
@@ -424,6 +500,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = false;
 		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
+		_playerbutton->Enabled = false;
 
 		_importMenuItem->Enabled = false;
 		_optionsToolStripMenuItem->Enabled = false;
@@ -441,6 +518,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = true;
 		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
+		_playerbutton->Enabled = true;
 
 		_importMenuItem->Enabled = true;
 		_optionsToolStripMenuItem->Enabled = true;
@@ -476,6 +554,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 
 		try
 		{
