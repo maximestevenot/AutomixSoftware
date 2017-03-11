@@ -447,12 +447,11 @@ namespace AutoMixUI {
 		dialog->FileName = "Auto Mix";
 		dialog->DefaultExt = "mp3";
 		dialog->RestoreDirectory = true;
-		_exportPath = dialog->FileName;
 
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
-			_exportBackgroundWorker->RunWorkerAsync(_exportPath);
+			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}
 
@@ -518,6 +517,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 
 		try
 		{
