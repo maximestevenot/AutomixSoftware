@@ -24,12 +24,13 @@ namespace AutoMixUI {
 		for each (auto track in collection)
 		{
 			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
+			_musicListView->Items->Add(lvitem);
+
 			lvitem->SubItems->Add(track->displayDuration());
 			lvitem->SubItems->Add(track->BPM.ToString());
 			lvitem->SubItems->Add(track->Key);
-
-			_musicListView->Items->Add(lvitem);
 		}
+		_musicListView->Invalidate();
 	}
 
 	System::Void MainForm::onCancelMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -349,12 +350,6 @@ namespace AutoMixUI {
 		{
 			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
 		}
-		else
-		{
-			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::BackGroundColor), e->Bounds);
-		}
-
-		e->DrawText(TextFormatFlags::TextBoxControl);
 	}
 
 	System::Void MainForm::musicListView_DrawColumnHeader(System::Object ^ sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs ^ e)
@@ -369,11 +364,6 @@ namespace AutoMixUI {
 		{
 			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
 		}
-		else
-		{
-			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::BackGroundColor), e->Bounds);
-		}
-
 		e->DrawText(TextFormatFlags::TextBoxControl);
 	}
 
@@ -464,7 +454,7 @@ namespace AutoMixUI {
 	{
 		String^ msg = "Operation was canceled";
 		String^ caption = "Cancel";
-		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Stop);
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
 	System::Void MainForm::showErrorDialog(String^ errorMessage)
