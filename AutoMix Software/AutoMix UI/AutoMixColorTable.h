@@ -21,7 +21,6 @@ namespace AutoMixUI {
 		property System::Drawing::Color MenuItemSelectedGradientBegin { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color MenuItemSelectedGradientEnd { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color MenuStripGradientBegin { virtual System::Drawing::Color get() override; }
-		property System::Drawing::Color MenuStripGradientMiddle { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color MenuStripGradientEnd { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color ImageMarginGradientBegin { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color ImageMarginGradientMiddle { virtual System::Drawing::Color get() override; }

@@ -34,6 +34,8 @@ namespace AutoMixUI {
 			InitializeComponent();
 			_menuStrip->RenderMode = ToolStripRenderMode::Professional;
 			_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+			_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
+			_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 
 			_presenter = gcnew Presenter(this);
 
@@ -137,6 +139,7 @@ namespace AutoMixUI {
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->_menuStrip = (gcnew System::Windows::Forms::MenuStrip());
 			this->_fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_importMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_cancelMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_quitMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -166,7 +169,6 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->_importMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -199,6 +201,15 @@ namespace AutoMixUI {
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
 			this->_fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->_fileToolStripMenuItem->Text = L"&File";
+			// 
+			// _importMenuItem
+			// 
+			this->_importMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_importMenuItem->Name = L"_importMenuItem";
+			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
+			this->_importMenuItem->Size = System::Drawing::Size(162, 22);
+			this->_importMenuItem->Text = L"&Import...";
+			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
@@ -239,14 +250,14 @@ namespace AutoMixUI {
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
 			this->_dataBaseToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
-			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
 			this->_dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBMenuItem
 			// 
 			this->_clearDBMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
-			this->_clearDBMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
@@ -367,12 +378,13 @@ namespace AutoMixUI {
 					this->_selectAllToolStrip
 			});
 			this->_trackContextMenu->Name = L"_listViewcontextMenu";
-			this->_trackContextMenu->Size = System::Drawing::Size(165, 48);
+			this->_trackContextMenu->Size = System::Drawing::Size(165, 70);
 			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::onTrackContextMenuOpening);
 			// 
 			// _deleteTrackToolStrip
 			// 
 			this->_deleteTrackToolStrip->Enabled = false;
+			this->_deleteTrackToolStrip->ForeColor = System::Drawing::Color::White;
 			this->_deleteTrackToolStrip->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_deleteTrackToolStrip.Image")));
 			this->_deleteTrackToolStrip->Name = L"_deleteTrackToolStrip";
 			this->_deleteTrackToolStrip->ShortcutKeys = System::Windows::Forms::Keys::Delete;
@@ -382,6 +394,7 @@ namespace AutoMixUI {
 			// 
 			// _selectAllToolStrip
 			// 
+			this->_selectAllToolStrip->ForeColor = System::Drawing::Color::White;
 			this->_selectAllToolStrip->Name = L"_selectAllToolStrip";
 			this->_selectAllToolStrip->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::A));
 			this->_selectAllToolStrip->Size = System::Drawing::Size(164, 22);
@@ -495,15 +508,6 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::exportBW_DoWork);
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
-			// 
-			// _importMenuItem
-			// 
-			this->_importMenuItem->ForeColor = System::Drawing::Color::White;
-			this->_importMenuItem->Name = L"_importMenuItem";
-			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(162, 22);
-			this->_importMenuItem->Text = L"&Import...";
-			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// MainForm
 			// 
