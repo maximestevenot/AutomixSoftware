@@ -36,6 +36,7 @@ namespace AutoMixUI {
 			_cancelMenuItem->Enabled = false;
 			_generateButton->Enabled = false;
 			_sortButton->Enabled = false;
+			_playerbutton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
 			AnOperationRunning = false;
 
@@ -68,6 +69,7 @@ namespace AutoMixUI {
 		Presenter^ _presenter;
 
 		bool _isPlayerPlaying = false;
+		bool _playerExists = false;
 		System::String^ _exportPath = System::IO::Path::GetTempPath() + "AutomixSoftware\\preview.mp3";
 
 		property bool IsRowDragInProgress;
@@ -117,8 +119,8 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
 	private: System::Windows::Forms::Button^  _playerbutton;
-	private: System::ComponentModel::BackgroundWorker^  _playerExportBackgroundWorker;
-	private: System::ComponentModel::BackgroundWorker^  _playerPlayBackgroundWorker;
+	private: System::ComponentModel::BackgroundWorker^  _playerBackgroundWorker;
+
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -169,8 +171,7 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
-			this->_playerExportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
-			this->_playerPlayBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -494,19 +495,13 @@ namespace AutoMixUI {
 			this->_playerbutton->UseVisualStyleBackColor = false;
 			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
-			// _playerExportBackgroundWorker
+			// _playerBackgroundWorker
 			// 
-			this->_playerExportBackgroundWorker->WorkerReportsProgress = true;
-			this->_playerExportBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_playerExportBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
-			this->_playerExportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
-			this->_playerExportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
-			// 
-			// _playerPlayBackgroundWorker
-			// 
-			this->_playerPlayBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_playerPlayBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerPlayBackgroundWorker_DoWork);
-			this->_playerPlayBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerPlayBackgroundWorker_RunWorkerCompleted);
+			this->_playerBackgroundWorker->WorkerReportsProgress = true;
+			this->_playerBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_playerBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
+			this->_playerBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
+			this->_playerBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
 			// 
 			// MainForm
 			// 
@@ -600,8 +595,8 @@ namespace AutoMixUI {
 	private: System::Void playerBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void playerBackgroundWorker_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 	private: System::Void playerBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
-	private: System::Void playerPlayBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
-	private: System::Void playerPlayBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+
+	private: System::Void stopPlayer();
 };
 
 }

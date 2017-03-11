@@ -37,6 +37,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 	}
 
 	System::Void MainForm::onQuitMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -136,6 +138,7 @@ namespace AutoMixUI {
 		}
 
 		onWorkerStop();
+		stopPlayer();
 		_presenter->notify();
 	}
 
@@ -169,6 +172,7 @@ namespace AutoMixUI {
 			_presenter->notify();
 		}
 		onWorkerStop();
+		stopPlayer();
 	}
 
 	System::Void MainForm::exportBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -332,8 +336,17 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onPlayerButtonClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		//onWorkerStart();
-		_playerExportBackgroundWorker->RunWorkerAsync();
+		onWorkerStart();
+		_playerbutton->Enabled = true;
+		if (!_isPlayerPlaying)
+		{
+			_playerbutton->Text = "Pause Mix";
+		}
+		else
+		{
+			_playerbutton->Text = "Play Mix";
+		}
+		_playerBackgroundWorker->RunWorkerAsync();
 	}
 
 	System::Void MainForm::playerBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -351,6 +364,7 @@ namespace AutoMixUI {
 				_presenter->resumeMix();
 			}
 			_isPlayerPlaying = true;
+			_playerExists = true;
 		}
 		else
 		{
@@ -379,30 +393,17 @@ namespace AutoMixUI {
 			showErrorDialog(e->Error->Message);
 		}
 		onWorkerStop();
-		//_playerPlayBackgroundWorker->RunWorkerAsync(_isPlayerPlaying);
 	}
 
-	System::Void MainForm::playerPlayBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	System::Void MainForm::stopPlayer()
 	{
-		BackgroundWorker^ bw = (BackgroundWorker^)sender;
-		bool isPlaying = (bool) e->Argument;
-		System::Diagnostics::Debug::WriteLine(isPlaying);
-		isPlaying = true;
-		System::Diagnostics::Debug::WriteLine(isPlaying);
-		System::Diagnostics::Debug::WriteLine(_isPlayerPlaying);
-		_presenter->playMix(_exportPath);
-		if (bw->CancellationPending)
+		if (_playerExists)
 		{
-			e->Cancel = true;
+			_presenter->stopMix();
+			_isPlayerPlaying = false;
+			_playerExists = false;
 		}
-	}
-
-	System::Void MainForm::playerPlayBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
-	{
-		if (e->Error != nullptr)
-		{
-			showErrorDialog(e->Error->Message);
-		}
+		_playerbutton->Text = "Play Mix";
 	}
 
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
@@ -446,11 +447,12 @@ namespace AutoMixUI {
 		dialog->FileName = "Auto Mix";
 		dialog->DefaultExt = "mp3";
 		dialog->RestoreDirectory = true;
+		_exportPath = dialog->FileName;
 
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
-			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
+			_exportBackgroundWorker->RunWorkerAsync(_exportPath);
 		}
 	}
 

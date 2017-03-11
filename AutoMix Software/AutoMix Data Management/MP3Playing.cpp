@@ -37,6 +37,9 @@ namespace AutoMixDataManagement {
 	void MP3Playing::stop()
 	{
 		_waveOutDevice->Stop();
+		SetPosition(_audioFileReader, 0.);
+		delete _waveOutDevice;
+		delete _audioFileReader;
 	}
 
 	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, long position)

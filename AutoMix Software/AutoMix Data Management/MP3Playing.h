@@ -23,8 +23,8 @@ namespace AutoMixDataManagement {
 		static void Seek(NAudio::Wave::WaveStream^ strm, double offset);
 
 	private:
-		NAudio::Wave::IWavePlayer^ _waveOutDevice;
-		NAudio::Wave::AudioFileReader^ _audioFileReader;
+		NAudio::Wave::IWavePlayer^ _waveOutDevice = nullptr;
+		NAudio::Wave::AudioFileReader^ _audioFileReader = nullptr;
 	};
 }
 
