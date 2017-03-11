@@ -330,6 +330,7 @@ namespace AutoMixUI {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->_musicListView->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
+			this->_musicListView->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
 				this->collectionName,
 					this->collectionDuration, this->collectionBPM, this->collectionKey
