@@ -24,12 +24,13 @@ namespace AutoMixUI {
 		for each (auto track in collection)
 		{
 			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
+			_musicListView->Items->Add(lvitem);
+
 			lvitem->SubItems->Add(track->displayDuration());
 			lvitem->SubItems->Add(track->BPM.ToString());
 			lvitem->SubItems->Add(track->Key);
-
-			_musicListView->Items->Add(lvitem);
 		}
+		_musicListView->Invalidate();
 	}
 
 	System::Void MainForm::onCancelMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -330,6 +331,42 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		Button^ modifiedButton = (Button^)sender;
+		if (!modifiedButton->Enabled)
+		{
+			modifiedButton->BackColor = Color::FromArgb(100, 0, 100);
+		}
+		else
+		{
+			modifiedButton->BackColor = Color::DarkViolet;
+		}
+	}
+
+	System::Void MainForm::musicListView_DrawItem(System::Object ^ sender, System::Windows::Forms::DrawListViewItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+	}
+
+	System::Void MainForm::musicListView_DrawColumnHeader(System::Object ^ sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs ^ e)
+	{
+		e->DrawBackground();
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
+	System::Void MainForm::musicListView_DrawSubItem(System::Object ^ sender, System::Windows::Forms::DrawListViewSubItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
@@ -417,7 +454,7 @@ namespace AutoMixUI {
 	{
 		String^ msg = "Operation was canceled";
 		String^ caption = "Cancel";
-		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Stop);
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
 	System::Void MainForm::showErrorDialog(String^ errorMessage)
