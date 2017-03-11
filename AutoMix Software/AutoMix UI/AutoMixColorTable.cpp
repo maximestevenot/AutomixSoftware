@@ -13,6 +13,16 @@ namespace AutoMixUI {
 		OVER_COLOR = Color::FromArgb(0, 192, 192);
 	}
 
+	Color AutoMixColorTable::SelectionColor::get()
+	{ 
+		return Color::FromArgb(0, 192, 192);
+	}
+
+	Color AutoMixColorTable::BackGroundColor::get()
+	{
+		return Color::FromArgb(19, 23, 27);
+	}
+
 	Color AutoMixColorTable::ToolStripBorder::get()
 	{
 		return BORDER_COLOR;

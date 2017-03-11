@@ -343,6 +343,40 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::musicListView_DrawItem(System::Object ^ sender, System::Windows::Forms::DrawListViewItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+		else
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::BackGroundColor), e->Bounds);
+		}
+
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
+	System::Void MainForm::musicListView_DrawColumnHeader(System::Object ^ sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs ^ e)
+	{
+		e->DrawBackground();
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
+	System::Void MainForm::musicListView_DrawSubItem(System::Object ^ sender, System::Windows::Forms::DrawListViewSubItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+		else
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::BackGroundColor), e->Bounds);
+		}
+
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)

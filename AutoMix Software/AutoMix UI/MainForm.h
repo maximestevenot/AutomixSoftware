@@ -342,10 +342,14 @@ namespace AutoMixUI {
 			this->_musicListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
+			this->_musicListView->OwnerDraw = true;
 			this->_musicListView->Size = System::Drawing::Size(1264, 382);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
+			this->_musicListView->DrawColumnHeader += gcnew System::Windows::Forms::DrawListViewColumnHeaderEventHandler(this, &MainForm::musicListView_DrawColumnHeader);
+			this->_musicListView->DrawItem += gcnew System::Windows::Forms::DrawListViewItemEventHandler(this, &MainForm::musicListView_DrawItem);
+			this->_musicListView->DrawSubItem += gcnew System::Windows::Forms::DrawListViewSubItemEventHandler(this, &MainForm::musicListView_DrawSubItem);
 			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::musicListView_ItemDrag);
 			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragDrop);
 			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragEnter);
@@ -378,7 +382,7 @@ namespace AutoMixUI {
 					this->_selectAllToolStrip
 			});
 			this->_trackContextMenu->Name = L"_listViewcontextMenu";
-			this->_trackContextMenu->Size = System::Drawing::Size(165, 70);
+			this->_trackContextMenu->Size = System::Drawing::Size(165, 48);
 			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::onTrackContextMenuOpening);
 			// 
 			// _deleteTrackToolStrip
@@ -600,6 +604,10 @@ namespace AutoMixUI {
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 
 	private: System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e);
-	};
+	private: System::Void musicListView_DrawItem(System::Object^  sender, System::Windows::Forms::DrawListViewItemEventArgs^  e);
+	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
+
+	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
+};
 
 }
