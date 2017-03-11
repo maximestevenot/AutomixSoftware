@@ -11,7 +11,6 @@ namespace AutoMixUI {
 		BORDER_COLOR = Color::White;
 		SELECTION_BORDER_COLOR = Color::DarkMagenta; //Color::FromArgb(0, 192, 192);
 		OVER_COLOR = Color::FromArgb(0, 192, 192);
-		PRESSED_COLOR = Color::FromArgb(0, 151, 151);
 	}
 
 	Color AutoMixColorTable::ToolStripBorder::get()

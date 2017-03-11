@@ -34,7 +34,6 @@ namespace AutoMixUI {
 		System::Drawing::Color BACKGROUND_COLOR;
 		System::Drawing::Color BORDER_COLOR;
 		System::Drawing::Color OVER_COLOR;
-		System::Drawing::Color PRESSED_COLOR;
 		System::Drawing::Color SELECTION_BORDER_COLOR;
 	};
 
