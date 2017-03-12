@@ -124,9 +124,13 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
-	private: System::Windows::Forms::Button^  _playerbutton;
+
 	private: System::ComponentModel::BackgroundWorker^  _playerBackgroundWorker;
 	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
+	private: System::Windows::Forms::Panel^  panel1;
+private: System::Windows::Forms::Button^  _playerbutton;
+
+private: System::Windows::Forms::BindingSource^  bindingSource1;
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -176,12 +180,16 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
+			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->BeginInit();
+			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// _menuStrip
@@ -196,7 +204,7 @@ namespace AutoMixUI {
 			this->_menuStrip->Location = System::Drawing::Point(0, 0);
 			this->_menuStrip->Name = L"_menuStrip";
 			this->_menuStrip->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
-			this->_menuStrip->Size = System::Drawing::Size(1264, 24);
+			this->_menuStrip->Size = System::Drawing::Size(1064, 24);
 			this->_menuStrip->TabIndex = 2;
 			this->_menuStrip->Text = L"menuStrip1";
 			// 
@@ -311,9 +319,9 @@ namespace AutoMixUI {
 				this->_toolStripProgressBar,
 					this->_toolStripCurrentDir
 			});
-			this->_statusStrip->Location = System::Drawing::Point(0, 660);
+			this->_statusStrip->Location = System::Drawing::Point(0, 626);
 			this->_statusStrip->Name = L"_statusStrip";
-			this->_statusStrip->Size = System::Drawing::Size(1264, 22);
+			this->_statusStrip->Size = System::Drawing::Size(1064, 22);
 			this->_statusStrip->TabIndex = 3;
 			this->_statusStrip->Text = L"statusStrip1";
 			// 
@@ -353,7 +361,7 @@ namespace AutoMixUI {
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
 			this->_musicListView->OwnerDraw = true;
-			this->_musicListView->Size = System::Drawing::Size(1264, 382);
+			this->_musicListView->Size = System::Drawing::Size(1064, 348);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
@@ -430,8 +438,9 @@ namespace AutoMixUI {
 				static_cast<System::Byte>(0)));
 			this->_importButton->ForeColor = System::Drawing::SystemColors::ButtonFace;
 			this->_importButton->Location = System::Drawing::Point(12, 188);
+			this->_importButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_importButton->Name = L"_importButton";
-			this->_importButton->Size = System::Drawing::Size(400, 78);
+			this->_importButton->Size = System::Drawing::Size(348, 78);
 			this->_importButton->TabIndex = 5;
 			this->_importButton->Text = L"Import Tracks";
 			this->_toolTip->SetToolTip(this->_importButton, L"Click to import new tracks");
@@ -454,9 +463,10 @@ namespace AutoMixUI {
 			this->_generateButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_generateButton->ForeColor = System::Drawing::SystemColors::ButtonFace;
-			this->_generateButton->Location = System::Drawing::Point(852, 188);
+			this->_generateButton->Location = System::Drawing::Point(742, 188);
+			this->_generateButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_generateButton->Name = L"_generateButton";
-			this->_generateButton->Size = System::Drawing::Size(400, 78);
+			this->_generateButton->Size = System::Drawing::Size(310, 78);
 			this->_generateButton->TabIndex = 6;
 			this->_generateButton->Text = L"Generate Mix";
 			this->_toolTip->SetToolTip(this->_generateButton, L"Click to export an mp3 file");
@@ -489,9 +499,10 @@ namespace AutoMixUI {
 			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_sortButton->ForeColor = System::Drawing::Color::White;
-			this->_sortButton->Location = System::Drawing::Point(434, 188);
+			this->_sortButton->Location = System::Drawing::Point(386, 188);
+			this->_sortButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_sortButton->Name = L"_sortButton";
-			this->_sortButton->Size = System::Drawing::Size(400, 78);
+			this->_sortButton->Size = System::Drawing::Size(330, 78);
 			this->_sortButton->TabIndex = 8;
 			this->_sortButton->Text = L"Sort";
 			this->_toolTip->SetToolTip(this->_sortButton, L"Click to sort tracks using AutoMix AI");
@@ -523,23 +534,6 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
-			// _playerbutton
-			// 
-			this->_playerbutton->AccessibleName = L"_playerbutton";
-			this->_playerbutton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->_playerbutton->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->_playerbutton->Location = System::Drawing::Point(1054, 67);
-			this->_playerbutton->Name = L"_playerbutton";
-			this->_playerbutton->Size = System::Drawing::Size(147, 78);
-			this->_playerbutton->TabIndex = 9;
-			this->_playerbutton->Text = L"Play Mix";
-			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
-			this->_playerbutton->UseVisualStyleBackColor = false;
-			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
-			// 
 			// _playerBackgroundWorker
 			// 
 			this->_playerBackgroundWorker->WorkerReportsProgress = true;
@@ -548,30 +542,67 @@ namespace AutoMixUI {
 			this->_playerBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
 			this->_playerBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
 			// 
+			// panel1
+			// 
+			this->panel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)), static_cast<System::Int32>(static_cast<System::Byte>(32)),
+				static_cast<System::Int32>(static_cast<System::Byte>(37)));
+			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->_playerbutton);
+			this->panel1->Location = System::Drawing::Point(417, 37);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(635, 134);
+			this->panel1->TabIndex = 10;
+			// 
+			// _playerbutton
+			// 
+			this->_playerbutton->AccessibleName = L"_playerbutton";
+			this->_playerbutton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_playerbutton->FlatAppearance->BorderSize = 0;
+			this->_playerbutton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_playerbutton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_playerbutton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_playerbutton->ForeColor = System::Drawing::Color::White;
+			this->_playerbutton->Location = System::Drawing::Point(20, 30);
+			this->_playerbutton->MinimumSize = System::Drawing::Size(200, 0);
+			this->_playerbutton->Name = L"_playerbutton";
+			this->_playerbutton->Size = System::Drawing::Size(200, 78);
+			this->_playerbutton->TabIndex = 11;
+			this->_playerbutton->Text = L"Play Mix";
+			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
+			this->_playerbutton->UseVisualStyleBackColor = false;
+			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
-			this->ClientSize = System::Drawing::Size(1264, 682);
+			this->ClientSize = System::Drawing::Size(1064, 648);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->_logo);
 			this->Controls->Add(this->_importButton);
 			this->Controls->Add(this->_musicListView);
 			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->_menuStrip);
-			this->Controls->Add(this->_playerbutton);
 			this->Controls->Add(this->_generateButton);
 			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->_menuStrip;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->MinimumSize = System::Drawing::Size(1280, 720);
+			this->MinimumSize = System::Drawing::Size(1080, 687);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AutoMix Software";
+			this->Text = L"Automix Software";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::onMainFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->_menuStrip->ResumeLayout(false);
@@ -580,6 +611,8 @@ namespace AutoMixUI {
 			this->_statusStrip->PerformLayout();
 			this->_trackContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->EndInit();
+			this->panel1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
