@@ -54,10 +54,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\play-button-icon-png-15.png">
+    <Image Include="images\pause_icon.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\..\..\..\Downloads\Icon_4-512.png">
+    <Image Include="images\play_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\pause_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\play_icon.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

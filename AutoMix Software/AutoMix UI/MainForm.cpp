@@ -17,6 +17,30 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	Bitmap^ MainForm::PlayIcon::get()
+	{
+		if (!_playIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+
+				Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
+	
+			_playIcon = gcnew Bitmap(myStream);
+		}
+		return _playIcon;
+	}
+
+	Bitmap^ MainForm::PauseIcon::get()
+	{
+		if (!_pauseIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("pause_icon.bmp");
+			_pauseIcon = gcnew Bitmap(imageStream);
+		}
+		return _pauseIcon;
+	}
+
 	System::Void MainForm::update(TrackCollection^ collection)
 	{
 		_musicListView->Items->Clear();
@@ -339,19 +363,14 @@ namespace AutoMixUI {
 	{
 		onWorkerStart();
 		_playerbutton->Enabled = true;
+
 		if (!_isPlayerPlaying)
 		{
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_pause.Image")));
-			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
-			_playerbutton->Image = (Image^)bmp;
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
 		}
 		else
 		{
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_play.Image")));
-			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
-			_playerbutton->Image = (Image^)bmp;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}

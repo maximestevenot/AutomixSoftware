@@ -98,6 +98,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,6 +122,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,8 +178,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\Icon_4-512.png" />
-    <Image Include="..\..\..\..\Downloads\play-button-icon-png-15.png" />
+    <Image Include="images\pause_icon.bmp" />
+    <Image Include="images\pause_icon.png" />
+    <Image Include="images\play_icon.bmp" />
+    <Image Include="images\play_icon.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

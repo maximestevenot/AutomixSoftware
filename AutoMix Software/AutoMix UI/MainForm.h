@@ -47,12 +47,7 @@ namespace AutoMixUI {
 			AnOperationRunning = false;
 
 			_insertionLineColor = Color::LightGray;
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
-			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_play.Image")));
-			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
-			_playerbutton->Image = (Image^)bmp;
-
-
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
 
 	protected:
@@ -76,7 +71,6 @@ namespace AutoMixUI {
 			void set(bool value) { _anOperationRunning = value; }
 		}
 
-
 	private:
 		Presenter^ _presenter;
 
@@ -93,6 +87,11 @@ namespace AutoMixUI {
 			Before,
 			After
 		};
+
+		property Bitmap^ PlayIcon { Bitmap^ get(); }
+		property Bitmap^ PauseIcon { Bitmap^ get(); }
+		Bitmap^ _playIcon;
+		Bitmap^ _pauseIcon;
 
 		int _insertionIndex;
 		InsertionModeType _insertionMode;
@@ -134,9 +133,9 @@ namespace AutoMixUI {
 	private: System::ComponentModel::BackgroundWorker^  _playerBackgroundWorker;
 	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
 	private: System::Windows::Forms::Panel^  panel1;
-private: System::Windows::Forms::Button^  _playerbutton;
+	private: System::Windows::Forms::Button^  _playerbutton;
 
-private: System::Windows::Forms::BindingSource^  bindingSource1;
+	private: System::Windows::Forms::BindingSource^  bindingSource1;
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -554,10 +553,9 @@ private: System::Windows::Forms::BindingSource^  bindingSource1;
 			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->_playerbutton->ForeColor = System::Drawing::Color::White;
-			this->_playerbutton->Location = System::Drawing::Point(20, 30);
-			this->_playerbutton->MinimumSize = System::Drawing::Size(200, 0);
+			this->_playerbutton->Location = System::Drawing::Point(18, 31);
 			this->_playerbutton->Name = L"_playerbutton";
-			this->_playerbutton->Size = System::Drawing::Size(200, 78);
+			this->_playerbutton->Size = System::Drawing::Size(75, 75);
 			this->_playerbutton->TabIndex = 11;
 			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
 			this->_playerbutton->UseVisualStyleBackColor = false;
@@ -688,6 +686,6 @@ private: System::Windows::Forms::BindingSource^  bindingSource1;
 	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
 
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
-};
+	};
 
 }
