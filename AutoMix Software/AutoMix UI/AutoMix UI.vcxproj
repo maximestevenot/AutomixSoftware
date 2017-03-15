@@ -175,6 +175,10 @@
       <Project>{57876097-6068-4a0c-8140-38b16f184979}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Icon_4-512.png" />
+    <Image Include="..\..\..\..\Downloads\play-button-icon-png-15.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

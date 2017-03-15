@@ -341,11 +341,17 @@ namespace AutoMixUI {
 		_playerbutton->Enabled = true;
 		if (!_isPlayerPlaying)
 		{
-			_playerbutton->Text = "Pause Mix";
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_pause.Image")));
+			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
+			_playerbutton->Image = (Image^)bmp;
 		}
 		else
 		{
-			_playerbutton->Text = "Play Mix";
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_play.Image")));
+			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
+			_playerbutton->Image = (Image^)bmp;
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}
@@ -404,7 +410,6 @@ namespace AutoMixUI {
 			_isPlayerPlaying = false;
 			_playerExists = false;
 		}
-		_playerbutton->Text = "Play Mix";
 	}
 
 	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)

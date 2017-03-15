@@ -47,6 +47,12 @@ namespace AutoMixUI {
 			AnOperationRunning = false;
 
 			_insertionLineColor = Color::LightGray;
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
+			Image^ img = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_play.Image")));
+			Bitmap^ bmp = gcnew Bitmap(img, 50, 50);
+			_playerbutton->Image = (Image^)bmp;
+
+
 		}
 
 	protected:
@@ -180,10 +186,10 @@ private: System::Windows::Forms::BindingSource^  bindingSource1;
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
-			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -534,6 +540,29 @@ private: System::Windows::Forms::BindingSource^  bindingSource1;
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
+			// _playerbutton
+			// 
+			this->_playerbutton->AccessibleName = L"_playerbutton";
+			this->_playerbutton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_playerbutton->FlatAppearance->BorderSize = 0;
+			this->_playerbutton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_playerbutton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_playerbutton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_playerbutton->ForeColor = System::Drawing::Color::White;
+			this->_playerbutton->Location = System::Drawing::Point(20, 30);
+			this->_playerbutton->MinimumSize = System::Drawing::Size(200, 0);
+			this->_playerbutton->Name = L"_playerbutton";
+			this->_playerbutton->Size = System::Drawing::Size(200, 78);
+			this->_playerbutton->TabIndex = 11;
+			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
+			this->_playerbutton->UseVisualStyleBackColor = false;
+			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
+			// 
 			// _playerBackgroundWorker
 			// 
 			this->_playerBackgroundWorker->WorkerReportsProgress = true;
@@ -554,30 +583,6 @@ private: System::Windows::Forms::BindingSource^  bindingSource1;
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(635, 134);
 			this->panel1->TabIndex = 10;
-			// 
-			// _playerbutton
-			// 
-			this->_playerbutton->AccessibleName = L"_playerbutton";
-			this->_playerbutton->BackColor = System::Drawing::Color::DarkMagenta;
-			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_playerbutton->FlatAppearance->BorderSize = 0;
-			this->_playerbutton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
-			this->_playerbutton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
-				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
-			this->_playerbutton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->_playerbutton->ForeColor = System::Drawing::Color::White;
-			this->_playerbutton->Location = System::Drawing::Point(20, 30);
-			this->_playerbutton->MinimumSize = System::Drawing::Size(200, 0);
-			this->_playerbutton->Name = L"_playerbutton";
-			this->_playerbutton->Size = System::Drawing::Size(200, 78);
-			this->_playerbutton->TabIndex = 11;
-			this->_playerbutton->Text = L"Play Mix";
-			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
-			this->_playerbutton->UseVisualStyleBackColor = false;
-			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
 			// MainForm
 			// 
