@@ -17,6 +17,30 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	Bitmap^ MainForm::PlayIcon::get()
+	{
+		if (!_playIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+
+				Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
+	
+			_playIcon = gcnew Bitmap(myStream);
+		}
+		return _playIcon;
+	}
+
+	Bitmap^ MainForm::PauseIcon::get()
+	{
+		if (!_pauseIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("pause_icon.bmp");
+			_pauseIcon = gcnew Bitmap(imageStream);
+		}
+		return _pauseIcon;
+	}
+
 	System::Void MainForm::update(TrackCollection^ collection)
 	{
 		_musicListView->Items->Clear();
@@ -339,13 +363,14 @@ namespace AutoMixUI {
 	{
 		onWorkerStart();
 		_playerbutton->Enabled = true;
+
 		if (!_isPlayerPlaying)
 		{
-			_playerbutton->Text = "Pause Mix";
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
 		}
 		else
 		{
-			_playerbutton->Text = "Play Mix";
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}
@@ -404,7 +429,6 @@ namespace AutoMixUI {
 			_isPlayerPlaying = false;
 			_playerExists = false;
 		}
-		_playerbutton->Text = "Play Mix";
 	}
 
 	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
