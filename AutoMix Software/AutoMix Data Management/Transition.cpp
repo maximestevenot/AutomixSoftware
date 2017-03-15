@@ -6,33 +6,50 @@ using namespace NAudio;
 using namespace Wave;
 using namespace SampleProviders;
 
-Transition::Transition()
+Transition::Transition(TrackCollection^ trackCollection)
 {
-	_trackList = TrackCollection::CopyFrom(_trackList); //TODO
+	_trackList = TrackCollection::CopyFrom(trackCollection);
 
 }
 
-void AutoMixDataManagement::Transition::createFile(System::String ^ outputFile)
+void AutoMixDataManagement::Transition::makeTransition()
 {
 	Mp3FileReader^ reader;
-	for (Track^ track : _trackList) {
-		reader = gcnew Mp3FileReader(track->Path);
-
+	Track^ previousTrack = nullptr;
+	for each (Track^ track in _trackList) {
+		if (previousTrack) {
+			fadeInOut(previousTrack, track);
+		}
+		else {
+			fadeOut(track);
+		}
+		previousTrack = track;
 	}
 }
 
-void AutoMixDataManagement::Transition::fadeIn(Track ^ track1, Track ^ track2)
+void AutoMixDataManagement::Transition::fadeIn(Track ^ track)
+{
+	_reader = gcnew Mp3FileReader(track->Path);
+	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(_reader, false);
+	fade->BeginFadeIn(10000);
+}
+
+void AutoMixDataManagement::Transition::fadeInOut(Track ^ track1, Track ^ track2)
 {
 	AudioFileReader^ reader1 = gcnew AudioFileReader(track1->Path);
 	AudioFileReader^ reader2 = gcnew AudioFileReader(track2->Path);
 	FadeInOutSampleProvider^ fade1= gcnew FadeInOutSampleProvider(reader1,false);
-	FadeInOutSampleProvider^ fade2 = gcnew FadeInOutSampleProvider(reader2, true);
+	FadeInOutSampleProvider^ fade2 = gcnew FadeInOutSampleProvider(reader2, false);
 	fade1->BeginFadeOut(track1->Duration-10000);
-	fade2->BeginFadeOut(10000);
-
+	track1->Duration -= 10000;
+	fade2->BeginFadeIn(10000*3);
+	track2->Duration -= 10000;
 }
 
-void AutoMixDataManagement::Transition::fadeOut(Track ^ track1, Track ^ track2)
+void AutoMixDataManagement::Transition::fadeOut(Track ^ track)
 {
-	throw gcnew System::NotImplementedException();
+	AudioFileReader^ reader = gcnew AudioFileReader(track->Path);
+	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(reader, false);
+	fade->BeginFadeOut(track->Duration-10000);
+	track->Duration -= 10000;
 }

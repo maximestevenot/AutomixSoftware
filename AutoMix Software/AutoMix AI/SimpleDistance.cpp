@@ -38,9 +38,9 @@ namespace AutoMixAI {
 			return -1;
 		}
 
-		double distance = System::Math::Abs((track2BPM - track1BPM)) * BPMPriority;
+		double distance = System::Math::Abs((track2BPM - track1BPM)) * 1200 * BPMPriority;
 
-		distance += System::Math::Abs((track1Danceability - track2Danceability)) * DanceabilityPriority;
+		distance += System::Math::Abs((track1Danceability - track2Danceability)) * 10 * DanceabilityPriority;
 
 		if (haveSameScale)
 		{
@@ -48,12 +48,12 @@ namespace AutoMixAI {
 			if (distance_abs > 6) {
 				distance_abs = 12 - distance_abs;
 			}
-			distance += distance_abs * KeyNumberPriority;
+			distance += distance_abs * 20 * KeyNumberPriority;
 		}
 		else
 		{
 			if (!(digitalTrack1Key == digitalTrack2Key)) {
-				distance += KeyTonalityPriority;
+				distance += 2000 * KeyTonalityPriority;
 			}
 
 		}

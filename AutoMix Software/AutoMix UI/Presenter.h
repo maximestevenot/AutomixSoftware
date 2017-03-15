@@ -25,12 +25,21 @@ namespace AutoMixUI {
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
 
+		void playMix(System::String^);
+		void resumeMix();
+		void pauseMix();
+		void stopMix();
+
 		void getMyRightsBack();
+
+		void createTransition();
 
 	private:
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
 		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
+
+		AutoMixDataManagement::MP3Playing^ _mp3Playing;
 	};
 }

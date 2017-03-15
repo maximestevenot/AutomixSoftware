@@ -37,8 +37,10 @@ namespace AutoMixUI {
 	{
 		if (_trackCollection->Count > 1)
 		{
-			GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
-			_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
+			SimulatedAnnealingSortAlgorithm^ annealingAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
+			_trackCollection = annealingAlgorithm->sort(bw, _trackCollection);
+			//GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
+			//_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
 		}
 		return _trackCollection;
 	}
@@ -112,8 +114,10 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
+		
 		if (_trackCollection->Count >= 1)
 		{
+			createTransition();
 			_trackCollection->exportToMP3(bw, destinationFile);
 		}
 	}
@@ -124,8 +128,34 @@ namespace AutoMixUI {
 		db->clear();
 	}
 
+	void Presenter::playMix(System::String ^ fileName)
+	{
+		_mp3Playing = gcnew AutoMixDataManagement::MP3Playing(fileName);
+		_mp3Playing->play();
+	}
+
+	void Presenter::resumeMix()
+	{
+		_mp3Playing->play();
+	}
+
+	void Presenter::pauseMix()
+	{
+		_mp3Playing->pause();
+	}
+
+	void Presenter::stopMix()
+	{
+		_mp3Playing->stop();
+	}
+
 	void Presenter::getMyRightsBack()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
+	}
+	void Presenter::createTransition()
+	{
+		Transition^ transition = gcnew Transition(_trackCollection);
+		transition->makeTransition();
 	}
 }
