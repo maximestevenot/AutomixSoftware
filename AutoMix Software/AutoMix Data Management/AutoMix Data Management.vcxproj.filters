@@ -99,11 +99,11 @@
     <ClInclude Include="AudioIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IExportation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SimpleConcatenation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Exportation</Filter>
+    </ClInclude>
+    <ClInclude Include="IExportation.h">
+      <Filter>Header Files\Exportation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +156,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimpleConcatenation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Exportation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
