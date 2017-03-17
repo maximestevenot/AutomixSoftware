@@ -435,7 +435,15 @@ namespace AutoMixUI {
 	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
-		trackBar1->Value = (int) normalize;
+		trackBar1->Value = (int) System::Math::Min( normalize, (__int64) 10000);
+	}
+
+	System::Void MainForm::onSkipButton_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		if (_playerExists)
+		{
+			_presenter->seek(30.);
+		}
 	}
 
 	System::Void MainForm::stopPlayer()
@@ -447,6 +455,7 @@ namespace AutoMixUI {
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
 	}
 

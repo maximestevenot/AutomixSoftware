@@ -147,6 +147,11 @@ namespace AutoMixUI {
 		_mp3Playing->stop();
 	}
 
+	void Presenter::seek(double seconds)
+	{
+		_mp3Playing->seek(seconds);
+	}
+
 	__int64 Presenter::getPosition()
 	{
 		return _mp3Playing->getPosition();

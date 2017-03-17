@@ -138,6 +138,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::BindingSource^  bindingSource1;
 private: System::Windows::Forms::TrackBar^  trackBar1;
 private: System::Windows::Forms::Timer^  _trackBarTimer;
+private: System::Windows::Forms::Button^  _skipButton;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -189,6 +190,7 @@ private: System::Windows::Forms::Timer^  _trackBarTimer;
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
+			this->_skipButton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
@@ -567,6 +569,28 @@ private: System::Windows::Forms::Timer^  _trackBarTimer;
 			this->_playerbutton->UseVisualStyleBackColor = false;
 			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
+			// _skipButton
+			// 
+			this->_skipButton->AccessibleName = L"_skipButton";
+			this->_skipButton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_skipButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_skipButton->FlatAppearance->BorderSize = 0;
+			this->_skipButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_skipButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_skipButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_skipButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_skipButton->ForeColor = System::Drawing::Color::White;
+			this->_skipButton->Location = System::Drawing::Point(99, 31);
+			this->_skipButton->Name = L"_skipButton";
+			this->_skipButton->Size = System::Drawing::Size(75, 75);
+			this->_skipButton->TabIndex = 13;
+			this->_toolTip->SetToolTip(this->_skipButton, L"Click to skip 30 seconds in the music mix");
+			this->_skipButton->UseVisualStyleBackColor = false;
+			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButton_Click);
+			// 
 			// _playerBackgroundWorker
 			// 
 			this->_playerBackgroundWorker->WorkerReportsProgress = true;
@@ -582,6 +606,7 @@ private: System::Windows::Forms::Timer^  _trackBarTimer;
 			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)), static_cast<System::Int32>(static_cast<System::Byte>(32)),
 				static_cast<System::Int32>(static_cast<System::Byte>(37)));
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->_skipButton);
 			this->panel1->Controls->Add(this->trackBar1);
 			this->panel1->Controls->Add(this->_playerbutton);
 			this->panel1->Location = System::Drawing::Point(417, 37);
@@ -592,10 +617,10 @@ private: System::Windows::Forms::Timer^  _trackBarTimer;
 			// trackBar1
 			// 
 			this->trackBar1->Enabled = false;
-			this->trackBar1->Location = System::Drawing::Point(100, 59);
+			this->trackBar1->Location = System::Drawing::Point(180, 59);
 			this->trackBar1->Maximum = 10000;
 			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(519, 45);
+			this->trackBar1->Size = System::Drawing::Size(439, 45);
 			this->trackBar1->TabIndex = 12;
 			this->trackBar1->TickStyle = System::Windows::Forms::TickStyle::None;
 			// 
@@ -712,6 +737,7 @@ private: System::Windows::Forms::Timer^  _trackBarTimer;
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
 
 	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSkipButton_Click(System::Object^  sender, System::EventArgs^  e);
 };
 
 }

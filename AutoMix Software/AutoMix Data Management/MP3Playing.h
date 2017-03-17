@@ -20,6 +20,8 @@ namespace AutoMixDataManagement {
 		__int64 getLength();
 		__int64 getPosition();
 
+		void seek(double seconds);
+
 		static void SetPosition(NAudio::Wave::WaveStream^ strm, long position);
 		static void SetPosition(NAudio::Wave::WaveStream^ strm, double seconds);
 		static void SetPosition(NAudio::Wave::WaveStream^ strm, System::TimeSpan time);
