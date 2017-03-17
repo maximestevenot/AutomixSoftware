@@ -136,6 +136,9 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _playerbutton;
 
 	private: System::Windows::Forms::BindingSource^  bindingSource1;
+private: System::Windows::Forms::TrackBar^  trackBar1;
+private: System::Windows::Forms::Timer^  _trackBarTimer;
+
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -188,12 +191,15 @@ namespace AutoMixUI {
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
+			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->BeginInit();
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -324,7 +330,7 @@ namespace AutoMixUI {
 				this->_toolStripProgressBar,
 					this->_toolStripCurrentDir
 			});
-			this->_statusStrip->Location = System::Drawing::Point(0, 626);
+			this->_statusStrip->Location = System::Drawing::Point(0, 627);
 			this->_statusStrip->Name = L"_statusStrip";
 			this->_statusStrip->Size = System::Drawing::Size(1064, 22);
 			this->_statusStrip->TabIndex = 3;
@@ -576,11 +582,27 @@ namespace AutoMixUI {
 			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)), static_cast<System::Int32>(static_cast<System::Byte>(32)),
 				static_cast<System::Int32>(static_cast<System::Byte>(37)));
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->trackBar1);
 			this->panel1->Controls->Add(this->_playerbutton);
 			this->panel1->Location = System::Drawing::Point(417, 37);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(635, 134);
 			this->panel1->TabIndex = 10;
+			// 
+			// trackBar1
+			// 
+			this->trackBar1->Enabled = false;
+			this->trackBar1->Location = System::Drawing::Point(100, 59);
+			this->trackBar1->Maximum = 10000;
+			this->trackBar1->Name = L"trackBar1";
+			this->trackBar1->Size = System::Drawing::Size(519, 45);
+			this->trackBar1->TabIndex = 12;
+			this->trackBar1->TickStyle = System::Windows::Forms::TickStyle::None;
+			// 
+			// _trackBarTimer
+			// 
+			this->_trackBarTimer->Interval = 500;
+			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
 			// 
 			// MainForm
 			// 
@@ -588,7 +610,7 @@ namespace AutoMixUI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
-			this->ClientSize = System::Drawing::Size(1064, 648);
+			this->ClientSize = System::Drawing::Size(1064, 649);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->_logo);
@@ -615,6 +637,8 @@ namespace AutoMixUI {
 			this->_trackContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->EndInit();
 			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -686,6 +710,8 @@ namespace AutoMixUI {
 	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
 
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
-	};
+
+	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+};
 
 }

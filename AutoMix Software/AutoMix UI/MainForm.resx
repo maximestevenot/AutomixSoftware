@@ -691,7 +691,7 @@
   <data name="_logo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABr4AAAJXCAYAAADFFSS9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAW2BJREFUeF7t3dux5DqSLdr+P9YylT7d2pQ0pctpAc7/FaAusBOr98qVTsaLD3dg
+        vwAADr8BOAVTJAAAW2BJREFUeF7t3dux5DqSLdr+P9YylT7d2pQ0pctpAc7/FaAusBOr98qVTsaLD3dg
         DLNpZbYrM8JBMPhwMCL/AwAAAAAAAAAAAAAAAAAAAAAAAAAAoKB/X2i8JQAAAAAAAPxurCctZwwfAAAA
         AACASsZaD08amw0AAAAAAIA7jDUbTjQ2NQAAAAAAAEcYazAkM6YHAAAAAACA78ZaChMYUwoAAAAAADC/
         sT7CQsbUAwAAAAAA1DfWP+AvY7cAAAAAAADIb6xvwFPGbgMAAAAAAHC/sX4Bhxi7FQAAAAAAwPnG+gRc
@@ -1093,11 +1093,17 @@
   <metadata name="_exportBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>856, 17</value>
   </metadata>
+  <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1053, 17</value>
+  </metadata>
   <metadata name="_playerBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1305, 17</value>
+    <value>149, 56</value>
+  </metadata>
+  <metadata name="_trackBarTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>

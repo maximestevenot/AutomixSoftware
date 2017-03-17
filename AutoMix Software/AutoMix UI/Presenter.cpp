@@ -147,6 +147,16 @@ namespace AutoMixUI {
 		_mp3Playing->stop();
 	}
 
+	__int64 Presenter::getPosition()
+	{
+		return _mp3Playing->getPosition();
+	}
+
+	__int64 Presenter::getLength()
+	{
+		return _mp3Playing->getLength();
+	}
+
 	void Presenter::getMyRightsBack()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);

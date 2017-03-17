@@ -418,13 +418,32 @@ namespace AutoMixUI {
 		{
 			showErrorDialog(e->Error->Message);
 		}
+		else
+		{
+			if (_isPlayerPlaying)
+			{
+				_trackBarTimer->Start();
+			}
+			else
+			{
+				_trackBarTimer->Stop();
+			}
+		}
 		onWorkerStop();
+	}
+
+	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
+		trackBar1->Value = (int) normalize;
 	}
 
 	System::Void MainForm::stopPlayer()
 	{
 		if (_playerExists)
 		{
+			_trackBarTimer->Stop();
+			trackBar1->Value = 0;
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;

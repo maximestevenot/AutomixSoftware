@@ -29,6 +29,8 @@ namespace AutoMixUI {
 		void resumeMix();
 		void pauseMix();
 		void stopMix();
+		__int64 getPosition();
+		__int64 getLength();
 
 		void getMyRightsBack();
 
