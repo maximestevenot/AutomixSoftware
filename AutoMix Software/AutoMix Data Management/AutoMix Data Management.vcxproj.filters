@@ -75,8 +75,10 @@
     <ClInclude Include="IAudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
-    <ClInclude Include="Transition.h">
     <ClInclude Include="MP3Playing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -123,8 +125,10 @@
     <ClCompile Include="DataBaseExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
-    <ClCompile Include="Transition.cpp">
     <ClCompile Include="MP3Playing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
