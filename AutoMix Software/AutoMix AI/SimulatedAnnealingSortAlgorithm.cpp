@@ -14,7 +14,7 @@ using namespace AutoMixDataManagement;
 
 namespace AutoMixAI
 {
-	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance) : SimulatedAnnealingSortAlgorithm(distance, 1, 35, 0.93, 15)
+	SimulatedAnnealingSortAlgorithm::SimulatedAnnealingSortAlgorithm(TrackDistance^ distance) : SimulatedAnnealingSortAlgorithm(distance, 1, 35, (float)0.93, 15)
 	{
 	}
 
@@ -40,7 +40,7 @@ namespace AutoMixAI
 			{
 				break;
 			}
-			float temperature = BEGINTEMPERATURE;
+			float temperature = (float)BEGINTEMPERATURE;
 
 			while (temperature > STOPTEMPERATURE) {
 				for (int i = 0; i < N; i++) {

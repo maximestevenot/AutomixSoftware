@@ -42,6 +42,21 @@ namespace AutoMixDataManagement {
 		delete _audioFileReader;
 	}
 
+	__int64 MP3Playing::getLength()
+	{
+		return _audioFileReader->Length;
+	}
+
+	__int64 MP3Playing::getPosition()
+	{
+		return _audioFileReader->Position;
+	}
+
+	void MP3Playing::seek(double seconds)
+	{
+		Seek(_audioFileReader, seconds);
+	}
+
 	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, long position)
 	{
 		long adj = position % strm->WaveFormat->BlockAlign;

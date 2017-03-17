@@ -66,5 +66,8 @@
     <Image Include="images\play_icon.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="images\seek_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

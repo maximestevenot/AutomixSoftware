@@ -48,6 +48,7 @@ namespace AutoMixUI {
 
 			_insertionLineColor = Color::LightGray;
 			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
 		}
 
 	protected:
@@ -90,8 +91,10 @@ namespace AutoMixUI {
 
 		property Bitmap^ PlayIcon { Bitmap^ get(); }
 		property Bitmap^ PauseIcon { Bitmap^ get(); }
+		property Bitmap^ SeekIcon { Bitmap^ get(); }
 		Bitmap^ _playIcon;
 		Bitmap^ _pauseIcon;
+		Bitmap^ _seekIcon;
 
 		int _insertionIndex;
 		InsertionModeType _insertionMode;
@@ -136,6 +139,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _playerbutton;
 
 	private: System::Windows::Forms::BindingSource^  bindingSource1;
+private: System::Windows::Forms::TrackBar^  trackBar1;
+private: System::Windows::Forms::Timer^  _trackBarTimer;
+private: System::Windows::Forms::Button^  _skipButton;
+
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -186,14 +193,18 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
+			this->_skipButton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
+			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->BeginInit();
 			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -324,7 +335,7 @@ namespace AutoMixUI {
 				this->_toolStripProgressBar,
 					this->_toolStripCurrentDir
 			});
-			this->_statusStrip->Location = System::Drawing::Point(0, 626);
+			this->_statusStrip->Location = System::Drawing::Point(0, 627);
 			this->_statusStrip->Name = L"_statusStrip";
 			this->_statusStrip->Size = System::Drawing::Size(1064, 22);
 			this->_statusStrip->TabIndex = 3;
@@ -561,6 +572,28 @@ namespace AutoMixUI {
 			this->_playerbutton->UseVisualStyleBackColor = false;
 			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
+			// _skipButton
+			// 
+			this->_skipButton->AccessibleName = L"_skipButton";
+			this->_skipButton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_skipButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_skipButton->FlatAppearance->BorderSize = 0;
+			this->_skipButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_skipButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_skipButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_skipButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_skipButton->ForeColor = System::Drawing::Color::White;
+			this->_skipButton->Location = System::Drawing::Point(99, 31);
+			this->_skipButton->Name = L"_skipButton";
+			this->_skipButton->Size = System::Drawing::Size(75, 75);
+			this->_skipButton->TabIndex = 13;
+			this->_toolTip->SetToolTip(this->_skipButton, L"Click to skip 30 seconds in the music mix");
+			this->_skipButton->UseVisualStyleBackColor = false;
+			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButton_Click);
+			// 
 			// _playerBackgroundWorker
 			// 
 			this->_playerBackgroundWorker->WorkerReportsProgress = true;
@@ -576,11 +609,30 @@ namespace AutoMixUI {
 			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)), static_cast<System::Int32>(static_cast<System::Byte>(32)),
 				static_cast<System::Int32>(static_cast<System::Byte>(37)));
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->_skipButton);
+			this->panel1->Controls->Add(this->trackBar1);
 			this->panel1->Controls->Add(this->_playerbutton);
 			this->panel1->Location = System::Drawing::Point(417, 37);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(635, 134);
 			this->panel1->TabIndex = 10;
+			// 
+			// trackBar1
+			// 
+			this->trackBar1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->trackBar1->Enabled = false;
+			this->trackBar1->Location = System::Drawing::Point(180, 59);
+			this->trackBar1->Maximum = 10000;
+			this->trackBar1->Name = L"trackBar1";
+			this->trackBar1->Size = System::Drawing::Size(439, 45);
+			this->trackBar1->TabIndex = 12;
+			this->trackBar1->TickStyle = System::Windows::Forms::TickStyle::None;
+			// 
+			// _trackBarTimer
+			// 
+			this->_trackBarTimer->Interval = 500;
+			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
 			// 
 			// MainForm
 			// 
@@ -588,7 +640,7 @@ namespace AutoMixUI {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
-			this->ClientSize = System::Drawing::Size(1064, 648);
+			this->ClientSize = System::Drawing::Size(1064, 649);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->_logo);
@@ -615,6 +667,8 @@ namespace AutoMixUI {
 			this->_trackContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->EndInit();
 			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -686,6 +740,9 @@ namespace AutoMixUI {
 	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
 
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
-	};
+
+	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSkipButton_Click(System::Object^  sender, System::EventArgs^  e);
+};
 
 }
