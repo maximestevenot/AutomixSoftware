@@ -35,6 +35,8 @@ namespace AutoMixUI {
 
 		void getMyRightsBack();
 
+		void createTransition();
+
 	private:
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 

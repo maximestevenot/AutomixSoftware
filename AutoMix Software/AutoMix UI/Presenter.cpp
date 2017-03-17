@@ -114,8 +114,10 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
+		
 		if (_trackCollection->Count >= 1)
 		{
+			//createTransition(); BUGGED
 			_trackCollection->exportToMP3(bw, destinationFile);
 		}
 	}
@@ -165,5 +167,10 @@ namespace AutoMixUI {
 	void Presenter::getMyRightsBack()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
+	}
+	void Presenter::createTransition()
+	{
+		Transition^ transition = gcnew Transition(_trackCollection);
+		transition->makeTransition();
 	}
 }
