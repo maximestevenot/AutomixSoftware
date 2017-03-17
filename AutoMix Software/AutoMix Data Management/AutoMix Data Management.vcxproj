@@ -164,11 +164,13 @@
     <ClInclude Include="DataBaseExtraction.h" />
     <ClInclude Include="DelegateAudioDataExtraction.h" />
     <ClInclude Include="ExecutableExtraction.h" />
+    <ClInclude Include="IExportation.h" />
     <ClInclude Include="IAudioDataExtraction.h" />
     <ClInclude Include="IExtraction.h" />
     <ClInclude Include="DataBase.h" />
     <ClInclude Include="MP3Playing.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SimpleConcatenation.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="TrackCollection.h" />
@@ -196,6 +198,7 @@
     <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="ExecutableExtraction.cpp" />
     <ClCompile Include="MP3Playing.cpp" />
+    <ClCompile Include="SimpleConcatenation.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

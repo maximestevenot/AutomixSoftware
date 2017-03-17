@@ -7,13 +7,15 @@
 // You should have received a copy of the License along with this program.
 
 #include "stdafx.h"
+#include "IExportation.h"
 #include "TrackCollection.h"
+#include "SimpleConcatenation.h"
 #include "AudioIO.h"
 
 namespace AutoMixDataManagement {
 
 	using namespace System;
-
+	
 	void TrackCollection::safeAdd(Track^ track)
 	{
 		if (!isPresent(track) && !String::IsNullOrEmpty(track->Checksum))
@@ -98,7 +100,8 @@ namespace AutoMixDataManagement {
 
 	void TrackCollection::exportToMP3(System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
 	{
-		AudioIO::Mp3Export(this, bw, outputFile);
+		IExportation^ exportEngine = gcnew SimpleConcatenation();
+		exportEngine->exportMix(bw, this, outputFile);
 	}
 
 	void TrackCollection::Remove(System::String^ name)
