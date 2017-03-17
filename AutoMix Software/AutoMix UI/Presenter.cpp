@@ -18,6 +18,8 @@ namespace AutoMixUI {
 		_views = gcnew Generic::List<ViewWithTrackCollection^>();
 		_trackCollection = gcnew TrackCollection();
 		_dataExtractionEngine = gcnew AudioDataExtractionProxy();
+
+		_sortAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
 	}
 
 	Presenter::Presenter(ViewWithTrackCollection^ view) : Presenter()
@@ -37,10 +39,7 @@ namespace AutoMixUI {
 	{
 		if (_trackCollection->Count > 1)
 		{
-			SimulatedAnnealingSortAlgorithm^ annealingAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
-			_trackCollection = annealingAlgorithm->sort(bw, _trackCollection);
-			//GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
-			//_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
+			_trackCollection = _sortAlgorithm->sort(bw, _trackCollection);
 		}
 		return _trackCollection;
 	}
@@ -76,7 +75,7 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
 			}
-			bw->ReportProgress((int)500*cpt++ / fileEntries->Length);
+			bw->ReportProgress((int)500 * cpt++ / fileEntries->Length);
 		}
 
 		_trackCollection->concat(collection);
@@ -114,7 +113,7 @@ namespace AutoMixUI {
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
 	{
-		
+
 		if (_trackCollection->Count >= 1)
 		{
 			//createTransition(); BUGGED
