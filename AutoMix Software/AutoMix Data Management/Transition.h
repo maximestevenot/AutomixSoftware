@@ -12,11 +12,13 @@ namespace AutoMixDataManagement {
 	private:
 		void fadeIn(Track^ track);
 		void fadeOut(Track^ track);
-		void fadeInOut(Track^ track1, Track^ track2);
+		void fadeInOut(Track^ track);
 
-		NAudio::Wave::Mp3FileReader^ _reader;
+		NAudio::Wave::AudioFileReader^ _reader;
 		TrackCollection^ _trackList;
 		NAudio::Wave::SampleProviders::FadeInOutSampleProvider^ _finalWave;
 		NAudio::Wave::WaveStream^ _stream;
+		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
+		int _time=0;
 	};
 }

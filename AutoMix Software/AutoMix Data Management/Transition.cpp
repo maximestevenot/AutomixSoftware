@@ -5,6 +5,7 @@ using namespace AutoMixDataManagement;
 using namespace NAudio;
 using namespace Wave;
 using namespace SampleProviders;
+using namespace System;
 
 Transition::Transition(TrackCollection^ trackCollection)
 {
@@ -14,11 +15,10 @@ Transition::Transition(TrackCollection^ trackCollection)
 
 void AutoMixDataManagement::Transition::makeTransition()
 {
-	Mp3FileReader^ reader;
 	Track^ previousTrack = nullptr;
 	for each (Track^ track in _trackList) {
 		if (previousTrack) {
-			fadeInOut(previousTrack, track);
+			fadeInOut(track);
 		}
 		else {
 			fadeOut(track);
@@ -29,27 +29,53 @@ void AutoMixDataManagement::Transition::makeTransition()
 
 void AutoMixDataManagement::Transition::fadeIn(Track ^ track)
 {
-	_reader = gcnew Mp3FileReader(track->Path);
-	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(_reader, false);
+	Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
+	array<float>^ bytes = gcnew array<float>((long)fileReader->Length);
+	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
 	fade->BeginFadeIn(10000);
+	fade->Read(bytes, 0, (long)fileReader->Length);
+	_waveFileWriter->WriteSamples(bytes, 0, bytes->Length);
+	_waveFileWriter->Flush();
 }
 
-void AutoMixDataManagement::Transition::fadeInOut(Track ^ track1, Track ^ track2)
+void AutoMixDataManagement::Transition::fadeInOut(Track ^ track)
 {
-	AudioFileReader^ reader1 = gcnew AudioFileReader(track1->Path);
-	AudioFileReader^ reader2 = gcnew AudioFileReader(track2->Path);
-	FadeInOutSampleProvider^ fade1= gcnew FadeInOutSampleProvider(reader1,false);
-	FadeInOutSampleProvider^ fade2 = gcnew FadeInOutSampleProvider(reader2, false);
-	fade1->BeginFadeOut(track1->Duration-10000);
-	track1->Duration -= 10000;
-	fade2->BeginFadeIn(10000*3);
-	track2->Duration -= 10000;
+
+	Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
+	ISampleProvider^ sample = WaveExtensionMethods::ToSampleProvider(fileReader);
+	//sample->WaveFormat
+	int size =(int) ((long)fileReader->Length / sample->WaveFormat->BitsPerSample);
+	array<float>^ bytes = gcnew array<float>(size);
+	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
+	fade->BeginFadeIn(10000);
+	int bytems = fade->WaveFormat->AverageBytesPerSecond / 1000;
+	//fileReader->Read(bytes, 0, (long)fileReader->Length - 10000*bytems);
+
+	fade->Read(bytes, 0, size - 10000 * bytems);
+
+	fade->BeginFadeOut(10000);
+
+	fade->Read(bytes, size - 10000 * bytems, size);
+	//fileReader->Read(bytes, (long)fileReader->Length - 10000*bytems, (long)fileReader->Length);
+	_waveFileWriter->WriteSamples(bytes, 0, bytes->Length);
+	_waveFileWriter->Flush();
 }
 
 void AutoMixDataManagement::Transition::fadeOut(Track ^ track)
 {
-	AudioFileReader^ reader = gcnew AudioFileReader(track->Path);
-	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(reader, false);
-	fade->BeginFadeOut(track->Duration-10000);
-	track->Duration -= 10000;
+
+	Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
+
+	_waveFileWriter = gcnew WaveFileWriter(System::IO::Path::GetTempPath() + "AutomixSoftware/" + "AutoMix.wav", fileReader->WaveFormat);
+	array<float>^ bytes = gcnew array<float>((long)fileReader->Length);
+	FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
+	int bytems = fade->WaveFormat->AverageBytesPerSecond / 1000;
+	
+	//fileReader->Read(bytes, 0, (long)fileReader->Length - 10000);
+	fade->Read(bytes, 0, (long)fileReader->Length - 10000*bytems);
+	fade->BeginFadeOut(10000);
+
+	fade->Read(bytes, (long)fileReader->Length - 10000 * bytems, (long)fileReader->Length);
+	_waveFileWriter->WriteSamples(bytes, 0, bytes->Length);
+	_waveFileWriter->Flush();
 }
