@@ -77,7 +77,8 @@ namespace AutoMixUI {
 
 		bool _isPlayerPlaying = false;
 		bool _playerExists = false;
-		System::String^ _exportPath = System::IO::Path::GetTempPath() + "AutomixSoftware\\preview.mp3";
+		System::String^ _defaultExportPath = System::IO::Path::GetTempPath() + "AutomixSoftware\\preview.mp3";
+		System::String^ _exportPath = _defaultExportPath;
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;
@@ -142,6 +143,7 @@ namespace AutoMixUI {
 private: System::Windows::Forms::TrackBar^  trackBar1;
 private: System::Windows::Forms::Timer^  _trackBarTimer;
 private: System::Windows::Forms::Button^  _skipButton;
+private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -199,6 +201,7 @@ private: System::Windows::Forms::Button^  _skipButton;
 			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->stopMixToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -271,7 +274,10 @@ private: System::Windows::Forms::Button^  _skipButton;
 			// _optionsToolStripMenuItem
 			// 
 			this->_optionsToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
-			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_dataBaseToolStripMenuItem });
+			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_dataBaseToolStripMenuItem,
+					this->stopMixToolStripMenuItem
+			});
 			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
 			this->_optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
@@ -283,14 +289,14 @@ private: System::Windows::Forms::Button^  _skipButton;
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
 			this->_dataBaseToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
-			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
+			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBMenuItem
 			// 
 			this->_clearDBMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
-			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
+			this->_clearDBMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
@@ -634,6 +640,13 @@ private: System::Windows::Forms::Button^  _skipButton;
 			this->_trackBarTimer->Interval = 500;
 			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
 			// 
+			// stopMixToolStripMenuItem
+			// 
+			this->stopMixToolStripMenuItem->Name = L"stopMixToolStripMenuItem";
+			this->stopMixToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->stopMixToolStripMenuItem->Text = L"Stop Mix";
+			this->stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::stopMixToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -743,6 +756,7 @@ private: System::Windows::Forms::Button^  _skipButton;
 
 	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onSkipButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void stopMixToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 };
 
 }
