@@ -175,6 +175,7 @@ namespace AutoMixUI {
 
 		onWorkerStop();
 		stopPlayer();
+		_exportPath = _defaultExportPath;
 		_presenter->notify();
 	}
 
@@ -205,6 +206,7 @@ namespace AutoMixUI {
 		}
 		else
 		{
+			_exportPath = _defaultExportPath;
 			_presenter->notify();
 		}
 		onWorkerStop();
@@ -215,6 +217,7 @@ namespace AutoMixUI {
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ fileName = (System::String^) e->Argument;
+		_exportPath = fileName;
 		_presenter->exportTrackList(bw, fileName);
 		if (bw->CancellationPending)
 		{
@@ -457,6 +460,11 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::stopMixToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		stopPlayer();
+	}
+
 	System::Void MainForm::stopPlayer()
 	{
 		if (_playerExists)
@@ -510,6 +518,7 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
+			_exportPath = _defaultExportPath;
 			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
