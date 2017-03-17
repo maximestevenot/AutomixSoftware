@@ -217,7 +217,6 @@ namespace AutoMixUI {
 	{
 		BackgroundWorker^ bw = (BackgroundWorker^)sender;
 		System::String^ fileName = (System::String^) e->Argument;
-		_exportPath = fileName;
 		_presenter->exportTrackList(bw, fileName);
 		if (bw->CancellationPending)
 		{
@@ -396,7 +395,10 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				_presenter->exportTrackList(bw, _exportPath);
+				if (_exportPath->Equals(_defaultExportPath))
+				{
+					_presenter->exportTrackList(bw, _exportPath);
+				}
 				_presenter->playMix(_exportPath);
 			}
 			catch (System::IO::IOException^)
@@ -560,6 +562,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
+			_exportPath = dialog->FileName;
 			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}
