@@ -17,6 +17,41 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	Bitmap^ MainForm::PlayIcon::get()
+	{
+		if (!_playIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+
+				Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
+	
+			_playIcon = gcnew Bitmap(myStream);
+		}
+		return _playIcon;
+	}
+
+	Bitmap^ MainForm::PauseIcon::get()
+	{
+		if (!_pauseIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("pause_icon.bmp");
+			_pauseIcon = gcnew Bitmap(imageStream);
+		}
+		return _pauseIcon;
+	}
+
+	Bitmap^ MainForm::SeekIcon::get()
+	{
+		if (!_seekIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("seek_icon.bmp");
+			_seekIcon = gcnew Bitmap(imageStream);
+		}
+		return _seekIcon;
+	}
+
 	System::Void MainForm::update(TrackCollection^ collection)
 	{
 		_musicListView->Items->Clear();
@@ -140,6 +175,7 @@ namespace AutoMixUI {
 
 		onWorkerStop();
 		stopPlayer();
+		_exportPath = _defaultExportPath;
 		_presenter->notify();
 	}
 
@@ -170,6 +206,7 @@ namespace AutoMixUI {
 		}
 		else
 		{
+			_exportPath = _defaultExportPath;
 			_presenter->notify();
 		}
 		onWorkerStop();
@@ -339,13 +376,14 @@ namespace AutoMixUI {
 	{
 		onWorkerStart();
 		_playerbutton->Enabled = true;
+
 		if (!_isPlayerPlaying)
 		{
-			_playerbutton->Text = "Pause Mix";
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
 		}
 		else
 		{
-			_playerbutton->Text = "Play Mix";
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}
@@ -357,7 +395,10 @@ namespace AutoMixUI {
 		{
 			try
 			{
-				_presenter->exportTrackList(bw, _exportPath);
+				if (_exportPath->Equals(_defaultExportPath))
+				{
+					_presenter->exportTrackList(bw, _exportPath);
+				}
 				_presenter->playMix(_exportPath);
 			}
 			catch (System::IO::IOException^)
@@ -393,18 +434,50 @@ namespace AutoMixUI {
 		{
 			showErrorDialog(e->Error->Message);
 		}
+		else
+		{
+			if (_isPlayerPlaying)
+			{
+				_trackBarTimer->Start();
+			}
+			else
+			{
+				_trackBarTimer->Stop();
+			}
+		}
 		onWorkerStop();
+	}
+
+	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
+		trackBar1->Value = (int) System::Math::Min( normalize, (__int64) 10000);
+	}
+
+	System::Void MainForm::onSkipButton_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		if (_playerExists)
+		{
+			_presenter->seek(30.);
+		}
+	}
+
+	System::Void MainForm::stopMixToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		stopPlayer();
 	}
 
 	System::Void MainForm::stopPlayer()
 	{
 		if (_playerExists)
 		{
+			_trackBarTimer->Stop();
+			trackBar1->Value = 0;
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		}
-		_playerbutton->Text = "Play Mix";
 	}
 
 	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
@@ -447,6 +520,7 @@ namespace AutoMixUI {
 	{
 		if (e->Cancelled)
 		{
+			_exportPath = _defaultExportPath;
 			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
@@ -488,6 +562,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
+			_exportPath = dialog->FileName;
 			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}

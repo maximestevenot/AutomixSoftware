@@ -53,4 +53,21 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\pause_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\play_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\pause_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\play_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\seek_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

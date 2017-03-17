@@ -98,6 +98,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -121,6 +122,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,6 +176,13 @@
     <ProjectReference Include="..\AutoMix Data Management\AutoMix Data Management.vcxproj">
       <Project>{57876097-6068-4a0c-8140-38b16f184979}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\pause_icon.bmp" />
+    <Image Include="images\pause_icon.png" />
+    <Image Include="images\play_icon.bmp" />
+    <Image Include="images\play_icon.png" />
+    <Image Include="images\seek_icon.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
