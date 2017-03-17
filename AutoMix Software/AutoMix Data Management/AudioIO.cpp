@@ -19,40 +19,6 @@ namespace AutoMixDataManagement {
 	using namespace NAudio::Lame;
 	using namespace System::Security::Cryptography;
 
-
-	AudioIO::AudioIO()
-	{
-	}
-
-	void AudioIO::Mp3Export( TrackCollection ^ trackCollection, System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
-	{
-		List<String^>^ filesList = gcnew List<String^>();
-		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
-		int cpt = 1;
-
-		Id3v2Tag^ tag = CreateMp3Tag(outputFile);
-		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
-
-		for each (auto track in trackCollection)
-		{
-
-			if (bw->CancellationPending)
-			{
-				break;
-			}
-			Mp3FileReader^ reader = gcnew Mp3FileReader(track->Path);
-			Mp3Frame^ frame;
-
-			while ((frame = reader->ReadNextFrame()) != nullptr)
-			{
-				outputStream->Write(frame->RawData, 0, frame->RawData->Length);
-			}
-
-			bw->ReportProgress((int)1000*cpt++ / trackCollection->Count);
-		}
-		outputStream->Close();
-	}
-
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);

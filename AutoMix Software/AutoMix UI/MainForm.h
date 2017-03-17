@@ -32,12 +32,16 @@ namespace AutoMixUI {
 		MainForm(void)
 		{
 			InitializeComponent();
+			_presenter = gcnew Presenter(this);
+
 			_menuStrip->RenderMode = ToolStripRenderMode::Professional;
 			_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 			_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
 			_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 
-			_presenter = gcnew Presenter(this);
+			_insertionLineColor = Color::LightGray;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
 
 			_cancelMenuItem->Enabled = false;
 			_generateButton->Enabled = false;
@@ -45,10 +49,6 @@ namespace AutoMixUI {
 			_playerbutton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
 			AnOperationRunning = false;
-
-			_insertionLineColor = Color::LightGray;
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
-			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
 		}
 
 	protected:
@@ -140,10 +140,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _playerbutton;
 
 	private: System::Windows::Forms::BindingSource^  bindingSource1;
-private: System::Windows::Forms::TrackBar^  trackBar1;
-private: System::Windows::Forms::Timer^  _trackBarTimer;
-private: System::Windows::Forms::Button^  _skipButton;
-private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
+	private: System::Windows::Forms::TrackBar^  trackBar1;
+	private: System::Windows::Forms::Timer^  _trackBarTimer;
+	private: System::Windows::Forms::Button^  _skipButton;
+	private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -598,7 +598,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 			this->_skipButton->TabIndex = 13;
 			this->_toolTip->SetToolTip(this->_skipButton, L"Click to skip 30 seconds in the music mix");
 			this->_skipButton->UseVisualStyleBackColor = false;
-			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButton_Click);
+			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButtonClick);
 			// 
 			// _playerBackgroundWorker
 			// 
@@ -645,7 +645,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 			this->stopMixToolStripMenuItem->Name = L"stopMixToolStripMenuItem";
 			this->stopMixToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->stopMixToolStripMenuItem->Text = L"Stop Mix";
-			this->stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::stopMixToolStripMenuItem_Click);
+			this->stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onStopMixToolStripMenuItemClick);
 			// 
 			// MainForm
 			// 
@@ -694,7 +694,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 	private:
 		System::Void onWorkerStart();
 		System::Void onWorkerStop();
-
+		System::Void stopPlayer();
+		System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e);
 		System::Void showCancelDialog();
 		System::Void showErrorDialog(System::String^);
 		bool showExitDialog();
@@ -721,6 +722,9 @@ private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 	private: System::Void onClearDBMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onDeleteTrackToolStripClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onSelectAllMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onPlayerButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSkipButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onStopMixToolStripMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 
 	private: System::Void importBW_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void importBW_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
@@ -742,21 +746,16 @@ private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
 	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 
-	private: System::Void onPlayerButtonClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void playerBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void playerBackgroundWorker_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
 	private: System::Void playerBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
 
-	private: System::Void stopPlayer();
-	private: System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+
 	private: System::Void musicListView_DrawItem(System::Object^  sender, System::Windows::Forms::DrawListViewItemEventArgs^  e);
 	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
-
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
 
-	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void onSkipButton_Click(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void stopMixToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
-};
+	};
 
 }

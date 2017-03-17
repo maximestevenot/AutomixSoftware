@@ -8,10 +8,14 @@
 
 #pragma once
 
-#include "Track.h"
-#include "TrackCollection.h"
-#include "IExtraction.h"
-#include "IAudioDataExtraction.h"
-#include "IExportation.h"
-#include "DataBase.h"
-#include "Utils.h"
+#include "AutoMixDataManagement.h"
+
+namespace AutoMixDataManagement {
+
+	public ref class SimpleConcatenation : IExportation
+	{
+	public:
+		void exportMix(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ collection, System::String^ outputFile) override;
+	};
+
+}

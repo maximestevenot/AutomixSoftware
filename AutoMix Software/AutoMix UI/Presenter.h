@@ -42,7 +42,7 @@ namespace AutoMixUI {
 
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
 		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
-
+		AutoMixAI::SortAlgorithm^ _sortAlgorithm;
 		AutoMixDataManagement::MP3Playing^ _mp3Playing;
 	};
 }

@@ -454,7 +454,7 @@ namespace AutoMixUI {
 		trackBar1->Value = (int) System::Math::Min( normalize, (__int64) 10000);
 	}
 
-	System::Void MainForm::onSkipButton_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onSkipButtonClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		if (_playerExists)
 		{
@@ -462,7 +462,7 @@ namespace AutoMixUI {
 		}
 	}
 
-	System::Void MainForm::stopMixToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	System::Void MainForm::onStopMixToolStripMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		stopPlayer();
 	}
