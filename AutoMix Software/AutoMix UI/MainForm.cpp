@@ -41,6 +41,17 @@ namespace AutoMixUI {
 		return _pauseIcon;
 	}
 
+	Bitmap^ MainForm::SeekIcon::get()
+	{
+		if (!_seekIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("seek_icon.bmp");
+			_seekIcon = gcnew Bitmap(imageStream);
+		}
+		return _seekIcon;
+	}
+
 	System::Void MainForm::update(TrackCollection^ collection)
 	{
 		_musicListView->Items->Clear();

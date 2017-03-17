@@ -48,6 +48,7 @@ namespace AutoMixUI {
 
 			_insertionLineColor = Color::LightGray;
 			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
 		}
 
 	protected:
@@ -90,8 +91,10 @@ namespace AutoMixUI {
 
 		property Bitmap^ PlayIcon { Bitmap^ get(); }
 		property Bitmap^ PauseIcon { Bitmap^ get(); }
+		property Bitmap^ SeekIcon { Bitmap^ get(); }
 		Bitmap^ _playIcon;
 		Bitmap^ _pauseIcon;
+		Bitmap^ _seekIcon;
 
 		int _insertionIndex;
 		InsertionModeType _insertionMode;
