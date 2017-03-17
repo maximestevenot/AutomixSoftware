@@ -616,6 +616,8 @@ private: System::Windows::Forms::Button^  _skipButton;
 			// 
 			// trackBar1
 			// 
+			this->trackBar1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->trackBar1->Enabled = false;
 			this->trackBar1->Location = System::Drawing::Point(180, 59);
 			this->trackBar1->Maximum = 10000;
