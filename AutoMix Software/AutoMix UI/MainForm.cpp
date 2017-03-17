@@ -17,6 +17,41 @@ using namespace System::Threading;
 
 namespace AutoMixUI {
 
+	Bitmap^ MainForm::PlayIcon::get()
+	{
+		if (!_playIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+
+				Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
+	
+			_playIcon = gcnew Bitmap(myStream);
+		}
+		return _playIcon;
+	}
+
+	Bitmap^ MainForm::PauseIcon::get()
+	{
+		if (!_pauseIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("pause_icon.bmp");
+			_pauseIcon = gcnew Bitmap(imageStream);
+		}
+		return _pauseIcon;
+	}
+
+	Bitmap^ MainForm::SeekIcon::get()
+	{
+		if (!_seekIcon)
+		{
+			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("seek_icon.bmp");
+			_seekIcon = gcnew Bitmap(imageStream);
+		}
+		return _seekIcon;
+	}
+
 	System::Void MainForm::update(TrackCollection^ collection)
 	{
 		_musicListView->Items->Clear();
@@ -24,12 +59,13 @@ namespace AutoMixUI {
 		for each (auto track in collection)
 		{
 			ListViewItem^ lvitem = gcnew ListViewItem(track->Name);
+			_musicListView->Items->Add(lvitem);
+
 			lvitem->SubItems->Add(track->displayDuration());
 			lvitem->SubItems->Add(track->BPM.ToString());
 			lvitem->SubItems->Add(track->Key);
-
-			_musicListView->Items->Add(lvitem);
 		}
+		_musicListView->Invalidate();
 	}
 
 	System::Void MainForm::onCancelMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -37,6 +73,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 	}
 
 	System::Void MainForm::onQuitMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -136,6 +174,8 @@ namespace AutoMixUI {
 		}
 
 		onWorkerStop();
+		stopPlayer();
+		_exportPath = _defaultExportPath;
 		_presenter->notify();
 	}
 
@@ -166,9 +206,11 @@ namespace AutoMixUI {
 		}
 		else
 		{
+			_exportPath = _defaultExportPath;
 			_presenter->notify();
 		}
 		onWorkerStop();
+		stopPlayer();
 	}
 
 	System::Void MainForm::exportBW_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
@@ -330,10 +372,155 @@ namespace AutoMixUI {
 		}
 	}
 
+	System::Void MainForm::onPlayerButtonClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		onWorkerStart();
+		_playerbutton->Enabled = true;
+
+		if (!_isPlayerPlaying)
+		{
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
+		}
+		else
+		{
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+		}
+		_playerBackgroundWorker->RunWorkerAsync();
+	}
+
+	System::Void MainForm::playerBackgroundWorker_DoWork(System::Object ^ sender, System::ComponentModel::DoWorkEventArgs ^ e)
+	{
+		BackgroundWorker^ bw = (BackgroundWorker^)sender;
+		if (!_isPlayerPlaying)
+		{
+			try
+			{
+				if (_exportPath->Equals(_defaultExportPath))
+				{
+					_presenter->exportTrackList(bw, _exportPath);
+				}
+				_presenter->playMix(_exportPath);
+			}
+			catch (System::IO::IOException^)
+			{
+				_presenter->resumeMix();
+			}
+			_isPlayerPlaying = true;
+			_playerExists = true;
+		}
+		else
+		{
+			_presenter->pauseMix();
+			_isPlayerPlaying = false;
+		}
+		if (bw->CancellationPending)
+		{
+			e->Cancel = true;
+		}
+	}
+
+	System::Void MainForm::playerBackgroundWorker_ProgressChanged(System::Object ^ sender, System::ComponentModel::ProgressChangedEventArgs ^ e)
+	{
+		_toolStripProgressBar->Value = e->ProgressPercentage;
+	}
+
+	System::Void MainForm::playerBackgroundWorker_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			showCancelDialog();
+		}
+		else if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+		else
+		{
+			if (_isPlayerPlaying)
+			{
+				_trackBarTimer->Start();
+			}
+			else
+			{
+				_trackBarTimer->Stop();
+			}
+		}
+		onWorkerStop();
+	}
+
+	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
+		trackBar1->Value = (int) System::Math::Min( normalize, (__int64) 10000);
+	}
+
+	System::Void MainForm::onSkipButton_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		if (_playerExists)
+		{
+			_presenter->seek(30.);
+		}
+	}
+
+	System::Void MainForm::stopMixToolStripMenuItem_Click(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		stopPlayer();
+	}
+
+	System::Void MainForm::stopPlayer()
+	{
+		if (_playerExists)
+		{
+			_trackBarTimer->Stop();
+			trackBar1->Value = 0;
+			_presenter->stopMix();
+			_isPlayerPlaying = false;
+			_playerExists = false;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+		}
+	}
+
+	System::Void MainForm::onButtonEnabledChanged(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		Button^ modifiedButton = (Button^)sender;
+		if (!modifiedButton->Enabled)
+		{
+			modifiedButton->BackColor = Color::FromArgb(100, 0, 100);
+		}
+		else
+		{
+			modifiedButton->BackColor = Color::DarkViolet;
+		}
+	}
+
+	System::Void MainForm::musicListView_DrawItem(System::Object ^ sender, System::Windows::Forms::DrawListViewItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+	}
+
+	System::Void MainForm::musicListView_DrawColumnHeader(System::Object ^ sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs ^ e)
+	{
+		e->DrawBackground();
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
+	System::Void MainForm::musicListView_DrawSubItem(System::Object ^ sender, System::Windows::Forms::DrawListViewSubItemEventArgs ^ e)
+	{
+		if (e->Item->Selected)
+		{
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+		}
+		e->DrawText(TextFormatFlags::TextBoxControl);
+	}
+
 	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
 	{
 		if (e->Cancelled)
 		{
+			_exportPath = _defaultExportPath;
 			showCancelDialog();
 		}
 		else if (e->Error != nullptr)
@@ -375,6 +562,7 @@ namespace AutoMixUI {
 		if (dialog->ShowDialog() == ::DialogResult::OK)
 		{
 			onWorkerStart();
+			_exportPath = dialog->FileName;
 			_exportBackgroundWorker->RunWorkerAsync(dialog->FileName);
 		}
 	}
@@ -387,6 +575,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = false;
 		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
+		_playerbutton->Enabled = false;
 
 		_importMenuItem->Enabled = false;
 		_optionsToolStripMenuItem->Enabled = false;
@@ -404,6 +593,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = true;
 		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
+		_playerbutton->Enabled = true;
 
 		_importMenuItem->Enabled = true;
 		_optionsToolStripMenuItem->Enabled = true;
@@ -417,7 +607,7 @@ namespace AutoMixUI {
 	{
 		String^ msg = "Operation was canceled";
 		String^ caption = "Cancel";
-		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Stop);
+		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
 	System::Void MainForm::showErrorDialog(String^ errorMessage)
@@ -439,6 +629,8 @@ namespace AutoMixUI {
 		_importBackgroundWorker->CancelAsync();
 		_sortBackgroundWorker->CancelAsync();
 		_exportBackgroundWorker->CancelAsync();
+		_playerBackgroundWorker->CancelAsync();
+		stopPlayer();
 
 		try
 		{

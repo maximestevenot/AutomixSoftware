@@ -37,8 +37,10 @@ namespace AutoMixUI {
 	{
 		if (_trackCollection->Count > 1)
 		{
-			GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
-			_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
+			SimulatedAnnealingSortAlgorithm^ annealingAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
+			_trackCollection = annealingAlgorithm->sort(bw, _trackCollection);
+			//GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
+			//_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
 		}
 		return _trackCollection;
 	}
@@ -122,6 +124,42 @@ namespace AutoMixUI {
 	{
 		DataBase^ db = gcnew DataBase();
 		db->clear();
+	}
+
+	void Presenter::playMix(System::String ^ fileName)
+	{
+		_mp3Playing = gcnew AutoMixDataManagement::MP3Playing(fileName);
+		_mp3Playing->play();
+	}
+
+	void Presenter::resumeMix()
+	{
+		_mp3Playing->play();
+	}
+
+	void Presenter::pauseMix()
+	{
+		_mp3Playing->pause();
+	}
+
+	void Presenter::stopMix()
+	{
+		_mp3Playing->stop();
+	}
+
+	void Presenter::seek(double seconds)
+	{
+		_mp3Playing->seek(seconds);
+	}
+
+	__int64 Presenter::getPosition()
+	{
+		return _mp3Playing->getPosition();
+	}
+
+	__int64 Presenter::getLength()
+	{
+		return _mp3Playing->getLength();
 	}
 
 	void Presenter::getMyRightsBack()

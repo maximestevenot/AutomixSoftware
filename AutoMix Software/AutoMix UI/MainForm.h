@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ViewWithTrackCollection.h"
+#include "AutoMixColorTable.h"
 #include "Presenter.h"
 
 namespace AutoMixUI {
@@ -31,15 +32,23 @@ namespace AutoMixUI {
 		MainForm(void)
 		{
 			InitializeComponent();
+			_menuStrip->RenderMode = ToolStripRenderMode::Professional;
+			_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+			_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
+			_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+
 			_presenter = gcnew Presenter(this);
 
 			_cancelMenuItem->Enabled = false;
 			_generateButton->Enabled = false;
 			_sortButton->Enabled = false;
+			_playerbutton->Enabled = false;
 			_toolStripProgressBar->Visible = false;
 			AnOperationRunning = false;
 
 			_insertionLineColor = Color::LightGray;
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
 		}
 
 	protected:
@@ -63,9 +72,13 @@ namespace AutoMixUI {
 			void set(bool value) { _anOperationRunning = value; }
 		}
 
-
 	private:
 		Presenter^ _presenter;
+
+		bool _isPlayerPlaying = false;
+		bool _playerExists = false;
+		System::String^ _defaultExportPath = System::IO::Path::GetTempPath() + "AutomixSoftware\\preview.mp3";
+		System::String^ _exportPath = _defaultExportPath;
 
 		property bool IsRowDragInProgress;
 		property bool IsDragImportInProgress;
@@ -77,13 +90,20 @@ namespace AutoMixUI {
 			After
 		};
 
+		property Bitmap^ PlayIcon { Bitmap^ get(); }
+		property Bitmap^ PauseIcon { Bitmap^ get(); }
+		property Bitmap^ SeekIcon { Bitmap^ get(); }
+		Bitmap^ _playIcon;
+		Bitmap^ _pauseIcon;
+		Bitmap^ _seekIcon;
+
 		int _insertionIndex;
 		InsertionModeType _insertionMode;
 		Color _insertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
+
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator;
 	private: System::Windows::Forms::ToolStripMenuItem^  _quitMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  _helpToolStripMenuItem;
@@ -113,6 +133,18 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+
+	private: System::ComponentModel::BackgroundWorker^  _playerBackgroundWorker;
+	private: System::Windows::Forms::ToolStripMenuItem^  _importMenuItem;
+	private: System::Windows::Forms::Panel^  panel1;
+	private: System::Windows::Forms::Button^  _playerbutton;
+
+	private: System::Windows::Forms::BindingSource^  bindingSource1;
+private: System::Windows::Forms::TrackBar^  trackBar1;
+private: System::Windows::Forms::Timer^  _trackBarTimer;
+private: System::Windows::Forms::Button^  _skipButton;
+private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
+
 	private: System::ComponentModel::IContainer^  components;
 
 	private:
@@ -140,6 +172,8 @@ namespace AutoMixUI {
 			this->_dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_clearDBMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_aboutMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
 			this->_toolStripProgressBar = (gcnew System::Windows::Forms::ToolStripProgressBar());
@@ -160,17 +194,27 @@ namespace AutoMixUI {
 			this->_sortBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_exportBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
-			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->_playerbutton = (gcnew System::Windows::Forms::Button());
+			this->_skipButton = (gcnew System::Windows::Forms::Button());
+			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
+			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
+			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->stopMixToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->BeginInit();
+			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// _menuStrip
 			// 
-			this->_menuStrip->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_menuStrip->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)));
 			this->_menuStrip->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->_menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->_fileToolStripMenuItem,
@@ -179,7 +223,7 @@ namespace AutoMixUI {
 			this->_menuStrip->Location = System::Drawing::Point(0, 0);
 			this->_menuStrip->Name = L"_menuStrip";
 			this->_menuStrip->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
-			this->_menuStrip->Size = System::Drawing::Size(1264, 24);
+			this->_menuStrip->Size = System::Drawing::Size(1064, 24);
 			this->_menuStrip->TabIndex = 2;
 			this->_menuStrip->Text = L"menuStrip1";
 			// 
@@ -189,28 +233,26 @@ namespace AutoMixUI {
 				this->_importMenuItem,
 					this->_cancelMenuItem, this->toolStripSeparator, this->_quitMenuItem
 			});
-			this->_fileToolStripMenuItem->ForeColor = System::Drawing::SystemColors::ControlText;
+			this->_fileToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
 			this->_fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->_fileToolStripMenuItem->Text = L"&File";
 			// 
 			// _importMenuItem
 			// 
-			this->_importMenuItem->Checked = true;
-			this->_importMenuItem->CheckState = System::Windows::Forms::CheckState::Indeterminate;
-			this->_importMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_importMenuItem.Image")));
-			this->_importMenuItem->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->_importMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_importMenuItem->Name = L"_importMenuItem";
 			this->_importMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::O));
-			this->_importMenuItem->Size = System::Drawing::Size(159, 26);
-			this->_importMenuItem->Text = L"&Open...";
+			this->_importMenuItem->Size = System::Drawing::Size(162, 22);
+			this->_importMenuItem->Text = L"&Import...";
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
+			this->_cancelMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
 			this->_cancelMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Z));
-			this->_cancelMenuItem->Size = System::Drawing::Size(155, 22);
+			this->_cancelMenuItem->Size = System::Drawing::Size(162, 22);
 			this->_cancelMenuItem->Text = L"&Cancel";
 			this->_cancelMenuItem->ToolTipText = L"Cancel all operations";
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
@@ -218,19 +260,25 @@ namespace AutoMixUI {
 			// toolStripSeparator
 			// 
 			this->toolStripSeparator->Name = L"toolStripSeparator";
-			this->toolStripSeparator->Size = System::Drawing::Size(152, 6);
+			this->toolStripSeparator->Size = System::Drawing::Size(159, 6);
 			// 
 			// _quitMenuItem
 			// 
+			this->_quitMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_quitMenuItem->Name = L"_quitMenuItem";
 			this->_quitMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Q));
-			this->_quitMenuItem->Size = System::Drawing::Size(155, 22);
+			this->_quitMenuItem->Size = System::Drawing::Size(162, 22);
 			this->_quitMenuItem->Text = L"&Quit";
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
 			// _optionsToolStripMenuItem
 			// 
-			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_dataBaseToolStripMenuItem });
+			this->_optionsToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_dataBaseToolStripMenuItem,
+					this->stopMixToolStripMenuItem
+			});
+			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
 			this->_optionsToolStripMenuItem->Size = System::Drawing::Size(61, 20);
 			this->_optionsToolStripMenuItem->Text = L"&Options";
@@ -239,14 +287,16 @@ namespace AutoMixUI {
 			// _dataBaseToolStripMenuItem
 			// 
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
+			this->_dataBaseToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
-			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(122, 22);
+			this->_dataBaseToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_dataBaseToolStripMenuItem->Text = L"&Database";
 			// 
 			// _clearDBMenuItem
 			// 
+			this->_clearDBMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
-			this->_clearDBMenuItem->Size = System::Drawing::Size(101, 22);
+			this->_clearDBMenuItem->Size = System::Drawing::Size(152, 22);
 			this->_clearDBMenuItem->Text = L"&Clear";
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
@@ -256,12 +306,27 @@ namespace AutoMixUI {
 				this->aboutCharacteristicsToolStripMenuItem,
 					this->toolStripSeparator1, this->_aboutMenuItem
 			});
+			this->_helpToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_helpToolStripMenuItem->Name = L"_helpToolStripMenuItem";
 			this->_helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->_helpToolStripMenuItem->Text = L"&Help";
 			// 
+			// aboutCharacteristicsToolStripMenuItem
+			// 
+			this->aboutCharacteristicsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
+			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
+			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
+			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
+			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			// 
+			// toolStripSeparator1
+			// 
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(191, 6);
+			// 
 			// _aboutMenuItem
 			// 
+			this->_aboutMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
 			this->_aboutMenuItem->Size = System::Drawing::Size(194, 22);
 			this->_aboutMenuItem->Text = L"About &application...";
@@ -270,14 +335,15 @@ namespace AutoMixUI {
 			// _statusStrip
 			// 
 			this->_statusStrip->AccessibleName = L"_statusStrip";
-			this->_statusStrip->BackColor = System::Drawing::SystemColors::GrayText;
+			this->_statusStrip->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)));
 			this->_statusStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->_toolStripProgressBar,
 					this->_toolStripCurrentDir
 			});
-			this->_statusStrip->Location = System::Drawing::Point(0, 660);
+			this->_statusStrip->Location = System::Drawing::Point(0, 627);
 			this->_statusStrip->Name = L"_statusStrip";
-			this->_statusStrip->Size = System::Drawing::Size(1264, 22);
+			this->_statusStrip->Size = System::Drawing::Size(1064, 22);
 			this->_statusStrip->TabIndex = 3;
 			this->_statusStrip->Text = L"statusStrip1";
 			// 
@@ -301,7 +367,9 @@ namespace AutoMixUI {
 			this->_musicListView->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->_musicListView->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_musicListView->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)));
+			this->_musicListView->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->_musicListView->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(4) {
 				this->collectionName,
 					this->collectionDuration, this->collectionBPM, this->collectionKey
@@ -309,15 +377,19 @@ namespace AutoMixUI {
 			this->_musicListView->ContextMenuStrip = this->_trackContextMenu;
 			this->_musicListView->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_musicListView->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->_musicListView->ForeColor = System::Drawing::Color::White;
 			this->_musicListView->FullRowSelect = true;
 			this->_musicListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->_musicListView->Location = System::Drawing::Point(0, 275);
 			this->_musicListView->Name = L"_musicListView";
-			this->_musicListView->Size = System::Drawing::Size(1264, 381);
+			this->_musicListView->OwnerDraw = true;
+			this->_musicListView->Size = System::Drawing::Size(1064, 348);
 			this->_musicListView->TabIndex = 4;
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
+			this->_musicListView->DrawColumnHeader += gcnew System::Windows::Forms::DrawListViewColumnHeaderEventHandler(this, &MainForm::musicListView_DrawColumnHeader);
+			this->_musicListView->DrawItem += gcnew System::Windows::Forms::DrawListViewItemEventHandler(this, &MainForm::musicListView_DrawItem);
+			this->_musicListView->DrawSubItem += gcnew System::Windows::Forms::DrawListViewSubItemEventHandler(this, &MainForm::musicListView_DrawSubItem);
 			this->_musicListView->ItemDrag += gcnew System::Windows::Forms::ItemDragEventHandler(this, &MainForm::musicListView_ItemDrag);
 			this->_musicListView->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragDrop);
 			this->_musicListView->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &MainForm::musicListView_DragEnter);
@@ -356,6 +428,7 @@ namespace AutoMixUI {
 			// _deleteTrackToolStrip
 			// 
 			this->_deleteTrackToolStrip->Enabled = false;
+			this->_deleteTrackToolStrip->ForeColor = System::Drawing::Color::White;
 			this->_deleteTrackToolStrip->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_deleteTrackToolStrip.Image")));
 			this->_deleteTrackToolStrip->Name = L"_deleteTrackToolStrip";
 			this->_deleteTrackToolStrip->ShortcutKeys = System::Windows::Forms::Keys::Delete;
@@ -365,6 +438,7 @@ namespace AutoMixUI {
 			// 
 			// _selectAllToolStrip
 			// 
+			this->_selectAllToolStrip->ForeColor = System::Drawing::Color::White;
 			this->_selectAllToolStrip->Name = L"_selectAllToolStrip";
 			this->_selectAllToolStrip->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::A));
 			this->_selectAllToolStrip->Size = System::Drawing::Size(164, 22);
@@ -374,43 +448,60 @@ namespace AutoMixUI {
 			// _importButton
 			// 
 			this->_importButton->AccessibleName = L"_importButton";
-			this->_importButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_importButton->BackColor = System::Drawing::Color::DarkMagenta;
 			this->_importButton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_importButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->_importButton->FlatAppearance->BorderSize = 0;
+			this->_importButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_importButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_importButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_importButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_importButton->Location = System::Drawing::Point(70, 114);
+			this->_importButton->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->_importButton->Location = System::Drawing::Point(12, 188);
+			this->_importButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_importButton->Name = L"_importButton";
-			this->_importButton->Size = System::Drawing::Size(147, 78);
+			this->_importButton->Size = System::Drawing::Size(348, 78);
 			this->_importButton->TabIndex = 5;
 			this->_importButton->Text = L"Import Tracks";
 			this->_toolTip->SetToolTip(this->_importButton, L"Click to import new tracks");
 			this->_importButton->UseVisualStyleBackColor = false;
+			this->_importButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
 			this->_importButton->Click += gcnew System::EventHandler(this, &MainForm::onImportButtonClick);
 			// 
 			// _generateButton
 			// 
 			this->_generateButton->AccessibleName = L"_generateButton";
 			this->_generateButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->_generateButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_generateButton->BackColor = System::Drawing::Color::DarkMagenta;
 			this->_generateButton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_generateButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->_generateButton->FlatAppearance->BorderSize = 0;
+			this->_generateButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_generateButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_generateButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_generateButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_generateButton->Location = System::Drawing::Point(1054, 67);
+			this->_generateButton->ForeColor = System::Drawing::SystemColors::ButtonFace;
+			this->_generateButton->Location = System::Drawing::Point(742, 188);
+			this->_generateButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_generateButton->Name = L"_generateButton";
-			this->_generateButton->Size = System::Drawing::Size(147, 78);
+			this->_generateButton->Size = System::Drawing::Size(310, 78);
 			this->_generateButton->TabIndex = 6;
 			this->_generateButton->Text = L"Generate Mix";
 			this->_toolTip->SetToolTip(this->_generateButton, L"Click to export an mp3 file");
 			this->_generateButton->UseVisualStyleBackColor = false;
+			this->_generateButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
 			this->_generateButton->Click += gcnew System::EventHandler(this, &MainForm::onExportButtonClick);
 			// 
 			// _logo
 			// 
-			this->_logo->Anchor = System::Windows::Forms::AnchorStyles::Top;
 			this->_logo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"_logo.Image")));
-			this->_logo->Location = System::Drawing::Point(311, 38);
+			this->_logo->Location = System::Drawing::Point(12, 37);
 			this->_logo->Name = L"_logo";
-			this->_logo->Size = System::Drawing::Size(653, 226);
+			this->_logo->Size = System::Drawing::Size(387, 134);
 			this->_logo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->_logo->TabIndex = 7;
 			this->_logo->TabStop = false;
@@ -418,18 +509,27 @@ namespace AutoMixUI {
 			// _sortButton
 			// 
 			this->_sortButton->AccessibleName = L"_sortButton";
-			this->_sortButton->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->_sortButton->BackColor = System::Drawing::SystemColors::ControlDark;
+			this->_sortButton->Anchor = System::Windows::Forms::AnchorStyles::Top;
+			this->_sortButton->BackColor = System::Drawing::Color::DarkMagenta;
 			this->_sortButton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->_sortButton->FlatAppearance->BorderSize = 0;
+			this->_sortButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_sortButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_sortButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_sortButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->_sortButton->Location = System::Drawing::Point(1054, 174);
+			this->_sortButton->ForeColor = System::Drawing::Color::White;
+			this->_sortButton->Location = System::Drawing::Point(386, 188);
+			this->_sortButton->MinimumSize = System::Drawing::Size(200, 0);
 			this->_sortButton->Name = L"_sortButton";
-			this->_sortButton->Size = System::Drawing::Size(147, 78);
+			this->_sortButton->Size = System::Drawing::Size(330, 78);
 			this->_sortButton->TabIndex = 8;
 			this->_sortButton->Text = L"Sort";
 			this->_toolTip->SetToolTip(this->_sortButton, L"Click to sort tracks using AutoMix AI");
 			this->_sortButton->UseVisualStyleBackColor = false;
+			this->_sortButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
 			this->_sortButton->Click += gcnew System::EventHandler(this, &MainForm::onSortButtonClick);
 			// 
 			// _importBackgroundWorker
@@ -456,38 +556,121 @@ namespace AutoMixUI {
 			this->_exportBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::exportBW_ProgressChanged);
 			this->_exportBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::exportBW_RunWorkerCompleted);
 			// 
-			// aboutCharacteristicsToolStripMenuItem
+			// _playerbutton
 			// 
-			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
-			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
-			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
-			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			this->_playerbutton->AccessibleName = L"_playerbutton";
+			this->_playerbutton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_playerbutton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_playerbutton->FlatAppearance->BorderSize = 0;
+			this->_playerbutton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_playerbutton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_playerbutton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_playerbutton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_playerbutton->ForeColor = System::Drawing::Color::White;
+			this->_playerbutton->Location = System::Drawing::Point(18, 31);
+			this->_playerbutton->Name = L"_playerbutton";
+			this->_playerbutton->Size = System::Drawing::Size(75, 75);
+			this->_playerbutton->TabIndex = 11;
+			this->_toolTip->SetToolTip(this->_playerbutton, L"Click to preview the music mix");
+			this->_playerbutton->UseVisualStyleBackColor = false;
+			this->_playerbutton->Click += gcnew System::EventHandler(this, &MainForm::onPlayerButtonClick);
 			// 
-			// toolStripSeparator1
+			// _skipButton
 			// 
-			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(191, 6);
+			this->_skipButton->AccessibleName = L"_skipButton";
+			this->_skipButton->BackColor = System::Drawing::Color::DarkMagenta;
+			this->_skipButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_skipButton->FlatAppearance->BorderSize = 0;
+			this->_skipButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(151)), static_cast<System::Int32>(static_cast<System::Byte>(151)));
+			this->_skipButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->_skipButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->_skipButton->Font = (gcnew System::Drawing::Font(L"Segoe UI Semilight", 18, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->_skipButton->ForeColor = System::Drawing::Color::White;
+			this->_skipButton->Location = System::Drawing::Point(99, 31);
+			this->_skipButton->Name = L"_skipButton";
+			this->_skipButton->Size = System::Drawing::Size(75, 75);
+			this->_skipButton->TabIndex = 13;
+			this->_toolTip->SetToolTip(this->_skipButton, L"Click to skip 30 seconds in the music mix");
+			this->_skipButton->UseVisualStyleBackColor = false;
+			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButton_Click);
+			// 
+			// _playerBackgroundWorker
+			// 
+			this->_playerBackgroundWorker->WorkerReportsProgress = true;
+			this->_playerBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_playerBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
+			this->_playerBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
+			this->_playerBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
+			// 
+			// panel1
+			// 
+			this->panel1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(29)), static_cast<System::Int32>(static_cast<System::Byte>(32)),
+				static_cast<System::Int32>(static_cast<System::Byte>(37)));
+			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel1->Controls->Add(this->_skipButton);
+			this->panel1->Controls->Add(this->trackBar1);
+			this->panel1->Controls->Add(this->_playerbutton);
+			this->panel1->Location = System::Drawing::Point(417, 37);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(635, 134);
+			this->panel1->TabIndex = 10;
+			// 
+			// trackBar1
+			// 
+			this->trackBar1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->trackBar1->Enabled = false;
+			this->trackBar1->Location = System::Drawing::Point(180, 59);
+			this->trackBar1->Maximum = 10000;
+			this->trackBar1->Name = L"trackBar1";
+			this->trackBar1->Size = System::Drawing::Size(439, 45);
+			this->trackBar1->TabIndex = 12;
+			this->trackBar1->TickStyle = System::Windows::Forms::TickStyle::None;
+			// 
+			// _trackBarTimer
+			// 
+			this->_trackBarTimer->Interval = 500;
+			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
+			// 
+			// stopMixToolStripMenuItem
+			// 
+			this->stopMixToolStripMenuItem->Name = L"stopMixToolStripMenuItem";
+			this->stopMixToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->stopMixToolStripMenuItem->Text = L"Stop Mix";
+			this->stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::stopMixToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::SystemColors::ControlDarkDark;
-			this->ClientSize = System::Drawing::Size(1264, 682);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
+				static_cast<System::Int32>(static_cast<System::Byte>(27)));
+			this->ClientSize = System::Drawing::Size(1064, 649);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->_sortButton);
 			this->Controls->Add(this->_logo);
-			this->Controls->Add(this->_generateButton);
 			this->Controls->Add(this->_importButton);
 			this->Controls->Add(this->_musicListView);
 			this->Controls->Add(this->_statusStrip);
 			this->Controls->Add(this->_menuStrip);
+			this->Controls->Add(this->_generateButton);
+			this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->_menuStrip;
 			this->Margin = System::Windows::Forms::Padding(2);
-			this->MinimumSize = System::Drawing::Size(1280, 720);
+			this->MinimumSize = System::Drawing::Size(1080, 687);
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AutoMix Software";
+			this->Text = L"Automix Software";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::onMainFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->_menuStrip->ResumeLayout(false);
@@ -496,6 +679,10 @@ namespace AutoMixUI {
 			this->_statusStrip->PerformLayout();
 			this->_trackContextMenu->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->EndInit();
+			this->panel1->ResumeLayout(false);
+			this->panel1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -555,6 +742,21 @@ namespace AutoMixUI {
 	private: System::Void musicListView_ItemDrag(System::Object^  sender, System::Windows::Forms::ItemDragEventArgs^  e);
 	private: System::Void musicListView_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 
-	};
+	private: System::Void onPlayerButtonClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void playerBackgroundWorker_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
+	private: System::Void playerBackgroundWorker_ProgressChanged(System::Object^  sender, System::ComponentModel::ProgressChangedEventArgs^  e);
+	private: System::Void playerBackgroundWorker_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
+
+	private: System::Void stopPlayer();
+	private: System::Void onButtonEnabledChanged(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void musicListView_DrawItem(System::Object^  sender, System::Windows::Forms::DrawListViewItemEventArgs^  e);
+	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
+
+	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
+
+	private: System::Void trackBarTimer_Tick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onSkipButton_Click(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void stopMixToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+};
 
 }

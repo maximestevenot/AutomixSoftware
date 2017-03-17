@@ -75,6 +75,9 @@
     <ClInclude Include="IAudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
+    <ClInclude Include="MP3Playing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="DataBaseExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
+    </ClCompile>
+    <ClCompile Include="MP3Playing.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

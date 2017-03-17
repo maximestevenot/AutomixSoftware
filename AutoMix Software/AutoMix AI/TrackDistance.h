@@ -23,10 +23,10 @@ namespace AutoMixAI
 
 		TrackDistance()
 		{
-			BPMPriority = 1200;
-			KeyNumberPriority = 20;
-			KeyTonalityPriority = 2000;
-			DanceabilityPriority = 10;
+			BPMPriority = 1;
+			KeyNumberPriority = 1;
+			KeyTonalityPriority = 1;
+			DanceabilityPriority = 1;
 		}
 
 		virtual double compute(AutoMixDataManagement::Track^ t1, AutoMixDataManagement::Track^ t2) abstract;

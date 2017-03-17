@@ -24,6 +24,9 @@
     <ClCompile Include="Presenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AutoMixColorTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainForm.h">
@@ -38,6 +41,9 @@
     <ClInclude Include="UserDocForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutoMixColorTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
@@ -46,5 +52,22 @@
     <EmbeddedResource Include="UserDocForm.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\pause_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\play_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\pause_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\play_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\seek_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
