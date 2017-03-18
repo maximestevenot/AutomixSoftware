@@ -26,8 +26,8 @@ namespace AutoMixAI
 
 	TrackCollection^ GeneticSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
-		Population^ pop = createInitialPopulation(trackCollection);
-		sortPopulation(pop, 0, pop->Count - 1);
+		Population^ population = createInitialPopulation(trackCollection);
+		sortPopulation(population, 0, population->Count - 1);
 
 		for (int k = 0; k < NUMBER_OF_ITERATION; k++)
 		{
@@ -36,21 +36,21 @@ namespace AutoMixAI
 				break;
 			}
 
-			createChildAndPutThemIntoPopulation(pop);
-			mutatePopulation(pop);
-			sortPopulation(pop, 0, pop->Count - 1);
-			pop = pop->GetRange(0, POPULATION_SIZE);
+			createChildrenAndPutThemIntoPopulation(population);
+			mutatePopulation(population);
+			sortPopulation(population, 0, population->Count - 1);
+			population = population->GetRange(0, POPULATION_SIZE);
 			bw->ReportProgress((int)1000 * k / NUMBER_OF_ITERATION);
 		}
-		System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(pop[0]));
-		return pop[0];
+		System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(population[0]));
+		return population[0];
 	}
 
 	Population^ GeneticSortAlgorithm::createInitialPopulation(TrackCollection^ trackCollection)
 	{
-		Population^ pop = gcnew Population();
-		System::Random^ rand = gcnew System::Random();
-		pop->Add(trackCollection);
+		Population^ population = gcnew Population();
+		Random^ randomGenerator = gcnew Random();
+		population->Add(trackCollection);
 		for (int k = 1; k < POPULATION_SIZE; k++)
 		{
 			TrackCollection^ individual = gcnew TrackCollection();
@@ -62,11 +62,11 @@ namespace AutoMixAI
 			{
 				Track^ track = individual[i];
 				individual->Remove(track);
-				individual->Insert(rand->Next(individual->Count), track);
+				individual->Insert(randomGenerator->Next(individual->Count), track);
 			}
-			pop->Add(individual);
+			population->Add(individual);
 		}
-		return pop;
+		return population;
 	}
 
 	double GeneticSortAlgorithm::computeIndividualEvaluation(TrackCollection^ individual)
@@ -115,7 +115,7 @@ namespace AutoMixAI
 		}
 	}
 
-	void GeneticSortAlgorithm::createChildAndPutThemIntoPopulation(Population^ pop)
+	void GeneticSortAlgorithm::createChildrenAndPutThemIntoPopulation(Population^ pop)
 	{
 		int count = pop->Count;
 		for (int k = 0; k < count / 2; k++)
@@ -157,20 +157,20 @@ namespace AutoMixAI
 
 	void GeneticSortAlgorithm::mutatePopulation(Population^ pop)
 	{
-		System::Random^ rand = gcnew System::Random();
+		Random^ randomGenerator = gcnew Random();
 		for (int k = 0; k < pop->Count; k++)
 		{
 
-			if (rand->Next(100) < MUTATION_PROBABILITY)
+			if (randomGenerator->Next(100) < MUTATION_PROBABILITY)
 			{
 				TrackCollection^ mutant = pop[k];
-				Track^ temp;
+				Track^ tempTrack;
 
-				int index1 = rand->Next(mutant->Count);
-				int index2 = rand->Next(mutant->Count);
-				temp = mutant[index1];
+				int index1 = randomGenerator->Next(mutant->Count);
+				int index2 = randomGenerator->Next(mutant->Count);
+				tempTrack = mutant[index1];
 				mutant[index1] = mutant[index2];
-				mutant[index2] = temp;
+				mutant[index2] = tempTrack;
 				pop[k] = mutant;
 			}
 		}
