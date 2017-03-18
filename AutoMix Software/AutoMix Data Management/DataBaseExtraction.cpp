@@ -26,7 +26,7 @@ namespace AutoMixDataManagement {
 	void DataBaseExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, int nbTracks, System::Threading::CancellationTokenSource^ cts, Track^ track)
 	{
 		_dataBase->extractData(track);
-		Interlocked::Increment(AudioDataExtraction::exploredTracks);
-		bw->ReportProgress((int)500 + 500 * AudioDataExtraction::exploredTracks / nbTracks);
+		Interlocked::Increment(AudioDataExtraction::ExploredTracks);
+		bw->ReportProgress((int)500 + 500 * AudioDataExtraction::ExploredTracks / nbTracks);
 	}
 }

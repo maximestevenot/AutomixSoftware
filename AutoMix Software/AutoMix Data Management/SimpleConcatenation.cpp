@@ -23,7 +23,7 @@ namespace AutoMixDataManagement {
 	{
 		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
-		int cpt = 1;
+		int count = 1;
 
 		Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
 		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
@@ -42,7 +42,7 @@ namespace AutoMixDataManagement {
 				outputStream->Write(frame->RawData, 0, frame->RawData->Length);
 			}
 
-			bw->ReportProgress((int)1000 * cpt++ / collection->Count);
+			bw->ReportProgress((int)1000 * count++ / collection->Count);
 		}
 		outputStream->Close();
 	}

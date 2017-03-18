@@ -177,10 +177,10 @@ danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
 
 	array<unsigned int>^ DataBase::extractFromString(String^ orig)
 	{
-		array<Char>^ sep = gcnew array<Char>{ ' ' };
+		array<Char>^ separator = gcnew array<Char>{ ' ' };
 		List<unsigned int>^ resultList = gcnew List<unsigned int>();
-		array<String^>^ Values = orig->Split(sep, StringSplitOptions::RemoveEmptyEntries);
-		for each (String^ value in Values)
+		array<String^>^ values = orig->Split(separator, StringSplitOptions::RemoveEmptyEntries);
+		for each (String^ value in values)
 		{
 			resultList->Add(Convert::ToUInt32(value));
 		}

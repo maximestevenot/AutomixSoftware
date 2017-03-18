@@ -22,10 +22,9 @@ namespace AutoMixDataManagement {
 
 		void seek(double seconds);
 
-		static void SetPosition(NAudio::Wave::WaveStream^ strm, long position);
-		static void SetPosition(NAudio::Wave::WaveStream^ strm, double seconds);
-		static void SetPosition(NAudio::Wave::WaveStream^ strm, System::TimeSpan time);
-		static void Seek(NAudio::Wave::WaveStream^ strm, double offset);
+		void setPosition(long position);
+		void setPosition(double seconds);
+		void setPosition(System::TimeSpan time);
 
 	private:
 		NAudio::Wave::IWavePlayer^ _waveOutDevice = nullptr;
