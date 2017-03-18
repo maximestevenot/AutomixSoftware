@@ -28,10 +28,10 @@ namespace AutoMixAI
 
 	TrackCollection^ SimulatedAnnealingSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{	
-		int nb_track = trackCollection->Count;
-		int N = (nb_track / 2) * (nb_track / 2);
+		int nbTracks = trackCollection->Count;
+		int N = (nbTracks / 2) * (nbTracks / 2);
 		TrackCollection^ result = trackCollection;
-		TrackCollection^ temp;
+		TrackCollection^ tempCollection;
 		System::Random^ rand = gcnew System::Random();
 
 		for (int k = 0; k < NUMBEROFITERATION; k++) {
@@ -45,15 +45,15 @@ namespace AutoMixAI
 			while (temperature > STOPTEMPERATURE) {
 				for (int i = 0; i < N; i++) {
 
-					temp = createPotentialTrackCollection(result);
-					double dE = computeIndividualEvaluation(temp) - computeIndividualEvaluation(result);
+					tempCollection = createPotentialTrackCollection(result);
+					double dE = computeIndividualEvaluation(tempCollection) - computeIndividualEvaluation(result);
 
 					if (dE < 0) {
-						result = temp;
+						result = tempCollection;
 					}
 					else {
 						if (rand->Next(100) < (System::Math::Exp(-dE / temperature) * 100)) {
-							result = temp;
+							result = tempCollection;
 						}
 					}
 

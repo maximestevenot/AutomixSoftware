@@ -10,21 +10,53 @@
 #include "UserDocForm.h"
 
 using namespace System;
-using namespace System::Windows::Forms;
-using namespace System::Collections;
 using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
+using namespace System::IO;
 using namespace System::Threading;
+using namespace AutoMixDataManagement;
 
 namespace AutoMixUI {
+
+	MainForm::MainForm(void)
+	{
+		InitializeComponent();
+		_presenter = gcnew Presenter(this);
+
+		_menuStrip->RenderMode = ToolStripRenderMode::Professional;
+		_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+		_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
+		_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
+
+		_insertionLineColor = Color::LightGray;
+		_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+		_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
+
+		_cancelMenuItem->Enabled = false;
+		_generateButton->Enabled = false;
+		_sortButton->Enabled = false;
+		_playerbutton->Enabled = false;
+		_toolStripProgressBar->Visible = false;
+		AnOperationRunning = false;
+	}
+
+	MainForm::~MainForm()
+	{
+		if (components)
+		{
+			delete components;
+		}
+	}
 
 	Bitmap^ MainForm::PlayIcon::get()
 	{
 		if (!_playIcon)
 		{
 			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
-
-				Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
-	
+			Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
 			_playIcon = gcnew Bitmap(myStream);
 		}
 		return _playIcon;
@@ -126,7 +158,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onAboutMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		String^ msg = "AutoMix Software Beta 1.0\n\n";
+		String^ msg = "AutoMix Software Beta 3.0\n\n";
 		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
 		msg += "Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT,\nLouis CARLIER, Pierre GABON";
 
@@ -229,13 +261,27 @@ namespace AutoMixUI {
 		_toolStripProgressBar->Value = e->ProgressPercentage;
 	}
 
+	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
+	{
+		if (e->Cancelled)
+		{
+			_exportPath = _defaultExportPath;
+			showCancelDialog();
+		}
+		else if (e->Error != nullptr)
+		{
+			showErrorDialog(e->Error->Message);
+		}
+		onWorkerStop();
+	}
+
 	System::Void MainForm::onDeleteTrackToolStripClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		Generic::List<String^>^ selection = gcnew Generic::List<String^>();
 
-		for each (ListViewItem^ item in _musicListView->SelectedItems)
+		for each (ListViewItem^ lvitem in _musicListView->SelectedItems)
 		{
-			selection->Add(item->Text);
+			selection->Add(lvitem->Text);
 		}
 		_presenter->removeTracks(selection);
 	}
@@ -254,9 +300,9 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onSelectAllMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		for each(ListViewItem^ item in _musicListView->Items)
+		for each(ListViewItem^ lvitem in _musicListView->Items)
 		{
-			item->Selected = true;
+			lvitem->Selected = true;
 		}
 	}
 
@@ -276,9 +322,6 @@ namespace AutoMixUI {
 			try
 			{
 				array<String^>^ fileNames = (array<String^>^) drgevent->Data->GetData(DataFormats::FileDrop);
-				for each (auto s in fileNames) {
-					Diagnostics::Debug::WriteLine(s);
-				}
 				onWorkerStart();
 				_importBackgroundWorker->RunWorkerAsync(fileNames);
 			}
@@ -287,7 +330,6 @@ namespace AutoMixUI {
 				IsDragImportInProgress = false;
 			}
 		}
-
 		else if (IsRowDragInProgress)
 		{
 			try
@@ -306,7 +348,6 @@ namespace AutoMixUI {
 					{
 						dropIndex++;
 					}
-
 					if (dropIndex != dragItem->Index)
 					{
 						Point clientPoint = _musicListView->PointToClient(Point(drgevent->X, drgevent->Y));
@@ -451,7 +492,7 @@ namespace AutoMixUI {
 	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
-		trackBar1->Value = (int) System::Math::Min( normalize, (__int64) 10000);
+		_playerTrackBar->Value = (int) System::Math::Min( normalize, (__int64) 10000);
 	}
 
 	System::Void MainForm::onSkipButtonClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -472,7 +513,7 @@ namespace AutoMixUI {
 		if (_playerExists)
 		{
 			_trackBarTimer->Stop();
-			trackBar1->Value = 0;
+			_playerTrackBar->Value = 0;
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;
@@ -514,20 +555,6 @@ namespace AutoMixUI {
 			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
 		}
 		e->DrawText(TextFormatFlags::TextBoxControl);
-	}
-
-	System::Void MainForm::exportBW_RunWorkerCompleted(System::Object ^ sender, System::ComponentModel::RunWorkerCompletedEventArgs ^ e)
-	{
-		if (e->Cancelled)
-		{
-			_exportPath = _defaultExportPath;
-			showCancelDialog();
-		}
-		else if (e->Error != nullptr)
-		{
-			showErrorDialog(e->Error->Message);
-		}
-		onWorkerStop();
 	}
 
 	System::Void MainForm::sortTrackList(System::Object^ sender, System::EventArgs^ e)

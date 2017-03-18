@@ -37,7 +37,7 @@ namespace AutoMixDataManagement {
 	void MP3Playing::stop()
 	{
 		_waveOutDevice->Stop();
-		SetPosition(_audioFileReader, 0.);
+		setPosition(0.);
 		delete _waveOutDevice;
 		delete _audioFileReader;
 	}
@@ -54,28 +54,23 @@ namespace AutoMixDataManagement {
 
 	void MP3Playing::seek(double seconds)
 	{
-		Seek(_audioFileReader, seconds);
+		_audioFileReader->Position = _audioFileReader->Position + (long)(seconds * _audioFileReader->WaveFormat->AverageBytesPerSecond);
 	}
 
-	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, long position)
+	void MP3Playing::setPosition(long position)
 	{
-		long adj = position % strm->WaveFormat->BlockAlign;
-		long newPos = (long) Math::Max((long long)0, Math::Min(strm->Length,(long long) position - adj));
-		strm->Position = newPos;
+		long adj = position % _audioFileReader->WaveFormat->BlockAlign;
+		long newPos = (long) Math::Max((long long)0, Math::Min(_audioFileReader->Length,(long long) position - adj));
+		_audioFileReader->Position = newPos;
 	}
 
-	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, double seconds)
+	void MP3Playing::setPosition(double seconds)
 	{
-		strm->Position = (long)(seconds * strm->WaveFormat->AverageBytesPerSecond);
+		_audioFileReader->Position = (long)(seconds * _audioFileReader->WaveFormat->AverageBytesPerSecond);
 	}
 
-	void MP3Playing::SetPosition(NAudio::Wave::WaveStream ^ strm, System::TimeSpan time)
+	void MP3Playing::setPosition(TimeSpan time)
 	{
-		strm->Position = (__int64) time.TotalSeconds;
-	}
-
-	void MP3Playing::Seek(NAudio::Wave::WaveStream ^ strm, double offset)
-	{
-		strm->Position = strm->Position + (long)(offset * strm->WaveFormat->AverageBytesPerSecond);
+		_audioFileReader->Position = (__int64) time.TotalSeconds;
 	}
 }

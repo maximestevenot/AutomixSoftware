@@ -14,56 +14,10 @@
 
 namespace AutoMixUI {
 
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace System::IO;
-	using namespace AutoMixDataManagement;
-
-	/// <summary>
-	/// Summary for MainForm
-	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form, public ViewWithTrackCollection
 	{
 	public:
-		MainForm(void)
-		{
-			InitializeComponent();
-			_presenter = gcnew Presenter(this);
-
-			_menuStrip->RenderMode = ToolStripRenderMode::Professional;
-			_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
-			_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
-			_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
-
-			_insertionLineColor = Color::LightGray;
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
-			_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
-
-			_cancelMenuItem->Enabled = false;
-			_generateButton->Enabled = false;
-			_sortButton->Enabled = false;
-			_playerbutton->Enabled = false;
-			_toolStripProgressBar->Visible = false;
-			AnOperationRunning = false;
-		}
-
-	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		~MainForm()
-		{
-			if (components)
-			{
-				delete components;
-			}
-		}
-
-	public:
+		MainForm(void);
 
 		property bool AnOperationRunning
 		{
@@ -71,6 +25,11 @@ namespace AutoMixUI {
 		private:
 			void set(bool value) { _anOperationRunning = value; }
 		}
+
+		System::Void update(TrackCollection^) override;
+
+	protected:
+		~MainForm();
 
 	private:
 		Presenter^ _presenter;
@@ -90,16 +49,16 @@ namespace AutoMixUI {
 			After
 		};
 
-		property Bitmap^ PlayIcon { Bitmap^ get(); }
-		property Bitmap^ PauseIcon { Bitmap^ get(); }
-		property Bitmap^ SeekIcon { Bitmap^ get(); }
-		Bitmap^ _playIcon;
-		Bitmap^ _pauseIcon;
-		Bitmap^ _seekIcon;
+		property System::Drawing::Bitmap^ PlayIcon { System::Drawing::Bitmap^ get(); }
+		property System::Drawing::Bitmap^ PauseIcon { System::Drawing::Bitmap^ get(); }
+		property System::Drawing::Bitmap^ SeekIcon { System::Drawing::Bitmap^ get(); }
+		System::Drawing::Bitmap^ _playIcon;
+		System::Drawing::Bitmap^ _pauseIcon;
+		System::Drawing::Bitmap^ _seekIcon;
 
 		int _insertionIndex;
 		InsertionModeType _insertionMode;
-		Color _insertionLineColor;
+		System::Drawing::Color _insertionLineColor;
 
 	private: System::Windows::Forms::MenuStrip^  _menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _fileToolStripMenuItem;
@@ -131,7 +90,7 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::ContextMenuStrip^  _trackContextMenu;
 	private: System::Windows::Forms::ToolStripMenuItem^  _deleteTrackToolStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^  _selectAllToolStrip;
-	private: System::Windows::Forms::ToolStripMenuItem^  aboutCharacteristicsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  _aboutCharacteristicsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
 
 	private: System::ComponentModel::BackgroundWorker^  _playerBackgroundWorker;
@@ -140,10 +99,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Button^  _playerbutton;
 
 	private: System::Windows::Forms::BindingSource^  bindingSource1;
-	private: System::Windows::Forms::TrackBar^  trackBar1;
+	private: System::Windows::Forms::TrackBar^  _playerTrackBar;
 	private: System::Windows::Forms::Timer^  _trackBarTimer;
 	private: System::Windows::Forms::Button^  _skipButton;
-	private: System::Windows::Forms::ToolStripMenuItem^  stopMixToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  _stopMixToolStripMenuItem;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -172,7 +131,7 @@ namespace AutoMixUI {
 			this->_dataBaseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_clearDBMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_aboutCharacteristicsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_aboutMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_statusStrip = (gcnew System::Windows::Forms::StatusStrip());
@@ -198,16 +157,16 @@ namespace AutoMixUI {
 			this->_skipButton = (gcnew System::Windows::Forms::Button());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->trackBar1 = (gcnew System::Windows::Forms::TrackBar());
+			this->_playerTrackBar = (gcnew System::Windows::Forms::TrackBar());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->stopMixToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_stopMixToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->BeginInit();
 			this->panel1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_playerTrackBar))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -276,7 +235,7 @@ namespace AutoMixUI {
 			this->_optionsToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->_dataBaseToolStripMenuItem,
-					this->stopMixToolStripMenuItem
+					this->_stopMixToolStripMenuItem
 			});
 			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
@@ -303,7 +262,7 @@ namespace AutoMixUI {
 			// _helpToolStripMenuItem
 			// 
 			this->_helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->aboutCharacteristicsToolStripMenuItem,
+				this->_aboutCharacteristicsToolStripMenuItem,
 					this->toolStripSeparator1, this->_aboutMenuItem
 			});
 			this->_helpToolStripMenuItem->ForeColor = System::Drawing::Color::White;
@@ -311,13 +270,13 @@ namespace AutoMixUI {
 			this->_helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->_helpToolStripMenuItem->Text = L"&Help";
 			// 
-			// aboutCharacteristicsToolStripMenuItem
+			// _aboutCharacteristicsToolStripMenuItem
 			// 
-			this->aboutCharacteristicsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
-			this->aboutCharacteristicsToolStripMenuItem->Name = L"aboutCharacteristicsToolStripMenuItem";
-			this->aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
-			this->aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
-			this->aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
+			this->_aboutCharacteristicsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_aboutCharacteristicsToolStripMenuItem->Name = L"_aboutCharacteristicsToolStripMenuItem";
+			this->_aboutCharacteristicsToolStripMenuItem->Size = System::Drawing::Size(194, 22);
+			this->_aboutCharacteristicsToolStripMenuItem->Text = L"About &characteristics...";
+			this->_aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
 			// 
 			// toolStripSeparator1
 			// 
@@ -616,36 +575,36 @@ namespace AutoMixUI {
 				static_cast<System::Int32>(static_cast<System::Byte>(37)));
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->panel1->Controls->Add(this->_skipButton);
-			this->panel1->Controls->Add(this->trackBar1);
+			this->panel1->Controls->Add(this->_playerTrackBar);
 			this->panel1->Controls->Add(this->_playerbutton);
 			this->panel1->Location = System::Drawing::Point(417, 37);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(635, 134);
 			this->panel1->TabIndex = 10;
 			// 
-			// trackBar1
+			// _playerTrackBar
 			// 
-			this->trackBar1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+			this->_playerTrackBar->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->trackBar1->Enabled = false;
-			this->trackBar1->Location = System::Drawing::Point(180, 59);
-			this->trackBar1->Maximum = 10000;
-			this->trackBar1->Name = L"trackBar1";
-			this->trackBar1->Size = System::Drawing::Size(439, 45);
-			this->trackBar1->TabIndex = 12;
-			this->trackBar1->TickStyle = System::Windows::Forms::TickStyle::None;
+			this->_playerTrackBar->Enabled = false;
+			this->_playerTrackBar->Location = System::Drawing::Point(180, 59);
+			this->_playerTrackBar->Maximum = 10000;
+			this->_playerTrackBar->Name = L"_playerTrackBar";
+			this->_playerTrackBar->Size = System::Drawing::Size(439, 45);
+			this->_playerTrackBar->TabIndex = 12;
+			this->_playerTrackBar->TickStyle = System::Windows::Forms::TickStyle::None;
 			// 
 			// _trackBarTimer
 			// 
 			this->_trackBarTimer->Interval = 500;
 			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
 			// 
-			// stopMixToolStripMenuItem
+			// _stopMixToolStripMenuItem
 			// 
-			this->stopMixToolStripMenuItem->Name = L"stopMixToolStripMenuItem";
-			this->stopMixToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->stopMixToolStripMenuItem->Text = L"Stop Mix";
-			this->stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onStopMixToolStripMenuItemClick);
+			this->_stopMixToolStripMenuItem->Name = L"_stopMixToolStripMenuItem";
+			this->_stopMixToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->_stopMixToolStripMenuItem->Text = L"Stop Mix";
+			this->_stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onStopMixToolStripMenuItemClick);
 			// 
 			// MainForm
 			// 
@@ -681,15 +640,13 @@ namespace AutoMixUI {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_logo))->EndInit();
 			this->panel1->ResumeLayout(false);
 			this->panel1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trackBar1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->_playerTrackBar))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	public:
-		System::Void update(TrackCollection^) override;
 
 	private:
 		System::Void onWorkerStart();
