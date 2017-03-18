@@ -20,7 +20,7 @@ namespace AutoMixUI {
 
 		TrackCollection^ loadTracks(System::ComponentModel::BackgroundWorker^, array<System::String^>^);
 		void removeTracks(System::Collections::Generic::List<System::String^>^);
-		void Presenter::moveTrack(int index, System::String^ name);
+		void Presenter::moveTrack(int, System::String^);
 		void exportTrackList(System::ComponentModel::BackgroundWorker^, System::String^);
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
@@ -33,11 +33,11 @@ namespace AutoMixUI {
 		__int64 getPosition();
 		__int64 getLength();
 
-		void getMyRightsBack();
-
 		void createTransition();
 
 	private:
+		void retrieveControlOnCollection();
+
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
