@@ -193,6 +193,9 @@
   <data name="collectionKey.Text" xml:space="preserve">
     <value>Clé</value>
   </data>
+  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 48</value>
+  </data>
   <data name="_deleteTrackToolStrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAtAAAALQCAYAAAC5V0ecAAAABGdBTUEAALGPC/xhBQAAgXdJREFUeF7t
@@ -762,9 +765,6 @@
   </data>
   <data name="_selectAllToolStrip.Text" xml:space="preserve">
     <value>Selectionner tout</value>
-  </data>
-  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 48</value>
   </data>
   <data name="_importButton.Text" xml:space="preserve">
     <value>Importer des pistes</value>

@@ -156,9 +156,9 @@ namespace AutoMixUI {
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_skipButton = (gcnew System::Windows::Forms::Button());
-			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->_playerTrackBar = (gcnew System::Windows::Forms::TrackBar());
+			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->_menuStrip->SuspendLayout();
@@ -172,7 +172,6 @@ namespace AutoMixUI {
 			// 
 			// _menuStrip
 			// 
-			resources->ApplyResources(this->_menuStrip, L"_menuStrip");
 			this->_menuStrip->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(19)), static_cast<System::Int32>(static_cast<System::Byte>(23)),
 				static_cast<System::Int32>(static_cast<System::Byte>(27)));
 			this->_menuStrip->ImageScalingSize = System::Drawing::Size(20, 20);
@@ -180,48 +179,47 @@ namespace AutoMixUI {
 				this->_fileToolStripMenuItem,
 					this->_optionsToolStripMenuItem, this->_helpToolStripMenuItem
 			});
+			resources->ApplyResources(this->_menuStrip, L"_menuStrip");
 			this->_menuStrip->Name = L"_menuStrip";
-			this->_toolTip->SetToolTip(this->_menuStrip, resources->GetString(L"_menuStrip.ToolTip"));
 			// 
 			// _fileToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_fileToolStripMenuItem, L"_fileToolStripMenuItem");
 			this->_fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->_importMenuItem,
 					this->_cancelMenuItem, this->toolStripSeparator, this->_quitMenuItem
 			});
 			this->_fileToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
+			resources->ApplyResources(this->_fileToolStripMenuItem, L"_fileToolStripMenuItem");
 			// 
 			// _importMenuItem
 			// 
-			resources->ApplyResources(this->_importMenuItem, L"_importMenuItem");
 			this->_importMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_importMenuItem->Name = L"_importMenuItem";
+			resources->ApplyResources(this->_importMenuItem, L"_importMenuItem");
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
-			resources->ApplyResources(this->_cancelMenuItem, L"_cancelMenuItem");
 			this->_cancelMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_cancelMenuItem->Name = L"_cancelMenuItem";
+			resources->ApplyResources(this->_cancelMenuItem, L"_cancelMenuItem");
 			this->_cancelMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onCancelMenuItemClick);
 			// 
 			// toolStripSeparator
 			// 
-			resources->ApplyResources(this->toolStripSeparator, L"toolStripSeparator");
 			this->toolStripSeparator->Name = L"toolStripSeparator";
+			resources->ApplyResources(this->toolStripSeparator, L"toolStripSeparator");
 			// 
 			// _quitMenuItem
 			// 
-			resources->ApplyResources(this->_quitMenuItem, L"_quitMenuItem");
 			this->_quitMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_quitMenuItem->Name = L"_quitMenuItem";
+			resources->ApplyResources(this->_quitMenuItem, L"_quitMenuItem");
 			this->_quitMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onQuitMenuItemClick);
 			// 
 			// _optionsToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_optionsToolStripMenuItem, L"_optionsToolStripMenuItem");
 			this->_optionsToolStripMenuItem->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
 			this->_optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->_dataBaseToolStripMenuItem,
@@ -229,56 +227,57 @@ namespace AutoMixUI {
 			});
 			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
+			resources->ApplyResources(this->_optionsToolStripMenuItem, L"_optionsToolStripMenuItem");
 			this->_optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
 			// _dataBaseToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_dataBaseToolStripMenuItem, L"_dataBaseToolStripMenuItem");
 			this->_dataBaseToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->_clearDBMenuItem });
 			this->_dataBaseToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_dataBaseToolStripMenuItem->Name = L"_dataBaseToolStripMenuItem";
+			resources->ApplyResources(this->_dataBaseToolStripMenuItem, L"_dataBaseToolStripMenuItem");
 			// 
 			// _clearDBMenuItem
 			// 
-			resources->ApplyResources(this->_clearDBMenuItem, L"_clearDBMenuItem");
 			this->_clearDBMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_clearDBMenuItem->Name = L"_clearDBMenuItem";
+			resources->ApplyResources(this->_clearDBMenuItem, L"_clearDBMenuItem");
 			this->_clearDBMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
 			// _stopMixToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_stopMixToolStripMenuItem, L"_stopMixToolStripMenuItem");
 			this->_stopMixToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_stopMixToolStripMenuItem->Name = L"_stopMixToolStripMenuItem";
+			resources->ApplyResources(this->_stopMixToolStripMenuItem, L"_stopMixToolStripMenuItem");
 			this->_stopMixToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onStopMixToolStripMenuItemClick);
 			// 
 			// _helpToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_helpToolStripMenuItem, L"_helpToolStripMenuItem");
 			this->_helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->_aboutCharacteristicsToolStripMenuItem,
 					this->toolStripSeparator1, this->_aboutMenuItem
 			});
 			this->_helpToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_helpToolStripMenuItem->Name = L"_helpToolStripMenuItem";
+			resources->ApplyResources(this->_helpToolStripMenuItem, L"_helpToolStripMenuItem");
 			// 
 			// _aboutCharacteristicsToolStripMenuItem
 			// 
-			resources->ApplyResources(this->_aboutCharacteristicsToolStripMenuItem, L"_aboutCharacteristicsToolStripMenuItem");
 			this->_aboutCharacteristicsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_aboutCharacteristicsToolStripMenuItem->Name = L"_aboutCharacteristicsToolStripMenuItem";
+			resources->ApplyResources(this->_aboutCharacteristicsToolStripMenuItem, L"_aboutCharacteristicsToolStripMenuItem");
 			this->_aboutCharacteristicsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutCharacteristicsMenuItemClick);
 			// 
 			// toolStripSeparator1
 			// 
-			resources->ApplyResources(this->toolStripSeparator1, L"toolStripSeparator1");
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			resources->ApplyResources(this->toolStripSeparator1, L"toolStripSeparator1");
 			// 
 			// _aboutMenuItem
 			// 
-			resources->ApplyResources(this->_aboutMenuItem, L"_aboutMenuItem");
 			this->_aboutMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_aboutMenuItem->Name = L"_aboutMenuItem";
+			resources->ApplyResources(this->_aboutMenuItem, L"_aboutMenuItem");
 			this->_aboutMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onAboutMenuItemClick);
 			// 
 			// _statusStrip
@@ -291,20 +290,19 @@ namespace AutoMixUI {
 					this->_toolStripCurrentDir
 			});
 			this->_statusStrip->Name = L"_statusStrip";
-			this->_toolTip->SetToolTip(this->_statusStrip, resources->GetString(L"_statusStrip.ToolTip"));
 			// 
 			// _toolStripProgressBar
 			// 
-			resources->ApplyResources(this->_toolStripProgressBar, L"_toolStripProgressBar");
 			this->_toolStripProgressBar->Margin = System::Windows::Forms::Padding(3, 3, 1, 3);
 			this->_toolStripProgressBar->Maximum = 1000;
 			this->_toolStripProgressBar->Name = L"_toolStripProgressBar";
+			resources->ApplyResources(this->_toolStripProgressBar, L"_toolStripProgressBar");
 			// 
 			// _toolStripCurrentDir
 			// 
-			resources->ApplyResources(this->_toolStripCurrentDir, L"_toolStripCurrentDir");
 			this->_toolStripCurrentDir->Margin = System::Windows::Forms::Padding(5, 3, 0, 2);
 			this->_toolStripCurrentDir->Name = L"_toolStripCurrentDir";
+			resources->ApplyResources(this->_toolStripCurrentDir, L"_toolStripCurrentDir");
 			// 
 			// _musicListView
 			// 
@@ -323,7 +321,6 @@ namespace AutoMixUI {
 			this->_musicListView->HeaderStyle = System::Windows::Forms::ColumnHeaderStyle::Nonclickable;
 			this->_musicListView->Name = L"_musicListView";
 			this->_musicListView->OwnerDraw = true;
-			this->_toolTip->SetToolTip(this->_musicListView, resources->GetString(L"_musicListView.ToolTip"));
 			this->_musicListView->UseCompatibleStateImageBehavior = false;
 			this->_musicListView->View = System::Windows::Forms::View::Details;
 			this->_musicListView->DrawColumnHeader += gcnew System::Windows::Forms::DrawListViewColumnHeaderEventHandler(this, &MainForm::musicListView_DrawColumnHeader);
@@ -352,13 +349,12 @@ namespace AutoMixUI {
 			// 
 			// _trackContextMenu
 			// 
-			resources->ApplyResources(this->_trackContextMenu, L"_trackContextMenu");
 			this->_trackContextMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->_deleteTrackToolStrip,
 					this->_selectAllToolStrip
 			});
 			this->_trackContextMenu->Name = L"_listViewcontextMenu";
-			this->_toolTip->SetToolTip(this->_trackContextMenu, resources->GetString(L"_trackContextMenu.ToolTip"));
+			resources->ApplyResources(this->_trackContextMenu, L"_trackContextMenu");
 			this->_trackContextMenu->Opening += gcnew System::ComponentModel::CancelEventHandler(this, &MainForm::onTrackContextMenuOpening);
 			// 
 			// _deleteTrackToolStrip
@@ -370,9 +366,9 @@ namespace AutoMixUI {
 			// 
 			// _selectAllToolStrip
 			// 
-			resources->ApplyResources(this->_selectAllToolStrip, L"_selectAllToolStrip");
 			this->_selectAllToolStrip->ForeColor = System::Drawing::Color::White;
 			this->_selectAllToolStrip->Name = L"_selectAllToolStrip";
+			resources->ApplyResources(this->_selectAllToolStrip, L"_selectAllToolStrip");
 			this->_selectAllToolStrip->Click += gcnew System::EventHandler(this, &MainForm::onSelectAllMenuItemClick);
 			// 
 			// _importButton
@@ -414,7 +410,6 @@ namespace AutoMixUI {
 			resources->ApplyResources(this->_logo, L"_logo");
 			this->_logo->Name = L"_logo";
 			this->_logo->TabStop = false;
-			this->_toolTip->SetToolTip(this->_logo, resources->GetString(L"_logo.ToolTip"));
 			// 
 			// _sortButton
 			// 
@@ -489,14 +484,6 @@ namespace AutoMixUI {
 			this->_skipButton->UseVisualStyleBackColor = false;
 			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButtonClick);
 			// 
-			// _playerBackgroundWorker
-			// 
-			this->_playerBackgroundWorker->WorkerReportsProgress = true;
-			this->_playerBackgroundWorker->WorkerSupportsCancellation = true;
-			this->_playerBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
-			this->_playerBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
-			this->_playerBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
-			// 
 			// panel1
 			// 
 			resources->ApplyResources(this->panel1, L"panel1");
@@ -507,7 +494,6 @@ namespace AutoMixUI {
 			this->panel1->Controls->Add(this->_playerTrackBar);
 			this->panel1->Controls->Add(this->_playerbutton);
 			this->panel1->Name = L"panel1";
-			this->_toolTip->SetToolTip(this->panel1, resources->GetString(L"panel1.ToolTip"));
 			// 
 			// _playerTrackBar
 			// 
@@ -515,7 +501,14 @@ namespace AutoMixUI {
 			this->_playerTrackBar->Maximum = 10000;
 			this->_playerTrackBar->Name = L"_playerTrackBar";
 			this->_playerTrackBar->TickStyle = System::Windows::Forms::TickStyle::None;
-			this->_toolTip->SetToolTip(this->_playerTrackBar, resources->GetString(L"_playerTrackBar.ToolTip"));
+			// 
+			// _playerBackgroundWorker
+			// 
+			this->_playerBackgroundWorker->WorkerReportsProgress = true;
+			this->_playerBackgroundWorker->WorkerSupportsCancellation = true;
+			this->_playerBackgroundWorker->DoWork += gcnew System::ComponentModel::DoWorkEventHandler(this, &MainForm::playerBackgroundWorker_DoWork);
+			this->_playerBackgroundWorker->ProgressChanged += gcnew System::ComponentModel::ProgressChangedEventHandler(this, &MainForm::playerBackgroundWorker_ProgressChanged);
+			this->_playerBackgroundWorker->RunWorkerCompleted += gcnew System::ComponentModel::RunWorkerCompletedEventHandler(this, &MainForm::playerBackgroundWorker_RunWorkerCompleted);
 			// 
 			// _trackBarTimer
 			// 
@@ -538,7 +531,6 @@ namespace AutoMixUI {
 			this->Controls->Add(this->_generateButton);
 			this->MainMenuStrip = this->_menuStrip;
 			this->Name = L"MainForm";
-			this->_toolTip->SetToolTip(this, resources->GetString(L"$this.ToolTip"));
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainForm::onMainFormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
 			this->_menuStrip->ResumeLayout(false);
