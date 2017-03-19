@@ -161,9 +161,17 @@
     <ClInclude Include="ViewWithTrackCollection.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="TextResources.resx" />
+    <EmbeddedResource Include="MainForm.fr.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextResources.fr-FR.resx" />
+    <EmbeddedResource Include="UserDocForm.fr.resx">
+      <DependentUpon>UserDocForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserDocForm.resx">
       <DependentUpon>UserDocForm.h</DependentUpon>
@@ -179,9 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\pause_icon.bmp" />
-    <Image Include="images\pause_icon.png" />
     <Image Include="images\play_icon.bmp" />
-    <Image Include="images\play_icon.png" />
     <Image Include="images\seek_icon.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

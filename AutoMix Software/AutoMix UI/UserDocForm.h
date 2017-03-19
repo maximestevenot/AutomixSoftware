@@ -87,144 +87,82 @@ namespace AutoMixUI {
 			// 
 			// tableLayoutPanel1
 			// 
-			this->tableLayoutPanel1->AutoSize = true;
-			this->tableLayoutPanel1->ColumnCount = 2;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				100)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				107)));
+			resources->ApplyResources(this->tableLayoutPanel1, L"tableLayoutPanel1");
 			this->tableLayoutPanel1->Controls->Add(this->tabControl1, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->okButton, 1, 1);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 0);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 2;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle()));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(772, 455);
-			this->tableLayoutPanel1->TabIndex = 0;
 			// 
 			// tabControl1
 			// 
+			resources->ApplyResources(this->tabControl1, L"tabControl1");
 			this->tableLayoutPanel1->SetColumnSpan(this->tabControl1, 2);
 			this->tabControl1->Controls->Add(this->_bpmTab);
 			this->tabControl1->Controls->Add(this->_keyPage);
-			this->tabControl1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9));
-			this->tabControl1->Location = System::Drawing::Point(3, 3);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(766, 413);
 			this->tabControl1->SizeMode = System::Windows::Forms::TabSizeMode::FillToRight;
-			this->tabControl1->TabIndex = 0;
 			// 
 			// _bpmTab
 			// 
+			resources->ApplyResources(this->_bpmTab, L"_bpmTab");
 			this->_bpmTab->Controls->Add(this->richTextBox1);
-			this->_bpmTab->Location = System::Drawing::Point(4, 24);
 			this->_bpmTab->Name = L"_bpmTab";
-			this->_bpmTab->Padding = System::Windows::Forms::Padding(3);
-			this->_bpmTab->Size = System::Drawing::Size(758, 385);
-			this->_bpmTab->TabIndex = 0;
-			this->_bpmTab->Text = L"BPM";
 			this->_bpmTab->UseVisualStyleBackColor = true;
 			// 
 			// richTextBox1
 			// 
+			resources->ApplyResources(this->richTextBox1, L"richTextBox1");
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::Window;
 			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-			this->richTextBox1->Location = System::Drawing::Point(3, 3);
-			this->richTextBox1->Margin = System::Windows::Forms::Padding(10);
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
 			this->richTextBox1->ShortcutsEnabled = false;
-			this->richTextBox1->Size = System::Drawing::Size(752, 379);
-			this->richTextBox1->TabIndex = 2;
-			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
 			// 
 			// _keyPage
 			// 
-			this->_keyPage->AutoScroll = true;
+			resources->ApplyResources(this->_keyPage, L"_keyPage");
 			this->_keyPage->Controls->Add(this->tableLayoutPanel2);
-			this->_keyPage->Location = System::Drawing::Point(4, 24);
 			this->_keyPage->Name = L"_keyPage";
-			this->_keyPage->Padding = System::Windows::Forms::Padding(3);
-			this->_keyPage->Size = System::Drawing::Size(758, 385);
-			this->_keyPage->TabIndex = 1;
-			this->_keyPage->Text = L"Key";
 			this->_keyPage->UseVisualStyleBackColor = true;
 			// 
 			// tableLayoutPanel2
 			// 
-			this->tableLayoutPanel2->AutoScroll = true;
-			this->tableLayoutPanel2->ColumnCount = 2;
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				50)));
-			this->tableLayoutPanel2->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				50)));
+			resources->ApplyResources(this->tableLayoutPanel2, L"tableLayoutPanel2");
 			this->tableLayoutPanel2->Controls->Add(this->pictureBox1, 0, 0);
 			this->tableLayoutPanel2->Controls->Add(this->_keyDescription, 1, 0);
-			this->tableLayoutPanel2->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->tableLayoutPanel2->Location = System::Drawing::Point(3, 3);
 			this->tableLayoutPanel2->Name = L"tableLayoutPanel2";
-			this->tableLayoutPanel2->RowCount = 1;
-			this->tableLayoutPanel2->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
-			this->tableLayoutPanel2->Size = System::Drawing::Size(752, 379);
-			this->tableLayoutPanel2->TabIndex = 0;
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->Anchor = System::Windows::Forms::AnchorStyles::Left;
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(3, 3);
+			resources->ApplyResources(this->pictureBox1, L"pictureBox1");
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(370, 373);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
 			// 
 			// _keyDescription
 			// 
+			resources->ApplyResources(this->_keyDescription, L"_keyDescription");
 			this->_keyDescription->BackColor = System::Drawing::SystemColors::Window;
 			this->_keyDescription->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			this->_keyDescription->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->_keyDescription->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-			this->_keyDescription->Location = System::Drawing::Point(386, 10);
-			this->_keyDescription->Margin = System::Windows::Forms::Padding(10);
 			this->_keyDescription->Name = L"_keyDescription";
 			this->_keyDescription->ReadOnly = true;
 			this->_keyDescription->ShortcutsEnabled = false;
-			this->_keyDescription->Size = System::Drawing::Size(356, 359);
-			this->_keyDescription->TabIndex = 1;
-			this->_keyDescription->Text = resources->GetString(L"_keyDescription.Text");
 			// 
 			// okButton
 			// 
-			this->okButton->Anchor = System::Windows::Forms::AnchorStyles::None;
-			this->okButton->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->okButton->FlatStyle = System::Windows::Forms::FlatStyle::System;
-			this->okButton->Location = System::Drawing::Point(676, 422);
+			resources->ApplyResources(this->okButton, L"okButton");
 			this->okButton->Name = L"okButton";
-			this->okButton->Size = System::Drawing::Size(84, 30);
-			this->okButton->TabIndex = 1;
-			this->okButton->Text = L"Ok";
 			this->okButton->UseVisualStyleBackColor = true;
 			this->okButton->Click += gcnew System::EventHandler(this, &UserDocForm::onOkButtonClick);
 			// 
 			// UserDocForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(772, 455);
 			this->Controls->Add(this->tableLayoutPanel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"UserDocForm";
-			this->Text = L"Automix Software - Help";
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tabControl1->ResumeLayout(false);
 			this->_bpmTab->ResumeLayout(false);

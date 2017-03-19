@@ -17,6 +17,9 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::IO;
 using namespace System::Threading;
+using namespace System::Globalization;
+using namespace System::Resources;
+using namespace System::Reflection;
 using namespace AutoMixDataManagement;
 
 namespace AutoMixUI {
@@ -24,22 +27,24 @@ namespace AutoMixUI {
 	MainForm::MainForm(void)
 	{
 		InitializeComponent();
+
 		_presenter = gcnew Presenter(this);
+		_resourceManager = gcnew Resources::ResourceManager(L"AutoMixUI.TextResources", Assembly::GetExecutingAssembly());
 
 		_menuStrip->RenderMode = ToolStripRenderMode::Professional;
 		_menuStrip->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 		_trackContextMenu->RenderMode = ToolStripRenderMode::Professional;
 		_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
-
 		_insertionLineColor = Color::LightGray;
+
 		_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
 		_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
-
 		_cancelMenuItem->Enabled = false;
 		_generateButton->Enabled = false;
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
 		_toolStripProgressBar->Visible = false;
+
 		AnOperationRunning = false;
 	}
 
@@ -55,7 +60,7 @@ namespace AutoMixUI {
 	{
 		if (!_playIcon)
 		{
-			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Assembly^ myAssembly = Assembly::GetExecutingAssembly();
 			Stream^ myStream = myAssembly->GetManifestResourceStream("play_icon.bmp");
 			_playIcon = gcnew Bitmap(myStream);
 		}
@@ -66,7 +71,7 @@ namespace AutoMixUI {
 	{
 		if (!_pauseIcon)
 		{
-			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Assembly^ myAssembly = Assembly::GetExecutingAssembly();
 			Stream^ imageStream = myAssembly->GetManifestResourceStream("pause_icon.bmp");
 			_pauseIcon = gcnew Bitmap(imageStream);
 		}
@@ -77,7 +82,7 @@ namespace AutoMixUI {
 	{
 		if (!_seekIcon)
 		{
-			System::Reflection::Assembly^ myAssembly = System::Reflection::Assembly::GetExecutingAssembly();
+			Assembly^ myAssembly = Assembly::GetExecutingAssembly();
 			Stream^ imageStream = myAssembly->GetManifestResourceStream("seek_icon.bmp");
 			_seekIcon = gcnew Bitmap(imageStream);
 		}
@@ -162,7 +167,7 @@ namespace AutoMixUI {
 		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
 		msg += "Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT,\nLouis CARLIER, Pierre GABON";
 
-		String^ caption = "About";
+		String^ caption = _resourceManager->GetString("about_caption");
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
@@ -566,7 +571,7 @@ namespace AutoMixUI {
 	System::Void MainForm::loadTracks(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		OpenFileDialog^ dialog = gcnew OpenFileDialog();
-		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+		dialog->Filter = _resourceManager->GetString("dialog_filters");
 		dialog->FilterIndex = 1;
 		dialog->Multiselect = true;
 
@@ -580,7 +585,7 @@ namespace AutoMixUI {
 	System::Void MainForm::exportTrackList(System::Object^  sender, System::EventArgs^  e)
 	{
 		SaveFileDialog^ dialog = gcnew SaveFileDialog;
-		dialog->Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+		dialog->Filter = _resourceManager->GetString("dialog_filters");
 		dialog->FilterIndex = 1;
 		dialog->FileName = "Auto Mix";
 		dialog->DefaultExt = "mp3";
@@ -632,22 +637,22 @@ namespace AutoMixUI {
 
 	System::Void MainForm::showCancelDialog()
 	{
-		String^ msg = "Operation was canceled";
-		String^ caption = "Cancel";
+		String^ msg = _resourceManager->GetString("cancel_msg");
+		String^ caption = _resourceManager->GetString("cancel_caption");
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
 	}
 
 	System::Void MainForm::showErrorDialog(String^ errorMessage)
 	{
-		String^ msg = String::Format("An error occurred: {0}", errorMessage);
-		String^ caption = "Error";
+		String^ msg = String::Format(_resourceManager->GetString("error_msg"), errorMessage);
+		String^ caption = _resourceManager->GetString("error_caption");
 		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
 
 	bool MainForm::showExitDialog()
 	{
-		String^ msg = "Are you sure you want to quit ?";
-		String^ caption = "Exit";
+		String^ msg = _resourceManager->GetString("exit_msg");
+		String^ caption = _resourceManager->GetString("exit_caption");;
 		return MessageBox::Show(msg, caption, MessageBoxButtons::YesNo, MessageBoxIcon::Question) == ::DialogResult::Yes;
 	}
 
