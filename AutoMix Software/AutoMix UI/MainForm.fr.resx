@@ -118,18 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Fichier</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Aide</value>
-  </data>
   <data name="_importMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
@@ -151,17 +139,23 @@
   <data name="_quitMenuItem.Text" xml:space="preserve">
     <value>&amp;Quitter</value>
   </data>
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Fichier</value>
+  </data>
+  <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 22</value>
+  </data>
+  <data name="_clearDBMenuItem.Text" xml:space="preserve">
+    <value>&amp;Nettoyer</value>
+  </data>
   <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
   </data>
   <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Base de données</value>
-  </data>
-  <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="_clearDBMenuItem.Text" xml:space="preserve">
-    <value>&amp;Nettoyer</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
@@ -182,7 +176,19 @@
     <value>167, 22</value>
   </data>
   <data name="_aboutMenuItem.Text" xml:space="preserve">
-    <value>A &amp;propos...</value>
+    <value>À &amp;propos...</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Aide</value>
+  </data>
+  <data name="_menuStrip.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_statusStrip.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="collectionName.Text" xml:space="preserve">
     <value>Nom</value>
@@ -192,9 +198,6 @@
   </data>
   <data name="collectionKey.Text" xml:space="preserve">
     <value>Clé</value>
-  </data>
-  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 48</value>
   </data>
   <data name="_deleteTrackToolStrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -766,6 +769,15 @@
   <data name="_selectAllToolStrip.Text" xml:space="preserve">
     <value>Selectionner tout</value>
   </data>
+  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 48</value>
+  </data>
+  <data name="_trackContextMenu.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="_musicListView.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="_importButton.Text" xml:space="preserve">
     <value>Importer des pistes</value>
   </data>
@@ -1174,6 +1186,9 @@
         9B//8f8DfttDtdGKof8AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="_logo.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="_sortButton.Text" xml:space="preserve">
     <value>Trier</value>
   </data>
@@ -1182,6 +1197,12 @@
   </data>
   <data name="_playerbutton.ToolTip" xml:space="preserve">
     <value>Cliquer pour prévisualiser le mix</value>
+  </data>
+  <data name="_playerTrackBar.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panel1.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1358,5 +1379,8 @@
         5NCEVFykmGqrUEM1VRRRwG62s5H1bGIb+ZT55XRoAN3XAAgQkAhG27LIpjk5tKMNrcilBU1pShMak046
         qThwAdUIVVRQQTnFFFFEIbvZzQ62UcA+Cimpe3N3A8p39P8Bwvza7fR5+yMAAAAASUVORK5CYII=
 </value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>
