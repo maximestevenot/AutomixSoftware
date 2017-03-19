@@ -34,7 +34,14 @@ namespace AutoMixUI {
 			view->update(_trackCollection);
 		}
 	}
-
+	bool Presenter::IsTrackCollectionFilled::get()
+	{
+		if (!_trackCollection)
+		{
+			return false;
+		}
+		return _trackCollection->Count >= 1;
+	}
 	TrackCollection^ Presenter::sortTrackCollectionWithGeneticAlgorithm(ComponentModel::BackgroundWorker^ bw)
 	{
 		if (_trackCollection->Count > 1)

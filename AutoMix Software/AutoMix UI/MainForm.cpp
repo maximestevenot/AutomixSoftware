@@ -116,7 +116,13 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onQuitMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		if (showExitDialog())
+		bool exitResult = true;
+
+		if (_presenter->IsTrackCollectionFilled)
+		{
+			exitResult = showExitDialog();
+		}
+		if (exitResult)
 		{
 			exitApplication();
 		}
@@ -126,7 +132,13 @@ namespace AutoMixUI {
 	{
 		if (e->CloseReason == CloseReason::UserClosing)
 		{
-			if (showExitDialog())
+			bool exitResult = true;
+
+			if (_presenter->IsTrackCollectionFilled)
+			{
+				exitResult = showExitDialog();
+			}
+			if (exitResult)
 			{
 				exitApplication();
 			}

@@ -18,6 +18,8 @@ namespace AutoMixUI {
 		Presenter(ViewWithTrackCollection^);
 		void notify();
 
+		property bool IsTrackCollectionFilled { bool get(); }
+
 		TrackCollection^ loadTracks(System::ComponentModel::BackgroundWorker^, array<System::String^>^);
 		void removeTracks(System::Collections::Generic::List<System::String^>^);
 		void Presenter::moveTrack(int, System::String^);
@@ -39,7 +41,6 @@ namespace AutoMixUI {
 		void retrieveControlOnCollection();
 
 		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
-
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
 		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
 		AutoMixAI::SortAlgorithm^ _sortAlgorithm;
