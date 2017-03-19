@@ -184,12 +184,6 @@
   <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Aide</value>
   </data>
-  <data name="_menuStrip.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_statusStrip.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="collectionName.Text" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -772,12 +766,6 @@
   <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>207, 48</value>
   </data>
-  <data name="_trackContextMenu.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="_musicListView.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="_importButton.Text" xml:space="preserve">
     <value>Importer des pistes</value>
   </data>
@@ -1186,9 +1174,6 @@
         9B//8f8DfttDtdGKof8AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="_logo.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="_sortButton.Text" xml:space="preserve">
     <value>Trier</value>
   </data>
@@ -1197,12 +1182,6 @@
   </data>
   <data name="_playerbutton.ToolTip" xml:space="preserve">
     <value>Cliquer pour prévisualiser le mix</value>
-  </data>
-  <data name="_playerTrackBar.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="panel1.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1379,8 +1358,5 @@
         5NCEVFykmGqrUEM1VRRRwG62s5H1bGIb+ZT55XRoAN3XAAgQkAhG27LIpjk5tKMNrcilBU1pShMak046
         qThwAdUIVVRQQTnFFFFEIbvZzQ62UcA+Cimpe3N3A8p39P8Bwvza7fR5+yMAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
 </root>
