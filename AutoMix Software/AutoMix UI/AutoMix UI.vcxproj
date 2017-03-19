@@ -185,9 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\pause_icon.bmp" />
-    <Image Include="images\pause_icon.png" />
     <Image Include="images\play_icon.bmp" />
-    <Image Include="images\play_icon.png" />
     <Image Include="images\seek_icon.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
