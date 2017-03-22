@@ -14,19 +14,17 @@ namespace AutoMixDataManagement {
 	public ref class Transition
 	{
 	public:
+		
 		Transition(TrackCollection^ trackCollection);
 		void makeTransition();
 
 	private:
-		void fadeIn(Track^ track);
-		void fadeOut(Track^ track);
-		void fadeInOut(Track^ track);
-
-		NAudio::Wave::AudioFileReader^ _reader;
-		TrackCollection^ _trackList;
-		NAudio::Wave::SampleProviders::FadeInOutSampleProvider^ _finalWave;
-		NAudio::Wave::WaveStream^ _stream;
+		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
-		int _time;
+		array<float>^ _savedOverlay;
+		TrackCollection^ _trackList;
+
+		void fadeInOut(Track^ track);
+		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);		
 	};
 }
