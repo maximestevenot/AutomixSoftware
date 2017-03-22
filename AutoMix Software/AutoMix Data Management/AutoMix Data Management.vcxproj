@@ -171,11 +171,11 @@
     <ClInclude Include="MP3Playing.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SimpleConcatenation.h" />
+    <ClInclude Include="SmoothMix.h" />
     <ClInclude Include="Stdafx.h" />
     <ClInclude Include="Track.h" />
     <ClInclude Include="TrackCollection.h" />
     <ClInclude Include="TracksComparison.h" />
-    <ClInclude Include="Transition.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +199,7 @@
     <ClCompile Include="ExecutableExtraction.cpp" />
     <ClCompile Include="MP3Playing.cpp" />
     <ClCompile Include="SimpleConcatenation.cpp" />
+    <ClCompile Include="SmoothMix.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -208,7 +209,6 @@
     <ClCompile Include="Track.cpp" />
     <ClCompile Include="TrackCollection.cpp" />
     <ClCompile Include="TracksComparison.cpp" />
-    <ClCompile Include="Transition.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>

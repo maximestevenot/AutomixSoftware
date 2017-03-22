@@ -39,11 +39,19 @@ namespace AutoMixDataManagement {
 
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
-		ID3TagData^ tag = gcnew ID3TagData(); //TODO add gestion of metadata
+		ID3TagData^ tag = gcnew ID3TagData();
+		tag->Title = outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1);
+		tag->Artist = Environment::UserName;
+		tag->Album = "Automix Software Mixes";
+		tag->Year = DateTime::Now.Year.ToString();
+		tag->Comment = "Created with Automix Software";
+		tag->Genre = "Compilation";
 
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
 		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
 		reader->CopyTo(writer);
+		writer->Close();
+		reader->Close();
 	}
 
 	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
@@ -88,7 +96,6 @@ namespace AutoMixDataManagement {
 
 	Id3v2Tag^ AudioIO::CreateMp3Tag(String^ outputFile)
 	{
-
 		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
 		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
 		tags->Add("TPE1", Environment::UserName);
