@@ -166,7 +166,7 @@
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="_deleteTrackToolStrip.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Del</value>
+    
   </data>
   <data name="&gt;&gt;_generateButton.Name" xml:space="preserve">
     <value>_generateButton</value>

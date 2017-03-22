@@ -123,7 +123,7 @@ namespace AutoMixUI {
 
 		if (_trackCollection->Count >= 1)
 		{
-			//createTransition(); BUGGED
+			createTransition(); //BUGGED
 			_trackCollection->exportToMP3(bw, destinationFile);
 		}
 	}
