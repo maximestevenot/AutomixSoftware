@@ -19,10 +19,25 @@ using namespace System::IO;
 
 namespace AutoMixDataManagement {
 
-	SmoothMix::SmoothMix()
+	SmoothMix::SmoothMix() : SmoothMix(10) {}
+
+	SmoothMix::SmoothMix(int transitionDuration)
 	{
 		WAVE_FORMAT = WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+		_samplesPerSecond = WAVE_FORMAT->AverageBytesPerSecond / 4;
 		_tempPath = System::IO::Path::GetTempPath() + "AutomixSoftware/" + "AutoMix.wav";
+		TransitionDuration = transitionDuration;
+	}
+
+	int SmoothMix::TransitionDuration::get()
+	{
+		return _transitionDuration;
+	}
+
+	void SmoothMix::TransitionDuration::set(int value)
+	{
+		_transitionDuration = value;
+		_overlaySize = value * WAVE_FORMAT->AverageBytesPerSecond / 4;;
 	}
 
 	void SmoothMix::exportMix(ComponentModel::BackgroundWorker ^ bw, TrackCollection ^ collection, String ^ outputFile)
@@ -57,28 +72,27 @@ namespace AutoMixDataManagement {
 		Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
 
 		FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
-		int samplesPerSecond = WAVE_FORMAT->AverageBytesPerSecond / 4;
-
-		long bufferSize = fileReader->Length / 2;
+		
+		long bufferSize = fileReader->Length / 2 - track->getLastFadeOutDuration() * _samplesPerSecond;
 		array<float>^ buffer = gcnew array<float>(bufferSize);
 
-		fade->BeginFadeIn(10000);
-		fade->Read(buffer, 0, bufferSize - 10 * samplesPerSecond);
-		fade->BeginFadeOut(10000);
-		fade->Read(buffer, bufferSize - 10 * samplesPerSecond, bufferSize);
+		fade->BeginFadeIn(_transitionDuration * 1000);
+		fade->Read(buffer, 0, bufferSize - _overlaySize);
+		fade->BeginFadeOut(_transitionDuration * 1000);
+		fade->Read(buffer, bufferSize - _overlaySize, _overlaySize);
 
 		if (_savedOverlay != nullptr)
 		{
 			buffer = applyOverlay(buffer, _savedOverlay);
 		}
 
-		_waveFileWriter->WriteSamples(buffer, 0, bufferSize - 10 * samplesPerSecond);
+		_waveFileWriter->WriteSamples(buffer, 0, bufferSize - _overlaySize);
 		_waveFileWriter->Flush();
 
-		_savedOverlay = gcnew array<float>(10 * samplesPerSecond);
-		for (int i = 0; i < (10 * samplesPerSecond); i++)
+		_savedOverlay = gcnew array<float>(_overlaySize);
+		for (int i = 0; i < _overlaySize; i++)
 		{
-			_savedOverlay[i] = buffer[(bufferSize - 10 * samplesPerSecond) + i];
+			_savedOverlay[i] = buffer[(bufferSize - _overlaySize) + i];
 		}
 	}
 

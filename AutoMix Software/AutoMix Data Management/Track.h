@@ -35,6 +35,7 @@ namespace AutoMixDataManagement {
 		property unsigned int Id { unsigned int get(); }
 
 		System::String^ displayDuration();
+		double getLastFadeOutDuration();
 
 	private:
 		static unsigned int TRACKS_COUNT = 0;

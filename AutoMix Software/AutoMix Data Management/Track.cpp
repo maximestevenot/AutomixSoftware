@@ -98,4 +98,24 @@ namespace AutoMixDataManagement {
 		}
 		return durationString;
 	}
+
+	double Track::getLastFadeOutDuration()
+	{
+		double time = Duration;
+
+		if (FadeOuts->Length >= 2)
+		{
+			time -= FadeOuts[FadeOuts->Length - 2];
+		}
+		else if (FadeOuts->Length == 1)
+		{
+			time -= FadeOuts[0];
+		}
+		else
+		{
+			time = 0;
+		}
+
+		return time / 1000;
+	}
 }

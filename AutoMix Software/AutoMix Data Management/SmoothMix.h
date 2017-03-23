@@ -16,13 +16,20 @@ namespace AutoMixDataManagement {
 	{
 	public:
 		SmoothMix();
+		SmoothMix(int);
+
 		void exportMix(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ collection, System::String^ outputFile) override;
+		property int TransitionDuration { int get(); void set(int); }
 
 	private:
 		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
 		System::String^ _tempPath;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
+
+		int _samplesPerSecond;
+		int _transitionDuration;
+		int _overlaySize;
 
 		void fadeInOut(Track^ track);
 		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
