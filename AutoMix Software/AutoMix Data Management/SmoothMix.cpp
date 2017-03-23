@@ -46,6 +46,7 @@ namespace AutoMixDataManagement {
 		_waveFileWriter = gcnew WaveFileWriter(_tempPath, WAVE_FORMAT);
 
 		int count = 1;
+		int memoryCount = 0;
 		for each (Track^ track in collection)
 		{
 			if (bw->CancellationPending)
@@ -54,6 +55,16 @@ namespace AutoMixDataManagement {
 			}
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 1));
 			fadeInOut(track);
+			memoryCount++;
+			if (memoryCount > 9) {
+				memoryCount = 0;
+				//TODO
+				//exporter en mp3
+				//sauvegarder le chemin du mp3 dans un tableau
+				//supprimer le wav
+				//creer un nouveau wav
+			}
+			
 		}
 
 		_waveFileWriter->WriteSamples(_savedOverlay, 0, _savedOverlay->Length);
