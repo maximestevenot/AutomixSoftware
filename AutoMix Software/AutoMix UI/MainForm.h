@@ -498,8 +498,8 @@ namespace AutoMixUI {
 			// panel1
 			// 
 			resources->ApplyResources(this->panel1, L"panel1");
-			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(69)),
-				static_cast<System::Int32>(static_cast<System::Byte>(69)));
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(53)), static_cast<System::Int32>(static_cast<System::Byte>(57)),
+				static_cast<System::Int32>(static_cast<System::Byte>(57)));
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->panel1->Controls->Add(this->_skipButton);
 			this->panel1->Controls->Add(this->_playerTrackBar);
