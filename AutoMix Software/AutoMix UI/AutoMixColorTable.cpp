@@ -15,23 +15,22 @@ namespace AutoMixUI {
 
 	Color AutoMixColorTable::MainColor::get()
 	{
-		return Color::FromArgb(227, 0, 100);
+		return Color::FromArgb(163, 38, 56);
 	}
 
 	Color AutoMixColorTable::SecondColor::get()
 	{
-		return Color::FromArgb(62, 48, 130);
+		return Color::FromArgb(214, 28, 56);
 	}
 
 	Color AutoMixColorTable::DisabledColor::get()
 	{
-		return Color::FromArgb(186, 0, 101);
+		return Color::FromArgb(171, 57, 74);
 	}
-
 
 	Color AutoMixColorTable::BackgroundColor::get()
 	{
-		return Color::FromArgb(35, 35, 35);
+		return Color::FromArgb(64,69,69);
 	}
 
 	Color AutoMixColorTable::ToolStripBorder::get()
