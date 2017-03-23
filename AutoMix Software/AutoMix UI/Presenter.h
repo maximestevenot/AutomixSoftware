@@ -35,8 +35,6 @@ namespace AutoMixUI {
 		__int64 getPosition();
 		__int64 getLength();
 
-		void createTransition();
-
 	private:
 		void retrieveControlOnCollection();
 
