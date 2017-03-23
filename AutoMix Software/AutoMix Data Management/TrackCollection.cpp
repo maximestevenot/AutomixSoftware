@@ -10,6 +10,7 @@
 #include "IExportation.h"
 #include "TrackCollection.h"
 #include "SimpleConcatenation.h"
+#include "SmoothMix.h"
 #include "AudioIO.h"
 
 namespace AutoMixDataManagement {
@@ -100,7 +101,7 @@ namespace AutoMixDataManagement {
 
 	void TrackCollection::exportToMP3(System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
 	{
-		IExportation^ exportEngine = gcnew SimpleConcatenation();
+		IExportation^ exportEngine = gcnew SmoothMix();
 		exportEngine->exportMix(bw, this, outputFile);
 	}
 

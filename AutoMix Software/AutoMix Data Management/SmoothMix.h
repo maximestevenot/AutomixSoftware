@@ -7,26 +7,25 @@
 // You should have received a copy of the License along with this program.
 
 #pragma once
-#include "TrackCollection.h"
+
+#include "AutoMixDataManagement.h"
 
 namespace AutoMixDataManagement {
 
-	public ref class Transition
+	public ref class SmoothMix : IExportation
 	{
 	public:
-		Transition(TrackCollection^ trackCollection);
-		void makeTransition();
+		SmoothMix();
+		void exportMix(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ collection, System::String^ outputFile) override;
 
 	private:
-		void fadeIn(Track^ track);
-		void fadeOut(Track^ track);
-		void fadeInOut(Track^ track);
-
-		NAudio::Wave::AudioFileReader^ _reader;
-		TrackCollection^ _trackList;
-		NAudio::Wave::SampleProviders::FadeInOutSampleProvider^ _finalWave;
-		NAudio::Wave::WaveStream^ _stream;
+		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
+		System::String^ _tempPath;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
-		int _time;
+		array<float>^ _savedOverlay;
+
+		void fadeInOut(Track^ track);
+		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
 	};
+
 }

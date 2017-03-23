@@ -21,7 +21,6 @@ namespace AutoMixDataManagement {
 
 	void SimpleConcatenation::exportMix(System::ComponentModel::BackgroundWorker ^ bw, TrackCollection ^ collection, System::String^ outputFile)
 	{
-		List<String^>^ filesList = gcnew List<String^>();
 		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 		int count = 1;
 
