@@ -864,9 +864,6 @@
         j6T8gsG3isOeQqaUNWv+P5aPu1Nu1Tg1AAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="_deleteTrackToolStrip.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Del</value>
-  </data>
   <data name="_deleteTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
   </data>
@@ -883,7 +880,7 @@
     <value>Select All</value>
   </data>
   <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 48</value>
+    <value>165, 70</value>
   </data>
   <data name="&gt;&gt;_trackContextMenu.Name" xml:space="preserve">
     <value>_trackContextMenu</value>
