@@ -60,12 +60,26 @@ namespace AutoMixDataManagement {
 		int samplesPerSecond = WAVE_FORMAT->AverageBytesPerSecond / 4;
 
 		long bufferSize = fileReader->Length / 2;
+		System::Diagnostics::Debug::WriteLine("avant reduction " + bufferSize);
+		
+		
+		
+		
+		bufferSize -= track->getLastFadeOutDuration() * samplesPerSecond;
+
+		System::Diagnostics::Debug::WriteLine(bufferSize);/*
+		System::Diagnostics::Debug::WriteLine(track->getLastFadeOutTime()); */
+		System::Diagnostics::Debug::WriteLine(bufferSize - 10 * samplesPerSecond);
+		
+		
+		
+	
 		array<float>^ buffer = gcnew array<float>(bufferSize);
 
 		fade->BeginFadeIn(10000);
 		fade->Read(buffer, 0, bufferSize - 10 * samplesPerSecond);
 		fade->BeginFadeOut(10000);
-		fade->Read(buffer, bufferSize - 10 * samplesPerSecond, bufferSize);
+		fade->Read(buffer, bufferSize - 10 * samplesPerSecond, 10 * samplesPerSecond);
 
 		if (_savedOverlay != nullptr)
 		{
