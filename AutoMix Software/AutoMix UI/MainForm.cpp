@@ -37,8 +37,8 @@ namespace AutoMixUI {
 		_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 		_insertionLineColor = Color::LightGray;
 
-		_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
-		_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
+		_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
+		_skipButton->Image = gcnew Bitmap(SeekIcon, 70, 70);
 		_cancelMenuItem->Enabled = false;
 		_generateButton->Enabled = false;
 		_sortButton->Enabled = false;
@@ -438,11 +438,11 @@ namespace AutoMixUI {
 
 		if (!_isPlayerPlaying)
 		{
-			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 70, 70);
 		}
 		else
 		{
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}
@@ -535,7 +535,7 @@ namespace AutoMixUI {
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
 		}
 	}
 
