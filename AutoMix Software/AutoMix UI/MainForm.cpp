@@ -37,12 +37,13 @@ namespace AutoMixUI {
 		_trackContextMenu->Renderer = gcnew ToolStripProfessionalRenderer(gcnew AutoMixColorTable());
 		_insertionLineColor = Color::LightGray;
 
-		_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
-		_skipButton->Image = gcnew Bitmap(SeekIcon, 60, 60);
+		_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
+		_skipButton->Image = gcnew Bitmap(SeekIcon, 70, 70);
 		_cancelMenuItem->Enabled = false;
 		_generateButton->Enabled = false;
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
+		_skipButton->Enabled = false;
 		_toolStripProgressBar->Visible = false;
 
 		AnOperationRunning = false;
@@ -437,11 +438,11 @@ namespace AutoMixUI {
 
 		if (!_isPlayerPlaying)
 		{
-			_playerbutton->Image = gcnew Bitmap(PauseIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PauseIcon, 70, 70);
 		}
 		else
 		{
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
 		}
 		_playerBackgroundWorker->RunWorkerAsync();
 	}
@@ -534,7 +535,7 @@ namespace AutoMixUI {
 			_presenter->stopMix();
 			_isPlayerPlaying = false;
 			_playerExists = false;
-			_playerbutton->Image = gcnew Bitmap(PlayIcon, 60, 60);
+			_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
 		}
 	}
 
@@ -543,11 +544,11 @@ namespace AutoMixUI {
 		Button^ modifiedButton = (Button^)sender;
 		if (!modifiedButton->Enabled)
 		{
-			modifiedButton->BackColor = Color::FromArgb(100, 0, 100);
+			modifiedButton->BackColor = AutoMixColorTable::DisabledColor; 
 		}
 		else
 		{
-			modifiedButton->BackColor = Color::DarkViolet;
+			modifiedButton->BackColor = AutoMixColorTable::MainColor;
 		}
 	}
 
@@ -555,7 +556,7 @@ namespace AutoMixUI {
 	{
 		if (e->Item->Selected)
 		{
-			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SecondColor), e->Bounds);
 		}
 	}
 
@@ -569,7 +570,7 @@ namespace AutoMixUI {
 	{
 		if (e->Item->Selected)
 		{
-			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SelectionColor), e->Bounds);
+			e->Graphics->FillRectangle(gcnew SolidBrush(AutoMixColorTable::SecondColor), e->Bounds);
 		}
 		e->DrawText(TextFormatFlags::TextBoxControl);
 	}
@@ -620,6 +621,7 @@ namespace AutoMixUI {
 		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
+		_skipButton->Enabled = false;
 
 		_importMenuItem->Enabled = false;
 		_optionsToolStripMenuItem->Enabled = false;
@@ -638,6 +640,7 @@ namespace AutoMixUI {
 		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
 		_playerbutton->Enabled = true;
+		_skipButton->Enabled = true;
 
 		_importMenuItem->Enabled = true;
 		_optionsToolStripMenuItem->Enabled = true;

@@ -7,8 +7,10 @@ namespace AutoMixUI {
 	public:
 		AutoMixColorTable();
 		
-		static property System::Drawing::Color SelectionColor { System::Drawing::Color get(); }
-		static property System::Drawing::Color BackGroundColor { System::Drawing::Color get(); }
+		static property System::Drawing::Color MainColor { System::Drawing::Color get(); }
+		static property System::Drawing::Color DisabledColor { System::Drawing::Color get(); }
+		static property System::Drawing::Color SecondColor { System::Drawing::Color get(); }
+		static property System::Drawing::Color BackgroundColor { System::Drawing::Color get(); }
 
 		property System::Drawing::Color ToolStripBorder { virtual System::Drawing::Color get() override; }
 		property System::Drawing::Color ToolStripDropDownBackground { virtual System::Drawing::Color get() override; }
