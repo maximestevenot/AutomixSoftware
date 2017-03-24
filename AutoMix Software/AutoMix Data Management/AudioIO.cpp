@@ -40,6 +40,8 @@ namespace AutoMixDataManagement {
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
 		ID3TagData^ tag = gcnew ID3TagData();
+		System::Diagnostics::Debug::WriteLine("input" + inputFile);
+		System::Diagnostics::Debug::WriteLine("output" + outputFile);
 		tag->Title = outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1);
 		tag->Artist = Environment::UserName;
 		tag->Album = "Automix Software Mixes";

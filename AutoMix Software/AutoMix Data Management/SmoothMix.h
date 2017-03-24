@@ -7,7 +7,6 @@
 // You should have received a copy of the License along with this program.
 
 #pragma once
-
 #include "AutoMixDataManagement.h"
 
 namespace AutoMixDataManagement {
@@ -24,6 +23,8 @@ namespace AutoMixDataManagement {
 	private:
 		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
 		System::String^ _tempPath;
+		System::String^ _tempWav;
+		System::Collections::Generic::List <System::String^>^ _tempFileList;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
 

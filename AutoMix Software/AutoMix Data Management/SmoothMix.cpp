@@ -16,6 +16,7 @@ using namespace Wave;
 using namespace SampleProviders;
 using namespace System;
 using namespace System::IO;
+using namespace System::Collections::Generic;
 
 namespace AutoMixDataManagement {
 
@@ -25,8 +26,10 @@ namespace AutoMixDataManagement {
 	{
 		WAVE_FORMAT = WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
 		_samplesPerSecond = WAVE_FORMAT->AverageBytesPerSecond / 4;
-		_tempPath = System::IO::Path::GetTempPath() + "AutomixSoftware/" + "AutoMix.wav";
+		_tempPath = System::IO::Path::GetTempPath() + "AutomixSoftware/";
+		_tempWav = _tempPath + "AutoMix.wav";
 		TransitionDuration = transitionDuration;
+		_tempFileList = gcnew List<String^>();
 	}
 
 	int SmoothMix::TransitionDuration::get()
@@ -43,37 +46,88 @@ namespace AutoMixDataManagement {
 	void SmoothMix::exportMix(ComponentModel::BackgroundWorker ^ bw, TrackCollection ^ collection, String ^ outputFile)
 	{
 		_savedOverlay = nullptr;
-		_waveFileWriter = gcnew WaveFileWriter(_tempPath, WAVE_FORMAT);
+		_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
 
 		int count = 1;
-		int memoryCount = 0;
+		int finalFileDuration = 0;
 		for each (Track^ track in collection)
 		{
+			finalFileDuration += track->Duration;
+			if (finalFileDuration >30000) {
+				finalFileDuration = track->Duration;
+				//TODO
+				
+				//sauvegarder le chemin du mp3 dans un tableau
+				_tempFileList->Add(_tempPath + (_tempFileList->Count+1) +".mp3");
+				_waveFileWriter->Flush();
+				_waveFileWriter->Close();
+				//exporter en mp3
+				AudioIO::WavToMp3(_tempWav, _tempPath + (_tempFileList->Count) + ".mp3");
+				
+				try
+				{
+					//supprimer le wav
+					System::IO::File::Delete(_tempWav);
+					//creer un nouveau
+					_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
+				}
+				catch (System::IO::IOException^ e)
+				{
+					Console::WriteLine(e->Message);
+					return;
+				}
+
+				
+			}
 			if (bw->CancellationPending)
 			{
 				break;
 			}
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 1));
 			fadeInOut(track);
-			memoryCount++;
-			if (memoryCount > 9) {
-				memoryCount = 0;
-				//TODO
-				//exporter en mp3
-				//sauvegarder le chemin du mp3 dans un tableau
-				//supprimer le wav
-				//creer un nouveau wav
-			}
+			
 			
 		}
 
 		_waveFileWriter->WriteSamples(_savedOverlay, 0, _savedOverlay->Length);
 		_waveFileWriter->Flush();
 		_waveFileWriter->Close();
+		
 
 		if (!bw->CancellationPending)
 		{
-			AudioIO::WavToMp3(_tempPath, outputFile);
+			//Reconstruire le MP3 final
+			
+
+			Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
+			int count = 1;
+
+			Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
+			outputStream->Write(tag->RawData, 0, tag->RawData->Length);
+
+			for each (auto path in _tempFileList)
+			{
+				if (bw->CancellationPending)
+				{
+					break;
+				}
+				Mp3FileReader^ reader = gcnew Mp3FileReader(path);
+				Mp3Frame^ frame;
+				//TODO virer la putain d'en tete pour les musiques suivantes !!
+				//SALE !!
+				/*for (int i = 0; i < 50000;  i++) {
+					reader->ReadNextFrame();
+				}*/
+				while ((frame = reader->ReadNextFrame()) != nullptr)
+				{					
+						outputStream->Write(frame->RawData, 0, frame->RawData->Length);
+
+				}
+			}
+			outputStream->Close();
+
+
+
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 1));
 		}
 	}
