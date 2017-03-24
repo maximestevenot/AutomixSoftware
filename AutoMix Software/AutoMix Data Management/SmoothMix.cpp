@@ -50,25 +50,23 @@ namespace AutoMixDataManagement {
 
 		int count = 1;
 		int finalFileDuration = 0;
+
 		for each (Track^ track in collection)
 		{
 			finalFileDuration += track->Duration;
-			if (finalFileDuration >30000) {
+
+			if (finalFileDuration > 30000) //TODO put the correct value 
+			{
 				finalFileDuration = track->Duration;
-				//TODO
-				
-				//sauvegarder le chemin du mp3 dans un tableau
-				_tempFileList->Add(_tempPath + (_tempFileList->Count+1) +".mp3");
+
 				_waveFileWriter->Flush();
 				_waveFileWriter->Close();
-				//exporter en mp3
+				_tempFileList->Add(_tempPath + (_tempFileList->Count + 1) + ".mp3");
 				AudioIO::WavToMp3(_tempWav, _tempPath + (_tempFileList->Count) + ".mp3");
-				
+
 				try
 				{
-					//supprimer le wav
 					System::IO::File::Delete(_tempWav);
-					//creer un nouveau
 					_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
 				}
 				catch (System::IO::IOException^ e)
@@ -76,59 +74,39 @@ namespace AutoMixDataManagement {
 					Console::WriteLine(e->Message);
 					return;
 				}
+			}
 
-				
-			}
-			if (bw->CancellationPending)
-			{
-				break;
-			}
-			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 1));
 			fadeInOut(track);
-			
-			
+
+			bw->ReportProgress((int)(1000 * count++) / (collection->Count)); //TODO smooth that
 		}
 
 		_waveFileWriter->WriteSamples(_savedOverlay, 0, _savedOverlay->Length);
 		_waveFileWriter->Flush();
 		_waveFileWriter->Close();
-		
+		_tempFileList->Add(_tempPath + (_tempFileList->Count + 1) + ".mp3");
+		AudioIO::WavToMp3(_tempWav, _tempPath + (_tempFileList->Count) + ".mp3");
 
 		if (!bw->CancellationPending)
 		{
 			//Reconstruire le MP3 final
-			
 
 			Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
-			int count = 1;
 
 			Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
 			outputStream->Write(tag->RawData, 0, tag->RawData->Length);
 
 			for each (auto path in _tempFileList)
 			{
-				if (bw->CancellationPending)
-				{
-					break;
-				}
 				Mp3FileReader^ reader = gcnew Mp3FileReader(path);
 				Mp3Frame^ frame;
-				//TODO virer la putain d'en tete pour les musiques suivantes !!
-				//SALE !!
-				/*for (int i = 0; i < 50000;  i++) {
-					reader->ReadNextFrame();
-				}*/
+				//TODO virer la p***** d'en tete pour les musiques suivantes !!
 				while ((frame = reader->ReadNextFrame()) != nullptr)
-				{					
-						outputStream->Write(frame->RawData, 0, frame->RawData->Length);
-
+				{
+					outputStream->Write(frame->RawData, 0, frame->RawData->Length);
 				}
 			}
 			outputStream->Close();
-
-
-
-			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 1));
 		}
 	}
 
@@ -137,10 +115,15 @@ namespace AutoMixDataManagement {
 		Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
 
 		FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
-		
-		long bufferSize = fileReader->Length / 2 - track->getLastFadeOutDuration() * _samplesPerSecond;
-		array<float>^ buffer = gcnew array<float>(bufferSize);
 
+		long bufferSize = fileReader->Length / 2 - track->getLastFadeOutDuration() * _samplesPerSecond;
+		if (bufferSize < _overlaySize)
+		{
+			bufferSize = _overlaySize;
+		}
+
+		array<float>^ buffer = gcnew array<float>(bufferSize);
+		
 		fade->BeginFadeIn(_transitionDuration * 1000);
 		fade->Read(buffer, 0, bufferSize - _overlaySize);
 		fade->BeginFadeOut(_transitionDuration * 1000);
