@@ -100,10 +100,31 @@ namespace AutoMixDataManagement {
 			{
 				Mp3FileReader^ reader = gcnew Mp3FileReader(path);
 				Mp3Frame^ frame;
+				bool first = true;
 				//TODO virer la p***** d'en tete pour les musiques suivantes !!
 				while ((frame = reader->ReadNextFrame()) != nullptr)
 				{
-					outputStream->Write(frame->RawData, 0, frame->RawData->Length);
+					if (first)
+					{
+						int nbZeros = 0;
+						for (int i = 0; i < frame->RawData->Length; i++)
+						{
+							if (frame->RawData[i].CompareTo(System::Convert::ToByte(10)) <= 0)
+							{
+								nbZeros++;
+							}
+						}
+
+						if (nbZeros < frame->RawData->Length / 3)
+						{
+							first = false;
+							outputStream->Write(frame->RawData, 0, frame->RawData->Length);
+						}
+					}
+					else
+					{
+						outputStream->Write(frame->RawData, 0, frame->RawData->Length);
+					}
 				}
 			}
 			outputStream->Close();
