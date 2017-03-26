@@ -21,6 +21,13 @@ namespace AutoMixDataManagement {
 		property int TransitionDuration { int get(); void set(int); }
 
 	private:
+		void mergeTempFiles(System::String^);
+		void createNewTempFile();
+		void finalizeTempWav();
+		void deleteTempFiles();
+		void fadeInOut(Track^ track);
+		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
+
 		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
 		System::String^ _tempPath;
 		System::String^ _tempWav;
@@ -31,9 +38,6 @@ namespace AutoMixDataManagement {
 		int _samplesPerSecond;
 		int _transitionDuration;
 		int _overlaySize;
-
-		void fadeInOut(Track^ track);
-		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
 	};
 
 }
