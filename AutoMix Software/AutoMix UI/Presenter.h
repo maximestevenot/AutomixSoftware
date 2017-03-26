@@ -24,6 +24,7 @@ namespace AutoMixUI {
 		void removeTracks(System::Collections::Generic::List<System::String^>^);
 		void Presenter::moveTrack(int, System::String^);
 		void exportTrackList(System::ComponentModel::BackgroundWorker^, System::String^);
+		void exportPlaylistInTextFile(System::String^);
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
 

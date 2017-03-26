@@ -44,6 +44,7 @@ namespace AutoMixUI {
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
 		_skipButton->Enabled = false;
+		_exportMenuItem->Enabled = false;
 		_toolStripProgressBar->Visible = false;
 
 		AnOperationRunning = false;
@@ -510,7 +511,7 @@ namespace AutoMixUI {
 	System::Void MainForm::trackBarTimer_Tick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		__int64 normalize = ((__int64)10000 * _presenter->getPosition()) / _presenter->getLength();
-		_playerTrackBar->Value = (int) System::Math::Min( normalize, (__int64) 10000);
+		_playerTrackBar->Value = (int)System::Math::Min(normalize, (__int64)10000);
 	}
 
 	System::Void MainForm::onSkipButtonClick(System::Object ^ sender, System::EventArgs ^ e)
@@ -524,6 +525,26 @@ namespace AutoMixUI {
 	System::Void MainForm::onStopMixToolStripMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
 		stopPlayer();
+	}
+
+	System::Void MainForm::onGenerateMixMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		exportTrackList(sender, e);
+	}
+
+	System::Void MainForm::onExportTextFileMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		SaveFileDialog^ dialog = gcnew SaveFileDialog;
+		dialog->Filter = _resourceManager->GetString("text_dialog_filters");
+		dialog->FilterIndex = 1;
+		dialog->FileName = "My mix";
+		dialog->DefaultExt = "txt";
+		dialog->RestoreDirectory = true;
+
+		if (dialog->ShowDialog() == ::DialogResult::OK)
+		{
+			_presenter->exportPlaylistInTextFile(dialog->FileName);
+		}
 	}
 
 	System::Void MainForm::stopPlayer()
@@ -544,7 +565,7 @@ namespace AutoMixUI {
 		Button^ modifiedButton = (Button^)sender;
 		if (!modifiedButton->Enabled)
 		{
-			modifiedButton->BackColor = AutoMixColorTable::DisabledColor; 
+			modifiedButton->BackColor = AutoMixColorTable::DisabledColor;
 		}
 		else
 		{
@@ -623,6 +644,7 @@ namespace AutoMixUI {
 		_playerbutton->Enabled = false;
 		_skipButton->Enabled = false;
 
+		_exportMenuItem->Enabled = false;
 		_importMenuItem->Enabled = false;
 		_optionsToolStripMenuItem->Enabled = false;
 		_toolStripProgressBar->Value = 0;
@@ -642,6 +664,7 @@ namespace AutoMixUI {
 		_playerbutton->Enabled = true;
 		_skipButton->Enabled = true;
 
+		_exportMenuItem->Enabled = true;
 		_importMenuItem->Enabled = true;
 		_optionsToolStripMenuItem->Enabled = true;
 		_toolStripProgressBar->Visible = false;

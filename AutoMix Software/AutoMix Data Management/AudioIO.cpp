@@ -22,12 +22,12 @@ namespace AutoMixDataManagement {
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
-
+		sw->WriteLine("Playlist created with Automix Software");
 		for each(auto t in trackCollection)
 		{
-			sw->WriteLine(t->Name);
+			sw->WriteLine(t->Name + " | " + t->displayDuration() + " | " + t->BPM + " | " + t->Key);
 		}
-
+		sw->Flush();
 		sw->Close();
 	}
 

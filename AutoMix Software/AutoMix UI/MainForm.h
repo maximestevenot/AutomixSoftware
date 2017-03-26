@@ -107,6 +107,10 @@ namespace AutoMixUI {
 	private: System::Windows::Forms::Timer^  _trackBarTimer;
 	private: System::Windows::Forms::Button^  _skipButton;
 	private: System::Windows::Forms::ToolStripMenuItem^  _stopMixToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  _exportMenuItem;
+
+	private: System::Windows::Forms::ToolStripMenuItem^  _generateMixMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  _exportTextFileMenuItem;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -128,6 +132,9 @@ namespace AutoMixUI {
 			this->_menuStrip = (gcnew System::Windows::Forms::MenuStrip());
 			this->_fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_importMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_exportMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_generateMixMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->_exportTextFileMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->_cancelMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripSeparator = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->_quitMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -188,9 +195,9 @@ namespace AutoMixUI {
 			// 
 			// _fileToolStripMenuItem
 			// 
-			this->_fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->_fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->_importMenuItem,
-					this->_cancelMenuItem, this->toolStripSeparator, this->_quitMenuItem
+					this->_exportMenuItem, this->_cancelMenuItem, this->toolStripSeparator, this->_quitMenuItem
 			});
 			this->_fileToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_fileToolStripMenuItem->Name = L"_fileToolStripMenuItem";
@@ -202,6 +209,30 @@ namespace AutoMixUI {
 			this->_importMenuItem->Name = L"_importMenuItem";
 			resources->ApplyResources(this->_importMenuItem, L"_importMenuItem");
 			this->_importMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onImportMenuItemClick);
+			// 
+			// _exportMenuItem
+			// 
+			this->_exportMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->_generateMixMenuItem,
+					this->_exportTextFileMenuItem
+			});
+			this->_exportMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_exportMenuItem->Name = L"_exportMenuItem";
+			resources->ApplyResources(this->_exportMenuItem, L"_exportMenuItem");
+			// 
+			// _generateMixMenuItem
+			// 
+			this->_generateMixMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_generateMixMenuItem->Name = L"_generateMixMenuItem";
+			resources->ApplyResources(this->_generateMixMenuItem, L"_generateMixMenuItem");
+			this->_generateMixMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onGenerateMixMenuItemClick);
+			// 
+			// _exportTextFileMenuItem
+			// 
+			this->_exportTextFileMenuItem->ForeColor = System::Drawing::Color::White;
+			this->_exportTextFileMenuItem->Name = L"_exportTextFileMenuItem";
+			resources->ApplyResources(this->_exportTextFileMenuItem, L"_exportTextFileMenuItem");
+			this->_exportTextFileMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onExportTextFileMenuItemClick);
 			// 
 			// _cancelMenuItem
 			// 
@@ -232,7 +263,6 @@ namespace AutoMixUI {
 			this->_optionsToolStripMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_optionsToolStripMenuItem->Name = L"_optionsToolStripMenuItem";
 			resources->ApplyResources(this->_optionsToolStripMenuItem, L"_optionsToolStripMenuItem");
-			this->_optionsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onClearDBMenuItemClick);
 			// 
 			// _dataBaseToolStripMenuItem
 			// 
@@ -594,6 +624,8 @@ namespace AutoMixUI {
 	private: System::Void onPlayerButtonClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onSkipButtonClick(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void onStopMixToolStripMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onGenerateMixMenuItemClick(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void onExportTextFileMenuItemClick(System::Object^  sender, System::EventArgs^  e);
 
 	private: System::Void importBW_DoWork(System::Object^  sender, System::ComponentModel::DoWorkEventArgs^  e);
 	private: System::Void importBW_RunWorkerCompleted(System::Object^  sender, System::ComponentModel::RunWorkerCompletedEventArgs^  e);
@@ -624,7 +656,6 @@ namespace AutoMixUI {
 	private: System::Void musicListView_DrawItem(System::Object^  sender, System::Windows::Forms::DrawListViewItemEventArgs^  e);
 	private: System::Void musicListView_DrawColumnHeader(System::Object^  sender, System::Windows::Forms::DrawListViewColumnHeaderEventArgs^  e);
 	private: System::Void musicListView_DrawSubItem(System::Object^  sender, System::Windows::Forms::DrawListViewSubItemEventArgs^  e);
-
 	};
 
 }

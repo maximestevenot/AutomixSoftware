@@ -126,6 +126,11 @@ namespace AutoMixUI {
 		}
 	}
 
+	void Presenter::exportPlaylistInTextFile(System::String^ outputFile)
+	{
+		_trackCollection->exportToText(outputFile);
+	}
+
 	void Presenter::clearDataBase()
 	{
 		DataBase^ db = gcnew DataBase();
