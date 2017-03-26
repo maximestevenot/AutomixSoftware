@@ -39,16 +39,8 @@ namespace AutoMixDataManagement {
 
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
-		ID3TagData^ tag = gcnew ID3TagData();
-		tag->Title = outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1);
-		tag->Artist = Environment::UserName;
-		tag->Album = "Automix Software Mixes";
-		tag->Year = DateTime::Now.Year.ToString();
-		tag->Comment = "Created with Automix Software";
-		tag->Genre = "Compilation";
-
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, nullptr);
 		reader->CopyTo(writer);
 		writer->Close();
 		reader->Close();
@@ -69,7 +61,7 @@ namespace AutoMixDataManagement {
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 		int readFrame = 0;
-		int nbFrames = (int) reader->Length / 1152 / 4 / 1000 + 1;
+		int nbFrames = (int)reader->Length / 1152 / 4 / 1000 + 1;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{
@@ -99,10 +91,12 @@ namespace AutoMixDataManagement {
 		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
 		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
 		tags->Add("TPE1", Environment::UserName);
+		tags->Add("TALB", "Automix Software Compilation");
+		tags->Add("TCON", "Mix");
 		tags->Add("TYER", DateTime::Now.Year.ToString());
-		tags->Add("TSSE", "AutoMix Software with NAudio");
-		tags->Add("COMM", "Created with AutoMix");
-		Id3v2Tag^ tag = Id3v2Tag::Create(tags);
-		return tag;
+		tags->Add("TENC", "Automix Software with NAudio API");
+		tags->Add("COMM", "Created with Automix Software");
+
+		return Id3v2Tag::Create(tags);
 	}
 }
