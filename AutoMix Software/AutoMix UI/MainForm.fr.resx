@@ -118,11 +118,41 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Fichier</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Aide</value>
+  </data>
   <data name="_importMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
   <data name="_importMenuItem.Text" xml:space="preserve">
     <value>&amp;Importer...</value>
+  </data>
+  <data name="_exportMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="_exportMenuItem.Text" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="_generateMixMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
+  </data>
+  <data name="_generateMixMenuItem.Text" xml:space="preserve">
+    <value>Générer le mix...</value>
+  </data>
+  <data name="_exportTextFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
+  </data>
+  <data name="_exportTextFileMenuItem.Text" xml:space="preserve">
+    <value>Exporter la playlist au format texte...</value>
   </data>
   <data name="_cancelMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
@@ -139,23 +169,17 @@
   <data name="_quitMenuItem.Text" xml:space="preserve">
     <value>&amp;Quitter</value>
   </data>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 20</value>
+  <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
   </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Fichier</value>
+  <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Base de données</value>
   </data>
   <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 22</value>
   </data>
   <data name="_clearDBMenuItem.Text" xml:space="preserve">
     <value>&amp;Nettoyer</value>
-  </data>
-  <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Base de données</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
@@ -178,12 +202,6 @@
   <data name="_aboutMenuItem.Text" xml:space="preserve">
     <value>À &amp;propos...</value>
   </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Aide</value>
-  </data>
   <data name="collectionName.Text" xml:space="preserve">
     <value>Nom</value>
   </data>
@@ -192,6 +210,9 @@
   </data>
   <data name="collectionKey.Text" xml:space="preserve">
     <value>Clé</value>
+  </data>
+  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 48</value>
   </data>
   <data name="_deleteTrackToolStrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -762,9 +783,6 @@
   </data>
   <data name="_selectAllToolStrip.Text" xml:space="preserve">
     <value>Selectionner tout</value>
-  </data>
-  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 48</value>
   </data>
   <data name="_importButton.Text" xml:space="preserve">
     <value>Importer des pistes</value>

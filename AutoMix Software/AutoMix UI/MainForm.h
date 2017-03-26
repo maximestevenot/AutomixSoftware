@@ -216,17 +216,20 @@ namespace AutoMixUI {
 				this->_generateMixMenuItem,
 					this->_exportTextFileMenuItem
 			});
+			this->_exportMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_exportMenuItem->Name = L"_exportMenuItem";
 			resources->ApplyResources(this->_exportMenuItem, L"_exportMenuItem");
 			// 
 			// _generateMixMenuItem
 			// 
+			this->_generateMixMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_generateMixMenuItem->Name = L"_generateMixMenuItem";
 			resources->ApplyResources(this->_generateMixMenuItem, L"_generateMixMenuItem");
 			this->_generateMixMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onGenerateMixMenuItemClick);
 			// 
 			// _exportTextFileMenuItem
 			// 
+			this->_exportTextFileMenuItem->ForeColor = System::Drawing::Color::White;
 			this->_exportTextFileMenuItem->Name = L"_exportTextFileMenuItem";
 			resources->ApplyResources(this->_exportTextFileMenuItem, L"_exportTextFileMenuItem");
 			this->_exportTextFileMenuItem->Click += gcnew System::EventHandler(this, &MainForm::onExportTextFileMenuItemClick);
