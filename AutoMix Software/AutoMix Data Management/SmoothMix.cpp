@@ -55,7 +55,7 @@ namespace AutoMixDataManagement {
 		{
 			finalFileDuration += track->Duration;
 
-			if (finalFileDuration > 3600000) //TODO put the correct value 
+			if (finalFileDuration > 2700000) //TODO put the correct value 
 			{
 				finalFileDuration = track->Duration;
 				createNewTempFile();
@@ -113,6 +113,7 @@ namespace AutoMixDataManagement {
 					outputStream->Write(frame->RawData, 0, frame->RawData->Length);
 				}
 			}
+			outputStream->Flush();
 			reader->Close();
 		}
 		outputStream->Close();
