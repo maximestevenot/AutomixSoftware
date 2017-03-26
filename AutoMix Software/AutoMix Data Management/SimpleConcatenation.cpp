@@ -40,7 +40,8 @@ namespace AutoMixDataManagement {
 			{
 				outputStream->Write(frame->RawData, 0, frame->RawData->Length);
 			}
-
+			reader->Close();
+			outputStream->Flush();
 			bw->ReportProgress((int)1000 * count++ / collection->Count);
 		}
 		outputStream->Close();

@@ -49,35 +49,38 @@ namespace AutoMixDataManagement {
 		_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
 
 		int count = 1;
-		int finalFileDuration = 0;
+		int tempFileDuration = 0;
 
 		for each (Track^ track in collection)
 		{
-			finalFileDuration += track->Duration;
-
-			if (finalFileDuration > 2700000) //TODO put the correct value 
+			if (bw->CancellationPending)
 			{
-				finalFileDuration = track->Duration;
+				_waveFileWriter->Close();
+				break;
+			}
+			tempFileDuration += track->Duration;
+
+			if (tempFileDuration > 2700000) //45 minutes
+			{
+				tempFileDuration = track->Duration;
 				createNewTempFile();
 			}
 
 			fadeInOut(track);
-			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 3));
+			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
 		}
-
-		finalizeTempWav();
-		bw->ReportProgress((int)(1000 * count++) / (collection->Count + 3));
 
 		if (!bw->CancellationPending)
 		{
-			mergeTempFiles(outputFile);
-			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 3));
-			deleteTempFiles();
-			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 3));
+			finalizeTempWav();
+			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
+			mergeTempFiles(bw, outputFile);
+			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
 		}
+		deleteTempFiles();
 	}
 
-	void SmoothMix::mergeTempFiles(String^ outputFile)
+	void SmoothMix::mergeTempFiles(ComponentModel::BackgroundWorker^ bw, String^ outputFile)
 	{
 		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 
@@ -86,6 +89,10 @@ namespace AutoMixDataManagement {
 
 		for each (auto path in _tempFileList)
 		{
+			if (bw->CancellationPending)
+			{
+				break;
+			}
 			Mp3FileReader^ reader = gcnew Mp3FileReader(path);
 			Mp3Frame^ frame = nullptr;
 			bool first = true;

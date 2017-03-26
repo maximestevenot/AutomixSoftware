@@ -27,32 +27,36 @@ namespace AutoMixAI
 	}
 
 	TrackCollection^ SimulatedAnnealingSortAlgorithm::sort(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
-	{	
+	{
 		int nbTracks = trackCollection->Count;
 		int N = (nbTracks / 2) * (nbTracks / 2);
 		TrackCollection^ result = trackCollection;
 		TrackCollection^ tempCollection;
 		System::Random^ rand = gcnew System::Random();
 
-		for (int k = 0; k < NUMBEROFITERATION; k++) {
-			
+		for (int k = 0; k < NUMBEROFITERATION; k++)
+		{
 			if (bw->CancellationPending)
 			{
 				break;
 			}
 			float temperature = (float)BEGINTEMPERATURE;
 
-			while (temperature > STOPTEMPERATURE) {
-				for (int i = 0; i < N; i++) {
-
+			while (temperature > STOPTEMPERATURE)
+			{
+				for (int i = 0; i < N; i++)
+				{
 					tempCollection = createPotentialTrackCollection(result);
 					double dE = computeIndividualEvaluation(tempCollection) - computeIndividualEvaluation(result);
 
-					if (dE < 0) {
+					if (dE < 0)
+					{
 						result = tempCollection;
 					}
-					else {
-						if (rand->Next(100) < (System::Math::Exp(-dE / temperature) * 100)) {
+					else
+					{
+						if (rand->Next(100) < (System::Math::Exp(-dE / temperature) * 100))
+						{
 							result = tempCollection;
 						}
 					}
@@ -60,11 +64,11 @@ namespace AutoMixAI
 				}
 				temperature = temperature * DECAYFACTOR;
 			}
-			if (computeIndividualEvaluation(result) < computeIndividualEvaluation(trackCollection)) {
+			if (computeIndividualEvaluation(result) < computeIndividualEvaluation(trackCollection))
+			{
 				trackCollection = result;
 			}
 			bw->ReportProgress((int)1000 * k / NUMBEROFITERATION);
-			System::Diagnostics::Debug::WriteLine("premier {0}", computeIndividualEvaluation(trackCollection));
 		}
 
 		return trackCollection;
@@ -80,29 +84,32 @@ namespace AutoMixAI
 		return result;
 	}
 
-	TrackCollection^ SimulatedAnnealingSortAlgorithm::createPotentialTrackCollection(TrackCollection^ current) {
+	TrackCollection^ SimulatedAnnealingSortAlgorithm::createPotentialTrackCollection(TrackCollection^ current)
+	{
 		TrackCollection^ newTrackCollection = gcnew TrackCollection();
 		System::Random^ rand = gcnew System::Random();
 		int track1 = rand->Next(current->Count);
 		int track2 = rand->Next(current->Count);
 
-		for (int i = 0; i < current->Count; i++) {
-			if (i == track1) {
+		for (int i = 0; i < current->Count; i++)
+		{
+			if (i == track1)
+			{
 				newTrackCollection->Add(current[track2]);
 			}
-			else {
-				if (i == track2) {
+			else
+			{
+				if (i == track2)
+				{
 					newTrackCollection->Add(current[track1]);
 				}
-				else {
+				else
+				{
 					newTrackCollection->Add(current[i]);
 				}
 			}
-			
-
 		}
 		return newTrackCollection;
-
 	}
 
 }

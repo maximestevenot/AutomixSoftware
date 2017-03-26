@@ -600,7 +600,7 @@ namespace AutoMixUI {
 		SaveFileDialog^ dialog = gcnew SaveFileDialog;
 		dialog->Filter = _resourceManager->GetString("dialog_filters");
 		dialog->FilterIndex = 1;
-		dialog->FileName = "Auto Mix";
+		dialog->FileName = "My mix";
 		dialog->DefaultExt = "mp3";
 		dialog->RestoreDirectory = true;
 

@@ -21,7 +21,7 @@ namespace AutoMixDataManagement {
 		property int TransitionDuration { int get(); void set(int); }
 
 	private:
-		void mergeTempFiles(System::String^);
+		void mergeTempFiles(System::ComponentModel::BackgroundWorker^ bw, System::String^);
 		void createNewTempFile();
 		void finalizeTempWav();
 		void deleteTempFiles();
