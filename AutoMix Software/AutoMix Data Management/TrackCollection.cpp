@@ -105,6 +105,11 @@ namespace AutoMixDataManagement {
 		exportEngine->exportMix(bw, this, outputFile);
 	}
 
+	void TrackCollection::exportToText(System::String ^ outputFile)
+	{
+		AudioIO::TextExport(this, outputFile);
+	}
+
 	void TrackCollection::Remove(System::String^ name)
 	{
 		Track^ temp = search(name);

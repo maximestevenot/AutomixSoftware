@@ -141,4 +141,7 @@
   <data name="exit_msg" xml:space="preserve">
     <value>Are you sure you want to quit?</value>
   </data>
+  <data name="text_dialog_filters" xml:space="preserve">
+    <value>Text files (*.txt)|*.txt|All files (*.*)|*.*</value>
+  </data>
 </root>
