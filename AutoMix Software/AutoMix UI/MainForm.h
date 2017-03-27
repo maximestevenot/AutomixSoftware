@@ -170,12 +170,12 @@ namespace AutoMixUI {
 			this->_toolTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->_playerbutton = (gcnew System::Windows::Forms::Button());
 			this->_skipButton = (gcnew System::Windows::Forms::Button());
+			this->_reloadButton = (gcnew System::Windows::Forms::Button());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->_playerTrackBar = (gcnew System::Windows::Forms::TrackBar());
 			this->_playerBackgroundWorker = (gcnew System::ComponentModel::BackgroundWorker());
 			this->bindingSource1 = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->_trackBarTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->_reloadButton = (gcnew System::Windows::Forms::Button());
 			this->_menuStrip->SuspendLayout();
 			this->_statusStrip->SuspendLayout();
 			this->_trackContextMenu->SuspendLayout();
@@ -529,6 +529,24 @@ namespace AutoMixUI {
 			this->_skipButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
 			this->_skipButton->Click += gcnew System::EventHandler(this, &MainForm::onSkipButtonClick);
 			// 
+			// _reloadButton
+			// 
+			resources->ApplyResources(this->_reloadButton, L"_reloadButton");
+			this->_reloadButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
+				static_cast<System::Int32>(static_cast<System::Byte>(56)));
+			this->_reloadButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->_reloadButton->FlatAppearance->BorderSize = 0;
+			this->_reloadButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(176)),
+				static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(46)));
+			this->_reloadButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(214)),
+				static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(56)));
+			this->_reloadButton->ForeColor = System::Drawing::Color::White;
+			this->_reloadButton->Name = L"_reloadButton";
+			this->_toolTip->SetToolTip(this->_reloadButton, resources->GetString(L"_reloadButton.ToolTip"));
+			this->_reloadButton->UseVisualStyleBackColor = false;
+			this->_reloadButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
+			this->_reloadButton->Click += gcnew System::EventHandler(this, &MainForm::onReloadButtonClick);
+			// 
 			// panel1
 			// 
 			resources->ApplyResources(this->panel1, L"panel1");
@@ -560,24 +578,6 @@ namespace AutoMixUI {
 			// 
 			this->_trackBarTimer->Interval = 500;
 			this->_trackBarTimer->Tick += gcnew System::EventHandler(this, &MainForm::trackBarTimer_Tick);
-			// 
-			// _reloadButton
-			// 
-			resources->ApplyResources(this->_reloadButton, L"_reloadButton");
-			this->_reloadButton->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(163)), static_cast<System::Int32>(static_cast<System::Byte>(38)),
-				static_cast<System::Int32>(static_cast<System::Byte>(56)));
-			this->_reloadButton->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->_reloadButton->FlatAppearance->BorderSize = 0;
-			this->_reloadButton->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(176)),
-				static_cast<System::Int32>(static_cast<System::Byte>(23)), static_cast<System::Int32>(static_cast<System::Byte>(46)));
-			this->_reloadButton->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(214)),
-				static_cast<System::Int32>(static_cast<System::Byte>(28)), static_cast<System::Int32>(static_cast<System::Byte>(56)));
-			this->_reloadButton->ForeColor = System::Drawing::Color::White;
-			this->_reloadButton->Name = L"_reloadButton";
-			this->_toolTip->SetToolTip(this->_reloadButton, resources->GetString(L"_reloadButton.ToolTip"));
-			this->_reloadButton->UseVisualStyleBackColor = false;
-			this->_reloadButton->EnabledChanged += gcnew System::EventHandler(this, &MainForm::onButtonEnabledChanged);
-			this->_reloadButton->Click += gcnew System::EventHandler(this, &MainForm::onReloadButtonClick);
 			// 
 			// MainForm
 			// 
