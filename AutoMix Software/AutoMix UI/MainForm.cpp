@@ -8,6 +8,7 @@
 
 #include "MainForm.h"
 #include "UserDocForm.h"
+#include "AboutForm.h"
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -190,12 +191,7 @@ namespace AutoMixUI {
 
 	System::Void MainForm::onAboutMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)
 	{
-		String^ msg = "AutoMix Software Beta 3.0\n\n";
-		msg += "Copyright © 2016-2017 LesProjecteurs - All Rights Reserved\n\n";
-		msg += "Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT,\nLouis CARLIER, Pierre GABON";
-
-		String^ caption = _resourceManager->GetString("about_caption");
-		MessageBox::Show(msg, caption, MessageBoxButtons::OK, MessageBoxIcon::Information);
+		AboutForm().ShowDialog();
 	}
 
 	System::Void AutoMixUI::MainForm::onAboutCharacteristicsMenuItemClick(System::Object ^ sender, System::EventArgs ^ e)

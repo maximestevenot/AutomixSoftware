@@ -144,12 +144,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutForm.cpp" />
     <ClCompile Include="AutoMixUI.cpp" />
     <ClCompile Include="AutoMixColorTable.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Presenter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AboutForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AutoMixColorTable.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
@@ -161,6 +165,12 @@
     <ClInclude Include="ViewWithTrackCollection.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutForm.fr.resx">
+      <DependentUpon>AboutForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TextResources.resx" />
     <EmbeddedResource Include="MainForm.fr.resx">
       <DependentUpon>MainForm.h</DependentUpon>
