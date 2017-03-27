@@ -98,7 +98,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
-      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;.\images\reload_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,7 +122,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
-      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;.\images\reload_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
