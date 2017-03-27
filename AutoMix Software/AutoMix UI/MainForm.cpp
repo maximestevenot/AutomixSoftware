@@ -39,11 +39,13 @@ namespace AutoMixUI {
 
 		_playerbutton->Image = gcnew Bitmap(PlayIcon, 70, 70);
 		_skipButton->Image = gcnew Bitmap(SeekIcon, 70, 70);
+		_reloadButton->Image = gcnew Bitmap(ReloadIcon, 60, 60);
 		_cancelMenuItem->Enabled = false;
 		_generateButton->Enabled = false;
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
 		_skipButton->Enabled = false;
+		_reloadButton->Enabled = false;
 		_exportMenuItem->Enabled = false;
 		_toolStripProgressBar->Visible = false;
 
@@ -89,6 +91,17 @@ namespace AutoMixUI {
 			_seekIcon = gcnew Bitmap(imageStream);
 		}
 		return _seekIcon;
+	}
+
+	Bitmap^ MainForm::ReloadIcon::get()
+	{
+		if (!_reloadIcon)
+		{
+			Assembly^ myAssembly = Assembly::GetExecutingAssembly();
+			Stream^ imageStream = myAssembly->GetManifestResourceStream("reload_icon.bmp");
+			_reloadIcon = gcnew Bitmap(imageStream);
+		}
+		return _reloadIcon;
 	}
 
 	System::Void MainForm::update(TrackCollection^ collection)
@@ -596,6 +609,11 @@ namespace AutoMixUI {
 		e->DrawText(TextFormatFlags::TextBoxControl);
 	}
 
+	System::Void MainForm::onReloadButtonClick(System::Object ^ sender, System::EventArgs ^ e)
+	{
+		stopPlayer();
+	}
+
 	System::Void MainForm::sortTrackList(System::Object^ sender, System::EventArgs^ e)
 	{
 		onWorkerStart();
@@ -642,6 +660,7 @@ namespace AutoMixUI {
 		_importButton->Enabled = false;
 		_sortButton->Enabled = false;
 		_playerbutton->Enabled = false;
+		_reloadButton->Enabled = false;
 		_skipButton->Enabled = false;
 
 		_exportMenuItem->Enabled = false;
@@ -661,6 +680,7 @@ namespace AutoMixUI {
 		_generateButton->Enabled = true;
 		_importButton->Enabled = true;
 		_sortButton->Enabled = true;
+		_reloadButton->Enabled = true;
 		_playerbutton->Enabled = true;
 		_skipButton->Enabled = true;
 
