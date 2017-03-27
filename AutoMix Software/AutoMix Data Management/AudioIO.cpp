@@ -40,7 +40,7 @@ namespace AutoMixDataManagement {
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, nullptr);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, LAMEPreset::ABR_320, nullptr);
 		reader->CopyTo(writer);
 		writer->Close();
 		reader->Close();
