@@ -94,26 +94,26 @@ namespace AutoMixUI {
 			// 
 			// tabControl1
 			// 
-			resources->ApplyResources(this->tabControl1, L"tabControl1");
 			this->tableLayoutPanel1->SetColumnSpan(this->tabControl1, 2);
 			this->tabControl1->Controls->Add(this->_bpmTab);
 			this->tabControl1->Controls->Add(this->_keyPage);
+			resources->ApplyResources(this->tabControl1, L"tabControl1");
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->SizeMode = System::Windows::Forms::TabSizeMode::FillToRight;
 			// 
 			// _bpmTab
 			// 
-			resources->ApplyResources(this->_bpmTab, L"_bpmTab");
 			this->_bpmTab->Controls->Add(this->richTextBox1);
+			resources->ApplyResources(this->_bpmTab, L"_bpmTab");
 			this->_bpmTab->Name = L"_bpmTab";
 			this->_bpmTab->UseVisualStyleBackColor = true;
 			// 
 			// richTextBox1
 			// 
-			resources->ApplyResources(this->richTextBox1, L"richTextBox1");
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::Window;
 			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			resources->ApplyResources(this->richTextBox1, L"richTextBox1");
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
 			this->richTextBox1->ShortcutsEnabled = false;
@@ -140,9 +140,9 @@ namespace AutoMixUI {
 			// 
 			// _keyDescription
 			// 
-			resources->ApplyResources(this->_keyDescription, L"_keyDescription");
 			this->_keyDescription->BackColor = System::Drawing::SystemColors::Window;
 			this->_keyDescription->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			resources->ApplyResources(this->_keyDescription, L"_keyDescription");
 			this->_keyDescription->Name = L"_keyDescription";
 			this->_keyDescription->ReadOnly = true;
 			this->_keyDescription->ShortcutsEnabled = false;
