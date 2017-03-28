@@ -11,15 +11,46 @@
 
 namespace AutoMixDataManagement {
 
+	/// <summary>
+	/// Provides some tools to manipulate audio files
+	/// </summary>
 	public ref class AudioIO
 	{
 	public:
+
+		/// <summary>
+		/// Export a <c>TrackCollection</c> as text file containing all information
+		/// </summary>
+		/// <param name="trackCollection">The collection to export</param>
+		/// <param name="outputFile">The path of the destination file</param>
 		static void TextExport(TrackCollection^ trackCollection, System::String^ outputFile);
 
+		/// <summary>
+		/// Convert an MP3 into WAV file
+		/// </summary>
+		/// <param name="inputFile">The path of the MP3 file</param>
+		/// <param name="outputFile">The path of the WAV file</param>
 		static void Mp3ToWav(System::String^ inputFile, System::String^ outputFile);
+
+		/// <summary>
+		/// Convert an WAV into MP3 file
+		/// </summary>
+		/// <param name="inputFile">The path of the WAV file</param>
+		/// <param name="outputFile">The path of the MP3 file</param>
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile);
 
+		/// <summary>
+		/// Compute the MD5 hash of an MP3 file
+		/// </summary>
+		/// <param name="path">The path of the MP3 file</param>
+		/// <returns>The Hash in a <c>String^</c></returns>
 		static System::String^ Mp3Md5Hash(System::String^ path);
-		static NAudio::Wave::Id3v2Tag^ CreateMp3Tag(System::String^ outputFile);
+
+		/// <summary>
+		/// Create an Id3v2 tag for a specified MP3 file
+		/// </summary>
+		/// <param name="path">The path of the MP3 file</param>
+		/// <returns> A new <c>Id3v2Tag^</c></returns>
+		static NAudio::Wave::Id3v2Tag^ CreateMp3Tag(System::String^ path);
 	};
 }
