@@ -65,34 +65,34 @@ namespace AutoMixUI {
 			// 
 			// panel1
 			// 
+			resources->ApplyResources(this->panel1, L"panel1");
 			this->panel1->BackColor = System::Drawing::Color::White;
 			this->panel1->Controls->Add(this->richTextBox1);
 			this->panel1->Controls->Add(this->pictureBox1);
 			this->panel1->Controls->Add(this->panel2);
-			resources->ApplyResources(this->panel1, L"panel1");
 			this->panel1->Name = L"panel1";
 			// 
 			// richTextBox1
 			// 
+			resources->ApplyResources(this->richTextBox1, L"richTextBox1");
 			this->richTextBox1->BackColor = System::Drawing::SystemColors::Window;
 			this->richTextBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
-			resources->ApplyResources(this->richTextBox1, L"richTextBox1");
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
 			this->richTextBox1->ShortcutsEnabled = false;
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			resources->ApplyResources(this->pictureBox1, L"pictureBox1");
+			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->TabStop = false;
 			// 
 			// panel2
 			// 
+			resources->ApplyResources(this->panel2, L"panel2");
 			this->panel2->BackColor = System::Drawing::SystemColors::Control;
 			this->panel2->Controls->Add(this->okButton);
-			resources->ApplyResources(this->panel2, L"panel2");
 			this->panel2->Name = L"panel2";
 			// 
 			// okButton
