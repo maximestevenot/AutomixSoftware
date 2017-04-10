@@ -17,7 +17,7 @@ namespace AutoMixDataManagement {
 	public:
 
 		ExecutableExtraction(System::IO::DirectoryInfo^);
-		void extractData(System::ComponentModel::BackgroundWorker^, int, System::Threading::CancellationTokenSource^, Track^ track) override;
+		void extractData(System::ComponentModel::BackgroundWorker^, int, System::Threading::CancellationTokenSource^, Track^) override;
 
 	private:
 		static unsigned int DoubleToUIntLists(double);

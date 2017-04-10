@@ -7,20 +7,30 @@ namespace AutoMixUI {
 
 	AutoMixColorTable::AutoMixColorTable() : ProfessionalColorTable()
 	{
-		BACKGROUND_COLOR = Color::DarkMagenta;
+		BACKGROUND_COLOR = MainColor;
 		BORDER_COLOR = Color::White;
-		SELECTION_BORDER_COLOR = Color::DarkMagenta; //Color::FromArgb(0, 192, 192);
-		OVER_COLOR = Color::FromArgb(0, 192, 192);
+		SELECTION_BORDER_COLOR = MainColor;
+		OVER_COLOR = SecondColor;
 	}
 
-	Color AutoMixColorTable::SelectionColor::get()
-	{ 
-		return Color::FromArgb(0, 192, 192);
-	}
-
-	Color AutoMixColorTable::BackGroundColor::get()
+	Color AutoMixColorTable::MainColor::get()
 	{
-		return Color::FromArgb(19, 23, 27);
+		return Color::FromArgb(163, 38, 56);
+	}
+
+	Color AutoMixColorTable::SecondColor::get()
+	{
+		return Color::FromArgb(214, 28, 56);
+	}
+
+	Color AutoMixColorTable::DisabledColor::get()
+	{
+		return Color::FromArgb(171, 57, 74);
+	}
+
+	Color AutoMixColorTable::BackgroundColor::get()
+	{
+		return Color::FromArgb(64,69,69);
 	}
 
 	Color AutoMixColorTable::ToolStripBorder::get()

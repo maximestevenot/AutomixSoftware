@@ -98,7 +98,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
-      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;.\images\reload_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,7 +122,7 @@
       <AdditionalDependencies />
       <EntryPointSymbol>Main</EntryPointSymbol>
       <SubSystem>Windows</SubSystem>
-      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
+      <EmbedManagedResourceFile>.\images\play_icon.bmp;.\images\pause_icon.bmp;.\images\seek_icon.bmp;.\images\reload_icon.bmp;%(EmbedManagedResourceFile)</EmbedManagedResourceFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,12 +144,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutForm.cpp" />
     <ClCompile Include="AutoMixUI.cpp" />
     <ClCompile Include="AutoMixColorTable.cpp" />
     <ClCompile Include="MainForm.cpp" />
     <ClCompile Include="Presenter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AboutForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AutoMixColorTable.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
@@ -161,9 +165,23 @@
     <ClInclude Include="ViewWithTrackCollection.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutForm.fr.resx">
+      <DependentUpon>AboutForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextResources.resx" />
+    <EmbeddedResource Include="MainForm.fr.resx">
+      <DependentUpon>MainForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.h</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextResources.fr-FR.resx" />
+    <EmbeddedResource Include="UserDocForm.fr.resx">
+      <DependentUpon>UserDocForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserDocForm.resx">
       <DependentUpon>UserDocForm.h</DependentUpon>
@@ -179,9 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\pause_icon.bmp" />
-    <Image Include="images\pause_icon.png" />
     <Image Include="images\play_icon.bmp" />
-    <Image Include="images\play_icon.png" />
     <Image Include="images\seek_icon.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

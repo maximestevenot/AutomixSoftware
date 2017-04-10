@@ -18,10 +18,13 @@ namespace AutoMixUI {
 		Presenter(ViewWithTrackCollection^);
 		void notify();
 
+		property bool IsTrackCollectionFilled { bool get(); }
+
 		TrackCollection^ loadTracks(System::ComponentModel::BackgroundWorker^, array<System::String^>^);
 		void removeTracks(System::Collections::Generic::List<System::String^>^);
-		void Presenter::moveTrack(int index, System::String^ name);
+		void Presenter::moveTrack(int, System::String^);
 		void exportTrackList(System::ComponentModel::BackgroundWorker^, System::String^);
+		void exportPlaylistInTextFile(System::String^);
 		TrackCollection^ sortTrackCollectionWithGeneticAlgorithm(System::ComponentModel::BackgroundWorker^);
 		void clearDataBase();
 
@@ -33,14 +36,13 @@ namespace AutoMixUI {
 		__int64 getPosition();
 		__int64 getLength();
 
-		void getMyRightsBack();
-
 	private:
-		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
+		void retrieveControlOnCollection();
 
+		System::Collections::Generic::List<ViewWithTrackCollection^>^ _views;
 		AutoMixDataManagement::TrackCollection^ _trackCollection;
 		AutoMixDataManagement::IAudioDataExtraction^ _dataExtractionEngine;
-
+		AutoMixAI::SortAlgorithm^ _sortAlgorithm;
 		AutoMixDataManagement::MP3Playing^ _mp3Playing;
 	};
 }

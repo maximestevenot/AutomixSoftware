@@ -25,6 +25,24 @@
     <Filter Include="Source Files\Collections">
       <UniqueIdentifier>{68051813-56ff-4118-a828-af427aade7ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Audio Playing">
+      <UniqueIdentifier>{11b01f14-828b-4c66-8cc9-7923fe989f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Storage">
+      <UniqueIdentifier>{0898b64c-a215-4b97-b082-eccbc99a7902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Storage">
+      <UniqueIdentifier>{5e18ad73-6821-4cd3-84a8-cc0b424e8097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Playing">
+      <UniqueIdentifier>{2ff048ca-46bf-40e0-90bd-4786e7215389}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Exportation">
+      <UniqueIdentifier>{46224899-9db2-43c3-a8a2-ab64bf14d623}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exportation">
+      <UniqueIdentifier>{629cb3c9-0502-47c6-b061-6adb23f09c19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -51,12 +69,6 @@
     <ClInclude Include="TracksComparison.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
-    <ClInclude Include="AudioIO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AudioDataExtraction.h">
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
@@ -76,7 +88,22 @@
       <Filter>Header Files\Extraction</Filter>
     </ClInclude>
     <ClInclude Include="MP3Playing.h">
+      <Filter>Header Files\Audio Playing</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>Header Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioIO.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleConcatenation.h">
+      <Filter>Header Files\Exportation</Filter>
+    </ClInclude>
+    <ClInclude Include="IExportation.h">
+      <Filter>Header Files\Exportation</Filter>
+    </ClInclude>
+    <ClInclude Include="SmoothMix.h">
+      <Filter>Header Files\Exportation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +131,6 @@
     <ClCompile Include="TracksComparison.cpp">
       <Filter>Source Files\Collections</Filter>
     </ClCompile>
-    <ClCompile Include="AudioIO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AudioDataExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
@@ -122,8 +143,20 @@
     <ClCompile Include="DataBaseExtraction.cpp">
       <Filter>Source Files\Extraction</Filter>
     </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
     <ClCompile Include="MP3Playing.cpp">
+      <Filter>Source Files\Playing</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioIO.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleConcatenation.cpp">
+      <Filter>Source Files\Exportation</Filter>
+    </ClCompile>
+    <ClCompile Include="SmoothMix.cpp">
+      <Filter>Source Files\Exportation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

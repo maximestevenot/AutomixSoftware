@@ -89,13 +89,33 @@ namespace AutoMixDataManagement {
 	String^ Track::displayDuration()
 	{
 		TimeSpan ts = TimeSpan::FromMilliseconds(Duration);
-		String^ stringDuration = ts.ToString();
-		int dotIndex = stringDuration->LastIndexOf(".");
+		String^ durationString = ts.ToString();
+		int dotIndex = durationString->LastIndexOf(".");
 
 		if (dotIndex > 0)
 		{
-			stringDuration = stringDuration->Substring(0, dotIndex);
+			durationString = durationString->Substring(0, dotIndex);
 		}
-		return stringDuration;
+		return durationString;
+	}
+
+	double Track::getLastFadeOutDuration()
+	{
+		double time = Duration;
+
+		if (FadeOuts->Length >= 2)
+		{
+			time -= FadeOuts[FadeOuts->Length - 2];
+		}
+		else if (FadeOuts->Length == 1)
+		{
+			time -= FadeOuts[0];
+		}
+		else
+		{
+			time = 0;
+		}
+
+		return time / 1000;
 	}
 }

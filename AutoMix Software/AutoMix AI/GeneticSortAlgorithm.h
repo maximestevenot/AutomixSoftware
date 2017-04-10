@@ -32,7 +32,7 @@ namespace AutoMixAI
 		Population^ createInitialPopulation(AutoMixDataManagement::TrackCollection^);
 		double computeIndividualEvaluation(AutoMixDataManagement::TrackCollection^);
 		void sortPopulation(Population^, int, int);
-		void createChildAndPutThemIntoPopulation(Population^);
+		void createChildrenAndPutThemIntoPopulation(Population^);
 		AutoMixDataManagement::TrackCollection^ createChildrenFromParents(AutoMixDataManagement::TrackCollection^, AutoMixDataManagement::TrackCollection^);
 		void mutatePopulation(Population^);
 	};

@@ -22,7 +22,7 @@ namespace AutoMixDataManagement {
 		AudioDataExtraction();
 		void extractData(System::ComponentModel::BackgroundWorker^, TrackCollection^) override;
 
-		static int exploredTracks;
+		static int ExploredTracks;
 
 	private:
 

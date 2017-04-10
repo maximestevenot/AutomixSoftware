@@ -19,49 +19,15 @@ namespace AutoMixDataManagement {
 	using namespace NAudio::Lame;
 	using namespace System::Security::Cryptography;
 
-
-	AudioIO::AudioIO()
-	{
-	}
-
-	void AudioIO::Mp3Export( TrackCollection ^ trackCollection, System::ComponentModel::BackgroundWorker^ bw, String ^ outputFile)
-	{
-		List<String^>^ filesList = gcnew List<String^>();
-		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
-		int cpt = 1;
-
-		Id3v2Tag^ tag = CreateMp3Tag(outputFile);
-		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
-
-		for each (auto track in trackCollection)
-		{
-
-			if (bw->CancellationPending)
-			{
-				break;
-			}
-			Mp3FileReader^ reader = gcnew Mp3FileReader(track->Path);
-			Mp3Frame^ frame;
-
-			while ((frame = reader->ReadNextFrame()) != nullptr)
-			{
-				outputStream->Write(frame->RawData, 0, frame->RawData->Length);
-			}
-
-			bw->ReportProgress((int)1000*cpt++ / trackCollection->Count);
-		}
-		outputStream->Close();
-	}
-
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
-
+		sw->WriteLine("Playlist created with Automix Software");
 		for each(auto t in trackCollection)
 		{
-			sw->WriteLine(t->Name);
+			sw->WriteLine(t->Name + " | " + t->displayDuration() + " | " + t->BPM + " | " + t->Key);
 		}
-
+		sw->Flush();
 		sw->Close();
 	}
 
@@ -73,11 +39,11 @@ namespace AutoMixDataManagement {
 
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
 	{
-		ID3TagData^ tag = gcnew ID3TagData(); //TODO add gestion of metadata
-
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, 320, tag);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, LAMEPreset::ABR_320, nullptr);
 		reader->CopyTo(writer);
+		writer->Close();
+		reader->Close();
 	}
 
 	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
@@ -95,7 +61,7 @@ namespace AutoMixDataManagement {
 		Mp3Frame^ frame;
 		array<Byte>^ audioData = gcnew array<Byte>(0);
 		int readFrame = 0;
-		int nbFrames = (int) reader->Length / 1152 / 4 / 1000 + 1;
+		int nbFrames = (int)reader->Length / 1152 / 4 / 1000 + 1;
 
 		while ((frame = reader->ReadNextFrame()) != nullptr)
 		{
@@ -122,14 +88,15 @@ namespace AutoMixDataManagement {
 
 	Id3v2Tag^ AudioIO::CreateMp3Tag(String^ outputFile)
 	{
-
 		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
 		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
 		tags->Add("TPE1", Environment::UserName);
+		tags->Add("TALB", "Automix Software Compilation");
+		tags->Add("TCON", "Mix");
 		tags->Add("TYER", DateTime::Now.Year.ToString());
-		tags->Add("TSSE", "AutoMix Software with NAudio");
-		tags->Add("COMM", "Created with AutoMix");
-		Id3v2Tag^ tag = Id3v2Tag::Create(tags);
-		return tag;
+		tags->Add("TENC", "Automix Software with NAudio API");
+		tags->Add("COMM", "Created with Automix Software");
+
+		return Id3v2Tag::Create(tags);
 	}
 }

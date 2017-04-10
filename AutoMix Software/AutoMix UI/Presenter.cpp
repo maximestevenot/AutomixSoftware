@@ -18,6 +18,8 @@ namespace AutoMixUI {
 		_views = gcnew Generic::List<ViewWithTrackCollection^>();
 		_trackCollection = gcnew TrackCollection();
 		_dataExtractionEngine = gcnew AudioDataExtractionProxy();
+
+		_sortAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
 	}
 
 	Presenter::Presenter(ViewWithTrackCollection^ view) : Presenter()
@@ -32,40 +34,44 @@ namespace AutoMixUI {
 			view->update(_trackCollection);
 		}
 	}
-
+	bool Presenter::IsTrackCollectionFilled::get()
+	{
+		if (!_trackCollection)
+		{
+			return false;
+		}
+		return _trackCollection->Count >= 1;
+	}
 	TrackCollection^ Presenter::sortTrackCollectionWithGeneticAlgorithm(ComponentModel::BackgroundWorker^ bw)
 	{
 		if (_trackCollection->Count > 1)
 		{
-			SimulatedAnnealingSortAlgorithm^ annealingAlgorithm = gcnew SimulatedAnnealingSortAlgorithm(gcnew SimpleDistance());
-			_trackCollection = annealingAlgorithm->sort(bw, _trackCollection);
-			//GeneticSortAlgorithm^ geneticAlgorithm = gcnew GeneticSortAlgorithm(gcnew SimpleDistance());
-			//_trackCollection = geneticAlgorithm->sort(bw, _trackCollection);
+			_trackCollection = _sortAlgorithm->sort(bw, _trackCollection);
 		}
 		return _trackCollection;
 	}
 
 	TrackCollection^ Presenter::loadTracks(ComponentModel::BackgroundWorker^ bw, array<String^>^ fileEntries)
 	{
-		IEnumerator^ files = fileEntries->GetEnumerator();
+		IEnumerator^ filesEnum = fileEntries->GetEnumerator();
 		TrackCollection^ collection = gcnew TrackCollection();
-		int cpt = 1;
+		int count = 1;
 
-		while (files->MoveNext() && !bw->CancellationPending)
+		while (filesEnum->MoveNext() && !bw->CancellationPending)
 		{
-			String^ filePath = safe_cast<String^>(files->Current);
+			String^ filePath = safe_cast<String^>(filesEnum->Current);
 
 			if (IO::Directory::Exists(filePath))
 			{
-				IEnumerator^ dirFiles = IO::Directory::GetFiles(filePath)->GetEnumerator();
+				IEnumerator^ filesInDirectoryEnum = IO::Directory::GetFiles(filePath)->GetEnumerator();
 
-				while (dirFiles->MoveNext() && !bw->CancellationPending)
+				while (filesInDirectoryEnum->MoveNext() && !bw->CancellationPending)
 				{
-					String^ dirFilePath = safe_cast<String^>(dirFiles->Current);
+					String^ filePathInDirectory = safe_cast<String^>(filesInDirectoryEnum->Current);
 
-					if (Utils::getExtension(dirFilePath)->Contains("mp3"))
+					if (Utils::getExtension(filePathInDirectory)->Contains("mp3"))
 					{
-						Track^ track = gcnew Track(dirFilePath);
+						Track^ track = gcnew Track(filePathInDirectory);
 						collection->safeAdd(track);
 					}
 				}
@@ -76,7 +82,7 @@ namespace AutoMixUI {
 				Track^ track = gcnew Track(filePath);
 				collection->safeAdd(track);
 			}
-			bw->ReportProgress((int)500*cpt++ / fileEntries->Length);
+			bw->ReportProgress((int)500 * count++ / fileEntries->Length);
 		}
 
 		_trackCollection->concat(collection);
@@ -84,7 +90,7 @@ namespace AutoMixUI {
 		bw->ReportProgress(500);
 
 		_dataExtractionEngine->extractData(bw, collection);
-		getMyRightsBack();
+		retrieveControlOnCollection();
 
 		_trackCollection->purge();
 		return _trackCollection;
@@ -92,24 +98,24 @@ namespace AutoMixUI {
 
 	void Presenter::removeTracks(Generic::List<String^>^ selection)
 	{
-		for each (String^ name in selection)
+		for each (String^ trackName in selection)
 		{
-			_trackCollection->Remove(name);
+			_trackCollection->Remove(trackName);
 		}
 		notify();
 	}
 
-	void Presenter::moveTrack(int index, String^ name)
+	void Presenter::moveTrack(int newIndex, String^ trackName)
 	{
-		if (index < 0 && index >= _trackCollection->Count)
+		if (newIndex < 0 && newIndex >= _trackCollection->Count)
 		{
 			notify();
 			return;
 		}
 
-		Track^ t = _trackCollection->search(name);
-		_trackCollection->Remove(t);
-		_trackCollection->Insert(index, t);
+		Track^ track = _trackCollection->search(trackName);
+		_trackCollection->Remove(track);
+		_trackCollection->Insert(newIndex, track);
 	}
 
 	void Presenter::exportTrackList(System::ComponentModel::BackgroundWorker^ bw, String^ destinationFile)
@@ -118,6 +124,11 @@ namespace AutoMixUI {
 		{
 			_trackCollection->exportToMP3(bw, destinationFile);
 		}
+	}
+
+	void Presenter::exportPlaylistInTextFile(System::String^ outputFile)
+	{
+		_trackCollection->exportToText(outputFile);
 	}
 
 	void Presenter::clearDataBase()
@@ -162,7 +173,7 @@ namespace AutoMixUI {
 		return _mp3Playing->getLength();
 	}
 
-	void Presenter::getMyRightsBack()
+	void Presenter::retrieveControlOnCollection()
 	{
 		_trackCollection = TrackCollection::CopyFrom(_trackCollection);
 	}

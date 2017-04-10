@@ -1921,6 +1921,8 @@
 		<row><td>naudio.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NAudio.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\NAudio-1.8.0\NAudio.xml</td><td>1</td><td/></row>
 		<row><td>newtonsoft.json.dll</td><td>Newtonsoft.Json.dll</td><td>NEWTON~1.DLL|Newtonsoft.Json.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Json.NET\Newtonsoft.Json.dll</td><td>1</td><td/></row>
 		<row><td>newtonsoft.json.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>NEWTON~1.XML|Newtonsoft.Json.xml</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\Json.NET\Newtonsoft.Json.xml</td><td>1</td><td/></row>
+		<row><td>regid.2017_02.ecole.ensicaen</td><td>ISO19770_SystemTag</td><td>REGID2~1.SWI|regid.2017-02.ecole.ensicaen.fr_75A9EAA8-D6A1-4EB8-A7D1-DDC94B6F070D.swidtag</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Software Installer\AutoMix Software Installer\Express\Interm\regid.2017-02.ecole.ensicaen.fr_75A9EAA8-D6A1-4EB8-A7D1-DDC94B6F070D.swidtag</td><td>1</td><td/></row>
+		<row><td>regid.2017_02.ecole.ensicaen1</td><td>ISO19770_LocalTag</td><td>REGID2~1.SWI|regid.2017-02.ecole.ensicaen.fr_75A9EAA8-D6A1-4EB8-A7D1-DDC94B6F070D.swidtag</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Software Installer\AutoMix Software Installer\Express\Interm\regid.2017-02.ecole.ensicaen.fr_75A9EAA8-D6A1-4EB8-A7D1-DDC94B6F070D.swidtag</td><td>1</td><td/></row>
 		<row><td>system.data.sqlite.dll</td><td>System.Data.SQLite.dll</td><td>SYSTEM~1.DLL|System.Data.SQLite.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Data Management\External\System.Data.SQLite.dll</td><td>1</td><td/></row>
 		<row><td>vcruntime140.dll</td><td>vcruntime140.dll</td><td>VCRUNT~1.DLL|vcruntime140.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\AutoMix Software Installer\vcruntime140.dll</td><td>1</td><td/></row>
 	</table>
@@ -2676,7 +2678,7 @@
 		<row><td>COMPANY_NAME</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>832926672</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>161854419</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue. Go to https://www.microsoft.com/net/download/framework to download it.</td><td>0</td><td/><td>1512402060</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
@@ -3894,9 +3896,9 @@
 		<col def="V0">Data</col>
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
-		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
-		<row><td>_Built1_23A65542C2AF41D49FC26F8976C0F03B.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
-		<row><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\Logo_automix.ico</td><td>0</td></row>
+		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\images\logo.ico</td><td>0</td></row>
+		<row><td>_Built1_0D8821D2FB804A27A3523CE552E406A1.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\images\logo.ico</td><td>0</td></row>
+		<row><td>_Built_A2BD90870B234E58BEA37E3816049261.exe</td><td/><td>&lt;VSSolutionFolder&gt;\AutoMix UI\images\logo.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -4029,7 +4031,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{7BF99722-4740-47FD-9451-204726B88692}</td></row>
 		<row><td>ISUSSignature</td><td>{7D45CB3D-8303-49D4-AE67-BFA7EAB8411A}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewObjects,viewShortcuts,viewRegistry,viewIniFiles,viewFileExtensions,viewServices,viewVRoots,viewEnvironmentVariables,viewUI,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewUpgradePaths</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewObjects,viewShortcuts,viewRegistry,viewIniFiles,viewFileExtensions,viewServices,viewVRoots,viewEnvironmentVariables,viewUI,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewUpgradePaths,viewISToday,viewLearnMore,viewUpdateService</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4409,7 +4411,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{D815BBE7-63A2-4E0E-A82D-31FA496A8CEE}</td><td/></row>
 		<row><td>ProductName</td><td>AutoMix Software Installer</td><td/></row>
-		<row><td>ProductVersion</td><td>0.5.5.000</td><td/></row>
+		<row><td>ProductVersion</td><td>1.0.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
@@ -4573,8 +4575,8 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>lespro_1_lesprojecteurs</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_194C3891248B474DAA5EFB7AE722AF66.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_23A65542C2AF41D49FC26F8976C0F03B.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>lespro_1_lesprojecteurs</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_A2BD90870B234E58BEA37E3816049261.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>AutoMix_UI.Primary_Output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_0D8821D2FB804A27A3523CE552E406A1.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

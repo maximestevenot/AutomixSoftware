@@ -10,10 +10,8 @@
 
 #include "Track.h"
 #include "TrackCollection.h"
-
 #include "IExtraction.h"
 #include "IAudioDataExtraction.h"
-
+#include "IExportation.h"
 #include "DataBase.h"
-
 #include "Utils.h"

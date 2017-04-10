@@ -24,17 +24,17 @@ namespace AutoMixDataManagement {
 	{
 		gcnew DataBase();
 		initExecConfiguration();
-		exploredTracks = 0;
+		ExploredTracks = 0;
 	}
 
 	void AudioDataExtraction::extractData(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ trackCollection)
 	{
 		CancellationTokenSource^ cts = gcnew CancellationTokenSource();
-		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(bw, trackCollection->Count,cts, _tempDirectory);
+		DelegateAudioDataExtraction^ d = gcnew DelegateAudioDataExtraction(bw, trackCollection->Count, cts, _tempDirectory);
 		ParallelOptions^ po = gcnew ParallelOptions();
 		po->CancellationToken = cts->Token;
-		po->MaxDegreeOfParallelism = (int) Math::Ceiling(System::Environment::ProcessorCount / 2.);
-		exploredTracks = 0;
+		po->MaxDegreeOfParallelism = (int)Math::Ceiling(System::Environment::ProcessorCount / 2.);
+		ExploredTracks = 0;
 		try
 		{
 			Parallel::ForEach(trackCollection, po, gcnew Action<Track^>(d, &DelegateAudioDataExtraction::delegateExtraction));
@@ -48,23 +48,30 @@ namespace AutoMixDataManagement {
 	void AudioDataExtraction::initExecConfiguration()
 	{
 
-		String^ temppath = Path::GetTempPath() + "AutomixSoftware";
+		String^ tempPath = Path::GetTempPath() + "AutomixSoftware";
 
-		if (!Directory::Exists(temppath))
+		if (!Directory::Exists(tempPath))
 		{
-			_tempDirectory = Directory::CreateDirectory(temppath);
+			_tempDirectory = Directory::CreateDirectory(tempPath);
 		}
 		else
 		{
-			System::IO::Directory::Delete(temppath, true);
-			_tempDirectory = Directory::CreateDirectory(temppath);
+			System::IO::Directory::Delete(tempPath, true);
+			_tempDirectory = Directory::CreateDirectory(tempPath);
 		}
 
-		String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
-		StreamWriter^ sw = gcnew StreamWriter(profileName);
-		sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
+		try
+		{
+			String^ profileName = _tempDirectory->FullName + "\\profile.yaml";
+			StreamWriter^ sw = gcnew StreamWriter(profileName);
+			sw->Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]\n\
     gfccStats : [\"mean\"]\nrhythm :\n    stats : [\"mean\"]\ntonal :\n\
     stats : [\"mean\"]");
-		sw->Close();
+			sw->Close();
+		}
+		catch (System::IO::IOException^ e)
+		{
+			System::Diagnostics::Debug::WriteLine(e->Message);
+		}
 	}
 }

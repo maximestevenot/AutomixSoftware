@@ -10,12 +10,33 @@
 
 namespace AutoMixDataManagement {
 
+	/// <summary>
+	/// Provides some tools to manipulate strings
+	/// </summary>
 	public ref class Utils
 	{
 	public:
 		
+		/// <summary>
+		/// Extract the name of a file (including extension) from a path
+		/// </summary>
+		/// <param name="path">The file path</param>
+		/// <param name="outputFile">The name in a new <c>String^</c></param>
 		static System::String^ nameFromPath(System::String^ path);
+
+		/// <summary>
+		/// Extract the extension of a file name
+		/// </summary>
+		/// <param name="path">The file name</param>
+		/// <param name="outputFile">The extension in a new <c>String^</c></param>
 		static System::String^ getExtension(System::String^ fileName);
+
+		/// <summary>
+		/// Convert a musical key into Openkey notation
+		/// </summary>
+		/// <param name="key">The music key</param>
+		/// <param name="scale">The music scale : major or minor</param>
+		/// <param name="outputFile">The openkey in a new <c>String^</c></param>
 		static System::String^ convertToOpenKey(System::String^ key, System::String^ scale);
 	};
 }

@@ -179,8 +179,8 @@ namespace AutoMixDataManagement {
 			}
 			reader->Close();
 		}
-		Interlocked::Increment(AudioDataExtraction::exploredTracks);
-		bw->ReportProgress((int)500 + 500 * AudioDataExtraction::exploredTracks / nbTracks);
+		Interlocked::Increment(AudioDataExtraction::ExploredTracks);
+		bw->ReportProgress((int)500 + 500 * AudioDataExtraction::ExploredTracks / nbTracks);
 	}
 
 	unsigned int ExecutableExtraction::DoubleToUIntLists(double old)
