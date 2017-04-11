@@ -2678,7 +2678,7 @@
 		<row><td>COMPANY_NAME</td><td>1033</td><td>LesProjecteurs</td><td>0</td><td/><td>832926672</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>161854419</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue. Go to https://www.microsoft.com/net/download/framework to download it.</td><td>0</td><td/><td>1512402060</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>161865354</td></row>
@@ -4031,7 +4031,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{7BF99722-4740-47FD-9451-204726B88692}</td></row>
 		<row><td>ISUSSignature</td><td>{7D45CB3D-8303-49D4-AE67-BFA7EAB8411A}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewObjects,viewShortcuts,viewRegistry,viewIniFiles,viewFileExtensions,viewServices,viewVRoots,viewEnvironmentVariables,viewUI,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewUpgradePaths</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewAppFiles,viewObjects,viewShortcuts,viewRegistry,viewIniFiles,viewFileExtensions,viewServices,viewVRoots,viewEnvironmentVariables,viewUI,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewUpgradePaths,viewISToday,viewLearnMore,viewUpdateService</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4411,7 +4411,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS</td><td>##IDS_PROGMSG_IIS_ROLLBACKWEBSERVICEEXTENSIONS##</td><td/></row>
 		<row><td>ProductCode</td><td>{D815BBE7-63A2-4E0E-A82D-31FA496A8CEE}</td><td/></row>
 		<row><td>ProductName</td><td>AutoMix Software Installer</td><td/></row>
-		<row><td>ProductVersion</td><td>0.8.0</td><td/></row>
+		<row><td>ProductVersion</td><td>1.0.0</td><td/></row>
 		<row><td>ProgressType0</td><td>install</td><td/></row>
 		<row><td>ProgressType1</td><td>Installing</td><td/></row>
 		<row><td>ProgressType2</td><td>installed</td><td/></row>
