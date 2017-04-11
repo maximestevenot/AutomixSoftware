@@ -17,20 +17,20 @@ namespace AutoMixDataManagement {
 
 	public:
 		DataBase();
-		DataBase(System::String^ path);
+		DataBase(System::String^);
 
 		void addTrack(Track^);
 		void clear();
 		void extractData(Track^ track);
 		bool isInDataBase(Track^);
-	private:
 
+	private:
 		void connectToDatabase(System::String^);
+		void initializeDataBaseConnection(System::String^);
 		void createTable();
 
 		static array<unsigned int>^ extractFromString(System::String^);
 
-		System::String^ _dbPath;
 		System::Data::SQLite::SQLiteConnection^ _dbConnection;
 	};
 }

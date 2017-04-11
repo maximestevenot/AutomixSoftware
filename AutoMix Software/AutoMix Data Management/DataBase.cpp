@@ -16,13 +16,27 @@ using namespace System::Collections::Generic;
 
 namespace AutoMixDataManagement {
 
-	DataBase::DataBase() : DataBase("AutoMixSoftware.db") {}
+	DataBase::DataBase()
+	{
+		System::String^ dbDir = System::Environment::GetFolderPath(System::Environment::SpecialFolder::ApplicationData) + "\\AutomixSoftware";
 
-	DataBase::DataBase(String^ path)
+		if (!Directory::Exists(dbDir))
+		{
+			Directory::CreateDirectory(dbDir);
+		}
+
+		initializeDataBaseConnection(dbDir + "\\automix_software_collection.db");
+	}
+
+	DataBase::DataBase(System::String ^ path)
+	{
+		initializeDataBaseConnection(path);
+	}
+
+	void DataBase::initializeDataBaseConnection(String^ path)
 	{
 		if (!File::Exists(path))
 		{
-			_dbPath = path;
 			SQLiteConnection::CreateFile(path);
 			connectToDatabase(path);
 			createTable();
@@ -32,7 +46,6 @@ namespace AutoMixDataManagement {
 		{
 			connectToDatabase(path);
 		}
-
 	}
 
 	void DataBase::connectToDatabase(String^ path)
