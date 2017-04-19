@@ -340,12 +340,16 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
+		<row><td>AutoMix.resources.dll</td><td>{1C3AABE4-B7E2-459B-AC25-D15FB56B2CFA}</td><td>FR</td><td>2</td><td/><td>automix.resources.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>AutoMix.resources.dll1</td><td>{D4EB44E9-0669-4FB0-B805-48C0002FDD4A}</td><td>FR_FR</td><td>2</td><td/><td>automix.resources.dll1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>AutoMix_AI.Primary_Output</td><td>{F4DECE48-0324-4F7B-9FEB-592D392D855B}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_ai.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>AutoMix_Data_Management.Primary_Output</td><td>{3D6C8730-C64B-4229-9752-A93D7AFBE7BC}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_data_management.prim</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>AutoMix_UI.Primary_Output</td><td>{2F21EF0F-B8A4-4AB5-BB3B-1FD8864406AD}</td><td>INSTALLDIR</td><td>2</td><td/><td>automix_ui.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISO19770_LocalTag</td><td>{8B125ECC-9C40-4DEC-80B0-00A99EF8784D}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISO19770_SystemTag</td><td>{FA857035-6896-400B-8856-AF413541E49A}</td><td>CommonAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{2932456C-4CEF-4FB4-BAC3-4A174668D1D9}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{B6EF6F44-3B9A-4C51-AEA4-5FDBAA23D569}</td><td>FR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{B247588B-49B4-4179-AA75-49AF4BA3AACC}</td><td>FR_FR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>NAudio.dll</td><td>{0FF51959-A8C8-442E-AA21-953A0A3BBBF9}</td><td>INSTALLDIR</td><td>2</td><td/><td>naudio.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Newtonsoft.Json.dll</td><td>{FA6E0097-F068-4C89-8DC9-AF86CADA79E0}</td><td>INSTALLDIR</td><td>2</td><td/><td>newtonsoft.json.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>System.Data.SQLite.dll</td><td>{F627E5B2-DEC0-4FA1-9B29-89E30532E559}</td><td>INSTALLDIR</td><td>2</td><td/><td>system.data.sqlite.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1062,12 +1066,20 @@
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>CommonAppDataFolder</td><td>ISO19770_SystemTag</td></row>
+		<row><td>FR</td><td>AutoMix.resources.dll</td></row>
+		<row><td>FR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>FR_FR</td><td>AutoMix.resources.dll1</td></row>
+		<row><td>FR_FR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
+		<row><td>INSTALLDIR</td><td>AutoMix.resources.dll</td></row>
+		<row><td>INSTALLDIR</td><td>AutoMix.resources.dll1</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_AI.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_Data_Management.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>AutoMix_UI.Primary_Output</td></row>
 		<row><td>INSTALLDIR</td><td>ISO19770_LocalTag</td></row>
 		<row><td>INSTALLDIR</td><td>ISO19770_SystemTag</td></row>
 		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>NAudio.dll</td></row>
 		<row><td>INSTALLDIR</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>INSTALLDIR</td><td>System.Data.SQLite.dll</td></row>
@@ -1162,6 +1174,8 @@
 		<row><td>CommonFilesFolder</td><td>TARGETDIR</td><td>.:Common</td><td/><td>0</td><td/></row>
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
+		<row><td>FR</td><td>INSTALLDIR</td><td>fr</td><td/><td>0</td><td/></row>
+		<row><td>FR_FR</td><td>INSTALLDIR</td><td>fr-FR</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
@@ -1886,10 +1900,14 @@
 	<table name="FeatureComponents">
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>AlwaysInstall</td><td>AutoMix.resources.dll</td></row>
+		<row><td>AlwaysInstall</td><td>AutoMix.resources.dll1</td></row>
 		<row><td>AlwaysInstall</td><td>AutoMix_AI.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>AutoMix_Data_Management.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>AutoMix_UI.Primary_Output</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>NAudio.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Newtonsoft.Json.dll</td></row>
 		<row><td>AlwaysInstall</td><td>System.Data.SQLite.dll</td></row>
@@ -1911,6 +1929,8 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
+		<row><td>automix.resources.dll</td><td>AutoMix.resources.dll</td><td>AUTOMI~1.DLL|AutoMix.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\Release\fr\AutoMix.resources.dll</td><td>1</td><td/></row>
+		<row><td>automix.resources.dll1</td><td>AutoMix.resources.dll1</td><td>AUTOMI~1.DLL|AutoMix.resources.dll</td><td>0</td><td/><td/><td/><td>1</td><td>D:\Fichiers\Documents\projet_2a\AutoMix Software\Release\fr-FR\AutoMix.resources.dll</td><td>1</td><td/></row>
 		<row><td>automix_ai.primary_output</td><td>AutoMix_AI.Primary_Output</td><td>AutoMix AI.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix AI&gt;|Built</td><td>3</td><td/></row>
 		<row><td>automix_data_management.prim</td><td>AutoMix_Data_Management.Primary_Output</td><td>AutoMix Data Management.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix Data Management&gt;|Built</td><td>3</td><td/></row>
 		<row><td>automix_ui.primary_output</td><td>AutoMix_UI.Primary_Output</td><td>AutoMix UI.Primary Output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;AutoMix UI&gt;|Built</td><td>3</td><td/></row>
@@ -2066,12 +2086,16 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
+		<row><td>AutoMix.resources.dll</td><td/><td/><td>_C0BD089E_59B7_47B2_99F1_5BD29E7507C9_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>AutoMix.resources.dll1</td><td/><td/><td>_C6A6F5AD_6DA1_4829_A853_3FCFC576B53A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>AutoMix_AI.Primary_Output</td><td/><td/><td>_942C316A_2FBD_46E4_9A59_F7D0A3B157A0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>AutoMix_Data_Management.Primary_Output</td><td/><td/><td>_1E8AFA07_3E57_4FC7_B60D_BB3BE92095BC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>AutoMix_UI.Primary_Output</td><td/><td/><td>_C7CDEC81_AB0D_4F6A_8501_929F9D7C8B42_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISO19770_LocalTag</td><td/><td/><td>_3F95F94F_6B34_4C26_B23C_82CA6415A349_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISO19770_SystemTag</td><td/><td/><td>_CEEEA1C8_28A4_43FA_A53A_9856C86E1C69_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_04679506_E6BA_4D64_903D_E38359EEFF1A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_718048F0_7728_45E6_B38C_68889AC94D1F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_5BF44D3E_3B3B_436A_8A35_BD7E96A5006C_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>NAudio.dll</td><td/><td/><td>_C09D4EDE_FD4D_44C3_B75C_A55592EF56C2_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Newtonsoft.Json.dll</td><td/><td/><td>_38BBE852_509C_4FBB_A77F_22B0BA562AC6_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>System.Data.SQLite.dll</td><td/><td/><td>_9EA46F1B_DDE5_4CC8_B7F2_0C722647AA3B_FILTER</td><td/><td/><td/><td/></row>
