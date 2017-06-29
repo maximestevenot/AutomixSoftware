@@ -73,6 +73,9 @@
     <EmbeddedResource Include="AboutForm.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+    <EmbeddedResource Include="AboutForm.fr.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Image Include="images\pause_icon.bmp">
