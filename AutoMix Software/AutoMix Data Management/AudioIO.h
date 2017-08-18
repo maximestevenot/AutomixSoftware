@@ -35,14 +35,33 @@ namespace AutoMixDataManagement {
 		static void Mp3ToWav(System::String^ inputFile, System::String^ outputFile);
 
 		/// <summary>
-		/// Convert an WAV into MP3 file
+		/// Convert a WAV into MP3 file
 		/// </summary>
-		/// <param name="inputFile">The path of the WAV file</param>
-		/// <param name="outputFile">The path of the MP3 file</param>
+		/// <param name="inputFile">Input WAV files path</param>
+		/// <param name="outputFile">Output MP3 file path</param>
+		/// <param name="id3Tag">MP3 tags</param>
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile, NAudio::Lame::ID3TagData^ id3Tag);
+
+		/// <summary>
+		/// Convert a WAV into MP3 file
+		/// </summary>
+		/// <param name="inputFile">Input WAV files path</param>
+		/// <param name="outputFile">Output MP3 file path</param>
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile);
 
+		/// <summary>
+		/// Concat a list of WAV in a MP3 file
+		/// </summary>
+		/// <param name="inputFiles">List of input WAV files paths</param>
+		/// <param name="outputFile">Output MP3 file path</param>
+		/// <param name="id3Tag">MP3 tags</param>
 		static void WavToMp3(System::Collections::Generic::List <System::String^>^ inputFiles, System::String ^ outputFile, NAudio::Lame::ID3TagData^ id3Tag);
+
+		/// <summary>
+		/// Concat a list of WAV in a MP3 file
+		/// </summary>
+		/// <param name="inputFiles">List of input WAV files paths</param>
+		/// <param name="outputFile">Output MP3 file path</param>
 		static void WavToMp3(System::Collections::Generic::List <System::String^>^ inputFiles, System::String ^ outputFile);
 
 		/// <summary>
@@ -53,12 +72,17 @@ namespace AutoMixDataManagement {
 		static System::String^ Mp3Md5Hash(System::String^ path);
 
 		/// <summary>
-		/// Create an Id3v2 tag for a specified MP3 file
+		/// Create a <c>NAudio::Wave::Id3v2Tag</c> for a specified MP3 file
 		/// </summary>
 		/// <param name="path">The path of the MP3 file</param>
-		/// <returns> A new <c>Id3v2Tag^</c></returns>
+		/// <returns> A new <c>NAudio::Wave::Id3v2Tag^</c></returns>
 		static NAudio::Wave::Id3v2Tag^ CreateId3v2Tag(System::String^ path);
 
+		/// <summary>
+		/// Create a <c>NAudio::Lame::ID3TagData</c> for a specified MP3 file
+		/// </summary>
+		/// <param name="path">The path of the MP3 file</param>
+		/// <returns> A new <c>NAudio::Lame::ID3TagData^</c></returns>
 		static NAudio::Lame::ID3TagData^ CreateID3TagData(System::String ^ outputFile);
 	};
 }

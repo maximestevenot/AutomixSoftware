@@ -8,6 +8,7 @@
 
 #pragma once
 #include "AutoMixDataManagement.h"
+#include "AudioIO.h"
 
 namespace AutoMixDataManagement {
 
@@ -21,7 +22,6 @@ namespace AutoMixDataManagement {
 		property int TransitionDuration { int get(); void set(int); }
 
 	private:
-		void mergeTempFiles(System::ComponentModel::BackgroundWorker^ bw, System::String^);
 		void createNewTempFile();
 		void finalizeLastTempWav();
 		void deleteTempFiles();
@@ -34,7 +34,7 @@ namespace AutoMixDataManagement {
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
 
-		int _samplesPerSecond;
+		static initonly int SAMPLES_PER_SECOND = AudioIO::WAVE_FORMAT->AverageBytesPerSecond / 4;;
 		int _transitionDuration;
 		int _overlaySize;
 	};
