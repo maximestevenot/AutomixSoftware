@@ -15,6 +15,13 @@ namespace AutoMixDataManagement {
 	public ref class IExportation abstract
 	{
 	public:
+		/// <summary>
+		/// Export a <c>TrackCollection</c> in a single audio file.
+		/// Different mix style can be used according to the implementation of this method.
+		/// </summary>
+		/// <param name="bw">An instance of BackgroindWorker</param>
+		/// <param name="trackCollection">Collection to export</param>
+		/// <param name="outputFile">Path of the destination file</param>
 		void virtual exportMix(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ collection, System::String^ outputFile) abstract;
 	};
 
