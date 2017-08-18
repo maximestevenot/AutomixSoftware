@@ -18,6 +18,8 @@ namespace AutoMixDataManagement {
 	{
 	public:
 
+		static initonly NAudio::Wave::WaveFormat^ WAVE_FORMAT = NAudio::Wave::WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+
 		/// <summary>
 		/// Export a <c>TrackCollection</c> as text file containing all information
 		/// </summary>
@@ -38,6 +40,8 @@ namespace AutoMixDataManagement {
 		/// <param name="inputFile">The path of the WAV file</param>
 		/// <param name="outputFile">The path of the MP3 file</param>
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile);
+
+		static void WavToMp3(System::Collections::Generic::List <System::String^>^ inputFiles, System::String ^ outputFile);
 
 		/// <summary>
 		/// Compute the MD5 hash of an MP3 file

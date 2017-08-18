@@ -46,6 +46,20 @@ namespace AutoMixDataManagement {
 		reader->Close();
 	}
 
+	void AudioIO::WavToMp3(List <String^>^ inputFiles, System::String ^ outputFile)
+	{
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, WAVE_FORMAT, LAMEPreset::ABR_320, nullptr);
+	
+		for each (auto inputFile in inputFiles) 
+		{
+			WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
+			reader->CopyTo(writer);
+			reader->Close();
+		}
+		writer->Close();
+	}
+
+
 	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
 	{
 		Mp3FileReader^ reader;

@@ -28,9 +28,8 @@ namespace AutoMixDataManagement {
 		void fadeInOut(Track^ track);
 		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
 
-		NAudio::Wave::WaveFormat^ WAVE_FORMAT;
-		System::String^ _tempPath;
-		System::String^ _tempWav;
+		System::String^ _tempDirPath;
+		System::String^ _tempWavPath;
 		System::Collections::Generic::List <System::String^>^ _tempFileList;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
