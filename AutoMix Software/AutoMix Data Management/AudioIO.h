@@ -39,8 +39,10 @@ namespace AutoMixDataManagement {
 		/// </summary>
 		/// <param name="inputFile">The path of the WAV file</param>
 		/// <param name="outputFile">The path of the MP3 file</param>
+		static void WavToMp3(System::String^ inputFile, System::String^ outputFile, NAudio::Lame::ID3TagData^ id3Tag);
 		static void WavToMp3(System::String^ inputFile, System::String^ outputFile);
 
+		static void WavToMp3(System::Collections::Generic::List <System::String^>^ inputFiles, System::String ^ outputFile, NAudio::Lame::ID3TagData^ id3Tag);
 		static void WavToMp3(System::Collections::Generic::List <System::String^>^ inputFiles, System::String ^ outputFile);
 
 		/// <summary>
@@ -55,6 +57,8 @@ namespace AutoMixDataManagement {
 		/// </summary>
 		/// <param name="path">The path of the MP3 file</param>
 		/// <returns> A new <c>Id3v2Tag^</c></returns>
-		static NAudio::Wave::Id3v2Tag^ CreateMp3Tag(System::String^ path);
+		static NAudio::Wave::Id3v2Tag^ CreateId3v2Tag(System::String^ path);
+
+		static NAudio::Lame::ID3TagData^ CreateID3TagData(System::String ^ outputFile);
 	};
 }

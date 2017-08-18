@@ -24,7 +24,7 @@ namespace AutoMixDataManagement {
 		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 		int count = 1;
 
-		Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
+		Id3v2Tag^ tag = AudioIO::CreateId3v2Tag(outputFile);
 		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
 
 		for each (auto track in collection)

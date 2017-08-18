@@ -23,7 +23,7 @@ namespace AutoMixDataManagement {
 	private:
 		void mergeTempFiles(System::ComponentModel::BackgroundWorker^ bw, System::String^);
 		void createNewTempFile();
-		void finalizeTempWav();
+		void finalizeLastTempWav();
 		void deleteTempFiles();
 		void fadeInOut(Track^ track);
 		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);

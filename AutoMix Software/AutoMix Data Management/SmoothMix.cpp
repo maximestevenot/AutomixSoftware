@@ -72,7 +72,7 @@ namespace AutoMixDataManagement {
 
 		if (!bw->CancellationPending)
 		{
-			finalizeTempWav();
+			finalizeLastTempWav();
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
 			mergeTempFiles(bw, outputFile);
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
@@ -84,10 +84,10 @@ namespace AutoMixDataManagement {
 	{
 		//Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
 
-		//Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
+		//Id3v2Tag^ tag = AudioIO::CreateId3v2Tag(outputFile);
 		//outputStream->Write(tag->RawData, 0, tag->RawData->Length);
 
-		AudioIO::WavToMp3(_tempFileList, outputFile);
+		AudioIO::WavToMp3(_tempFileList, outputFile, AudioIO::CreateID3TagData(outputFile));
 
 		/*for each (auto path in _tempFileList)
 		{
@@ -174,7 +174,7 @@ namespace AutoMixDataManagement {
 		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::WAVE_FORMAT);
 	}
 
-	void SmoothMix::finalizeTempWav()
+	void SmoothMix::finalizeLastTempWav()
 	{
 		_waveFileWriter->WriteSamples(_savedOverlay, 0, _savedOverlay->Length);
 		_waveFileWriter->Flush();
