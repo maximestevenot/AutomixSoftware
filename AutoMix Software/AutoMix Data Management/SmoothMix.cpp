@@ -119,7 +119,7 @@ namespace AutoMixDataManagement {
 
 		_tempFileList->Add(_tempWavPath);
 
-		_tempWavPath = _tempDirPath + "_automix_" + (_tempFileList->Count + 1) + ".wav";
+		_tempWavPath = _tempDirPath + "automix_" + (_tempFileList->Count + 1) + ".wav";
 		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::WAVE_FORMAT);
 	}
 

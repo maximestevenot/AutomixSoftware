@@ -40,7 +40,7 @@ namespace AutoMixDataManagement {
 	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile, ID3TagData^ id3Tag)
 	{
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, LAMEPreset::ABR_320, id3Tag);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, EXPORT_QUALITY, id3Tag);
 		reader->CopyTo(writer);
 		writer->Close();
 		reader->Close();
@@ -53,14 +53,16 @@ namespace AutoMixDataManagement {
 
 	void AudioIO::WavToMp3(List <String^>^ inputFiles, System::String ^ outputFile, ID3TagData^ id3Tag)
 	{
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, WAVE_FORMAT, LAMEPreset::ABR_320, id3Tag);
-	
-		for each (auto inputFile in inputFiles) 
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, WAVE_FORMAT, EXPORT_QUALITY, id3Tag);
+
+		for each (auto inputFile in inputFiles)
 		{
 			WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
 			reader->CopyTo(writer);
 			reader->Close();
 		}
+
+		writer->Flush();
 		writer->Close();
 	}
 

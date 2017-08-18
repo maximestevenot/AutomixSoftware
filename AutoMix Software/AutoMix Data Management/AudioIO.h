@@ -19,6 +19,7 @@ namespace AutoMixDataManagement {
 	public:
 
 		static initonly NAudio::Wave::WaveFormat^ WAVE_FORMAT = NAudio::Wave::WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+		static initonly NAudio::Lame::LAMEPreset EXPORT_QUALITY = NAudio::Lame::LAMEPreset::INSANE;
 
 		/// <summary>
 		/// Export a <c>TrackCollection</c> as text file containing all information
