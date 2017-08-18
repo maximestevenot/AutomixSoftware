@@ -19,6 +19,17 @@ namespace AutoMixDataManagement {
 	using namespace NAudio::Lame;
 	using namespace System::Security::Cryptography;
 
+	static AudioIO::AudioIO()
+	{
+		ExportQuality = NAudio::Lame::LAMEPreset::INSANE;
+		WAV_FORMAT = NAudio::Wave::WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+	}
+
+	WaveFormat^ AudioIO::TempWaveFormat::get()
+	{
+		return WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+	}
+
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
@@ -37,23 +48,25 @@ namespace AutoMixDataManagement {
 		WaveFileWriter::CreateWaveFile(outputFile, reader);
 	}
 
-	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile, ID3TagData^ id3Tag)
+	void AudioIO::WavToMp3(System::String ^ inputFile, System::String^ outputFile, ID3TagData^ id3Tag)
 	{
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, EXPORT_QUALITY, id3Tag);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, ExportQuality, id3Tag);
+
 		reader->CopyTo(writer);
-		writer->Close();
 		reader->Close();
+		writer->Flush();
+		writer->Close();
 	}
 
-	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
+	void AudioIO::WavToMp3(System::String ^ inputFile, System::String^ outputFile)
 	{
 		WavToMp3(inputFile, outputFile, nullptr);
 	}
 
-	void AudioIO::WavToMp3(List <String^>^ inputFiles, System::String ^ outputFile, ID3TagData^ id3Tag)
+	void AudioIO::WavToMp3(List <String^>^ inputFiles, System::String^ outputFile, ID3TagData^ id3Tag)
 	{
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, WAVE_FORMAT, EXPORT_QUALITY, id3Tag);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, TempWaveFormat, ExportQuality, id3Tag);
 
 		for each (auto inputFile in inputFiles)
 		{

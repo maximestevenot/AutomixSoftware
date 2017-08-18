@@ -33,8 +33,7 @@ namespace AutoMixDataManagement {
 		System::Collections::Generic::List <System::String^>^ _tempFileList;
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
-
-		static initonly int SAMPLES_PER_SECOND = AudioIO::WAVE_FORMAT->AverageBytesPerSecond / 4;;
+		static initonly int SAMPLES_PER_SECOND = AudioIO::TempWaveFormat->AverageBytesPerSecond / 4;
 		int _transitionDuration;
 		int _overlaySize;
 	};

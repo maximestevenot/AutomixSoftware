@@ -44,7 +44,7 @@ namespace AutoMixDataManagement {
 	{
 		_savedOverlay = nullptr;
 		_tempWavPath = _tempDirPath + "automix_1.wav";
-		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::WAVE_FORMAT);
+		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::TempWaveFormat);
 
 		int count = 1;
 		int tempFileDuration = 0;
@@ -120,7 +120,7 @@ namespace AutoMixDataManagement {
 		_tempFileList->Add(_tempWavPath);
 
 		_tempWavPath = _tempDirPath + "automix_" + (_tempFileList->Count + 1) + ".wav";
-		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::WAVE_FORMAT);
+		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::TempWaveFormat);
 	}
 
 	void SmoothMix::finalizeLastTempWav()

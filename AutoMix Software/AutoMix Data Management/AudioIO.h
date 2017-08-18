@@ -17,9 +17,20 @@ namespace AutoMixDataManagement {
 	public ref class AudioIO
 	{
 	public:
+		/// <summary>
+		/// Format of temp WAV files
+		/// </summary>
+		static property NAudio::Wave::WaveFormat^ TempWaveFormat { NAudio::Wave::WaveFormat^ get(); }
 
-		static initonly NAudio::Wave::WaveFormat^ WAVE_FORMAT = NAudio::Wave::WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
-		static initonly NAudio::Lame::LAMEPreset EXPORT_QUALITY = NAudio::Lame::LAMEPreset::INSANE;
+		/// <summary>
+		/// Quality of the exported MP3 file
+		/// </summary>
+		static property NAudio::Lame::LAMEPreset ExportQuality;
+
+		/// <summary>
+		/// Static constructor which initialize properties
+		/// </summary>
+		static AudioIO();
 
 		/// <summary>
 		/// Export a <c>TrackCollection</c> as text file containing all information
@@ -85,5 +96,8 @@ namespace AutoMixDataManagement {
 		/// <param name="path">The path of the MP3 file</param>
 		/// <returns> A new <c>NAudio::Lame::ID3TagData^</c></returns>
 		static NAudio::Lame::ID3TagData^ CreateID3TagData(System::String ^ outputFile);
+
+	private:
+		static initonly NAudio::Wave::WaveFormat^ WAV_FORMAT;
 	};
 }
