@@ -15,15 +15,15 @@ namespace AutoMixDataManagement {
 	public ref class SmoothMix : IExportation
 	{
 	public:
+		property int TransitionDuration;
+
 		SmoothMix();
 		SmoothMix(int);
-
 		void exportMix(System::ComponentModel::BackgroundWorker^ bw, TrackCollection^ collection, System::String^ outputFile) override;
-		property int TransitionDuration { int get(); void set(int); }
 
 	private:
 		void createNewTempFile();
-		void finalizeLastTempWav();
+		void finalizeLastTempFile();
 		void deleteTempFiles();
 		void fadeInOut(Track^ track);
 		array<float>^ applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer);
@@ -34,8 +34,6 @@ namespace AutoMixDataManagement {
 		NAudio::Wave::WaveFileWriter^ _waveFileWriter;
 		array<float>^ _savedOverlay;
 		static initonly int SAMPLES_PER_SECOND = AudioIO::TempWaveFormat->AverageBytesPerSecond / 4;
-		int _transitionDuration;
-		int _overlaySize;
 	};
 
 }
