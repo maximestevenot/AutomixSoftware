@@ -7,15 +7,15 @@
 // You should have received a copy of the License along with this program.
 
 using System;
-using System.IO;
-using System.Text;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
-using NAudio.Wave;
+using System.Text;
+using Automix_Data_Management.Model;
 using NAudio.Lame;
-using AutomixDataManagement.Model;
+using NAudio.Wave;
 
-namespace AutomixDataManagement
+namespace Automix_Data_Management
 {
     /// <summary>
     /// Provides some tools to manipulate audio files
@@ -25,13 +25,7 @@ namespace AutomixDataManagement
         /// <summary>
         /// Format of temp WAV files
         /// </summary>
-        public static WaveFormat TempWaveFormat
-        {
-            get
-            {
-                return WaveFormat.CreateIeeeFloatWaveFormat(44100, 2);
-            }
-        }
+        public static WaveFormat TempWaveFormat => WaveFormat.CreateIeeeFloatWaveFormat(44100, 2);
 
         /// <summary>
         /// Quality of the exported MP3 file
@@ -58,7 +52,7 @@ namespace AutomixDataManagement
             foreach (var t in trackCollection)
 
             {
-                sw.WriteLine(t.Name + " | " + t.DisplayDuration() + " | " + t.BPM + " | " + t.Key);
+                sw.WriteLine(t.Name + " | " + t.DisplayDuration() + " | " + t.Bpm + " | " + t.Key);
             }
             sw.Flush();
             sw.Close();
@@ -144,13 +138,13 @@ namespace AutomixDataManagement
             }
             catch (InvalidOperationException ex)
             {
-                System.Diagnostics.Debug.WriteLine(String.Format("Error when reading {0}", path));
+                System.Diagnostics.Debug.WriteLine($@"Error when reading {path}");
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return string.Empty;
             }
 
             Mp3Frame frame;
-            Byte[] audioData = new Byte[0];
+            var audioData = new byte[0];
             int readFrame = 0;
             int nbFrames = (int)reader.Length / 1152 / 4 / 1000 + 1;
 
@@ -158,8 +152,8 @@ namespace AutomixDataManagement
             {
                 if (readFrame == 0)
                 {
-                    int originalLength = audioData.Length;
-                    Array.Resize<Byte>(ref audioData, originalLength + frame.RawData.Length);
+                    var originalLength = audioData.Length;
+                    Array.Resize<byte>(ref audioData, originalLength + frame.RawData.Length);
                     Array.Copy(frame.RawData, 0, audioData, originalLength, frame.RawData.Length);
                 }
                 readFrame = (readFrame + 1) % nbFrames;
@@ -169,9 +163,9 @@ namespace AutomixDataManagement
             Byte[] audioDataHash = md5Hash.ComputeHash(audioData);
             var sBuilder = new StringBuilder();
 
-            for (int i = 0; i < audioDataHash.Length; i++)
+            foreach (byte b in audioDataHash)
             {
-                sBuilder.Append(audioDataHash[i].ToString("x2"));
+                sBuilder.Append(b.ToString("x2"));
             }
 
             return sBuilder.ToString();
@@ -180,28 +174,31 @@ namespace AutomixDataManagement
         /// <summary>
         /// Create a <c>NAudio.Lame.ID3TagData</c> for a specified MP3 file
         /// </summary>
-        /// <param name="path">The path of the MP3 file</param>
+        /// <param name="outputFile">The path of the MP3 file</param>
         /// <returns> A new <c>NAudio.Lame.ID3TagData</c></returns>
-        public static ID3TagData CreateID3TagData(string outputFile)
+        public static ID3TagData CreateId3TagData(string outputFile)
         {
-            var tag = new ID3TagData();
-            tag.Title = outputFile.Substring(outputFile.LastIndexOf("\\") + 1, outputFile.LastIndexOf(".mp3") - outputFile.LastIndexOf("\\") - 1); //TIT2
-            tag.Artist = Environment.UserName; //TPE1
-            tag.Album = "Automix Software Compilation"; //TALB
-            tag.Year = DateTime.Now.Year.ToString(); //TYER
-            tag.Comment = "Created with Automix Software"; //COMM
-            tag.Genre = "Mix"; //TCON
-            return tag;
+            return new ID3TagData
+            {
+                Title = outputFile.Substring(outputFile.LastIndexOf("\\", StringComparison.Ordinal) + 1,
+                     outputFile.LastIndexOf(".mp3", StringComparison.Ordinal) -
+                     outputFile.LastIndexOf("\\", StringComparison.Ordinal) - 1),
+                Artist = Environment.UserName,
+                Album = "Automix Software Compilation",
+                Year = DateTime.Now.Year.ToString(),
+                Comment = "Created with Automix Software",
+                Genre = "Mix"
+            };
         }
 
         /// <summary>
         /// Create a <c>NAudio.Wave.Id3v2Tag</c> for a specified MP3 file
         /// </summary>
-        /// <param name="path">The path of the MP3 file</param>
+        /// <param name="outputFile">The path of the MP3 file</param>
         /// <returns> A new <c>NAudio.Wave.Id3v2Tag</c></returns>
-        public static Id3v2Tag CreateId3v2Tag(string outputFile)
+        public static Id3v2Tag CreateId3V2Tag(string outputFile)
         {
-            var data = CreateID3TagData(outputFile);
+            var data = CreateId3TagData(outputFile);
             var tags = new Dictionary<string, string>
             {
                 { "TIT2", data.Title },

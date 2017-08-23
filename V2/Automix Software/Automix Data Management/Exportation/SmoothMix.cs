@@ -9,20 +9,20 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using AutomixDataManagement.Model;
+using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 
-namespace AutomixDataManagement.Exportation
+namespace Automix_Data_Management.Exportation
 {
-    class SmoothMix : IExportation
+    public class SmoothMix : IExportation
     {
         public int TransitionDuration { get; set; }
 
-        private static readonly int SAMPLES_PER_SECOND = AudioIO.TempWaveFormat.AverageBytesPerSecond / 4;
-        private string _tempDirPath;
+        private static readonly int SamplesPerSecond = AudioIO.TempWaveFormat.AverageBytesPerSecond / 4;
+        private readonly string _tempDirPath;
         private string _tempWavPath;
-        private List<string> _tempFileList;
+        private readonly List<string> _tempFileList;
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
 
@@ -67,7 +67,7 @@ namespace AutomixDataManagement.Exportation
             {
                 FinalizeLastTempFile();
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
-                AudioIO.WavToMp3(_tempFileList, outputFile, AudioIO.CreateID3TagData(outputFile));
+                AudioIO.WavToMp3(_tempFileList, outputFile, AudioIO.CreateId3TagData(outputFile));
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
             }
             DeleteTempFiles();
@@ -76,10 +76,10 @@ namespace AutomixDataManagement.Exportation
         private void FadeInOut(Track track)
         {
             var fileReader = new Mp3FileReader(track.Path);
-            var fade = new FadeInOutSampleProvider(WaveExtensionMethods.ToSampleProvider(fileReader), false);
+            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider(), false);
 
-            long bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SAMPLES_PER_SECOND;
-            int overlaySize = TransitionDuration * SAMPLES_PER_SECOND;
+            long bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SamplesPerSecond;
+            int overlaySize = TransitionDuration * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -108,9 +108,9 @@ namespace AutomixDataManagement.Exportation
             }
         }
 
-        private float[] ApplyOverlay(float[] trackBuffer, float[] overlayBuffer)
+        private static float[] ApplyOverlay(float[] trackBuffer, float[] overlayBuffer)
         {
-            for (int i = 0; i < overlayBuffer.Length; i++)
+            for (var i = 0; i < overlayBuffer.Length; i++)
             {
                 trackBuffer[i] += overlayBuffer[i];
             }

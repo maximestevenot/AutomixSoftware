@@ -7,9 +7,9 @@
 // You should have received a copy of the License along with this program.
 
 using System.ComponentModel;
-using AutomixDataManagement.Model;
+using Automix_Data_Management.Model;
 
-namespace AutomixDataManagement.Exportation
+namespace Automix_Data_Management.Exportation
 {
     public interface IExportation
     {

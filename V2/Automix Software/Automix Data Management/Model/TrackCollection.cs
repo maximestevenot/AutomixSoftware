@@ -8,15 +8,16 @@
 
 using System.Collections.Generic;
 using System.ComponentModel;
-using AutomixDataManagement.Exportation;
+using System.Linq;
+using Automix_Data_Management.Exportation;
 
-namespace AutomixDataManagement.Model
+namespace Automix_Data_Management.Model
 {
     public class TrackCollection : List<Track>
     {
         public static TrackCollection CopyFrom(TrackCollection old)
         {
-            TrackCollection newCollection = new TrackCollection();
+            var newCollection = new TrackCollection();
             foreach (Track t in old)
             {
                 newCollection.Add(Track.CopyFrom(t));
@@ -24,10 +25,10 @@ namespace AutomixDataManagement.Model
             return newCollection;
         }
 
-        public void ExportToMP3(BackgroundWorker bw, string outputFile)
+        public void ExportToMp3(BackgroundWorker bw, string outputFile)
         {
             IExportation exportEngine = new SmoothMix();
-            //exportEngine->exportMix(bw, this, outputFile);
+            exportEngine.ExportMix(bw, this, outputFile);
         }
 
         public void ExportToText(string outputFile)
@@ -45,34 +46,20 @@ namespace AutomixDataManagement.Model
 
         public bool IsPresent(Track track)
         {
-            foreach (Track t in this)
-            {
-                if (track.Checksum.Equals(t.Checksum) || track.Checksum.Equals(t.Checksum))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return this.Any(t => track.Checksum.Equals(t.Checksum) || track.Checksum.Equals(t.Checksum));
         }
 
         public Track Search(string name)
         {
-            foreach (Track t in this)
-            {
-                if (t.Name.Equals(name))
-                {
-                    return t;
-                }
-            }
-            return null;
+            return this.FirstOrDefault(t => t.Name.Equals(name));
         }
 
         public void Remove(string name)
         {
-            Track temp = Search(name);
-            if (temp != null)
+            var tempTrack = Search(name);
+            if (tempTrack != null)
             {
-                Remove(temp);
+                Remove(tempTrack);
             }
         }
 
@@ -83,9 +70,9 @@ namespace AutomixDataManagement.Model
 
         public void Concat(TrackCollection original)
         {
-            foreach (Track t in original)
+            foreach (var track in original)
             {
-                SafeAdd(t);
+                SafeAdd(track);
             }
         }
     }

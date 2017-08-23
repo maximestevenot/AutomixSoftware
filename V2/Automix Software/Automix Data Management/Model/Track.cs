@@ -8,13 +8,13 @@
 
 using System;
 
-namespace AutomixDataManagement.Model
+namespace Automix_Data_Management.Model
 {
     //TODO: Change constructors
     public class Track
     {
-        private static int TRACKS_COUNT = 0;
-        public int BPM { get; set; }
+        private static int _tracksCount;
+        public int Bpm { get; set; }
         public int Duration { get; set; }
         public string Key { get; set; }
         public double Danceability { get; set; }
@@ -29,15 +29,17 @@ namespace AutomixDataManagement.Model
 
         public static Track CopyFrom(Track old)
         {
-            Track newTrack = new Track(string.Copy(old.Path), string.Copy(old.Checksum));
-            newTrack.Duration = old.Duration;
-            newTrack.BPM = old.BPM;
-            newTrack.Key = string.Copy(old.Key);
-            newTrack.Danceability = old.Danceability;
-            newTrack.Samplerate = old.Samplerate;
-            newTrack.Beats = new int[old.Beats.Length];
-            newTrack.FadeIns = new int[old.FadeIns.Length];
-            newTrack.FadeOuts = new int[old.FadeOuts.Length];
+            var newTrack = new Track(string.Copy(old.Path), string.Copy(old.Checksum))
+            {
+                Duration = old.Duration,
+                Bpm = old.Bpm,
+                Key = string.Copy(old.Key),
+                Danceability = old.Danceability,
+                Samplerate = old.Samplerate,
+                Beats = new int[old.Beats.Length],
+                FadeIns = new int[old.FadeIns.Length],
+                FadeOuts = new int[old.FadeOuts.Length]
+            };
             Array.Copy(old.Beats, newTrack.Beats, old.Beats.Length);
             Array.Copy(old.FadeIns, newTrack.FadeIns, old.FadeIns.Length);
             Array.Copy(old.FadeOuts, newTrack.FadeOuts, old.FadeOuts.Length);
@@ -46,25 +48,18 @@ namespace AutomixDataManagement.Model
         public Track()
         {
             Duration = 0;
-            BPM = 0;
+            Bpm = 0;
             Key = "";
             Danceability = 0;
             Samplerate = 0;
-            Id = TRACKS_COUNT++;
+            Id = _tracksCount++;
         }
 
         public Track(string path) : this()
         {
             Path = path;
             Name = Utils.NameFromPath(path);
-            if (path.StartsWith("test"))
-            {
-                Checksum = path;
-            }
-            else
-            {
-                Checksum = AudioIO.Mp3Md5Hash(path);
-            }
+            Checksum = path.StartsWith("test") ? path : AudioIO.Mp3Md5Hash(path);
         }
 
         public Track(string path, string checksum) : this()
@@ -78,7 +73,7 @@ namespace AutomixDataManagement.Model
         {
             TimeSpan ts = TimeSpan.FromMilliseconds(Duration);
             string durationString = ts.ToString();
-            int dotIndex = durationString.LastIndexOf(".");
+            int dotIndex = durationString.LastIndexOf(".", StringComparison.Ordinal);
 
             if (dotIndex > 0)
             {

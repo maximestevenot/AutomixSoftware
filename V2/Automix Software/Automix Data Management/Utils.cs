@@ -8,7 +8,7 @@
 
 using System;
 
-namespace AutomixDataManagement
+namespace Automix_Data_Management
 {
     /// <summary>
     /// Provides some tools to manipulate strings
