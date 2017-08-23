@@ -7,7 +7,7 @@ variables:
   ReleaseMode: "Release|x86"
 
 before_script:
-  - 'call "D:\Programmes\Visual Studio Enterprise 2015\VC\bin\amd64\vcvars64.bat"'
+  - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
 
 stages:
   - build

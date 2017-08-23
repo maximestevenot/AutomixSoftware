@@ -19,6 +19,17 @@ namespace AutoMixDataManagement {
 	using namespace NAudio::Lame;
 	using namespace System::Security::Cryptography;
 
+	static AudioIO::AudioIO()
+	{
+		ExportQuality = NAudio::Lame::LAMEPreset::INSANE;
+		WAV_FORMAT = NAudio::Wave::WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+	}
+
+	WaveFormat^ AudioIO::TempWaveFormat::get()
+	{
+		return WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
+	}
+
 	void AudioIO::TextExport(TrackCollection ^ trackCollection, System::String ^ outputFile)
 	{
 		StreamWriter^ sw = gcnew StreamWriter(outputFile);
@@ -37,14 +48,42 @@ namespace AutoMixDataManagement {
 		WaveFileWriter::CreateWaveFile(outputFile, reader);
 	}
 
-	void AudioIO::WavToMp3(System::String ^ inputFile, System::String ^ outputFile)
+	void AudioIO::WavToMp3(System::String ^ inputFile, System::String^ outputFile, ID3TagData^ id3Tag)
 	{
 		WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
-		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, LAMEPreset::ABR_320, nullptr);
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, reader->WaveFormat, ExportQuality, id3Tag);
+
 		reader->CopyTo(writer);
-		writer->Close();
 		reader->Close();
+		writer->Flush();
+		writer->Close();
 	}
+
+	void AudioIO::WavToMp3(System::String ^ inputFile, System::String^ outputFile)
+	{
+		WavToMp3(inputFile, outputFile, nullptr);
+	}
+
+	void AudioIO::WavToMp3(List <String^>^ inputFiles, System::String^ outputFile, ID3TagData^ id3Tag)
+	{
+		LameMP3FileWriter^ writer = gcnew LameMP3FileWriter(outputFile, TempWaveFormat, ExportQuality, id3Tag);
+
+		for each (auto inputFile in inputFiles)
+		{
+			WaveFileReader^ reader = gcnew WaveFileReader(inputFile);
+			reader->CopyTo(writer);
+			reader->Close();
+		}
+
+		writer->Flush();
+		writer->Close();
+	}
+
+	void AudioIO::WavToMp3(System::Collections::Generic::List<System::String^>^ inputFiles, System::String ^ outputFile)
+	{
+		WavToMp3(inputFiles, outputFile, nullptr);
+	}
+
 
 	System::String^ AudioIO::Mp3Md5Hash(String ^ path)
 	{
@@ -86,17 +125,31 @@ namespace AutoMixDataManagement {
 		return sBuilder->ToString();
 	}
 
-	Id3v2Tag^ AudioIO::CreateMp3Tag(String^ outputFile)
+	Id3v2Tag^ AudioIO::CreateId3v2Tag(String^ outputFile)
 	{
+		ID3TagData^ data = CreateID3TagData(outputFile);
 		Dictionary<String^, String^>^ tags = gcnew Dictionary<String^, String^>();
-		tags->Add("TIT2", outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1));
-		tags->Add("TPE1", Environment::UserName);
-		tags->Add("TALB", "Automix Software Compilation");
-		tags->Add("TCON", "Mix");
-		tags->Add("TYER", DateTime::Now.Year.ToString());
+
+		tags->Add("TIT2", data->Title);
+		tags->Add("TPE1", data->Artist);
+		tags->Add("TALB", data->Album);
+		tags->Add("TCON", data->Genre);
+		tags->Add("TYER", data->Year);
 		tags->Add("TENC", "Automix Software with NAudio API");
-		tags->Add("COMM", "Created with Automix Software");
+		tags->Add("COMM", data->Comment);
 
 		return Id3v2Tag::Create(tags);
+	}
+
+	ID3TagData^ AudioIO::CreateID3TagData(String^ outputFile)
+	{
+		ID3TagData^ tag = gcnew ID3TagData();
+		tag->Title = outputFile->Substring(outputFile->LastIndexOf("\\") + 1, outputFile->LastIndexOf(".mp3") - outputFile->LastIndexOf("\\") - 1); //TIT2
+		tag->Artist = Environment::UserName; //TPE1
+		tag->Album = "Automix Software Compilation"; //TALB
+		tag->Year = DateTime::Now.Year.ToString(); //TYER
+		tag->Comment = "Created with Automix Software"; //COMM
+		tag->Genre = "Mix"; //TCON
+		return tag;
 	}
 }
