@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Automix_Data_Management
+namespace AutomixDataManagement
 {
     /// <summary>
     /// Provides some tools to manipulate strings
