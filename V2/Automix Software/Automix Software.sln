@@ -1,14 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix UI", "Automix UI\Automix UI.csproj", "{51A818E4-8CF1-4DE1-8A77-6D251DBE574D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{005F26BB-0EB3-43E8-A915-7A0F67D623A5} = {005F26BB-0EB3-43E8-A915-7A0F67D623A5}
-		{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C} = {EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix AI", "Automix AI\Automix AI.csproj", "{005F26BB-0EB3-43E8-A915-7A0F67D623A5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C} = {EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}
@@ -18,16 +12,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix Data Management", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix Data Management.Tests", "Automix Data Management.Tests\Automix Data Management.Tests.csproj", "{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix UI", "Automix UI\Automix UI.csproj", "{DA2306A3-343D-4E50-8F29-EB2A0A172078}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{51A818E4-8CF1-4DE1-8A77-6D251DBE574D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51A818E4-8CF1-4DE1-8A77-6D251DBE574D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51A818E4-8CF1-4DE1-8A77-6D251DBE574D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51A818E4-8CF1-4DE1-8A77-6D251DBE574D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{005F26BB-0EB3-43E8-A915-7A0F67D623A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{005F26BB-0EB3-43E8-A915-7A0F67D623A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005F26BB-0EB3-43E8-A915-7A0F67D623A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,8 +32,15 @@ Global
 		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AF37A94-36EC-44F3-A0B2-C75F5A96F949}
 	EndGlobalSection
 EndGlobal
