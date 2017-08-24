@@ -6,14 +6,14 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
+using Automix_Data_Management.Model;
+using NAudio.Lame;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Automix_Data_Management.Model;
-using NAudio.Lame;
-using NAudio.Wave;
 
 namespace Automix_Data_Management
 {
@@ -153,7 +153,7 @@ namespace Automix_Data_Management
                 if (readFrame == 0)
                 {
                     var originalLength = audioData.Length;
-                    Array.Resize<byte>(ref audioData, originalLength + frame.RawData.Length);
+                    Array.Resize(ref audioData, originalLength + frame.RawData.Length);
                     Array.Copy(frame.RawData, 0, audioData, originalLength, frame.RawData.Length);
                 }
                 readFrame = (readFrame + 1) % nbFrames;
