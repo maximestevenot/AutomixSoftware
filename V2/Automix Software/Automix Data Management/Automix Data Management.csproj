@@ -40,11 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio Playing\Mp3Player.cs" />
     <Compile Include="AudioIO.cs" />
     <Compile Include="Exportation\IExportation.cs" />
     <Compile Include="Exportation\SmoothMix.cs" />
+    <Compile Include="Extraction\AudioDataExtraction.cs" />
+    <Compile Include="Extraction\AudioDataExtractionProxy.cs" />
+    <Compile Include="Extraction\IAudioDataExtraction.cs" />
+    <Compile Include="Extraction\IExtraction.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="Model\TrackCollection.cs" />
+    <Compile Include="Storage\DataBase.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
