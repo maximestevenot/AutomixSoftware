@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Automix_UI
+namespace Automix_UI.Forms
 {
-    public partial class MainForm : Form
+    public partial class AboutForm : Form
     {
-        public MainForm()
+        public AboutForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
