@@ -12,9 +12,9 @@ namespace Automix_Data_Management.Extraction
             _realSubject = new AudioDataExtraction();
         }
 
-        public void ExtractData(BackgroundWorker bw, TrackCollection trackCollection)
+        public void ExtractData(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
-            _realSubject.ExtractData(bw, trackCollection);
+            _realSubject.ExtractData(backgroundWorker, trackCollection);
         }
     }
 }

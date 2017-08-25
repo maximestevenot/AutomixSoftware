@@ -6,6 +6,6 @@ namespace Automix_Data_Management.Extraction
 {
     public interface IExtraction
     {
-        void ExtractData(BackgroundWorker bw, int nbTracks, CancellationTokenSource cancellationTokenSource, Track track);
+        void ExtractData(BackgroundWorker backgroundWorker, int nbTracks, CancellationTokenSource cancellationTokenSource, Track track);
     }
 }
