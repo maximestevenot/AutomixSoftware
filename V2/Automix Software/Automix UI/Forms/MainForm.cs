@@ -1,21 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Resources;
 using System.IO;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
+using Automix_UI.Drawing;
 using Automix_UI.Properties;
 
 namespace Automix_UI.Forms
 {
     public partial class MainForm : Form, IViewWithTrackCollection
     {
-        public bool AnOperationRunning { get; }
+        public bool AnOperationRunning { get; private set; }
 
         private Presenter _presenter;
-        private ResourceManager _resourceManager;
 
         private bool IsRowDragInProgress;
         private bool IsDragImportInProgress;
@@ -31,9 +33,9 @@ namespace Automix_UI.Forms
             After
         };
 
+        private ListViewDrawer _lvDrawer;
         private int _insertionIndex;
         private InsertionModeType _insertionMode;
-        private Color _insertionLineColor;
 
         public MainForm()
         {
@@ -41,7 +43,7 @@ namespace Automix_UI.Forms
 
             AnOperationRunning = false;
             _presenter = new Presenter(this);
-            _resourceManager = new ResourceManager("Automix_UI.Ressources.TextResources", Assembly.GetExecutingAssembly());
+            _lvDrawer = new ListViewDrawer(_musicListView, Color.LightGray);
             _exportPath = DefaultExportPath;
 
             var colorTable = new AutomixColorTable();
@@ -49,7 +51,6 @@ namespace Automix_UI.Forms
             _menuStrip.Renderer = new ToolStripProfessionalRenderer(colorTable);
             _trackContextMenu.RenderMode = ToolStripRenderMode.Professional;
             _trackContextMenu.Renderer = new ToolStripProfessionalRenderer(colorTable);
-            _insertionLineColor = Color.LightGray;
 
             _playerbutton.Image = new Bitmap(Resources.PlayIcon, 70, 70);
             _skipButton.Image = new Bitmap(Resources.SeekIcon, 70, 70);
@@ -80,10 +81,10 @@ namespace Automix_UI.Forms
 
         private void OnImportMenuItemClick(object sender, EventArgs e)
         {
-            LoadTracks(sender, e);
+            LoadTracks();
         }
 
-        private void LoadTracks(object sender, EventArgs eventArgs)
+        private void LoadTracks()
         {
             var dialog = new OpenFileDialog
             {
@@ -97,210 +98,424 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            //OnWorkerStart();
+            OnWorkerStart();
             _importBackgroundWorker.RunWorkerAsync(dialog.FileNames);
         }
 
-        private void OnGenerateMixMenuItemClick(object sender, EventArgs e)
+        private void OnWorkerStart()
         {
-            //throw new NotImplementedException();
+            AnOperationRunning = true;
+
+            _cancelMenuItem.Enabled = true;
+            _generateButton.Enabled = false;
+            _importButton.Enabled = false;
+            _sortButton.Enabled = false;
+            _playerbutton.Enabled = false;
+            _reloadButton.Enabled = false;
+            _skipButton.Enabled = false;
+
+            _exportMenuItem.Enabled = false;
+            _importMenuItem.Enabled = false;
+            _optionsToolStripMenuItem.Enabled = false;
+            _toolStripProgressBar.Value = 0;
+            _toolStripProgressBar.Visible = true;
+
+            _musicListView.AllowDrop = false;
+        }
+
+
+        private void OnWorkerStop()
+        {
+            AnOperationRunning = false;
+
+            _cancelMenuItem.Enabled = false;
+            _generateButton.Enabled = true;
+            _importButton.Enabled = true;
+            _sortButton.Enabled = true;
+            _reloadButton.Enabled = true;
+            _playerbutton.Enabled = true;
+            _skipButton.Enabled = true;
+
+            _exportMenuItem.Enabled = true;
+            _importMenuItem.Enabled = true;
+            _optionsToolStripMenuItem.Enabled = true;
+            _toolStripProgressBar.Visible = false;
+            _toolStripProgressBar.Value = 0;
+
+            _musicListView.AllowDrop = true;
+        }
+
+        private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
+
+        private void ExportTrackList()
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = TextResources.DialogFilters,
+                FilterIndex = 1,
+                FileName = "My mix",
+                DefaultExt = "mp3",
+                RestoreDirectory = true
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            OnWorkerStart();
+            _exportPath = dialog.FileName;
+            _exportBackgroundWorker.RunWorkerAsync(dialog.FileName);
         }
 
         private void OnExportTextFileMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            var dialog = new SaveFileDialog
+            {
+                Filter = TextResources.DialogFiltersText,
+                FilterIndex = 1,
+                FileName = "My mix",
+                DefaultExt = "txt",
+                RestoreDirectory = true
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            _presenter.ExportPlaylistInTextFile(dialog.FileName);
         }
 
         private void OnCancelMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            _importBackgroundWorker.CancelAsync();
+            _sortBackgroundWorker.CancelAsync();
+            _exportBackgroundWorker.CancelAsync();
+            _playerBackgroundWorker.CancelAsync();
+            StopPlayer();
+        }
+
+        private void StopPlayer()
+        {
+            if (!_playerExists)
+            {
+                return;
+            }
+            _trackBarTimer.Stop();
+            _playerTrackBar.Value = 0;
+            _presenter.StopMix();
+            _isPlayerPlaying = false;
+            _playerExists = false;
+            _playerbutton.Image = new Bitmap(Resources.PlayIcon, 70, 70);
         }
 
         private void OnQuitMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            var exitResult = true;
+
+            if (_presenter.IsTrackCollectionFilled)
+            {
+                exitResult = ShowExitDialog();
+            }
+            if (exitResult)
+            {
+                ExitApplication();
+            }
         }
 
-        private void OnClearDBMenuItemClick(object sender, EventArgs e)
+        private void ExitApplication()
         {
-            //throw new NotImplementedException();
+            _importBackgroundWorker.CancelAsync();
+            _sortBackgroundWorker.CancelAsync();
+            _exportBackgroundWorker.CancelAsync();
+            _playerBackgroundWorker.CancelAsync();
+            StopPlayer();
+
+            try
+            {
+                Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
+            }
+            catch
+            {
+                //TODO log this
+            }
+            Application.Exit();
         }
 
-        private void OnStopMixToolStripMenuItemClick(object sender, EventArgs e)
+        private static bool ShowExitDialog()
         {
-            //throw new NotImplementedException();
+            return MessageBox.Show(TextResources.ExitMessage, TextResources.ExitCaption,
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
+
+        private void OnClearDbMenuItemClick(object sender, EventArgs e) => _presenter.ClearDataBase();
+
+        private void OnStopMixToolStripMenuItemClick(object sender, EventArgs e) => StopPlayer();
 
         private void OnAboutCharacteristicsMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnAboutMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        private void MusicListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        private void MusicListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => _lvDrawer.DrawColumnHeader(e);
 
-        private void MusicListView_DrawItem(object sender, DrawListViewItemEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        private void MusicListView_DrawItem(object sender, DrawListViewItemEventArgs e) => _lvDrawer.DrawItem(e);
 
-        private void MusicListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        private void MusicListView_DrawSubItem(object sender, DrawListViewSubItemEventArgs e) => _lvDrawer.DrawSubItem(e);
 
         private void MusicListView_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (_musicListView.Items.Count <= 1)
+            {
+                return;
+            }
+            IsRowDragInProgress = true;
+            DoDragDrop(e.Item, DragDropEffects.Move);
         }
 
         private void MusicListView_DragDrop(object sender, DragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (IsDragImportInProgress)
+            {
+                try
+                {
+                    var fileNames = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    OnWorkerStart();
+                    _importBackgroundWorker.RunWorkerAsync(fileNames);
+                }
+                finally
+                {
+                    IsDragImportInProgress = false;
+                }
+            }
+            else if (IsRowDragInProgress)
+            {
+                try
+                {
+                    ListViewItem dropItem = _insertionIndex != -1 ? _musicListView.Items[_insertionIndex] : null;
+                    if (dropItem == null)
+                    {
+                        return;
+                    }
+
+                    ListViewItem dragItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+                    var dropIndex = dropItem.Index;
+
+                    if (dragItem.Index < dropIndex)
+                    {
+                        dropIndex--;
+                    }
+                    if (_insertionMode == InsertionModeType.After && dragItem.Index < _musicListView.Items.Count - 1)
+                    {
+                        dropIndex++;
+                    }
+                    if (dropIndex != dragItem.Index)
+                    {
+                        _musicListView.Items.Remove(dragItem);
+                        _musicListView.Items.Insert(dropIndex, dragItem);
+                        _presenter.MoveTrack(dropIndex, dragItem.Text);
+                    }
+                }
+                finally
+                {
+                    _insertionIndex = -1;
+                    IsRowDragInProgress = false;
+                    _musicListView.Invalidate();
+                }
+            }
         }
 
         private void MusicListView_DragEnter(object sender, DragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                return;
+            }
+            e.Effect = DragDropEffects.Copy;
+            IsDragImportInProgress = true;
         }
 
         private void MusicListView_DragOver(object sender, DragEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!IsRowDragInProgress)
+            {
+                return;
+            }
+
+            int insertionIndex;
+            InsertionModeType insertionMode;
+
+            var clientPoint = _musicListView.PointToClient(new Point(e.X, e.Y));
+            var dropItem = _musicListView.GetItemAt(0, Math.Min(clientPoint.Y, _musicListView.Items[_musicListView.Items.Count - 1].GetBounds(ItemBoundsPortion.Entire).Bottom - 1));
+
+            if (dropItem != null)
+            {
+                var bounds = dropItem.GetBounds(ItemBoundsPortion.Entire);
+                insertionIndex = dropItem.Index;
+                insertionMode = clientPoint.Y < bounds.Top + (bounds.Height / 2) ? InsertionModeType.Before : InsertionModeType.After;
+
+                e.Effect = DragDropEffects.Move;
+
+                if (_insertionIndex < 0 || _insertionIndex >= _musicListView.Items.Count)
+                {
+                    return;
+                }
+
+                bounds = _musicListView.Items[_insertionIndex].GetBounds(ItemBoundsPortion.Entire);
+                var y = _insertionMode == InsertionModeType.Before ? bounds.Top : bounds.Bottom;
+                var width = Math.Min(bounds.Width - bounds.Left, ClientSize.Width);
+                _lvDrawer.DrawInsertionLine(0, y, width);
+            }
+            else
+            {
+                insertionIndex = -1;
+                insertionMode = _insertionMode;
+                e.Effect = DragDropEffects.None;
+            }
+
+            if (insertionIndex == _insertionIndex && insertionMode == _insertionMode)
+            {
+                return;
+            }
+
+            _insertionMode = insertionMode;
+            _insertionIndex = insertionIndex;
+            _musicListView.Invalidate();
         }
 
         private void OnTrackContextMenuOpening(object sender, CancelEventArgs e)
         {
-            //throw new NotImplementedException();
+            if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
+            {
+                _deleteTrackToolStrip.Enabled = true;
+            }
+            else
+            {
+                _deleteTrackToolStrip.Enabled = false;
+            }
         }
 
         private void OnDeleteTrackToolStripClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
+            _presenter.RemoveTracks(selection);
         }
 
         private void OnSelectAllMenuItemClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            foreach (ListViewItem item in _musicListView.Items)
+            {
+                item.Selected = true;
+            }
         }
 
         private void OnButtonEnabledChanged(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            var button = (Button)sender;
+            button.BackColor = button.Enabled ? AutomixColorTable.MainColor : AutomixColorTable.DisabledColor;
         }
 
-        private void OnImportButtonClick(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        private void OnImportButtonClick(object sender, EventArgs e) => LoadTracks();
 
         private void OnExportButtonClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ImportBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ImportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void SortBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void SortBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void SortBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ExportBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ExportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void ExportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnPlayerButtonClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnSkipButtonClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnReloadButtonClick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void PlayerBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void PlayerBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void PlayerBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void TrackBarTimer_Tick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void OnMainFormClosing(object sender, FormClosingEventArgs e)
         {
-            //throw new NotImplementedException();
-        }
-
-        private Bitmap LoadIcon(string img)
-        {
-            var myAssembly = Assembly.GetExecutingAssembly();
-            var myStream = myAssembly.GetManifestResourceStream(img);
-            return new Bitmap(myStream);
+            throw new NotImplementedException();
         }
     }
 }

@@ -178,7 +178,7 @@
             this._clearDBMenuItem.ForeColor = System.Drawing.Color.White;
             this._clearDBMenuItem.Name = "_clearDBMenuItem";
             resources.ApplyResources(this._clearDBMenuItem, "_clearDBMenuItem");
-            this._clearDBMenuItem.Click += new System.EventHandler(this.OnClearDBMenuItemClick);
+            this._clearDBMenuItem.Click += new System.EventHandler(this.OnClearDbMenuItemClick);
             // 
             // _stopMixToolStripMenuItem
             // 
