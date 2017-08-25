@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Resources;
 using System.IO;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
@@ -20,8 +17,8 @@ namespace Automix_UI.Forms
         private readonly Presenter _presenter;
         private readonly ListViewDrawer _lvDrawer;
 
-        private bool IsRowDragInProgress;
-        private bool IsDragImportInProgress;
+        private bool _isRowDragInProgress;
+        private bool _isDragImportInProgress;
         private bool _isPlayerPlaying;
         private bool _playerExists;
 
@@ -275,13 +272,13 @@ namespace Automix_UI.Forms
             {
                 return;
             }
-            IsRowDragInProgress = true;
+            _isRowDragInProgress = true;
             DoDragDrop(e.Item, DragDropEffects.Move);
         }
 
         private void MusicListView_DragDrop(object sender, DragEventArgs e)
         {
-            if (IsDragImportInProgress)
+            if (_isDragImportInProgress)
             {
                 try
                 {
@@ -291,10 +288,10 @@ namespace Automix_UI.Forms
                 }
                 finally
                 {
-                    IsDragImportInProgress = false;
+                    _isDragImportInProgress = false;
                 }
             }
-            else if (IsRowDragInProgress)
+            else if (_isRowDragInProgress)
             {
                 try
                 {
@@ -325,7 +322,7 @@ namespace Automix_UI.Forms
                 finally
                 {
                     _insertionIndex = -1;
-                    IsRowDragInProgress = false;
+                    _isRowDragInProgress = false;
                     _musicListView.Invalidate();
                 }
             }
@@ -338,12 +335,12 @@ namespace Automix_UI.Forms
                 return;
             }
             e.Effect = DragDropEffects.Copy;
-            IsDragImportInProgress = true;
+            _isDragImportInProgress = true;
         }
 
         private void MusicListView_DragOver(object sender, DragEventArgs e)
         {
-            if (!IsRowDragInProgress)
+            if (!_isRowDragInProgress)
             {
                 return;
             }
@@ -555,42 +552,115 @@ namespace Automix_UI.Forms
 
         private void OnPlayerButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            OnWorkerStart();
+            _playerbutton.Enabled = true;
+
+            _playerbutton.Image = _isPlayerPlaying ? new Bitmap(Resources.PlayIcon, 70, 70) : new Bitmap(Resources.PauseIcon, 70, 70);
+            _playerBackgroundWorker.RunWorkerAsync();
         }
 
         private void OnSkipButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (_playerExists)
+            {
+                _presenter.Seek(30.0);
+            }
         }
 
         private void OnReloadButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            StopPlayer();
         }
 
         private void PlayerBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            var backgroundWorker = (BackgroundWorker)sender;
+            if (!_isPlayerPlaying)
+            {
+                try
+                {
+                    if (_exportPath.Equals(DefaultExportPath))
+                    {
+                        _presenter.ExportTrackList(backgroundWorker, _exportPath);
+                    }
+                    _presenter.PlayMix(_exportPath);
+                }
+                catch (IOException)
+                {
+                    _presenter.ResumeMix();
+                }
+                _isPlayerPlaying = true;
+                _playerExists = true;
+            }
+            else
+            {
+                _presenter.PauseMix();
+                _isPlayerPlaying = false;
+            }
+            if (backgroundWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void PlayerBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
         private void PlayerBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Cancelled)
+            {
+                ShowCancelDialog();
+            }
+            else if (e.Error != null)
+            {
+                ShowErrorDialog(e.Error.Message);
+            }
+            else
+            {
+                if (_isPlayerPlaying)
+                {
+                    _trackBarTimer.Start();
+                }
+                else
+                {
+                    _trackBarTimer.Stop();
+                }
+            }
+            OnWorkerStop();
         }
 
         private void TrackBarTimer_Tick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var normalize = 10000 * _presenter.GetPlayerPosition() / _presenter.GetPlayerLength();
+            _playerTrackBar.Value = (int)Math.Min(normalize, 10000);
         }
 
         private void OnMainFormClosing(object sender, FormClosingEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                var exitResult = true;
+
+                if (_presenter.IsTrackCollectionFilled)
+                {
+                    exitResult = ShowExitDialog();
+                }
+                if (exitResult)
+                {
+                    ExitApplication();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                ExitApplication();
+            }
         }
     }
 }

@@ -58,5 +58,35 @@ namespace Automix_UI
         {
             throw new System.NotImplementedException();
         }
+
+        public void Seek(double d)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PlayMix(string exportPath)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ResumeMix()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void PauseMix()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public long GetPlayerPosition()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public long GetPlayerLength()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
