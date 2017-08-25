@@ -24,29 +24,16 @@ namespace AutoMixDataManagement {
 
 	SmoothMix::SmoothMix(int transitionDuration)
 	{
-		WAVE_FORMAT = WaveFormat::CreateIeeeFloatWaveFormat(44100, 2);
-		_samplesPerSecond = WAVE_FORMAT->AverageBytesPerSecond / 4;
-		_tempPath = System::IO::Path::GetTempPath() + "AutomixSoftware/";
-		_tempWav = _tempPath + "AutoMix.wav";
+		_tempDirPath = System::IO::Path::GetTempPath() + "AutomixSoftware/";
 		TransitionDuration = transitionDuration;
 		_tempFileList = gcnew List<String^>();
-	}
-
-	int SmoothMix::TransitionDuration::get()
-	{
-		return _transitionDuration;
-	}
-
-	void SmoothMix::TransitionDuration::set(int value)
-	{
-		_transitionDuration = value;
-		_overlaySize = value * WAVE_FORMAT->AverageBytesPerSecond / 4;;
 	}
 
 	void SmoothMix::exportMix(ComponentModel::BackgroundWorker ^ bw, TrackCollection ^ collection, String ^ outputFile)
 	{
 		_savedOverlay = nullptr;
-		_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
+		_tempWavPath = _tempDirPath + "automix_1.wav";
+		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::TempWaveFormat);
 
 		int count = 1;
 		int tempFileDuration = 0;
@@ -72,91 +59,46 @@ namespace AutoMixDataManagement {
 
 		if (!bw->CancellationPending)
 		{
-			finalizeTempWav();
+			finalizeLastTempFile();
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
-			mergeTempFiles(bw, outputFile);
+			AudioIO::WavToMp3(_tempFileList, outputFile, AudioIO::CreateID3TagData(outputFile));
 			bw->ReportProgress((int)(1000 * count++) / (collection->Count + 2));
 		}
 		deleteTempFiles();
 	}
 
-	void SmoothMix::mergeTempFiles(ComponentModel::BackgroundWorker^ bw, String^ outputFile)
-	{
-		Stream^ outputStream = gcnew FileStream(outputFile, FileMode::Create);
-
-		Id3v2Tag^ tag = AudioIO::CreateMp3Tag(outputFile);
-		outputStream->Write(tag->RawData, 0, tag->RawData->Length);
-
-		for each (auto path in _tempFileList)
-		{
-			if (bw->CancellationPending)
-			{
-				break;
-			}
-			Mp3FileReader^ reader = gcnew Mp3FileReader(path);
-			Mp3Frame^ frame = nullptr;
-			bool first = true;
-
-			while ((frame = reader->ReadNextFrame()) != nullptr)
-			{
-				if (first)
-				{
-					int nbZeros = 0;
-					for (int i = 0; i < frame->RawData->Length; i++)
-					{
-						if (frame->RawData[i].CompareTo(System::Convert::ToByte(10)) <= 0)
-						{
-							nbZeros++;
-						}
-					}
-					if (nbZeros < frame->RawData->Length / 3)
-					{
-						first = false;
-						outputStream->Write(frame->RawData, 0, frame->RawData->Length);
-					}
-				}
-				else
-				{
-					outputStream->Write(frame->RawData, 0, frame->RawData->Length);
-				}
-			}
-			outputStream->Flush();
-			reader->Close();
-		}
-		outputStream->Close();
-	}
-
 	void AutoMixDataManagement::SmoothMix::fadeInOut(Track ^ track)
 	{
 		Mp3FileReader^ fileReader = gcnew Mp3FileReader(track->Path);
-
 		FadeInOutSampleProvider^ fade = gcnew FadeInOutSampleProvider(WaveExtensionMethods::ToSampleProvider(fileReader), false);
 
-		long bufferSize = fileReader->Length / 2 - track->getLastFadeOutDuration() * _samplesPerSecond;
-		if (bufferSize < _overlaySize)
+		long bufferSize = fileReader->Length / 2 - track->getLastFadeOutDuration() * SAMPLES_PER_SECOND;
+		int overlaySize = TransitionDuration * SAMPLES_PER_SECOND;
+
+		if (bufferSize < overlaySize)
 		{
-			bufferSize = _overlaySize;
+			bufferSize = overlaySize;
 		}
 
 		array<float>^ buffer = gcnew array<float>(bufferSize);
 
-		fade->BeginFadeIn(_transitionDuration * 1000);
-		fade->Read(buffer, 0, bufferSize - _overlaySize);
-		fade->BeginFadeOut(_transitionDuration * 1000);
-		fade->Read(buffer, bufferSize - _overlaySize, _overlaySize);
+		fade->BeginFadeIn(TransitionDuration * 1000);
+		fade->Read(buffer, 0, bufferSize - overlaySize);
+		fade->BeginFadeOut(TransitionDuration * 1000);
+		fade->Read(buffer, bufferSize - overlaySize, overlaySize);
 
 		if (_savedOverlay != nullptr)
 		{
 			buffer = applyOverlay(buffer, _savedOverlay);
 		}
 
-		_waveFileWriter->WriteSamples(buffer, 0, bufferSize - _overlaySize);
+		_waveFileWriter->WriteSamples(buffer, 0, bufferSize - overlaySize);
 		_waveFileWriter->Flush();
 
-		_savedOverlay = gcnew array<float>(_overlaySize);
-		for (int i = 0; i < _overlaySize; i++)
+		_savedOverlay = gcnew array<float>(overlaySize);
+		for (int i = 0; i < overlaySize; i++)
 		{
-			_savedOverlay[i] = buffer[(bufferSize - _overlaySize) + i];
+			_savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
 		}
 	}
 
@@ -165,27 +107,18 @@ namespace AutoMixDataManagement {
 		_waveFileWriter->Flush();
 		_waveFileWriter->Close();
 
-		_tempFileList->Add(_tempPath + (_tempFileList->Count + 1) + ".mp3");
-		AudioIO::WavToMp3(_tempWav, _tempPath + (_tempFileList->Count) + ".mp3");
+		_tempFileList->Add(_tempWavPath);
 
-		try
-		{
-			System::IO::File::Delete(_tempWav);
-			_waveFileWriter = gcnew WaveFileWriter(_tempWav, WAVE_FORMAT);
-		}
-		catch (System::IO::IOException^ e)
-		{
-			System::Diagnostics::Debug::WriteLine(e->Message);
-		}
+		_tempWavPath = _tempDirPath + "automix_" + (_tempFileList->Count + 1) + ".wav";
+		_waveFileWriter = gcnew WaveFileWriter(_tempWavPath, AudioIO::TempWaveFormat);
 	}
 
-	void SmoothMix::finalizeTempWav()
+	void SmoothMix::finalizeLastTempFile()
 	{
 		_waveFileWriter->WriteSamples(_savedOverlay, 0, _savedOverlay->Length);
 		_waveFileWriter->Flush();
 		_waveFileWriter->Close();
-		_tempFileList->Add(_tempPath + (_tempFileList->Count + 1) + ".mp3");
-		AudioIO::WavToMp3(_tempWav, _tempPath + (_tempFileList->Count) + ".mp3");
+		_tempFileList->Add(_tempWavPath);
 	}
 
 	array<float>^ SmoothMix::applyOverlay(array<float>^ trackBuffer, array<float>^ overlayBuffer)
@@ -199,15 +132,6 @@ namespace AutoMixDataManagement {
 
 	void SmoothMix::deleteTempFiles()
 	{
-		try
-		{
-			System::IO::File::Delete(_tempWav);
-		}
-		catch (System::IO::IOException^ e)
-		{
-			System::Diagnostics::Debug::WriteLine(e->Message);
-		}
-
 		for each (auto path in _tempFileList)
 		{
 			try
