@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix AI", "Automix AI\Automix AI.csproj", "{005F26BB-0EB3-43E8-A915-7A0F67D623A5}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix AI", "Automix AI\Au
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix Data Management", "Automix Data Management\Automix Data Management.csproj", "{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix Data Management.Tests", "Automix Data Management.Tests\Automix Data Management.Tests.csproj", "{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix UI", "Automix UI\Automix UI.csproj", "{DA2306A3-343D-4E50-8F29-EB2A0A172078}"
 EndProject
@@ -28,10 +26,6 @@ Global
 		{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03AAAFE7-69A3-4521-8378-CD0A1F24EE3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Release|Any CPU.ActiveCfg = Release|Any CPU
