@@ -1,59 +1,37 @@
 variables:
-  AutoMix: "Automix Software\\AutoMix Software.sln"
-  TestsLib: "Automix Software\\Debug\\AutoMix Tests.dll"
-  TestsFile: "Automix Software\\TestResults\\tests.xml"
-  ReleaseDir: "Automix Software\\Release\\"
-  DebugMode: "Debug|x86"
-  ReleaseMode: "Release|x86"
+  AutoMix: "V2\\Automix Software\\AutoMix Software.sln"
 
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
+  - echo "Restoring NuGet Packages..."
+  - 'msbuild /t:restore /p:Platform="Any CPU" "%AutoMix%"'
 
 stages:
   - build
-  - test
   - deploy
 
 build:
   stage: build
   script:
     - echo building...
-    - 'devenv "%AutoMix%" /Build "%DebugMode%"'
+    - 'msbuild /m /nologo /p:Configuration=Debug;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   except:
     - tags
   artifacts:
     paths:
-      - Automix Software/Debug
-    expire_in: 10 minutes
-
-
-test:
-  stage: test
-  script:
-    - echo testing...
-    - 'mkdir "Automix Software\\TestResults"'
-    - 'mstest.exe /testcontainer:"%TestsLib%" /resultsfile:"%TestsFile%"'
-  dependencies:
-    - build
-  except:
-    - tags
+      - V2/Automix Software/Automix UI/bin/Debug
+    expire_in: 10 minutes 
 
 deploy:
   stage: deploy
   script:
     - echo deploying...
-    - 'devenv "%AutoMix%" /Build "%ReleaseMode%"'
-    - 'cd "%ReleaseDir%"'
-    - 'for %%i in (*.exe *.dll) do attrib -a "%%i" /s'
-    - 'del *.* /s /a:a /q'
-    - 'attrib +a *.* /s'
-    - 'del *Test*'
-    - 'cd ..\\..'
+    - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   artifacts:
     paths:
-      - Automix Software/Release
+      - V2/Automix Software/Automix UI/bin/Release/
     expire_in: 2 weeks
   only:
     - master
