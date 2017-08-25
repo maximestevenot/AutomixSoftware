@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Automix_UI
 {
@@ -34,6 +35,26 @@ namespace Automix_UI
         }
 
         public void RemoveTracks(List<string> selection)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public object LoadTracks(BackgroundWorker backgroundWorker, string[] fileNames)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Notify()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public object SortTrackCollection(BackgroundWorker backgroundWorker)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ExportTrackList(BackgroundWorker backgroundWorker, string fileName)
         {
             throw new System.NotImplementedException();
         }

@@ -17,7 +17,8 @@ namespace Automix_UI.Forms
     {
         public bool AnOperationRunning { get; private set; }
 
-        private Presenter _presenter;
+        private readonly Presenter _presenter;
+        private readonly ListViewDrawer _lvDrawer;
 
         private bool IsRowDragInProgress;
         private bool IsDragImportInProgress;
@@ -33,7 +34,6 @@ namespace Automix_UI.Forms
             After
         };
 
-        private ListViewDrawer _lvDrawer;
         private int _insertionIndex;
         private InsertionModeType _insertionMode;
 
@@ -425,57 +425,132 @@ namespace Automix_UI.Forms
 
         private void OnExportButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            ExportTrackList();
         }
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            SortTrackList();
+        }
+
+        private void SortTrackList()
+        {
+            OnWorkerStart();
+            _sortBackgroundWorker.RunWorkerAsync();
         }
 
         private void ImportBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            var backgroundWorker = (BackgroundWorker)sender;
+            var fileNames = (string[])e.Argument;
+            e.Result = _presenter.LoadTracks(backgroundWorker, fileNames);
+
+            if (backgroundWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _presenter.Notify();
         }
 
         private void ImportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Cancelled)
+            {
+                ShowCancelDialog();
+            }
+            else if (e.Error != null)
+            {
+                ShowErrorDialog(e.Error.Message);
+            }
+            else
+            {
+                _exportPath = DefaultExportPath;
+                _presenter.Notify();
+            }
+            OnWorkerStop();
+            StopPlayer();
+        }
+
+        private static void ShowErrorDialog(string errorMessage)
+        {
+            var msg = string.Format(TextResources.ErrorMessage, errorMessage);
+            MessageBox.Show(msg, TextResources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private static void ShowCancelDialog()
+        {
+            MessageBox.Show(TextResources.CancelMessage, TextResources.CancelCaption, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void SortBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            var backgroundWorker = (BackgroundWorker)sender;
+            e.Result = _presenter.SortTrackCollection(backgroundWorker);
+
+            if (backgroundWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void SortBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
         private void SortBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Cancelled)
+            {
+                ShowCancelDialog();
+            }
+            else if (e.Error != null)
+            {
+                ShowErrorDialog(e.Error.Message);
+            }
+            else
+            {
+                _exportPath = DefaultExportPath;
+                _presenter.Notify();
+            }
+            OnWorkerStop();
+            StopPlayer();
         }
 
         private void ExportBW_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            var backgroundWorker = (BackgroundWorker)sender;
+            var fileName = (string)e.Argument;
+            _presenter.ExportTrackList(backgroundWorker, fileName);
+
+            if (backgroundWorker.CancellationPending)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ExportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            _toolStripProgressBar.Value = e.ProgressPercentage;
         }
 
         private void ExportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.Cancelled)
+            {
+                _exportPath = DefaultExportPath;
+                ShowCancelDialog();
+            }
+            else if (e.Error != null)
+            {
+                ShowErrorDialog(e.Error.Message);
+            }
+            OnWorkerStop();
         }
 
         private void OnPlayerButtonClick(object sender, EventArgs e)
