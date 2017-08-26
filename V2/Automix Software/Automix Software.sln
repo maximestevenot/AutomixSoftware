@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix AI", "Automix AI\Automix AI.csproj", "{005F26BB-0EB3-43E8-A915-7A0F67D623A5}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix Data Management", "Automix Data Management\Automix Data Management.csproj", "{EA011BC3-8963-4062-A9C4-0A5A2A6BCD7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix UI", "Automix UI\Automix UI.csproj", "{DA2306A3-343D-4E50-8F29-EB2A0A172078}"
+	ProjectSection(ProjectDependencies) = postProject
+		{005F26BB-0EB3-43E8-A915-7A0F67D623A5} = {005F26BB-0EB3-43E8-A915-7A0F67D623A5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
