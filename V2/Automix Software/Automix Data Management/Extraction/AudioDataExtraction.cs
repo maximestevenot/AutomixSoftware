@@ -20,7 +20,7 @@ namespace Automix_Data_Management.Extraction
     internal class AudioDataExtraction : IAudioDataExtraction
     {
         private DirectoryInfo _tempDirectory;
-        public static int ExploredTracks { get; set; }
+        public static int ExploredTracks;
 
         public AudioDataExtraction()
         {

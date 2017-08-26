@@ -47,7 +47,7 @@ namespace Automix_Data_Management
         /// <param name="outputFile">The path of the destination file</param>
         public static void TextExport(TrackCollection trackCollection, string outputFile)
         {
-            StreamWriter sw = new StreamWriter(outputFile);
+            var sw = new StreamWriter(outputFile);
             sw.WriteLine("Playlist created with Automix Software");
             foreach (var t in trackCollection)
 
@@ -145,8 +145,8 @@ namespace Automix_Data_Management
 
             Mp3Frame frame;
             var audioData = new byte[0];
-            int readFrame = 0;
-            int nbFrames = (int)reader.Length / 1152 / 4 / 1000 + 1;
+            var readFrame = 0;
+            var nbFrames = (int)reader.Length / 1152 / 4 / 1000 + 1;
 
             while ((frame = reader.ReadNextFrame()) != null)
             {
@@ -159,11 +159,11 @@ namespace Automix_Data_Management
                 readFrame = (readFrame + 1) % nbFrames;
             }
 
-            MD5 md5Hash = MD5.Create();
-            Byte[] audioDataHash = md5Hash.ComputeHash(audioData);
+            var md5Hash = MD5.Create();
+            var audioDataHash = md5Hash.ComputeHash(audioData);
             var sBuilder = new StringBuilder();
 
-            foreach (byte b in audioDataHash)
+            foreach (var b in audioDataHash)
             {
                 sBuilder.Append(b.ToString("x2"));
             }

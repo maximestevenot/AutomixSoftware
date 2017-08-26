@@ -289,13 +289,13 @@ namespace Automix_UI.Forms
             {
                 try
                 {
-                    ListViewItem dropItem = _insertionIndex != -1 ? _musicListView.Items[_insertionIndex] : null;
+                    var dropItem = _insertionIndex != -1 ? _musicListView.Items[_insertionIndex] : null;
                     if (dropItem == null)
                     {
                         return;
                     }
 
-                    ListViewItem dragItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+                    var dragItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
                     var dropIndex = dropItem.Index;
 
                     if (dragItem.Index < dropIndex)

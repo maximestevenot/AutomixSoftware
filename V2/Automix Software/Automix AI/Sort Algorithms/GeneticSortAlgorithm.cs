@@ -74,8 +74,8 @@ namespace Automix_AI.Sort_Algorithms
 
         private TrackCollection CreateChildrenFromParents(TrackCollection parent1, TrackCollection parent2)
         {
-            TrackCollection  children = new TrackCollection();
-            for (int k = 0; k < (parent1.Count) / 2; k++)
+            var  children = new TrackCollection();
+            for (var k = 0; k < (parent1.Count) / 2; k++)
             {
                 children.Add(parent1[k]);
             }

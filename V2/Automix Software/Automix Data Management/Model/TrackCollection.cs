@@ -19,7 +19,7 @@ namespace Automix_Data_Management.Model
         public static TrackCollection CopyFrom(TrackCollection old)
         {
             var newCollection = new TrackCollection();
-            foreach (Track t in old)
+            foreach (var t in old)
             {
                 newCollection.Add(Track.CopyFrom(t));
             }

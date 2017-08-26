@@ -65,8 +65,7 @@ namespace Automix_Data_Management.Extraction
             var dataBase = new DataBase();
             dataBase.AddTrack(track);
 
-            var exploredTracks = AudioDataExtraction.ExploredTracks;
-            Interlocked.Increment(ref exploredTracks);
+            Interlocked.Increment(ref AudioDataExtraction.ExploredTracks);
             backgroundWorker.ReportProgress(500 + 500 * AudioDataExtraction.ExploredTracks / nbTracks);
         }
 
@@ -126,8 +125,8 @@ namespace Automix_Data_Management.Extraction
 
         private static void ReadFades(Process fadeExtractor, Track track)
         {
-            StreamReader reader = fadeExtractor.StandardOutput;
-            String output = reader.ReadToEnd();
+            var reader = fadeExtractor.StandardOutput;
+            var output = reader.ReadToEnd();
 
             char[] separators = { ' ', ',', '[', ']', '\n' };
             var fadeInIndex = output.IndexOf("fade ins:", StringComparison.Ordinal);
@@ -180,8 +179,8 @@ namespace Automix_Data_Management.Extraction
 
         private void ReadDataFromJson(Track track)
         {
-            StreamReader file = File.OpenText(_tempDirectory.FullName + "\\" + track.Id + ".json");
-            JsonTextReader reader = new JsonTextReader(file);
+            var file = File.OpenText(_tempDirectory.FullName + "\\" + track.Id + ".json");
+            var reader = new JsonTextReader(file);
             var jObject = (JObject)JToken.ReadFrom(reader);
 
             track.Duration = (int)((double)jObject["metadata"]["audio_properties"]["length"] * 1000);

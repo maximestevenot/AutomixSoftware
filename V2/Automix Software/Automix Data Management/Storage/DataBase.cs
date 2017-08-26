@@ -37,9 +37,9 @@ namespace Automix_Data_Management.Storage
 
         public void AddTrack(Track track)
         {
-            string beats = track.Beats.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
-            string fadeins = track.FadeIns.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
-            string fadeouts = track.FadeOuts.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
+            var beats = track.Beats.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
+            var fadeins = track.FadeIns.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
+            var fadeouts = track.FadeOuts.Aggregate("", (current, i) => current + (Convert.ToString(i) + " "));
 
             _dbConnection.Open();
 
@@ -186,7 +186,7 @@ namespace Automix_Data_Management.Storage
         public int[] ExtractFromString(string orig)
         {
             char[] separator = { ' ' };
-            string[] values = orig.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            var values = orig.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             return values.Select(value => Convert.ToInt32(value)).ToArray();
         }
     }

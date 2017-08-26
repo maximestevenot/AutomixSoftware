@@ -71,9 +71,9 @@ namespace Automix_Data_Management.Model
 
         public string DisplayDuration()
         {
-            TimeSpan ts = TimeSpan.FromMilliseconds(Duration);
-            string durationString = ts.ToString();
-            int dotIndex = durationString.LastIndexOf(".", StringComparison.Ordinal);
+            var ts = TimeSpan.FromMilliseconds(Duration);
+            var durationString = ts.ToString();
+            var dotIndex = durationString.LastIndexOf(".", StringComparison.Ordinal);
 
             if (dotIndex > 0)
             {

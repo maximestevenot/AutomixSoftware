@@ -25,8 +25,7 @@ namespace Automix_Data_Management.Extraction
         public void ExtractData(BackgroundWorker backgroundWorker, int nbTracks, CancellationTokenSource cancellationTokenSource, Track track)
         {
             _dataBase.ExtractData(track);
-            var exploredTracks = AudioDataExtraction.ExploredTracks;
-            Interlocked.Increment(ref exploredTracks);
+            Interlocked.Increment(ref AudioDataExtraction.ExploredTracks);
             backgroundWorker.ReportProgress(500 + 500 * AudioDataExtraction.ExploredTracks / nbTracks);
         }
     }

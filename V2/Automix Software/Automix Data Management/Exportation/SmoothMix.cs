@@ -41,8 +41,8 @@ namespace Automix_Data_Management.Exportation
             _tempWavPath = _tempDirPath + "automix_1.wav";
             _waveFileWriter = new WaveFileWriter(_tempWavPath, AudioIO.TempWaveFormat);
 
-            int count = 1;
-            int tempFileDuration = 0;
+            var count = 1;
+            var tempFileDuration = 0;
 
             foreach (var track in collection)
             {
@@ -78,8 +78,8 @@ namespace Automix_Data_Management.Exportation
             var fileReader = new Mp3FileReader(track.Path);
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider(), false);
 
-            long bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SamplesPerSecond;
-            int overlaySize = TransitionDuration * SamplesPerSecond;
+            var bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SamplesPerSecond;
+            var overlaySize = TransitionDuration * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -102,7 +102,7 @@ namespace Automix_Data_Management.Exportation
             _waveFileWriter.Flush();
 
             _savedOverlay = new float[overlaySize];
-            for (int i = 0; i < overlaySize; i++)
+            for (var i = 0; i < overlaySize; i++)
             {
                 _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
             }
