@@ -3,7 +3,7 @@ using Automix_Data_Management.Model;
 
 namespace Automix_AI.Distances
 {
-    internal class SimpleTracksDistance : AbstractTracksDistance
+    public class SimpleTracksDistance : AbstractTracksDistance
     {
         public override double Compute(Track track1, Track track2)
         {

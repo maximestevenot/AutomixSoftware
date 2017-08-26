@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using Automix_AI.Distances;
+using Automix_AI.Sort_Algorithms;
 using Automix_Data_Management;
 using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
@@ -17,7 +19,7 @@ namespace Automix_UI
         private TrackCollection _trackCollection;
 
         private IAudioDataExtraction _dataExtractionEngine;
-        //AutoMixAISortAlgorithm _sortAlgorithm;
+        private AbstractSortAlgorithm _sortAlgorithm;
         private Mp3Player _mp3Player;
 
         public Presenter()
@@ -26,7 +28,7 @@ namespace Automix_UI
             _trackCollection = new TrackCollection();
             _dataExtractionEngine = new AudioDataExtractionProxy();
 
-            //_sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleDistance());
+            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance());
         }
 
         public Presenter(IViewWithTrackCollection view) : this()
@@ -127,7 +129,11 @@ namespace Automix_UI
 
         public object SortTrackCollection(BackgroundWorker backgroundWorker)
         {
-            throw new System.NotImplementedException();
+            if (_trackCollection.Count > 1)
+            {
+                _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
+            }
+            return _trackCollection;
         }
 
         public void ExportTrackList(BackgroundWorker backgroundWorker, string outputFilePath)

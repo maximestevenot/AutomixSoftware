@@ -7,7 +7,7 @@ using Automix_Data_Management.Model;
 
 namespace Automix_AI.Distances
 {
-    internal abstract class AbstractTracksDistance : ITracksDistance
+    public abstract class AbstractTracksDistance : ITracksDistance
     {
         public double BpmPriority { get; set; }
         public double KeyNumberPriority { get; set; }
