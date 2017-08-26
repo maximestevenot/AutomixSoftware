@@ -316,6 +316,7 @@ namespace Automix_UI.Forms
                     }
                     if (dropIndex != dragItem.Index)
                     {
+                        _musicListView.PointToClient(new Point(e.X, e.Y));
                         _musicListView.Items.Remove(dragItem);
                         _musicListView.Items.Insert(dropIndex, dragItem);
                         _presenter.MoveTrack(dropIndex, dragItem.Text);
@@ -360,16 +361,7 @@ namespace Automix_UI.Forms
                 insertionMode = clientPoint.Y < bounds.Top + (bounds.Height / 2) ? InsertionModeType.Before : InsertionModeType.After;
 
                 e.Effect = DragDropEffects.Move;
-
-                if (_insertionIndex < 0 || _insertionIndex >= _musicListView.Items.Count)
-                {
-                    return;
-                }
-
-                bounds = _musicListView.Items[_insertionIndex].GetBounds(ItemBoundsPortion.Entire);
-                var y = _insertionMode == InsertionModeType.Before ? bounds.Top : bounds.Bottom;
-                var width = Math.Min(bounds.Width - bounds.Left, ClientSize.Width);
-                _lvDrawer.DrawInsertionLine(0, y, width);
+                DrawInsertionLine();
             }
             else
             {
@@ -378,14 +370,26 @@ namespace Automix_UI.Forms
                 e.Effect = DragDropEffects.None;
             }
 
-            if (insertionIndex == _insertionIndex && insertionMode == _insertionMode)
+            if (insertionIndex == _insertionIndex && insertionMode == _insertionMode) return;
+            _insertionMode = insertionMode;
+            _insertionIndex = insertionIndex;
+            _musicListView.Invalidate();
+        }
+
+        private void DrawInsertionLine()
+        {
+
+            if (_insertionIndex < 0 || _insertionIndex >= _musicListView.Items.Count)
             {
                 return;
             }
 
-            _insertionMode = insertionMode;
-            _insertionIndex = insertionIndex;
-            _musicListView.Invalidate();
+            var bounds = _musicListView.Items[_insertionIndex].GetBounds(ItemBoundsPortion.Entire);
+            const int x = 0;
+            var y = _insertionMode == InsertionModeType.Before ? bounds.Top : bounds.Bottom;
+            var width = Math.Min(bounds.Width - bounds.Left, ClientSize.Width);
+
+            _lvDrawer.DrawInsertionLine(x, y, width);
         }
 
         private void OnTrackContextMenuOpening(object sender, CancelEventArgs e)
