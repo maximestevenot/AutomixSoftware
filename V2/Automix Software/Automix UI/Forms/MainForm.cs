@@ -250,15 +250,9 @@ namespace Automix_UI.Forms
 
         private void OnStopMixToolStripMenuItemClick(object sender, EventArgs e) => StopPlayer();
 
-        private void OnAboutCharacteristicsMenuItemClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void OnAboutCharacteristicsMenuItemClick(object sender, EventArgs e) => new UserDocForm().ShowDialog();
 
-        private void OnAboutMenuItemClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void OnAboutMenuItemClick(object sender, EventArgs e) => new AboutForm().ShowDialog();
 
         private void MusicListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => _lvDrawer.DrawColumnHeader(e);
 

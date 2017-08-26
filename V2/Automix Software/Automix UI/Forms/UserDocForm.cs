@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 namespace Automix_UI.Forms
 {
-    public partial class AboutForm : Form
+    public partial class UserDocForm : Form
     {
-        public AboutForm()
+        public UserDocForm()
         {
             InitializeComponent();
         }
+
         private void OnOkButtonClick(object sender, EventArgs e) => Close();
     }
 }
