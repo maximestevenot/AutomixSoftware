@@ -6,10 +6,10 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
-namespace Automix_UI
+namespace Automix_UI.Drawing
 {
     public class AutomixColorTable : ProfessionalColorTable
     {
