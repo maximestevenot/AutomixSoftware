@@ -15,6 +15,8 @@ namespace Automix_UI.Forms
         public AboutForm()
         {
             InitializeComponent();
+            var text = richTextBox1.Text;
+            richTextBox1.Text = string.Format(text,Application.ProductVersion);
         }
         private void OnOkButtonClick(object sender, EventArgs e) => Close();
     }

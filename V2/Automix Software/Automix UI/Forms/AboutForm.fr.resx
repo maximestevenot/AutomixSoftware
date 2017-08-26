@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>AutoMix Software Release Candidate 1.0
+    <value>Automix Software {0}
 Copyright © 2016-2017 LesProjecteurs - Tous droits réservés
 
 Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, 
