@@ -1,5 +1,5 @@
 variables:
-  AutoMix: "V2\\Automix Software\\AutoMix Software.sln"
+  AutoMix: "Automix Software.sln"
 
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
@@ -20,7 +20,7 @@ build:
     - tags
   artifacts:
     paths:
-      - V2/Automix Software/Automix UI/bin/Debug
+      - Automix UI/bin/Debug
     expire_in: 10 minutes 
 
 deploy:
@@ -31,7 +31,7 @@ deploy:
   dependencies: []
   artifacts:
     paths:
-      - V2/Automix Software/Automix UI/bin/Release/
+      - Automix UI/bin/Release
     expire_in: 2 weeks
   only:
     - master
