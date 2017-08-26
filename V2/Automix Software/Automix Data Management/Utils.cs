@@ -13,7 +13,7 @@ namespace Automix_Data_Management
     /// <summary>
     /// Provides some tools to manipulate strings
     /// </summary>
-    internal abstract class Utils
+    public abstract class Utils
     {
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Automix_Data_Management
         /// </summary>
         /// <param name="path">The file path</param>
         /// <returns>The name in a new <c>string</c></returns>
-        internal static string NameFromPath(string path)
+        public static string NameFromPath(string path)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -37,7 +37,7 @@ namespace Automix_Data_Management
         /// </summary>
         /// <param name="fileName">The file name</param>
         /// <returns>The extension in a new <c>string</c></returns>
-        internal static string GetExtension(string fileName)
+        public static string GetExtension(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
             {
@@ -54,7 +54,7 @@ namespace Automix_Data_Management
         /// <param name="key">The music key</param>
         /// <param name="scale">The music scale : major or minor</param>
         /// <returns>The openkey in a new <c>string</c></returns>
-        internal static string ConvertToOpenKey(string key, string scale)
+        public static string ConvertToOpenKey(string key, string scale)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(scale))
             {

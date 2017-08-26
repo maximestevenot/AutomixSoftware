@@ -6,6 +6,7 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -74,6 +75,11 @@ namespace Automix_Data_Management.Model
             {
                 SafeAdd(track);
             }
+        }
+
+        public void SortByName()
+        {
+            Sort((t1, t2) => string.Compare(t1.Name, t2.Name, StringComparison.Ordinal));
         }
     }
 }
