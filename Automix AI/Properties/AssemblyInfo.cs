@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Automix AI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("LesProjecteurs")]
 [assembly: AssemblyProduct("Automix Software")]
 [assembly: AssemblyCopyright("Copyright © 2016-2017 LesProjecteurs - All Rights Reserved")]
 [assembly: AssemblyTrademark("")]
