@@ -55,18 +55,15 @@ namespace Automix_Data_Management.Model
             Id = _tracksCount++;
         }
 
-        public Track(string path) : this()
+        public Track(string path) : this(path, null)
         {
-            Path = path;
-            Name = Utils.NameFromPath(path);
-            Checksum = path.StartsWith("test") ? path : AudioIO.Mp3Md5Hash(path);
         }
 
         public Track(string path, string checksum) : this()
         {
             Path = path;
             Name = Utils.NameFromPath(path);
-            Checksum = checksum;
+            Checksum = checksum ?? AudioIO.Mp3Md5Hash(path);
         }
 
         public string DisplayDuration()
