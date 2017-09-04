@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix UI", "Automix UI\Au
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Automix Setup", "Automix Setup\Automix Setup.vdproj", "{9F63E8C3-DDB7-4BFF-B5A3-C821700E9F8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automix AI Tests", "Automix AI Tests\Automix AI Tests.csproj", "{35AA3DB0-8D48-4F95-B594-5366A0EC75AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{DA2306A3-343D-4E50-8F29-EB2A0A172078}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F63E8C3-DDB7-4BFF-B5A3-C821700E9F8E}.Debug|Any CPU.ActiveCfg = Debug
 		{9F63E8C3-DDB7-4BFF-B5A3-C821700E9F8E}.Release|Any CPU.ActiveCfg = Release
+		{35AA3DB0-8D48-4F95-B594-5366A0EC75AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35AA3DB0-8D48-4F95-B594-5366A0EC75AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35AA3DB0-8D48-4F95-B594-5366A0EC75AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35AA3DB0-8D48-4F95-B594-5366A0EC75AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
