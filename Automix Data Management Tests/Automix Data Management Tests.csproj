@@ -67,6 +67,8 @@
     <Compile Include="Audio Playing\Mp3PlayerTest.cs" />
     <Compile Include="Exportation\SmoothMixTest.cs" />
     <Compile Include="Extraction\AudioDataExtractionTest.cs" />
+    <Compile Include="Model\TrackTest.cs" />
+    <Compile Include="Model\TrackCollectionTest.cs" />
     <Compile Include="TestConstant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\DataBaseTest.cs" />

@@ -10,7 +10,6 @@ using System;
 
 namespace Automix_Data_Management.Model
 {
-    //TODO: Change constructors
     public class Track
     {
         private static int _tracksCount;
