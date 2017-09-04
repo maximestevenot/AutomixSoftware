@@ -1,6 +1,8 @@
 variables:
   AutoMix: "Automix Software.sln"
-
+  AITestsLib: "Automix AI Tests\\bin\\Debug\\Automix AI Tests.dll"
+  TestsFile: "Automix Software\\TestResults\\ai_test.xml"
+  
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
   - echo "Restoring NuGet Packages..."
@@ -8,12 +10,13 @@ before_script:
 
 stages:
   - build
+  - test
   - deploy
 
 build:
   stage: build
   script:
-    - echo building...
+    - echo "Building..."
     - 'msbuild /m /nologo /p:Configuration=Debug;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   except:
@@ -23,10 +26,21 @@ build:
       - Automix UI/bin/Debug
     expire_in: 10 minutes 
 
+test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - 'mkdir "Automix Software\\TestResults"'
+    - 'mstest.exe /testcontainer:"%AITestsLib%" /resultsfile:"%AITestsFile%"'
+  dependencies:
+    - build
+  except:
+    - tags
+    
 deploy:
   stage: deploy
   script:
-    - echo deploying...
+    - echo "Deploying..."
     - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   artifacts:
