@@ -1,7 +1,7 @@
 variables:
   AutoMix: "Automix Software.sln"
   AITestsLib: "Automix AI Tests\\bin\\Debug\\Automix AI Tests.dll"
-  AITestsFile: "Automix Software\\TestResults\\ai_test.xml"
+  AITestsFile: "TestResults\\ai_test.xml"
   
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
@@ -24,13 +24,14 @@ build:
   artifacts:
     paths:
       - Automix UI/bin/Debug
+      - Automix AI Tests/bin/Debug
     expire_in: 10 minutes 
 
 test:
   stage: test
   script:
     - echo "Testing..."
-    - 'mkdir "Automix Software\\TestResults"'
+    - 'mkdir "TestResults"'
     - 'mstest.exe /testcontainer:"%AITestsLib%" /resultsfile:"%AITestsFile%"'
   dependencies:
     - build
