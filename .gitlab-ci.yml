@@ -1,7 +1,7 @@
 variables:
   AutoMix: "Automix Software.sln"
   AITestsLib: "Automix AI Tests\\bin\\Debug\\Automix AI Tests.dll"
-  TestsFile: "Automix Software\\TestResults\\ai_test.xml"
+  AITestsFile: "Automix Software\\TestResults\\ai_test.xml"
   
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
