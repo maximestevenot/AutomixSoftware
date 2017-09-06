@@ -64,4 +64,7 @@
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)\Automix Data Management\External Libraries\Lame\libmp3lame.32.dll" &amp; xcopy /y "$(SolutionDir)\Automix Data Management\External Libraries\Lame\libmp3lame.64.dll"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
