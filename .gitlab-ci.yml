@@ -34,9 +34,7 @@ test:
   stage: test
   script:
     - echo "Testing..."
-    - 'mkdir "TestResults"'
-    - 'mstest.exe /testcontainer:"%AITestsLib%"'
-    - 'mstest.exe /testcontainer:"%DataManagementTestsLib%"'
+    - 'vstest.console.exe "%AITestsLib%" "%DataManagementTestsLib%" /Enablecodecoverage /Logger:trx'
   dependencies:
     - build
   except:
