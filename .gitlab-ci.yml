@@ -1,5 +1,7 @@
 variables:
   AutoMix: "Automix Software.sln"
+  DataManagementTestsLib: "Automix Data Management Tests\\bin\\Debug\\Automix Data Management Tests.dll"
+  DataManagementTestsFile: "TestResults\\data_management_test.xml"
 
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
@@ -21,7 +23,19 @@ build:
   artifacts:
     paths:
       - Automix UI/bin/Debug
+      - Automix Data Management Tests/bin/Debug
     expire_in: 10 minutes 
+
+test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - 'mkdir "TestResults"'
+    - 'mstest.exe /testcontainer:"%DataManagementTestsLib%" /resultsfile:"%DataManagementTestsFile%"'
+  dependencies:
+    - build
+  except:
+    - tags
 
 deploy:
   stage: deploy
