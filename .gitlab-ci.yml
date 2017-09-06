@@ -23,20 +23,14 @@ build:
   dependencies: []
   except:
     - tags
-  artifacts:
-    paths:
-      - Automix UI/bin/Debug
-      - Automix Data Management Tests/bin/Debug
-      - Automix AI Tests/bin/Debug
-    expire_in: 10 minutes 
 
 test:
   stage: test
   script:
     - echo "Testing..."
     - 'mkdir "TestResults"'
-    - 'mstest.exe /testcontainer:"%DataManagementTestsLib%" /resultsfile:"%DataManagementTestsFile%"'
-    - 'mstest.exe /testcontainer:"%AITestsLib%" /resultsfile:"%AITestsFile%"'
+    - 'mstest.exe /testcontainer:"%AITestsLib%"'
+    - 'mstest.exe /testcontainer:"%DataManagementTestsLib%"'
   dependencies:
     - build
   except:
