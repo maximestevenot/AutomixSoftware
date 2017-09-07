@@ -34,7 +34,12 @@ test:
   stage: test
   script:
     - echo "Testing..."
-    - 'vstest.console.exe "%AITestsLib%" "%DataManagementTestsLib%" /Enablecodecoverage /Logger:trx'
+    - 'vstest.console.exe "%AITestsLib%" "%DataManagementTestsLib%" /Logger:trx'
+    - 'npm init -f'
+    - 'npm install xml2js'
+    - 'npm install fs'
+    - 'npm init -f'
+    - 'node coverage.js'
   dependencies:
     - build
   except:
