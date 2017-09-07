@@ -38,6 +38,7 @@ test:
     - 'npm init -f'
     - 'npm install xml2js'
     - 'npm install fs'
+    - echo "Estimating coverage..."
     - 'node coverage.js'
   dependencies:
     - build
