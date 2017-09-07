@@ -38,7 +38,6 @@ test:
     - 'npm init -f'
     - 'npm install xml2js'
     - 'npm install fs'
-    - 'npm init -f'
     - 'node coverage.js'
   dependencies:
     - build
