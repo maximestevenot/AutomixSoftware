@@ -35,10 +35,9 @@ test:
   script:
     - echo "Testing..."
     - 'vstest.console.exe "%AITestsLib%" "%DataManagementTestsLib%" /Logger:trx'
-    - 'npm init -f'
-    - 'npm install xml2js'
-    - 'npm install fs'
-    - 'npm init -f'
+    - 'call npm init -f'
+    - 'call npm install xml2js'
+    - 'call npm install fs'
     - echo "Estimating coverage..."
     - 'node coverage.js'
   dependencies:
