@@ -5,26 +5,27 @@
 #define MyAppVersion "1.1.0"
 #define MyAppPublisher "LesProjecteurs"
 #define MyAppURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/"
+#define MyAppDownloadURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/download"
 #define MyAppExeName "Automix Software.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{0AC515B7-DA9B-489F-A17A-57BD5C54E4F8}
+AppId={{C8409620-2495-4E05-8307-7FB8645F3B12}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
+AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
-AppUpdatesURL={#MyAppURL}
+AppUpdatesURL={#MyAppDownloadURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=D:\Documents\Projets\AutomixSoftware\COPYING
-OutputDir=D:\Documents\Projets\AutomixSoftware\Automix Setup\bin
+LicenseFile=..\COPYING
+OutputDir=bin
 OutputBaseFilename=setup
-SetupIconFile=D:\Documents\Projets\AutomixSoftware\Automix UI\logo.ico
+SetupIconFile=..\Automix UI\logo.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -36,8 +37,8 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "D:\Documents\Projets\AutomixSoftware\Automix UI\bin\Release\Automix Software.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Documents\Projets\AutomixSoftware\Automix UI\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\Automix UI\bin\Release\Automix Software.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Automix UI\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
