@@ -1,0 +1,21 @@
+{
+  "name": "Automix",
+  "version": "1.0.0",
+  "description": "This project aims to create a virtual and intelligent DJ to help customers create their own mix so they can enjoy any music without interruption.",
+  "main": "coverage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {}
+}

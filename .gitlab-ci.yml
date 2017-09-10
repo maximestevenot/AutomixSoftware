@@ -1,6 +1,10 @@
 variables:
   AutoMix: "Automix Software.sln"
-
+  DataManagementTestsLib: "Automix Data Management Tests\\bin\\Debug\\Automix Data Management Tests.dll"
+  DataManagementTestsFile: "TestResults\\data_management_test.xml"
+  AITestsLib: "Automix AI Tests\\bin\\Debug\\Automix AI Tests.dll"
+  AITestsFile: "TestResults\\ai_test.xml"
+  
 before_script:
   - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
   - echo "Restoring NuGet Packages..."
@@ -8,12 +12,13 @@ before_script:
 
 stages:
   - build
+  - test
   - deploy
 
 build:
   stage: build
   script:
-    - echo building...
+    - echo "Building..."
     - 'msbuild /m /nologo /p:Configuration=Debug;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   except:
@@ -21,12 +26,29 @@ build:
   artifacts:
     paths:
       - Automix UI/bin/Debug
+      - Automix Data Management Tests/bin/Debug
+      - Automix AI Tests/bin/Debug
     expire_in: 10 minutes 
+
+test:
+  stage: test
+  script:
+    - echo "Testing..."
+    - 'vstest.console.exe "%AITestsLib%" "%DataManagementTestsLib%" /Logger:trx'
+    - 'call npm init -f'
+    - 'call npm install xml2js'
+    - 'call npm install fs'
+    - echo "Estimating coverage..."
+    - 'node coverage.js'
+  dependencies:
+    - build
+  except:
+    - tags
 
 deploy:
   stage: deploy
   script:
-    - echo deploying...
+    - echo "Deploying..."
     - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
   dependencies: []
   artifacts:
