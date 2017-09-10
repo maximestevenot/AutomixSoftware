@@ -50,10 +50,11 @@ deploy:
   script:
     - echo "Deploying..."
     - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
+    - 'iscc "Automix Setup\setup.iss"'
   dependencies: []
   artifacts:
     paths:
-      - Automix UI/bin/Release
+      - Automix Setup/bin/
     expire_in: 2 weeks
   only:
     - master
