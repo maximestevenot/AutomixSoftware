@@ -1,12 +1,12 @@
 variables:
   AutoMix: "Automix Software.sln"
   DataManagementTestsLib: "Automix Data Management Tests\\bin\\Debug\\Automix Data Management Tests.dll"
-  DataManagementTestsFile: "TestResults\\data_management_test.xml"
   AITestsLib: "Automix AI Tests\\bin\\Debug\\Automix AI Tests.dll"
-  AITestsFile: "TestResults\\ai_test.xml"
+  PathToISCC: "D:\\Programmes\\Inno Setup 5\\ISCC.exe"
+  PathToVisualVariables: "D:\\Programmes\\Microsoft Visual Studio\\2017\\Enterprise\\VC\\Auxiliary\\Build\\vcvars64.bat"
   
 before_script:
-  - 'call "D:\Programmes\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvars64.bat"'
+  - 'call "%PathToVisualVariables%"'
   - echo "Restoring NuGet Packages..."
   - 'msbuild /t:restore /p:Platform="Any CPU" "%AutoMix%"'
 
@@ -50,7 +50,7 @@ deploy:
   script:
     - echo "Deploying..."
     - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
-    - 'iscc "Automix Setup\setup.iss"'
+    - '%PathToISCC% "Automix Setup\setup.iss"'
   dependencies: []
   artifacts:
     paths:
