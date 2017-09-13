@@ -50,7 +50,7 @@ deploy:
   script:
     - echo "Deploying..."
     - 'msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "%AutoMix%"'
-    - '%PathToISCC% "Automix Setup\setup.iss"'
+    - '"%PathToISCC%" "Automix Setup\setup.iss"'
   dependencies: []
   artifacts:
     paths:
