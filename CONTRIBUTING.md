@@ -14,9 +14,9 @@ Names of variables should not be a name of a type.
 As much as possible, the source code should be a good documentation.  
 Otherwise, you have to create documentation.
 
-Following the [PEP (Python Enhancement Proposal) 20](https://www.python.org/dev/peps/pep-0020/) is a good thing, even if the project does not use the Python language.
+More info [here](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions) on C# best practices.
 
-More info [here](https://isocpp.org/wiki/faq/coding-standards) and [here](https://lefticus.gitbooks.io/cpp-best-practices/content/) on C++ best practices.
+Following the [PEP (Python Enhancement Proposal) 20](https://www.python.org/dev/peps/pep-0020/) is a good thing, even if the project does not use the Python language.
 
 ### Formatted text files
 
