@@ -13,7 +13,7 @@ See [deployment](#deployment) for notes on how to build and deploy the project o
 
 ### Prerequisites
 
-This project was developed in C++ and .NET under Microsoft Visual Studio 2015. No plugins are required.
+This project was developed in C# and .NET under Microsoft Visual Studio 2017. No plugins are required.
 
 Get Visual Studio [here](https://www.visualstudio.com/downloads/).
 
@@ -28,20 +28,20 @@ git clone https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a.git
 Open solution in Visual Studio.
 
 ```
-File > Open > Project/Solution > path/to/AutoMix/Software
+File > Open > Project/Solution > "[...]/Automix Software.sln"
 ```
 
-Run solution in *Debug* mode and under *x86* architecture.
+Run solution in *Debug* mode and under *Any CPU* architecture.
 
 ----------
 
 ## Deployment
 
-Open a command prompt for Visual Studio and navigate to the *AutoMix Software* folder in the repository.
+Open a command prompt for Visual Studio and navigate to the *Automix Software* folder in the repository.
 ```
-msbuild /p:Configuration=Release;Architecture=x86 "AutoMix Software.sln"
+msbuild /m /nologo /p:Configuration=Release;Platform="Any CPU" "Automix Software.sln"
 ```
-The .exe file will be built in the *Debug* directory.
+The .exe file will be built in the *Release* directory.
 
 ----------
 
@@ -81,6 +81,6 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our coding style, 
 
 ## License
 
-For AutoMix Software  
-Copyright (c) 2016-2017, ENSICAEN All rights reserved.  
+For Automix Software  
+Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
 This project is licensed under Proprietary License - see the [LICENSE.md](LICENSE.md) file for details.
