@@ -32,6 +32,7 @@ namespace Automix_Data_Management.Exportation
         {
             TransitionDuration = transitionDuration;
             _tempDirPath = Path.GetTempPath() + "AutomixSoftware/";
+            //_tempDirPath = "C:/Users/Niels/Documents/Automix/";
             _tempFileList = new List<string>();
         }
 
