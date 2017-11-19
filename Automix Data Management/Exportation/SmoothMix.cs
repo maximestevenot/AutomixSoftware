@@ -31,6 +31,7 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
+            // TODO: directory choosen by the user
             _tempDirPath = Path.GetTempPath() + "AutomixSoftware/";
             //_tempDirPath = "C:/Users/Niels/Documents/Automix/";
             _tempFileList = new List<string>();

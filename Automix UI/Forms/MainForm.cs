@@ -32,6 +32,7 @@ namespace Automix_UI.Forms
 
         // TODO: directory choosen by the user
         private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
+        private string _customExportPath;
         private string _exportPath;
 
         private enum InsertionModeType
@@ -69,6 +70,7 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
+            _chooseTempDirToolStripMenuItem.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -125,6 +127,7 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = false;
             _toolStripProgressBar.Value = 0;
             _toolStripProgressBar.Visible = true;
+            _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
         }
@@ -147,6 +150,7 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = true;
             _toolStripProgressBar.Visible = false;
             _toolStripProgressBar.Value = 0;
+            _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
         }
@@ -240,6 +244,7 @@ namespace Automix_UI.Forms
 
             try
             {
+                // TODO: directory choosen by the user
                 Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
             }
             catch
@@ -668,6 +673,25 @@ namespace Automix_UI.Forms
             {
                 ExitApplication();
             }
+        }
+
+        private void OnChooseTempDirButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new FolderBrowserDialog
+            {
+                SelectedPath = _customExportPath,
+                ShowNewFolderButton = true
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            //OnWorkerStart();
+            //_chooseTempDirToolStripMenuItem.RunWorkerAsync();
+            Console.WriteLine("Dossier choisi" + dialog.SelectedPath);
+            OnWorkerStop();
         }
     }
 }

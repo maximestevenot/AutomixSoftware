@@ -77,6 +77,7 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
+            // TODO: directory choosen by the user
             var tempPath = Path.GetTempPath() + "AutomixSoftware";
 
             if (!Directory.Exists(tempPath))
