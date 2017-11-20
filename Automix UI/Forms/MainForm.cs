@@ -16,6 +16,7 @@ using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
 using System.Xml;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_UI.Forms
 {
@@ -32,8 +33,7 @@ namespace Automix_UI.Forms
         private bool _playerExists;
 
         // TODO: directory choosen by the user
-        private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
-        private string _customExportPath;
+        private static readonly string DefaultExportPath = GetTempDir() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
 
         private enum InsertionModeType
@@ -680,7 +680,6 @@ namespace Automix_UI.Forms
         {
             var dialog = new FolderBrowserDialog
             {
-                SelectedPath = _customExportPath,
                 ShowNewFolderButton = true
             };
 
@@ -689,14 +688,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
-            writer.WriteStartElement("configuration");
-            writer.WriteElementString("tempDir", dialog.SelectedPath);
-            writer.WriteEndElement();
-            writer.Flush();
+            SetTempDir(dialog.SelectedPath);
 
             OnWorkerStop();
         }
