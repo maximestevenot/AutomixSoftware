@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
+using System.Xml;
 
 namespace Automix_UI.Forms
 {
@@ -688,9 +689,15 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            //OnWorkerStart();
-            //_chooseTempDirToolStripMenuItem.RunWorkerAsync();
-            Console.WriteLine("Dossier choisi" + dialog.SelectedPath);
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
+            writer.WriteStartElement("configuration");
+            writer.WriteElementString("tempDir", dialog.SelectedPath);
+            writer.WriteEndElement();
+            writer.Flush();
+
             OnWorkerStop();
         }
     }
