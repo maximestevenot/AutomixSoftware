@@ -110,5 +110,15 @@ namespace Automix_Data_Management
 
             return openKeyString;
         }
+
+        /// <summary>
+        /// Gives the important data of an exception into a formatted string
+        /// </summary>
+        /// <param name="ex">The exception concerned</param>
+        /// <returns>The data in a formatted <c>string</c></returns>
+        public static string GetExceptionData(Exception ex)
+        {
+            return "Message : " + ex.Message + "\nStack trace : " + ex.StackTrace + "\n\n";
+        }
     }
 }
