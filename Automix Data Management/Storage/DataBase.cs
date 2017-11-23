@@ -189,5 +189,168 @@ namespace Automix_Data_Management.Storage
             var values = orig.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             return values.Select(value => Convert.ToInt32(value)).ToArray();
         }
+
+
+
+
+
+        public void ImportDatabBase(String pathUser)
+        {
+            /*
+            var db = new DataBase();
+            String path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\automix_software_collection.db";
+            ConnectToDatabase(path);
+            */
+
+            _dbConnection.Open();
+
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathUser + ";Version=3;");
+            dbUserConnection.Open();
+
+            if (CheckColumnsProperties(pathUser, dbUserConnection))
+            {
+                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+                commandUser.ExecuteNonQuery();
+                SQLiteDataReader readerUser = commandUser.ExecuteReader();
+
+                while (readerUser.Read())
+                {
+                    string checksumUser = readerUser.GetString(1);
+                    if (!IsInDataBase(checksumUser))
+                    {
+                        string query = "INSERT INTO tracks VALUES (" + readerUser.GetString(0) + ","
+                            + checksumUser + ","
+                            + readerUser.GetString(2) + ","
+                            + readerUser.GetString(3) + ","
+                            + readerUser.GetString(4) + ","
+                            + readerUser.GetString(5) + ","
+                            + readerUser.GetString(6) + ","
+                            + readerUser.GetString(7) + ","
+                            + readerUser.GetString(8) + ","
+                            + readerUser.GetString(9) + ")"; // ATTENTION ';' DS REQUETE SQL A METTRE OU PAS ?
+                        SQLiteCommand command = new SQLiteCommand(query, _dbConnection);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            else
+            {
+                // ATTENTION : EXCEPTION A CREER ?
+            }
+
+            _dbConnection.Close();
+            dbUserConnection.Close();
+        }
+
+        private bool CheckColumnsProperties(String pathUser, SQLiteConnection dbUserConnection)
+        {
+            _dbConnection.Open();
+            dbUserConnection.Open();
+            int nbColUser, nbCol;
+
+            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
+            commandUser.ExecuteNonQuery();
+            SQLiteDataReader readerUser = commandUser.ExecuteReader();
+            nbColUser = readerUser.FieldCount;
+
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+            command.ExecuteNonQuery();
+            SQLiteDataReader reader = command.ExecuteReader();
+            nbCol = reader.FieldCount;
+
+            if (nbColUser == nbCol)
+            {
+                for (int i = 0; i < nbCol; i++)
+                {
+                    if (readerUser.GetName(i) == reader.GetName(i) && readerUser.GetFieldType(i) == reader.GetFieldType(i))
+                    {
+                    }
+                    else
+                    {
+                        _dbConnection.Close();
+                        dbUserConnection.Close();
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                _dbConnection.Close();
+                dbUserConnection.Close();
+                return false;
+            }
+
+            _dbConnection.Close();
+            dbUserConnection.Close();
+            return true;
+        }
+
+        private bool IsInDataBase(string checksumUser)
+        {
+            _dbConnection.Open();
+
+            const string query = "SELECT checksum FROM tracks";
+            var command = new SQLiteCommand(query, _dbConnection);
+            command.ExecuteNonQuery();
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (reader.GetString(0).Equals(checksumUser))
+                {
+                    _dbConnection.Close();
+                    return true;
+                }
+            }
+
+            _dbConnection.Close();
+            return false;
+        }
+
+
+        public void ExportDataBase(string pathUser)
+        {
+            _dbConnection.Open();
+
+            SQLiteConnection.CreateFile(pathUser);
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathUser + ";Version=3;");
+            dbUserConnection.Open();
+
+            try
+            {
+                // Creation of the user database
+                const string query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, checksum TEXT, "
+                                     + "duration TEXT, bpm TEXT, key TEXT, danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
+                SQLiteCommand commandUser = new SQLiteCommand(query, dbUserConnection);
+                commandUser.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
+            }
+
+            // Copy of the database in the database user
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+            command.ExecuteNonQuery();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string queryUser = "INSERT INTO tracks VALUES (" + reader.GetString(0) + ","
+                    + reader.GetString(1) + ","
+                    + reader.GetString(2) + ","
+                    + reader.GetString(3) + ","
+                    + reader.GetString(4) + ","
+                    + reader.GetString(5) + ","
+                    + reader.GetString(6) + ","
+                    + reader.GetString(7) + ","
+                    + reader.GetString(8) + ","
+                    + reader.GetString(9) + ")"; // ATTENTION ';' DS REQUETE SQL A METTRE OU PAS ?
+                SQLiteCommand commandUser = new SQLiteCommand(queryUser, dbUserConnection);
+                commandUser.ExecuteNonQuery();
+            }
+
+            _dbConnection.Close();
+            dbUserConnection.Close();
+        }
     }
 }

@@ -74,6 +74,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -160,7 +161,8 @@
             this._optionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
-            this._stopMixToolStripMenuItem});
+            this._stopMixToolStripMenuItem,
+            this._importDataBase});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -220,6 +222,7 @@
             // 
             resources.ApplyResources(this._statusStrip, "_statusStrip");
             this._statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStripProgressBar,
             this._toolStripCurrentDir});
@@ -283,6 +286,7 @@
             // 
             // _trackContextMenu
             // 
+            this._trackContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._trackContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._deleteTrackToolStrip,
             this._selectAllToolStrip});
@@ -455,6 +459,11 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // _importDataBase
+            // 
+            this._importDataBase.Name = "_importDataBase";
+            resources.ApplyResources(this._importDataBase, "_importDataBase");
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -532,7 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem _generateMixMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _exportTextFileMenuItem;
         private System.Windows.Forms.Button _reloadButton;
-
+        private System.Windows.Forms.ToolStripMenuItem _importDataBase;
     }
 }
 
