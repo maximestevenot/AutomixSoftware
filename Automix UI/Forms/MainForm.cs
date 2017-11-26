@@ -32,7 +32,6 @@ namespace Automix_UI.Forms
         private bool _isPlayerPlaying;
         private bool _playerExists;
 
-        // TODO: directory choosen by the user
         private static readonly string DefaultExportPath = GetTempDir() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
 

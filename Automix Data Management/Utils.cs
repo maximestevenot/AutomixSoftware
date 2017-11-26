@@ -161,10 +161,15 @@ namespace Automix_Data_Management
 
         public static void SetTempDir(string path)
         {
+            path += "\\AutomixSoftware";
             string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
+            }
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
             }
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;

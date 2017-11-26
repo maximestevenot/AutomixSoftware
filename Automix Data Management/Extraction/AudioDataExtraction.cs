@@ -78,21 +78,20 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
-            var tempPath = GetTempDir(); 
-
-            if (!Directory.Exists(tempPath))
-            {
-                _tempDirectory = Directory.CreateDirectory(tempPath);
-            }
-            else
-            {
-                //TODO: try catch System.IO.IOException
-                //Directory.Delete(tempPath, true);
-                //_tempDirectory = Directory.CreateDirectory(tempPath);
-            }
+            var tempPath = GetTempDir();
 
             try
             {
+                if (!Directory.Exists(tempPath))
+                {
+                    _tempDirectory = Directory.CreateDirectory(tempPath);
+                }
+                else
+                {
+                    Directory.Delete(tempPath, true);
+                    _tempDirectory = Directory.CreateDirectory(tempPath);
+                }
+
                 var profileName = _tempDirectory.FullName + "\\profile.yaml";
                 var sw = new StreamWriter(profileName);
                 sw.Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]"
