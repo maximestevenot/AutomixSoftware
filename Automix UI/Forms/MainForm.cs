@@ -245,8 +245,7 @@ namespace Automix_UI.Forms
 
             try
             {
-                // TODO: directory choosen by the user
-                Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
+                Directory.Delete(GetTempDir(), true);
             }
             catch
             {
@@ -689,8 +688,6 @@ namespace Automix_UI.Forms
             }
 
             SetTempDir(dialog.SelectedPath);
-
-            OnWorkerStop();
         }
     }
 }

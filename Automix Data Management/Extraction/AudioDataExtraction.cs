@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -77,8 +78,7 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
-            // TODO: directory choosen by the user
-            var tempPath = Path.GetTempPath() + "AutomixSoftware";
+            var tempPath = GetTempDir(); 
 
             if (!Directory.Exists(tempPath))
             {
@@ -86,8 +86,9 @@ namespace Automix_Data_Management.Extraction
             }
             else
             {
-                Directory.Delete(tempPath, true);
-                _tempDirectory = Directory.CreateDirectory(tempPath);
+                //TODO: try catch System.IO.IOException
+                //Directory.Delete(tempPath, true);
+                //_tempDirectory = Directory.CreateDirectory(tempPath);
             }
 
             try

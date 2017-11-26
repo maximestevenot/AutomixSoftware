@@ -117,9 +117,14 @@ namespace Automix_Data_Management
         public static string GetTempDir()
         {
             string path;
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
             try
             {
-                XmlReader reader = XmlReader.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                XmlReader reader = XmlReader.Create(dir +"\\config.xml");
                 if (reader.ReadToDescendant("tempDir"))
                 {
                     if (reader.NodeType == XmlNodeType.Element)
@@ -156,6 +161,11 @@ namespace Automix_Data_Management
 
         public static void SetTempDir(string path)
         {
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
             XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
