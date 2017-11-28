@@ -43,6 +43,7 @@
             this._dataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._clearDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -74,7 +75,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this._exportDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -162,7 +163,8 @@
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
             this._stopMixToolStripMenuItem,
-            this._importDataBase});
+            this._importDataBase,
+            this._exportDataBase});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -188,6 +190,12 @@
             this._stopMixToolStripMenuItem.Name = "_stopMixToolStripMenuItem";
             resources.ApplyResources(this._stopMixToolStripMenuItem, "_stopMixToolStripMenuItem");
             this._stopMixToolStripMenuItem.Click += new System.EventHandler(this.OnStopMixToolStripMenuItemClick);
+            // 
+            // _importDataBase
+            // 
+            this._importDataBase.Name = "_importDataBase";
+            resources.ApplyResources(this._importDataBase, "_importDataBase");
+            this._importDataBase.Click += new System.EventHandler(this._importDataBase_Click);
             // 
             // _helpToolStripMenuItem
             // 
@@ -459,10 +467,10 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
-            // _importDataBase
+            // _exportDataBase
             // 
-            this._importDataBase.Name = "_importDataBase";
-            resources.ApplyResources(this._importDataBase, "_importDataBase");
+            this._exportDataBase.Name = "_exportDataBase";
+            resources.ApplyResources(this._exportDataBase, "_exportDataBase");
             // 
             // MainForm
             // 
@@ -542,6 +550,7 @@
         private System.Windows.Forms.ToolStripMenuItem _exportTextFileMenuItem;
         private System.Windows.Forms.Button _reloadButton;
         private System.Windows.Forms.ToolStripMenuItem _importDataBase;
+        private System.Windows.Forms.ToolStripMenuItem _exportDataBase;
     }
 }
 

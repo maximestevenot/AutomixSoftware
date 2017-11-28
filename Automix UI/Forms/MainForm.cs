@@ -668,5 +668,24 @@ namespace Automix_UI.Forms
                 ExitApplication();
             }
         }
+
+        private void _importDataBase_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = TextResources.DialogFilters,
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            /*
+            OnWorkerStart();
+            _importDataBase.RunWorkerAsync(dialog.FileNames);
+            */
+        }
     }
 }

@@ -209,7 +209,7 @@ namespace Automix_Data_Management.Storage
 
             if (CheckColumnsProperties(pathUser, dbUserConnection))
             {
-                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", _dbConnection); // checker nom table db user
                 commandUser.ExecuteNonQuery();
                 SQLiteDataReader readerUser = commandUser.ExecuteReader();
 
@@ -248,7 +248,7 @@ namespace Automix_Data_Management.Storage
             dbUserConnection.Open();
             int nbColUser, nbCol;
 
-            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
+            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection); // checker le nom de table de db user
             commandUser.ExecuteNonQuery();
             SQLiteDataReader readerUser = commandUser.ExecuteReader();
             nbColUser = readerUser.FieldCount;
