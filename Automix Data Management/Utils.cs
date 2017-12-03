@@ -7,6 +7,7 @@
 // You should have received a copy of the License along with this program.
 
 using System;
+using log4net;
 
 namespace Automix_Data_Management
 {
@@ -109,6 +110,39 @@ namespace Automix_Data_Management
             }
 
             return openKeyString;
+        }
+    }
+
+
+    /// <summary>
+    /// Allow developers to write into Automix log file
+    /// </summary>
+    public class Logger
+    {
+        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        
+        public static void WriteInFile(string level, Object message)
+        {
+            switch (level)
+            {
+                case "DEBUG":
+                    _log.Debug(message);
+                    break;
+                case "INFO":
+                    _log.Info(message);
+                    break;
+                case "ERROR":
+                    _log.Error(message);
+                    break;
+                case "FATAL":
+                    _log.Fatal(message);
+                    break;
+                case "WARN":
+                    _log.Warn(message);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
