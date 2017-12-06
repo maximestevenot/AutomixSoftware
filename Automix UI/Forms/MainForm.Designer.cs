@@ -43,6 +43,7 @@
             this._dataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._clearDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._chooseTempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -160,7 +161,8 @@
             this._optionsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
-            this._stopMixToolStripMenuItem});
+            this._stopMixToolStripMenuItem,
+            this._chooseTempDirToolStripMenuItem});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -186,6 +188,13 @@
             this._stopMixToolStripMenuItem.Name = "_stopMixToolStripMenuItem";
             resources.ApplyResources(this._stopMixToolStripMenuItem, "_stopMixToolStripMenuItem");
             this._stopMixToolStripMenuItem.Click += new System.EventHandler(this.OnStopMixToolStripMenuItemClick);
+            // 
+            // _chooseTempDirToolStripMenuItem
+            // 
+            this._chooseTempDirToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this._chooseTempDirToolStripMenuItem.Name = "_chooseTempDirToolStripMenuItem";
+            resources.ApplyResources(this._chooseTempDirToolStripMenuItem, "_chooseTempDirToolStripMenuItem");
+            this._chooseTempDirToolStripMenuItem.Click += new System.EventHandler(this.OnChooseTempDirButtonClick);
             // 
             // _helpToolStripMenuItem
             // 
@@ -532,7 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem _generateMixMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _exportTextFileMenuItem;
         private System.Windows.Forms.Button _reloadButton;
-
+        private System.Windows.Forms.ToolStripMenuItem _chooseTempDirToolStripMenuItem;
     }
 }
 
