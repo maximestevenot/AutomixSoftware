@@ -44,6 +44,7 @@
             this._clearDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this._exportDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -75,7 +76,6 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this._exportDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -193,9 +193,17 @@
             // 
             // _importDataBase
             // 
+            this._importDataBase.ForeColor = System.Drawing.Color.White;
             this._importDataBase.Name = "_importDataBase";
             resources.ApplyResources(this._importDataBase, "_importDataBase");
             this._importDataBase.Click += new System.EventHandler(this._importDataBase_Click);
+            // 
+            // _exportDataBase
+            // 
+            this._exportDataBase.ForeColor = System.Drawing.Color.White;
+            this._exportDataBase.Name = "_exportDataBase";
+            resources.ApplyResources(this._exportDataBase, "_exportDataBase");
+            this._exportDataBase.Click += new System.EventHandler(this._exportDataBase_Click);
             // 
             // _helpToolStripMenuItem
             // 
@@ -466,11 +474,6 @@
             // 
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
-            // 
-            // _exportDataBase
-            // 
-            this._exportDataBase.Name = "_exportDataBase";
-            resources.ApplyResources(this._exportDataBase, "_exportDataBase");
             // 
             // MainForm
             // 

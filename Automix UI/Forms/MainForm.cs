@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
+using Automix_Data_Management.Storage;
 
 namespace Automix_UI.Forms
 {
@@ -68,6 +69,8 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
+            _importDataBase.Enabled = true;
+            _exportDataBase.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -126,6 +129,9 @@ namespace Automix_UI.Forms
             _toolStripProgressBar.Visible = true;
 
             _musicListView.AllowDrop = false;
+
+            _importDataBase.Enabled = false;
+            _exportDataBase.Enabled = false;
         }
 
 
@@ -148,6 +154,9 @@ namespace Automix_UI.Forms
             _toolStripProgressBar.Value = 0;
 
             _musicListView.AllowDrop = true;
+
+            _importDataBase.Enabled = true;
+            _exportDataBase.Enabled = true;
         }
 
         private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
@@ -673,7 +682,7 @@ namespace Automix_UI.Forms
         {
             var dialog = new OpenFileDialog
             {
-                Filter = TextResources.DialogFilters,
+                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
                 FilterIndex = 1,
                 Multiselect = false
             };
@@ -682,10 +691,27 @@ namespace Automix_UI.Forms
             {
                 return;
             }
-            /*
-            OnWorkerStart();
-            _importDataBase.RunWorkerAsync(dialog.FileNames);
-            */
+
+            var dataBase = new DataBase();
+            dataBase.ImportDataBase(dialog.FileName);
+        }
+
+        private void _exportDataBase_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var dataBase = new DataBase();
+            dataBase.ExportDataBase(dialog.FileName);
         }
     }
 }
