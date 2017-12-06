@@ -15,14 +15,16 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using System.Xml;
 using static Automix_Data_Management.Utils;
+using log4net;
 
 namespace Automix_UI.Forms
 {
     public partial class MainForm : Form, IViewWithTrackCollection
     {
         public bool AnOperationRunning { get; private set; }
+
+        public static ILog Log => log;
 
         private readonly Presenter _presenter;
         private readonly ListViewDrawer _lvDrawer;
@@ -34,6 +36,8 @@ namespace Automix_UI.Forms
 
         private static readonly string DefaultExportPath = GetTempDir() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private enum InsertionModeType
         {
@@ -249,6 +253,7 @@ namespace Automix_UI.Forms
             catch (Exception e) when (e is IOException || e is UnauthorizedAccessException || e is ArgumentException
             || e is ArgumentNullException || e is PathTooLongException || e is DirectoryNotFoundException || e is System.Security.SecurityException)
             {
+                Log.Info(e.Source, e);
                 Console.WriteLine(Automix_Data_Management.Utils.GetExceptionData(e));
             }
             Application.Exit();
@@ -562,13 +567,22 @@ namespace Automix_UI.Forms
             OnWorkerStop();
         }
 
-        private void OnPlayerButtonClick(object sender, EventArgs e)
+        private void OnPlayerButtonClick(object sender, EventArgs ex)
         {
             OnWorkerStart();
             _playerbutton.Enabled = true;
 
             _playerbutton.Image = _isPlayerPlaying ? new Bitmap(Resources.PlayIcon, 70, 70) : new Bitmap(Resources.PauseIcon, 70, 70);
-            _playerBackgroundWorker.RunWorkerAsync();
+
+            try
+            {
+                _playerBackgroundWorker.RunWorkerAsync();
+            } catch (InvalidOperationException exception)
+            {
+                Log.Debug("Invalid operation - Pause during not ready preview", exception);
+                throw exception;
+            }
+            
         }
 
         private void OnSkipButtonClick(object sender, EventArgs e)
@@ -597,8 +611,9 @@ namespace Automix_UI.Forms
                     }
                     _presenter.PlayMix(_exportPath);
                 }
-                catch (IOException)
+                catch (IOException exception) 
                 {
+                    Log.Info(exception.Source, exception);
                     _presenter.ResumeMix();
                 }
                 _isPlayerPlaying = true;

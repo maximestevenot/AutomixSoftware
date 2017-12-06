@@ -17,6 +17,7 @@ using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -25,6 +26,8 @@ namespace Automix_Data_Management.Extraction
         private readonly ProcessStartInfo _startInfo;
         private readonly ProcessStartInfo _startInfoFade;
         private readonly DirectoryInfo _tempDirectory;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ExecutableExtraction(DirectoryInfo tempDirectory)
         {
@@ -118,6 +121,7 @@ namespace Automix_Data_Management.Extraction
                 }
                 catch (FileNotFoundException e)
                 {
+                    log.Debug(e.Message, e);
                     Debug.WriteLine(e.Message);
                 }
             }

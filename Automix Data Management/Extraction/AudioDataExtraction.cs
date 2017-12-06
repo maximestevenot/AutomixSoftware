@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using static Automix_Data_Management.Utils;
+using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -22,6 +23,8 @@ namespace Automix_Data_Management.Extraction
     {
         private DirectoryInfo _tempDirectory;
         public static int ExploredTracks;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public AudioDataExtraction()
         {
@@ -72,6 +75,7 @@ namespace Automix_Data_Management.Extraction
             }
             catch (OperationCanceledException oce)
             {
+                log.Info(oce.Message, oce);
                 Console.WriteLine(Utils.GetExceptionData(oce));
             }
         }
@@ -100,6 +104,7 @@ namespace Automix_Data_Management.Extraction
             }
             catch (IOException e)
             {
+                log.Debug(e.Message, e);
                 Debug.WriteLine(e.Message);
             }
         }
