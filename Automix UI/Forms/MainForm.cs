@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
+using System.Xml;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_UI.Forms
 {
@@ -30,7 +32,7 @@ namespace Automix_UI.Forms
         private bool _isPlayerPlaying;
         private bool _playerExists;
 
-        private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
+        private static readonly string DefaultExportPath = GetTempDir() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
 
         private enum InsertionModeType
@@ -68,6 +70,7 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
+            _chooseTempDirToolStripMenuItem.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -124,6 +127,7 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = false;
             _toolStripProgressBar.Value = 0;
             _toolStripProgressBar.Visible = true;
+            _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
         }
@@ -146,6 +150,7 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = true;
             _toolStripProgressBar.Visible = false;
             _toolStripProgressBar.Value = 0;
+            _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
         }
@@ -239,7 +244,7 @@ namespace Automix_UI.Forms
 
             try
             {
-                Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
+                Directory.Delete(GetTempDir(), true);
             }
             catch (Exception e) when (e is IOException || e is UnauthorizedAccessException || e is ArgumentException
             || e is ArgumentNullException || e is PathTooLongException || e is DirectoryNotFoundException || e is System.Security.SecurityException)
@@ -668,6 +673,21 @@ namespace Automix_UI.Forms
             {
                 ExitApplication();
             }
+        }
+
+        private void OnChooseTempDirButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new FolderBrowserDialog
+            {
+                ShowNewFolderButton = true
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            SetTempDir(dialog.SelectedPath);
         }
     }
 }

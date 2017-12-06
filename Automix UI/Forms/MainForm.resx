@@ -180,22 +180,28 @@
     <value>&amp;File</value>
   </data>
   <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="_clearDBMenuItem.Text" xml:space="preserve">
     <value>&amp;Clear</value>
   </data>
   <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 22</value>
+    <value>224, 22</value>
   </data>
   <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Database</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 22</value>
+    <value>224, 22</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
     <value>Stop Mix</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Choisir le dossier temporaire</value>
   </data>
   <data name="_optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
@@ -883,7 +889,7 @@
 </value>
   </data>
   <data name="_deleteTrackToolStrip.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Delete</value>
+    <value>Suppr</value>
   </data>
   <data name="_deleteTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 22</value>
@@ -901,7 +907,7 @@
     <value>Select All</value>
   </data>
   <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 70</value>
+    <value>165, 48</value>
   </data>
   <data name="&gt;&gt;_trackContextMenu.Name" xml:space="preserve">
     <value>_trackContextMenu</value>
@@ -1842,6 +1848,12 @@
     <value>_stopMixToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;_stopMixToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_chooseTempDirToolStripMenuItem.Name" xml:space="preserve">
+    <value>_chooseTempDirToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;_chooseTempDirToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_helpToolStripMenuItem.Name" xml:space="preserve">

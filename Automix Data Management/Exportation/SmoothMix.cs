@@ -12,6 +12,7 @@ using System.IO;
 using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_Data_Management.Exportation
 {
@@ -31,7 +32,8 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
-            _tempDirPath = Path.GetTempPath() + "AutomixSoftware/";
+            // TODO: directory choosen by the user
+            _tempDirPath = GetTempDir();
             _tempFileList = new List<string>();
         }
 
