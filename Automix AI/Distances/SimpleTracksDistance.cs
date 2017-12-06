@@ -8,6 +8,7 @@
 
 using System;
 using Automix_Data_Management.Model;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_AI.Distances
 {
@@ -25,8 +26,15 @@ namespace Automix_AI.Distances
                 digitalTrack2Key = double.Parse(track2.Key.Remove(track2.Key.Length - 1));
 
             }
-            catch
+            catch(Exception ex) when (ex is ArgumentNullException || ex is FormatException)
             {
+                Console.WriteLine("Unable to compute distance between tracks {0} and {1}\n\n", track1.Name, track2.Name);
+                Console.WriteLine(GetExceptionData(ex));
+                return -1;
+            }
+            catch(OverflowException oe)
+            {
+                Console.WriteLine("One of the following song is too big : {0} or {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
 

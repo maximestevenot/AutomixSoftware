@@ -16,6 +16,7 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_UI
 {
@@ -171,7 +172,17 @@ namespace Automix_UI
 
         public long GetPlayerPosition()
         {
-            return _mp3Player.GetPosition();
+            //TODO : correct the error or at least catch the exception into the other classes
+            try
+            {
+                return _mp3Player.GetPosition();
+            }
+            catch (System.NullReferenceException e)
+            {
+                System.Console.WriteLine(GetExceptionData(e));
+                throw e;
+            }
+
         }
 
         public long GetPlayerLength()

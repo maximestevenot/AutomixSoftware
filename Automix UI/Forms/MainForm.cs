@@ -241,9 +241,10 @@ namespace Automix_UI.Forms
             {
                 Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
             }
-            catch
+            catch (Exception e) when (e is IOException || e is UnauthorizedAccessException || e is ArgumentException
+            || e is ArgumentNullException || e is PathTooLongException || e is DirectoryNotFoundException || e is System.Security.SecurityException)
             {
-                //TODO log this
+                Console.WriteLine(Automix_Data_Management.Utils.GetExceptionData(e));
             }
             Application.Exit();
         }

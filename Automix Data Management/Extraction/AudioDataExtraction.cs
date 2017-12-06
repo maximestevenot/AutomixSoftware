@@ -69,9 +69,9 @@ namespace Automix_Data_Management.Extraction
                     }
                 });
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException oce)
             {
-                //TODO log file
+                Console.WriteLine(Utils.GetExceptionData(oce));
             }
         }
 
