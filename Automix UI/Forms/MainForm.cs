@@ -17,6 +17,7 @@ using Automix_UI.Drawing;
 using Automix_UI.Properties;
 using static Automix_Data_Management.Utils;
 using log4net;
+using Automix_Data_Management.Storage;
 
 namespace Automix_UI.Forms
 {
@@ -75,6 +76,8 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
             _chooseTempDirToolStripMenuItem.Enabled = true;
+            _importDataBase.Enabled = true;
+            _exportDataBase.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -134,6 +137,9 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
+
+            _importDataBase.Enabled = false;
+            _exportDataBase.Enabled = false;
         }
 
 
@@ -157,6 +163,9 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
+
+            _importDataBase.Enabled = true;
+            _exportDataBase.Enabled = true;
         }
 
         private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
@@ -689,6 +698,7 @@ namespace Automix_UI.Forms
             }
         }
 
+
         private void OnChooseTempDirButtonClick(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
@@ -702,6 +712,42 @@ namespace Automix_UI.Forms
             }
 
             SetTempDir(dialog.SelectedPath);
+        }
+
+        private void _importDataBase_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+         
+            var dataBase = new DataBase();
+            dataBase.ImportDataBase(dialog.FileName);
+        }
+
+       private void _exportDataBase_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
+                FilterIndex = 1,
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var dataBase = new DataBase();
+            dataBase.ExportDataBase(dialog.FileName);
         }
     }
 }

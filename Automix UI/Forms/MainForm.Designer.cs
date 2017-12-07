@@ -44,6 +44,8 @@
             this._clearDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._chooseTempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
+            this._exportDataBase = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -162,7 +164,9 @@
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
             this._stopMixToolStripMenuItem,
-            this._chooseTempDirToolStripMenuItem});
+            this._chooseTempDirToolStripMenuItem,
+            this._importDataBase,
+            this._exportDataBase});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -188,13 +192,27 @@
             this._stopMixToolStripMenuItem.Name = "_stopMixToolStripMenuItem";
             resources.ApplyResources(this._stopMixToolStripMenuItem, "_stopMixToolStripMenuItem");
             this._stopMixToolStripMenuItem.Click += new System.EventHandler(this.OnStopMixToolStripMenuItemClick);
-            // 
+            //
             // _chooseTempDirToolStripMenuItem
             // 
             this._chooseTempDirToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._chooseTempDirToolStripMenuItem.Name = "_chooseTempDirToolStripMenuItem";
             resources.ApplyResources(this._chooseTempDirToolStripMenuItem, "_chooseTempDirToolStripMenuItem");
             this._chooseTempDirToolStripMenuItem.Click += new System.EventHandler(this.OnChooseTempDirButtonClick);
+            //
+            // _importDataBase
+            // 
+            this._importDataBase.ForeColor = System.Drawing.Color.White;
+            this._importDataBase.Name = "_importDataBase";
+            resources.ApplyResources(this._importDataBase, "_importDataBase");
+            this._importDataBase.Click += new System.EventHandler(this._importDataBase_Click);
+            // 
+            // _exportDataBase
+            // 
+            this._exportDataBase.ForeColor = System.Drawing.Color.White;
+            this._exportDataBase.Name = "_exportDataBase";
+            resources.ApplyResources(this._exportDataBase, "_exportDataBase");
+            this._exportDataBase.Click += new System.EventHandler(this._exportDataBase_Click);
             // 
             // _helpToolStripMenuItem
             // 
@@ -229,6 +247,7 @@
             // 
             resources.ApplyResources(this._statusStrip, "_statusStrip");
             this._statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStripProgressBar,
             this._toolStripCurrentDir});
@@ -292,6 +311,7 @@
             // 
             // _trackContextMenu
             // 
+            this._trackContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._trackContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._deleteTrackToolStrip,
             this._selectAllToolStrip});
@@ -542,6 +562,8 @@
         private System.Windows.Forms.ToolStripMenuItem _exportTextFileMenuItem;
         private System.Windows.Forms.Button _reloadButton;
         private System.Windows.Forms.ToolStripMenuItem _chooseTempDirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _importDataBase;
+        private System.Windows.Forms.ToolStripMenuItem _exportDataBase;
     }
 }
 
