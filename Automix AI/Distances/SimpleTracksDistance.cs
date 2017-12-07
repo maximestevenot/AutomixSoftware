@@ -8,11 +8,15 @@
 
 using System;
 using Automix_Data_Management.Model;
+using static Automix_Data_Management.Utils;
 
 namespace Automix_AI.Distances
 {
     public class SimpleTracksDistance : AbstractTracksDistance
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
         public override double Compute(Track track1, Track track2)
         {
             bool haveSameScale;
@@ -25,8 +29,16 @@ namespace Automix_AI.Distances
                 digitalTrack2Key = double.Parse(track2.Key.Remove(track2.Key.Length - 1));
 
             }
-            catch
+            catch(Exception ex) when (ex is ArgumentNullException || ex is FormatException)
             {
+                log.Info("Unable to compute distance between tracks { 0} and { 1}\n\n" + track1.Name + track2.Name, ex);
+                Console.WriteLine("Unable to compute distance between tracks {0} and {1}\n\n", track1.Name, track2.Name);
+                return -1;
+            }
+            catch(OverflowException oe)
+            {
+                log.Info("One of the following song is too big : {0} or {1}\n\n" + track1.Name + track2.Name, oe);
+                Console.WriteLine("One of the following song is too big : {0} or {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
 

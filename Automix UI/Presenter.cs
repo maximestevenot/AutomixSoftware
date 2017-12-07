@@ -16,6 +16,8 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using static Automix_Data_Management.Utils;
+using log4net;
 
 namespace Automix_UI
 {
@@ -27,6 +29,8 @@ namespace Automix_UI
         private readonly IAudioDataExtraction _dataExtractionEngine;
         private readonly AbstractSortAlgorithm _sortAlgorithm;
         private Mp3Player _mp3Player;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Presenter()
         {
@@ -171,7 +175,17 @@ namespace Automix_UI
 
         public long GetPlayerPosition()
         {
-            return _mp3Player.GetPosition();
+            //TODO : correct the error or at least catch the exception into the other classes
+            try
+            {
+                return _mp3Player.GetPosition();
+            }
+            catch (System.NullReferenceException e)
+            {
+                log.Debug("Exception in presenter --> TODO correct error", e);
+                throw e;
+            }
+
         }
 
         public long GetPlayerLength()

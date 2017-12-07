@@ -11,12 +11,15 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using Automix_Data_Management.Model;
+using log4net;
 
 namespace Automix_Data_Management.Storage
 {
     public class DataBase
     {
         private SQLiteConnection _dbConnection;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public DataBase()
         {
@@ -52,6 +55,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to insert :" + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to insert :" + track.Path + e.Message);
             }
 
@@ -73,6 +77,8 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+
+                log.Debug("DB ERROR when trying to clean database" + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to clean database" + e.Message);
             }
             _dbConnection.Close();
@@ -108,6 +114,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to extract data of : " + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine(
                     "DB ERROR when trying to extract data of : " + track.Path + e.Message);
 
@@ -138,6 +145,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to isPresent: " + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to isPresent : " + track.Path + e.Message);
             }
 
@@ -177,6 +185,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to create tracks table" + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
             }
 
