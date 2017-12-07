@@ -76,7 +76,6 @@ namespace Automix_Data_Management.Extraction
             catch (OperationCanceledException oce)
             {
                 log.Info(oce.Message, oce);
-                Console.WriteLine(Utils.GetExceptionData(oce));
             }
         }
 

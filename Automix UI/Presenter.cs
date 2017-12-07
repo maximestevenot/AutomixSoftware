@@ -182,8 +182,7 @@ namespace Automix_UI
             }
             catch (System.NullReferenceException e)
             {
-                log.Debug("Exception presenter", e);
-                System.Console.WriteLine(GetExceptionData(e));
+                log.Debug("Exception in presenter --> TODO correct error", e);
                 throw e;
             }
 

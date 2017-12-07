@@ -254,7 +254,6 @@ namespace Automix_UI.Forms
             || e is ArgumentNullException || e is PathTooLongException || e is DirectoryNotFoundException || e is System.Security.SecurityException)
             {
                 Log.Info(e.Source, e);
-                Console.WriteLine(Automix_Data_Management.Utils.GetExceptionData(e));
             }
             Application.Exit();
         }
