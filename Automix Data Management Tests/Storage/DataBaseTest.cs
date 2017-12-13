@@ -21,7 +21,7 @@ namespace Automix_Data_Management_Tests.Storage
     {
         private static Track _testTrack;
         private static readonly string[] DataBasePaths = { "db_test_1.db", "db_test_2.db", "db_test_3.db" };
-        private static readonly string[] DataBaseUserPaths = { "../../db_user_test_to_import.db", "db_user_test_where_to_export.db" };
+        private static readonly string[] DataBaseUserPaths = { "../../db_user_test_to_import_1.db", "../../db_user_test_to_import_2.db", "db_user_test_where_to_export.db" };
 
         [ClassInitialize]
         public static void InitializeTests(TestContext testContext)
@@ -99,9 +99,9 @@ namespace Automix_Data_Management_Tests.Storage
         public void TestExportDataBase()
         {
             var db = new DataBase(DataBaseUserPaths[0]);
-            db.ExportDataBase(DataBaseUserPaths[1]);
+            db.ExportDataBase(DataBaseUserPaths[2]);
 
-            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + DataBaseUserPaths[1] + ";Version=3;");
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + DataBaseUserPaths[2] + ";Version=3;");
             Assert.IsTrue(db.ChecksumsAreInDataBase(dbUserConnection));
         }
     }
