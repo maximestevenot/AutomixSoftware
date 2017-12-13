@@ -483,6 +483,7 @@ namespace Automix_UI.Forms
         {
             if (e.Cancelled)
             {
+                //CLEAN ICI
                 ShowCancelDialog();
             }
             else if (e.Error != null)

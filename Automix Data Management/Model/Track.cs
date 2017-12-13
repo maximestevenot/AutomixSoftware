@@ -28,6 +28,11 @@ namespace Automix_Data_Management.Model
 
         public static Track CopyFrom(Track old)
         {
+            if (old == null)
+            {
+                return null;
+            }
+
             var newTrack = new Track(string.Copy(old.Path), string.Copy(old.Checksum))
             {
                 Duration = old.Duration,
@@ -35,13 +40,23 @@ namespace Automix_Data_Management.Model
                 Key = string.Copy(old.Key),
                 Danceability = old.Danceability,
                 Samplerate = old.Samplerate,
-                Beats = new int[old.Beats.Length],
-                FadeIns = new int[old.FadeIns.Length],
-                FadeOuts = new int[old.FadeOuts.Length]
+                Beats = new int[old.Beats != null ? old.Beats.Length : 0],
+                FadeIns = new int[old.FadeIns != null ? old.Beats.Length : 0],
+                FadeOuts = new int[old.FadeOuts != null ? old.Beats.Length : 0]
             };
-            Array.Copy(old.Beats, newTrack.Beats, old.Beats.Length);
-            Array.Copy(old.FadeIns, newTrack.FadeIns, old.FadeIns.Length);
-            Array.Copy(old.FadeOuts, newTrack.FadeOuts, old.FadeOuts.Length);
+            if (old.Beats != null)
+            {
+                Array.Copy(old.Beats, newTrack.Beats, old.Beats.Length);
+            }
+            if (old.FadeIns != null)
+            {
+                Array.Copy(old.FadeIns, newTrack.FadeIns, old.FadeIns.Length);
+            }
+            if (old.FadeOuts != null)
+            {
+                Array.Copy(old.FadeOuts, newTrack.FadeOuts, old.FadeOuts.Length);
+            }
+
             return newTrack;
         }
         public Track()
