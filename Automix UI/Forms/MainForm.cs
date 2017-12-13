@@ -738,11 +738,10 @@ namespace Automix_UI.Forms
 
        private void _exportDataBase_Click(object sender, EventArgs e)
         {
-            var dialog = new OpenFileDialog
+            var dialog = new SaveFileDialog
             {
                 Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
-                FilterIndex = 1,
-                Multiselect = false
+                FilterIndex = 1
             };
 
             if (dialog.ShowDialog() != DialogResult.OK)
@@ -753,7 +752,8 @@ namespace Automix_UI.Forms
             var dataBase = new DataBase();
             dataBase.ExportDataBase(dialog.FileName);
 
-            string messageBoxText = "Database \"" + dialog.SafeFileName + "\" has been imported !";
-            MessageBox.Show(messageBoxText);        }
+            string messageBoxText = "Software database has been exported !";
+            MessageBox.Show(messageBoxText);
+        }
     }
 }
