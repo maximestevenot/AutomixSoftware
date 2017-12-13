@@ -229,7 +229,7 @@ namespace Automix_Data_Management.Storage
                             + "'" + readerUser.GetString(6) + "',"
                             + "'" + readerUser.GetString(7) + "',"
                             + "'" + readerUser.GetString(8) + "',"
-                            + "'" + readerUser.GetString(9) + "')"; // ATTENTION ';' DS REQUETE SQL A METTRE OU PAS ?
+                            + "'" + readerUser.GetString(9) + "')";
                         SQLiteCommand command = new SQLiteCommand(query, _dbConnection);
                         command.ExecuteNonQuery();
                         _dbConnection.Close();
