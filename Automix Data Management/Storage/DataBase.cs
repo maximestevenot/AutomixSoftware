@@ -199,10 +199,6 @@ namespace Automix_Data_Management.Storage
             return values.Select(value => Convert.ToInt32(value)).ToArray();
         }
 
-
-
-
-
         public void ImportDataBase(String pathDbUser)
         {
             _dbConnection.Open();

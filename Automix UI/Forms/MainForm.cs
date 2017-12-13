@@ -752,6 +752,8 @@ namespace Automix_UI.Forms
 
             var dataBase = new DataBase();
             dataBase.ExportDataBase(dialog.FileName);
-        }
+
+            string messageBoxText = "Database \"" + dialog.SafeFileName + "\" has been imported !";
+            MessageBox.Show(messageBoxText);        }
     }
 }
