@@ -207,7 +207,7 @@ namespace Automix_Data_Management.Storage
 
             if (CheckColumnsProperties(dbUserConnection))
             {
-                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks;", dbUserConnection); // checker nom table db user
+                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
                 commandUser.ExecuteNonQuery();
                 SQLiteDataReader readerUser = commandUser.ExecuteReader();
                 
@@ -225,7 +225,7 @@ namespace Automix_Data_Management.Storage
                             + "'" + readerUser.GetString(6) + "',"
                             + "'" + readerUser.GetString(7) + "',"
                             + "'" + readerUser.GetString(8) + "',"
-                            + "'" + readerUser.GetString(9) + "');";
+                            + "'" + readerUser.GetString(9) + "')";
                         SQLiteCommand command = new SQLiteCommand(query, _dbConnection);
                         command.ExecuteNonQuery();
                     }
@@ -242,12 +242,12 @@ namespace Automix_Data_Management.Storage
 
         private bool CheckColumnsProperties(SQLiteConnection dbUserConnection)
         {
-            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks;", dbUserConnection); // checker le nom de table de db user
+            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
             commandUser.ExecuteNonQuery();
             SQLiteDataReader readerUser = commandUser.ExecuteReader();
             int nbColUser = readerUser.FieldCount;
 
-            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks;", _dbConnection);
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
             command.ExecuteNonQuery();
             SQLiteDataReader reader = command.ExecuteReader();
             int nbCol = reader.FieldCount;
@@ -275,7 +275,7 @@ namespace Automix_Data_Management.Storage
 
         private bool IsInDataBase(string checksumUser)
         {
-            const string query = "SELECT checksum FROM tracks;";
+            const string query = "SELECT checksum FROM tracks";
             var command = new SQLiteCommand(query, _dbConnection);
             command.ExecuteNonQuery();
             var reader = command.ExecuteReader();
@@ -293,8 +293,9 @@ namespace Automix_Data_Management.Storage
 
         public bool ChecksumsAreInDataBase(SQLiteConnection dbUserConnection)
         {
+            _dbConnection.Open();
             dbUserConnection.Open();
-            const string queryUser = "SELECT checksum FROM tracks;";
+            const string queryUser = "SELECT checksum FROM tracks";
             var commandUser = new SQLiteCommand(queryUser, dbUserConnection);
             commandUser.ExecuteNonQuery();
             var readerUser = commandUser.ExecuteReader();
@@ -310,6 +311,7 @@ namespace Automix_Data_Management.Storage
             }
 
             dbUserConnection.Close();
+            _dbConnection.Close();
             return true;
         }
 
@@ -351,7 +353,7 @@ namespace Automix_Data_Management.Storage
                     + "'" + reader.GetString(6) + "',"
                     + "'" + reader.GetString(7) + "',"
                     + "'" + reader.GetString(8) + "',"
-                    + "'" + reader.GetString(9) + "');";
+                    + "'" + reader.GetString(9) + "')";
                 SQLiteCommand commandUser = new SQLiteCommand(queryUser, dbUserConnection);
                 commandUser.ExecuteNonQuery();
             }
