@@ -199,18 +199,15 @@ namespace Automix_Data_Management.Storage
             return values.Select(value => Convert.ToInt32(value)).ToArray();
         }
 
-
-
-
-
         public void ImportDataBase(String pathDbUser)
         {
+            _dbConnection.Open();
             SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathDbUser + ";Version=3;");
+            dbUserConnection.Open();
 
             if (CheckColumnsProperties(dbUserConnection))
             {
-                dbUserConnection.Open();
-                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection); // checker nom table db user
+                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
                 commandUser.ExecuteNonQuery();
                 SQLiteDataReader readerUser = commandUser.ExecuteReader();
                 
@@ -219,7 +216,6 @@ namespace Automix_Data_Management.Storage
                     string checksumUser = readerUser.GetString(1);
                     if (!IsInDataBase(checksumUser))
                     {
-                        _dbConnection.Open();
                         string query = "INSERT INTO tracks (checksum, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts) VALUES "
                             + "('" + checksumUser + "',"
                             + "'" + readerUser.GetString(2) + "',"
@@ -229,26 +225,24 @@ namespace Automix_Data_Management.Storage
                             + "'" + readerUser.GetString(6) + "',"
                             + "'" + readerUser.GetString(7) + "',"
                             + "'" + readerUser.GetString(8) + "',"
-                            + "'" + readerUser.GetString(9) + "')"; // ATTENTION ';' DS REQUETE SQL A METTRE OU PAS ?
+                            + "'" + readerUser.GetString(9) + "')";
                         SQLiteCommand command = new SQLiteCommand(query, _dbConnection);
                         command.ExecuteNonQuery();
-                        _dbConnection.Close();
                     }
                 }
-                dbUserConnection.Close();
             }
             else
             {
                 throw new System.ArgumentException("User database to import hasn't the same format than the software database\n");
             }
+
+            dbUserConnection.Close();
+            _dbConnection.Close();
         }
 
         private bool CheckColumnsProperties(SQLiteConnection dbUserConnection)
         {
-            _dbConnection.Open();
-            dbUserConnection.Open();
-
-            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection); // checker le nom de table de db user
+            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
             commandUser.ExecuteNonQuery();
             SQLiteDataReader readerUser = commandUser.ExecuteReader();
             int nbColUser = readerUser.FieldCount;
@@ -267,28 +261,20 @@ namespace Automix_Data_Management.Storage
                     }
                     else
                     {
-                        dbUserConnection.Close();
-                        _dbConnection.Close();
                         return false;
                     }
                 }
             }
             else
             {
-                dbUserConnection.Close();
-                _dbConnection.Close();
                 return false;
             }
 
-            dbUserConnection.Close();
-            _dbConnection.Close();
             return true;
         }
 
         private bool IsInDataBase(string checksumUser)
         {
-            _dbConnection.Open();
-
             const string query = "SELECT checksum FROM tracks";
             var command = new SQLiteCommand(query, _dbConnection);
             command.ExecuteNonQuery();
@@ -298,17 +284,16 @@ namespace Automix_Data_Management.Storage
             {
                 if (reader.GetString(0).Equals(checksumUser))
                 {
-                    _dbConnection.Close();
                     return true;
                 }
             }
 
-            _dbConnection.Close();
             return false;
         }
 
         public bool ChecksumsAreInDataBase(SQLiteConnection dbUserConnection)
         {
+            _dbConnection.Open();
             dbUserConnection.Open();
             const string queryUser = "SELECT checksum FROM tracks";
             var commandUser = new SQLiteCommand(queryUser, dbUserConnection);
@@ -320,9 +305,13 @@ namespace Automix_Data_Management.Storage
                 var checksumUser = readerUser.GetString(0);
                 if (!IsInDataBase(checksumUser))
                 {
+                    dbUserConnection.Close();
                     return false;
                 }
             }
+
+            dbUserConnection.Close();
+            _dbConnection.Close();
             return true;
         }
 
@@ -364,13 +353,13 @@ namespace Automix_Data_Management.Storage
                     + "'" + reader.GetString(6) + "',"
                     + "'" + reader.GetString(7) + "',"
                     + "'" + reader.GetString(8) + "',"
-                    + "'" + reader.GetString(9) + "')"; // ATTENTION ';' DS REQUETE SQL A METTRE OU PAS ?
+                    + "'" + reader.GetString(9) + "')";
                 SQLiteCommand commandUser = new SQLiteCommand(queryUser, dbUserConnection);
                 commandUser.ExecuteNonQuery();
             }
 
-            _dbConnection.Close();
             dbUserConnection.Close();
+            _dbConnection.Close();
         }
     }
 }
