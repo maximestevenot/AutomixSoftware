@@ -18,6 +18,8 @@ using Automix_UI.Properties;
 using static Automix_Data_Management.Utils;
 using log4net;
 using Automix_Data_Management.Storage;
+using System.Resources;
+using System.Reflection;
 
 namespace Automix_UI.Forms
 {
@@ -732,8 +734,9 @@ namespace Automix_UI.Forms
             var dataBase = new DataBase();
             dataBase.ImportDataBase(dialog.FileName);
 
-            string messageBoxText = "Database \"" + dialog.SafeFileName + "\" has been imported !";
-            MessageBox.Show(messageBoxText);
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
+            MessageBox.Show(msg);
         }
 
        private void _exportDataBase_Click(object sender, EventArgs e)
@@ -752,8 +755,9 @@ namespace Automix_UI.Forms
             var dataBase = new DataBase();
             dataBase.ExportDataBase(dialog.FileName);
 
-            string messageBoxText = "Software database has been exported !";
-            MessageBox.Show(messageBoxText);
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ExportDbMessage");
+            MessageBox.Show(msg);
         }
     }
 }
