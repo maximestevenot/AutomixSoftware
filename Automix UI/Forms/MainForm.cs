@@ -759,5 +759,10 @@ namespace Automix_UI.Forms
             string msg = rm.GetString("ExportDbMessage");
             MessageBox.Show(msg);
         }
+
+        private void _dataBaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

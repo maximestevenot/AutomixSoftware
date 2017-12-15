@@ -1302,4 +1302,10 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="_exportDataBase.Text" xml:space="preserve">
+    <value>Exporter base de données</value>
+  </data>
+  <data name="_importDataBase.Text" xml:space="preserve">
+    <value>Importer base de données</value>
+  </data>
 </root>
