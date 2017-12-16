@@ -191,14 +191,14 @@
             this._importDBMenuItem.ForeColor = System.Drawing.Color.White;
             this._importDBMenuItem.Name = "_importDBMenuItem";
             resources.ApplyResources(this._importDBMenuItem, "_importDBMenuItem");
-            this._importDBMenuItem.Click += new System.EventHandler(this._importDBMenuItem_Click);
+            this._importDBMenuItem.Click += new System.EventHandler(this.OnChooseImportDBMenuItemClick);
             // 
             // _exportDBMenuItem
             // 
             this._exportDBMenuItem.ForeColor = System.Drawing.Color.White;
             this._exportDBMenuItem.Name = "_exportDBMenuItem";
             resources.ApplyResources(this._exportDBMenuItem, "_exportDBMenuItem");
-            this._exportDBMenuItem.Click += new System.EventHandler(this._exportDBMenuItem_Click);
+            this._exportDBMenuItem.Click += new System.EventHandler(this.OnChooseExportDBMenuItemClick);
             // 
             // _stopMixToolStripMenuItem
             // 

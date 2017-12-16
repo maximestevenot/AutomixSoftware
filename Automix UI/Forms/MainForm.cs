@@ -717,7 +717,7 @@ namespace Automix_UI.Forms
             SetTempDir(dialog.SelectedPath);
         }
                 
-        private void _importDBMenuItem_Click(object sender, EventArgs e)
+        private void OnChooseImportDBMenuItemClick(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog
             {
@@ -739,7 +739,7 @@ namespace Automix_UI.Forms
             MessageBox.Show(msg);
         }
 
-        private void _exportDBMenuItem_Click(object sender, EventArgs e)
+        private void OnChooseExportDBMenuItemClick(object sender, EventArgs e)
         {
             var dialog = new SaveFileDialog
             {
