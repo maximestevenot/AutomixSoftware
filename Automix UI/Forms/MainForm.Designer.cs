@@ -77,6 +77,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this._importDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -174,7 +175,8 @@
             // _dataBaseToolStripMenuItem
             // 
             this._dataBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._clearDBMenuItem});
+            this._clearDBMenuItem,
+            this._importDBMenuItem});
             this._dataBaseToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._dataBaseToolStripMenuItem.Name = "_dataBaseToolStripMenuItem";
             resources.ApplyResources(this._dataBaseToolStripMenuItem, "_dataBaseToolStripMenuItem");
@@ -192,14 +194,14 @@
             this._stopMixToolStripMenuItem.Name = "_stopMixToolStripMenuItem";
             resources.ApplyResources(this._stopMixToolStripMenuItem, "_stopMixToolStripMenuItem");
             this._stopMixToolStripMenuItem.Click += new System.EventHandler(this.OnStopMixToolStripMenuItemClick);
-            //
+            // 
             // _chooseTempDirToolStripMenuItem
             // 
             this._chooseTempDirToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._chooseTempDirToolStripMenuItem.Name = "_chooseTempDirToolStripMenuItem";
             resources.ApplyResources(this._chooseTempDirToolStripMenuItem, "_chooseTempDirToolStripMenuItem");
             this._chooseTempDirToolStripMenuItem.Click += new System.EventHandler(this.OnChooseTempDirButtonClick);
-            //
+            // 
             // _importDataBase
             // 
             this._importDataBase.ForeColor = System.Drawing.Color.White;
@@ -484,6 +486,13 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // _importDBMenuItem
+            // 
+            this._importDBMenuItem.ForeColor = System.Drawing.Color.White;
+            this._importDBMenuItem.Name = "_importDBMenuItem";
+            resources.ApplyResources(this._importDBMenuItem, "_importDBMenuItem");
+            this._importDBMenuItem.Click += new System.EventHandler(this._importDBMenuItem_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -564,6 +573,7 @@
         private System.Windows.Forms.ToolStripMenuItem _chooseTempDirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _importDataBase;
         private System.Windows.Forms.ToolStripMenuItem _exportDataBase;
+        private System.Windows.Forms.ToolStripMenuItem _importDBMenuItem;
     }
 }
 

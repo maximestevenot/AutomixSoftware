@@ -1308,4 +1308,7 @@
   <data name="_importDataBase.Text" xml:space="preserve">
     <value>Importer base de données</value>
   </data>
+  <data name="_importDBMenuItem.Text" xml:space="preserve">
+    <value>Importer une nouvelle base de données</value>
+  </data>
 </root>
