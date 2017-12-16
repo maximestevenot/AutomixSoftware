@@ -126,6 +126,9 @@
   <data name="CancelMessage" xml:space="preserve">
     <value>Opération annulée</value>
   </data>
+  <data name="ChooseTempDir" xml:space="preserve">
+    <value>Changement du dossier temporaire réussi</value>
+  </data>
   <data name="DialogFilters" xml:space="preserve">
     <value>Fichiers MP3 (*.mp3)|*.mp3|Tous les fichiers (*.*)|*.*</value>
   </data>

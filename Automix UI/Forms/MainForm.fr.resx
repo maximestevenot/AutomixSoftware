@@ -1302,4 +1302,7 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Choisir le dossier temporaire</value>
+  </data>
 </root>

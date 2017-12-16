@@ -15,8 +15,9 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using System.Xml;
 using static Automix_Data_Management.Utils;
+using System.Resources;
+using System.Reflection;
 
 namespace Automix_UI.Forms
 {
@@ -687,6 +688,10 @@ namespace Automix_UI.Forms
             }
 
             SetTempDir(dialog.SelectedPath);
+
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ChooseTempDir");
+            MessageBox.Show(msg);
         }
     }
 }
