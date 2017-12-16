@@ -1302,12 +1302,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="_exportDataBase.Text" xml:space="preserve">
-    <value>Exporter base de données</value>
-  </data>
-  <data name="_importDataBase.Text" xml:space="preserve">
-    <value>Importer base de données</value>
-  </data>
   <data name="_exportDBMenuItem.Text" xml:space="preserve">
     <value>Exporter la base de données du logiciel</value>
   </data>

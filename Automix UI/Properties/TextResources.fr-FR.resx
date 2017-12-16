@@ -145,7 +145,7 @@
     <value>Êtes vous sûr de vouloir quitter?</value>
   </data>
   <data name="ExportDbMessage" xml:space="preserve">
-    <value>La base de données du logiciel a bien été importé !</value>
+    <value>La base de données du logiciel a bien été exporté !</value>
   </data>
   <data name="ImportDbMessagePart1" xml:space="preserve">
     <value>La base de données "</value>

@@ -78,8 +78,6 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
             _chooseTempDirToolStripMenuItem.Enabled = true;
-            _importDataBase.Enabled = true;
-            _exportDataBase.Enabled = true;
             _importDBMenuItem.Enabled = true;
             _exportDBMenuItem.Enabled = true;
         }
@@ -141,9 +139,7 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
-
-            _importDataBase.Enabled = false;
-            _exportDataBase.Enabled = false;
+            
             _importDBMenuItem.Enabled = false;
             _exportDBMenuItem.Enabled = false;
         }
@@ -169,9 +165,7 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
-
-            _importDataBase.Enabled = true;
-            _exportDataBase.Enabled = true;
+            
             _importDBMenuItem.Enabled = true;
             _exportDBMenuItem.Enabled = true;
         }
@@ -722,50 +716,7 @@ namespace Automix_UI.Forms
 
             SetTempDir(dialog.SelectedPath);
         }
-
-        private void _importDataBase_Click(object sender, EventArgs e)
-        {
-            var dialog = new OpenFileDialog
-            {
-                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
-                FilterIndex = 1,
-                Multiselect = false
-            };
-
-            if (dialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-         
-            var dataBase = new DataBase();
-            dataBase.ImportDataBase(dialog.FileName);
-
-            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
-            string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
-            MessageBox.Show(msg);
-        }
-
-       private void _exportDataBase_Click(object sender, EventArgs e)
-        {
-            var dialog = new SaveFileDialog
-            {
-                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
-                FilterIndex = 1
-            };
-
-            if (dialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-            var dataBase = new DataBase();
-            dataBase.ExportDataBase(dialog.FileName);
-
-            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
-            string msg = rm.GetString("ExportDbMessage");
-            MessageBox.Show(msg);
-        }
-        
+                
         private void _importDBMenuItem_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog
