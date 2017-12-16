@@ -81,6 +81,7 @@ namespace Automix_UI.Forms
             _importDataBase.Enabled = true;
             _exportDataBase.Enabled = true;
             _importDBMenuItem.Enabled = true;
+            _exportDBMenuItem.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -144,6 +145,7 @@ namespace Automix_UI.Forms
             _importDataBase.Enabled = false;
             _exportDataBase.Enabled = false;
             _importDBMenuItem.Enabled = false;
+            _exportDBMenuItem.Enabled = false;
         }
 
 
@@ -171,6 +173,7 @@ namespace Automix_UI.Forms
             _importDataBase.Enabled = true;
             _exportDataBase.Enabled = true;
             _importDBMenuItem.Enabled = true;
+            _exportDBMenuItem.Enabled = true;
         }
 
         private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
@@ -782,6 +785,27 @@ namespace Automix_UI.Forms
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
+            MessageBox.Show(msg);
+        }
+
+        private void _exportDBMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = "db files (*.db)|*.db|All files (*.*)|*.*",
+                FilterIndex = 1
+            };
+
+            if (dialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var dataBase = new DataBase();
+            dataBase.ExportDataBase(dialog.FileName);
+
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ExportDbMessage");
             MessageBox.Show(msg);
         }
     }

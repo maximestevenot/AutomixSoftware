@@ -145,10 +145,10 @@
     <value>Êtes vous sûr de vouloir quitter?</value>
   </data>
   <data name="ExportDbMessage" xml:space="preserve">
-    <value>La base de donnée du logiciel a bien été importé !</value>
+    <value>La base de données du logiciel a bien été importé !</value>
   </data>
   <data name="ImportDbMessagePart1" xml:space="preserve">
-    <value>La base de donnée "</value>
+    <value>La base de données "</value>
   </data>
   <data name="ImportDbMessagePart2" xml:space="preserve">
     <value>" a bien été importé !</value>

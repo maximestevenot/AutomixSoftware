@@ -42,6 +42,7 @@
             this._optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._dataBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._clearDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._importDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._chooseTempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._importDataBase = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this._importDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._exportDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -176,7 +177,8 @@
             // 
             this._dataBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._clearDBMenuItem,
-            this._importDBMenuItem});
+            this._importDBMenuItem,
+            this._exportDBMenuItem});
             this._dataBaseToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._dataBaseToolStripMenuItem.Name = "_dataBaseToolStripMenuItem";
             resources.ApplyResources(this._dataBaseToolStripMenuItem, "_dataBaseToolStripMenuItem");
@@ -187,6 +189,13 @@
             this._clearDBMenuItem.Name = "_clearDBMenuItem";
             resources.ApplyResources(this._clearDBMenuItem, "_clearDBMenuItem");
             this._clearDBMenuItem.Click += new System.EventHandler(this.OnClearDbMenuItemClick);
+            // 
+            // _importDBMenuItem
+            // 
+            this._importDBMenuItem.ForeColor = System.Drawing.Color.White;
+            this._importDBMenuItem.Name = "_importDBMenuItem";
+            resources.ApplyResources(this._importDBMenuItem, "_importDBMenuItem");
+            this._importDBMenuItem.Click += new System.EventHandler(this._importDBMenuItem_Click);
             // 
             // _stopMixToolStripMenuItem
             // 
@@ -486,12 +495,12 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
-            // _importDBMenuItem
+            // _exportDBMenuItem
             // 
-            this._importDBMenuItem.ForeColor = System.Drawing.Color.White;
-            this._importDBMenuItem.Name = "_importDBMenuItem";
-            resources.ApplyResources(this._importDBMenuItem, "_importDBMenuItem");
-            this._importDBMenuItem.Click += new System.EventHandler(this._importDBMenuItem_Click);
+            this._exportDBMenuItem.ForeColor = System.Drawing.Color.White;
+            this._exportDBMenuItem.Name = "_exportDBMenuItem";
+            resources.ApplyResources(this._exportDBMenuItem, "_exportDBMenuItem");
+            this._exportDBMenuItem.Click += new System.EventHandler(this._exportDBMenuItem_Click);
             // 
             // MainForm
             // 
@@ -574,6 +583,7 @@
         private System.Windows.Forms.ToolStripMenuItem _importDataBase;
         private System.Windows.Forms.ToolStripMenuItem _exportDataBase;
         private System.Windows.Forms.ToolStripMenuItem _importDBMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
     }
 }
 
