@@ -180,40 +180,40 @@
     <value>&amp;File</value>
   </data>
   <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 26</value>
+    <value>253, 26</value>
   </data>
   <data name="_clearDBMenuItem.Text" xml:space="preserve">
     <value>&amp;Clear</value>
   </data>
+  <data name="_importDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 26</value>
+  </data>
+  <data name="_importDBMenuItem.Text" xml:space="preserve">
+    <value>Import new database</value>
+  </data>
+  <data name="_exportDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>253, 26</value>
+  </data>
+  <data name="_exportDBMenuItem.Text" xml:space="preserve">
+    <value>Export software database</value>
+  </data>
   <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 26</value>
+    <value>274, 26</value>
   </data>
   <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Database</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 26</value>
+    <value>274, 26</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
     <value>Stop Mix</value>
   </data>
   <data name="_chooseTempDirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
+    <value>274, 26</value>
   </data>
   <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
     <value>Choisir le dossier temporaire</value>
-  </data>
-  <data name="_importDataBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 26</value>
-  </data>
-  <data name="_importDataBase.Text" xml:space="preserve">
-    <value>Importer base de données</value>
-  </data>
-  <data name="_exportDataBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 26</value>
-  </data>
-  <data name="_exportDataBase.Text" xml:space="preserve">
-    <value>Exporter base de données</value>
   </data>
   <data name="_optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 24</value>
@@ -1886,6 +1886,18 @@
   <data name="&gt;&gt;_clearDBMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;_importDBMenuItem.Name" xml:space="preserve">
+    <value>_importDBMenuItem</value>
+  </data>
+  <data name="&gt;&gt;_importDBMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_exportDBMenuItem.Name" xml:space="preserve">
+    <value>_exportDBMenuItem</value>
+  </data>
+  <data name="&gt;&gt;_exportDBMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;_stopMixToolStripMenuItem.Name" xml:space="preserve">
     <value>_stopMixToolStripMenuItem</value>
   </data>
@@ -1896,18 +1908,6 @@
     <value>_chooseTempDirToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;_chooseTempDirToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_importDataBase.Name" xml:space="preserve">
-    <value>_importDataBase</value>
-  </data>
-  <data name="&gt;&gt;_importDataBase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_exportDataBase.Name" xml:space="preserve">
-    <value>_exportDataBase</value>
-  </data>
-  <data name="&gt;&gt;_exportDataBase.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_helpToolStripMenuItem.Name" xml:space="preserve">

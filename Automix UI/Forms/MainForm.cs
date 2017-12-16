@@ -18,6 +18,8 @@ using Automix_UI.Properties;
 using static Automix_Data_Management.Utils;
 using log4net;
 using Automix_Data_Management.Storage;
+using System.Resources;
+using System.Reflection;
 
 namespace Automix_UI.Forms
 {
@@ -76,8 +78,8 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
             _chooseTempDirToolStripMenuItem.Enabled = true;
-            _importDataBase.Enabled = true;
-            _exportDataBase.Enabled = true;
+            _importDBMenuItem.Enabled = true;
+            _exportDBMenuItem.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -137,9 +139,9 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
-
-            _importDataBase.Enabled = false;
-            _exportDataBase.Enabled = false;
+            
+            _importDBMenuItem.Enabled = false;
+            _exportDBMenuItem.Enabled = false;
         }
 
 
@@ -163,9 +165,9 @@ namespace Automix_UI.Forms
             _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
-
-            _importDataBase.Enabled = true;
-            _exportDataBase.Enabled = true;
+            
+            _importDBMenuItem.Enabled = true;
+            _exportDBMenuItem.Enabled = true;
         }
 
         private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
@@ -714,8 +716,8 @@ namespace Automix_UI.Forms
 
             SetTempDir(dialog.SelectedPath);
         }
-
-        private void _importDataBase_Click(object sender, EventArgs e)
+                
+        private void OnChooseImportDBMenuItemClick(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog
             {
@@ -728,15 +730,16 @@ namespace Automix_UI.Forms
             {
                 return;
             }
-         
+
             var dataBase = new DataBase();
             dataBase.ImportDataBase(dialog.FileName);
 
-            string messageBoxText = "Database \"" + dialog.SafeFileName + "\" has been imported !";
-            MessageBox.Show(messageBoxText);
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
+            MessageBox.Show(msg);
         }
 
-       private void _exportDataBase_Click(object sender, EventArgs e)
+        private void OnChooseExportDBMenuItemClick(object sender, EventArgs e)
         {
             var dialog = new SaveFileDialog
             {
@@ -752,8 +755,9 @@ namespace Automix_UI.Forms
             var dataBase = new DataBase();
             dataBase.ExportDataBase(dialog.FileName);
 
-            string messageBoxText = "Software database has been exported !";
-            MessageBox.Show(messageBoxText);
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ExportDbMessage");
+            MessageBox.Show(msg);
         }
     }
 }
