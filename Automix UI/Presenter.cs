@@ -137,7 +137,11 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
+                var fixedTracks = new TrackCollection();
+                fixedTracks.Add(_trackCollection[2]);
+                fixedTracks.Add(_trackCollection[6]);
+                fixedTracks.Add(_trackCollection[8]);
+                _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection, fixedTracks);
             }
             return _trackCollection;
         }

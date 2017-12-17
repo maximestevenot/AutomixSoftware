@@ -31,7 +31,7 @@ namespace Automix_AI.Sort_Algorithms
             _mutationProbability = mutationProbabilty;
         }
 
-        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
             var population = CreateInitialPopulation(trackCollection);
             SortPopulation(population, 0, population.Count - 1);
@@ -50,6 +50,11 @@ namespace Automix_AI.Sort_Algorithms
                 backgroundWorker.ReportProgress(1000 * k / _numberOfIteration);
             }
             return population[0];
+        }
+
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
+        {
+            return Sort(backgroundWorker, trackCollection);
         }
 
         private void MutatePopulation(Population pop)

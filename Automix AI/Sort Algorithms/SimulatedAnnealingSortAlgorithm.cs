@@ -11,6 +11,7 @@ using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -35,15 +36,50 @@ namespace Automix_AI.Sort_Algorithms
         {
             var nbCollections = fixedTracks.Count;
             var resultCollection = new TrackCollection();
-            List<TrackCollection> collections = new List<TrackCollection>(nbCollections);
+            var collections = new List<TrackCollection>();
+            int numCollection = 0;
 
-            // action
+            fixedTracks.ForEach(delegate (Track track)
+            {
+                collections.Add(new TrackCollection());
+                int pos = trackCollection.IndexOf(track);
+                if (pos != -1)
+                {
+                    for (int i = 0; i < pos; i++)
+                    {
+                        collections[numCollection].Add(trackCollection[i]);
+                    }
+                    
+                    numCollection++;
+                    
+                    trackCollection.RemoveRange(0, pos);
+                }
+            });
+
+            collections.Add(new TrackCollection());
+            for (int i = 0; i < trackCollection.Count; i++)
+            {
+                collections[numCollection].Add(trackCollection[i]);
+            }
+            numCollection++;
+            trackCollection.Clear();
+
+            for (int i = 0; i < collections.Count; i++)
+            {
+                Console.WriteLine("{");
+                for (int j = 0; j < collections[i].Count; j++)
+                {
+                    Console.WriteLine(collections[i][j].Name);
+                }
+                Console.WriteLine("}");
+            }
+
+            // sort each collection
 
             collections.ForEach(delegate(TrackCollection collection)
             {
                 resultCollection.Concat(collection);
-            }
-            );
+            });
 
             return resultCollection;
         }
