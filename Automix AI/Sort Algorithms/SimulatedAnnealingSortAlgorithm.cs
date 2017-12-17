@@ -49,10 +49,13 @@ namespace Automix_AI.Sort_Algorithms
                     {
                         collections[numCollection].Add(trackCollection[i]);
                     }
-                    
                     numCollection++;
-                    
-                    trackCollection.RemoveRange(0, pos);
+
+                    collections.Add(new TrackCollection());
+                    collections[numCollection].Add(trackCollection[pos]); // add the fixed Track
+                    numCollection++;
+
+                    trackCollection.RemoveRange(0, pos+1);
                 }
             });
 
@@ -64,17 +67,23 @@ namespace Automix_AI.Sort_Algorithms
             numCollection++;
             trackCollection.Clear();
 
+            //collections.ForEach(delegate (TrackCollection collection)
             for (int i = 0; i < collections.Count; i++)
             {
-                Console.WriteLine("{");
-                for (int j = 0; j < collections[i].Count; j++)
+                TrackCollection newCollection;
+                newCollection = Sort(backgroundWorker, collections[i]);
+                /*Console.WriteLine("{");
+                for (int j = 0; j < newCollection.Count; j++)
                 {
-                    Console.WriteLine(collections[i][j].Name);
+                    Console.WriteLine(newCollection[j].Name);
                 }
-                Console.WriteLine("}");
+                Console.WriteLine("}");*/
+                if (!newCollection.Equals(collections[i]))
+                {
+                    var pos = collections.IndexOf(collections[i]);
+                    collections[pos] = newCollection;
+                }
             }
-
-            // sort each collection
 
             collections.ForEach(delegate(TrackCollection collection)
             {
