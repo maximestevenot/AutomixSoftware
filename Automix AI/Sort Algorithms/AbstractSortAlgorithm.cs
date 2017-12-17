@@ -21,6 +21,8 @@ namespace Automix_AI.Sort_Algorithms
             Distance = distance;
         }
 
+        public abstract TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection);
+
         public abstract TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks);
     }
 }

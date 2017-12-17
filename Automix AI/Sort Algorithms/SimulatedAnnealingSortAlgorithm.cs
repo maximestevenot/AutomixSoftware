@@ -10,6 +10,7 @@ using System;
 using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
+using System.Collections.Generic;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -31,6 +32,23 @@ namespace Automix_AI.Sort_Algorithms
         }
 
         public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
+        {
+            var nbCollections = fixedTracks.Count;
+            var resultCollection = new TrackCollection();
+            List<TrackCollection> collections = new List<TrackCollection>(nbCollections);
+
+            // action
+
+            collections.ForEach(delegate(TrackCollection collection)
+            {
+                resultCollection.Concat(collection);
+            }
+            );
+
+            return resultCollection;
+        }
+
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
             var nbTracks = trackCollection.Count;
             var n = (nbTracks / 2) * (nbTracks / 2);
