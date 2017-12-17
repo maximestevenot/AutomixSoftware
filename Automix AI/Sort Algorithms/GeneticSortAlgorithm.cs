@@ -31,7 +31,7 @@ namespace Automix_AI.Sort_Algorithms
             _mutationProbability = mutationProbabilty;
         }
 
-        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
         {
             var population = CreateInitialPopulation(trackCollection);
             SortPopulation(population, 0, population.Count - 1);

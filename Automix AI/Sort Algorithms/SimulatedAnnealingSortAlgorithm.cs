@@ -20,17 +20,17 @@ namespace Automix_AI.Sort_Algorithms
         private readonly double _decayFactor;
         private readonly int _numberOfIteration;
 
-        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 35.0, 0.93, 15, new TrackCollection()) { }
+        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 35.0, 0.93, 15) { }
 
-        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance, double stopTemperature, double beginTemperature, double decayFactor, int numberOfIteration, TrackCollection fixedTracks) : base(distance)
+        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance, double stopTemperature, double beginTemperature, double decayFactor, int numberOfIteration) : base(distance)
         {
             _stopTemperature = stopTemperature;
             _beginTemperature = beginTemperature;
             _decayFactor = decayFactor;
             _numberOfIteration = numberOfIteration;
-            _fixedTracks = fixedTracks;
         }
-        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
+
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
         {
             var nbTracks = trackCollection.Count;
             var n = (nbTracks / 2) * (nbTracks / 2);

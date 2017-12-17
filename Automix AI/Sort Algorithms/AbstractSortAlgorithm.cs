@@ -14,8 +14,6 @@ namespace Automix_AI.Sort_Algorithms
 {
     public abstract class AbstractSortAlgorithm
     {
-        protected TrackCollection _fixedTracks;
-
         public ITracksDistance Distance { get; }
 
         protected AbstractSortAlgorithm(ITracksDistance distance)
@@ -23,6 +21,6 @@ namespace Automix_AI.Sort_Algorithms
             Distance = distance;
         }
 
-        public abstract TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection);
+        public abstract TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks);
     }
 }
