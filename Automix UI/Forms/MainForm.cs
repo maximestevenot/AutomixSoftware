@@ -485,7 +485,7 @@ namespace Automix_UI.Forms
         {
             if (e.Cancelled)
             {
-                //CLEAN ICI
+                _presenter.ClearMusicList();
                 ShowCancelDialog();
             }
             else if (e.Error != null)
@@ -519,6 +519,7 @@ namespace Automix_UI.Forms
 
             if (backgroundWorker.CancellationPending)
             {
+                _presenter.ClearMusicList();
                 e.Cancel = true;
             }
         }

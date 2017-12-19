@@ -192,5 +192,17 @@ namespace Automix_UI
         {
             return _mp3Player.GetLength();
         }
+
+        public void ClearMusicList()
+        {
+            foreach (Track t in _trackCollection)
+            {
+                if (!_trackCollection.IsPresent(t))
+                {
+                    _trackCollection.Remove(t.Name);
+                }
+            }
+            Notify();
+        }
     }
 }
