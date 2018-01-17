@@ -52,6 +52,11 @@ namespace Automix_AI.Sort_Algorithms
             return population[0];
         }
 
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
+        {
+            return Sort(backgroundWorker, trackCollection);
+        }
+
         private void MutatePopulation(Population pop)
         {
             var  randomGenerator = new Random();

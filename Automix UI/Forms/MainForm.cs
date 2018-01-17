@@ -715,6 +715,10 @@ namespace Automix_UI.Forms
             }
 
             SetTempDir(dialog.SelectedPath);
+
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ChooseTempDir");
+            MessageBox.Show(msg);
         }
                 
         private void OnChooseImportDBMenuItemClick(object sender, EventArgs e)

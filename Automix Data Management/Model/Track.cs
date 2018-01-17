@@ -25,6 +25,7 @@ namespace Automix_Data_Management.Model
         public string Name { get; private set; }
         public string Path { get; private set; }
         public int Id { get; private set; }
+        public bool isFixed { get; set; }
 
         public static Track CopyFrom(Track old)
         {

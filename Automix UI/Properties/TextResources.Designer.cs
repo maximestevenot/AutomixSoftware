@@ -88,6 +88,15 @@ namespace Automix_UI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Changing temporary directory successful.
+        /// </summary>
+        internal static string ChooseTempDir {
+            get {
+                return ResourceManager.GetString("ChooseTempDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*.
         /// </summary>
         internal static string DialogFilters {
