@@ -157,19 +157,26 @@ namespace Automix_AI.Sort_Algorithms
             var track1 = random.Next(current.Count);
             var track2 = random.Next(current.Count);
 
-            var newTrackCollection = new TrackCollection();
-            for (var i = 0; i < current.Count; i++)
+            if (current[track1].isFixed || current[track2].isFixed)
             {
-                if (i == track1)
-                {
-                    newTrackCollection.Add(current[track2]);
-                }
-                else
-                {
-                    newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
-                }
+                return current;
             }
-            return newTrackCollection;
+            else
+            {
+                var newTrackCollection = new TrackCollection();
+                for (var i = 0; i < current.Count; i++)
+                {
+                    if (i == track1)
+                    {
+                        newTrackCollection.Add(current[track2]);
+                    }
+                    else
+                    {
+                        newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
+                    }
+                }
+                return newTrackCollection;
+            }
         }
     }
 }

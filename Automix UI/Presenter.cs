@@ -137,11 +137,16 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                var fixedTracks = new TrackCollection();
+                /*var fixedTracks = new TrackCollection();
                 fixedTracks.Add(_trackCollection[2]);
                 fixedTracks.Add(_trackCollection[6]);
-                fixedTracks.Add(_trackCollection[8]);
-                _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection, fixedTracks);
+                fixedTracks.Add(_trackCollection[8]);*/
+                _trackCollection[2].isFixed = true;
+                _trackCollection[6].isFixed = true;
+                _trackCollection[8].isFixed = true;
+
+                //_trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
+                _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
             }
             return _trackCollection;
         }
