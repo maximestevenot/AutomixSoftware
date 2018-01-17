@@ -247,7 +247,6 @@
             // 
             resources.ApplyResources(this._statusStrip, "_statusStrip");
             this._statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this._statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStripProgressBar,
             this._toolStripCurrentDir});
@@ -311,7 +310,6 @@
             // 
             // _trackContextMenu
             // 
-            this._trackContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._trackContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._deleteTrackToolStrip,
             this._selectAllToolStrip});
@@ -566,4 +564,3 @@
         private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
     }
 }
-
