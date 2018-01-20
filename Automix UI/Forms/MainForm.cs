@@ -713,7 +713,8 @@ namespace Automix_UI.Forms
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
-            MessageBox.Show(msg);
+            string legend = rm.GetString("ImportDbLegend");
+            MessageBox.Show(msg, legend);
         }
 
         private void OnChooseExportDBMenuItemClick(object sender, EventArgs e)
@@ -734,7 +735,8 @@ namespace Automix_UI.Forms
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ExportDbMessage");
-            MessageBox.Show(msg);
+            string legend = rm.GetString("ExportDbLegend");
+            MessageBox.Show(msg, legend);
         }
     }
 
