@@ -18,6 +18,7 @@ using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using static Automix_Data_Management.Utils;
 using log4net;
+using System;
 
 namespace Automix_UI
 {
@@ -77,6 +78,18 @@ namespace Automix_UI
                 _trackCollection.Remove(trackName);
             }
             Notify();
+        }
+
+        public void LockTracks(List<string> selection)
+        {
+            foreach(var trackName in selection)
+            {
+                var track = _trackCollection.Search(trackName);
+                if (track != null)
+                {
+                    track.isFixed = true;
+                }
+            }
         }
 
         public object LoadTracks(BackgroundWorker backgroundWorker, string[] fileNames)
@@ -141,13 +154,9 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                /*var fixedTracks = new TrackCollection();
-                fixedTracks.Add(_trackCollection[2]);
-                fixedTracks.Add(_trackCollection[6]);
-                fixedTracks.Add(_trackCollection[8]);*/
-                _trackCollection[2].isFixed = true;
+                /*_trackCollection[2].isFixed = true;
                 _trackCollection[6].isFixed = true;
-                _trackCollection[8].isFixed = true;
+                _trackCollection[8].isFixed = true;*/
 
                 //_trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
                 _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);

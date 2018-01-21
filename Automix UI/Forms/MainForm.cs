@@ -426,6 +426,12 @@ namespace Automix_UI.Forms
             }
         }
 
+        private void OnLockTrackToolStripClick(object sender, EventArgs e)
+        {
+            var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
+            _presenter.LockTracks(selection);
+        }
+
         private void OnButtonEnabledChanged(object sender, EventArgs e)
         {
             var button = (Button)sender;

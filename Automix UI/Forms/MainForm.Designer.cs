@@ -489,6 +489,7 @@
             resources.ApplyResources(this._lockTrackToolStrip, "_lockTrackToolStrip");
             this._lockTrackToolStrip.ForeColor = System.Drawing.Color.White;
             this._lockTrackToolStrip.Name = "_lockTrackToolStrip";
+            this._lockTrackToolStrip.Click += new System.EventHandler(this.OnLockTrackToolStripClick);
             // 
             // MainForm
             // 
