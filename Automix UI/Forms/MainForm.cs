@@ -21,13 +21,12 @@ using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
 
+
 namespace Automix_UI.Forms
 {
     public partial class MainForm : Form, IViewWithTrackCollection
     {
         public bool AnOperationRunning { get; private set; }
-
-        public static ILog Log => log;
 
         private readonly Presenter _presenter;
         private readonly ListViewDrawer _lvDrawer;
@@ -37,10 +36,8 @@ namespace Automix_UI.Forms
         private bool _isPlayerPlaying;
         private bool _playerExists;
 
-        private static readonly string DefaultExportPath = GetTempDir() + "AutomixSoftware\\preview.mp3";
+        private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
-
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private enum InsertionModeType
         {
@@ -77,9 +74,6 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
-            _chooseTempDirToolStripMenuItem.Enabled = true;
-            _importDBMenuItem.Enabled = true;
-            _exportDBMenuItem.Enabled = true;
         }
 
         public void Update(TrackCollection trackCollection)
@@ -136,12 +130,8 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = false;
             _toolStripProgressBar.Value = 0;
             _toolStripProgressBar.Visible = true;
-            _chooseTempDirToolStripMenuItem.Enabled = false;
 
             _musicListView.AllowDrop = false;
-            
-            _importDBMenuItem.Enabled = false;
-            _exportDBMenuItem.Enabled = false;
         }
 
 
@@ -162,12 +152,8 @@ namespace Automix_UI.Forms
             _optionsToolStripMenuItem.Enabled = true;
             _toolStripProgressBar.Visible = false;
             _toolStripProgressBar.Value = 0;
-            _chooseTempDirToolStripMenuItem.Enabled = true;
 
             _musicListView.AllowDrop = true;
-            
-            _importDBMenuItem.Enabled = true;
-            _exportDBMenuItem.Enabled = true;
         }
 
         private void OnGenerateMixMenuItemClick(object sender, EventArgs e) => ExportTrackList();
@@ -259,12 +245,11 @@ namespace Automix_UI.Forms
 
             try
             {
-                Directory.Delete(GetTempDir(), true);
+                Directory.Delete(Path.GetTempPath() + "AutomixSoftware", true);
             }
-            catch (Exception e) when (e is IOException || e is UnauthorizedAccessException || e is ArgumentException
-            || e is ArgumentNullException || e is PathTooLongException || e is DirectoryNotFoundException || e is System.Security.SecurityException)
+            catch
             {
-                Log.Info(e.Source, e);
+                //TODO log this
             }
             Application.Exit();
         }
@@ -418,10 +403,12 @@ namespace Automix_UI.Forms
             if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
             {
                 _deleteTrackToolStrip.Enabled = true;
+                _lockTrackToolStrip.Enabled = true;
             }
             else
             {
                 _deleteTrackToolStrip.Enabled = false;
+                _lockTrackToolStrip.Enabled = false;
             }
         }
 
@@ -437,6 +424,12 @@ namespace Automix_UI.Forms
             {
                 item.Selected = true;
             }
+        }
+
+        private void OnLockTrackToolStripClick(object sender, EventArgs e)
+        {
+            var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
+            _presenter.LockTracks(selection);
         }
 
         private void OnButtonEnabledChanged(object sender, EventArgs e)
@@ -486,6 +479,7 @@ namespace Automix_UI.Forms
             if (e.Cancelled)
             {
                 _presenter.ClearMusicList();
+
                 ShowCancelDialog();
             }
             else if (e.Error != null)
@@ -579,22 +573,13 @@ namespace Automix_UI.Forms
             OnWorkerStop();
         }
 
-        private void OnPlayerButtonClick(object sender, EventArgs ex)
+        private void OnPlayerButtonClick(object sender, EventArgs e)
         {
             OnWorkerStart();
             _playerbutton.Enabled = true;
 
             _playerbutton.Image = _isPlayerPlaying ? new Bitmap(Resources.PlayIcon, 70, 70) : new Bitmap(Resources.PauseIcon, 70, 70);
-
-            try
-            {
-                _playerBackgroundWorker.RunWorkerAsync();
-            } catch (InvalidOperationException exception)
-            {
-                Log.Debug("Invalid operation - Pause during not ready preview", exception);
-                throw exception;
-            }
-            
+            _playerBackgroundWorker.RunWorkerAsync();
         }
 
         private void OnSkipButtonClick(object sender, EventArgs e)
@@ -623,9 +608,8 @@ namespace Automix_UI.Forms
                     }
                     _presenter.PlayMix(_exportPath);
                 }
-                catch (IOException exception) 
+                catch (IOException)
                 {
-                    Log.Info(exception.Source, exception);
                     _presenter.ResumeMix();
                 }
                 _isPlayerPlaying = true;
@@ -702,7 +686,6 @@ namespace Automix_UI.Forms
             }
         }
 
-
         private void OnChooseTempDirButtonClick(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog
@@ -716,8 +699,12 @@ namespace Automix_UI.Forms
             }
 
             SetTempDir(dialog.SelectedPath);
+
+            ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
+            string msg = rm.GetString("ChooseTempDir");
+            MessageBox.Show(msg);
         }
-                
+
         private void OnChooseImportDBMenuItemClick(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog
@@ -737,7 +724,8 @@ namespace Automix_UI.Forms
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ImportDbMessagePart1") + dialog.SafeFileName + rm.GetString("ImportDbMessagePart2");
-            MessageBox.Show(msg);
+            string legend = rm.GetString("ImportDbLegend");
+            MessageBox.Show(msg, legend);
         }
 
         private void OnChooseExportDBMenuItemClick(object sender, EventArgs e)
@@ -758,7 +746,9 @@ namespace Automix_UI.Forms
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ExportDbMessage");
-            MessageBox.Show(msg);
+            string legend = rm.GetString("ExportDbLegend");
+            MessageBox.Show(msg, legend);
         }
     }
+
 }

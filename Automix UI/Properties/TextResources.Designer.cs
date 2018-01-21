@@ -88,6 +88,15 @@ namespace Automix_UI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Changing temporary directory successful.
+        /// </summary>
+        internal static string ChooseTempDir {
+            get {
+                return ResourceManager.GetString("ChooseTempDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*.
         /// </summary>
         internal static string DialogFilters {
@@ -142,11 +151,29 @@ namespace Automix_UI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Export the software database.
+        /// </summary>
+        internal static string ExportDbLegend {
+            get {
+                return ResourceManager.GetString("ExportDbLegend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Software database has been exported !.
         /// </summary>
         internal static string ExportDbMessage {
             get {
                 return ResourceManager.GetString("ExportDbMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Import a new database.
+        /// </summary>
+        internal static string ImportDbLegend {
+            get {
+                return ResourceManager.GetString("ImportDbLegend", resourceCulture);
             }
         }
         

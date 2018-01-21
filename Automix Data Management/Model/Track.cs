@@ -25,6 +25,7 @@ namespace Automix_Data_Management.Model
         public string Name { get; private set; }
         public string Path { get; private set; }
         public int Id { get; private set; }
+        public bool isFixed { get; set; }
 
         public static Track CopyFrom(Track old)
         {
@@ -41,8 +42,8 @@ namespace Automix_Data_Management.Model
                 Danceability = old.Danceability,
                 Samplerate = old.Samplerate,
                 Beats = new int[old.Beats != null ? old.Beats.Length : 0],
-                FadeIns = new int[old.FadeIns != null ? old.Beats.Length : 0],
-                FadeOuts = new int[old.FadeOuts != null ? old.Beats.Length : 0]
+                FadeIns = new int[old.FadeIns != null ? old.FadeIns.Length : 0],
+                FadeOuts = new int[old.FadeOuts != null ? old.FadeOuts.Length : 0]
             };
             if (old.Beats != null)
             {
