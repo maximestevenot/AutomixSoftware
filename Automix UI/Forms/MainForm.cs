@@ -403,10 +403,12 @@ namespace Automix_UI.Forms
             if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
             {
                 _deleteTrackToolStrip.Enabled = true;
+                _lockTrackToolStrip.Enabled = true;
             }
             else
             {
                 _deleteTrackToolStrip.Enabled = false;
+                _lockTrackToolStrip.Enabled = false;
             }
         }
 
@@ -422,6 +424,12 @@ namespace Automix_UI.Forms
             {
                 item.Selected = true;
             }
+        }
+
+        private void OnLockTrackToolStripClick(object sender, EventArgs e)
+        {
+            var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
+            _presenter.LockTracks(selection);
         }
 
         private void OnButtonEnabledChanged(object sender, EventArgs e)
@@ -470,6 +478,8 @@ namespace Automix_UI.Forms
         {
             if (e.Cancelled)
             {
+                _presenter.ClearMusicList();
+
                 ShowCancelDialog();
             }
             else if (e.Error != null)
@@ -503,6 +513,7 @@ namespace Automix_UI.Forms
 
             if (backgroundWorker.CancellationPending)
             {
+                _presenter.ClearMusicList();
                 e.Cancel = true;
             }
         }
