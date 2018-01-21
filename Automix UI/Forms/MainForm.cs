@@ -403,10 +403,12 @@ namespace Automix_UI.Forms
             if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
             {
                 _deleteTrackToolStrip.Enabled = true;
+                _lockTrackToolStrip.Enabled = true;
             }
             else
             {
                 _deleteTrackToolStrip.Enabled = false;
+                _lockTrackToolStrip.Enabled = false;
             }
         }
 

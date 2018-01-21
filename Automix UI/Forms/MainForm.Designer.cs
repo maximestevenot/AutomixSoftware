@@ -77,6 +77,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this._lockTrackToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -312,7 +313,8 @@
             // 
             this._trackContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._deleteTrackToolStrip,
-            this._selectAllToolStrip});
+            this._selectAllToolStrip,
+            this._lockTrackToolStrip});
             this._trackContextMenu.Name = "_listViewcontextMenu";
             resources.ApplyResources(this._trackContextMenu, "_trackContextMenu");
             this._trackContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.OnTrackContextMenuOpening);
@@ -482,6 +484,12 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // _lockTrackToolStrip
+            // 
+            resources.ApplyResources(this._lockTrackToolStrip, "_lockTrackToolStrip");
+            this._lockTrackToolStrip.ForeColor = System.Drawing.Color.White;
+            this._lockTrackToolStrip.Name = "_lockTrackToolStrip";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -562,5 +570,6 @@
         private System.Windows.Forms.ToolStripMenuItem _chooseTempDirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _importDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _lockTrackToolStrip;
     }
 }
