@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,163 +59,163 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="metadata">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" />
-							</xsd:sequence>
-							<xsd:attribute name="name" use="required" type="xsd:string" />
-							<xsd:attribute name="type" type="xsd:string" />
-							<xsd:attribute name="mimetype" type="xsd:string" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="assembly">
-						<xsd:complexType>
-							<xsd:attribute name="alias" type="xsd:string" />
-							<xsd:attribute name="name" type="xsd:string" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-							<xsd:attribute ref="xml:space" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>2.0</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-	<data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>54, 20</value>
-	</data>
-	<data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 20</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Fichier</value>
   </data>
-	<data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>43, 20</value>
-	</data>
-	<data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 20</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Aide</value>
   </data>
-	<data name="_importMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>172, 22</value>
-	</data>
-	<data name="_importMenuItem.Text" xml:space="preserve">
+  <data name="_importMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="_importMenuItem.Text" xml:space="preserve">
     <value>&amp;Importer...</value>
   </data>
-	<data name="_exportMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>172, 22</value>
-	</data>
-	<data name="_exportMenuItem.Text" xml:space="preserve">
+  <data name="_exportMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="_exportMenuItem.Text" xml:space="preserve">
     <value>Exporter</value>
   </data>
-	<data name="_generateMixMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>261, 22</value>
-	</data>
-	<data name="_generateMixMenuItem.Text" xml:space="preserve">
+  <data name="_generateMixMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
+  </data>
+  <data name="_generateMixMenuItem.Text" xml:space="preserve">
     <value>Générer le mix...</value>
   </data>
-	<data name="_exportTextFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>261, 22</value>
-	</data>
-	<data name="_exportTextFileMenuItem.Text" xml:space="preserve">
+  <data name="_exportTextFileMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 22</value>
+  </data>
+  <data name="_exportTextFileMenuItem.Text" xml:space="preserve">
     <value>Exporter la playlist au format texte...</value>
   </data>
-	<data name="_cancelMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>172, 22</value>
-	</data>
-	<data name="_cancelMenuItem.Text" xml:space="preserve">
+  <data name="_cancelMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="_cancelMenuItem.Text" xml:space="preserve">
     <value>&amp;Annuler</value>
   </data>
-	<data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-		<value>169, 6</value>
-	</data>
-	<data name="_quitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>172, 22</value>
-	</data>
-	<data name="_quitMenuItem.Text" xml:space="preserve">
+  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 6</value>
+  </data>
+  <data name="_quitMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="_quitMenuItem.Text" xml:space="preserve">
     <value>&amp;Quitter</value>
   </data>
-	<data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>162, 22</value>
-	</data>
-	<data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Base de données</value>
   </data>
-	<data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>120, 22</value>
-	</data>
-	<data name="_clearDBMenuItem.Text" xml:space="preserve">
+  <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 22</value>
+  </data>
+  <data name="_clearDBMenuItem.Text" xml:space="preserve">
     <value>&amp;Nettoyer</value>
   </data>
-	<data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>162, 22</value>
-	</data>
-	<data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
     <value>Arrêter le mix</value>
   </data>
-	<data name="_aboutCharacteristicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>167, 22</value>
-	</data>
-	<data name="_aboutCharacteristicsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_aboutCharacteristicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="_aboutCharacteristicsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Caractéristiques...</value>
   </data>
-	<data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-		<value>164, 6</value>
-	</data>
-	<data name="_aboutMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-		<value>167, 22</value>
-	</data>
-	<data name="_aboutMenuItem.Text" xml:space="preserve">
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 6</value>
+  </data>
+  <data name="_aboutMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="_aboutMenuItem.Text" xml:space="preserve">
     <value>À &amp;propos...</value>
   </data>
-	<data name="collectionName.Text" xml:space="preserve">
+  <data name="collectionName.Text" xml:space="preserve">
     <value>Nom</value>
   </data>
-	<data name="collectionDuration.Text" xml:space="preserve">
+  <data name="collectionDuration.Text" xml:space="preserve">
     <value>Durée</value>
   </data>
-	<data name="collectionKey.Text" xml:space="preserve">
+  <data name="collectionKey.Text" xml:space="preserve">
     <value>Clé</value>
   </data>
-	<data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-		<value>207, 48</value>
-	</data>
-	<data name="_deleteTrackToolStrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-		<value>
+  <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 48</value>
+  </data>
+  <data name="_deleteTrackToolStrip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
         iVBORw0KGgoAAAANSUhEUgAAAtAAAALQCAYAAAC5V0ecAAAABGdBTUEAALGPC/xhBQAAgXdJREFUeF7t
         3QecZWWd9fu+XoIkERQVRFFAVBRREXNCRVDEQUwYUFQcw5jGMI6ODlcujuOYXnXMgXFgzDm9mMUxKwZM
         iAEERVBE7NsS+op11zpTq+/Th3O66+z9nFN7n/Nbn8/X2iVQ3VW19/OsfvpfVWsImVL+D/k//+dyzVtl
@@ -771,33 +771,33 @@
         JuU4x+vFi9moH8ua/+9fxWGhI4QQsqmkRO8u35dyL8lLyjMhpLcpT6Lz3TnKEp3r14jDQkcIIWQlKUv0
         j6T8gsG3isOeQqaUNWv+P5aPu1Nu1Tg1AAAAAElFTkSuQmCC
 </value>
-	</data>
-	<data name="_deleteTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-		<value>206, 22</value>
-	</data>
-	<data name="_deleteTrackToolStrip.Text" xml:space="preserve">
+  </data>
+  <data name="_deleteTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 22</value>
+  </data>
+  <data name="_deleteTrackToolStrip.Text" xml:space="preserve">
     <value>&amp;Supprimer</value>
   </data>
-	<data name="_selectAllToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-		<value>206, 22</value>
-	</data>
-	<data name="_selectAllToolStrip.Text" xml:space="preserve">
+  <data name="_selectAllToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 22</value>
+  </data>
+  <data name="_selectAllToolStrip.Text" xml:space="preserve">
     <value>Selectionner tout</value>
   </data>
-	<data name="_importButton.Text" xml:space="preserve">
+  <data name="_importButton.Text" xml:space="preserve">
     <value>Importer des pistes</value>
   </data>
-	<data name="_importButton.ToolTip" xml:space="preserve">
+  <data name="_importButton.ToolTip" xml:space="preserve">
     <value>Cliquer pour importer de nouvelles musiques</value>
   </data>
-	<data name="_generateButton.Text" xml:space="preserve">
+  <data name="_generateButton.Text" xml:space="preserve">
     <value>Générer le mix</value>
   </data>
-	<data name="_generateButton.ToolTip" xml:space="preserve">
+  <data name="_generateButton.ToolTip" xml:space="preserve">
     <value>Cliquer pour exporter un fichier mp3</value>
   </data>
-	<data name="_logo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-		<value>
+  <data name="_logo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
         iVBORw0KGgoAAAANSUhEUgAABr4AAAJXCAYAAADFFSS9AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAW2BJREFUeF7t3dux5DqSLdr+P9YylT7d2pQ0pctpAc7/FaAusBOr98qVTsaLD3dg
         DLNpZbYrM8JBMPhwMCL/AwAAAAAAAAAAAAAAAAAAAAAAAAAAoKB/X2i8JQAAAAAAAPxurCctZwwfAAAA
@@ -1191,24 +1191,24 @@
         1lu40Nj0AAAAAAAAXGWs0/CmsRkBAAAAAADIbKztLG9sDgAAAAAAAFYy1opSGiUCAAAAAAAAAAAAAABk
         9B//8f8DfttDtdGKof8AAAAASUVORK5CYII=
 </value>
-	</data>
-	<data name="_sortButton.Text" xml:space="preserve">
+  </data>
+  <data name="_sortButton.Text" xml:space="preserve">
     <value>Trier</value>
   </data>
-	<data name="_sortButton.ToolTip" xml:space="preserve">
+  <data name="_sortButton.ToolTip" xml:space="preserve">
     <value>Cliquer pour trier les musiques</value>
   </data>
-	<data name="_playerbutton.ToolTip" xml:space="preserve">
+  <data name="_playerbutton.ToolTip" xml:space="preserve">
     <value>Cliquer pour prévisualiser le mix</value>
   </data>
-	<data name="_skipButton.ToolTip" xml:space="preserve">
+  <data name="_skipButton.ToolTip" xml:space="preserve">
     <value>Cliquer pour avancer de 30 secondes</value>
   </data>
-	<data name="_reloadButton.ToolTip" xml:space="preserve">
+  <data name="_reloadButton.ToolTip" xml:space="preserve">
     <value>Cliquer pour relancer le mix</value>
   </data>
-	<data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-		<value>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
         AAABAAIAEBAAAAAAIABoBAAAJgAAACAgAAAAACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAAEAE
         AAAAAAAAAAAAAAAAAAAAAAAA////Af///wH///8B////Bf///2H////D////+///////////////+///
         /8P///9h////Bf///wH///8B////Af///wH///8B////If///8fb29v/Z2dn/xwcHP8AAAD/AAAA/yAg
@@ -1301,14 +1301,17 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-	</data>
-	<data name="_exportDBMenuItem.Text" xml:space="preserve">
+  </data>
+  <data name="_exportDBMenuItem.Text" xml:space="preserve">
     <value>Exporter la base de données du logiciel</value>
   </data>
-	<data name="_importDBMenuItem.Text" xml:space="preserve">
-        <value>Importer une nouvelle base de données</value>
-    </data>
-	<data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_importDBMenuItem.Text" xml:space="preserve">
+    <value>Importer une nouvelle base de données</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
     <value>Choisir le dossier temporaire</value>
+  </data>
+  <data name="_lockTrackToolStrip.Text" xml:space="preserve">
+    <value>Verrouiller</value>
   </data>
 </root>
