@@ -66,6 +66,7 @@ namespace Automix_UI.Forms
             _playerbutton.Image = new Bitmap(Resources.PlayIcon, 70, 70);
             _skipButton.Image = new Bitmap(Resources.SeekIcon, 70, 70);
             _reloadButton.Image = new Bitmap(Resources.ReloadIcon, 60, 60);
+
             _cancelMenuItem.Enabled = false;
             _generateButton.Enabled = false;
             _sortButton.Enabled = false;
@@ -74,7 +75,11 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
+
+            _deleteTrackToolStrip.ShortcutKeys = Keys.Delete;
+            _musicListView.ItemSelectionChanged += OnMusicListViewItemSelectionChanged;
         }
+
 
         public void Update(TrackCollection trackCollection)
         {
@@ -399,6 +404,16 @@ namespace Automix_UI.Forms
         }
 
         private void OnTrackContextMenuOpening(object sender, CancelEventArgs e)
+        {
+            ToogleToolStripItems();
+        }
+
+        private void OnMusicListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs listViewItemSelectionChangedEventArgs)
+        {
+            ToogleToolStripItems();
+        }
+
+        private void ToogleToolStripItems()
         {
             if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
             {
