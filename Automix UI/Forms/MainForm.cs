@@ -83,6 +83,10 @@ namespace Automix_UI.Forms
             {
                 var lvitem = new ListViewItem(track.Name);
                 _musicListView.Items.Add(lvitem);
+                if (track.isFixed)
+                {
+                    lvitem.SubItems[0].Font = new Font(lvitem.SubItems[0].Font, FontStyle.Bold);
+                }
                 lvitem.SubItems.Add(track.DisplayDuration());
                 lvitem.SubItems.Add(track.Bpm.ToString());
                 lvitem.SubItems.Add(track.Key);
@@ -430,6 +434,11 @@ namespace Automix_UI.Forms
         {
             var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
             _presenter.LockTracks(selection);
+            foreach (ListViewItem lockedItem in _musicListView.SelectedItems)
+            {
+                lockedItem.SubItems[0].Font = new Font(lockedItem.SubItems[0].Font, FontStyle.Bold);
+            }
+            _musicListView.Invalidate();
         }
 
         private void OnButtonEnabledChanged(object sender, EventArgs e)
