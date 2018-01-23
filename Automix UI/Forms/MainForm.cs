@@ -87,6 +87,7 @@ namespace Automix_UI.Forms
             foreach (var track in trackCollection)
             {
                 var lvitem = new ListViewItem(track.Name);
+                lvitem.UseItemStyleForSubItems = true;
                 _musicListView.Items.Add(lvitem);
                 if (track.isFixed)
                 {

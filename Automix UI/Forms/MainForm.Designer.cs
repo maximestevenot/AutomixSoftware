@@ -272,6 +272,7 @@
             this._musicListView.AllowDrop = true;
             this._musicListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this._musicListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this._musicListView.CheckBoxes = true;
             this._musicListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.collectionName,
             this.collectionDuration,
@@ -281,8 +282,8 @@
             this._musicListView.ForeColor = System.Drawing.Color.White;
             this._musicListView.FullRowSelect = true;
             this._musicListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this._musicListView.LabelEdit = true;
             this._musicListView.Name = "_musicListView";
-            this._musicListView.OwnerDraw = true;
             this._musicListView.UseCompatibleStateImageBehavior = false;
             this._musicListView.View = System.Windows.Forms.View.Details;
             this._musicListView.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.MusicListView_DrawColumnHeader);
