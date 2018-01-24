@@ -474,7 +474,18 @@ namespace Automix_UI.Forms
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
-            /* Checks if a music is locked by a click on a checkbox */
+            UpdateLockedTracks();
+            SortTrackList();
+        }
+
+        private void SortTrackList()
+        {
+            OnWorkerStart();
+            _sortBackgroundWorker.RunWorkerAsync();
+        }
+
+        private void UpdateLockedTracks()
+        {
             List<String> checkedTracks = new List<String>();
             List<String> uncheckedTracks = new List<String>();
 
@@ -492,16 +503,7 @@ namespace Automix_UI.Forms
 
             _presenter.LockTracks(checkedTracks);
             _presenter.UnlockTracks(uncheckedTracks);
-
-            SortTrackList();
         }
-
-        private void SortTrackList()
-        {
-            OnWorkerStart();
-            _sortBackgroundWorker.RunWorkerAsync();
-        }
-
         private void ImportBW_DoWork(object sender, DoWorkEventArgs e)
         {
             var backgroundWorker = (BackgroundWorker)sender;
