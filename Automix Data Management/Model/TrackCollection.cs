@@ -94,5 +94,18 @@ namespace Automix_Data_Management.Model
                 return true;
             }
         }
+
+        public int HammingDist(TrackCollection other)
+        {
+            if (this.Count != other.Count) { return -1; }
+
+            var HammingDist = 0;
+
+            for (var k = 0; k < this.Count; k++)
+            {
+                if (!(this[k].Equals(other[k]))) { HammingDist++; }
+            }
+            return HammingDist;
+        }
     }
 }
