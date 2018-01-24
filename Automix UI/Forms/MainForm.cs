@@ -20,7 +20,7 @@ using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
-
+using System.Collections.Generic;
 
 namespace Automix_UI.Forms
 {
@@ -86,11 +86,14 @@ namespace Automix_UI.Forms
             _musicListView.Items.Clear();
             foreach (var track in trackCollection)
             {
-                var lvitem = new ListViewItem(track.Name);
-                _musicListView.Items.Add(lvitem);
-                if (track.isFixed)
+                var lvitem = new ListViewItem(track.Name)
                 {
-                    lvitem.SubItems[0].Font = new Font(lvitem.SubItems[0].Font, FontStyle.Bold);
+                    UseItemStyleForSubItems = true
+                };
+                _musicListView.Items.Add(lvitem);
+                if (track.IsFixed)
+                {
+                    lvitem.Checked = true;
                 }
                 lvitem.SubItems.Add(track.DisplayDuration());
                 lvitem.SubItems.Add(track.Bpm.ToString());
@@ -451,7 +454,7 @@ namespace Automix_UI.Forms
             _presenter.LockTracks(selection);
             foreach (ListViewItem lockedItem in _musicListView.SelectedItems)
             {
-                lockedItem.SubItems[0].Font = new Font(lockedItem.SubItems[0].Font, FontStyle.Bold);
+                lockedItem.Checked = true;
             }
             _musicListView.Invalidate();
         }
@@ -471,6 +474,7 @@ namespace Automix_UI.Forms
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
+            UpdateLockedTracks();
             SortTrackList();
         }
 
@@ -480,6 +484,26 @@ namespace Automix_UI.Forms
             _sortBackgroundWorker.RunWorkerAsync();
         }
 
+        private void UpdateLockedTracks()
+        {
+            List<String> checkedTracks = new List<String>();
+            List<String> uncheckedTracks = new List<String>();
+
+            foreach (ListViewItem item in _musicListView.Items)
+            {
+                if (item.Checked)
+                {
+                    checkedTracks.Add(item.Text);
+                }
+                else
+                {
+                    uncheckedTracks.Add(item.Text);
+                }
+            }
+
+            _presenter.LockTracks(checkedTracks);
+            _presenter.UnlockTracks(uncheckedTracks);
+        }
         private void ImportBW_DoWork(object sender, DoWorkEventArgs e)
         {
             var backgroundWorker = (BackgroundWorker)sender;
