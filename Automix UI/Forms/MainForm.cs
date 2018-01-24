@@ -86,12 +86,14 @@ namespace Automix_UI.Forms
             _musicListView.Items.Clear();
             foreach (var track in trackCollection)
             {
-                var lvitem = new ListViewItem(track.Name);
-                lvitem.UseItemStyleForSubItems = true;
+                var lvitem = new ListViewItem(track.Name)
+                {
+                    UseItemStyleForSubItems = true
+                };
                 _musicListView.Items.Add(lvitem);
                 if (track.isFixed)
                 {
-                    lvitem.SubItems[0].Font = new Font(lvitem.SubItems[0].Font, FontStyle.Bold);
+                    lvitem.Checked = true;
                 }
                 lvitem.SubItems.Add(track.DisplayDuration());
                 lvitem.SubItems.Add(track.Bpm.ToString());
@@ -452,7 +454,7 @@ namespace Automix_UI.Forms
             _presenter.LockTracks(selection);
             foreach (ListViewItem lockedItem in _musicListView.SelectedItems)
             {
-                lockedItem.SubItems[0].Font = new Font(lockedItem.SubItems[0].Font, FontStyle.Bold);
+                lockedItem.Checked = true;
             }
             _musicListView.Invalidate();
         }
@@ -472,6 +474,9 @@ namespace Automix_UI.Forms
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
+            /* Checks if a music is locked by a click on a checkbox */
+            var selection = (from ListViewItem item in _musicListView.CheckedItems select item.Text).ToList();
+            _presenter.LockTracks(selection);
             SortTrackList();
         }
 
