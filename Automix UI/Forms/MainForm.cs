@@ -20,7 +20,7 @@ using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
-
+using System.Collections.Generic;
 
 namespace Automix_UI.Forms
 {
@@ -91,7 +91,7 @@ namespace Automix_UI.Forms
                     UseItemStyleForSubItems = true
                 };
                 _musicListView.Items.Add(lvitem);
-                if (track.isFixed)
+                if (track.IsFixed)
                 {
                     lvitem.Checked = true;
                 }
@@ -475,8 +475,24 @@ namespace Automix_UI.Forms
         private void OnSortButtonClick(object sender, EventArgs e)
         {
             /* Checks if a music is locked by a click on a checkbox */
-            var selection = (from ListViewItem item in _musicListView.CheckedItems select item.Text).ToList();
-            _presenter.LockTracks(selection);
+            List<String> checkedTracks = new List<String>();
+            List<String> uncheckedTracks = new List<String>();
+
+            foreach (ListViewItem item in _musicListView.Items)
+            {
+                if (item.Checked)
+                {
+                    checkedTracks.Add(item.Text);
+                }
+                else
+                {
+                    uncheckedTracks.Add(item.Text);
+                }
+            }
+
+            _presenter.LockTracks(checkedTracks);
+            _presenter.UnlockTracks(uncheckedTracks);
+
             SortTrackList();
         }
 

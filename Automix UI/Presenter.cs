@@ -87,7 +87,19 @@ namespace Automix_UI
                 var track = _trackCollection.Search(trackName);
                 if (track != null)
                 {
-                    track.isFixed = true;
+                    track.IsFixed = true;
+                }
+            }
+        }
+
+        public void UnlockTracks(List<string> selection)
+        {
+            foreach(var trackName in selection)
+            {
+                var track = _trackCollection.Search(trackName);
+                if(track != null)
+                {
+                    track.IsFixed = false;
                 }
             }
         }
@@ -154,9 +166,9 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                /*_trackCollection[2].isFixed = true;
-                _trackCollection[6].isFixed = true;
-                _trackCollection[8].isFixed = true;*/
+                /*_trackCollection[2].IsFixed = true;
+                _trackCollection[6].IsFixed = true;
+                _trackCollection[8].IsFixed = true;*/
 
                 //_trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
                 _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
