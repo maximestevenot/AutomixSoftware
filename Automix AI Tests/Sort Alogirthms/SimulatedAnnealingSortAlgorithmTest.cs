@@ -27,35 +27,35 @@ namespace Automix_AI_Tests.Sort_Alogirthms
             {
                 Bpm = 128,
                 Key = "6d",
-                isFixed = false
+                IsFixed = false
             };
 
             var track2 = new Track()
             {
                 Bpm = 150,
                 Key = "6m",
-                isFixed = true
+                IsFixed = true
             };
 
             var track3 = new Track()
             {
                 Bpm = 128,
                 Key = "6m",
-                isFixed = false
+                IsFixed = false
             };
 
             var track4 = new Track()
             {
                 Bpm = 120,
                 Key = "3m",
-                isFixed = true
+                IsFixed = true
             };
 
             var track5 = new Track()
             {
                 Bpm = 60,
                 Key = "1d",
-                isFixed = false
+                IsFixed = false
             };
 
             _trackCollection = new TrackCollection { track1, track2, track3, track4, track5 };
