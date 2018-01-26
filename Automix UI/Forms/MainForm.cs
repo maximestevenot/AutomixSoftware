@@ -21,6 +21,7 @@ using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Automix_UI.Forms
 {
@@ -38,6 +39,8 @@ namespace Automix_UI.Forms
 
         private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
+
+        private readonly ImageList _lockpadImageList;
 
         private enum InsertionModeType
         {
@@ -67,6 +70,10 @@ namespace Automix_UI.Forms
             _skipButton.Image = new Bitmap(Resources.SeekIcon, 70, 70);
             _reloadButton.Image = new Bitmap(Resources.ReloadIcon, 60, 60);
 
+            _lockpadImageList = new ImageList();
+            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
+            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
+        
             _cancelMenuItem.Enabled = false;
             _generateButton.Enabled = false;
             _sortButton.Enabled = false;
