@@ -42,7 +42,11 @@ namespace Automix_AI.Distances
                 return -1;
             }
 
+           
             var distance = Math.Abs(track2.Bpm - track1.Bpm) * 1200 * BpmPriority;
+            var distanceDouble = track2.Bpm < track1.Bpm ? Math.Abs(2 * track2.Bpm - track1.Bpm) * 1200 * BpmPriority : Math.Abs(track2.Bpm - 2 * track1.Bpm) * 1200 * BpmPriority;
+            distance = distanceDouble < distance ? distanceDouble : distance;
+
             distance += Math.Abs(track1.Danceability - track2.Danceability) * 10 * DanceabilityPriority;
 
             if (haveSameScale)
