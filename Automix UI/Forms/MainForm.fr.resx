@@ -1312,6 +1312,6 @@
     <value>Choisir le dossier temporaire</value>
   </data>
   <data name="_lockTrackToolStrip.Text" xml:space="preserve">
-    <value>Verrouiller</value>
+    <value>Verrouiller/Déverrouiller</value>
   </data>
 </root>

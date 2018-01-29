@@ -73,7 +73,9 @@ namespace Automix_UI.Forms
             _lockpadImageList = new ImageList();
             _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
             _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
-        
+
+            _musicListView.StateImageList = _lockpadImageList;
+
             _cancelMenuItem.Enabled = false;
             _generateButton.Enabled = false;
             _sortButton.Enabled = false;
@@ -461,7 +463,8 @@ namespace Automix_UI.Forms
             _presenter.LockTracks(selection);
             foreach (ListViewItem lockedItem in _musicListView.SelectedItems)
             {
-                lockedItem.Checked = true;
+                lockedItem.Checked = !lockedItem.Checked;
+                lockedItem.ImageIndex = (_musicListView.Items[0].ImageIndex + 1) % 2;
             }
             _musicListView.Invalidate();
         }
