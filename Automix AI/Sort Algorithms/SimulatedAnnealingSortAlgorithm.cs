@@ -23,7 +23,7 @@ namespace Automix_AI.Sort_Algorithms
         private readonly int _numberOfIteration;
         private int nbOfAppliance = 0;
 
-        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 35.0, 0.93, 15) { }
+        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 45.0, 0.93, 75) { }
 
         public SimulatedAnnealingSortAlgorithm(ITracksDistance distance, double stopTemperature, double beginTemperature, double decayFactor, int numberOfIteration) : base(distance)
         {
@@ -115,13 +115,10 @@ namespace Automix_AI.Sort_Algorithms
                 {
                     for (var i = 0; i < n; i++)
                     {
-                        TrackCollection tempCollection;
-                        if (nbOfAppliance == 0)
+                        TrackCollection tempCollection = CreatePotentialTrackCollection(result);
+                        for (var j = 0; j < temperature; j++)
                         {
-                            tempCollection = CreateRandomTrackCollection(result);
-                        } else
-                        {
-                            tempCollection = CreatePotentialTrackCollection(result);
+                            tempCollection = CreatePotentialTrackCollection(tempCollection);
                         }
 
                         var dE = ComputeIndividualEvaluation(tempCollection) - ComputeIndividualEvaluation(result);
@@ -149,25 +146,7 @@ namespace Automix_AI.Sort_Algorithms
             }
 
             System.Console.WriteLine(ComputeIndividualEvaluation(trackCollection));
-
-            if (originalTrackCollection.Equals(trackCollection))
-            {
-                if ((nbOfAppliance <  2 && trackCollection.Count < 20) || (nbOfAppliance < 1 && trackCollection.Count < 40 && trackCollection.Count > 20))
-                {
-                    System.Console.WriteLine(nbOfAppliance);
-                    nbOfAppliance++;
-                    return Sort(backgroundWorker, trackCollection);
-                } else
-                {
-                    nbOfAppliance = 0;
-                    return trackCollection;
-                }
-            } else 
-            {
-                nbOfAppliance = 0;
-                return Sort(backgroundWorker, trackCollection);
-            }
-
+            
             return trackCollection;
         }
 
