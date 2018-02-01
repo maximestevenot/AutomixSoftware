@@ -126,6 +126,9 @@
   <data name="CancelMessage" xml:space="preserve">
     <value>Operation canceled</value>
   </data>
+  <data name="ChooseTempDir" xml:space="preserve">
+    <value>Changing temporary directory successful</value>
+  </data>
   <data name="DialogFilters" xml:space="preserve">
     <value>MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*</value>
   </data>
@@ -143,5 +146,20 @@
   </data>
   <data name="ExitMessage" xml:space="preserve">
     <value>Are you sure you want to quit?</value>
+  </data>
+  <data name="ExportDbLegend" xml:space="preserve">
+    <value>Export the software database</value>
+  </data>
+  <data name="ExportDbMessage" xml:space="preserve">
+    <value>Software database has been exported !</value>
+  </data>
+  <data name="ImportDbLegend" xml:space="preserve">
+    <value>Import a new database</value>
+  </data>
+  <data name="ImportDbMessagePart1" xml:space="preserve">
+    <value>Database "</value>
+  </data>
+  <data name="ImportDbMessagePart2" xml:space="preserve">
+    <value>" has been imported !</value>
   </data>
 </root>

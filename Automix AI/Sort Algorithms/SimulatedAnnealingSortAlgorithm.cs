@@ -10,6 +10,8 @@ using System;
 using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -29,6 +31,68 @@ namespace Automix_AI.Sort_Algorithms
             _decayFactor = decayFactor;
             _numberOfIteration = numberOfIteration;
         }
+
+        public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection, TrackCollection fixedTracks)
+        {
+            var nbCollections = fixedTracks.Count;
+            var resultCollection = new TrackCollection();
+            var collections = new List<TrackCollection>();
+            int numCollection = 0;
+
+            fixedTracks.ForEach(delegate (Track track)
+            {
+                collections.Add(new TrackCollection());
+                int pos = trackCollection.IndexOf(track);
+                if (pos != -1)
+                {
+                    for (int i = 0; i < pos; i++)
+                    {
+                        collections[numCollection].Add(trackCollection[i]);
+                    }
+                    numCollection++;
+
+                    collections.Add(new TrackCollection());
+                    collections[numCollection].Add(trackCollection[pos]); // add the fixed Track
+                    numCollection++;
+
+                    trackCollection.RemoveRange(0, pos+1);
+                }
+            });
+
+            collections.Add(new TrackCollection());
+            for (int i = 0; i < trackCollection.Count; i++)
+            {
+                collections[numCollection].Add(trackCollection[i]);
+            }
+            numCollection++;
+            trackCollection.Clear();
+
+            //collections.ForEach(delegate (TrackCollection collection)
+            for (int i = 0; i < collections.Count; i++)
+            {
+                TrackCollection newCollection;
+                newCollection = Sort(backgroundWorker, collections[i]);
+                /*Console.WriteLine("{");
+                for (int j = 0; j < newCollection.Count; j++)
+                {
+                    Console.WriteLine(newCollection[j].Name);
+                }
+                Console.WriteLine("}");*/
+                if (!newCollection.Equals(collections[i]))
+                {
+                    var pos = collections.IndexOf(collections[i]);
+                    collections[pos] = newCollection;
+                }
+            }
+
+            collections.ForEach(delegate(TrackCollection collection)
+            {
+                resultCollection.Concat(collection);
+            });
+
+            return resultCollection;
+        }
+
         public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
             var nbTracks = trackCollection.Count;
@@ -93,19 +157,26 @@ namespace Automix_AI.Sort_Algorithms
             var track1 = random.Next(current.Count);
             var track2 = random.Next(current.Count);
 
-            var newTrackCollection = new TrackCollection();
-            for (var i = 0; i < current.Count; i++)
+            if (current[track1].IsFixed || current[track2].IsFixed)
             {
-                if (i == track1)
-                {
-                    newTrackCollection.Add(current[track2]);
-                }
-                else
-                {
-                    newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
-                }
+                return current;
             }
-            return newTrackCollection;
+            else
+            {
+                var newTrackCollection = new TrackCollection();
+                for (var i = 0; i < current.Count; i++)
+                {
+                    if (i == track1)
+                    {
+                        newTrackCollection.Add(current[track2]);
+                    }
+                    else
+                    {
+                        newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
+                    }
+                }
+                return newTrackCollection;
+            }
         }
     }
 }

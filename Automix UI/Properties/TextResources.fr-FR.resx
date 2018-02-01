@@ -126,6 +126,9 @@
   <data name="CancelMessage" xml:space="preserve">
     <value>Opération annulée</value>
   </data>
+  <data name="ChooseTempDir" xml:space="preserve">
+    <value>Changement du dossier temporaire réussi</value>
+  </data>
   <data name="DialogFilters" xml:space="preserve">
     <value>Fichiers MP3 (*.mp3)|*.mp3|Tous les fichiers (*.*)|*.*</value>
   </data>
@@ -143,5 +146,20 @@
   </data>
   <data name="ExitMessage" xml:space="preserve">
     <value>Êtes vous sûr de vouloir quitter?</value>
+  </data>
+  <data name="ExportDbLegend" xml:space="preserve">
+    <value>Exporter la base de données du logiciel</value>
+  </data>
+  <data name="ExportDbMessage" xml:space="preserve">
+    <value>La base de données du logiciel a bien été exporté !</value>
+  </data>
+  <data name="ImportDbLegend" xml:space="preserve">
+    <value>Importer une nouvelle base de données</value>
+  </data>
+  <data name="ImportDbMessagePart1" xml:space="preserve">
+    <value>La base de données "</value>
+  </data>
+  <data name="ImportDbMessagePart2" xml:space="preserve">
+    <value>" a bien été importé !</value>
   </data>
 </root>

@@ -26,22 +26,39 @@ namespace Automix_AI_Tests.Sort_Alogirthms
             var track1 = new Track()
             {
                 Bpm = 128,
-                Key = "6d"
+                Key = "6d",
+                IsFixed = false
             };
 
             var track2 = new Track()
             {
                 Bpm = 150,
-                Key = "6m"
+                Key = "6m",
+                IsFixed = true
             };
 
             var track3 = new Track()
             {
                 Bpm = 128,
-                Key = "6m"
+                Key = "6m",
+                IsFixed = false
             };
 
-            _trackCollection = new TrackCollection { track1, track2, track3 };
+            var track4 = new Track()
+            {
+                Bpm = 120,
+                Key = "3m",
+                IsFixed = true
+            };
+
+            var track5 = new Track()
+            {
+                Bpm = 60,
+                Key = "1d",
+                IsFixed = false
+            };
+
+            _trackCollection = new TrackCollection { track1, track2, track3, track4, track5 };
 
             _backgroundWorker = new BackgroundWorker
             {
@@ -60,6 +77,20 @@ namespace Automix_AI_Tests.Sort_Alogirthms
             var resultTrackCollection = sortAlgorithm.Sort(_backgroundWorker, _trackCollection);
 
             Assert.AreEqual(_trackCollection.Count, resultTrackCollection.Count);
+        }
+
+        [TestMethod]
+        public void TestFixedTrackPosition()
+        {
+            Assert.IsNotNull(_trackCollection, "TrackCollection not initialized");
+            Assert.IsNotNull(_backgroundWorker, "BackgroundWorker not initialized");
+
+            var sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance());
+            var resultTrackCollection = sortAlgorithm.Sort(_backgroundWorker, _trackCollection);
+            
+
+            Assert.AreEqual(resultTrackCollection[1], _trackCollection[1]);
+            Assert.AreEqual(resultTrackCollection[3], _trackCollection[3]);
         }
     }
 }

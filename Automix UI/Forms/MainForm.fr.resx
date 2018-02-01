@@ -1302,4 +1302,16 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="_exportDBMenuItem.Text" xml:space="preserve">
+    <value>Exporter la base de données du logiciel</value>
+  </data>
+  <data name="_importDBMenuItem.Text" xml:space="preserve">
+    <value>Importer une nouvelle base de données</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Choisir le dossier temporaire</value>
+  </data>
+  <data name="_lockTrackToolStrip.Text" xml:space="preserve">
+    <value>Verrouiller/Déverrouiller</value>
+  </data>
 </root>

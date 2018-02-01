@@ -10,6 +10,8 @@ using System.IO;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Data.SQLite;
 
 namespace Automix_Data_Management_Tests.Storage
 {
@@ -18,7 +20,8 @@ namespace Automix_Data_Management_Tests.Storage
     public class DataBaseTest
     {
         private static Track _testTrack;
-        private static readonly string[] DataBasePaths = { "db_test_1.db", "db_test_2.db" };
+        private static readonly string[] DataBasePaths = { "db_test_1.db", "db_test_2.db", "db_test_imported.db" };
+        private static readonly string[] DataBaseUserPaths = { "../../db_user_test_to_import_1.db", "../../db_user_test_to_import_2.db", "db_user_test_exported.db" };
 
         [ClassInitialize]
         public static void InitializeTests(TestContext testContext)
@@ -79,6 +82,27 @@ namespace Automix_Data_Management_Tests.Storage
                 Assert.AreEqual(_testTrack.FadeOuts[i], extractedTrack.FadeOuts[i]);
 
             }
+        }
+        
+        [TestMethod]
+        public void TestImportDataBase()
+        {
+            var db = new DataBase(DataBasePaths[2]);
+            db.ImportDataBase(DataBaseUserPaths[0]);
+
+            SQLiteConnection dbUserToImportConnection = new SQLiteConnection("Data Source=" + DataBaseUserPaths[0] + ";Version=3;");
+            Assert.IsTrue(db.ChecksumsAreInDataBase(dbUserToImportConnection));
+        }
+
+
+        [TestMethod]
+        public void TestExportDataBase()
+        {
+            var db = new DataBase(DataBaseUserPaths[1]);
+            db.ExportDataBase(DataBaseUserPaths[2]);
+
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + DataBaseUserPaths[2] + ";Version=3;");
+            Assert.IsTrue(db.ChecksumsAreInDataBase(dbUserConnection));
         }
     }
 }

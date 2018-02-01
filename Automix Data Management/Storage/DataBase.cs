@@ -11,12 +11,15 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using Automix_Data_Management.Model;
+using log4net;
 
 namespace Automix_Data_Management.Storage
 {
     public class DataBase
     {
         private SQLiteConnection _dbConnection;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public DataBase()
         {
@@ -52,6 +55,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to insert :" + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to insert :" + track.Path + e.Message);
             }
 
@@ -73,6 +77,8 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+
+                log.Debug("DB ERROR when trying to clean database" + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to clean database" + e.Message);
             }
             _dbConnection.Close();
@@ -108,6 +114,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to extract data of : " + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine(
                     "DB ERROR when trying to extract data of : " + track.Path + e.Message);
 
@@ -138,6 +145,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to isPresent: " + track.Path + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to isPresent : " + track.Path + e.Message);
             }
 
@@ -177,6 +185,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
+                log.Debug("DB ERROR when trying to create tracks table" + e.Message, e);
                 System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
             }
 
@@ -188,6 +197,169 @@ namespace Automix_Data_Management.Storage
             char[] separator = { ' ' };
             var values = orig.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             return values.Select(value => Convert.ToInt32(value)).ToArray();
+        }
+
+        public void ImportDataBase(String pathDbUser)
+        {
+            _dbConnection.Open();
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathDbUser + ";Version=3;");
+            dbUserConnection.Open();
+
+            if (CheckColumnsProperties(dbUserConnection))
+            {
+                SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
+                commandUser.ExecuteNonQuery();
+                SQLiteDataReader readerUser = commandUser.ExecuteReader();
+                
+                while (readerUser.Read())
+                {
+                    string checksumUser = readerUser.GetString(1);
+                    if (!IsInDataBase(checksumUser))
+                    {
+                        string query = "INSERT INTO tracks (checksum, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts) VALUES "
+                            + "('" + checksumUser + "',"
+                            + "'" + readerUser.GetString(2) + "',"
+                            + "'" + readerUser.GetString(3) + "',"
+                            + "'" + readerUser.GetString(4) + "',"
+                            + "'" + readerUser.GetString(5) + "',"
+                            + "'" + readerUser.GetString(6) + "',"
+                            + "'" + readerUser.GetString(7) + "',"
+                            + "'" + readerUser.GetString(8) + "',"
+                            + "'" + readerUser.GetString(9) + "')";
+                        SQLiteCommand command = new SQLiteCommand(query, _dbConnection);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            else
+            {
+                throw new System.ArgumentException("User database to import hasn't the same format than the software database\n");
+            }
+
+            dbUserConnection.Close();
+            _dbConnection.Close();
+        }
+
+        private bool CheckColumnsProperties(SQLiteConnection dbUserConnection)
+        {
+            SQLiteCommand commandUser = new SQLiteCommand("SELECT * FROM tracks", dbUserConnection);
+            commandUser.ExecuteNonQuery();
+            SQLiteDataReader readerUser = commandUser.ExecuteReader();
+            int nbColUser = readerUser.FieldCount;
+
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+            command.ExecuteNonQuery();
+            SQLiteDataReader reader = command.ExecuteReader();
+            int nbCol = reader.FieldCount;
+
+            if (nbColUser == nbCol)
+            {
+                for (int i = 0; i < nbCol; i++)
+                {
+                    if (readerUser.GetName(i) == reader.GetName(i) && readerUser.GetFieldType(i) == reader.GetFieldType(i))
+                    {
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsInDataBase(string checksumUser)
+        {
+            const string query = "SELECT checksum FROM tracks";
+            var command = new SQLiteCommand(query, _dbConnection);
+            command.ExecuteNonQuery();
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (reader.GetString(0).Equals(checksumUser))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool ChecksumsAreInDataBase(SQLiteConnection dbUserConnection)
+        {
+            _dbConnection.Open();
+            dbUserConnection.Open();
+            const string queryUser = "SELECT checksum FROM tracks";
+            var commandUser = new SQLiteCommand(queryUser, dbUserConnection);
+            commandUser.ExecuteNonQuery();
+            var readerUser = commandUser.ExecuteReader();
+
+            while (readerUser.Read())
+            {
+                var checksumUser = readerUser.GetString(0);
+                if (!IsInDataBase(checksumUser))
+                {
+                    dbUserConnection.Close();
+                    return false;
+                }
+            }
+
+            dbUserConnection.Close();
+            _dbConnection.Close();
+            return true;
+        }
+
+
+        public void ExportDataBase(string pathDbUser)
+        {
+            _dbConnection.Open();
+
+            // Creation of the user database file .db 
+            SQLiteConnection.CreateFile(pathDbUser);
+            SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathDbUser + ";Version=3;");
+            dbUserConnection.Open();
+
+            // Creation of the user database with the same format than the software database
+            try
+            {
+                const string query = "CREATE TABLE tracks (id INTEGER PRIMARY KEY AUTOINCREMENT, checksum TEXT, "
+                                     + "duration TEXT, bpm TEXT, key TEXT, danceability TEXT, samplerate TEXT, beats TEXT, fadeins TEXT, fadeouts TEXT)";
+                SQLiteCommand commandUser = new SQLiteCommand(query, dbUserConnection);
+                commandUser.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
+            }
+
+            // Copy the software database in the database user
+            SQLiteCommand command = new SQLiteCommand("SELECT * FROM tracks", _dbConnection);
+            command.ExecuteNonQuery();
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string queryUser = "INSERT INTO tracks (checksum, duration, bpm, key, danceability, samplerate, beats, fadeins, fadeouts) VALUES "
+                    + "('" + reader.GetString(1) + "',"
+                    + "'" + reader.GetString(2) + "',"
+                    + "'" + reader.GetString(3) + "',"
+                    + "'" + reader.GetString(4) + "',"
+                    + "'" + reader.GetString(5) + "',"
+                    + "'" + reader.GetString(6) + "',"
+                    + "'" + reader.GetString(7) + "',"
+                    + "'" + reader.GetString(8) + "',"
+                    + "'" + reader.GetString(9) + "')";
+                SQLiteCommand commandUser = new SQLiteCommand(queryUser, dbUserConnection);
+                commandUser.ExecuteNonQuery();
+            }
+
+            dbUserConnection.Close();
+            _dbConnection.Close();
         }
     }
 }

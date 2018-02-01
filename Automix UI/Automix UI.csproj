@@ -136,6 +136,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TextResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -161,12 +165,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo.ico" />
+    <Content Include="Resources\LockedIcon.png" />
     <Content Include="Resources\PauseIcon.bmp" />
     <Content Include="Resources\PlayIcon.bmp" />
     <Content Include="Resources\ReloadIcon.bmp" />
     <Content Include="Resources\SeekIcon.bmp" />
+    <Content Include="Resources\UnlockedIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.105.2</Version>
     </PackageReference>

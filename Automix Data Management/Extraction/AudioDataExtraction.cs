@@ -14,6 +14,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using static Automix_Data_Management.Utils;
+using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -21,6 +23,8 @@ namespace Automix_Data_Management.Extraction
     {
         private DirectoryInfo _tempDirectory;
         public static int ExploredTracks;
+
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public AudioDataExtraction()
         {
@@ -69,28 +73,28 @@ namespace Automix_Data_Management.Extraction
                     }
                 });
             }
-            catch (OperationCanceledException)
+            catch (OperationCanceledException oce)
             {
-                //TODO log file
+                log.Info(oce.Message, oce);
             }
         }
 
         private void InitExecConfiguration()
         {
-            var tempPath = Path.GetTempPath() + "AutomixSoftware";
-
-            if (!Directory.Exists(tempPath))
-            {
-                _tempDirectory = Directory.CreateDirectory(tempPath);
-            }
-            else
-            {
-                Directory.Delete(tempPath, true);
-                _tempDirectory = Directory.CreateDirectory(tempPath);
-            }
+            var tempPath = GetTempDir();
 
             try
             {
+                if (!Directory.Exists(tempPath))
+                {
+                    _tempDirectory = Directory.CreateDirectory(tempPath);
+                }
+                else
+                {
+                    Directory.Delete(tempPath, true);
+                    _tempDirectory = Directory.CreateDirectory(tempPath);
+                }
+
                 var profileName = _tempDirectory.FullName + "\\profile.yaml";
                 var sw = new StreamWriter(profileName);
                 sw.Write("outputFormat: json\noutputFrames: 0\nlowlevel:\n    stats: [ \"mean\" ]\n    mfccStats: [\"mean\"]"
@@ -99,6 +103,7 @@ namespace Automix_Data_Management.Extraction
             }
             catch (IOException e)
             {
+                log.Debug(e.Message, e);
                 Debug.WriteLine(e.Message);
             }
         }

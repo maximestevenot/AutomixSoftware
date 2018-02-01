@@ -12,6 +12,8 @@ using System.IO;
 using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using static Automix_Data_Management.Utils;
+using log4net;
 
 namespace Automix_Data_Management.Exportation
 {
@@ -26,12 +28,15 @@ namespace Automix_Data_Management.Exportation
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
 
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public SmoothMix() : this(10) { }
 
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
-            _tempDirPath = Path.GetTempPath() + "AutomixSoftware/";
+            // TODO: directory choosen by the user
+            _tempDirPath = GetTempDir();
             _tempFileList = new List<string>();
         }
 
@@ -146,6 +151,7 @@ namespace Automix_Data_Management.Exportation
                 }
                 catch (IOException e)
                 {
+                    log.Debug(e.Message, e);
                     System.Diagnostics.Debug.WriteLine(e.Message);
                 }
             }
