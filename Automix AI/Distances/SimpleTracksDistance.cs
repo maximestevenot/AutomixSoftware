@@ -32,13 +32,11 @@ namespace Automix_AI.Distances
             catch(Exception ex) when (ex is ArgumentNullException || ex is FormatException)
             {
                 log.Info("Unable to compute distance between tracks { 0} and { 1}\n\n" + track1.Name + track2.Name, ex);
-                Console.WriteLine("Unable to compute distance between tracks {0} and {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
             catch(OverflowException oe)
             {
                 log.Info("One of the following song is too big : {0} or {1}\n\n" + track1.Name + track2.Name, oe);
-                Console.WriteLine("One of the following song is too big : {0} or {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
 

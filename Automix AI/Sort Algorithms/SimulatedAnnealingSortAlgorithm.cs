@@ -119,6 +119,10 @@ namespace Automix_AI.Sort_Algorithms
                         for (var j = 0; j < temperature; j++)
                         {
                             tempCollection = CreatePotentialTrackCollection(tempCollection);
+                            if (j > tempCollection.Count)
+                            {
+                                break;
+                            }
                         }
 
                         var dE = ComputeIndividualEvaluation(tempCollection) - ComputeIndividualEvaluation(result);
