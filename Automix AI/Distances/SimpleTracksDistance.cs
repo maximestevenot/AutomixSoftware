@@ -27,7 +27,6 @@ namespace Automix_AI.Distances
                 haveSameScale = track1.Key.Contains("d") == track2.Key.Contains("d");
                 digitalTrack1Key = double.Parse(track1.Key.Remove(track1.Key.Length - 1));
                 digitalTrack2Key = double.Parse(track2.Key.Remove(track2.Key.Length - 1));
-
             }
             catch(Exception ex) when (ex is ArgumentNullException || ex is FormatException)
             {
@@ -42,8 +41,8 @@ namespace Automix_AI.Distances
                 return -1;
             }
 
-            var distance = Math.Abs(track2.Bpm - track1.Bpm) * 1200 * BpmPriority;
-            distance += Math.Abs(track1.Danceability - track2.Danceability) * 10 * DanceabilityPriority;
+            var distance = Math.Abs(track2.Bpm - track1.Bpm) * BpmPriority;
+            distance += Math.Abs(track1.Danceability - track2.Danceability) * DanceabilityPriority;
 
             if (haveSameScale)
             {
@@ -52,13 +51,13 @@ namespace Automix_AI.Distances
                 {
                     absoluteDistance = 12 - absoluteDistance;
                 }
-                distance += absoluteDistance * 20 * KeyNumberPriority;
+                distance += absoluteDistance * KeyNumberPriority;
             }
             else
             {
                 if (Math.Abs(digitalTrack1Key - digitalTrack2Key) > 0.0001)
                 {
-                    distance += 2000 * KeyTonalityPriority;
+                    distance += KeyTonalityPriority;
                 }
 
             }

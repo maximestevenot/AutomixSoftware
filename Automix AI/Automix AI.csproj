@@ -58,8 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Distances\IProfileDistance.cs" />
     <Compile Include="Distances\ITracksDistance.cs" />
     <Compile Include="Distances\AbstractTracksDistance.cs" />
+    <Compile Include="Distances\BasicProfile.cs" />
     <Compile Include="Distances\SimpleTracksDistance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sort Algorithms\AbstractSortAlgorithm.cs" />
