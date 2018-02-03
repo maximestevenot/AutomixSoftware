@@ -191,7 +191,7 @@ namespace Automix_AI.Sort_Algorithms
             var track1 = random.Next(current.Count);
             var track2 = random.Next(current.Count);
 
-            if (current[track1].isFixed || current[track2].isFixed)
+            if (current[track1].IsFixed || current[track2].IsFixed)
             {
                 return current;
             }

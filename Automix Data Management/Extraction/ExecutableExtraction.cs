@@ -65,6 +65,11 @@ namespace Automix_Data_Management.Extraction
 
             ExtractFadesFromExecResult(backgroundWorker, cancellationTokenSource, track);
 
+            if (backgroundWorker.CancellationPending || track.FadeOuts == null)
+            {
+                return;
+            }
+
             var dataBase = new DataBase();
             dataBase.AddTrack(track);
 

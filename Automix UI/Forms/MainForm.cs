@@ -20,7 +20,8 @@ using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
-
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Automix_UI.Forms
 {
@@ -38,6 +39,8 @@ namespace Automix_UI.Forms
 
         private static readonly string DefaultExportPath = Path.GetTempPath() + "AutomixSoftware\\preview.mp3";
         private string _exportPath;
+
+        private readonly ImageList _lockpadImageList;
 
         private enum InsertionModeType
         {
@@ -66,6 +69,13 @@ namespace Automix_UI.Forms
             _playerbutton.Image = new Bitmap(Resources.PlayIcon, 70, 70);
             _skipButton.Image = new Bitmap(Resources.SeekIcon, 70, 70);
             _reloadButton.Image = new Bitmap(Resources.ReloadIcon, 60, 60);
+
+            _lockpadImageList = new ImageList();
+            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
+            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
+
+            _musicListView.StateImageList = _lockpadImageList;
+
             _cancelMenuItem.Enabled = false;
             _generateButton.Enabled = false;
             _sortButton.Enabled = false;
@@ -74,15 +84,26 @@ namespace Automix_UI.Forms
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
             _toolStripProgressBar.Visible = false;
+
+            _deleteTrackToolStrip.ShortcutKeys = Keys.Delete;
+            _musicListView.ItemSelectionChanged += OnMusicListViewItemSelectionChanged;
         }
+
 
         public void Update(TrackCollection trackCollection)
         {
             _musicListView.Items.Clear();
             foreach (var track in trackCollection)
             {
-                var lvitem = new ListViewItem(track.Name);
+                var lvitem = new ListViewItem(track.Name)
+                {
+                    UseItemStyleForSubItems = true
+                };
                 _musicListView.Items.Add(lvitem);
+                if (track.IsFixed)
+                {
+                    lvitem.Checked = true;
+                }
                 lvitem.SubItems.Add(track.DisplayDuration());
                 lvitem.SubItems.Add(track.Bpm.ToString());
                 lvitem.SubItems.Add(track.Key);
@@ -400,6 +421,16 @@ namespace Automix_UI.Forms
 
         private void OnTrackContextMenuOpening(object sender, CancelEventArgs e)
         {
+            ToogleToolStripItems();
+        }
+
+        private void OnMusicListViewItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs listViewItemSelectionChangedEventArgs)
+        {
+            ToogleToolStripItems();
+        }
+
+        private void ToogleToolStripItems()
+        {
             if (!AnOperationRunning && _musicListView.SelectedItems.Count != 0)
             {
                 _deleteTrackToolStrip.Enabled = true;
@@ -430,6 +461,12 @@ namespace Automix_UI.Forms
         {
             var selection = (from ListViewItem item in _musicListView.SelectedItems select item.Text).ToList();
             _presenter.LockTracks(selection);
+            foreach (ListViewItem lockedItem in _musicListView.SelectedItems)
+            {
+                lockedItem.Checked = !lockedItem.Checked;
+                lockedItem.ImageIndex = (_musicListView.Items[0].ImageIndex + 1) % 2;
+            }
+            _musicListView.Invalidate();
         }
 
         private void OnButtonEnabledChanged(object sender, EventArgs e)
@@ -447,6 +484,7 @@ namespace Automix_UI.Forms
 
         private void OnSortButtonClick(object sender, EventArgs e)
         {
+            UpdateLockedTracks();
             SortTrackList();
         }
 
@@ -456,6 +494,26 @@ namespace Automix_UI.Forms
             _sortBackgroundWorker.RunWorkerAsync();
         }
 
+        private void UpdateLockedTracks()
+        {
+            List<String> checkedTracks = new List<String>();
+            List<String> uncheckedTracks = new List<String>();
+
+            foreach (ListViewItem item in _musicListView.Items)
+            {
+                if (item.Checked)
+                {
+                    checkedTracks.Add(item.Text);
+                }
+                else
+                {
+                    uncheckedTracks.Add(item.Text);
+                }
+            }
+
+            _presenter.LockTracks(checkedTracks);
+            _presenter.UnlockTracks(uncheckedTracks);
+        }
         private void ImportBW_DoWork(object sender, DoWorkEventArgs e)
         {
             var backgroundWorker = (BackgroundWorker)sender;

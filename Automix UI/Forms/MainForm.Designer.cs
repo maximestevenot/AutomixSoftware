@@ -61,6 +61,7 @@
             this._trackContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this._deleteTrackToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this._selectAllToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this._lockTrackToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this._importButton = new System.Windows.Forms.Button();
             this._generateButton = new System.Windows.Forms.Button();
             this._logo = new System.Windows.Forms.PictureBox();
@@ -77,7 +78,6 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this._lockTrackToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -272,6 +272,7 @@
             this._musicListView.AllowDrop = true;
             this._musicListView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this._musicListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this._musicListView.CheckBoxes = true;
             this._musicListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.collectionName,
             this.collectionDuration,
@@ -281,8 +282,8 @@
             this._musicListView.ForeColor = System.Drawing.Color.White;
             this._musicListView.FullRowSelect = true;
             this._musicListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this._musicListView.LabelEdit = true;
             this._musicListView.Name = "_musicListView";
-            this._musicListView.OwnerDraw = true;
             this._musicListView.UseCompatibleStateImageBehavior = false;
             this._musicListView.View = System.Windows.Forms.View.Details;
             this._musicListView.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.MusicListView_DrawColumnHeader);
@@ -321,8 +322,8 @@
             // 
             // _deleteTrackToolStrip
             // 
-            resources.ApplyResources(this._deleteTrackToolStrip, "_deleteTrackToolStrip");
             this._deleteTrackToolStrip.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this._deleteTrackToolStrip, "_deleteTrackToolStrip");
             this._deleteTrackToolStrip.Name = "_deleteTrackToolStrip";
             this._deleteTrackToolStrip.Click += new System.EventHandler(this.OnDeleteTrackToolStripClick);
             // 
@@ -332,6 +333,13 @@
             this._selectAllToolStrip.Name = "_selectAllToolStrip";
             resources.ApplyResources(this._selectAllToolStrip, "_selectAllToolStrip");
             this._selectAllToolStrip.Click += new System.EventHandler(this.OnSelectAllMenuItemClick);
+            // 
+            // _lockTrackToolStrip
+            // 
+            this._lockTrackToolStrip.ForeColor = System.Drawing.Color.White;
+            this._lockTrackToolStrip.Name = "_lockTrackToolStrip";
+            resources.ApplyResources(this._lockTrackToolStrip, "_lockTrackToolStrip");
+            this._lockTrackToolStrip.Click += new System.EventHandler(this.OnLockTrackToolStripClick);
             // 
             // _importButton
             // 
@@ -483,13 +491,6 @@
             // 
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
-            // 
-            // _lockTrackToolStrip
-            // 
-            resources.ApplyResources(this._lockTrackToolStrip, "_lockTrackToolStrip");
-            this._lockTrackToolStrip.ForeColor = System.Drawing.Color.White;
-            this._lockTrackToolStrip.Name = "_lockTrackToolStrip";
-            this._lockTrackToolStrip.Click += new System.EventHandler(this.OnLockTrackToolStripClick);
             // 
             // MainForm
             // 
