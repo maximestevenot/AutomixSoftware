@@ -21,8 +21,9 @@ namespace Automix_AI.Sort_Algorithms
         private readonly double _beginTemperature;
         private readonly double _decayFactor;
         private readonly int _numberOfIteration;
+        private int nbOfAppliance = 0;
 
-        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 35.0, 0.93, 15) { }
+        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 45.0, 0.93, 75) { }
 
         public SimulatedAnnealingSortAlgorithm(ITracksDistance distance, double stopTemperature, double beginTemperature, double decayFactor, int numberOfIteration) : base(distance)
         {
@@ -95,6 +96,7 @@ namespace Automix_AI.Sort_Algorithms
 
         public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
+            var originalTrackCollection = trackCollection;
             var nbTracks = trackCollection.Count;
             var n = (nbTracks / 2) * (nbTracks / 2);
             var result = trackCollection;
@@ -113,7 +115,16 @@ namespace Automix_AI.Sort_Algorithms
                 {
                     for (var i = 0; i < n; i++)
                     {
-                        var tempCollection = CreatePotentialTrackCollection(result);
+                        TrackCollection tempCollection = CreatePotentialTrackCollection(result);
+                        for (var j = 0; j < temperature; j++)
+                        {
+                            tempCollection = CreatePotentialTrackCollection(tempCollection);
+                            if (j > tempCollection.Count)
+                            {
+                                break;
+                            }
+                        }
+
                         var dE = ComputeIndividualEvaluation(tempCollection) - ComputeIndividualEvaluation(result);
 
                         if (dE < 0)
@@ -138,6 +149,8 @@ namespace Automix_AI.Sort_Algorithms
                 backgroundWorker.ReportProgress(1000 * k / _numberOfIteration);
             }
 
+            System.Console.WriteLine(ComputeIndividualEvaluation(trackCollection));
+            
             return trackCollection;
         }
 
@@ -149,6 +162,27 @@ namespace Automix_AI.Sort_Algorithms
                 result += Distance.Compute(individual[k], individual[k + 1]);
             }
             return result;
+        }
+
+        private static TrackCollection CreateRandomTrackCollection(TrackCollection current)
+        {
+            var random = new Random();
+            List<int> allPos = new List<int>();
+            int index;
+            for (var k = 0; k < current.Count; k++)
+            {
+                allPos.Add(k);
+            }
+
+            var newTrackCollection = new TrackCollection();
+            for (var k = 0; k < current.Count; k++)
+            {
+                index = random.Next(allPos.Count);
+                newTrackCollection.Add(current[allPos[index]]);
+                allPos.RemoveAt(index);
+            }
+
+            return newTrackCollection;
         }
 
         private static TrackCollection CreatePotentialTrackCollection(TrackCollection current)
