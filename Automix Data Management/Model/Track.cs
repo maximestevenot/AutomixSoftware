@@ -113,5 +113,10 @@ namespace Automix_Data_Management.Model
 
             return time / 1000;
         }
+
+        public bool Equals(Track other)
+        {
+            return (this.Name.Equals(other.Name));
+        }
     }
 }

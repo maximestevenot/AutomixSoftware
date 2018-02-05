@@ -81,5 +81,31 @@ namespace Automix_Data_Management.Model
         {
             Sort((t1, t2) => string.Compare(t1.Name, t2.Name, StringComparison.Ordinal));
         }
+
+        public bool Equals(TrackCollection other)
+        {
+            if (this.Count != other.Count) { return false;  }
+            else
+            {
+                for (var k = 0; k < this.Count; k++)
+                {
+                    if ( !(this[k].Equals(other[k])) ) { return false; }
+                }
+                return true;
+            }
+        }
+
+        public int HammingDist(TrackCollection other)
+        {
+            if (this.Count != other.Count) { return -1; }
+
+            var HammingDist = 0;
+
+            for (var k = 0; k < this.Count; k++)
+            {
+                if (!(this[k].Equals(other[k]))) { HammingDist++; }
+            }
+            return HammingDist;
+        }
     }
 }

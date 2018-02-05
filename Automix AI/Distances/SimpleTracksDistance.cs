@@ -31,17 +31,18 @@ namespace Automix_AI.Distances
             catch(Exception ex) when (ex is ArgumentNullException || ex is FormatException)
             {
                 log.Info("Unable to compute distance between tracks { 0} and { 1}\n\n" + track1.Name + track2.Name, ex);
-                Console.WriteLine("Unable to compute distance between tracks {0} and {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
             catch(OverflowException oe)
             {
                 log.Info("One of the following song is too big : {0} or {1}\n\n" + track1.Name + track2.Name, oe);
-                Console.WriteLine("One of the following song is too big : {0} or {1}\n\n", track1.Name, track2.Name);
                 return -1;
             }
 
             var distance = Math.Abs(track2.Bpm - track1.Bpm) * BpmPriority;
+            var distanceDouble = track2.Bpm < track1.Bpm ? Math.Abs(2 * track2.Bpm - track1.Bpm) * BpmPriority : Math.Abs(track2.Bpm - 2 * track1.Bpm) * BpmPriority;
+
+            distance = distanceDouble < distance ? distanceDouble : distance;
             distance += Math.Abs(track1.Danceability - track2.Danceability) * DanceabilityPriority;
 
             if (haveSameScale)
