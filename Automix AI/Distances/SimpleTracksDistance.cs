@@ -16,6 +16,10 @@ namespace Automix_AI.Distances
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public SimpleTracksDistance(IProfileDistance sortProfile) : base(sortProfile)
+        {
+
+        }
 
         public override double Compute(Track track1, Track track2)
         {

@@ -26,6 +26,7 @@ namespace Automix_UI
     {
         private readonly List<IViewWithTrackCollection> _views;
         private TrackCollection _trackCollection;
+        private IProfileDistance _sortProfile;
 
         private readonly IAudioDataExtraction _dataExtractionEngine;
         private readonly AbstractSortAlgorithm _sortAlgorithm;
@@ -38,8 +39,9 @@ namespace Automix_UI
             _views = new List<IViewWithTrackCollection>();
             _trackCollection = new TrackCollection();
             _dataExtractionEngine = new AudioDataExtractionProxy();
+            _sortProfile = new BasicProfile();
 
-            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance());
+            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(_sortProfile));
         }
 
         public Presenter(IViewWithTrackCollection view) : this()

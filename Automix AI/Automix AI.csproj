@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Distances\TonalityProfile.cs" />
     <Compile Include="Distances\IProfileDistance.cs" />
     <Compile Include="Distances\ITracksDistance.cs" />
     <Compile Include="Distances\AbstractTracksDistance.cs" />
