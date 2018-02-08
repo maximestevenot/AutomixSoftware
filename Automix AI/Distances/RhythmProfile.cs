@@ -8,7 +8,7 @@
 
 namespace Automix_AI.Distances
 {
-    class RhythmProfile : IProfileDistance
+    public class RhythmProfile : IProfileDistance
     {
         public double BpmPriority { get; set; }
         public double KeyNumberPriority { get; set; }

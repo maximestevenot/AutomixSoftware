@@ -8,7 +8,7 @@
 
 namespace Automix_AI.Distances
 {
-    class TonalityProfile : IProfileDistance
+    public class TonalityProfile : IProfileDistance
     {
         public double BpmPriority { get; set; }
         public double KeyNumberPriority { get; set; }
