@@ -87,22 +87,11 @@ namespace Automix_Data_Management.Exportation
             }
             else {
                 startFadeIn = track.FadeIns[1];
-                Console.WriteLine("fade in: " + startFadeIn);
             }
             var fileReader = new Mp3FileReader(track.Path);
-            fileReader.Seek(startFadeIn, SeekOrigin.Begin);
-            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider(), false);
-
-            /*Console.WriteLine(track.Name);
-            for(var i = 0; i < track.FadeIns.Length; i++)
-            {
-                Console.WriteLine("Fade in " + track.FadeIns[i]);
-            }
-            for (var i = 0; i < track.FadeOuts.Length; i++)
-            {
-                Console.WriteLine("Fade out " + track.FadeOuts[i]);
-            }*/
-
+            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
+            fileReader.CurrentTime = startTimeSpan;
+            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
             var fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
             var fadeOutDuration = track.FadeOuts[track.FadeOuts.Length-1] - track.FadeOuts[track.FadeOuts.Length - 2];
@@ -115,7 +104,6 @@ namespace Automix_Data_Management.Exportation
             }
 
             var buffer = new float[bufferSize];
-
             
             var startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
 
@@ -129,7 +117,6 @@ namespace Automix_Data_Management.Exportation
                 buffer = ApplyOverlay(buffer, _savedOverlay);
             }
 
-            //_waveFileWriter.Seek(startFadeIn, SeekOrigin.Begin);
             _waveFileWriter.WriteSamples(buffer, 0, (int)(bufferSize - overlaySize));
             _waveFileWriter.Flush();
 
