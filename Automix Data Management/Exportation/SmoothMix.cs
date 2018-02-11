@@ -90,13 +90,12 @@ namespace Automix_Data_Management.Exportation
             }
             var fileReader = new Mp3FileReader(track.Path);
             var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
-            fileReader.CurrentTime = startTimeSpan;
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
             var fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
             var fadeOutDuration = track.FadeOuts[track.FadeOuts.Length-1] - track.FadeOuts[track.FadeOuts.Length - 2];
-            var bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SamplesPerSecond;
-            var overlaySize = (Math.Max(fadeInDuration, fadeOutDuration)/1000) * SamplesPerSecond;
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration+fadeInDuration-2000)/1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration/1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
