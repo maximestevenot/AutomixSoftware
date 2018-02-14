@@ -78,6 +78,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -165,7 +166,8 @@
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
             this._stopMixToolStripMenuItem,
-            this._chooseTempDirToolStripMenuItem});
+            this._chooseTempDirToolStripMenuItem,
+            this.preferencesToolStripMenuItem});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -492,6 +494,13 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            resources.ApplyResources(this.preferencesToolStripMenuItem, "preferencesToolStripMenuItem");
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.OnPreferencesToolStripMenuItemClick);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -573,5 +582,6 @@
         private System.Windows.Forms.ToolStripMenuItem _importDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _lockTrackToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
     }
 }

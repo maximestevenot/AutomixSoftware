@@ -289,6 +289,8 @@ namespace Automix_UI.Forms
 
         private void OnAboutMenuItemClick(object sender, EventArgs e) => new AboutForm().ShowDialog();
 
+        private void OnPreferencesToolStripMenuItemClick(object sender, EventArgs e) => new ParameterForm().ShowDialog();
+
         private void MusicListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => _lvDrawer.DrawColumnHeader(e);
 
         private void MusicListView_DrawItem(object sender, DrawListViewItemEventArgs e) => _lvDrawer.DrawItem(e);

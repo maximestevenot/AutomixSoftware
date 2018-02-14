@@ -117,9 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="_menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>247, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Database</value>
+  </data>
+  <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
+    <value>Stop Mix</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
+    <value>Choose temporary directory</value>
+  </data>
+  <data name="preferencesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="preferencesToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Preferences...</value>
+  </data>
+  <data name="_optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="_optionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Options</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
   </data>
   <data name="_menuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -149,12 +191,6 @@
   </data>
   <data name="&gt;&gt;_menuStrip.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
   </data>
   <data name="_importMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
@@ -207,18 +243,6 @@
   <data name="_quitMenuItem.Text" xml:space="preserve">
     <value>&amp;Quit</value>
   </data>
-  <data name="_optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="_optionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Options</value>
-  </data>
-  <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
-  </data>
-  <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Database</value>
-  </data>
   <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 22</value>
   </data>
@@ -233,24 +257,6 @@
   </data>
   <data name="_exportDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 22</value>
-  </data>
-  <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
-  </data>
-  <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
-    <value>Stop Mix</value>
-  </data>
-  <data name="_chooseTempDirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
-  </data>
-  <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Choose temporary directory</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
   </data>
   <data name="_aboutCharacteristicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 22</value>
@@ -267,9 +273,9 @@
   <data name="_aboutMenuItem.Text" xml:space="preserve">
     <value>About &amp;application...</value>
   </data>
-  <data name="_statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="_statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>360, 17</value>
-  </data>
+  </metadata>
   <data name="_statusStrip.AccessibleName" xml:space="preserve">
     <value>_statusStrip</value>
   </data>
@@ -333,11 +339,11 @@
   <data name="collectionKey.Width" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
-  <data name="_trackContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="_trackContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1148, 17</value>
-  </data>
+  </metadata>
   <data name="_trackContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 70</value>
+    <value>182, 70</value>
   </data>
   <data name="&gt;&gt;_trackContextMenu.Name" xml:space="preserve">
     <value>_trackContextMenu</value>
@@ -928,7 +934,7 @@
 </value>
   </data>
   <data name="_deleteTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>181, 22</value>
   </data>
   <data name="_deleteTrackToolStrip.Text" xml:space="preserve">
     <value>&amp;Remove</value>
@@ -937,7 +943,7 @@
     <value>Ctrl+A</value>
   </data>
   <data name="_selectAllToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>181, 22</value>
   </data>
   <data name="_selectAllToolStrip.Text" xml:space="preserve">
     <value>Select All</value>
@@ -946,14 +952,14 @@
     <value>Ctrl+L</value>
   </data>
   <data name="_lockTrackToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>181, 22</value>
   </data>
   <data name="_lockTrackToolStrip.Text" xml:space="preserve">
     <value>Lock/Unlock</value>
   </data>
-  <data name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1053, 17</value>
-  </data>
+  </metadata>
   <data name="_importButton.AccessibleName" xml:space="preserve">
     <value>_importButton</value>
   </data>
@@ -1497,15 +1503,18 @@
   <data name="&gt;&gt;_sortButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="_importBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <metadata name="_importBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>474, 17</value>
-  </data>
-  <data name="_sortBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="_sortBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>673, 17</value>
-  </data>
-  <data name="_exportBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="_exportBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>856, 17</value>
-  </data>
+  </metadata>
+  <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1053, 17</value>
+  </metadata>
   <data name="_playerbutton.AccessibleName" xml:space="preserve">
     <value>_playerbutton</value>
   </data>
@@ -1659,21 +1668,33 @@
   <data name="_playerTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="_playerBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  <data name="&gt;&gt;_playerTrackBar.Name" xml:space="preserve">
+    <value>_playerTrackBar</value>
+  </data>
+  <data name="&gt;&gt;_playerTrackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_playerTrackBar.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;_playerTrackBar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="_playerBackgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </data>
-  <data name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>149, 56</value>
-  </data>
-  <data name="_trackBarTimer.TrayLocation" type="System.Drawing.Point, System.Drawing">
+  </metadata>
+  <metadata name="_trackBarTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
-  </data>
-  <data name="$this.Localizable" type="System.Boolean, mscorlib">
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </data>
-  <data name="$this.TrayHeight" type="System.Int32, mscorlib">
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>46</value>
-  </data>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -1999,6 +2020,12 @@
   </data>
   <data name="&gt;&gt;_trackBarTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Name" xml:space="preserve">
+    <value>preferencesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
