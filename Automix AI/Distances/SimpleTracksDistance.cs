@@ -21,6 +21,11 @@ namespace Automix_AI.Distances
 
         }
 
+        public SimpleTracksDistance() : base()
+        {
+
+        }
+
         public override double Compute(Track track1, Track track2)
         {
             bool haveSameScale;
