@@ -6,36 +6,21 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-using Automix_Data_Management.Model;
-
 namespace Automix_AI.Distances
 {
-    public abstract class AbstractTracksDistance : ITracksDistance
+    public class TonalityProfile : IProfileDistance
     {
         public double BpmPriority { get; set; }
         public double KeyNumberPriority { get; set; }
         public double KeyTonalityPriority { get; set; }
         public double DanceabilityPriority { get; set; }
 
-
-        protected AbstractTracksDistance() : this(new BasicProfile())
+        public TonalityProfile()
         {
-
+            BpmPriority = 800;
+            KeyNumberPriority = 35;
+            KeyTonalityPriority = 3000;
+            DanceabilityPriority = 15;
         }
-
-        protected AbstractTracksDistance(IProfileDistance profile)
-        {
-            BpmPriority = profile.BpmPriority;
-            KeyNumberPriority = profile.KeyNumberPriority;
-            KeyTonalityPriority = profile.KeyTonalityPriority;
-            DanceabilityPriority = profile.DanceabilityPriority;
-        }
-
-        public abstract double Compute(Track track1, Track track2);
-
-       
-
-
-
     }
 }

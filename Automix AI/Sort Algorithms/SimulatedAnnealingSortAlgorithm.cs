@@ -21,7 +21,6 @@ namespace Automix_AI.Sort_Algorithms
         private readonly double _beginTemperature;
         private readonly double _decayFactor;
         private readonly int _numberOfIteration;
-        private int nbOfAppliance = 0;
 
         public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 45.0, 0.93, 75) { }
 
