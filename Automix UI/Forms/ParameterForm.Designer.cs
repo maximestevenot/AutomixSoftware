@@ -35,24 +35,27 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.BPMbar = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.BPMbar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -65,7 +68,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(634, 264);
+            this.tabControl1.Size = new System.Drawing.Size(634, 234);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -75,7 +78,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(626, 238);
+            this.tabPage1.Size = new System.Drawing.Size(626, 208);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
             // 
@@ -135,19 +138,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(626, 238);
+            this.tabPage2.Size = new System.Drawing.Size(626, 208);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
-            // 
-            // BPMbar
-            // 
-            this.BPMbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.BPMbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BPMbar.Location = new System.Drawing.Point(96, 23);
-            this.BPMbar.Maximum = 100;
-            this.BPMbar.Name = "BPMbar";
-            this.BPMbar.Size = new System.Drawing.Size(521, 46);
-            this.BPMbar.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -171,38 +164,82 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 232);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 202);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 155);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 47);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Danceability";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 110);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 45);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Key Number";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 45);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Key Tonality";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // trackBar1
             // 
             this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(96, 75);
+            this.trackBar1.Location = new System.Drawing.Point(96, 68);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(521, 47);
+            this.trackBar1.Size = new System.Drawing.Size(521, 39);
             this.trackBar1.TabIndex = 1;
             // 
             // trackBar2
             // 
             this.trackBar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar2.Location = new System.Drawing.Point(96, 128);
+            this.trackBar2.Location = new System.Drawing.Point(96, 113);
             this.trackBar2.Maximum = 100;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(521, 47);
+            this.trackBar2.Size = new System.Drawing.Size(521, 39);
             this.trackBar2.TabIndex = 2;
             // 
             // trackBar3
             // 
             this.trackBar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.trackBar3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar3.Location = new System.Drawing.Point(96, 181);
+            this.trackBar3.Location = new System.Drawing.Point(96, 158);
             this.trackBar3.Maximum = 100;
             this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(521, 48);
+            this.trackBar3.Size = new System.Drawing.Size(521, 41);
             this.trackBar3.TabIndex = 3;
+            // 
+            // BPMbar
+            // 
+            this.BPMbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.BPMbar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BPMbar.Location = new System.Drawing.Point(96, 23);
+            this.BPMbar.Maximum = 100;
+            this.BPMbar.Name = "BPMbar";
+            this.BPMbar.Size = new System.Drawing.Size(521, 39);
+            this.BPMbar.TabIndex = 0;
             // 
             // label1
             // 
@@ -210,43 +247,37 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 52);
+            this.label1.Size = new System.Drawing.Size(87, 45);
             this.label1.TabIndex = 4;
             this.label1.Text = "BPM";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
+            // button1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 53);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Key Tonality";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Location = new System.Drawing.Point(490, 253);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Apply";
+            this.button1.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // button2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 53);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Key Number";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button2.Location = new System.Drawing.Point(571, 253);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "OK";
+            this.button2.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // button3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 178);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 54);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Danceability";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button3.Location = new System.Drawing.Point(12, 252);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Cancel";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // ParameterForm
             // 
@@ -254,6 +285,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.ClientSize = new System.Drawing.Size(658, 288);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.MaximumSize = new System.Drawing.Size(740, 580);
             this.MinimumSize = new System.Drawing.Size(370, 290);
@@ -264,12 +298,12 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -292,5 +326,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
