@@ -24,7 +24,10 @@ namespace Automix_UI.Forms
         public ParameterForm(MainForm mainForm)
         {
             InitializeComponent();
+            _normalRadioButton.Checked = true;
+            _actualProfile = new BasicProfile();
             _mainForm = mainForm;
+            UpdateAdvancedUI();
         }
 
         private void OnCancelButtonClick(object sender, EventArgs e)
@@ -34,8 +37,7 @@ namespace Automix_UI.Forms
 
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
-            
-            _applyButton.Enabled = false;
+            _mainForm.UpdateSortProfile(_actualProfile);
         }
 
         private void OnOKButtonClick(object sender, EventArgs e)
@@ -52,16 +54,28 @@ namespace Automix_UI.Forms
         private void OnNormalProfileClick(object sender, EventArgs e)
         {
             _actualProfile = new BasicProfile();
+            UpdateAdvancedUI();
         }
 
         private void OnTonalityProfileClick(object sender, EventArgs e)
         {
             _actualProfile = new TonalityProfile();
+            UpdateAdvancedUI();
         }
 
         private void OnRhythmProfileClick(object sender, EventArgs e)
         {
             _actualProfile = new RhythmProfile();
+            UpdateAdvancedUI();
+        }
+
+        private void UpdateAdvancedUI()
+        {
+            _bpmBar.Value = (int) ((_actualProfile.BpmPriority) / 120);
+            _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
+            _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
+            _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
+
         }
     }
 }
