@@ -14,6 +14,7 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using static Automix_Data_Management.Utils;
 using log4net;
+using System;
 
 namespace Automix_Data_Management.Exportation
 {
@@ -35,7 +36,6 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
-            // TODO: directory choosen by the user
             _tempDirPath = GetTempDir();
             _tempFileList = new List<string>();
         }
@@ -57,6 +57,7 @@ namespace Automix_Data_Management.Exportation
                     break;
                 }
 
+                //TODO : change this after transition start
                 tempFileDuration += track.Duration;
                 if (tempFileDuration > 2700000) //45 minutes
                 {
@@ -80,11 +81,53 @@ namespace Automix_Data_Management.Exportation
 
         private void FadeInOut(Track track)
         {
-            var fileReader = new Mp3FileReader(track.Path);
-            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider(), false);
+            // TESTS
+            Console.WriteLine(track.Name + " of " + track.Duration + "ms");
+            Console.WriteLine("Fade ins x" + track.FadeIns.Length);
+            for (var i = 0; i < track.FadeIns.Length; i++)
+            {
+                Console.WriteLine(track.FadeIns[i]);
+            }
+            Console.WriteLine("Fade outs " + track.FadeOuts.Length);
+            for (var i = 0; i < track.FadeOuts.Length; i++)
+            {
+                Console.WriteLine(track.FadeOuts[i]);
+            }
+            // FIN TESTS
+            
+            int nbFadeIns = track.FadeIns.Length;
+            int nbFadeOuts = track.FadeOuts.Length;
 
-            var bufferSize = fileReader.Length / 2 - (long)track.GetLastFadeOutDuration() * SamplesPerSecond;
-            var overlaySize = TransitionDuration * SamplesPerSecond;
+            int startFadeIn = 0;
+            if (nbFadeIns > 1)
+            {
+                if (track.FadeIns[0] != 0)
+                {
+                    startFadeIn = track.FadeIns[0];
+                }
+                else
+                {
+                    startFadeIn = track.FadeIns[1];
+                }
+            }
+            
+            var fileReader = new Mp3FileReader(track.Path);
+            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
+            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
+
+            var fadeInDuration = 10*1000;
+            if (nbFadeIns > 1)
+            {
+                fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
+            }
+
+            var fadeOutDuration = 10*1000;
+            if (nbFadeOuts > 1)
+            {
+                fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
+            }
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration+fadeInDuration-2000)/1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration/1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -93,9 +136,15 @@ namespace Automix_Data_Management.Exportation
 
             var buffer = new float[bufferSize];
 
-            fade.BeginFadeIn(TransitionDuration * 1000);
+            int startFadeOut = track.Duration - 10*1000;
+            if (nbFadeOuts > 1)
+            {
+                startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
+            }
+
+            fade.BeginFadeIn(fadeInDuration);
             fade.Read(buffer, 0, (int)(bufferSize - overlaySize));
-            fade.BeginFadeOut(TransitionDuration * 1000);
+            fade.BeginFadeOut(fadeOutDuration);
             fade.Read(buffer, (int)(bufferSize - overlaySize), overlaySize);
 
             if (_savedOverlay != null)
