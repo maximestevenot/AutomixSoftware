@@ -29,7 +29,7 @@ namespace Automix_UI
         private IProfileDistance _sortProfile;
 
         private readonly IAudioDataExtraction _dataExtractionEngine;
-        private readonly AbstractSortAlgorithm _sortAlgorithm;
+        private AbstractSortAlgorithm _sortAlgorithm;
         private Mp3Player _mp3Player;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

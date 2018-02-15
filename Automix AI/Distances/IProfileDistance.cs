@@ -10,9 +10,9 @@ namespace Automix_AI.Distances
 {
     public interface IProfileDistance 
     {
-        double BpmPriority { get; set; }
-        double KeyNumberPriority { get; set; }
-        double KeyTonalityPriority { get; set; }
-        double DanceabilityPriority { get; set; }
+        double BpmPriority { get; }
+        double KeyNumberPriority { get; }
+        double KeyTonalityPriority { get; }
+        double DanceabilityPriority { get; }
     }
 }

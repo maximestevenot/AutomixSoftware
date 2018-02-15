@@ -127,26 +127,44 @@
   <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
   </data>
+  <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 22</value>
+  </data>
+  <data name="_clearDBMenuItem.Text" xml:space="preserve">
+    <value>&amp;Clear</value>
+  </data>
+  <data name="_importDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 22</value>
+  </data>
+  <data name="_importDBMenuItem.Text" xml:space="preserve">
+    <value>Import a database</value>
+  </data>
+  <data name="_exportDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 22</value>
+  </data>
+  <data name="_exportDBMenuItem.Text" xml:space="preserve">
+    <value>Export a database</value>
+  </data>
   <data name="_dataBaseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
+    <value>231, 22</value>
   </data>
   <data name="_dataBaseToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Database</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
+    <value>231, 22</value>
   </data>
   <data name="_stopMixToolStripMenuItem.Text" xml:space="preserve">
     <value>Stop Mix</value>
   </data>
   <data name="_chooseTempDirToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
+    <value>231, 22</value>
   </data>
   <data name="_chooseTempDirToolStripMenuItem.Text" xml:space="preserve">
-    <value>Choose temporary directory</value>
+    <value>Choose temporary directory...</value>
   </data>
   <data name="preferencesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 22</value>
+    <value>231, 22</value>
   </data>
   <data name="preferencesToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Preferences...</value>
@@ -242,21 +260,6 @@
   </data>
   <data name="_quitMenuItem.Text" xml:space="preserve">
     <value>&amp;Quit</value>
-  </data>
-  <data name="_clearDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
-  </data>
-  <data name="_clearDBMenuItem.Text" xml:space="preserve">
-    <value>&amp;Clear</value>
-  </data>
-  <data name="_importDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
-  </data>
-  <data name="_importDBMenuItem.Text" xml:space="preserve">
-    <value>Import a database</value>
-  </data>
-  <data name="_exportDBMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 22</value>
   </data>
   <data name="_aboutCharacteristicsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 22</value>
@@ -1901,6 +1904,12 @@
   <data name="&gt;&gt;_chooseTempDirToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Name" xml:space="preserve">
+    <value>preferencesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;preferencesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;_helpToolStripMenuItem.Name" xml:space="preserve">
     <value>_helpToolStripMenuItem</value>
   </data>
@@ -2020,12 +2029,6 @@
   </data>
   <data name="&gt;&gt;_trackBarTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;preferencesToolStripMenuItem.Name" xml:space="preserve">
-    <value>preferencesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;preferencesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this._tonalityRadioButton = new System.Windows.Forms.RadioButton();
+            this._rhythmRadioButton = new System.Windows.Forms.RadioButton();
+            this._normalRadioButton = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
-            this.trackBar3 = new System.Windows.Forms.TrackBar();
-            this.BPMbar = new System.Windows.Forms.TrackBar();
+            this._keyTonalityBar = new System.Windows.Forms.TrackBar();
+            this._keyNumberBar = new System.Windows.Forms.TrackBar();
+            this._danceabilityBar = new System.Windows.Forms.TrackBar();
+            this._bpmBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this._applyButton = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._keyTonalityBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -68,7 +70,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(634, 234);
+            this.tabControl1.Size = new System.Drawing.Size(634, 237);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -78,7 +80,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(626, 208);
+            this.tabPage1.Size = new System.Drawing.Size(626, 211);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
             // 
@@ -86,9 +88,9 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this._tonalityRadioButton);
+            this.groupBox1.Controls.Add(this._rhythmRadioButton);
+            this.groupBox1.Controls.Add(this._normalRadioButton);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
@@ -97,38 +99,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sort Profile";
             // 
-            // radioButton3
+            // _tonalityRadioButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(6, 42);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(62, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Tonality";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this._tonalityRadioButton.AutoSize = true;
+            this._tonalityRadioButton.Location = new System.Drawing.Point(6, 42);
+            this._tonalityRadioButton.Name = "_tonalityRadioButton";
+            this._tonalityRadioButton.Size = new System.Drawing.Size(62, 17);
+            this._tonalityRadioButton.TabIndex = 2;
+            this._tonalityRadioButton.TabStop = true;
+            this._tonalityRadioButton.Text = "Tonality";
+            this.toolTip1.SetToolTip(this._tonalityRadioButton, "Click to set a tonality oriented profile");
+            this._tonalityRadioButton.UseVisualStyleBackColor = true;
+            this._tonalityRadioButton.Click += new System.EventHandler(this.OnTonalityProfileClick);
             // 
-            // radioButton2
+            // _rhythmRadioButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(6, 65);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(61, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Rhythm";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this._rhythmRadioButton.AutoSize = true;
+            this._rhythmRadioButton.Location = new System.Drawing.Point(6, 65);
+            this._rhythmRadioButton.Name = "_rhythmRadioButton";
+            this._rhythmRadioButton.Size = new System.Drawing.Size(61, 17);
+            this._rhythmRadioButton.TabIndex = 1;
+            this._rhythmRadioButton.TabStop = true;
+            this._rhythmRadioButton.Text = "Rhythm";
+            this.toolTip1.SetToolTip(this._rhythmRadioButton, "Click to set a rhythm oriented profile");
+            this._rhythmRadioButton.UseVisualStyleBackColor = true;
+            this._rhythmRadioButton.Click += new System.EventHandler(this.OnRhythmProfileClick);
             // 
-            // radioButton1
+            // _normalRadioButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(6, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(58, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Normal";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this._normalRadioButton.AutoSize = true;
+            this._normalRadioButton.Location = new System.Drawing.Point(6, 19);
+            this._normalRadioButton.Name = "_normalRadioButton";
+            this._normalRadioButton.Size = new System.Drawing.Size(58, 17);
+            this._normalRadioButton.TabIndex = 0;
+            this._normalRadioButton.TabStop = true;
+            this._normalRadioButton.Text = "Normal";
+            this.toolTip1.SetToolTip(this._normalRadioButton, "Click to set a balanced ratio between tonality and rhythm");
+            this._normalRadioButton.UseVisualStyleBackColor = true;
+            this._normalRadioButton.Click += new System.EventHandler(this.OnNormalProfileClick);
             // 
             // tabPage2
             // 
@@ -138,7 +146,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(626, 208);
+            this.tabPage2.Size = new System.Drawing.Size(626, 211);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
             // 
@@ -150,10 +158,10 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.trackBar1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.trackBar2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.trackBar3, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.BPMbar, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this._keyTonalityBar, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this._keyNumberBar, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this._danceabilityBar, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this._bpmBar, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -165,14 +173,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 202);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(620, 205);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 155);
+            this.label4.Location = new System.Drawing.Point(3, 158);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 47);
             this.label4.TabIndex = 7;
@@ -183,9 +191,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 110);
+            this.label3.Location = new System.Drawing.Point(3, 112);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 45);
+            this.label3.Size = new System.Drawing.Size(87, 46);
             this.label3.TabIndex = 6;
             this.label3.Text = "Key Number";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -194,52 +202,52 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 65);
+            this.label2.Location = new System.Drawing.Point(3, 66);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 45);
+            this.label2.Size = new System.Drawing.Size(87, 46);
             this.label2.TabIndex = 5;
             this.label2.Text = "Key Tonality";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // trackBar1
+            // _keyTonalityBar
             // 
-            this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.trackBar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar1.Location = new System.Drawing.Point(96, 68);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(521, 39);
-            this.trackBar1.TabIndex = 1;
+            this._keyTonalityBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._keyTonalityBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._keyTonalityBar.Location = new System.Drawing.Point(96, 69);
+            this._keyTonalityBar.Maximum = 20;
+            this._keyTonalityBar.Name = "_keyTonalityBar";
+            this._keyTonalityBar.Size = new System.Drawing.Size(521, 40);
+            this._keyTonalityBar.TabIndex = 1;
             // 
-            // trackBar2
+            // _keyNumberBar
             // 
-            this.trackBar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.trackBar2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar2.Location = new System.Drawing.Point(96, 113);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(521, 39);
-            this.trackBar2.TabIndex = 2;
+            this._keyNumberBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._keyNumberBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._keyNumberBar.Location = new System.Drawing.Point(96, 115);
+            this._keyNumberBar.Maximum = 20;
+            this._keyNumberBar.Name = "_keyNumberBar";
+            this._keyNumberBar.Size = new System.Drawing.Size(521, 40);
+            this._keyNumberBar.TabIndex = 2;
             // 
-            // trackBar3
+            // _danceabilityBar
             // 
-            this.trackBar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.trackBar3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBar3.Location = new System.Drawing.Point(96, 158);
-            this.trackBar3.Maximum = 100;
-            this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(521, 41);
-            this.trackBar3.TabIndex = 3;
+            this._danceabilityBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._danceabilityBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._danceabilityBar.Location = new System.Drawing.Point(96, 161);
+            this._danceabilityBar.Maximum = 20;
+            this._danceabilityBar.Name = "_danceabilityBar";
+            this._danceabilityBar.Size = new System.Drawing.Size(521, 41);
+            this._danceabilityBar.TabIndex = 3;
             // 
-            // BPMbar
+            // _bpmBar
             // 
-            this.BPMbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.BPMbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BPMbar.Location = new System.Drawing.Point(96, 23);
-            this.BPMbar.Maximum = 100;
-            this.BPMbar.Name = "BPMbar";
-            this.BPMbar.Size = new System.Drawing.Size(521, 39);
-            this.BPMbar.TabIndex = 0;
+            this._bpmBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this._bpmBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._bpmBar.Location = new System.Drawing.Point(96, 23);
+            this._bpmBar.Maximum = 20;
+            this._bpmBar.Name = "_bpmBar";
+            this._bpmBar.Size = new System.Drawing.Size(521, 40);
+            this._bpmBar.TabIndex = 0;
             // 
             // label1
             // 
@@ -247,52 +255,59 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 45);
+            this.label1.Size = new System.Drawing.Size(87, 46);
             this.label1.TabIndex = 4;
             this.label1.Text = "BPM";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // button1
+            // _applyButton
             // 
-            this.button1.Location = new System.Drawing.Point(490, 253);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Apply";
-            this.button1.UseVisualStyleBackColor = true;
+            this._applyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._applyButton.Location = new System.Drawing.Point(490, 256);
+            this._applyButton.Name = "_applyButton";
+            this._applyButton.Size = new System.Drawing.Size(75, 23);
+            this._applyButton.TabIndex = 1;
+            this._applyButton.Text = "Apply";
+            this._applyButton.UseVisualStyleBackColor = true;
+            this._applyButton.Click += new System.EventHandler(this.OnApplyButtonClick);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(571, 253);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(571, 256);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.OnOKButtonClick);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 252);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button3.Location = new System.Drawing.Point(12, 255);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
             // ParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
-            this.ClientSize = new System.Drawing.Size(658, 288);
+            this.ClientSize = new System.Drawing.Size(658, 291);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this._applyButton);
             this.Controls.Add(this.tabControl1);
             this.MaximumSize = new System.Drawing.Size(740, 580);
-            this.MinimumSize = new System.Drawing.Size(370, 290);
+            this.MinimumSize = new System.Drawing.Size(640, 330);
             this.Name = "ParameterForm";
             this.Text = "ParameterForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormCloseButtonClick);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -300,10 +315,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BPMbar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._keyTonalityBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -314,20 +329,21 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.TrackBar BPMbar;
+        private System.Windows.Forms.RadioButton _tonalityRadioButton;
+        private System.Windows.Forms.RadioButton _rhythmRadioButton;
+        private System.Windows.Forms.RadioButton _normalRadioButton;
+        private System.Windows.Forms.TrackBar _bpmBar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TrackBar trackBar2;
-        private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.TrackBar _keyTonalityBar;
+        private System.Windows.Forms.TrackBar _keyNumberBar;
+        private System.Windows.Forms.TrackBar _danceabilityBar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button _applyButton;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

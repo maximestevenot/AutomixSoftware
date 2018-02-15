@@ -46,6 +46,7 @@
             this._exportDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._chooseTempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -78,7 +79,6 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -216,6 +216,13 @@
             this._chooseTempDirToolStripMenuItem.Name = "_chooseTempDirToolStripMenuItem";
             resources.ApplyResources(this._chooseTempDirToolStripMenuItem, "_chooseTempDirToolStripMenuItem");
             this._chooseTempDirToolStripMenuItem.Click += new System.EventHandler(this.OnChooseTempDirButtonClick);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            resources.ApplyResources(this.preferencesToolStripMenuItem, "preferencesToolStripMenuItem");
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.OnPreferencesToolStripMenuItemClick);
             // 
             // _helpToolStripMenuItem
             // 
@@ -493,13 +500,6 @@
             // 
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
-            // 
-            // preferencesToolStripMenuItem
-            // 
-            this.preferencesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            resources.ApplyResources(this.preferencesToolStripMenuItem, "preferencesToolStripMenuItem");
-            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.OnPreferencesToolStripMenuItemClick);
             // 
             // MainForm
             // 
