@@ -16,9 +16,7 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using static Automix_Data_Management.Utils;
 using log4net;
-using System;
 
 namespace Automix_UI
 {
@@ -168,11 +166,6 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                /*_trackCollection[2].IsFixed = true;
-                _trackCollection[6].IsFixed = true;
-                _trackCollection[8].IsFixed = true;*/
-
-                //_trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
                 _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
             }
             return _trackCollection;

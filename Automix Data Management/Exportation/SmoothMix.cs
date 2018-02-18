@@ -20,6 +20,8 @@ namespace Automix_Data_Management.Exportation
 {
     public class SmoothMix : IExportation
     {
+        public static int DEFAULTTRANSITIONDURATION = 10;
+
         public int TransitionDuration { get; set; }
 
         private static readonly int SamplesPerSecond = AudioIO.TempWaveFormat.AverageBytesPerSecond / 4;
@@ -31,7 +33,7 @@ namespace Automix_Data_Management.Exportation
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SmoothMix() : this(10) { }
+        public SmoothMix() : this(DEFAULTTRANSITIONDURATION) { }
 
         public SmoothMix(int transitionDuration)
         {
@@ -81,20 +83,6 @@ namespace Automix_Data_Management.Exportation
 
         private void FadeInOut(Track track)
         {
-            // TESTS
-            Console.WriteLine(track.Name + " of " + track.Duration + "ms");
-            Console.WriteLine("Fade ins x" + track.FadeIns.Length);
-            for (var i = 0; i < track.FadeIns.Length; i++)
-            {
-                Console.WriteLine(track.FadeIns[i]);
-            }
-            Console.WriteLine("Fade outs " + track.FadeOuts.Length);
-            for (var i = 0; i < track.FadeOuts.Length; i++)
-            {
-                Console.WriteLine(track.FadeOuts[i]);
-            }
-            // FIN TESTS
-            
             int nbFadeIns = track.FadeIns.Length;
             int nbFadeOuts = track.FadeOuts.Length;
 
@@ -110,24 +98,24 @@ namespace Automix_Data_Management.Exportation
                     startFadeIn = track.FadeIns[1];
                 }
             }
-            
+
             var fileReader = new Mp3FileReader(track.Path);
             var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
-            var fadeInDuration = 10*1000;
+            var fadeInDuration = TransitionDuration * 1000;
             if (nbFadeIns > 1)
             {
                 fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
             }
 
-            var fadeOutDuration = 10*1000;
+            var fadeOutDuration = TransitionDuration * 1000;
             if (nbFadeOuts > 1)
             {
                 fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
             }
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration+fadeInDuration-2000)/1000) * SamplesPerSecond;
-            var overlaySize = (fadeOutDuration/1000) * SamplesPerSecond;
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration + fadeInDuration - 2000) / 1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration / 1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -136,7 +124,7 @@ namespace Automix_Data_Management.Exportation
 
             var buffer = new float[bufferSize];
 
-            int startFadeOut = track.Duration - 10*1000;
+            int startFadeOut = track.Duration - TransitionDuration * 1000;
             if (nbFadeOuts > 1)
             {
                 startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
