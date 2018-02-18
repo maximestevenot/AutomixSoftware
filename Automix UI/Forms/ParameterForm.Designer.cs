@@ -49,6 +49,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.TransitionDuration = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -58,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TransitionDuration)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -76,6 +79,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.tabPage1.Controls.Add(this.TransitionDuration);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -293,6 +298,29 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(6, 115);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(136, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Duration of the transitions : ";
+            // 
+            // TransitionDuration
+            // 
+            this.TransitionDuration.Location = new System.Drawing.Point(148, 113);
+            this.TransitionDuration.Name = "TransitionDuration";
+            this.TransitionDuration.Size = new System.Drawing.Size(120, 20);
+            this.TransitionDuration.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.TransitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
+            this.TransitionDuration.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
             // ParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,6 +338,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormCloseButtonClick);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -319,6 +348,7 @@
             ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TransitionDuration)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -345,5 +375,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.NumericUpDown TransitionDuration;
+        private System.Windows.Forms.Label label5;
     }
 }
