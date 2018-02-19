@@ -21,8 +21,11 @@ namespace Automix_Data_Management.Exportation
     public class SmoothMix : IExportation
     {
         public static int DEFAULTTRANSITIONDURATION = 10;
+        public static int DEFAULTMIXDURATION = 60000;
 
         public int TransitionDuration { get; set; }
+
+        public int MixDuration { get; set; }
 
         private static readonly int SamplesPerSecond = AudioIO.TempWaveFormat.AverageBytesPerSecond / 4;
         private readonly string _tempDirPath;
@@ -38,6 +41,7 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
+            MixDuration = SmoothMix.DEFAULTMIXDURATION;
             _tempDirPath = GetTempDir();
             _tempFileList = new List<string>();
         }

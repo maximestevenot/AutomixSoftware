@@ -95,17 +95,14 @@ namespace Automix_Data_Management.Model
             }
         }
 
-        public int HammingDist(TrackCollection other)
+        public int computeTotalTime()
         {
-            if (this.Count != other.Count) { return -1; }
-
-            var HammingDist = 0;
-
-            for (var k = 0; k < this.Count; k++)
+            var sum = 0;
+            for (var i = 0; i < this.Count; i++)
             {
-                if (!(this[k].Equals(other[k]))) { HammingDist++; }
+                sum += this[i].Duration;
             }
-            return HammingDist;
+            return sum;
         }
     }
 }
