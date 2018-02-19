@@ -54,6 +54,8 @@ namespace Automix_Data_Management.Exportation
 
             var count = 1;
             var tempFileDuration = 0;
+            
+            collection = truncateCollection(collection);
 
             foreach (var track in collection)
             {
@@ -84,6 +86,30 @@ namespace Automix_Data_Management.Exportation
             }
             DeleteTempFiles();
         }
+
+        private TrackCollection truncateCollection( TrackCollection collection )
+        {
+            var newCollection = new TrackCollection();
+            var index = 0;
+            var mixDuration = MixDuration;
+
+            while ( mixDuration > collection[index].Duration && index <= collection.Count)
+            {
+                mixDuration -= collection[index].Duration;
+                newCollection.Add(collection[index]);
+                index++;
+            }
+
+            if (index <= collection.Count)
+            {
+                var lastTrack = collection[index];
+                lastTrack.Duration = mixDuration;
+                newCollection.Add(lastTrack);
+            }
+
+            return newCollection;
+        }
+
 
         private void FadeInOut(Track track)
         {
