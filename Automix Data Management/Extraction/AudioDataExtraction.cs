@@ -81,7 +81,7 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
-            var tempPath = GetTempDir();
+            var tempPath = settingsAccessor.GetTempDir();
 
             try
             {
