@@ -39,6 +39,8 @@ namespace Automix_UI.Forms
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
             _mainForm.UpdateSortProfile(_actualProfile);
+            SetSetting(Settings.mixDuration, _mixDuration.Value.ToString());
+            SetSetting(Settings.transitionDuration, _transitionDuration.Value.ToString());
         }
 
         private void OnOKButtonClick(object sender, EventArgs e)
@@ -76,18 +78,6 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
             _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
-
-        }
-
-        private void TransitionDuration_ValueChanged(object sender, EventArgs e)
-        {
-            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.transitionDuration, "10");
-        }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.mixDuration, "45");
-
         }
     }
 }

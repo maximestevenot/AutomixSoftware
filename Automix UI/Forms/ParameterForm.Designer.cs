@@ -1,4 +1,6 @@
-﻿namespace Automix_UI.Forms
+﻿using static Automix_Data_Management.SettingsAccessor;
+
+namespace Automix_UI.Forms
 {
     partial class ParameterForm
     {
@@ -31,7 +33,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.TransitionDuration = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this._mixDuration = new System.Windows.Forms.NumericUpDown();
+            this._transitionDuration = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this._tonalityRadioButton = new System.Windows.Forms.RadioButton();
@@ -51,11 +55,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TransitionDuration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._mixDuration)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._transitionDuration)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -63,7 +66,6 @@
             ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,8 +85,8 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.numericUpDown1);
-            this.tabPage1.Controls.Add(this.TransitionDuration);
+            this.tabPage1.Controls.Add(this._mixDuration);
+            this.tabPage1.Controls.Add(this._transitionDuration);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -94,19 +96,41 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
             // 
-            // TransitionDuration
+            // label6
             // 
-            this.TransitionDuration.Location = new System.Drawing.Point(148, 113);
-            this.TransitionDuration.Name = "TransitionDuration";
-            this.TransitionDuration.Size = new System.Drawing.Size(120, 20);
-            this.TransitionDuration.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.TransitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
-            this.TransitionDuration.Value = new decimal(new int[] {
-            10,
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(6, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Duration of the mix : ";
+            // 
+            // _mixDuration
+            // 
+            this._mixDuration.Location = new System.Drawing.Point(148, 167);
+            this._mixDuration.Name = "_mixDuration";
+            this._mixDuration.Size = new System.Drawing.Size(120, 20);
+            this._mixDuration.TabIndex = 3;
+            this.toolTip1.SetToolTip(this._mixDuration, "Recommended transition durations stands between 5 and 30 seconds");
+            this._mixDuration.Value = new decimal(new int[] {
+            int.Parse(GetSetting(Settings.mixDuration)),
             0,
             0,
             0});
-            this.TransitionDuration.ValueChanged += new System.EventHandler(this.TransitionDuration_ValueChanged);
+            // 
+            // _transitionDuration
+            // 
+            this._transitionDuration.Location = new System.Drawing.Point(148, 113);
+            this._transitionDuration.Name = "_transitionDuration";
+            this._transitionDuration.Size = new System.Drawing.Size(120, 20);
+            this._transitionDuration.TabIndex = 2;
+            this.toolTip1.SetToolTip(this._transitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
+            this._transitionDuration.Value = new decimal(new int[] {
+            int.Parse(GetSetting(Settings.transitionDuration)),
+            0,
+            0,
+            0});
             // 
             // label5
             // 
@@ -327,30 +351,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(148, 167);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.numericUpDown1, "Recommended transition durations stands between 5 and 30 seconds");
-            this.numericUpDown1.Value = new decimal(new int[] {
-            45,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(6, 169);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Duration of the mix : ";
-            // 
             // ParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,7 +369,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TransitionDuration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._mixDuration)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._transitionDuration)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -379,7 +380,6 @@
             ((System.ComponentModel.ISupportInitialize)(this._keyNumberBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._danceabilityBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._bpmBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -406,9 +406,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.NumericUpDown TransitionDuration;
+        private System.Windows.Forms.NumericUpDown _transitionDuration;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown _mixDuration;
     }
 }
