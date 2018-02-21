@@ -17,14 +17,25 @@ namespace Automix_AI.Distances
         public double KeyTonalityPriority { get; set; }
         public double DanceabilityPriority { get; set; }
 
-        protected AbstractTracksDistance()
+
+        protected AbstractTracksDistance() : this(new BasicProfile())
         {
-            BpmPriority = 1;
-            KeyNumberPriority = 1;
-            KeyTonalityPriority = 1;
-            DanceabilityPriority = 1;
+
+        }
+
+        protected AbstractTracksDistance(IProfileDistance profile)
+        {
+            BpmPriority = profile.BpmPriority;
+            KeyNumberPriority = profile.KeyNumberPriority;
+            KeyTonalityPriority = profile.KeyTonalityPriority;
+            DanceabilityPriority = profile.DanceabilityPriority;
         }
 
         public abstract double Compute(Track track1, Track track2);
+
+       
+
+
+
     }
 }

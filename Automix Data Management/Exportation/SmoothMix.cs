@@ -101,13 +101,13 @@ namespace Automix_Data_Management.Exportation
             var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
-            var fadeInDuration = TransitionDuration*1000;
+            var fadeInDuration = 10*1000;
             if (nbFadeIns > 1)
             {
                 fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
             }
 
-            var fadeOutDuration = TransitionDuration*1000;
+            var fadeOutDuration = 10*1000;
             if (nbFadeOuts > 1)
             {
                 fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
@@ -122,7 +122,7 @@ namespace Automix_Data_Management.Exportation
 
             var buffer = new float[bufferSize];
 
-            int startFadeOut = track.Duration - TransitionDuration*1000;
+            int startFadeOut = track.Duration - 10*1000;
             if (nbFadeOuts > 1)
             {
                 startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
