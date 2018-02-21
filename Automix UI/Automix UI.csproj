@@ -100,7 +100,8 @@
     <Compile Include="Forms\UserDocForm.Designer.cs">
       <DependentUpon>UserDocForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenter.cs" />
+    <Compile Include="Presenters\ParameterPresenter.cs" />
+    <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\TextResources.Designer.cs">
       <AutoGen>True</AutoGen>

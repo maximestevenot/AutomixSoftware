@@ -16,9 +16,6 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using static Automix_Data_Management.Utils;
-using log4net;
-using System;
 
 namespace Automix_UI
 {

@@ -1,5 +1,4 @@
-﻿using System.IO;
-using static Automix_Data_Management.Utils;
+﻿using static Automix_Data_Management.Utils;
 
 namespace Automix_Data_Management_Tests
 {

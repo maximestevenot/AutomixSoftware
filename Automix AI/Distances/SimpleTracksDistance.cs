@@ -8,7 +8,6 @@
 
 using System;
 using Automix_Data_Management.Model;
-using static Automix_Data_Management.Utils;
 
 namespace Automix_AI.Distances
 {
