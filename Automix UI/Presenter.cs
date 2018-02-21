@@ -235,5 +235,10 @@ namespace Automix_UI
             _sortProfile = profileChosen;
             _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(profileChosen));
         }
+
+        public void UpdateTransitionDuration(int transitionDuration)
+        {
+            Utils.setTransitionDuration(transitionDuration);
+        }
     }
 }

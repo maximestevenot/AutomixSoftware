@@ -38,6 +38,7 @@ namespace Automix_UI.Forms
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
             _mainForm.UpdateSortProfile(_actualProfile);
+            _mainForm.UpdateTransitionDuration((int)_transitionDuration.Value);
         }
 
         private void OnOKButtonClick(object sender, EventArgs e)

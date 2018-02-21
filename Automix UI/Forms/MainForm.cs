@@ -819,5 +819,10 @@ namespace Automix_UI.Forms
         {
             _presenter.UpdateSortAlgorithm(profileChosen);
         }
+
+        public void UpdateTransitionDuration(int duration)
+        {
+            _presenter.UpdateTransitionDuration(duration);
+        }
     }
 }
