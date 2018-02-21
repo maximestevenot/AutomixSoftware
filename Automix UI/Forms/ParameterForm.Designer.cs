@@ -1,6 +1,4 @@
-﻿using static Automix_Data_Management.SettingsAccessor;
-
-namespace Automix_UI.Forms
+﻿namespace Automix_UI.Forms
 {
     partial class ParameterForm
     {
@@ -114,7 +112,7 @@ namespace Automix_UI.Forms
             this._mixDuration.TabIndex = 3;
             this.toolTip1.SetToolTip(this._mixDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._mixDuration.Value = new decimal(new int[] {
-            int.Parse(GetSetting(Settings.mixDuration)),
+            int.Parse(Automix_Data_Management.SettingsAccessor.GetSetting(Automix_Data_Management.SettingsAccessor.Settings.mixDuration)),
             0,
             0,
             0});
@@ -127,7 +125,7 @@ namespace Automix_UI.Forms
             this._transitionDuration.TabIndex = 2;
             this.toolTip1.SetToolTip(this._transitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._transitionDuration.Value = new decimal(new int[] {
-            int.Parse(GetSetting(Settings.transitionDuration)),
+            int.Parse(Automix_Data_Management.SettingsAccessor.GetSetting(Automix_Data_Management.SettingsAccessor.Settings.transitionDuration)),
             0,
             0,
             0});
