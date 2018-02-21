@@ -46,7 +46,6 @@ namespace Automix_UI.Forms
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
             ApplyPriorities();
-            _mainForm.UpdateSortProfile(_resultProfile);
         }
 
         private void OnOkButtonClick(object sender, EventArgs e)

@@ -236,11 +236,5 @@ namespace Automix_UI
             }
             Notify();
         }
-
-        public void UpdateSortAlgorithm(IProfileDistance profileChosen)
-        {
-            _sortProfile = profileChosen;
-            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(profileChosen));
-        }
     }
 }

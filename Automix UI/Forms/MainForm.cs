@@ -15,14 +15,12 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using static Automix_Data_Management.Utils;
 using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Automix_AI.Distances;
 
 namespace Automix_UI.Forms
 {
@@ -813,11 +811,6 @@ namespace Automix_UI.Forms
             string msg = rm.GetString("ExportDbMessage");
             string legend = rm.GetString("ExportDbLegend");
             MessageBox.Show(msg, legend);
-        }
-
-        public void UpdateSortProfile(IProfileDistance profileChosen)
-        {
-            _presenter.UpdateSortAlgorithm(profileChosen);
         }
     }
 }
