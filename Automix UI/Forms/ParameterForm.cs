@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Automix_Data_Management.SettingsAccessor;
 
 namespace Automix_UI.Forms
 {
@@ -75,6 +76,17 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
             _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
+
+        }
+
+        private void TransitionDuration_ValueChanged(object sender, EventArgs e)
+        {
+            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.transitionDuration, "10");
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.mixDuration, "45");
 
         }
     }

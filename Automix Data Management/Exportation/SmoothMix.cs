@@ -42,7 +42,7 @@ namespace Automix_Data_Management.Exportation
         {
             TransitionDuration = transitionDuration;
             MixDuration = SmoothMix.DEFAULTMIXDURATION;
-            _tempDirPath = settingsAccessor.GetTempDir();
+            _tempDirPath = SettingsAccessor.GetTempDir();
             _tempFileList = new List<string>();
         }
 

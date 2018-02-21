@@ -116,194 +116,78 @@ namespace Automix_Data_Management
             return openKeyString;
         }
 
-        public static class settingsAccessor {
-            private static XmlWriter OpenOrCreateConfigFile()
+        private static XmlWriter OpenOrCreateConfigFile()
+        {
+            if (!Directory.Exists(_dir))
+            {
+                Directory.CreateDirectory(_dir);
+            }
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
+
+            return writer;
+        }
+
+        public static string GetTempDir()
+        {
+            string path;
+            try
             {
                 if (!Directory.Exists(_dir))
                 {
                     Directory.CreateDirectory(_dir);
                 }
-
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-                XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
-
-                return writer;
-            }
-
-            public static string GetTempDir()
-            {
-                string path;
-                try
+                XmlReader reader = XmlReader.Create(_dir + "\\config.xml");
+                if (reader.ReadToDescendant("tempDir"))
                 {
-                    if (!Directory.Exists(_dir))
+                    if (reader.NodeType == XmlNodeType.Element)
                     {
-                        Directory.CreateDirectory(_dir);
-                    }
-                    XmlReader reader = XmlReader.Create(_dir + "\\config.xml");
-                    if (reader.ReadToDescendant("tempDir"))
-                    {
-                        if (reader.NodeType == XmlNodeType.Element)
-                        {
-                            path = reader.ReadElementContentAsString() + "\\";
-                        }
-                        else
-                        {
-                            //TODO throw BadFormattedConfigFileException
-                            path = "Unexpected node type\n";
-                        }
+                        path = reader.ReadElementContentAsString() + "\\";
                     }
                     else
                     {
-                        SetTempDir(Path.GetTempPath() + "AutomixSoftware");
-                        path = Path.GetTempPath() + "AutomixSoftware";
+                        //TODO throw BadFormattedConfigFileException
+                        path = "Unexpected node type\n";
                     }
-
-                    reader.Close();
                 }
-                catch (Exception e) when (e is SecurityException || e is FileNotFoundException)
+                else
                 {
-                    path = Path.GetTempPath() + "AutomixSoftware";
                     SetTempDir(Path.GetTempPath() + "AutomixSoftware");
-                }
-                catch (Exception e) when (e is FormatException || e is InvalidCastException)
-                {
-                    //TODO throw BadFormattedConfigFileException
-                    path = "Unexpected node type\n";
+                    path = Path.GetTempPath() + "AutomixSoftware";
                 }
 
-                return path;
+                reader.Close();
             }
-
-            public static void SetTempDir(string path)
+            catch (Exception e) when (e is SecurityException || e is FileNotFoundException)
             {
-                path += "\\AutomixSoftware";
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-
-                XmlWriter writer = OpenOrCreateConfigFile();
-                writer.WriteStartElement("configuration");
-                writer.WriteElementString("tempDir", path);
-                writer.WriteEndElement();
-                writer.Flush();
-                writer.Close();
+                path = Path.GetTempPath() + "AutomixSoftware";
+                SetTempDir(Path.GetTempPath() + "AutomixSoftware");
             }
-
-            public static int getTransitionDuration()
+            catch (Exception e) when (e is FormatException || e is InvalidCastException)
             {
-                int transitionDuration;
-                try
-                {
-                    if (!Directory.Exists(_dir))
-                    {
-                        Directory.CreateDirectory(_dir);
-                    }
-                    XmlReader reader = XmlReader.Create(_dir + "\\config.xml");
-                    if (reader.ReadToDescendant("transitionDuration"))
-                    {
-                        if (reader.NodeType == XmlNodeType.Element)
-                        {
-                            transitionDuration = reader.ReadElementContentAsInt();
-                        }
-                        else
-                        {
-                            //TODO throw BadFormattedConfigFileException
-                            transitionDuration = -1;
-                        }
-                    }
-                    else
-                    {
-                        transitionDuration = -1;
-                    }
-
-                    reader.Close();
-                }
-                catch (Exception e) when (e is SecurityException || e is FileNotFoundException)
-                {
-                    transitionDuration = -1;
-                }
-                catch (Exception e) when (e is FormatException || e is InvalidCastException)
-                {
-                    //TODO throw BadFormattedConfigFileException
-                    transitionDuration = -1;
-                }
-
-                if (transitionDuration == -1)
-                {
-                    setTransitionDuration(SmoothMix.DEFAULTTRANSITIONDURATION);
-                }
-
-                return transitionDuration;
+                //TODO throw BadFormattedConfigFileException
+                path = "Unexpected node type\n";
             }
 
-            public static int getMixDuration()
+            return path;
+        }
+
+        public static void SetTempDir(string path)
+        {
+            path += "\\AutomixSoftware";
+            if (!Directory.Exists(path))
             {
-                int mixDuration;
-                try
-                {
-                    if (!Directory.Exists(_dir))
-                    {
-                        Directory.CreateDirectory(_dir);
-                    }
-                    XmlReader reader = XmlReader.Create(_dir + "\\config.xml");
-                    if (reader.ReadToDescendant("mixDuration"))
-                    {
-                        if (reader.NodeType == XmlNodeType.Element)
-                        {
-                            mixDuration = reader.ReadElementContentAsInt();
-                        }
-                        else
-                        {
-                            //TODO throw BadFormattedConfigFileException
-                            mixDuration = -1;
-                        }
-                    }
-                    else
-                    {
-                        mixDuration = -1;
-                    }
-
-                    reader.Close();
-                }
-                catch (Exception e) when (e is SecurityException || e is FileNotFoundException)
-                {
-                    mixDuration = -1;
-                }
-                catch (Exception e) when (e is FormatException || e is InvalidCastException)
-                {
-                    //TODO throw BadFormattedConfigFileException
-                    mixDuration = -1;
-                }
-
-                if (mixDuration == -1)
-                {
-                    setTransitionDuration(SmoothMix.DEFAULTMIXDURATION);
-                }
-
-                return mixDuration;
+                Directory.CreateDirectory(path);
             }
 
-            public static void setTransitionDuration(int transitionDuration)
-            {
-                XmlWriter writer = OpenOrCreateConfigFile();
-                writer.WriteStartElement("parameters");
-                writer.WriteElementString("transitionDuration", transitionDuration.ToString());
-                writer.WriteEndElement();
-                writer.Flush();
-                writer.Close();
-            }
-
-            public static void setMixDuration(int mixDuration)
-            {
-                XmlWriter writer = OpenOrCreateConfigFile();
-                writer.WriteStartElement("parameters");
-                writer.WriteElementString("mixDuration", mixDuration.ToString());
-                writer.WriteEndElement();
-                writer.Flush();
-                writer.Close();
-            }
+            XmlWriter writer = OpenOrCreateConfigFile();
+            writer.WriteStartElement("configuration");
+            writer.WriteElementString("tempDir", path);
+            writer.WriteEndElement();
+            writer.Flush();
+            writer.Close();
         }
     }
 }

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Audio Playing\Mp3Player.cs" />
     <Compile Include="AudioIO.cs" />
+    <Compile Include="SettingsAccessor.cs" />
     <Compile Include="Exportation\IExportation.cs" />
     <Compile Include="Exportation\SmoothMix.cs" />
     <Compile Include="Extraction\AudioDataExtraction.cs" />
