@@ -101,20 +101,27 @@ namespace Automix_Data_Management
 
             if (!File.Exists(_dir + "\\config.xml"))
             {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-                XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
-                writer.WriteStartElement("configuration");
-                writer.WriteElementString("tempDir", _dir);
-                writer.WriteEndElement();
-                writer.Flush();
-                writer.Close();
+                CreateDefaultConfigFile();
             }
 
             XmlDocument file = new XmlDocument();
             file.Load(_dir + "\\config.xml");
 
             return file;
+        }
+
+        private static void CreateDefaultConfigFile()
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
+            writer.WriteStartElement("configuration");
+            writer.WriteElementString("tempDir", _dir);
+            writer.WriteElementString("transitionDuration", "10");
+            writer.WriteElementString("mixDuration", "45");
+            writer.WriteEndElement();
+            writer.Flush();
+            writer.Close();
         }
     }
 }

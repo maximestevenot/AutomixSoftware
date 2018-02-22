@@ -55,7 +55,7 @@ namespace Automix_Data_Management.Exportation
             var count = 1;
             var tempFileDuration = 0;
             
-            collection = truncateCollection(collection);
+            //collection = truncateCollection(collection);
 
             foreach (var track in collection)
             {
