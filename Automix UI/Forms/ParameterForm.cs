@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static Automix_Data_Management.SettingsAccessor;
+using Automix_Data_Management.Model;
 
 namespace Automix_UI.Forms
 {
-    public partial class ParameterForm : Form
+    public partial class ParameterForm : Form, IViewWithParameters
     {
         private IProfileDistance _actualProfile;
         private MainForm _mainForm;
@@ -39,9 +39,7 @@ namespace Automix_UI.Forms
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
             _mainForm.UpdateSortProfile(_actualProfile);
-            SetSetting(Settings.mixDuration, _mixDuration.Value.ToString());
-            SetSetting(Settings.transitionDuration, _transitionDuration.Value.ToString());
-        }
+     }
 
         private void OnOKButtonClick(object sender, EventArgs e)
         {
@@ -78,6 +76,11 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
             _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
+        }
+
+        public void LoadParameters(Parameters param)
+        {
+            throw new NotImplementedException();
         }
     }
 }
