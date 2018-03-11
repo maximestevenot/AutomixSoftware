@@ -34,7 +34,7 @@ namespace Automix_UI
             UpdateViews();
         }
 
-        public void Save()
+        public void SaveParameters()
         {
             _parameters.Save();
         }

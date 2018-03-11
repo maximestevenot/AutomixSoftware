@@ -116,7 +116,6 @@
             0,
             0,
             0});
-            this._mixDuration.ValueChanged += new System.EventHandler(this.OnValueChangedMixDuration);
             // 
             // _transitionDuration
             // 
@@ -130,7 +129,6 @@
             0,
             0,
             0});
-            this._transitionDuration.ValueChanged += new System.EventHandler(this.OnValueChangedTransitionDuration);
             // 
             // label5
             // 

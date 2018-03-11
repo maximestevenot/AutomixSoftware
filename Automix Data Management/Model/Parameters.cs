@@ -22,9 +22,9 @@ namespace Automix_Data_Management.Model
             KeyTonalityPriority = GetSetting(Settings.keyTonalityPriority);
             DanceabilityPriority = GetSetting(Settings.danceabilityPriority);
         }
+
         public void Save()
         {
-            System.Console.WriteLine("HELLO");
             SetSetting(Settings.tempDir, TempDir);
             SetSetting(Settings.transitionDuration, TransitionDuration);
             SetSetting(Settings.mixDuration, MixDuration);

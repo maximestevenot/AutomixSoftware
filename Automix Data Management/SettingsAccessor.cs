@@ -138,8 +138,11 @@ namespace Automix_Data_Management
 
         private static void CreateDefaultConfigFile()
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                Indent = true
+            };
+
             XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
             writer.WriteStartElement("configuration");
             writer.WriteElementString("tempDir", _dir);

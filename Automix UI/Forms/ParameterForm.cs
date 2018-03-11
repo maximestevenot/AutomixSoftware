@@ -36,13 +36,24 @@ namespace Automix_UI.Forms
         }
 
         private void OnApplyButtonClick(object sender, EventArgs e)
-        {
-            _presenter.Save();
+        {          
             _mainForm.UpdateSortProfile(new BasicProfile());
         }
 
         private void OnOKButtonClick(object sender, EventArgs e)
         {
+            _presenter.SetMixDuration(_mixDuration.Value);
+            _presenter.SetTransitionDuration(_transitionDuration.Value);
+
+            ManualProfile toSave = new ManualProfile();
+            toSave.UpdateBpmPriority(_bpmBar.Value);
+            toSave.UpdateDanceabilityPriority(_danceabilityBar.Value);
+            toSave.UpdateKeyNumberPriority(_keyNumberBar.Value);
+            toSave.UpdateKeyTonalityPriority(_keyTonalityBar.Value);
+     
+            _presenter.SetProfile(toSave);
+
+            _presenter.SaveParameters();
             OnApplyButtonClick(sender, e);
             Hide();
         }
@@ -75,16 +86,6 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int)(Int32.Parse(param.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
             _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
-        }
-
-        private void OnValueChangedTransitionDuration(object sender, EventArgs e)
-        {
-            _presenter.SetTransitionDuration(_transitionDuration.Value);
-        }
-
-        private void OnValueChangedMixDuration(object sender, EventArgs e)
-        {
-            _presenter.SetMixDuration(_mixDuration.Value);
         }
     }
 }
