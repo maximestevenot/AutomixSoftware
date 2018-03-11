@@ -9,16 +9,15 @@ namespace Automix_Data_Management.Model
 {
     public class Parameters
     {
-        private string TempDir { get; set; }
-        private string TransitionDuration { get; set; }
-        private string MixDuration { get; set; }
-
+        public string TempDir { get; set; }
+        public string TransitionDuration { get; set; }
+        public string MixDuration { get; set; }
+       
         public Parameters ()
         {
             TempDir = GetSetting(Settings.tempDir);
             TransitionDuration = GetSetting(Settings.transitionDuration);
             MixDuration = GetSetting(Settings.mixDuration);
-
         }
 
         ~Parameters()

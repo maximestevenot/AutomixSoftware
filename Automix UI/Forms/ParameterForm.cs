@@ -17,6 +17,8 @@ namespace Automix_UI.Forms
         private IProfileDistance _actualProfile;
         private MainForm _mainForm;
 
+        private readonly PresenterParameter _presenter;
+
         private int _bpmPriority;
         private int _keyTonalityPriority;
         private int _keyNumberPriority;
@@ -26,9 +28,10 @@ namespace Automix_UI.Forms
         {
             InitializeComponent();
             _normalRadioButton.Checked = true;
+            _presenter = new PresenterParameter(this);
             _actualProfile = new BasicProfile();
+            _presenter.setProfile(_actualProfile);  
             _mainForm = mainForm;
-            UpdateAdvancedUI();
         }
 
         private void OnCancelButtonClick(object sender, EventArgs e)
@@ -54,33 +57,32 @@ namespace Automix_UI.Forms
 
         private void OnNormalProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new BasicProfile();
-            UpdateAdvancedUI();
+            _presenter.setProfile(new BasicProfile());  
         }
 
         private void OnTonalityProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new TonalityProfile();
-            UpdateAdvancedUI();
+            _presenter.setProfile(new TonalityProfile());
         }
 
         private void OnRhythmProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new RhythmProfile();
-            UpdateAdvancedUI();
+            _presenter.setProfile(new RhythmProfile());
         }
 
         private void UpdateAdvancedUI()
         {
-            _bpmBar.Value = (int) ((_actualProfile.BpmPriority) / 120);
-            _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
-            _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
-            _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
         }
 
         public void LoadParameters(Parameters param)
         {
-            throw new NotImplementedException();
+            _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
+            _mixDuration.Value = Int32.Parse(param.MixDuration);
+            _bpmBar.Value = (int)((_actualProfile.BpmPriority) / 120);
+            _keyTonalityBar.Value = (int)((_actualProfile.KeyTonalityPriority) / 200);
+            _keyNumberBar.Value = (int)((_actualProfile.KeyNumberPriority) / 2);
+            _danceabilityBar.Value = (int)_actualProfile.DanceabilityPriority;
+
         }
     }
 }
