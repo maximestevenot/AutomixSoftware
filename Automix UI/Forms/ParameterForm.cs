@@ -14,7 +14,6 @@ namespace Automix_UI.Forms
 {
     public partial class ParameterForm : Form, IViewWithParameters
     {
-        private MainForm _mainForm;
         private readonly PresenterParameter _presenter;
 
         public ParameterForm()
@@ -25,8 +24,8 @@ namespace Automix_UI.Forms
         }
 
         public ParameterForm(MainForm mainForm) : this()
-        { 
-            _mainForm = mainForm;
+        {
+            _presenter.SetMainForm(mainForm);
             _presenter.UpdateViews();
         }
 
@@ -37,7 +36,7 @@ namespace Automix_UI.Forms
 
         private void OnApplyButtonClick(object sender, EventArgs e)
         {          
-            _mainForm.UpdateSortProfile(new BasicProfile());
+            _presenter.UpdateSortProfile();
         }
 
         private void OnOKButtonClick(object sender, EventArgs e)
