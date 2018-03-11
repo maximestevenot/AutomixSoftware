@@ -112,10 +112,11 @@
             this._mixDuration.TabIndex = 3;
             this.toolTip1.SetToolTip(this._mixDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._mixDuration.Value = new decimal(new int[] {
-            int.Parse(Automix_Data_Management.SettingsAccessor.GetSetting(Automix_Data_Management.SettingsAccessor.Settings.mixDuration)),
+            30,
             0,
             0,
             0});
+            this._mixDuration.ValueChanged += new System.EventHandler(this.OnValueChangedMixDuration);
             // 
             // _transitionDuration
             // 
@@ -125,10 +126,11 @@
             this._transitionDuration.TabIndex = 2;
             this.toolTip1.SetToolTip(this._transitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._transitionDuration.Value = new decimal(new int[] {
-            int.Parse(Automix_Data_Management.SettingsAccessor.GetSetting(Automix_Data_Management.SettingsAccessor.Settings.transitionDuration)),
+            10,
             0,
             0,
             0});
+            this._transitionDuration.ValueChanged += new System.EventHandler(this.OnValueChangedTransitionDuration);
             // 
             // label5
             // 

@@ -12,8 +12,6 @@ namespace Automix_UI
     {
         private readonly List<IViewWithParameters> _views;
         private Parameters _parameters;
-        private IProfileDistance _sortProfile;
-
 
         public PresenterParameter()
         {
@@ -26,14 +24,37 @@ namespace Automix_UI
             _views.Add(view);
         }
 
-        public void setProfile(IProfileDistance profile)
+        public void SetProfile(IProfileDistance profile)
         {
-            _sortProfile = profile;
+            _parameters.BpmPriority = profile.BpmPriority.ToString();
+            _parameters.KeyNumberPriority = profile.KeyNumberPriority.ToString();
+            _parameters.KeyTonalityPriority = profile.KeyTonalityPriority.ToString();
+            _parameters.DanceabilityPriority = profile.DanceabilityPriority.ToString();
+
+            UpdateViews();
+        }
+
+        public void Save()
+        {
+            _parameters.Save();
+        }
+
+        internal void SetTransitionDuration(decimal value)
+        {
+            _parameters.TransitionDuration = value.ToString();
+        }
+
+        internal void SetMixDuration(decimal value)
+        {
+            _parameters.MixDuration = value.ToString();
+        }
+
+        public void UpdateViews()
+        {
             foreach (IViewWithParameters view in _views)
             {
                 view.LoadParameters(_parameters);
             }
         }
-
     }
 }

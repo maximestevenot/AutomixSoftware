@@ -26,7 +26,11 @@ namespace Automix_Data_Management
         {
             tempDir = 0,
             transitionDuration = 1,
-            mixDuration = 2
+            mixDuration = 2,
+            bpmPriority = 3,
+            keyTonalityPriority = 4,
+            keyNumberPriority = 5,
+            danceabilityPriority = 6
         }
 
         public static void SetSetting(Settings setting, String param)
@@ -48,6 +52,18 @@ namespace Automix_Data_Management
                 case Settings.mixDuration:
                     MakeSettlement("mixDuration", param);
                     break;
+                case Settings.bpmPriority:
+                    MakeSettlement("bpmP", param);
+                    break;
+                case Settings.keyNumberPriority:
+                    MakeSettlement("keyNumberP", param);
+                    break;
+                case Settings.keyTonalityPriority:
+                    MakeSettlement("keyTonalityP", param);
+                    break;
+                case Settings.danceabilityPriority:
+                    MakeSettlement("danceabilityP", param);
+                    break;
             }
         }
 
@@ -66,6 +82,18 @@ namespace Automix_Data_Management
                     return node.InnerText;
                 case Settings.mixDuration:
                     node = configFile.DocumentElement.SelectSingleNode("mixDuration");
+                    return node.InnerText;
+                case Settings.bpmPriority:
+                    node = configFile.DocumentElement.SelectSingleNode("bpmP");
+                    return node.InnerText;
+                case Settings.keyNumberPriority:
+                    node = configFile.DocumentElement.SelectSingleNode("keyNumberP");
+                    return node.InnerText;
+                case Settings.keyTonalityPriority:
+                    node = configFile.DocumentElement.SelectSingleNode("keyTonalityP");
+                    return node.InnerText;
+                case Settings.danceabilityPriority:
+                    node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
                     return node.InnerText;
                 default:
                     return "Setting Not Found";
@@ -116,7 +144,11 @@ namespace Automix_Data_Management
             writer.WriteStartElement("configuration");
             writer.WriteElementString("tempDir", _dir);
             writer.WriteElementString("transitionDuration", "10");
-            writer.WriteElementString("mixDuration", "45");
+            writer.WriteElementString("mixDuration", "30");
+            writer.WriteElementString("bpmP", "0");
+            writer.WriteElementString("keyNumberP", "0");
+            writer.WriteElementString("keyTonalityP", "0");
+            writer.WriteElementString("danceabilityP", "0");
             writer.WriteEndElement();
             writer.Flush();
             writer.Close();

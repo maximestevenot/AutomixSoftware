@@ -14,24 +14,20 @@ namespace Automix_UI.Forms
 {
     public partial class ParameterForm : Form, IViewWithParameters
     {
-        private IProfileDistance _actualProfile;
         private MainForm _mainForm;
-
         private readonly PresenterParameter _presenter;
 
-        private int _bpmPriority;
-        private int _keyTonalityPriority;
-        private int _keyNumberPriority;
-        private int _danceabilityPriority;
-
-        public ParameterForm(MainForm mainForm)
+        public ParameterForm()
         {
             InitializeComponent();
             _normalRadioButton.Checked = true;
             _presenter = new PresenterParameter(this);
-            _actualProfile = new BasicProfile();
-            _presenter.setProfile(_actualProfile);  
+        }
+
+        public ParameterForm(MainForm mainForm) : this()
+        { 
             _mainForm = mainForm;
+            _presenter.UpdateViews();
         }
 
         private void OnCancelButtonClick(object sender, EventArgs e)
@@ -41,8 +37,9 @@ namespace Automix_UI.Forms
 
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
-            _mainForm.UpdateSortProfile(_actualProfile);
-     }
+            _presenter.Save();
+            _mainForm.UpdateSortProfile(new BasicProfile());
+        }
 
         private void OnOKButtonClick(object sender, EventArgs e)
         {
@@ -57,32 +54,37 @@ namespace Automix_UI.Forms
 
         private void OnNormalProfileClick(object sender, EventArgs e)
         {
-            _presenter.setProfile(new BasicProfile());  
+            _presenter.SetProfile(new BasicProfile());  
         }
 
         private void OnTonalityProfileClick(object sender, EventArgs e)
         {
-            _presenter.setProfile(new TonalityProfile());
+            _presenter.SetProfile(new TonalityProfile());
         }
 
         private void OnRhythmProfileClick(object sender, EventArgs e)
         {
-            _presenter.setProfile(new RhythmProfile());
-        }
-
-        private void UpdateAdvancedUI()
-        {
+            _presenter.SetProfile(new RhythmProfile());
         }
 
         public void LoadParameters(Parameters param)
         {
             _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
             _mixDuration.Value = Int32.Parse(param.MixDuration);
-            _bpmBar.Value = (int)((_actualProfile.BpmPriority) / 120);
-            _keyTonalityBar.Value = (int)((_actualProfile.KeyTonalityPriority) / 200);
-            _keyNumberBar.Value = (int)((_actualProfile.KeyNumberPriority) / 2);
-            _danceabilityBar.Value = (int)_actualProfile.DanceabilityPriority;
+            _bpmBar.Value = (int)(Int32.Parse(param.BpmPriority) / 120);
+            _keyTonalityBar.Value = (int)(Int32.Parse(param.KeyTonalityPriority) / 200);
+            _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
+            _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
+        }
 
+        private void OnValueChangedTransitionDuration(object sender, EventArgs e)
+        {
+            _presenter.SetTransitionDuration(_transitionDuration.Value);
+        }
+
+        private void OnValueChangedMixDuration(object sender, EventArgs e)
+        {
+            _presenter.SetMixDuration(_mixDuration.Value);
         }
     }
 }
