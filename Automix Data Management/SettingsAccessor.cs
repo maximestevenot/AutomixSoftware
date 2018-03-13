@@ -11,6 +11,8 @@ using System.IO;
 using System.Security;
 using System.Xml;
 using Automix_Data_Management.Exportation;
+using Automix_Data_Management.Model;
+using System.Reflection;
 
 namespace Automix_Data_Management
 {
@@ -21,15 +23,32 @@ namespace Automix_Data_Management
     {
         private static string _dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
         private static XmlDocument configFile;
-        
+
+        public class SettingText : Attribute
+        {
+            public string Text { get; private set; }
+
+            public SettingText(string text)
+            {
+                this.Text = text;
+            }
+        }
+
         public enum Settings : int
         {
+            [SettingText("tempDir")]
             tempDir = 0,
+            [SettingText("transitionDuration")]
             transitionDuration = 1,
+            [SettingText("mixDuration")]
             mixDuration = 2,
+            [SettingText("bpmP")]
             bpmPriority = 3,
+            [SettingText("keyTonalityP")]
             keyTonalityPriority = 4,
+            [SettingText("keyNumberP")]
             keyNumberPriority = 5,
+            [SettingText("danceabilityP")]
             danceabilityPriority = 6
         }
 
@@ -44,25 +63,15 @@ namespace Automix_Data_Management
                     {
                         Directory.CreateDirectory(param);
                     }
-                    MakeSettlement("tempDir", param + "\\AutomixSoftware");
+                    MakeSettlement(setting.ToText(), param + "\\AutomixSoftware");
                     break;
                 case Settings.transitionDuration:
-                    MakeSettlement("transitionDuration", param);
-                    break;
                 case Settings.mixDuration:
-                    MakeSettlement("mixDuration", param);
-                    break;
                 case Settings.bpmPriority:
-                    MakeSettlement("bpmP", param);
-                    break;
                 case Settings.keyNumberPriority:
-                    MakeSettlement("keyNumberP", param);
-                    break;
                 case Settings.keyTonalityPriority:
-                    MakeSettlement("keyTonalityP", param);
-                    break;
                 case Settings.danceabilityPriority:
-                    MakeSettlement("danceabilityP", param);
+                    MakeSettlement(setting.ToText(), param);
                     break;
             }
         }
@@ -71,33 +80,8 @@ namespace Automix_Data_Management
         {
             configFile = OpenOrCreateConfigFile();
             XmlNode node;
-
-            switch (setting)
-            {
-                case Settings.tempDir:
-                    node = configFile.DocumentElement.SelectSingleNode("tempDir");
-                    return node.InnerText;
-                case Settings.transitionDuration:
-                    node = configFile.DocumentElement.SelectSingleNode("transitionDuration");
-                    return node.InnerText;
-                case Settings.mixDuration:
-                    node = configFile.DocumentElement.SelectSingleNode("mixDuration");
-                    return node.InnerText;
-                case Settings.bpmPriority:
-                    node = configFile.DocumentElement.SelectSingleNode("bpmP");
-                    return node.InnerText;
-                case Settings.keyNumberPriority:
-                    node = configFile.DocumentElement.SelectSingleNode("keyNumberP");
-                    return node.InnerText;
-                case Settings.keyTonalityPriority:
-                    node = configFile.DocumentElement.SelectSingleNode("keyTonalityP");
-                    return node.InnerText;
-                case Settings.danceabilityPriority:
-                    node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
-                    return node.InnerText;
-                default:
-                    return "Setting Not Found";
-            }
+            node = configFile.DocumentElement.SelectSingleNode(setting.ToText());
+            return node.InnerText;
         }
 
         private static void MakeSettlement(String section, String param)
@@ -156,5 +140,61 @@ namespace Automix_Data_Management
             writer.Flush();
             writer.Close();
         }
+
+        public static Parameters LoadParametersFromFile()
+        {
+            var param = new Parameters();
+
+            configFile = OpenOrCreateConfigFile();
+            XmlNode node;
+
+            node = configFile.DocumentElement.SelectSingleNode("tempDir");
+            param.TempDir = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("transitionDuration");
+            param.TransitionDuration = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("mixDuration");
+            param.MixDuration = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("bpmP");
+            param.BpmPriority = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("keyNumberP");
+            param.KeyNumberPriority = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("keyTonalityP");
+            param.KeyTonalityPriority = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
+            param.DanceabilityPriority = node.InnerText;
+
+            return param;
+        }
+
+        public static void SaveParametersInFile(Parameters param)
+        {
+            configFile = OpenOrCreateConfigFile();
+
+            MakeSettlement(Settings.tempDir.ToText(), param.TempDir);
+            MakeSettlement(Settings.mixDuration.ToText(), param.MixDuration);
+            MakeSettlement(Settings.transitionDuration.ToText(), param.TransitionDuration);
+            MakeSettlement(Settings.bpmPriority.ToText(), param.BpmPriority);
+            MakeSettlement(Settings.keyTonalityPriority.ToText(), param.KeyTonalityPriority);
+            MakeSettlement(Settings.keyNumberPriority.ToText(), param.KeyNumberPriority);
+            MakeSettlement(Settings.danceabilityPriority.ToText(), param.DanceabilityPriority);
+        }
+    }
+}
+
+public static class EnumExtensions
+{
+    public static string ToText(this Enum enumeration)
+    {
+        Type type = enumeration.GetType();
+        MemberInfo[] memInfo = type.GetMember(enumeration.ToString());
+
+        if (null != memInfo && memInfo.Length > 0)
+        {
+            object[] attrs = memInfo[0].GetCustomAttributes(typeof(Automix_Data_Management.SettingsAccessor.SettingText), false);
+            if (null != attrs && attrs.Length > 0)
+                return ((Automix_Data_Management.SettingsAccessor.SettingText)attrs[0]).Text;
+        }
+
+        return enumeration.ToString();
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_AI.Distances;
 using Automix_UI.Forms;
+using static Automix_Data_Management.SettingsAccessor;
 
 namespace Automix_UI
 {
@@ -19,7 +20,7 @@ namespace Automix_UI
         public PresenterParameter()
         {
             _views = new List<IViewWithParameters>();
-            _parameters = new Parameters();
+            _parameters = LoadParametersFromFile();
         }
 
         public PresenterParameter(IViewWithParameters view) : this()
@@ -48,20 +49,11 @@ namespace Automix_UI
             _mainForm.UpdateSortProfile(_actualProfile);
         }
 
-        public void SaveParameters()
-        {
-            _parameters.Save();
-        }
+        public void SaveParameters() => _parameters.Save();
 
-        internal void SetTransitionDuration(decimal value)
-        {
-            _parameters.TransitionDuration = value.ToString();
-        }
+        internal void SetTransitionDuration(decimal value) => _parameters.TransitionDuration = value.ToString();
 
-        internal void SetMixDuration(decimal value)
-        {
-            _parameters.MixDuration = value.ToString();
-        }
+        internal void SetMixDuration(decimal value) => _parameters.MixDuration = value.ToString();
 
         public void UpdateViews()
         {
