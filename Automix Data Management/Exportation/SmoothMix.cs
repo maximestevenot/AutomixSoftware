@@ -28,7 +28,7 @@ namespace Automix_Data_Management.Exportation
         private readonly List<string> _tempFileList;
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
-
+        internal static int DEFAULTTRANSITIONDURATION = 10;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public SmoothMix() : this(10) { }
@@ -79,11 +79,30 @@ namespace Automix_Data_Management.Exportation
             DeleteTempFiles();
         }
 
-        private void FadeInOut(Track track)
-        {            
+        private int CalculateFadeInDuration(Track track)
+        {
             int nbFadeIns = track.FadeIns.Length;
+            int fadeInDuration = 10 * 1000;
+            if (nbFadeIns > 1)
+            {
+                fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
+            }
+            return fadeInDuration;
+        }
+        private int CalculateFadeOutDuration(Track track)
+        {
             int nbFadeOuts = track.FadeOuts.Length;
+            int fadeOutDuration = 10 * 1000;
+            if (nbFadeOuts > 1)
+            {
+                fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
+            }
+            return fadeOutDuration;
+        }
 
+        private int CalculateStartFadeIn(Track track)
+        {
+            int nbFadeIns = track.FadeIns.Length;
             int startFadeIn = 0;
             if (nbFadeIns > 1)
             {
@@ -96,24 +115,37 @@ namespace Automix_Data_Management.Exportation
                     startFadeIn = track.FadeIns[1];
                 }
             }
-            
-            var fileReader = new Mp3FileReader(track.Path);
-            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn);
-            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
-
-            var fadeInDuration = 10*1000;
-            if (nbFadeIns > 1)
-            {
-                fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
-            }
-
-            var fadeOutDuration = 10*1000;
+            return startFadeIn;
+        }
+        private int CalculateStartFadeOut(Track track)
+        {
+            int nbFadeOuts = track.FadeOuts.Length;
+            int startFadeOut = track.Duration - 10 * 1000;
             if (nbFadeOuts > 1)
             {
-                fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
+                startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
             }
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration+fadeInDuration-2000)/1000) * SamplesPerSecond;
-            var overlaySize = (fadeOutDuration/1000) * SamplesPerSecond;
+            return startFadeOut;
+        }
+
+        private void FadeInOut(Track track1)
+        {            
+            int nbFadeIns = track1.FadeIns.Length;
+            int nbFadeOuts = track1.FadeOuts.Length;
+
+            int startFadeIn1 = CalculateStartFadeIn(track1);
+            //int startFadeIn2 = CalculateStartFadeIn(track2);
+            
+            var fileReader = new Mp3FileReader(track1.Path);
+            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn1);
+            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
+
+            var fadeInDuration1 = CalculateFadeInDuration(track1);
+            //var fadeInDuration2 = CalculateFadeInDuration(track2);
+
+            var fadeOutDuration1 = CalculateFadeOutDuration(track1);
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1+fadeInDuration1-2000)/1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration1/1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -122,15 +154,11 @@ namespace Automix_Data_Management.Exportation
 
             var buffer = new float[bufferSize];
 
-            int startFadeOut = track.Duration - 10*1000;
-            if (nbFadeOuts > 1)
-            {
-                startFadeOut = track.FadeOuts[track.FadeOuts.Length - 2];
-            }
+            int startFadeOut1 = CalculateStartFadeOut(track1);
 
-            fade.BeginFadeIn(fadeInDuration);
+            fade.BeginFadeIn(fadeInDuration1);
             fade.Read(buffer, 0, (int)(bufferSize - overlaySize));
-            fade.BeginFadeOut(fadeOutDuration);
+            fade.BeginFadeOut(fadeOutDuration1);
             fade.Read(buffer, (int)(bufferSize - overlaySize), overlaySize);
 
             if (_savedOverlay != null)
