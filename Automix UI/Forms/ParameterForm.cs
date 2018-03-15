@@ -86,5 +86,6 @@ namespace Automix_UI.Forms
             _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
             _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
         }
+
     }
 }

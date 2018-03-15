@@ -49,7 +49,9 @@ namespace Automix_Data_Management
             [SettingText("keyNumberP")]
             keyNumberPriority = 5,
             [SettingText("danceabilityP")]
-            danceabilityPriority = 6
+            danceabilityPriority = 6,
+            [SettingText("MP3Quality")]
+            MP3Quality = 7
         }
 
         public static void SetSetting(Settings setting, String param)
@@ -71,6 +73,7 @@ namespace Automix_Data_Management
                 case Settings.keyNumberPriority:
                 case Settings.keyTonalityPriority:
                 case Settings.danceabilityPriority:
+                case Settings.MP3Quality:
                     MakeSettlement(setting.ToText(), param);
                     break;
             }
@@ -136,6 +139,7 @@ namespace Automix_Data_Management
             writer.WriteElementString("keyNumberP", "0");
             writer.WriteElementString("keyTonalityP", "0");
             writer.WriteElementString("danceabilityP", "0");
+            writer.WriteElementString("MP3Quality", "320");
             writer.WriteEndElement();
             writer.Flush();
             writer.Close();
@@ -162,6 +166,8 @@ namespace Automix_Data_Management
             param.KeyTonalityPriority = node.InnerText;
             node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
             param.DanceabilityPriority = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("MP3Quality");
+            param.MP3Quality = Int32.Parse(node.InnerText);
 
             return param;
         }
@@ -177,6 +183,7 @@ namespace Automix_Data_Management
             MakeSettlement(Settings.keyTonalityPriority.ToText(), param.KeyTonalityPriority);
             MakeSettlement(Settings.keyNumberPriority.ToText(), param.KeyNumberPriority);
             MakeSettlement(Settings.danceabilityPriority.ToText(), param.DanceabilityPriority);
+            MakeSettlement(Settings.MP3Quality.ToText(), param.BpmPriority);
         }
     }
 }
