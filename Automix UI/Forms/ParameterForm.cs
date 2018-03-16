@@ -43,6 +43,8 @@ namespace Automix_UI.Forms
         {
             _presenter.SetMixDuration(_mixDuration.Value);
             _presenter.SetTransitionDuration(_transitionDuration.Value);
+            //Console.WriteLine("mp3quality: " + _MP3Quality.SelectedItem.ToString());
+            _presenter.SetMP3Quality((int)Int32.Parse(_MP3Quality.SelectedItem.ToString()));
 
             ManualProfile toSave = new ManualProfile();
             toSave.UpdateBpmPriority(_bpmBar.Value);
@@ -85,6 +87,7 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int)(Int32.Parse(param.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
             _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
+            _MP3Quality.SelectedValue = param.MP3Quality;
         }
 
     }

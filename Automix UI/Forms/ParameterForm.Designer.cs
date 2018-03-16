@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this._MP3Quality = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this._mixDuration = new System.Windows.Forms.NumericUpDown();
             this._transitionDuration = new System.Windows.Forms.NumericUpDown();
@@ -53,9 +56,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
-            this._mp3Quality = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._mixDuration)).BeginInit();
@@ -86,7 +86,7 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this._mp3Quality);
+            this.tabPage1.Controls.Add(this._MP3Quality);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this._mixDuration);
@@ -99,6 +99,56 @@
             this.tabPage1.Size = new System.Drawing.Size(626, 276);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(275, 209);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(40, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Kbits/s";
+            // 
+            // _MP3Quality
+            // 
+            this._MP3Quality.AutoCompleteCustomSource.AddRange(new string[] {
+            "8",
+            "16",
+            "32",
+            "48",
+            "64",
+            "96",
+            "128",
+            "160",
+            "256",
+            "320"});
+            this._MP3Quality.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._MP3Quality.FormattingEnabled = true;
+            this._MP3Quality.Items.AddRange(new object[] {
+            "8",
+            "16",
+            "32",
+            "48",
+            "64",
+            "96",
+            "128",
+            "256",
+            "320"});
+            this._MP3Quality.Location = new System.Drawing.Point(195, 206);
+            this._MP3Quality.Name = "_MP3Quality";
+            this._MP3Quality.Size = new System.Drawing.Size(74, 21);
+            this._MP3Quality.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(6, 214);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(160, 13);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "Quality of the exported MP3 file :";
             // 
             // label6
             // 
@@ -355,55 +405,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(6, 214);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(160, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Quality of the exported MP3 file :";
-            // 
-            // _mp3Quality
-            // 
-            this._mp3Quality.AutoCompleteCustomSource.AddRange(new string[] {
-            "8",
-            "16",
-            "32",
-            "48",
-            "64",
-            "96",
-            "128",
-            "160",
-            "256",
-            "320"});
-            this._mp3Quality.FormattingEnabled = true;
-            this._mp3Quality.Items.AddRange(new object[] {
-            "8",
-            "16",
-            "32",
-            "48",
-            "64",
-            "96",
-            "128",
-            "256",
-            "320"});
-            this._mp3Quality.Location = new System.Drawing.Point(195, 206);
-            this._mp3Quality.Name = "_mp3Quality";
-            this._mp3Quality.Size = new System.Drawing.Size(74, 21);
-            this._mp3Quality.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(275, 209);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(40, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Kbits/s";
-            // 
             // ParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,7 +465,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown _mixDuration;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox _mp3Quality;
+        private System.Windows.Forms.ComboBox _MP3Quality;
         private System.Windows.Forms.Label label7;
     }
 }

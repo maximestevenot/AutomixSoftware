@@ -11,7 +11,7 @@ namespace Automix_Data_Management.Model
         public string KeyTonalityPriority { get; set; }
         public string KeyNumberPriority { get; set; }
         public string DanceabilityPriority { get; set; }
-        public int MP3Quality { get; set; }
+        public string MP3Quality { get; set; }
 
         public Parameters() { }
 

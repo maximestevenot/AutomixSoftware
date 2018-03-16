@@ -55,6 +55,8 @@ namespace Automix_UI
 
         internal void SetMixDuration(decimal value) => _parameters.MixDuration = value.ToString();
 
+        internal void SetMP3Quality(int value) => _parameters.MP3Quality = value.ToString();
+
         public void UpdateViews()
         {
             foreach (IViewWithParameters view in _views)

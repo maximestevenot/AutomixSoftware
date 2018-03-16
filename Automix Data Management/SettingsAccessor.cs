@@ -167,7 +167,7 @@ namespace Automix_Data_Management
             node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
             param.DanceabilityPriority = node.InnerText;
             node = configFile.DocumentElement.SelectSingleNode("MP3Quality");
-            param.MP3Quality = Int32.Parse(node.InnerText);
+            param.MP3Quality = node.InnerText;
 
             return param;
         }
@@ -183,7 +183,7 @@ namespace Automix_Data_Management
             MakeSettlement(Settings.keyTonalityPriority.ToText(), param.KeyTonalityPriority);
             MakeSettlement(Settings.keyNumberPriority.ToText(), param.KeyNumberPriority);
             MakeSettlement(Settings.danceabilityPriority.ToText(), param.DanceabilityPriority);
-            MakeSettlement(Settings.MP3Quality.ToText(), param.BpmPriority);
+            MakeSettlement(Settings.MP3Quality.ToText(), param.MP3Quality);
         }
     }
 }
