@@ -21,6 +21,12 @@ namespace Automix_UI
         {
             _views = new List<IViewWithParameters>();
             _parameters = LoadParametersFromFile();
+            _actualProfile = new ManualProfile(
+                Int32.Parse(_parameters.BpmPriority),
+                Int32.Parse(_parameters.KeyNumberPriority),
+                Int32.Parse(_parameters.KeyTonalityPriority),
+                Int32.Parse(_parameters.DanceabilityPriority)
+                );
         }
 
         public PresenterParameter(IViewWithParameters view) : this()

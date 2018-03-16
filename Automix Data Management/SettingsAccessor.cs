@@ -129,7 +129,7 @@ namespace Automix_Data_Management
 
             XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
             writer.WriteStartElement("configuration");
-            writer.WriteElementString("tempDir", _dir);
+            writer.WriteElementString("tempDir", Path.GetTempPath()+"//AutomixSoftware");
             writer.WriteElementString("transitionDuration", "10");
             writer.WriteElementString("mixDuration", "30");
             writer.WriteElementString("bpmP", "0");

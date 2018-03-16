@@ -23,6 +23,17 @@ namespace Automix_AI.Distances
             KeyTonalityPriority = 200 * 10;
             DanceabilityPriority = 1 * 10;
         }
+
+        public ManualProfile(int bpmP, int keyNumberP, int keyTonalityP, int danceabilityP)
+        {
+            BpmPriority = 120 * bpmP;
+            KeyNumberPriority = 2 * keyNumberP;
+            KeyTonalityPriority = 200 * keyTonalityP;
+            DanceabilityPriority = 1 * danceabilityP; 
+        }
+
+
+
         public void UpdateBpmPriority(int value)
         {
             BpmPriority = value * 120;
