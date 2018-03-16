@@ -41,7 +41,7 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
-            MixDuration = SmoothMix.DEFAULTMIXDURATION;
+            MixDuration = 60000 * (Int32.Parse(SettingsAccessor.GetSetting(SettingsAccessor.Settings.mixDuration)));
             _tempDirPath = SettingsAccessor.GetSetting(SettingsAccessor.Settings.tempDir);
             _tempFileList = new List<string>();
         }
@@ -54,8 +54,6 @@ namespace Automix_Data_Management.Exportation
 
             var count = 1;
             var tempFileDuration = 0;
-            
-            //collection = truncateCollection(collection);
 
             foreach (var track in collection)
             {
@@ -87,7 +85,7 @@ namespace Automix_Data_Management.Exportation
             DeleteTempFiles();
         }
 
-        private TrackCollection truncateCollection( TrackCollection collection )
+        private TrackCollection TruncateCollection( TrackCollection collection )
         {
             var newCollection = new TrackCollection();
             var index = 0;
@@ -104,19 +102,23 @@ namespace Automix_Data_Management.Exportation
             {
                 var lastTrack = collection[index];
                 lastTrack.Duration = mixDuration;
+                for (int i = 0; i < lastTrack.FadeOuts.Length; i++)
+                {
+                    lastTrack.FadeOuts[i] = mixDuration;
+                }
+
                 newCollection.Add(lastTrack);
             }
 
             return newCollection;
         }
 
-
         private void FadeInOut(Track track)
         {
             int nbFadeIns = track.FadeIns.Length;
             int nbFadeOuts = track.FadeOuts.Length;
-
             int startFadeIn = 0;
+
             if (nbFadeIns > 1)
             {
                 if (track.FadeIns[0] != 0)
@@ -144,7 +146,8 @@ namespace Automix_Data_Management.Exportation
             {
                 fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
             }
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration + fadeInDuration - 2000) / 1000) * SamplesPerSecond;
+            var bufferSize = (fileReader.Length) /*Convert.ToInt32((176.4 * track.Duration))*/ / 2 - ((fadeOutDuration + fadeInDuration - 2000) / 1000) * SamplesPerSecond;
+         
             var overlaySize = (fadeOutDuration / 1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)

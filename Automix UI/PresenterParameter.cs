@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_AI.Distances;
 using Automix_UI.Forms;
+using Automix_Data_Management.Exportation;
 using static Automix_Data_Management.SettingsAccessor;
 
 namespace Automix_UI
@@ -57,9 +58,17 @@ namespace Automix_UI
 
         public void SaveParameters() => _parameters.Save();
 
-        internal void SetTransitionDuration(decimal value) => _parameters.TransitionDuration = value.ToString();
+        internal void SetTransitionDuration(decimal value)
+        {
+            _parameters.TransitionDuration = value.ToString();
+            SmoothMix.DEFAULTTRANSITIONDURATION = (int) value;
+        }
 
-        internal void SetMixDuration(decimal value) => _parameters.MixDuration = value.ToString();
+        internal void SetMixDuration(decimal value)
+        {
+            _parameters.MixDuration = value.ToString();
+            SmoothMix.DEFAULTMIXDURATION = (int) value;
+        }
 
         public void UpdateViews()
         {
