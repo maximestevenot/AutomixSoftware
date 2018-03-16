@@ -49,6 +49,38 @@ namespace Automix_Data_Management.Exportation
             var count = 1;
             var tempFileDuration = 0;
 
+            Track firstTrack = collection[0];
+            int fadeInDurationPreviousTrack = CalculateFadeInDuration(firstTrack);
+            int nbTracks = collection.Count;
+            for (int i = 0; i < nbTracks; i++)
+            {
+                Track track = collection[i];
+
+                if (bw.CancellationPending)
+                {
+                    _waveFileWriter.Close();
+                    break;
+                }
+                //TO DO : change this after transition start
+                tempFileDuration += track.Duration;
+                if (tempFileDuration > 2700000) //45 minutes
+                {
+                    tempFileDuration = track.Duration;
+                    CreateNewTempFile();
+                }
+
+                if (track != collection[nbTracks - 1])
+                {
+                    Track nextTrack = collection[i + 1];
+                    fadeInDurationPreviousTrack = FadeInOut(track, nextTrack, fadeInDurationPreviousTrack, collection);
+                }
+                else
+                {
+                    FadeInOut(track, track, fadeInDurationPreviousTrack, collection);
+                }
+                bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
+            }
+            /*
             foreach (var track in collection)
             {
                 if (bw.CancellationPending)
@@ -68,6 +100,7 @@ namespace Automix_Data_Management.Exportation
                 FadeInOut(track);
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
             }
+            */
 
             if (!bw.CancellationPending)
             {
@@ -128,22 +161,33 @@ namespace Automix_Data_Management.Exportation
             return startFadeOut;
         }
 
-        private void FadeInOut(Track track1)
-        {            
-            int nbFadeIns = track1.FadeIns.Length;
-            int nbFadeOuts = track1.FadeOuts.Length;
-
-            int startFadeIn1 = CalculateStartFadeIn(track1);
-            //int startFadeIn2 = CalculateStartFadeIn(track2);
-            
+        private int FadeInOut(Track track1, Track track2, int averageFadeDuration, TrackCollection collection)
+        {
+            int startFadeIn1 = CalculateStartFadeIn(track1);  
             var fileReader = new Mp3FileReader(track1.Path);
             var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn1);
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
-            var fadeInDuration1 = CalculateFadeInDuration(track1);
-            //var fadeInDuration2 = CalculateFadeInDuration(track2);
-
-            var fadeOutDuration1 = CalculateFadeOutDuration(track1);
+            int fadeInDuration1, fadeOutDuration1, fadeInDuration2;
+            if (track1 == collection[0])
+            {
+                fadeInDuration1 = CalculateFadeInDuration(track1);
+            } else
+            {
+                fadeInDuration1 = averageFadeDuration;
+            }
+            if (track1 == collection[collection.Count-1])
+            {
+                fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                averageFadeDuration = 0;
+            } else
+            {
+                fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                fadeInDuration2 = CalculateFadeInDuration(track2);
+                var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
+                averageFadeDuration = averageFadesDuration / 2;
+                fadeOutDuration1 = averageFadeDuration;
+            }
             var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1+fadeInDuration1-2000)/1000) * SamplesPerSecond;
             var overlaySize = (fadeOutDuration1/1000) * SamplesPerSecond;
 
@@ -153,8 +197,6 @@ namespace Automix_Data_Management.Exportation
             }
 
             var buffer = new float[bufferSize];
-
-            int startFadeOut1 = CalculateStartFadeOut(track1);
 
             fade.BeginFadeIn(fadeInDuration1);
             fade.Read(buffer, 0, (int)(bufferSize - overlaySize));
@@ -174,6 +216,8 @@ namespace Automix_Data_Management.Exportation
             {
                 _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
             }
+            
+            return averageFadeDuration;
         }
 
         private static float[] ApplyOverlay(float[] trackBuffer, float[] overlayBuffer)
