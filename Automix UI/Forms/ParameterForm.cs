@@ -1,12 +1,5 @@
 ﻿using Automix_AI.Distances;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_Data_Management;
@@ -41,7 +34,7 @@ namespace Automix_UI.Forms
             _presenter.UpdateSortProfile();
         }
 
-        private void OnOKButtonClick(object sender, EventArgs e)
+        private void OnOkButtonClick(object sender, EventArgs e)
         {
             _presenter.SetMixDuration(_mixDuration.Value);
             _presenter.SetTransitionDuration(_transitionDuration.Value);
@@ -88,7 +81,7 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int)(Int32.Parse(param.KeyTonalityPriority) / 200);
             _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
             _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
-            _MP3Quality.SelectedValue = param.MP3Quality;
+            _MP3Quality.SelectedIndex = _MP3Quality.FindString(param.MP3Quality);
             AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.MP3Quality);
         }
 
