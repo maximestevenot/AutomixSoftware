@@ -1,12 +1,5 @@
 ﻿using Automix_AI.Distances;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
 
@@ -39,7 +32,7 @@ namespace Automix_UI.Forms
             _presenter.UpdateSortProfile();
         }
 
-        private void OnOKButtonClick(object sender, EventArgs e)
+        private void OnOkButtonClick(object sender, EventArgs e)
         {
             _presenter.SetMixDuration(_mixDuration.Value);
             _presenter.SetTransitionDuration(_transitionDuration.Value);

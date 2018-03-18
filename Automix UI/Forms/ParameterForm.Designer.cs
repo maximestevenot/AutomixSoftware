@@ -89,7 +89,7 @@
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage1.Size = new System.Drawing.Size(626, 211);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
@@ -98,7 +98,8 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(6, 169);
+            this.label6.Location = new System.Drawing.Point(4, 137);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(104, 13);
             this.label6.TabIndex = 4;
@@ -106,9 +107,10 @@
             // 
             // _mixDuration
             // 
-            this._mixDuration.Location = new System.Drawing.Point(148, 167);
+            this._mixDuration.Location = new System.Drawing.Point(144, 135);
+            this._mixDuration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this._mixDuration.Name = "_mixDuration";
-            this._mixDuration.Size = new System.Drawing.Size(120, 20);
+            this._mixDuration.Size = new System.Drawing.Size(90, 20);
             this._mixDuration.TabIndex = 3;
             this.toolTip1.SetToolTip(this._mixDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._mixDuration.Value = new decimal(new int[] {
@@ -119,9 +121,10 @@
             // 
             // _transitionDuration
             // 
-            this._transitionDuration.Location = new System.Drawing.Point(148, 113);
+            this._transitionDuration.Location = new System.Drawing.Point(144, 103);
+            this._transitionDuration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this._transitionDuration.Name = "_transitionDuration";
-            this._transitionDuration.Size = new System.Drawing.Size(120, 20);
+            this._transitionDuration.Size = new System.Drawing.Size(90, 20);
             this._transitionDuration.TabIndex = 2;
             this.toolTip1.SetToolTip(this._transitionDuration, "Recommended transition durations stands between 5 and 30 seconds");
             this._transitionDuration.Value = new decimal(new int[] {
@@ -134,7 +137,8 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(6, 115);
+            this.label5.Location = new System.Drawing.Point(4, 105);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 13);
             this.label5.TabIndex = 1;
@@ -201,7 +205,7 @@
             this.tabPage2.ForeColor = System.Drawing.Color.White;
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPage2.Size = new System.Drawing.Size(626, 211);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
@@ -336,7 +340,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.OnOKButtonClick);
+            this.button2.Click += new System.EventHandler(this.OnOkButtonClick);
             // 
             // button3
             // 
@@ -359,8 +363,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this._applyButton);
             this.Controls.Add(this.tabControl1);
-            this.MaximumSize = new System.Drawing.Size(740, 580);
-            this.MinimumSize = new System.Drawing.Size(640, 330);
+            this.MaximumSize = new System.Drawing.Size(740, 579);
+            this.MinimumSize = new System.Drawing.Size(639, 328);
             this.Name = "ParameterForm";
             this.Text = "ParameterForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormCloseButtonClick);
