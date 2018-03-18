@@ -16,7 +16,6 @@ using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
 using static Automix_Data_Management.Utils;
-using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;

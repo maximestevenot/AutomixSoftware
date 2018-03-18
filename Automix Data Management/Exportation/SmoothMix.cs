@@ -13,7 +13,6 @@ using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using static Automix_Data_Management.Utils;
-using log4net;
 using System;
 
 namespace Automix_Data_Management.Exportation

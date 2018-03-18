@@ -80,41 +80,49 @@ namespace Automix_UI.Forms
 
         private void UpdateAdvancedUi()
         {
-            _bpmBar.Value = (int) ((_actualProfile.BpmPriority) / 120);
-            _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
-            _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
+            _bpmBar.Value = (int) _actualProfile.BpmPriority;
+            _keyTonalityBar.Value = (int) _actualProfile.KeyTonalityPriority;
+            _keyNumberBar.Value = (int) _actualProfile.KeyNumberPriority;
             _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
             UpdatePriorities();
         }
 
         private void AdvancedPageSelected(object sender, EventArgs e)
         {
-            _resultProfile = new ManualProfile(_bpmPriorityValue, _keyNumberPriorityValue, 
-                _keyTonalityPriorityValue, _danceabilityPriorityValue);
-            _normalRadioButton.Checked = false;
-            _rhythmRadioButton.Checked = false;
-            _tonalityRadioButton.Checked = false;
+            _resultProfile = new ManualProfile(_bpmBar.Value, _keyNumberBar.Value, 
+                _keyTonalityBar.Value, _danceabilityBar.Value);
         }
 
         private void OnScrollBpmBar(object sender, EventArgs e)
         {
             UpdatePriorities();
+            UncheckPresetProfiles();
         }
 
 
         private void OnScrollKeyTonalityBar(object sender, EventArgs e)
         {
             UpdatePriorities();
+            UncheckPresetProfiles();
         }
 
         private void OnScrollKeyNumberBar(object sender, EventArgs e)
         {
             UpdatePriorities();
+            UncheckPresetProfiles();
         }
 
         private void OnScrollDanceabilityBar(object sender, EventArgs e)
         {
             UpdatePriorities();
+            UncheckPresetProfiles();
+        }
+
+        private void UncheckPresetProfiles()
+        {
+            _normalRadioButton.Checked = false;
+            _rhythmRadioButton.Checked = false;
+            _tonalityRadioButton.Checked = false;
         }
     }
 }

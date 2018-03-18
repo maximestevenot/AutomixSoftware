@@ -10,7 +10,6 @@ using System.IO;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Data.SQLite;
 
 namespace Automix_Data_Management_Tests.Storage

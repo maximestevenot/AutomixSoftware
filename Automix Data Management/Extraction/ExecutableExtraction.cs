@@ -17,7 +17,6 @@ using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using log4net;
 
 namespace Automix_Data_Management.Extraction
 {

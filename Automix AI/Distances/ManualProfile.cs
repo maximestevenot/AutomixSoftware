@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Automix_AI.Distances
+﻿namespace Automix_AI.Distances
 {
     public class ManualProfile : IProfileDistance
     {
@@ -22,22 +16,22 @@ namespace Automix_AI.Distances
         public ManualProfile(int bpmBarValue, int keyNumberBarValue,
             int keyTonalityBarValue, int danceabiltyBarValue)
         {
-            BpmPriority = 120 * bpmBarValue;
-            KeyNumberPriority = 2 * keyNumberBarValue;
-            KeyTonalityPriority = 200 * keyTonalityBarValue;
-            DanceabilityPriority = 1 * danceabiltyBarValue;
+            BpmPriority = bpmBarValue;
+            KeyNumberPriority = keyNumberBarValue;
+            KeyTonalityPriority = keyTonalityBarValue;
+            DanceabilityPriority = danceabiltyBarValue;
         }
         public void UpdateBpmPriority(int value)
         {
-            BpmPriority = value * 120;
+            BpmPriority = value;
         }
         public void UpdateKeyNumberPriority(int value)
         {
-            KeyNumberPriority = value * 2;
+            KeyNumberPriority = value;
         }
         public void UpdateKeyTonalityPriority(int value)
         {
-            KeyTonalityPriority = value * 200;
+            KeyTonalityPriority = value;
         }
         public void UpdateDanceabilityPriority(int value)
         {
