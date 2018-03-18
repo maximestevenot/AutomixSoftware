@@ -61,6 +61,7 @@ namespace Automix_Data_Management.Exportation
                     _waveFileWriter.Close();
                     break;
                 }
+
                 //TO DO : change this after transition start
                 tempFileDuration += track.Duration;
                 if (tempFileDuration > 2700000) //45 minutes
@@ -164,10 +165,10 @@ namespace Automix_Data_Management.Exportation
                 fadeOutDuration1 = CalculateFadeOutDuration(track1);
                 fadeInDuration2 = CalculateFadeInDuration(track2);
                 var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
-                averageFadeDuration = averageFadesDuration / 2;
+                averageFadeDuration = averageFadesDuration;
                 fadeOutDuration1 = averageFadeDuration;
             }
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1+fadeInDuration1-2000)/1000) * SamplesPerSecond;
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1+fadeInDuration1+startFadeIn1-2000)/1000) * SamplesPerSecond;
             var overlaySize = (fadeOutDuration1/1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
