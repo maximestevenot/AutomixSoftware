@@ -80,27 +80,6 @@ namespace Automix_Data_Management.Exportation
                 }
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
             }
-            /*
-            foreach (var track in collection)
-            {
-                if (bw.CancellationPending)
-                {
-                    _waveFileWriter.Close();
-                    break;
-                }
-
-                //TODO : change this after transition start
-                tempFileDuration += track.Duration;
-                if (tempFileDuration > 2700000) //45 minutes
-                {
-                    tempFileDuration = track.Duration;
-                    CreateNewTempFile();
-                }
-
-                FadeInOut(track);
-                bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
-            }
-            */
 
             if (!bw.CancellationPending)
             {
