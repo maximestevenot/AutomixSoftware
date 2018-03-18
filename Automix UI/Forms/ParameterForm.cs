@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
+using Automix_Data_Management;
+using NAudio.Lame;
 
 namespace Automix_UI.Forms
 {
@@ -43,7 +45,6 @@ namespace Automix_UI.Forms
         {
             _presenter.SetMixDuration(_mixDuration.Value);
             _presenter.SetTransitionDuration(_transitionDuration.Value);
-            //Console.WriteLine("mp3quality: " + _MP3Quality.SelectedItem.ToString());
             _presenter.SetMP3Quality((int)Int32.Parse(_MP3Quality.SelectedItem.ToString()));
 
             ManualProfile toSave = new ManualProfile();
@@ -88,6 +89,7 @@ namespace Automix_UI.Forms
             _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
             _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
             _MP3Quality.SelectedValue = param.MP3Quality;
+            AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.MP3Quality);
         }
 
     }
