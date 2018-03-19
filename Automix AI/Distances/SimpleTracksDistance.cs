@@ -8,7 +8,6 @@
 
 using System;
 using Automix_Data_Management.Model;
-using static Automix_Data_Management.Utils;
 
 namespace Automix_AI.Distances
 {
@@ -48,8 +47,8 @@ namespace Automix_AI.Distances
                 return -1;
             }
 
-            var distance = Math.Abs(track2.Bpm - track1.Bpm) * BpmPriority;
-            var distanceDouble = track2.Bpm < track1.Bpm ? Math.Abs(2 * track2.Bpm - track1.Bpm) * BpmPriority : Math.Abs(track2.Bpm - 2 * track1.Bpm) * BpmPriority;
+            var distance = Math.Abs(track2.Bpm - track1.Bpm) * 120 * BpmPriority;
+            var distanceDouble = track2.Bpm < track1.Bpm ? Math.Abs(2 * track2.Bpm - track1.Bpm) * 120 * BpmPriority : Math.Abs(track2.Bpm - 2 * track1.Bpm) * 120 * BpmPriority;
 
             distance = distanceDouble < distance ? distanceDouble : distance;
             distance += Math.Abs(track1.Danceability - track2.Danceability) * DanceabilityPriority;
@@ -61,13 +60,13 @@ namespace Automix_AI.Distances
                 {
                     absoluteDistance = 12 - absoluteDistance;
                 }
-                distance += absoluteDistance * KeyNumberPriority;
+                distance += absoluteDistance * 2 * KeyNumberPriority;
             }
             else
             {
                 if (Math.Abs(digitalTrack1Key - digitalTrack2Key) > 0.0001)
                 {
-                    distance += KeyTonalityPriority;
+                    distance += 200 * KeyTonalityPriority;
                 }
 
             }

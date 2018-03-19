@@ -11,7 +11,6 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using Automix_Data_Management.Model;
-using log4net;
 
 namespace Automix_Data_Management.Storage
 {

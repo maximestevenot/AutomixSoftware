@@ -1,33 +1,27 @@
 ﻿using Automix_AI.Distances;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Automix_Data_Management.Model;
+using Automix_Data_Management;
+using NAudio.Lame;
 
 namespace Automix_UI.Forms
 {
-    public partial class ParameterForm : Form
+    public partial class ParameterForm : Form, IViewWithParameters
     {
-        private IProfileDistance _actualProfile;
-        private MainForm _mainForm;
+        private readonly PresenterParameter _presenter;
 
-        private int _bpmPriority;
-        private int _keyTonalityPriority;
-        private int _keyNumberPriority;
-        private int _danceabilityPriority;
-
-        public ParameterForm(MainForm mainForm)
+        public ParameterForm()
         {
             InitializeComponent();
             _normalRadioButton.Checked = true;
-            _actualProfile = new BasicProfile();
-            _mainForm = mainForm;
-            UpdateAdvancedUI();
+            _presenter = new PresenterParameter(this);
+        }
+
+        public ParameterForm(MainForm mainForm) : this()
+        {
+            _presenter.SetMainForm(mainForm);
+            _presenter.UpdateViews();
         }
 
         private void OnCancelButtonClick(object sender, EventArgs e)
@@ -37,12 +31,24 @@ namespace Automix_UI.Forms
 
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
-            _mainForm.UpdateSortProfile(_actualProfile);
-            _mainForm.UpdateTransitionDuration((int)_transitionDuration.Value);
+            _presenter.UpdateSortProfile();
         }
 
-        private void OnOKButtonClick(object sender, EventArgs e)
+        private void OnOkButtonClick(object sender, EventArgs e)
         {
+            _presenter.SetMixDuration(_mixDuration.Value);
+            _presenter.SetTransitionDuration(_transitionDuration.Value);
+            _presenter.SetMP3Quality((int)Int32.Parse(_MP3Quality.SelectedItem.ToString()));
+
+            ManualProfile toSave = new ManualProfile();
+            toSave.UpdateBpmPriority(_bpmBar.Value);
+            toSave.UpdateDanceabilityPriority(_danceabilityBar.Value);
+            toSave.UpdateKeyNumberPriority(_keyNumberBar.Value);
+            toSave.UpdateKeyTonalityPriority(_keyTonalityBar.Value);
+     
+            _presenter.SetProfile(toSave);
+
+            _presenter.SaveParameters();
             OnApplyButtonClick(sender, e);
             Hide();
         }
@@ -54,29 +60,30 @@ namespace Automix_UI.Forms
 
         private void OnNormalProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new BasicProfile();
-            UpdateAdvancedUI();
+            _presenter.SetProfile(new BasicProfile());  
         }
 
         private void OnTonalityProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new TonalityProfile();
-            UpdateAdvancedUI();
+            _presenter.SetProfile(new TonalityProfile());
         }
 
         private void OnRhythmProfileClick(object sender, EventArgs e)
         {
-            _actualProfile = new RhythmProfile();
-            UpdateAdvancedUI();
+            _presenter.SetProfile(new RhythmProfile());
         }
 
-        private void UpdateAdvancedUI()
+        public void LoadParameters(Parameters param)
         {
-            _bpmBar.Value = (int) ((_actualProfile.BpmPriority) / 120);
-            _keyTonalityBar.Value = (int) ((_actualProfile.KeyTonalityPriority) / 200);
-            _keyNumberBar.Value = (int) ((_actualProfile.KeyNumberPriority) / 2);
-            _danceabilityBar.Value = (int) _actualProfile.DanceabilityPriority;
-
+            _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
+            _mixDuration.Value = Int32.Parse(param.MixDuration);
+            _bpmBar.Value = (int)Int32.Parse(param.BpmPriority);
+            _keyTonalityBar.Value = (int)Int32.Parse(param.KeyTonalityPriority);
+            _keyNumberBar.Value = (int)Int32.Parse(param.KeyNumberPriority);
+            _danceabilityBar.Value = (int)Int32.Parse(param.DanceabilityPriority);
+            _MP3Quality.SelectedIndex = _MP3Quality.FindString(param.MP3Quality);
+            AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.MP3Quality);
         }
+
     }
 }

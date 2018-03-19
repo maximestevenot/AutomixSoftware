@@ -14,8 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using static Automix_Data_Management.Utils;
-using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -81,7 +79,7 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
-            var tempPath = GetTempDir();
+            var tempPath = SettingsAccessor.GetSetting(SettingsAccessor.Settings.tempDir);
 
             try
             {

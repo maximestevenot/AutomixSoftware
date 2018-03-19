@@ -27,12 +27,3 @@ namespace Automix_Data_Management.Exportation.Tests
         }
     }
 }
-
-namespace Automix_Data_Management_Tests.Exportation
-{
-    [TestClass]
-    public class SmoothMixTest
-    {
-        //TODO
-    }
-}

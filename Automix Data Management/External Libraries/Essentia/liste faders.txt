@@ -1,0 +1,13 @@
+./essentia_standard_fadedetection.exe 'C:\Users\Niels\Music\Main\Axwanging & Roone - Vertigo.mp3'
+[0;33m[ WARNING  ] [0mAudioLoader: Error reading frame: Error number -5 occurred
+No fades in found
+fade outs: [209.955, 232.246]
+Suivis de Like I Do
+No fades in found
+fade outs: [195.611, 202.664]
+Suivis de Burn Out
+fade ins: [4.09832, 13.2644]
+fade outs: [157.367, 172.344]
+Suivis de Last Fight
+fade ins: [0, 6.40871]
+fade outs: [178.155, 183.136]

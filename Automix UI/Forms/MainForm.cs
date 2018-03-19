@@ -15,8 +15,6 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using static Automix_Data_Management.Utils;
-using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
@@ -763,7 +761,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            SetTempDir(dialog.SelectedPath);
+            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.tempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");
@@ -820,9 +818,5 @@ namespace Automix_UI.Forms
             _presenter.UpdateSortAlgorithm(profileChosen);
         }
 
-        public void UpdateTransitionDuration(int duration)
-        {
-            _presenter.UpdateTransitionDuration(duration);
-        }
     }
 }

@@ -16,7 +16,6 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using log4net;
 
 namespace Automix_UI
 {
@@ -236,9 +235,5 @@ namespace Automix_UI
             _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(profileChosen));
         }
 
-        public void UpdateTransitionDuration(int transitionDuration)
-        {
-            Utils.setTransitionDuration(transitionDuration);
-        }
     }
 }

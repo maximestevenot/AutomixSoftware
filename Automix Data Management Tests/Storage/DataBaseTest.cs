@@ -10,7 +10,6 @@ using System.IO;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Data.SQLite;
 
 namespace Automix_Data_Management_Tests.Storage
@@ -26,7 +25,7 @@ namespace Automix_Data_Management_Tests.Storage
         [ClassInitialize]
         public static void InitializeTests(TestContext testContext)
         {
-
+            
             foreach (var path in DataBasePaths)
             {
                 if (File.Exists(path))
