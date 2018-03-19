@@ -12,7 +12,6 @@ using System.IO;
 using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using static Automix_Data_Management.Utils;
 using log4net;
 using System;
 
@@ -20,7 +19,12 @@ namespace Automix_Data_Management.Exportation
 {
     public class SmoothMix : IExportation
     {
+        public static int DEFAULTTRANSITIONDURATION = 10;
+        public static int DEFAULTMIXDURATION = 60000;
+
         public int TransitionDuration { get; set; }
+
+        public int MixDuration { get; set; }
 
         private static readonly int SamplesPerSecond = AudioIO.TempWaveFormat.AverageBytesPerSecond / 4;
         private readonly string _tempDirPath;
@@ -28,7 +32,6 @@ namespace Automix_Data_Management.Exportation
         private readonly List<string> _tempFileList;
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
-        internal static int DEFAULTTRANSITIONDURATION = 10;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public SmoothMix() : this(10) { }
@@ -36,7 +39,8 @@ namespace Automix_Data_Management.Exportation
         public SmoothMix(int transitionDuration)
         {
             TransitionDuration = transitionDuration;
-            _tempDirPath = GetTempDir();
+            MixDuration = 60000 * (Int32.Parse(SettingsAccessor.GetSetting(SettingsAccessor.Settings.mixDuration)));
+            _tempDirPath = SettingsAccessor.GetSetting(SettingsAccessor.Settings.tempDir);
             _tempFileList = new List<string>();
         }
 
@@ -91,6 +95,33 @@ namespace Automix_Data_Management.Exportation
             }
             DeleteTempFiles();
         }
+        private TrackCollection TruncateCollection(TrackCollection collection)
+        {
+            var newCollection = new TrackCollection();
+            var index = 0;
+            var mixDuration = MixDuration;
+
+            while (mixDuration > collection[index].Duration && index <= collection.Count)
+            {
+                mixDuration -= collection[index].Duration;
+                newCollection.Add(collection[index]);
+                index++;
+            }
+
+            if (index <= collection.Count)
+            {
+                var lastTrack = collection[index];
+                lastTrack.Duration = mixDuration;
+                for (int i = 0; i < lastTrack.FadeOuts.Length; i++)
+                {
+                    lastTrack.FadeOuts[i] = mixDuration;
+                }
+
+                newCollection.Add(lastTrack);
+            }
+
+            return newCollection;
+        }
 
         private int CalculateFadeInDuration(Track track)
         {
@@ -117,6 +148,7 @@ namespace Automix_Data_Management.Exportation
         {
             int nbFadeIns = track.FadeIns.Length;
             int startFadeIn = 0;
+
             if (nbFadeIns > 1)
             {
                 if (track.FadeIns[0] != 0)
@@ -143,7 +175,7 @@ namespace Automix_Data_Management.Exportation
 
         private int FadeInOut(Track track1, Track track2, int averageFadeDuration, TrackCollection collection)
         {
-            int startFadeIn1 = CalculateStartFadeIn(track1);  
+            int startFadeIn1 = CalculateStartFadeIn(track1);
             var fileReader = new Mp3FileReader(track1.Path);
             var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn1);
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
@@ -152,15 +184,17 @@ namespace Automix_Data_Management.Exportation
             if (track1 == collection[0])
             {
                 fadeInDuration1 = CalculateFadeInDuration(track1);
-            } else
+            }
+            else
             {
                 fadeInDuration1 = averageFadeDuration;
             }
-            if (track1 == collection[collection.Count-1])
+            if (track1 == collection[collection.Count - 1])
             {
                 fadeOutDuration1 = CalculateFadeOutDuration(track1);
                 averageFadeDuration = 0;
-            } else
+            }
+            else
             {
                 fadeOutDuration1 = CalculateFadeOutDuration(track1);
                 fadeInDuration2 = CalculateFadeInDuration(track2);
@@ -168,8 +202,9 @@ namespace Automix_Data_Management.Exportation
                 averageFadeDuration = averageFadesDuration;
                 fadeOutDuration1 = averageFadeDuration;
             }
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1+fadeInDuration1+startFadeIn1-2000)/1000) * SamplesPerSecond;
-            var overlaySize = (fadeOutDuration1/1000) * SamplesPerSecond;
+
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
             {
@@ -196,7 +231,7 @@ namespace Automix_Data_Management.Exportation
             {
                 _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
             }
-            
+
             return averageFadeDuration;
         }
 

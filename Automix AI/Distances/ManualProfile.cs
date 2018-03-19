@@ -17,12 +17,17 @@ namespace Automix_AI.Distances
         public double DanceabilityPriority { get; private set; }
 
         public ManualProfile()
+        : this(10, 10, 10, 10) {}
+
+        public ManualProfile(int bpmBarValue, int keyNumberBarValue,
+            int keyTonalityBarValue, int danceabiltyBarValue)
         {
-            BpmPriority = 120 * 10;
-            KeyNumberPriority = 2 * 10;
-            KeyTonalityPriority = 200 * 10;
-            DanceabilityPriority = 1 * 10;
+            BpmPriority = 120 * bpmBarValue;
+            KeyNumberPriority = 2 * keyNumberBarValue;
+            KeyTonalityPriority = 200 * keyTonalityBarValue;
+            DanceabilityPriority = 1 * danceabiltyBarValue;
         }
+
         public void UpdateBpmPriority(int value)
         {
             BpmPriority = value * 120;
