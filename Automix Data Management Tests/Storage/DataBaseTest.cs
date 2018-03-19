@@ -25,7 +25,7 @@ namespace Automix_Data_Management_Tests.Storage
         [ClassInitialize]
         public static void InitializeTests(TestContext testContext)
         {
-
+            
             foreach (var path in DataBasePaths)
             {
                 if (File.Exists(path))
