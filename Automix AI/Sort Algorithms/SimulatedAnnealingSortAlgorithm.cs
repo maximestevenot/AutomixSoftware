@@ -67,17 +67,11 @@ namespace Automix_AI.Sort_Algorithms
             numCollection++;
             trackCollection.Clear();
 
-            //collections.ForEach(delegate (TrackCollection collection)
             for (int i = 0; i < collections.Count; i++)
             {
                 TrackCollection newCollection;
                 newCollection = Sort(backgroundWorker, collections[i]);
-                /*Console.WriteLine("{");
-                for (int j = 0; j < newCollection.Count; j++)
-                {
-                    Console.WriteLine(newCollection[j].Name);
-                }
-                Console.WriteLine("}");*/
+                
                 if (!newCollection.Equals(collections[i]))
                 {
                     var pos = collections.IndexOf(collections[i]);
