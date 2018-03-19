@@ -12,6 +12,7 @@ namespace Automix_Data_Management.Model
         public string KeyNumberPriority { get; set; }
         public string DanceabilityPriority { get; set; }
         public string MP3Quality { get; set; }
+        public string ApplyTransitionDuration { get; set; }
 
         public Parameters() { }
 

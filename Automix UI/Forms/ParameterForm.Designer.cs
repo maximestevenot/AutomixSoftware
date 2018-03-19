@@ -31,13 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-
             this.label8 = new System.Windows.Forms.Label();
             this._MP3Quality = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this._mixDuration = new System.Windows.Forms.NumericUpDown();
-
             this._transitionDuration = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,9 +56,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this._applyTransitionDuration = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-
             ((System.ComponentModel.ISupportInitialize)(this._mixDuration)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._transitionDuration)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -88,6 +86,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.tabPage1.Controls.Add(this._applyTransitionDuration);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this._MP3Quality);
             this.tabPage1.Controls.Add(this.label7);
@@ -410,6 +409,17 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.OnCancelButtonClick);
             // 
+            // _applyTransitionDuration
+            // 
+            this._applyTransitionDuration.AutoSize = true;
+            this._applyTransitionDuration.ForeColor = System.Drawing.Color.White;
+            this._applyTransitionDuration.Location = new System.Drawing.Point(311, 115);
+            this._applyTransitionDuration.Name = "_applyTransitionDuration";
+            this._applyTransitionDuration.Size = new System.Drawing.Size(123, 17);
+            this._applyTransitionDuration.TabIndex = 8;
+            this._applyTransitionDuration.Text = "Apply / Do not apply";
+            this._applyTransitionDuration.UseVisualStyleBackColor = true;
+            // 
             // ParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,5 +482,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox _MP3Quality;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.CheckBox _applyTransitionDuration;
     }
 }

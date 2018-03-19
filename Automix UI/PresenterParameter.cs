@@ -63,6 +63,12 @@ namespace Automix_UI
             SmoothMix.DEFAULTTRANSITIONDURATION = (int) value;
         }
 
+        internal void SetApplyTransitionDuration(bool value)
+        {
+            _parameters.ApplyTransitionDuration = value.ToString();
+            SmoothMix.APPLYTRANSITIONDURATION = value;
+        }
+
         internal void SetMixDuration(decimal value)
         {
             _parameters.MixDuration = value.ToString();

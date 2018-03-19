@@ -38,18 +38,20 @@ namespace Automix_Data_Management
             tempDir = 0,
             [SettingText("transitionDuration")]
             transitionDuration = 1,
+            [SettingText("applyTransitionDuration")]
+            applyTransitionDuration = 2,
             [SettingText("mixDuration")]
-            mixDuration = 2,
+            mixDuration = 3,
             [SettingText("bpmP")]
-            bpmPriority = 3,
+            bpmPriority = 4,
             [SettingText("keyTonalityP")]
-            keyTonalityPriority = 4,
+            keyTonalityPriority = 5,
             [SettingText("keyNumberP")]
-            keyNumberPriority = 5,
+            keyNumberPriority = 6,
             [SettingText("danceabilityP")]
-            danceabilityPriority = 6,
+            danceabilityPriority = 7,
             [SettingText("MP3Quality")]
-            MP3Quality = 7
+            MP3Quality = 8
         }
 
         public static void SetSetting(Settings setting, String param)
@@ -66,6 +68,7 @@ namespace Automix_Data_Management
                     MakeSettlement(setting.ToText(), param + "\\AutomixSoftware");
                     break;
                 case Settings.transitionDuration:
+                case Settings.applyTransitionDuration:
                 case Settings.mixDuration:
                 case Settings.bpmPriority:
                 case Settings.keyNumberPriority:
@@ -132,6 +135,7 @@ namespace Automix_Data_Management
             writer.WriteStartElement("configuration");
             writer.WriteElementString("tempDir", Path.GetTempPath()+"//AutomixSoftware");
             writer.WriteElementString("transitionDuration", "10");
+            writer.WriteElementString("applyTransitionDuration", "false");
             writer.WriteElementString("mixDuration", "30");
             writer.WriteElementString("bpmP", "10");
             writer.WriteElementString("keyNumberP", "10");
@@ -154,6 +158,8 @@ namespace Automix_Data_Management
             param.TempDir = node.InnerText;
             node = configFile.DocumentElement.SelectSingleNode("transitionDuration");
             param.TransitionDuration = node.InnerText;
+            node = configFile.DocumentElement.SelectSingleNode("applyTransitionDuration");
+            param.ApplyTransitionDuration = node.InnerText;
             node = configFile.DocumentElement.SelectSingleNode("mixDuration");
             param.MixDuration = node.InnerText;
             node = configFile.DocumentElement.SelectSingleNode("bpmP");
@@ -177,6 +183,7 @@ namespace Automix_Data_Management
             MakeSettlement(Settings.tempDir.ToText(), param.TempDir);
             MakeSettlement(Settings.mixDuration.ToText(), param.MixDuration);
             MakeSettlement(Settings.transitionDuration.ToText(), param.TransitionDuration);
+            MakeSettlement(Settings.applyTransitionDuration.ToText(), param.ApplyTransitionDuration);
             MakeSettlement(Settings.bpmPriority.ToText(), param.BpmPriority);
             MakeSettlement(Settings.keyTonalityPriority.ToText(), param.KeyTonalityPriority);
             MakeSettlement(Settings.keyNumberPriority.ToText(), param.KeyNumberPriority);

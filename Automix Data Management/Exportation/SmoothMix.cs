@@ -20,6 +20,7 @@ namespace Automix_Data_Management.Exportation
     {
         public static int DEFAULTTRANSITIONDURATION = 10;
         public static int DEFAULTMIXDURATION = 60000;
+        public static bool APPLYTRANSITIONDURATION = false;
 
         public int TransitionDuration { get; set; }
 
@@ -33,11 +34,9 @@ namespace Automix_Data_Management.Exportation
         private float[] _savedOverlay;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SmoothMix() : this(10) { }
-
-        public SmoothMix(int transitionDuration)
+        public SmoothMix()
         {
-            TransitionDuration = transitionDuration;
+            TransitionDuration = Int32.Parse(SettingsAccessor.GetSetting(SettingsAccessor.Settings.transitionDuration));
             MixDuration = 60000 * (Int32.Parse(SettingsAccessor.GetSetting(SettingsAccessor.Settings.mixDuration)));
             _tempDirPath = SettingsAccessor.GetSetting(SettingsAccessor.Settings.tempDir);
             _tempFileList = new List<string>();
@@ -180,29 +179,36 @@ namespace Automix_Data_Management.Exportation
             var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
 
             int fadeInDuration1, fadeOutDuration1, fadeInDuration2;
-            if (track1 == collection[0])
+            if (APPLYTRANSITIONDURATION)
             {
-                fadeInDuration1 = CalculateFadeInDuration(track1);
+                fadeInDuration1 = TransitionDuration*1000;
+                fadeOutDuration1 = TransitionDuration*1000;
             }
-            else
-            {
-                fadeInDuration1 = averageFadeDuration;
-            }
-            if (track1 == collection[collection.Count - 1])
-            {
-                fadeOutDuration1 = CalculateFadeOutDuration(track1);
-                averageFadeDuration = 0;
-            }
-            else
-            {
-                fadeOutDuration1 = CalculateFadeOutDuration(track1);
-                fadeInDuration2 = CalculateFadeInDuration(track2);
-                var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
-                averageFadeDuration = averageFadesDuration;
-                fadeOutDuration1 = averageFadeDuration;
+            else { 
+                if (track1 == collection[0])
+                {
+                    fadeInDuration1 = CalculateFadeInDuration(track1);
+                }
+                else
+                {
+                    fadeInDuration1 = averageFadeDuration;
+                }
+                if (track1 == collection[collection.Count - 1])
+                {
+                    fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                    averageFadeDuration = 0;
+                }
+                else
+                {
+                    fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                    fadeInDuration2 = CalculateFadeInDuration(track2);
+                    var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
+                    averageFadeDuration = averageFadesDuration;
+                    fadeOutDuration1 = averageFadeDuration;
+                }
             }
 
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1/2 + fadeInDuration1/2 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
             var overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)

@@ -102,7 +102,6 @@ namespace Automix_Data_Management
         /// <param name="id3Tag">MP3 tags</param>
         public static void WavToMp3(List<string> inputFiles, string outputFile, ID3TagData id3Tag)
         {
-            Console.WriteLine(ExportQuality);
             var writer = new LameMP3FileWriter(outputFile, TempWaveFormat, ExportQuality, id3Tag);
 
             foreach (var inputFile in inputFiles)

@@ -37,6 +37,7 @@ namespace Automix_UI.Forms
         private void OnOkButtonClick(object sender, EventArgs e)
         {
             _presenter.SetMixDuration(_mixDuration.Value);
+            _presenter.SetApplyTransitionDuration(_applyTransitionDuration.Checked);
             _presenter.SetTransitionDuration(_transitionDuration.Value);
             _presenter.SetMP3Quality((int)Int32.Parse(_MP3Quality.SelectedItem.ToString()));
 
@@ -76,6 +77,7 @@ namespace Automix_UI.Forms
         public void LoadParameters(Parameters param)
         {
             _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
+            _applyTransitionDuration.Checked = Boolean.Parse(param.ApplyTransitionDuration);
             _mixDuration.Value = Int32.Parse(param.MixDuration);
             _bpmBar.Value = (int)Int32.Parse(param.BpmPriority);
             _keyTonalityBar.Value = (int)Int32.Parse(param.KeyTonalityPriority);
