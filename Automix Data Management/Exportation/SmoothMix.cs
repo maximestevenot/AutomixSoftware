@@ -21,7 +21,6 @@ namespace Automix_Data_Management.Exportation
     public class SmoothMix : IExportation
     {
         public static int DEFAULTTRANSITIONDURATION = 10;
-        public static int DEFAULTMIXDURATION = 60000;
 
         public int TransitionDuration { get; set; }
 
@@ -78,25 +77,29 @@ namespace Automix_Data_Management.Exportation
 
                 if (MixDuration < Convert.ToInt32(track.Duration*176.4)/2)
                 {
-                    track.FadeOuts[track.FadeOuts.Length - 2] = track.Duration - TransitionDuration * 1000;
-                    track.FadeOuts[track.FadeOuts.Length - 1] = track.Duration;
-                    var fadeInDuration = TransitionDuration * 1000;
-                    if (track.FadeIns.Length > 1)
+                    if (MixDuration > 0)
                     {
-                        fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
-                    }
-                    var fadeOutDuration = TransitionDuration * 1000;
-                    if (track.FadeOuts.Length > 1)
-                    {
-                        fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
-                    }
+                        //track.FadeOuts[track.FadeOuts.Length - 2] = track.Duration - TransitionDuration * 1000;
+                        //track.FadeOuts[track.FadeOuts.Length - 1] = track.Duration;
+                        var fadeInDuration = TransitionDuration * 1000;
+                        if (track.FadeIns.Length > 1)
+                        {
+                            fadeInDuration = track.FadeIns[1] - track.FadeIns[0];
+                        }
+                        var fadeOutDuration = TransitionDuration * 1000;
+                        if (track.FadeOuts.Length > 1)
+                        {
+                            fadeOutDuration = track.FadeOuts[track.FadeOuts.Length - 1] - track.FadeOuts[track.FadeOuts.Length - 2];
+                        }
+                        else { }
 
-                    var tmpTrackDuration = track.Duration;
-                    track.Duration = Convert.ToInt32((MixDuration * 2) / 176.4 + ((((fadeInDuration + fadeOutDuration - 2000) / 1000) * SamplesPerSecond) * 2) / 176.4);
+                        var tmpTrackDuration = track.Duration;
+                        track.Duration = Convert.ToInt32((MixDuration * 2) / 176.4 + ((((fadeInDuration + fadeOutDuration - 2000) / 1000) * SamplesPerSecond) * 2) / 176.4);
 
-                    bufferSize = Convert.ToInt32(FadeInOut(track));
-                    track.Duration = tmpTrackDuration;
-                    // TODO MAKE IT STOP !!!
+                        bufferSize = Convert.ToInt32(FadeInOut(track));
+                        track.Duration = tmpTrackDuration;
+                        MixDuration = -1;
+                    }
                 }
                 else
                 {

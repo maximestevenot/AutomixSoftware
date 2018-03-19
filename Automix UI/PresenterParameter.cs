@@ -67,7 +67,6 @@ namespace Automix_UI
         internal void SetMixDuration(decimal value)
         {
             _parameters.MixDuration = value.ToString();
-            SmoothMix.DEFAULTMIXDURATION = (int) value;
         }
 
         public void UpdateViews()
