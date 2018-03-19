@@ -21,6 +21,7 @@
             KeyTonalityPriority = keyTonalityBarValue;
             DanceabilityPriority = danceabiltyBarValue;
         }
+
         public void UpdateBpmPriority(int value)
         {
             BpmPriority = value;

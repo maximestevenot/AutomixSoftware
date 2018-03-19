@@ -73,6 +73,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PresenterParameter.cs" />
+    <Compile Include="IViewWithParameters.cs" />
     <Compile Include="Drawing\AutomixColorTable.cs" />
     <Compile Include="Drawing\ListViewDrawer.cs" />
     <Compile Include="Forms\AboutForm.cs">

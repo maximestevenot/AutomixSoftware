@@ -16,6 +16,11 @@ using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
 using static Automix_Data_Management.Utils;
+<<<<<<< HEAD
+=======
+using static Automix_Data_Management.SettingsAccessor;
+using log4net;
+>>>>>>> develop
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
@@ -762,7 +767,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            SetTempDir(dialog.SelectedPath);
+            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.tempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");
