@@ -15,12 +15,6 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using static Automix_Data_Management.Utils;
-<<<<<<< HEAD
-=======
-using static Automix_Data_Management.SettingsAccessor;
-using log4net;
->>>>>>> develop
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;

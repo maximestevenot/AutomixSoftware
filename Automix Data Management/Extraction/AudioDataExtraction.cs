@@ -14,7 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using static Automix_Data_Management.Utils;
 
 namespace Automix_Data_Management.Extraction
 {

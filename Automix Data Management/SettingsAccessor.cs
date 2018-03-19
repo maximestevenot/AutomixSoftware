@@ -8,9 +8,7 @@
 
 using System;
 using System.IO;
-using System.Security;
 using System.Xml;
-using Automix_Data_Management.Exportation;
 using Automix_Data_Management.Model;
 using System.Reflection;
 
@@ -135,10 +133,10 @@ namespace Automix_Data_Management
             writer.WriteElementString("tempDir", Path.GetTempPath()+"//AutomixSoftware");
             writer.WriteElementString("transitionDuration", "10");
             writer.WriteElementString("mixDuration", "30");
-            writer.WriteElementString("bpmP", "0");
-            writer.WriteElementString("keyNumberP", "0");
-            writer.WriteElementString("keyTonalityP", "0");
-            writer.WriteElementString("danceabilityP", "0");
+            writer.WriteElementString("bpmP", "10");
+            writer.WriteElementString("keyNumberP", "10");
+            writer.WriteElementString("keyTonalityP", "10");
+            writer.WriteElementString("danceabilityP", "10");
             writer.WriteElementString("MP3Quality", "320");
             writer.WriteEndElement();
             writer.Flush();

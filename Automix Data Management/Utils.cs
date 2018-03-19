@@ -7,10 +7,6 @@
 // You should have received a copy of the License along with this program.
 
 using System;
-using System.IO;
-using System.Security;
-using System.Xml;
-using Automix_Data_Management.Exportation;
 
 namespace Automix_Data_Management
 {

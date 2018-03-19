@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_AI.Distances;
 using Automix_UI.Forms;
