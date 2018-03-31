@@ -533,7 +533,7 @@ namespace Automix_UI.Forms
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar1.Value = e.ProgressPercentage;
             _presenter.Notify();
         }
 

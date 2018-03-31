@@ -79,6 +79,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this._circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -501,19 +502,49 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // _circularProgressBar1
+            // 
+            this._circularProgressBar1.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.Liner;
+            this._circularProgressBar1.AnimationSpeed = 500;
+            this._circularProgressBar1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this._circularProgressBar1, "_circularProgressBar1");
+            this._circularProgressBar1.ForeColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar1.InnerColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar1.InnerMargin = 2;
+            this._circularProgressBar1.InnerWidth = -1;
+            this._circularProgressBar1.MarqueeAnimationSpeed = 2000;
+            this._circularProgressBar1.Maximum = 1000;
+            this._circularProgressBar1.Name = "_circularProgressBar1";
+            this._circularProgressBar1.OuterColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar1.OuterMargin = -25;
+            this._circularProgressBar1.OuterWidth = 0;
+            this._circularProgressBar1.ProgressColor = System.Drawing.Color.Lime;
+            this._circularProgressBar1.ProgressWidth = 15;
+            this._circularProgressBar1.SecondaryFont = new System.Drawing.Font("Microsoft Sans Serif", 36F);
+            this._circularProgressBar1.StartAngle = 270;
+            this._circularProgressBar1.Value = 0;
+            this._circularProgressBar1.SubscriptColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar1.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
+            this._circularProgressBar1.SubscriptText = ".23";
+            this._circularProgressBar1.SuperscriptColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar1.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
+            this._circularProgressBar1.SuperscriptText = "°C";
+            this._circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(8, 8, 0, 0);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.Controls.Add(this._circularProgressBar1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this._sortButton);
-            this.Controls.Add(this._logo);
             this.Controls.Add(this._importButton);
             this.Controls.Add(this._musicListView);
             this.Controls.Add(this._statusStrip);
             this.Controls.Add(this._menuStrip);
             this.Controls.Add(this._generateButton);
+            this.Controls.Add(this._logo);
             this.MainMenuStrip = this._menuStrip;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnMainFormClosing);
@@ -583,5 +614,6 @@
         private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _lockTrackToolStrip;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private CircularProgressBar.CircularProgressBar _circularProgressBar1;
     }
 }
