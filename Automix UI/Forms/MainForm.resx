@@ -1692,31 +1692,28 @@
   <metadata name="_trackBarTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 56</value>
   </metadata>
-  <data name="_circularProgressBar1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 72pt, style=Bold</value>
-  </data>
-  <data name="_circularProgressBar1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_circularProgressBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 37</value>
   </data>
-  <data name="_circularProgressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 134</value>
+  <data name="_circularProgressBar.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>60, 60</value>
   </data>
-  <data name="_circularProgressBar1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_circularProgressBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 137</value>
+  </data>
+  <data name="_circularProgressBar.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="_circularProgressBar1.Text" xml:space="preserve">
-    <value>_circularProgressBar1</value>
+  <data name="&gt;&gt;_circularProgressBar.Name" xml:space="preserve">
+    <value>_circularProgressBar</value>
   </data>
-  <data name="&gt;&gt;_circularProgressBar1.Name" xml:space="preserve">
-    <value>_circularProgressBar1</value>
+  <data name="&gt;&gt;_circularProgressBar.Type" xml:space="preserve">
+    <value>AltoControls.CircularPB, AltoControls, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;_circularProgressBar1.Type" xml:space="preserve">
-    <value>CircularProgressBar.CircularProgressBar, CircularProgressBar, Version=2.5.6403.13419, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;_circularProgressBar1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_circularProgressBar.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;_circularProgressBar1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_circularProgressBar.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

@@ -86,7 +86,6 @@ namespace Automix_UI.Forms
             _skipButton.Enabled = false;
             _reloadButton.Enabled = false;
             _exportMenuItem.Enabled = false;
-            _circularProgressBar1.Visible = false;
             _toolStripProgressBar.Visible = false;
 
             _deleteTrackToolStrip.ShortcutKeys = Keys.Delete;
@@ -153,7 +152,7 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _importMenuItem.Enabled = false;
             _optionsToolStripMenuItem.Enabled = false;
-            _circularProgressBar1.Visible = true;
+            //_circularProgressBar1.Visible = true;
 
             _musicListView.AllowDrop = false;
         }
@@ -174,7 +173,7 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = true;
             _importMenuItem.Enabled = true;
             _optionsToolStripMenuItem.Enabled = true;
-            _circularProgressBar1.Value = 0;
+            _circularProgressBar.Value = 0;
 
 
             _musicListView.AllowDrop = true;
@@ -533,7 +532,7 @@ namespace Automix_UI.Forms
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _circularProgressBar1.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
             _presenter.Notify();
         }
 
@@ -555,7 +554,6 @@ namespace Automix_UI.Forms
                 _presenter.Notify();
             }
             OnWorkerStop();
-            _circularProgressBar1.Visible = false;
             StopPlayer();
             
         }
@@ -585,7 +583,7 @@ namespace Automix_UI.Forms
 
         private void SortBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _circularProgressBar1.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void SortBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -604,7 +602,6 @@ namespace Automix_UI.Forms
                 _presenter.Notify();
             }
             OnWorkerStop();
-            _circularProgressBar1.Visible = false;
             StopPlayer();
         }
 
@@ -622,7 +619,7 @@ namespace Automix_UI.Forms
 
         private void ExportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _circularProgressBar1.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void ExportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -637,7 +634,6 @@ namespace Automix_UI.Forms
                 ShowErrorDialog(e.Error.Message);
             }
             OnWorkerStop();
-            _circularProgressBar1.Visible = false;
         }
 
         private void OnPlayerButtonClick(object sender, EventArgs e)
@@ -695,7 +691,7 @@ namespace Automix_UI.Forms
 
         private void PlayerBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _circularProgressBar1.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void PlayerBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -720,7 +716,6 @@ namespace Automix_UI.Forms
                 }
             }
             OnWorkerStop();
-            _circularProgressBar1.Visible = false;
         }
 
         private void TrackBarTimer_Tick(object sender, EventArgs e)

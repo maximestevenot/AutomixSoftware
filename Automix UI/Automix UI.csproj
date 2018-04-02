@@ -184,8 +184,8 @@
     <Content Include="Resources\UnlockedIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CircularProgressBar">
-      <Version>2.5.6403.13419</Version>
+    <PackageReference Include="AltoControls">
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.8</Version>
