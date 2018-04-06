@@ -2,6 +2,8 @@
 using System;
 using System.Windows.Forms;
 using Automix_Data_Management.Model;
+using Automix_Data_Management;
+using NAudio.Lame;
 
 namespace Automix_UI.Forms
 {
@@ -36,6 +38,7 @@ namespace Automix_UI.Forms
         {
             _presenter.SetMixDuration(_mixDuration.Value);
             _presenter.SetTransitionDuration(_transitionDuration.Value);
+            _presenter.SetMP3Quality((int)Int32.Parse(_MP3Quality.SelectedItem.ToString()));
 
             ManualProfile toSave = new ManualProfile();
             toSave.UpdateBpmPriority(_bpmBar.Value);
@@ -74,10 +77,13 @@ namespace Automix_UI.Forms
         {
             _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
             _mixDuration.Value = Int32.Parse(param.MixDuration);
-            _bpmBar.Value = (int)(Int32.Parse(param.BpmPriority) / 120);
-            _keyTonalityBar.Value = (int)(Int32.Parse(param.KeyTonalityPriority) / 200);
-            _keyNumberBar.Value = (int)((Int32.Parse(param.KeyNumberPriority)) / 2);
-            _danceabilityBar.Value = (int)(Int32.Parse(param.DanceabilityPriority));
+            _bpmBar.Value = (int)Int32.Parse(param.BpmPriority);
+            _keyTonalityBar.Value = (int)Int32.Parse(param.KeyTonalityPriority);
+            _keyNumberBar.Value = (int)Int32.Parse(param.KeyNumberPriority);
+            _danceabilityBar.Value = (int)Int32.Parse(param.DanceabilityPriority);
+            _MP3Quality.SelectedIndex = _MP3Quality.FindString(param.MP3Quality);
+            AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.MP3Quality);
         }
+
     }
 }

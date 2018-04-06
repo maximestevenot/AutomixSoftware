@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_AI.Distances;
 using Automix_UI.Forms;
 using Automix_Data_Management.Exportation;
 using static Automix_Data_Management.SettingsAccessor;
+using Automix_Data_Management;
+using NAudio.Lame;
 
 namespace Automix_UI
 {
@@ -68,6 +67,12 @@ namespace Automix_UI
         {
             _parameters.MixDuration = value.ToString();
         }
+
+        internal void SetMP3Quality(int value)
+        {
+            _parameters.MP3Quality = value.ToString();
+            AudioIO.ExportQuality = (LAMEPreset)value;
+        } 
 
         public void UpdateViews()
         {

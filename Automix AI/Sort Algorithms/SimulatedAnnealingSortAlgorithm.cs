@@ -11,7 +11,6 @@ using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Automix_AI.Sort_Algorithms
 {
