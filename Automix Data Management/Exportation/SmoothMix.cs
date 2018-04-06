@@ -127,10 +127,12 @@ namespace Automix_Data_Management.Exportation
                 fadeOutDuration1 = averageFadeDuration;
             }
 
+            log.Debug("Start :" + track1.FadeIns[0]);
+            log.Debug("End : " + track1.FadeOuts[track1.FadeOuts.Length - 1]);
             log.Debug("track Duration : "+ track1.Duration);
-            log.Debug("StartFadeIn : " + startFadeIn1 + " - " + (track1.FadeIns[0]));
+            log.Debug("StartFadeIn : " + startFadeIn1 + " - " + (track1.FadeIns[0]) + " - " + startTimeSpan.TotalMilliseconds);
             var endTimeSpan = new TimeSpan(0, 0, 0, (CalculateStartFadeOut(track1)));
-            log.Debug("EndFadeOut : " + endTimeSpan);
+            log.Debug("EndFadeOut : " + endTimeSpan.TotalMilliseconds);
             log.Debug("Duration of truncate song : " + (endTimeSpan.TotalMilliseconds - startTimeSpan.TotalMilliseconds));
 
             var bufferSize = 0;
