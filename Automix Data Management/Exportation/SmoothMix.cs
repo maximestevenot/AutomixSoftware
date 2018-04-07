@@ -80,12 +80,18 @@ namespace Automix_Data_Management.Exportation
 
                 if (track != collection[nbTracks - 1])
                 {
-                    Track nextTrack = collection[i + 1];
-                    fadeInDurationPreviousTrack = FadeInOut(track, nextTrack, fadeInDurationPreviousTrack, collection);
+                    if (_currentMixDuration < MixDuration)
+                    {
+                        Track nextTrack = collection[i + 1];
+                        fadeInDurationPreviousTrack = FadeInOut(track, nextTrack, fadeInDurationPreviousTrack, collection);
+                    }
                 }
                 else
                 {
-                    FadeInOut(track, track, fadeInDurationPreviousTrack, collection);
+                    if (_currentMixDuration < MixDuration)
+                    { 
+                        FadeInOut(track, track, fadeInDurationPreviousTrack, collection);
+                    }
                 }
 
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
@@ -184,13 +190,22 @@ namespace Automix_Data_Management.Exportation
                 averageFadeDuration = averageFadesDuration;
                 fadeOutDuration1 = averageFadeDuration;
             }
-            _currentMixDuration += (track1.Duration - startFadeIn1)+fadeInDuration1+averageFadeDuration;
+            var trackDuration = (track1.Duration - startFadeIn1) + fadeInDuration1 + averageFadeDuration;
             if (track2 == null)
             {
-                _currentMixDuration += averageFadeDuration;
+                trackDuration += averageFadeDuration;
             }
 
-            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
+            long bufferSize = 0;
+            if (_currentMixDuration < MixDuration)
+            {
+                bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
+            }
+            else
+            {
+                bufferSize = (MixDuration - _currentMixDuration) * SamplesPerSecond;
+            }
+
             var overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
 
             if (bufferSize < overlaySize)
@@ -218,6 +233,8 @@ namespace Automix_Data_Management.Exportation
             {
                 _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
             }
+
+            _currentMixDuration += trackDuration;
 
             return averageFadeDuration;
         }
@@ -248,11 +265,11 @@ namespace Automix_Data_Management.Exportation
             _waveFileWriter.Flush();
             _waveFileWriter.Close();
             _tempFileList.Add(_tempWavPath);
-            WaveFileReader fr = new WaveFileReader(_tempWavPath);
+            /*WaveFileReader fr = new WaveFileReader(_tempWavPath);
             WaveFileWriter writer = new WaveFileWriter(_tempDirPath + "cut2.wav", fr.WaveFormat);
             int end = MixDuration * fr.WaveFormat.AverageBytesPerSecond / 1000;
             end = end - end % fr.WaveFormat.BlockAlign;
-            TrimWavFile(fr, writer, 0, end);
+            TrimWavFile(fr, writer, 0, end);*/
         }
 
         public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan cutFromEnd)
