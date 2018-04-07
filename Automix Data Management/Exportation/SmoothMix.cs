@@ -31,6 +31,7 @@ namespace Automix_Data_Management.Exportation
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private int _currentMixDuration;
 
         public SmoothMix() : this(10) { }
 
@@ -50,8 +51,7 @@ namespace Automix_Data_Management.Exportation
 
             var count = 1;
             var tempFileDuration = 0;
-            
-            var quality = AudioIO.ExportQuality.ToString().Substring(AudioIO.ExportQuality.ToString().Length - 3);
+            _currentMixDuration = 0;
 
             Track firstTrack = collection[0];
             int fadeInDurationPreviousTrack = CalculateFadeInDuration(firstTrack);
@@ -71,6 +71,11 @@ namespace Automix_Data_Management.Exportation
                 {
                     tempFileDuration = track.Duration;
                     CreateNewTempFile();
+                }
+
+                if (i == 0)
+                {
+                    _currentMixDuration += CalculateFadeInDuration(firstTrack);
                 }
 
                 if (track != collection[nbTracks - 1])
@@ -94,82 +99,8 @@ namespace Automix_Data_Management.Exportation
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
             }
             DeleteTempFiles();
-        }
-
-        private int FadeInOut(Track track1, Track track2, int averageFadeDuration, TrackCollection collection)
-        {
-            int startFadeIn1 = CalculateStartFadeIn(track1);
-            var fileReader = new Mp3FileReader(track1.Path);
-            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn1);
-            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
-
-            int fadeInDuration1, fadeOutDuration1, fadeInDuration2;
-            if (track1 == collection[0])
-            {
-                fadeInDuration1 = CalculateFadeInDuration(track1);
-            }
-            else
-            {
-                fadeInDuration1 = averageFadeDuration;
-            }
-
-            if (track1 == collection[collection.Count - 1])
-            {
-                fadeOutDuration1 = CalculateFadeOutDuration(track1);
-                averageFadeDuration = 0;
-            }
-            else
-            {
-                fadeOutDuration1 = CalculateFadeOutDuration(track1);
-                fadeInDuration2 = CalculateFadeInDuration(track2);
-                var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
-                averageFadeDuration = averageFadesDuration;
-                fadeOutDuration1 = averageFadeDuration;
-            }
-
-            log.Debug("Start :" + track1.FadeIns[0]);
-            log.Debug("End : " + track1.FadeOuts[track1.FadeOuts.Length - 1]);
-            log.Debug("track Duration : "+ track1.Duration);
-            log.Debug("StartFadeIn : " + startFadeIn1 + " - " + (track1.FadeIns[0]) + " - " + startTimeSpan.TotalMilliseconds);
-            var endTimeSpan = new TimeSpan(0, 0, 0, (CalculateStartFadeOut(track1)));
-            log.Debug("EndFadeOut : " + endTimeSpan.TotalMilliseconds);
-            log.Debug("Duration of truncate song : " + (endTimeSpan.TotalMilliseconds - startTimeSpan.TotalMilliseconds));
-
-            var bufferSize = 0;
-            var overlaySize = 0;
-
-            bufferSize = Convert.ToInt32(fileReader.Length/2) - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
-            overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
-
-           
-            if (bufferSize < overlaySize)
-            {
-                bufferSize = overlaySize;
-            }
-
-            var buffer = new float[bufferSize];
-
-            fade.BeginFadeIn(fadeInDuration1);
-            fade.Read(buffer, 0, (int)(bufferSize - overlaySize));
-            fade.BeginFadeOut(fadeOutDuration1);
-            fade.Read(buffer, (int)(bufferSize - overlaySize), overlaySize);
-
-            if (_savedOverlay != null)
-            {
-                buffer = ApplyOverlay(buffer, _savedOverlay);
-            }
-          
-            _waveFileWriter.WriteSamples(buffer, 0, (int)(bufferSize - overlaySize));
-            _waveFileWriter.Flush();
-
-
-            _savedOverlay = new float[overlaySize];
-            for (var i = 0; i < overlaySize; i++)
-            {
-                _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
-            }
-
-            return averageFadeDuration;
+            _currentMixDuration += fadeInDurationPreviousTrack;
+            Console.WriteLine(_currentMixDuration);
         }
 
         private int CalculateFadeInDuration(Track track)
@@ -224,6 +155,71 @@ namespace Automix_Data_Management.Exportation
             return startFadeOut;
         }
 
+
+        private int FadeInOut(Track track1, Track track2, int averageFadeDuration, TrackCollection collection)
+        {
+            int startFadeIn1 = CalculateStartFadeIn(track1);
+            var fileReader = new Mp3FileReader(track1.Path);
+            var startTimeSpan = new TimeSpan(0, 0, 0, 0, startFadeIn1);
+            var fade = new FadeInOutSampleProvider(fileReader.ToSampleProvider().Skip(startTimeSpan), false);
+
+            int fadeInDuration1, fadeOutDuration1, fadeInDuration2;
+            if (track1 == collection[0])
+            {
+                fadeInDuration1 = CalculateFadeInDuration(track1);
+            }
+            else
+            {
+                fadeInDuration1 = averageFadeDuration;
+            }
+            if (track1 == collection[collection.Count - 1])
+            {
+                fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                averageFadeDuration = 0;
+            }
+            else
+            {
+                fadeOutDuration1 = CalculateFadeOutDuration(track1);
+                fadeInDuration2 = CalculateFadeInDuration(track2);
+                var averageFadesDuration = (fadeOutDuration1 + fadeInDuration2) / 2;
+                averageFadeDuration = averageFadesDuration;
+                fadeOutDuration1 = averageFadeDuration;
+            }
+
+            var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
+            var overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
+
+            if (bufferSize < overlaySize)
+            {
+                bufferSize = overlaySize;
+            }
+
+            var buffer = new float[bufferSize];
+
+            fade.BeginFadeIn(fadeInDuration1);
+            fade.Read(buffer, 0, (int)(bufferSize - overlaySize));
+            fade.BeginFadeOut(fadeOutDuration1);
+            fade.Read(buffer, (int)(bufferSize - overlaySize), overlaySize);
+
+            if (_savedOverlay != null)
+            {
+                buffer = ApplyOverlay(buffer, _savedOverlay);
+            }
+
+            _waveFileWriter.WriteSamples(buffer, 0, (int)(bufferSize - overlaySize));
+            _waveFileWriter.Flush();
+
+            _savedOverlay = new float[overlaySize];
+            for (var i = 0; i < overlaySize; i++)
+            {
+                _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
+            }
+
+            _currentMixDuration += (track1.Duration - averageFadeDuration);
+
+            return averageFadeDuration;
+        }
+
         private static float[] ApplyOverlay(float[] trackBuffer, float[] overlayBuffer)
         {
             for (var i = 0; i < overlayBuffer.Length; i++)
@@ -250,6 +246,51 @@ namespace Automix_Data_Management.Exportation
             _waveFileWriter.Flush();
             _waveFileWriter.Close();
             _tempFileList.Add(_tempWavPath);
+            Console.WriteLine(_tempWavPath);
+            WaveFileReader fr = new WaveFileReader(_tempWavPath);
+            WaveFileWriter writer = new WaveFileWriter(_tempDirPath + "cut2.wav", fr.WaveFormat);
+            int end = MixDuration * fr.WaveFormat.AverageBytesPerSecond / 1000;
+            end = end - end % fr.WaveFormat.BlockAlign;
+            TrimWavFile(fr, writer, 0, end);
+        }
+
+        public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan cutFromEnd)
+        {
+            using (WaveFileReader reader = new WaveFileReader(inPath))
+            {
+                using (WaveFileWriter writer = new WaveFileWriter(outPath, reader.WaveFormat))
+                {
+                    int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
+
+                    int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
+                    startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
+
+                    int endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
+                    endBytes = endBytes - endBytes % reader.WaveFormat.BlockAlign;
+                    int endPos = (int)reader.Length - endBytes;
+
+                    TrimWavFile(reader, writer, startPos, endPos);
+                }
+            }
+        }
+
+        private static void TrimWavFile(WaveFileReader reader, WaveFileWriter writer, int startPos, int endPos)
+        {
+            reader.Position = startPos;
+            byte[] buffer = new byte[1024];
+            while (reader.Position < endPos)
+            {
+                int bytesRequired = (int) (endPos - reader.Position);
+                if (bytesRequired > 0)
+                {
+                    int bytesToRead = Math.Min(bytesRequired, buffer.Length);
+                    int bytesRead = reader.Read(buffer, 0, bytesToRead);
+                    if (bytesRead > 0)
+                    {
+                        writer.WriteData(buffer, 0, bytesRead);
+                    }
+                }
+            }
         }
 
         private void DeleteTempFiles()
