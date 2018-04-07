@@ -99,7 +99,6 @@ namespace Automix_Data_Management.Exportation
                 bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
             }
             DeleteTempFiles();
-            _currentMixDuration += fadeInDurationPreviousTrack;
             Console.WriteLine(_currentMixDuration);
         }
 
@@ -185,6 +184,11 @@ namespace Automix_Data_Management.Exportation
                 averageFadeDuration = averageFadesDuration;
                 fadeOutDuration1 = averageFadeDuration;
             }
+            _currentMixDuration += (track1.Duration - startFadeIn1)+fadeInDuration1+averageFadeDuration;
+            if (track2 == null)
+            {
+                _currentMixDuration += averageFadeDuration;
+            }
 
             var bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
             var overlaySize = (fadeOutDuration1 / 1000) * SamplesPerSecond;
@@ -215,8 +219,6 @@ namespace Automix_Data_Management.Exportation
                 _savedOverlay[i] = buffer[(bufferSize - overlaySize) + i];
             }
 
-            _currentMixDuration += (track1.Duration - averageFadeDuration);
-
             return averageFadeDuration;
         }
 
@@ -246,7 +248,6 @@ namespace Automix_Data_Management.Exportation
             _waveFileWriter.Flush();
             _waveFileWriter.Close();
             _tempFileList.Add(_tempWavPath);
-            Console.WriteLine(_tempWavPath);
             WaveFileReader fr = new WaveFileReader(_tempWavPath);
             WaveFileWriter writer = new WaveFileWriter(_tempDirPath + "cut2.wav", fr.WaveFormat);
             int end = MixDuration * fr.WaveFormat.AverageBytesPerSecond / 1000;
