@@ -73,7 +73,7 @@ namespace Automix_Data_Management.Extraction
             dataBase.AddTrack(track);
 
             Interlocked.Increment(ref AudioDataExtraction.ExploredTracks);
-            backgroundWorker.ReportProgress(500 + 500 * AudioDataExtraction.ExploredTracks / nbTracks);
+            backgroundWorker.ReportProgress(250 + 750 * AudioDataExtraction.ExploredTracks / nbTracks);
         }
 
         private void ExtractFadesFromExecResult(BackgroundWorker bw, CancellationTokenSource cancellationTokenSource,

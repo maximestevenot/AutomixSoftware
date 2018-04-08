@@ -152,8 +152,7 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _importMenuItem.Enabled = false;
             _optionsToolStripMenuItem.Enabled = false;
-            _toolStripProgressBar.Value = 0;
-            _toolStripProgressBar.Visible = true;
+            //_circularProgressBar1.Visible = true;
 
             _musicListView.AllowDrop = false;
         }
@@ -174,8 +173,8 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = true;
             _importMenuItem.Enabled = true;
             _optionsToolStripMenuItem.Enabled = true;
-            _toolStripProgressBar.Visible = false;
-            _toolStripProgressBar.Value = 0;
+            _circularProgressBar.Value = 0;
+
 
             _musicListView.AllowDrop = true;
         }
@@ -533,7 +532,7 @@ namespace Automix_UI.Forms
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
             _presenter.Notify();
         }
 
@@ -556,6 +555,7 @@ namespace Automix_UI.Forms
             }
             OnWorkerStop();
             StopPlayer();
+            
         }
 
         private static void ShowErrorDialog(string errorMessage)
@@ -583,7 +583,7 @@ namespace Automix_UI.Forms
 
         private void SortBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void SortBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -619,7 +619,7 @@ namespace Automix_UI.Forms
 
         private void ExportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void ExportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -691,7 +691,7 @@ namespace Automix_UI.Forms
 
         private void PlayerBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void PlayerBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -817,5 +817,9 @@ namespace Automix_UI.Forms
         {
             _presenter.UpdateSortAlgorithm(profileChosen);
         }
+
+        
     }
 }
+
+
