@@ -196,7 +196,7 @@ namespace Automix_Data_Management.Exportation
                 trackDuration += averageFadeDuration;
             }
 
-            long bufferSize = 0;
+            long bufferSize;
             if (_currentMixDuration < MixDuration)
             {
                 bufferSize = (fileReader.Length) / 2 - ((fadeOutDuration1 + fadeInDuration1 + startFadeIn1 - 2000) / 1000) * SamplesPerSecond;
@@ -265,50 +265,6 @@ namespace Automix_Data_Management.Exportation
             _waveFileWriter.Flush();
             _waveFileWriter.Close();
             _tempFileList.Add(_tempWavPath);
-            /*WaveFileReader fr = new WaveFileReader(_tempWavPath);
-            WaveFileWriter writer = new WaveFileWriter(_tempDirPath + "cut2.wav", fr.WaveFormat);
-            int end = MixDuration * fr.WaveFormat.AverageBytesPerSecond / 1000;
-            end = end - end % fr.WaveFormat.BlockAlign;
-            TrimWavFile(fr, writer, 0, end);*/
-        }
-
-        public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan cutFromEnd)
-        {
-            using (WaveFileReader reader = new WaveFileReader(inPath))
-            {
-                using (WaveFileWriter writer = new WaveFileWriter(outPath, reader.WaveFormat))
-                {
-                    int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
-
-                    int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
-                    startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
-
-                    int endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
-                    endBytes = endBytes - endBytes % reader.WaveFormat.BlockAlign;
-                    int endPos = (int)reader.Length - endBytes;
-
-                    TrimWavFile(reader, writer, startPos, endPos);
-                }
-            }
-        }
-
-        private static void TrimWavFile(WaveFileReader reader, WaveFileWriter writer, int startPos, int endPos)
-        {
-            reader.Position = startPos;
-            byte[] buffer = new byte[1024];
-            while (reader.Position < endPos)
-            {
-                int bytesRequired = (int) (endPos - reader.Position);
-                if (bytesRequired > 0)
-                {
-                    int bytesToRead = Math.Min(bytesRequired, buffer.Length);
-                    int bytesRead = reader.Read(buffer, 0, bytesToRead);
-                    if (bytesRead > 0)
-                    {
-                        writer.WriteData(buffer, 0, bytesRead);
-                    }
-                }
-            }
         }
 
         private void DeleteTempFiles()
