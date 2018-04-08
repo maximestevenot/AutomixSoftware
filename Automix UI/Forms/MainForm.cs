@@ -15,13 +15,12 @@ using System.Windows.Forms;
 using Automix_Data_Management.Model;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using static Automix_Data_Management.Utils;
-using log4net;
 using Automix_Data_Management.Storage;
 using System.Resources;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Automix_AI.Distances;
 
 namespace Automix_UI.Forms
 {
@@ -51,6 +50,8 @@ namespace Automix_UI.Forms
         private int _insertionIndex;
         private InsertionModeType _insertionMode;
 
+        private ParameterForm _parameterForm;
+
         public MainForm()
         {
             InitializeComponent();
@@ -69,6 +70,8 @@ namespace Automix_UI.Forms
             _playerbutton.Image = new Bitmap(Resources.PlayIcon, 70, 70);
             _skipButton.Image = new Bitmap(Resources.SeekIcon, 70, 70);
             _reloadButton.Image = new Bitmap(Resources.ReloadIcon, 60, 60);
+
+            _parameterForm = new ParameterForm(this);
 
             _lockpadImageList = new ImageList();
             _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
@@ -149,8 +152,7 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = false;
             _importMenuItem.Enabled = false;
             _optionsToolStripMenuItem.Enabled = false;
-            _toolStripProgressBar.Value = 0;
-            _toolStripProgressBar.Visible = true;
+            //_circularProgressBar1.Visible = true;
 
             _musicListView.AllowDrop = false;
         }
@@ -171,8 +173,8 @@ namespace Automix_UI.Forms
             _exportMenuItem.Enabled = true;
             _importMenuItem.Enabled = true;
             _optionsToolStripMenuItem.Enabled = true;
-            _toolStripProgressBar.Visible = false;
-            _toolStripProgressBar.Value = 0;
+            _circularProgressBar.Value = 0;
+
 
             _musicListView.AllowDrop = true;
         }
@@ -288,6 +290,8 @@ namespace Automix_UI.Forms
         private void OnAboutCharacteristicsMenuItemClick(object sender, EventArgs e) => new UserDocForm().ShowDialog();
 
         private void OnAboutMenuItemClick(object sender, EventArgs e) => new AboutForm().ShowDialog();
+
+        private void OnPreferencesToolStripMenuItemClick(object sender, EventArgs e) => _parameterForm.ShowDialog();
 
         private void MusicListView_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e) => _lvDrawer.DrawColumnHeader(e);
 
@@ -528,7 +532,7 @@ namespace Automix_UI.Forms
 
         private void ImportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
             _presenter.Notify();
         }
 
@@ -551,6 +555,7 @@ namespace Automix_UI.Forms
             }
             OnWorkerStop();
             StopPlayer();
+            
         }
 
         private static void ShowErrorDialog(string errorMessage)
@@ -578,7 +583,7 @@ namespace Automix_UI.Forms
 
         private void SortBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void SortBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -614,7 +619,7 @@ namespace Automix_UI.Forms
 
         private void ExportBW_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void ExportBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -686,7 +691,7 @@ namespace Automix_UI.Forms
 
         private void PlayerBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            _toolStripProgressBar.Value = e.ProgressPercentage;
+            _circularProgressBar.Value = e.ProgressPercentage;
         }
 
         private void PlayerBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -756,7 +761,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            SetTempDir(dialog.SelectedPath);
+            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.tempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");
@@ -807,6 +812,14 @@ namespace Automix_UI.Forms
             string legend = rm.GetString("ExportDbLegend");
             MessageBox.Show(msg, legend);
         }
-    }
 
+        public void UpdateSortProfile(IProfileDistance profileChosen)
+        {
+            _presenter.UpdateSortAlgorithm(profileChosen);
+        }
+
+        
+    }
 }
+
+

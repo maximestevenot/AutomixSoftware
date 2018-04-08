@@ -16,9 +16,6 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
-using static Automix_Data_Management.Utils;
-using log4net;
-using System;
 
 namespace Automix_UI
 {
@@ -26,9 +23,10 @@ namespace Automix_UI
     {
         private readonly List<IViewWithTrackCollection> _views;
         private TrackCollection _trackCollection;
+        private IProfileDistance _sortProfile;
 
         private readonly IAudioDataExtraction _dataExtractionEngine;
-        private readonly AbstractSortAlgorithm _sortAlgorithm;
+        private AbstractSortAlgorithm _sortAlgorithm;
         private Mp3Player _mp3Player;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -38,8 +36,9 @@ namespace Automix_UI
             _views = new List<IViewWithTrackCollection>();
             _trackCollection = new TrackCollection();
             _dataExtractionEngine = new AudioDataExtractionProxy();
+            _sortProfile = new BasicProfile();
 
-            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance());
+            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(_sortProfile));
         }
 
         public Presenter(IViewWithTrackCollection view) : this()
@@ -135,12 +134,12 @@ namespace Automix_UI
                     var track = new Track(filePath);
                     tempTrackCollection.SafeAdd(track);
                 }
-                backgroundWorker.ReportProgress(500 * count++ / fileNames.Length);
+                backgroundWorker.ReportProgress(250 * count++ / fileNames.Length);
             }
 
             _trackCollection.Concat(tempTrackCollection);
             _trackCollection.SortByName();
-            backgroundWorker.ReportProgress(500);
+            backgroundWorker.ReportProgress(250);
 
             _dataExtractionEngine.ExtractData(backgroundWorker, tempTrackCollection);
             RetrieveControlOnCollection();
@@ -166,11 +165,6 @@ namespace Automix_UI
         {
             if (_trackCollection.Count > 1)
             {
-                /*_trackCollection[2].IsFixed = true;
-                _trackCollection[6].IsFixed = true;
-                _trackCollection[8].IsFixed = true;*/
-
-                //_trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
                 _trackCollection = _sortAlgorithm.Sort(backgroundWorker, _trackCollection);
             }
             return _trackCollection;
@@ -233,6 +227,12 @@ namespace Automix_UI
                 }
             }
             Notify();
+        }
+
+        public void UpdateSortAlgorithm(IProfileDistance profileChosen)
+        {
+            _sortProfile = profileChosen;
+            _sortAlgorithm = new SimulatedAnnealingSortAlgorithm(new SimpleTracksDistance(profileChosen));
         }
     }
 }

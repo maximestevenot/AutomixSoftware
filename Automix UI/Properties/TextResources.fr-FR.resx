@@ -151,7 +151,7 @@
     <value>Exporter la base de données du logiciel</value>
   </data>
   <data name="ExportDbMessage" xml:space="preserve">
-    <value>La base de données du logiciel a bien été exporté !</value>
+    <value>La base de données du logiciel a bien été exportée !</value>
   </data>
   <data name="ImportDbLegend" xml:space="preserve">
     <value>Importer une nouvelle base de données</value>
@@ -160,6 +160,6 @@
     <value>La base de données "</value>
   </data>
   <data name="ImportDbMessagePart2" xml:space="preserve">
-    <value>" a bien été importé !</value>
+    <value>" a bien été importée !</value>
   </data>
 </root>

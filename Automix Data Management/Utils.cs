@@ -7,9 +7,6 @@
 // You should have received a copy of the License along with this program.
 
 using System;
-using System.IO;
-using System.Security;
-using System.Xml;
 
 namespace Automix_Data_Management
 {
@@ -18,6 +15,7 @@ namespace Automix_Data_Management
     /// </summary>
     public abstract class Utils
     {
+        private static string _dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
 
         /// <summary>
         /// Extracts the name of a file (including extension) from a path
@@ -112,73 +110,6 @@ namespace Automix_Data_Management
             }
 
             return openKeyString;
-        }
-
-        public static string GetTempDir()
-        {
-            string path;
-            string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
-            try
-            {
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                XmlReader reader = XmlReader.Create(dir +"\\config.xml");
-                if (reader.ReadToDescendant("tempDir"))
-                {
-                    if (reader.NodeType == XmlNodeType.Element)
-                    {
-                        path = reader.ReadElementContentAsString() + "\\";
-                    }
-                    else
-                    {
-                        //TODO throw BadFormattedConfigFileException
-                        path = "Unexpected node type\n";
-                    }
-                }
-                else
-                {
-                    SetTempDir(Path.GetTempPath() + "AutomixSoftware");
-                    path = Path.GetTempPath() + "AutomixSoftware";
-                }
-
-                reader.Close();
-            }
-            catch (Exception e) when (e is SecurityException || e is FileNotFoundException)
-            {
-                path = Path.GetTempPath() + "AutomixSoftware";
-                SetTempDir(Path.GetTempPath() + "AutomixSoftware");
-            }
-            catch (Exception e) when (e is FormatException || e is InvalidCastException)
-            {
-                //TODO throw BadFormattedConfigFileException
-                path = "Unexpected node type\n";
-            }
-            
-            return path;
-        }
-
-        public static void SetTempDir(string path)
-        {
-            path += "\\AutomixSoftware";
-            string dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
-            writer.WriteStartElement("configuration");
-            writer.WriteElementString("tempDir", path);
-            writer.WriteEndElement();
-            writer.Flush();
-            writer.Close();
         }
     }
 }

@@ -46,6 +46,7 @@
             this._exportDBMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._stopMixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._chooseTempDirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutCharacteristicsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -78,6 +79,7 @@
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
+            this._circularProgressBar = new AltoControls.CircularPB();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -165,7 +167,8 @@
             this._optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._dataBaseToolStripMenuItem,
             this._stopMixToolStripMenuItem,
-            this._chooseTempDirToolStripMenuItem});
+            this._chooseTempDirToolStripMenuItem,
+            this.preferencesToolStripMenuItem});
             this._optionsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this._optionsToolStripMenuItem.Name = "_optionsToolStripMenuItem";
             resources.ApplyResources(this._optionsToolStripMenuItem, "_optionsToolStripMenuItem");
@@ -214,6 +217,13 @@
             this._chooseTempDirToolStripMenuItem.Name = "_chooseTempDirToolStripMenuItem";
             resources.ApplyResources(this._chooseTempDirToolStripMenuItem, "_chooseTempDirToolStripMenuItem");
             this._chooseTempDirToolStripMenuItem.Click += new System.EventHandler(this.OnChooseTempDirButtonClick);
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            resources.ApplyResources(this.preferencesToolStripMenuItem, "preferencesToolStripMenuItem");
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.OnPreferencesToolStripMenuItemClick);
             // 
             // _helpToolStripMenuItem
             // 
@@ -492,19 +502,35 @@
             this._trackBarTimer.Interval = 500;
             this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
+            // _circularProgressBar
+            // 
+            this._circularProgressBar.AllowText = true;
+            this._circularProgressBar.AutomaticFontCalculation = true;
+            this._circularProgressBar.BackColor = System.Drawing.Color.Transparent;
+            this._circularProgressBar.ForeColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this._circularProgressBar, "_circularProgressBar");
+            this._circularProgressBar.MaxValue = 1000;
+            this._circularProgressBar.MinValue = 0;
+            this._circularProgressBar.Name = "_circularProgressBar";
+            this._circularProgressBar.ProgressColor = System.Drawing.Color.Lime;
+            this._circularProgressBar.Stroke = 10;
+            this._circularProgressBar.Transparency = true;
+            this._circularProgressBar.Value = 0;
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(69)))));
+            this.Controls.Add(this._circularProgressBar);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this._sortButton);
-            this.Controls.Add(this._logo);
             this.Controls.Add(this._importButton);
             this.Controls.Add(this._musicListView);
             this.Controls.Add(this._statusStrip);
             this.Controls.Add(this._menuStrip);
             this.Controls.Add(this._generateButton);
+            this.Controls.Add(this._logo);
             this.MainMenuStrip = this._menuStrip;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnMainFormClosing);
@@ -573,5 +599,7 @@
         private System.Windows.Forms.ToolStripMenuItem _importDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _exportDBMenuItem;
         private System.Windows.Forms.ToolStripMenuItem _lockTrackToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private AltoControls.CircularPB _circularProgressBar;
     }
 }

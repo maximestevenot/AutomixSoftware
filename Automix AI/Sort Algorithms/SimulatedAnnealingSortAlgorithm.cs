@@ -11,7 +11,6 @@ using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -22,7 +21,7 @@ namespace Automix_AI.Sort_Algorithms
         private readonly double _decayFactor;
         private readonly int _numberOfIteration;
 
-        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 35.0, 0.93, 15) { }
+        public SimulatedAnnealingSortAlgorithm(ITracksDistance distance) : this(distance, 1, 45.0, 0.93, 75) { }
 
         public SimulatedAnnealingSortAlgorithm(ITracksDistance distance, double stopTemperature, double beginTemperature, double decayFactor, int numberOfIteration) : base(distance)
         {
@@ -67,17 +66,11 @@ namespace Automix_AI.Sort_Algorithms
             numCollection++;
             trackCollection.Clear();
 
-            //collections.ForEach(delegate (TrackCollection collection)
             for (int i = 0; i < collections.Count; i++)
             {
                 TrackCollection newCollection;
                 newCollection = Sort(backgroundWorker, collections[i]);
-                /*Console.WriteLine("{");
-                for (int j = 0; j < newCollection.Count; j++)
-                {
-                    Console.WriteLine(newCollection[j].Name);
-                }
-                Console.WriteLine("}");*/
+                
                 if (!newCollection.Equals(collections[i]))
                 {
                     var pos = collections.IndexOf(collections[i]);
@@ -95,6 +88,7 @@ namespace Automix_AI.Sort_Algorithms
 
         public override TrackCollection Sort(BackgroundWorker backgroundWorker, TrackCollection trackCollection)
         {
+            var originalTrackCollection = trackCollection;
             var nbTracks = trackCollection.Count;
             var n = (nbTracks / 2) * (nbTracks / 2);
             var result = trackCollection;
@@ -113,7 +107,16 @@ namespace Automix_AI.Sort_Algorithms
                 {
                     for (var i = 0; i < n; i++)
                     {
-                        var tempCollection = CreatePotentialTrackCollection(result);
+                        TrackCollection tempCollection = CreatePotentialTrackCollection(result);
+                        for (var j = 0; j < temperature; j++)
+                        {
+                            tempCollection = CreatePotentialTrackCollection(tempCollection);
+                            if (j > tempCollection.Count)
+                            {
+                                break;
+                            }
+                        }
+
                         var dE = ComputeIndividualEvaluation(tempCollection) - ComputeIndividualEvaluation(result);
 
                         if (dE < 0)
@@ -137,7 +140,7 @@ namespace Automix_AI.Sort_Algorithms
                 }
                 backgroundWorker.ReportProgress(1000 * k / _numberOfIteration);
             }
-
+            
             return trackCollection;
         }
 

@@ -17,7 +17,6 @@ using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -74,7 +73,7 @@ namespace Automix_Data_Management.Extraction
             dataBase.AddTrack(track);
 
             Interlocked.Increment(ref AudioDataExtraction.ExploredTracks);
-            backgroundWorker.ReportProgress(500 + 500 * AudioDataExtraction.ExploredTracks / nbTracks);
+            backgroundWorker.ReportProgress(250 + 750 * AudioDataExtraction.ExploredTracks / nbTracks);
         }
 
         private void ExtractFadesFromExecResult(BackgroundWorker bw, CancellationTokenSource cancellationTokenSource,

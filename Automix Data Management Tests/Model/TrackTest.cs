@@ -1,5 +1,4 @@
-﻿using System;
-using Automix_Data_Management.Model;
+﻿using Automix_Data_Management.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Automix_Data_Management_Tests.Model
