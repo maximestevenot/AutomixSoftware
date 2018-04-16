@@ -20,7 +20,7 @@ namespace Automix_UI
         public PresenterParameter()
         {
             _views = new List<IViewWithParameters>();
-            _parameters = LoadParametersFromFile();
+            _parameters = new SettingsAccessor().LoadParametersFromFile();
             _actualProfile = new ManualProfile(
                 Int32.Parse(_parameters.BpmPriority),
                 Int32.Parse(_parameters.KeyNumberPriority),
@@ -70,7 +70,7 @@ namespace Automix_UI
 
         internal void SetMP3Quality(int value)
         {
-            _parameters.MP3Quality = value.ToString();
+            _parameters.Mp3Quality = value.ToString();
             AudioIO.ExportQuality = (LAMEPreset)value;
         } 
 

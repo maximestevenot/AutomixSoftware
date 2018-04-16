@@ -17,171 +17,213 @@ namespace Automix_Data_Management
     /// <summary>
     /// Allow to set or get preferences/settings of the user
     /// </summary>
-    public abstract class SettingsAccessor
+    public class SettingsAccessor
     {
-        private static string _dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
-        private static XmlDocument configFile;
+        private readonly string Dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
+        private XmlDocument _configFile;
+
+        public SettingsAccessor()
+        {
+            _configFile = OpenOrCreateConfigFile();
+        }
 
         public class SettingText : Attribute
         {
-            public string Text { get; private set; }
+            public string Text { get; }
 
             public SettingText(string text)
             {
-                this.Text = text;
+                Text = text;
             }
         }
 
-        public enum Settings : int
+        public enum Settings
         {
             [SettingText("tempDir")]
-            tempDir = 0,
+            TempDir = 0,
             [SettingText("transitionDuration")]
-            transitionDuration = 1,
+            TransitionDuration = 1,
             [SettingText("mixDuration")]
-            mixDuration = 2,
+            MixDuration = 2,
             [SettingText("bpmP")]
-            bpmPriority = 3,
+            BpmPriority = 3,
             [SettingText("keyTonalityP")]
-            keyTonalityPriority = 4,
+            KeyTonalityPriority = 4,
             [SettingText("keyNumberP")]
-            keyNumberPriority = 5,
+            KeyNumberPriority = 5,
             [SettingText("danceabilityP")]
-            danceabilityPriority = 6,
+            DanceabilityPriority = 6,
             [SettingText("MP3Quality")]
-            MP3Quality = 7
+            Mp3Quality = 7
         }
 
-        public static void SetSetting(Settings setting, String param)
+        public void SetSetting(Settings setting, string param)
         {
-            configFile = OpenOrCreateConfigFile();
-
-            switch (setting)
+            if (setting == Settings.TempDir)
             {
-                case Settings.tempDir:
-                    if (!Directory.Exists(param))
-                    {
-                        Directory.CreateDirectory(param);
-                    }
-                    MakeSettlement(setting.ToText(), param + "\\AutomixSoftware");
-                    break;
-                case Settings.transitionDuration:
-                case Settings.mixDuration:
-                case Settings.bpmPriority:
-                case Settings.keyNumberPriority:
-                case Settings.keyTonalityPriority:
-                case Settings.danceabilityPriority:
-                case Settings.MP3Quality:
-                    MakeSettlement(setting.ToText(), param);
-                    break;
+                if (!Directory.Exists(param))
+                {
+                    Directory.CreateDirectory(param);
+                }
+                MakeSettlement(setting.ToText(), param + "\\AutomixSoftware");
+            }
+            else if (setting == Settings.TransitionDuration || setting == Settings.MixDuration ||
+                     setting == Settings.BpmPriority || setting == Settings.KeyNumberPriority ||
+                     setting == Settings.KeyTonalityPriority || setting == Settings.DanceabilityPriority ||
+                     setting == Settings.Mp3Quality)
+            {
+                MakeSettlement(setting.ToText(), param);
             }
         }
 
-        public static String GetSetting(Settings setting)
+        public string GetSetting(Settings setting)
         {
-            configFile = OpenOrCreateConfigFile();
-            XmlNode node;
-            node = configFile.DocumentElement.SelectSingleNode(setting.ToText());
-            return node.InnerText;
+            var node = _configFile.DocumentElement?.SelectSingleNode(setting.ToText());
+            return node?.InnerText;
         }
 
-        private static void MakeSettlement(String section, String param)
+        private void MakeSettlement(string section, string param)
         {
-            XmlNode node = configFile.DocumentElement.SelectSingleNode(section);
+            var node = _configFile.DocumentElement?.SelectSingleNode(section);
+
             if (node != null)
             {
                 node.InnerText = param;
             }
+
             else
             {
-                XmlNode root = configFile.DocumentElement;
-                XmlElement elem = configFile.CreateElement(section);
+                XmlNode root = _configFile.DocumentElement;
+                var elem = _configFile.CreateElement(section);
                 elem.InnerText = param;
-                root.AppendChild(elem);
+                root?.AppendChild(elem);
             }
 
-            configFile.Save(_dir + "\\config.xml");
+            _configFile.Save(Dir + "\\config.xml");
+
         }
 
-        private static XmlDocument OpenOrCreateConfigFile()
+        private XmlDocument OpenOrCreateConfigFile()
         {
-            if (!Directory.Exists(_dir))
+            if (!Directory.Exists(Dir))
             {
-                Directory.CreateDirectory(_dir);
+                Directory.CreateDirectory(Dir);
             }
 
-            if (!File.Exists(_dir + "\\config.xml"))
+            if (!File.Exists(Dir + "\\config.xml"))
             {
                 CreateDefaultConfigFile();
             }
 
-            XmlDocument file = new XmlDocument();
-            file.Load(_dir + "\\config.xml");
-
+            var file = new XmlDocument();
+            try
+            {
+                file.Load(Dir + "\\config.xml");
+            }
+            catch (System.Xml.XmlException e)
+            {
+                CreateDefaultConfigFile();
+                //log this
+            }
+            file.Load(Dir + "\\config.xml");
             return file;
         }
 
-        private static void CreateDefaultConfigFile()
+        private void CreateDefaultConfigFile()
         {
-            XmlWriterSettings settings = new XmlWriterSettings
+            var settings = new XmlWriterSettings
             {
                 Indent = true
             };
 
-            XmlWriter writer = XmlWriter.Create(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware\\config.xml", settings);
+            var defaultParameters = new Parameters();
+            var writer = XmlWriter.Create(Dir + "\\config.xml", settings);
+
             writer.WriteStartElement("configuration");
-            writer.WriteElementString("tempDir", Path.GetTempPath()+"//AutomixSoftware");
-            writer.WriteElementString("transitionDuration", "10");
-            writer.WriteElementString("mixDuration", "30");
-            writer.WriteElementString("bpmP", "10");
-            writer.WriteElementString("keyNumberP", "10");
-            writer.WriteElementString("keyTonalityP", "10");
-            writer.WriteElementString("danceabilityP", "10");
-            writer.WriteElementString("MP3Quality", "320");
+            writer.WriteElementString(Settings.TempDir.ToText(), defaultParameters.TempDir);
+            writer.WriteElementString(Settings.MixDuration.ToText(), defaultParameters.MixDuration);
+            writer.WriteElementString(Settings.TransitionDuration.ToText(), defaultParameters.TransitionDuration);
+            writer.WriteElementString(Settings.BpmPriority.ToText(), defaultParameters.BpmPriority);
+            writer.WriteElementString(Settings.KeyTonalityPriority.ToText(), defaultParameters.KeyTonalityPriority);
+            writer.WriteElementString(Settings.KeyNumberPriority.ToText(), defaultParameters.KeyNumberPriority);
+            writer.WriteElementString(Settings.DanceabilityPriority.ToText(), defaultParameters.DanceabilityPriority);
+            writer.WriteElementString(Settings.Mp3Quality.ToText(), defaultParameters.Mp3Quality);
             writer.WriteEndElement();
             writer.Flush();
             writer.Close();
         }
 
-        public static Parameters LoadParametersFromFile()
+        public Parameters LoadParametersFromFile()
         {
             var param = new Parameters();
 
-            configFile = OpenOrCreateConfigFile();
-            XmlNode node;
+            var document = _configFile.DocumentElement;
+            if (document == null)
+            {
+                return param;
+            }
 
-            node = configFile.DocumentElement.SelectSingleNode("tempDir");
-            param.TempDir = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("transitionDuration");
-            param.TransitionDuration = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("mixDuration");
-            param.MixDuration = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("bpmP");
-            param.BpmPriority = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("keyNumberP");
-            param.KeyNumberPriority = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("keyTonalityP");
-            param.KeyTonalityPriority = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("danceabilityP");
-            param.DanceabilityPriority = node.InnerText;
-            node = configFile.DocumentElement.SelectSingleNode("MP3Quality");
-            param.MP3Quality = node.InnerText;
+            var node = document.SelectSingleNode(Settings.TempDir.ToText());
+            if (node != null)
+            {
+                param.TempDir = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.TransitionDuration.ToText());
+            if (node != null)
+            {
+                param.TransitionDuration = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.MixDuration.ToText());
+            if (node != null)
+            {
+                param.MixDuration = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.BpmPriority.ToText());
+            if (node != null)
+            {
+                param.BpmPriority = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.KeyNumberPriority.ToText());
+            if (node != null)
+            {
+                param.KeyNumberPriority = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.KeyTonalityPriority.ToText());
+            if (node != null)
+            {
+                param.KeyTonalityPriority = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.DanceabilityPriority.ToText());
+            if (node != null)
+            {
+                param.DanceabilityPriority = node.InnerText;
+            }
+
+            node = document.SelectSingleNode(Settings.Mp3Quality.ToText());
+            if (node != null)
+            {
+                param.Mp3Quality = node.InnerText;
+            }
 
             return param;
         }
 
-        public static void SaveParametersInFile(Parameters param)
+        public void SaveParametersInFile(Parameters param)
         {
-            configFile = OpenOrCreateConfigFile();
-
-            MakeSettlement(Settings.tempDir.ToText(), param.TempDir);
-            MakeSettlement(Settings.mixDuration.ToText(), param.MixDuration);
-            MakeSettlement(Settings.transitionDuration.ToText(), param.TransitionDuration);
-            MakeSettlement(Settings.bpmPriority.ToText(), param.BpmPriority);
-            MakeSettlement(Settings.keyTonalityPriority.ToText(), param.KeyTonalityPriority);
-            MakeSettlement(Settings.keyNumberPriority.ToText(), param.KeyNumberPriority);
-            MakeSettlement(Settings.danceabilityPriority.ToText(), param.DanceabilityPriority);
-            MakeSettlement(Settings.MP3Quality.ToText(), param.MP3Quality);
+            MakeSettlement(Settings.TempDir.ToText(), param.TempDir);
+            MakeSettlement(Settings.MixDuration.ToText(), param.MixDuration);
+            MakeSettlement(Settings.TransitionDuration.ToText(), param.TransitionDuration);
+            MakeSettlement(Settings.BpmPriority.ToText(), param.BpmPriority);
+            MakeSettlement(Settings.KeyTonalityPriority.ToText(), param.KeyTonalityPriority);
+            MakeSettlement(Settings.KeyNumberPriority.ToText(), param.KeyNumberPriority);
+            MakeSettlement(Settings.DanceabilityPriority.ToText(), param.DanceabilityPriority);
+            MakeSettlement(Settings.Mp3Quality.ToText(), param.Mp3Quality);
         }
     }
 }
