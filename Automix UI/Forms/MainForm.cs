@@ -21,6 +21,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Automix_AI.Distances;
+using Automix_Data_Management;
 
 namespace Automix_UI.Forms
 {
@@ -555,7 +556,7 @@ namespace Automix_UI.Forms
             }
             OnWorkerStop();
             StopPlayer();
-            
+
         }
 
         private static void ShowErrorDialog(string errorMessage)
@@ -761,7 +762,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.tempDir, dialog.SelectedPath);
+            new SettingsManager().SetSetting(SettingsManager.SettingTypes.TempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");
@@ -818,7 +819,7 @@ namespace Automix_UI.Forms
             _presenter.UpdateSortAlgorithm(profileChosen);
         }
 
-        
+
     }
 }
 

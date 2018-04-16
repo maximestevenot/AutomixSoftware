@@ -73,7 +73,7 @@ namespace Automix_UI.Forms
             _presenter.SetProfile(new RhythmProfile());
         }
 
-        public void LoadParameters(Parameters param)
+        public void LoadParameters(Settings param)
         {
             _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
             _mixDuration.Value = Int32.Parse(param.MixDuration);
@@ -81,8 +81,8 @@ namespace Automix_UI.Forms
             _keyTonalityBar.Value = (int)Int32.Parse(param.KeyTonalityPriority);
             _keyNumberBar.Value = (int)Int32.Parse(param.KeyNumberPriority);
             _danceabilityBar.Value = (int)Int32.Parse(param.DanceabilityPriority);
-            _MP3Quality.SelectedIndex = _MP3Quality.FindString(param.MP3Quality);
-            AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.MP3Quality);
+            _MP3Quality.SelectedIndex = _MP3Quality.FindString(param.Mp3Quality);
+            AudioIO.ExportQuality = (LAMEPreset)Int32.Parse(param.Mp3Quality);
         }
 
     }

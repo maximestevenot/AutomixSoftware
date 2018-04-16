@@ -4,6 +4,6 @@ namespace Automix_UI
 {
     public interface IViewWithParameters
     {
-        void LoadParameters(Parameters param);
+        void LoadParameters(Settings param);
     }
 }

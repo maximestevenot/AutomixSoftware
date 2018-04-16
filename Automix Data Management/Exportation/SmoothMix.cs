@@ -13,6 +13,7 @@ using Automix_Data_Management.Model;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System;
+using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management.Exportation
 {
@@ -37,9 +38,11 @@ namespace Automix_Data_Management.Exportation
 
         public SmoothMix(int transitionDuration)
         {
+            var settingsManager = new SettingsManager();
+
             TransitionDuration = transitionDuration;
-            MixDuration = Convert.ToInt32(60000 * (Int32.Parse(SettingsAccessor.GetSetting(SettingsAccessor.Settings.mixDuration))));
-            _tempDirPath = SettingsAccessor.GetSetting(SettingsAccessor.Settings.tempDir);
+            MixDuration = Convert.ToInt32(60000 * (Int32.Parse(settingsManager.GetSetting(SettingsManager.SettingTypes.MixDuration))));
+            _tempDirPath = settingsManager.GetSetting(SettingsManager.SettingTypes.TempDir);
             _tempFileList = new List<string>();
         }
 
