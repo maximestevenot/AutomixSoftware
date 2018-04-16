@@ -12,10 +12,10 @@ namespace Automix_AI.Distances
     {
         public TonalityProfile()
         {
-            BpmPriority = 400;
-            KeyNumberPriority = 40;
-            KeyTonalityPriority = 3000;
-            DanceabilityPriority = 15;
+            BpmPriority = 0;
+            KeyNumberPriority = 20;
+            KeyTonalityPriority = 15;
+            DanceabilityPriority = 10;
         }
     }
 }

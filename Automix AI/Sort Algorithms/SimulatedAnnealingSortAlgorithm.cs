@@ -11,7 +11,6 @@ using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -67,17 +66,11 @@ namespace Automix_AI.Sort_Algorithms
             numCollection++;
             trackCollection.Clear();
 
-            //collections.ForEach(delegate (TrackCollection collection)
             for (int i = 0; i < collections.Count; i++)
             {
                 TrackCollection newCollection;
                 newCollection = Sort(backgroundWorker, collections[i]);
-                /*Console.WriteLine("{");
-                for (int j = 0; j < newCollection.Count; j++)
-                {
-                    Console.WriteLine(newCollection[j].Name);
-                }
-                Console.WriteLine("}");*/
+                
                 if (!newCollection.Equals(collections[i]))
                 {
                     var pos = collections.IndexOf(collections[i]);
@@ -147,8 +140,6 @@ namespace Automix_AI.Sort_Algorithms
                 }
                 backgroundWorker.ReportProgress(1000 * k / _numberOfIteration);
             }
-
-            System.Console.WriteLine(ComputeIndividualEvaluation(trackCollection));
             
             return trackCollection;
         }
@@ -161,27 +152,6 @@ namespace Automix_AI.Sort_Algorithms
                 result += Distance.Compute(individual[k], individual[k + 1]);
             }
             return result;
-        }
-
-        private static TrackCollection CreateRandomTrackCollection(TrackCollection current)
-        {
-            var random = new Random();
-            List<int> allPos = new List<int>();
-            int index;
-            for (var k = 0; k < current.Count; k++)
-            {
-                allPos.Add(k);
-            }
-
-            var newTrackCollection = new TrackCollection();
-            for (var k = 0; k < current.Count; k++)
-            {
-                index = random.Next(allPos.Count);
-                newTrackCollection.Add(current[allPos[index]]);
-                allPos.RemoveAt(index);
-            }
-
-            return newTrackCollection;
         }
 
         private static TrackCollection CreatePotentialTrackCollection(TrackCollection current)

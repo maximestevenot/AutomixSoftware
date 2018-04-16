@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Automix_Data_Management.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
