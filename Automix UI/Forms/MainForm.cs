@@ -762,7 +762,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            new SettingsAccessor().SetSetting(SettingsAccessor.Settings.TempDir, dialog.SelectedPath);
+            new SettingsManager().SetSetting(SettingsManager.SettingTypes.TempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");

@@ -79,8 +79,8 @@ namespace Automix_Data_Management.Extraction
 
         private void InitExecConfiguration()
         {
-            var settingsManager = new SettingsAccessor();
-            var tempPath = settingsManager.GetSetting(SettingsAccessor.Settings.TempDir);
+            var settingsManager = new SettingsManager();
+            var tempPath = settingsManager.GetSetting(SettingsManager.SettingTypes.TempDir);
 
             try
             {

@@ -7,13 +7,14 @@
 // You should have received a copy of the License along with this program.
 
 using System;
+using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management
 {
     /// <summary>
     /// Provides some tools to manipulate strings
     /// </summary>
-    public abstract class Utils
+    public static class Utils
     {
         private static string _dir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AutomixSoftware";
 
@@ -110,6 +111,22 @@ namespace Automix_Data_Management
             }
 
             return openKeyString;
+        }
+        public static string ToText(this Enum enumeration)
+        {
+            var type = enumeration.GetType();
+            var memInfo = type.GetMember(enumeration.ToString());
+
+            if (memInfo.Length > 0)
+            {
+                var attrs = memInfo[0].GetCustomAttributes(typeof(SettingsManager.SettingText), false);
+                if (attrs.Length > 0)
+                {
+                    return ((SettingsManager.SettingText)attrs[0]).Text;
+                }
+            }
+
+            return enumeration.ToString();
         }
     }
 }

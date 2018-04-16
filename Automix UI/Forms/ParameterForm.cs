@@ -73,7 +73,7 @@ namespace Automix_UI.Forms
             _presenter.SetProfile(new RhythmProfile());
         }
 
-        public void LoadParameters(Parameters param)
+        public void LoadParameters(Settings param)
         {
             _transitionDuration.Value = Int32.Parse(param.TransitionDuration);
             _mixDuration.Value = Int32.Parse(param.MixDuration);
