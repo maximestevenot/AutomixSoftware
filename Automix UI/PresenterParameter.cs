@@ -14,7 +14,7 @@ namespace Automix_UI
     public class PresenterParameter
     {
         private readonly List<IViewWithParameters> _views;
-        private Settings _settings;
+        private Automix_Data_Management.Model.Settings _settings;
         private IProfileDistance _actualProfile;
         private MainForm _mainForm;
 

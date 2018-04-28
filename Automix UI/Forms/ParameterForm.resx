@@ -117,7 +117,1601 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Name" xml:space="preserve">
+    <value>_MP3Quality</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Name" xml:space="preserve">
+    <value>_mixDuration</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Name" xml:space="preserve">
+    <value>_transitionDuration</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>626, 276</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label4" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_keyTonalityBar" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_keyNumberBar" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_danceabilityBar" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_bpmBar" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,15.16129,Percent,84.83871" /&gt;&lt;Rows Styles="Absolute,20,Percent,25,Percent,25,Percent,25,Percent,25,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>626, 276</value>
+  </data>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>634, 302</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 191</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>Kbits/s</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource1" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource2" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource3" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource4" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource5" xml:space="preserve">
+    <value>96</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource6" xml:space="preserve">
+    <value>128</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource7" xml:space="preserve">
+    <value>160</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource8" xml:space="preserve">
+    <value>256</value>
+  </data>
+  <data name="_MP3Quality.AutoCompleteCustomSource9" xml:space="preserve">
+    <value>320</value>
+  </data>
+  <data name="_MP3Quality.Items" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="_MP3Quality.Items1" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="_MP3Quality.Items2" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="_MP3Quality.Items3" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="_MP3Quality.Items4" xml:space="preserve">
+    <value>64</value>
+  </data>
+  <data name="_MP3Quality.Items5" xml:space="preserve">
+    <value>96</value>
+  </data>
+  <data name="_MP3Quality.Items6" xml:space="preserve">
+    <value>128</value>
+  </data>
+  <data name="_MP3Quality.Items7" xml:space="preserve">
+    <value>256</value>
+  </data>
+  <data name="_MP3Quality.Items8" xml:space="preserve">
+    <value>320</value>
+  </data>
+  <data name="_MP3Quality.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 188</value>
+  </data>
+  <data name="_MP3Quality.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 21</value>
+  </data>
+  <data name="_MP3Quality.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Name" xml:space="preserve">
+    <value>_MP3Quality</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_MP3Quality.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 191</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 13</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Exported MP3 file quality :</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 153</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 13</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Max Duration of the mix (min):</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="_mixDuration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 151</value>
+  </data>
+  <data name="_mixDuration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="_mixDuration.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="_mixDuration.ToolTip" xml:space="preserve">
+    <value>Recommended transition durations stands between 5 and 30 seconds</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Name" xml:space="preserve">
+    <value>_mixDuration</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_mixDuration.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="_transitionDuration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 113</value>
+  </data>
+  <data name="_transitionDuration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="_transitionDuration.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="_transitionDuration.ToolTip" xml:space="preserve">
+    <value>Recommended transition durations stands between 5 and 30 seconds</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Name" xml:space="preserve">
+    <value>_transitionDuration</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;_transitionDuration.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 115</value>
+  </data>
+  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 13</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Transitions duration (s): </value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Name" xml:space="preserve">
+    <value>_tonalityRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Name" xml:space="preserve">
+    <value>_rhythmRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Name" xml:space="preserve">
+    <value>_normalRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>614, 92</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Sorting Profile</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="_tonalityRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_tonalityRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="_tonalityRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="_tonalityRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="_tonalityRadioButton.Text" xml:space="preserve">
+    <value>Tonality</value>
+  </data>
+  <data name="_tonalityRadioButton.ToolTip" xml:space="preserve">
+    <value>Click to set a tonality oriented profile</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Name" xml:space="preserve">
+    <value>_tonalityRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_tonalityRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="_rhythmRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_rhythmRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="_rhythmRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 17</value>
+  </data>
+  <data name="_rhythmRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="_rhythmRadioButton.Text" xml:space="preserve">
+    <value>Rhythm</value>
+  </data>
+  <data name="_rhythmRadioButton.ToolTip" xml:space="preserve">
+    <value>Click to set a rhythm oriented profile</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Name" xml:space="preserve">
+    <value>_rhythmRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_rhythmRadioButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="_normalRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_normalRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="_normalRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 17</value>
+  </data>
+  <data name="_normalRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="_normalRadioButton.Text" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="_normalRadioButton.ToolTip" xml:space="preserve">
+    <value>Click to set a balanced ratio between tonality and rhythm</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Name" xml:space="preserve">
+    <value>_normalRadioButton</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;_normalRadioButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Name" xml:space="preserve">
+    <value>_keyTonalityBar</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Name" xml:space="preserve">
+    <value>_keyNumberBar</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Name" xml:space="preserve">
+    <value>_danceabilityBar</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Name" xml:space="preserve">
+    <value>_bpmBar</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>620, 270</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label4" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label3" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_keyTonalityBar" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_keyNumberBar" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_danceabilityBar" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="_bpmBar" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label1" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,15.16129,Percent,84.83871" /&gt;&lt;Rows Styles="Absolute,20,Percent,25,Percent,25,Percent,25,Percent,25,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 206</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 64</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Danceability</value>
+  </data>
+  <data name="label4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 144</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 62</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Key Number</value>
+  </data>
+  <data name="label3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 82</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 62</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Key Tonality</value>
+  </data>
+  <data name="label2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="_keyTonalityBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_keyTonalityBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 85</value>
+  </data>
+  <data name="_keyTonalityBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 56</value>
+  </data>
+  <data name="_keyTonalityBar.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Name" xml:space="preserve">
+    <value>_keyTonalityBar</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_keyTonalityBar.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="_keyNumberBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_keyNumberBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 147</value>
+  </data>
+  <data name="_keyNumberBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 56</value>
+  </data>
+  <data name="_keyNumberBar.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Name" xml:space="preserve">
+    <value>_keyNumberBar</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_keyNumberBar.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="_danceabilityBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_danceabilityBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 209</value>
+  </data>
+  <data name="_danceabilityBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 58</value>
+  </data>
+  <data name="_danceabilityBar.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Name" xml:space="preserve">
+    <value>_danceabilityBar</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_danceabilityBar.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="_bpmBar.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_bpmBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 23</value>
+  </data>
+  <data name="_bpmBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 56</value>
+  </data>
+  <data name="_bpmBar.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Name" xml:space="preserve">
+    <value>_bpmBar</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;_bpmBar.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 20</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 62</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="label1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="_applyButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="_applyButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>490, 321</value>
+  </data>
+  <data name="_applyButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="_applyButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="_applyButton.Text" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="&gt;&gt;_applyButton.Name" xml:space="preserve">
+    <value>_applyButton</value>
+  </data>
+  <data name="&gt;&gt;_applyButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_applyButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_applyButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="button2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>571, 321</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 320</value>
+  </data>
+  <data name="button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button3.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="button3.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;button3.Name" xml:space="preserve">
+    <value>button3</value>
+  </data>
+  <data name="&gt;&gt;button3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;button3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>658, 356</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAQAEBAAAAAAIABoBAAARgAAACAgAAAAACAAqBAAAK4EAAAwMAAAAAAgAKglAABWFQAAQEAAAAAA
+        IAAoQgAA/joAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af//
+        /wH///8B////Vf///7v////3///////////////3////u////1P///8B////Af///wH///8B////Af//
+        /wH///8Z////veLi4v90dHT/Jycn/wQEBP8EBAT/KCgo/3R0dP/j4+P/////vf///xf///8B////Af//
+        /wH///8X////26CgoP8JCQn/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/CwsL/6Kiov/////b////Ff//
+        /wH///8B////t6Ghof84ODj/39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f3/9wcHD/pKSk////
+        /7f///8B////R+bm5v8LCwv/AAAA/2hoaP9vb2//kpKS/5mZmf+SkpL/xsbG/5eXl/9oaGj/AAAA/w0N
+        Df/m5ub/////R////6l5eXn/AAAA/wAAAP8AAAD/AAAA/09PT////////////8DAwP/W1tb/BAQE/wAA
+        AP8AAAD/fn5+/////6n////nLy8v/wAAAP8AAAD/AAAA/wAAAP9PT0////////////+fn5//p6en/yQk
+        JP8AAAD/AAAA/zMzM//////n/////xEREf8AAAD/AAAA/wAAAP8AAAD/Y2Nj////////////uLi4/9fX
+        1/8QEBD/AAAA/wAAAP8TExP///////////0UFBT/AAAA/wAAAP8AAAD/QUFB//X19f//////////////
+        //+SkpL/AAAA/wAAAP8AAAD/FhYW//////3////fOzs7/wAAAP8AAAD/ExMT/+jo6P9OTk7/dXV1/4mJ
+        if8gICD/AAAA/wAAAP8AAAD/AAAA/z8/P//////f////nYyMjP8AAAD/AAAA/3BwcP+ysrL/sbGx//7+
+        /v//////ubm5/zk5Of8AAAD/AAAA/wAAAP+QkJD/////nf///zXz8/P9Ghoa/wAAAP+cnJz/bGxs/76+
+        vv///////////8vLy/8tLS3/AAAA/wAAAP8dHR3/8/Pz/f///zX///8B////ncPDw/8JCQn/a2tr/zMz
+        M/8/Pz//n5+f/6ioqP9RUVH/AAAA/wAAAP8JCQn/xcXF/////5v///8B////Af///wv///+9yMjI/yMj
+        I/8AAAD/AAAA/w4ODv8UFBT/AAAA/wAAAP8lJSX/ysrK/////73///8L////Af///wH///8B////Cf//
+        /5f4+Pj9pKSk/1hYWP80NDT/NDQ0/1hYWP+lpaX/+Pj4/f///5f///8J////Af///wH///8B////Af//
+        /wH///8B////L////5H////T////7////+/////T////kf///y////8B////Af///wH///8BAAD//wAA
+        //8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//ygA
+        AAAgAAAAQAAAAAEAIAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAD///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8F////Tf///5/////f////////////////////////////////////3///
+        /5////9N////Bf///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8F////a////+P/////////////////////////////////////////////
+        ///////////////////////f////af///wX///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Mf///8////////////v7+/+7u7v/a2tr/zQ0NP8QEBD/AAAA/wAA
+        AP8QEBD/NDQ0/29vb/+7u7v/+/v7////////////////z////zH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///2H////3//////v7+/+Pj4//HBwc/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8cHBz/k5OT//v7+///////////9////13///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///9x///////////Pz8//Jycn/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/Ly8v/8/Pz///////////////
+        /3H///8B////Af///wH///8B////Af///wH///8B////Wf//////////q6ur/wgICP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/DAwM/6+v
+        r////////////////1X///8B////Af///wH///8B////Af///yn////z/////6urq/8EBAT/b29v/9/f
+        3//f39//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f
+        3//f39//BAQE/6+vr///////////8////yX///8B////Af///wH///8B////w//////Pz8//DAwM/wAA
+        AP9vb2//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f3//f39//39/f/9/f
+        3//f39//39/f/9/f3/8AAAD/DAwM/9fX1///////////w////wH///8B////Af///1H/////+/v7/y8v
+        L/8AAAD/AAAA/wAAAP/Dw8P/39/f/9/f3//f39//39/f/9/f3/+np6f/AAAA/wAAAP+Li4v/39/f/9/f
+        3//f39//39/f/9/f3//Dw8P/AAAA/wAAAP8AAAD/Nzc3//v7+///////////Uf///wH///8B////y///
+        //+fn5//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/i4uL/9/f3//f39//39/f/9/f
+        3//f39//e3t7/5OTk/8MDAz/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/n5+f///////////H////Af//
+        /y3//////////yQkJP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP+fn5//////////
+        ///////////////////Dw8P//////5ubm/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8rKyv/////////
+        //////8t////e//////Dw8P/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/5+f
+        n////////////////////////////0BAQP/Dw8P/+/v7/xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP/Pz8///////////3v///+z/////3d3d/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/n5+f////////////////////////////QEBA/19fX///////QEBA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/39/f///////////s////+f/////R0dH/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP+fn5////////////////////////////9AQED/QEBA//////9TU1P/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/T09P///////////n//////////8kJCT/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/5+fn////////////////////////////0BAQP93d3f//////zg4
+        OP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8sLCz//////////////////////yAgIP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8YGBj/19fX////////////////////////////o6Oj//Pz
+        8//z8/P/CAgI/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAgIP//////////////////////ICAg/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/GBgY/9fX1///////////////////////////////
+        /////////////4eHh/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/ICAg////////////////+///
+        //8wMDD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/xgYGP/X19f/////////////////////////
+        //////////////////+7u7v/CAgI/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP84ODj/////////
+        //v////X/////1dXV/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/v7+////////Ly8v/X19f/19f
+        X/9fX1//X19f/19fX/9HR0f/NDQ0/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/2Nj
+        Y///////////1////6f/////l5eX/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/09PT///////4+Pj/xAQ
+        EP8AAAD/S0tL/8vLy//b29v/i4uL/wgICP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/m5ub//////////+n////Y//////j4+P/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/u7u7////
+        //9ra2v/d3d3/19fX//7+/v/////////////////l5eX/3d3d/8jIyP/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wQEBP/r6+v//////////2P///8V////+/////9PT0//AAAA/wAAAP8AAAD/AAAA/wwM
+        DP/7+/v/+/v7/2NjY///////7+/v///////////////////////39/f/39/f/8PDw/8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/U1NT///////////7////Ff///wH///+n/////8/Pz/8AAAD/AAAA/wAA
+        AP8AAAD/NDQ0///////Ly8v/Q0ND///////z8/P///////////////////////v7+//f39//r6+v/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wQEBP/Pz8///////////6P///8B////Af///y3////7/////2tr
+        a/8AAAD/AAAA/wAAAP9AQED//////6Ojo/8AAAD/b29v/5eXl///////////////////////q6ur/6en
+        p/8ICAj/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/c3Nz///////////7////Lf///wH///8B////Af//
+        /5P/////9/f3/y8vL/8AAAD/AAAA/zw8PP//////q6ur/wAAAP8QEBD/t7e3/3Nzc//r6+v/+/v7/6ur
+        q/93d3f/U1NT/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/zc3N//39/f//////////4////8B////Af//
+        /wH///8B////Df///9P/////5+fn/ycnJ/8AAAD/BAQE/29vb/8jIyP/AAAA/wAAAP83Nzf/s7Oz/2tr
+        a/9fX1//m5ub/3t7e/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8nJyf/5+fn///////////T////Df//
+        /wH///8B////Af///wH///8B////Kf///+f/////5+fn/z8/P/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8EBAT/NDQ0/0BAQP8QEBD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/Q0ND/+vr6///////////5///
+        /yn///8B////Af///wH///8B////Af///wH///8B////Kf///+f/////+/v7/4eHh/8ICAj/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/DAwM/4uLi//7+/v/////////
+        /+f///8p////Af///wH///8B////Af///wH///8B////Af///wH///8B////Jf///8///////////+fn
+        5/93d3f/HBwc/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/HBwc/3t7e//n5+f/////////
+        ///////P////Jf///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Cf//
+        /4f////3////////////////z8/P/5OTk/9zc3P/X19f/19fX/9zc3P/k5OT/8/Pz///////////////
+        ///////3////h////wn///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///yX///+T////8///////////////////////////////////////////////////
+        ///////z////k////yX///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8J////Tf///4////+/////3////9/////f////3///
+        /7v///+P////Tf///wn///8B////Af///wH///8B////Af///wH///8B////Af///wH///8BAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAoAAAAMAAAAGAAAAABACAAAAAAAIAlAAAAAAAAAAAAAAAAAAAAAAAA////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH+/v4D////H////0f+/v59/v7+w///
+        //P///////////////////////////7+/v////////////7+/vP////D////ff7+/kf+/v4f/v7+Bf//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Bf7+/jH///91////vf//
+        //P+/v7////////////+/v7////////////+/v7////////////+/v7////////////+/v7/////////
+        //P///+9////cf///y3///8F////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8J////g/7+
+        /tf////1//////7+/v////////////7+/v////////////7+/v//////////////////////////////
+        ////////////////////////////9f///9X///97////Cf///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B/v7+D///
+        /1X////V/////////////////f39//Dw8P/Y2Nj/qqqq/3d3d/9ERET/IyMj/wAAAP8AAAD/AAAA/wAA
+        AP8jIyP/RERE/3d3d/+zs7P/2NjY//Dw8P/+/v7///////7+/v///////v7+1f///1X+/v4P////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8T////j////+v+/v7////////////y8vL/o6Oj/2dnZ/8xMTH/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/MTEx/2dnZ/+jo6P/8/Pz///////+/v7///////7+
+        /uv///+P////E////wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///yX///+h////+f7+/v//////+/v7/729vf9LS0v/ExMT/wICAv8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wICAv8TExP/Tk5O/8PD
+        w//8/Pz////////////////5////n////x////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Nf7+/sP///////////39/f/d3d3/U1NT/wUFBf8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wUFBf9lZWX/3d3d//39/f////////////7+/sP///81////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8Z/v7+w//////+/v7/+fn5/7e3t/8/Pz//AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/QUFB/7+/v//6+vr////////////+/v7D////Gf//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///xP///+b//////7+/v//////tLS0/yMj
+        I/8CAgL/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AwMD/ycnJ/+1tbX/////////
+        ////////////mf///w3///8B////Af///wH///8B////Af///wH///8B////Df///4X+/v73//////j4
+        +P+0tLT/CAgI/wAAAP+bm5v/z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/P
+        z//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/2dn
+        Z/8ICAj/tbW1//r6+v//////////9f7+/n////8J////Af///wH///8B////Af///wH///8B////S/7+
+        /uP//////f39/7u7u/8lJSX/AAAA/wAAAP+/v7/////////////+/v7////////////+/v7/////////
+        ///+/v7////////////+/v7////////////+/v7////////////+/v7////////////+/v7/////////
+        ///+/v7//////39/f/8AAAD/Jycn/7+/v//9/f3//////////+P///9L////Af///wH///8B////Af//
+        /wH///8B////wf//////////3d3d/0FBQf8DAwP/AAAA/wAAAP+bm5v/z8/P/8/Pz//Pz8//z8/P/8/P
+        z//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/Pz//Pz8//z8/P/8/P
+        z//Pz8//z8/P/8/Pz//Pz8//z8/P/2dnZ/8AAAD/AwMD/01NTf/j4+P////////////////B////Af//
+        /wH///8B////Af///wH///9h//////7+/v/8/Pz/ZWVl/wAAAP8AAAD/AAAA/wAAAP8AAAD/wcHB/+7u
+        7v/u7u7/7u7u/+7u7v/u7u7/7u7u/+7u7v/u7u7/0dHR/zs7O/8AAAD/AAAA/x0dHf/CwsL/7u7u/+7u
+        7v/u7u7/7u7u/+7u7v/u7u7/7u7u/+7u7v/CwsL/AAAA/wAAAP8AAAD/AAAA/wAAAP9xcXH//Pz8//7+
+        /v//////////Yf///wH///8B////Af///xn///+//v7+///////Jycn/BQUF/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/TU1N/19fX/9fX1//X19f/19fX/9fX1//X19f/2tra/+tra3/s7Oz/3d3d/9fX1//X19f/2tr
+        a/+tra3/v7+//6enp/9xcXH/e3t7/2dnZ/9fX1//X19f/19fX/9NTU3/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8LCwv/ycnJ///////+/v7/////v////xn///8B////Af7+/lv////t//////n5+f9dXV3/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/x0dHf/CwsL/7u7u/+7u
+        7v/u7u7/7u7u/+7u7v/u7u7/7u7u/7m5uf+qqqr/ysrK/29vb/8JCQn/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/XV1d//n5+f//////////6f///1X///8B////D////53//////////7Gx
+        sf8YGBj/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAg
+        IP/Pz8////////////////////////7+/v///////////9jY2P/f39////////Pz8/9aWlr/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/HBwc/7m5uf///////////////53///8P////Lf7+
+        /tf/////9fX1/29vb/8BAQH/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/yAgIP/Pz8/////////////+/v7////////////+/v7//////8PDw/9paWn/7e3t////
+        ///Jycn/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/BAQE/3t7e//4+Pj/////////
+        /9f///8t////T/7+/vn+/v7/3Nzc/zk5Of8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/x8fH//Pz8////////7+/v///////////////////////////7+/
+        v/8gICD/ioqK///////8/Pz/IyMj/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0ND
+        Q//h4eH///////////n///9P////hf7+/v//////ubm5/wUFBf8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAgIP/Pz8////////////////////////7+
+        /v///////////7+/v/8gICD/MzMz/+bm5v//////X19f/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wsLC/+/v7////////7+/v////+F////t/7+/v//////iYmJ/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAgIP/Pz8//////////
+        ///+/v7////////////+/v7//////7+/v/8gICD/IyMj/8fHx//+/v7/d3d3/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP+bm5v///////////////+3////4f7+/v/+/v7/ZWVl/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/x8f
+        H//Pz8////////7+/v///////////////////////////7+/v/8gICD/ICAg/7+/v///////dHR0/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9ra2v////////////////h//////7+
+        /v//////OTk5/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/yAgIP/Pz8////////////////////////7+/v///////////7+/v/8gICD/OTk5/+fn
+        5///////WVlZ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9KSkr///////7+
+        /v///////v7+//7+/v//////MDAw/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/ygoKP/T09P////////////+/v7////////////+/v7//////7+/
+        v/8sLCz/mZmZ///////+/v7/Ly8v/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8vLy/////////////+/v7///////7+/v/+/v7/MDAw/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/ERER/4+Pj//19fX///////7+/v//////////////
+        /////////////+np6f/Kysr/9fX1///////k5OT/BgYG/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8vLy//////////////////////////////////MDAw/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8RERH/paWl////////////////////
+        //////////////////////////////////////////////f39/9xcXH/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8vLy////////////////////////7+/v//////MDAw/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/xcXF/+Pj4////////7+
+        /v////////////7+/v///////v7+/////////////v7+/////////////Pz8/7Ozs/8bGxv/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP87Ozv//v7+////////////////9f//
+        ////////VFRU/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/ERER/4+P
+        j//19fX///////////////////////////////////////7+/v/+/v7///////7+/v/+/v7/vLy8/zMz
+        M/8CAgL/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9ZWVn///////7+
+        /v/+/v73////yf//////////d3d3/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/gYGB////////////8PDw/7W1tf+JiYn/j4+P/4+Pj/+Pj4//j4+P/4+Pj/+Pj4//cXFx/2Bg
+        YP9FRUX/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP+MjIz////////////////J////pf7+/v//////r6+v/wQEBP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8kJCT/7Ozs//7+/v//////eXl5/xAQEP8AAAD/AQEB/yAgIP9VVVX/XV1d/0ND
+        Q/8MDAz/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wQEBP+1tbX//v7+//////////+l////cf//////////z8/P/yAgIP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP+Pj4////////////+/v7//CwsL/wAAAP8AAAD/SEhI/8nJ
+        yf/q6ur/7u7u/+Hh4f+qqqr/ERER/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/yYmJv/S0tL///////7+/v////9x////N/7+/u3/////7Ozs/1lZ
+        Wf8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/zExMf/Y2Nj//////+3t7f9CQkL/OTk5/0tL
+        S/8/Pz//9vb2////////////////////////////r6+v/zk5Of9BQUH/Ghoa/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AQEB/2NjY//v7+///////////+3///83////H///
+        /7v//////Pz8/5OTk/8LCwv/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/2NjY//x8fH//////7Oz
+        s/9bW1v/5ubm/9fX1//Hx8f///////7+/v///////v7+////////////6+vr/7e3t//u7u7/oaGh/xgY
+        GP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/EBAQ/5+fn////////v7+////
+        /7v///8f////Bf///4P////7/////9/f3/8vLy//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/CAgI/4+P
+        j//+/v7/+/v7/39/f/+MjIz///////f39//7+/v///////////////////////7+/v/+/v7//f39/9ra
+        2v/u7u7/5ubm/01NTf8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/MDAw/+Hh
+        4f/+/v7/////+////4P///8F////Af///zX////Z//////////+fn5//AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/FhYW/62trf//////6Ojo/1FRUf96enr///////n5+f/8/Pz/////////////////////////
+        /////////v7+/93d3f/u7u7/3d3d/0FBQf8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8CAgL/n5+f/////////////v7+2f///zP///8B////Af///wn///+f/v7+///////z8/P/Ly8v/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/Hx8f/7+/v///////2dnZ/zMzM/8eHh7/s7Oz/9LS0v/V1dX///////7+
+        /v///////v7+////////////8PDw/7+/v//U1NT/a2tr/wwMDP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP87Ozv/8vLy/////////////v7+nf///wX///8B////Af///wH///8n////9f7+
+        /v/+/v7/sLCw/xISEv8AAAD/AAAA/wAAAP8AAAD/Hx8f/7+/v///////0NDQ/yIiIv8AAAD/Nzc3/7Oz
+        s/91dXX///////////////////////7+/v/+/v7/xsbG/4mJif+FhYX/BQUF/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/xgYGP+2trb///////7+/v/+/v73/v7+J////wH///8B////Af//
+        /wH///8B////hf////n/////+fn5/4+Pj/8NDQ3/AAAA/wAAAP8AAAD/Hh4e/729vf//////1tbW/y4u
+        Lv8AAAD/CwsL/42Njf+Li4v/cnJy/93d3f/6+vr//v7+//Hx8f/Gxsb/UVFR/6+vr/8yMjL/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/Dw8P/5OTk//5+fn///////////n///99////Af//
+        /wH///8B////Af///wH///8B////If///7v////9/v7+/+vr6/9xcXH/AAAA/wAAAP8AAAD/Dw8P/4+P
+        j//39/f/n5+f/xQUFP8AAAD/AAAA/y8vL/+/v7//gYGB/1dXV/91dXX/fX19/2dnZ/9RUVH/paWl/39/
+        f/8MDAz/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/dXV1//Pz8////////v7+/f//
+        /7v+/v4h////Af///wH///8B////Af///wH///8B////A////0n////h/v7+//7+/v/s7Oz/WVlZ/wAA
+        AP8AAAD/AAAA/xkZGf87Ozv/Ghoa/wAAAP8AAAD/AAAA/wICAv8nJyf/qKio/8HBwf+YmJj/j4+P/6mp
+        qf/Gxsb/ZmZm/xMTE/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9ZWVn/7e3t//7+
+        /v//////////4f///0n+/v4F////Af///wH///8B////Af///wH///8B////Af///wH///9Z/v7+7f//
+        ////////7e3t/3t7e/8VFRX/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AgIC/yMj
+        I/9XV1f/X19f/0dHR/8MDAz/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/GBgY/4GB
+        gf/v7+////////7+/v/+/v7t////Wf///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////b/7+/uf//////v7+//Pz8/+fn5//JCQk/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8pKSn/paWl//Pz8////////////////+f+/v5v////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////C////2/+/v7t/v7+//7+/v/7+/v/xcXF/1NTU/8FBQX/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/CQkJ/1lZWf/IyMj//Pz8//7+/v//////////7f7+/m////8L////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///9R////3f////3/////////////
+        ///IyMj/TU1N/yMjI/8ICAj/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/CQkJ/yMjI/9WVlb/ycnJ//////////////////7+/v3////d////Uf///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Qf//
+        /7P+/v73/v7+////////////9/f3/8fHx/+RkZH/V1dX/zAwMP8NDQ3/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/Dg4O/y8vL/9XV1f/kZGR/8fHx//29vb//////////////////v7+9////7P///9B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////A////x3+/v5z/v7+7f7+/v////////////7+/v//////6+vr/9fX1//Gxsb/tra2/5WV
+        lf+Pj4//j4+P/5WVlf+2trb/xsbG/9fX1//r6+v////////////////////////////////t////c///
+        /x3///8D////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////If///4v////P////9f//////////////////
+        ///////////////////////////////////////////////////////////////////////3////z///
+        /4v///8j////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8l////cf//
+        /6P+/v7V//////////////////////////////////////7+/v////////////7+/v//////////1f//
+        /6P///9z////Jf///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////A////xP///8r////Tf///4P///+l////z////8/////P////z////8/////P////nf//
+        /4P+/v5N/v7+K////xP+/v4D////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8BAAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
+        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
+        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//KAAAAEAAAACAAAAAAQAgAAAA
+        AAAAQgAAAAAAAAAAAAAAAAAAAAAAAP///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8h////Yf//
+        /5/////f////////////////////////////////////////////////////////////////////3///
+        /5////9h////If///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Ef//
+        /2H////P////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////P////Yf///xH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8h////n////+//////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////v////j///
+        /yH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///xH///+P////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////gf///xH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///1H////v////////////////////////////////////////
+        ///v7+//v7+//4CAgP9QUFD/QEBA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0BAQP9QUFD/gICA/7+/
+        v//////////////////////////////////////////////////////v////Uf///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Ef///6//////////////////////////////
+        ////////7+/v/5+fn/9QUFD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/1BQUP+fn5//7+/v////////////////////////////////////
+        //////+v////Ef///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Mf///9//////////////
+        ///////////////////f39//YGBg/xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/xAQEP9gYGD/39/f////
+        /////////////////////////////////9////8x////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Yf//
+        /+///////////////////////////+/v7/9gYGD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP9wcHD/7+/v////////////////////////////////7////1H///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Yf///////////////////////////////4+Pj/8QEBD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/xAQEP+vr6//////////////////////////
+        ////////////Yf///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Yf//////////////////////////7+/v/1BQUP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/1BQ
+        UP/v7+////////////////////////////////9h////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Qf//////////////////////////z8/P/yAg
+        IP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/MDAw/9/f3////////////////////////////////0H///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Mf///+//////////////
+        ////////z8/P/xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8QEBD/z8/P////////////////////
+        ///////v////If///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Ef//
+        /8//////////////////////z8/P/xAQEP8AAAD/AAAA/7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//AAAA/xAQ
+        EP/Pz8///////////////////////////8////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///4//////////////////////z8/P/xAQEP8AAAD/AAAA/wAAAP//////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////wAAAP8AAAD/EBAQ/9/f3///////////////////////////j////wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///0H/////////////////////7+/v/zAwMP8AAAD/AAAA/wAA
+        AP8AAAD/////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////8AAAD/AAAA/wAAAP8wMDD/7+/v////////////////////
+        //////9B////Af///wH///8B////Af///wH///8B////Af///wH////P/////////////////////1BQ
+        UP8AAAD/AAAA/wAAAP8AAAD/AAAA/7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//AAAA/wAAAP8AAAD/AAAA/3Bw
+        cP//////////////////////////z////wH///8B////Af///wH///8B////Af///wH///9h////////
+        /////////////6+vr/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/v7+/////////////////////
+        /////////////////////////////////////////////4CAgP8AAAD/AAAA/wAAAP8AAAD/QEBA////
+        /////////////////////////////////////////////////////////////7+/v/8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/v7+///////////////////////////9h////Af///wH///8B////Af//
+        /wH///8B////3////////////////+/v7/8QEBD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/4+P
+        j/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/9gYGD/AAAA/wAA
+        AP8AAAD/AAAA/zAwMP+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/
+        v/+Pj4//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAgIP/v7+//////////////////////3///
+        /wH///8B////Af///wH///8B////Yf////////////////////+AgID/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/MDAw/7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//v7+//7+/v/+/v7//YGBg/xAQEP9AQED/ICAg/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/gICA////
+        //////////////////////9h////Af///wH///8B////Af///8/////////////////v7+//EBAQ/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/0BAQP///////////////////////////////////////////////////////////4+P
+        j//v7+///////+/v7/8wMDD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/xAQEP/v7+//////////////////////v////wH///8B////Af///yH/////////////
+        ////////gICA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9AQED/////////////////////////////////////////
+        //////////////////+/v7//////////////////39/f/xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/j4+P//////////////////////////8h////Af//
+        /wH///+P/////////////////////xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/QEBA////////////////////
+        ////////////////////////////////////////j4+P/7+/v/////////////////+AgID/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/yAgIP//////////////
+        ////////////j////wH///8B////z////////////////6+vr/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0BA
+        QP///////////////////////////////////////////////////////////4CAgP8AAAD/z8/P////
+        ////////7+/v/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/z8/P/////////////////////8////8B////If////////////////////9gYGD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP9AQED/////////////////////////////////////////////////////////
+        //+AgID/AAAA/0BAQP////////////////9AQED/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/3BwcP//////////////////////////If///1H/////////////
+        ////////EBAQ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/QEBA////////////////////////////////////
+        ////////////////////////gICA/wAAAP8AAAD/39/f////////////gICA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8gICD/////////////////////////
+        /1H///+B////////////////z8/P/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0BAQP//////////////
+        /////////////////////////////////////////////4CAgP8AAAD/AAAA/5+fn////////////4CA
+        gP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/9/f
+        3/////////////////////+B////v////////////////5+fn/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP9AQED///////////////////////////////////////////////////////////+AgID/AAAA/wAA
+        AP+AgID///////////+/v7//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP+/v7//////////////////////v////9////////////////+AgID/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/QEBA////////////////////////////////////////////////////
+        ////////gICA/wAAAP8AAAD/gICA////////////j4+P/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/gICA/////////////////////9//////////////
+        ////////UFBQ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0BAQP//////////////////////////////
+        /////////////////////////////4CAgP8AAAD/AAAA/7+/v////////////4CAgP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/3BwcP//////////////
+        /////////////////////////////0BAQP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9AQED/////////
+        //////////////////////////////////////////////////+AgID/AAAA/yAgIP//////////////
+        //9gYGD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP9AQED///////////////////////////////////////////9AQED/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/YGBg////////////////////////////////////////////////////////////gICA/yAg
+        IP/Pz8//////////////////ICAg/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/QEBA////////////////////////////////////////////QEBA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/YGBg////////////////////////////////////////////////////
+        /////////////+/v7///////////////////////z8/P/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/0BAQP//////////////////////////////
+        /////////////0BAQP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/YGBg////////////////////////////////////
+        /////////////////////////////////////////////////////////////2BgYP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9AQED/////////
+        //////////////////////////////////9AQED/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/YGBg////////////////////
+        /////////////////////////////////////////////////////////////////////////////7+/
+        v/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/QEBA////////////////////////////////////////////QEBA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/YGBg////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////+/v7/8gICD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/2BgYP//////////////////////////7////////////////4CA
+        gP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/YGBg////////////////////////////////////////////////////////////////////
+        /////////////////////////////8/Pz/8wMDD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP+AgID/////////////////////7///
+        /7////////////////+Pj4//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/MDAw////////////////////////////z8/P/6+vr/+/v7//v7+//7+/
+        v/+/v7//v7+//7+/v/+/v7//v7+//5+fn/+AgID/gICA/1BQUP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/r6+v////
+        /////////////////7////+f////////////////z8/P/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/8/Pz//////////////////v7+//QEBA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/9/f3/////////////////////+f////cf////////////////////8QEBD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/2BgYP//////////////
+        ////////QEBA/wAAAP8AAAD/AAAA/wAAAP8QEBD/cHBw/7+/v/+/v7//r6+v/2BgYP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/xAQEP//////////////////////////cf///zH/////////////
+        ////////UFBQ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP/f39//////////////////j4+P/wAAAP8AAAD/AAAA/wAAAP8wMDD/7+/v////////////////////
+        ////////z8/P/yAgIP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9gYGD/////////////////////////
+        /zH///8B////7////////////////5+fn/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP9QUFD/////////////////7+/v/xAQEP8AAAD/ICAg/yAgIP8gICD/7+/v////
+        ///////////////////////////////////Pz8//EBAQ/yAgIP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/r6+v////
+        /////////////////+////8B////Af///5/////////////////v7+//AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/n5+f/////////////////5+fn/8QEBD/v7+/////
+        //+fn5//n5+f/////////////////////////////////////////////////4CAgP+/v7///////4+P
+        j/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/EBAQ//////////////////////////+f////Af///wH///9R/////////////////////2Bg
+        YP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/+/v7///////////////
+        //8wMDD/n5+f////////////v7+/////////////////////////////////////////////////////
+        ///f39//v7+/////////////YGBg/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/3BwcP//////////////////////////Uf///wH///8B////Af//
+        /+/////////////////f39//AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/zAw
+        MP/////////////////v7+//AAAA/7+/v///////////////////////////////////////////////
+        /////////////////////////////7+/v////////////6+vr/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP/f39//////////////////////7///
+        /wH///8B////Af///wH///+B/////////////////////2BgYP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP9QUFD/////////////////r6+v/wAAAP+/v7//////////////////////////
+        //////////////////////////////////////////////////+/v7////////////+fn5//AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP9gYGD/////////
+        /////////////////4H///8B////Af///wH///8B////If/////////////////////f39//AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/gICA/////////////////4CAgP8AAAD/UFBQ////
+        ////////z8/P///////////////////////////////////////////////////////v7+//v7+/////
+        ///v7+//MDAw/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8QEBD/39/f//////////////////////////8R////Af///wH///8B////Af///wH///+f////////
+        /////////////4CAgP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/4CAgP//////////////
+        //9QUFD/AAAA/wAAAP9AQED/39/f/5+fn/+/v7//////////////////////////////////////////
+        ////////n5+f/6+vr/+/v7//ICAg/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/j4+P//////////////////////////+f////Af///wH///8B////Af//
+        /wH///8B////Ef///+//////////////////////MDAw/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP+AgID/////////////////QEBA/wAAAP8AAAD/AAAA/5+fn/+/v7//QEBA////////////////////
+        ////////////////////////7+/v/yAgIP/f39//UFBQ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/QEBA///////////////////////////v////Ef//
+        /wH///8B////Af///wH///8B////Af///wH///+B/////////////////////9/f3/8QEBD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/gICA/////////////////2BgYP8AAAD/AAAA/wAAAP9AQED//////0BA
+        QP9gYGD/////////////////////////////////7+/v/0BAQP9wcHD/7+/v/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/EBAQ/9/f3///////////////
+        ////////////cf///wH///8B////Af///wH///8B////Af///wH///8B////Af///8//////////////
+        ////////r6+v/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/3BwcP////////////////9QUFD/AAAA/wAA
+        AP8AAAD/AAAA/6+vr//v7+//MDAw/0BAQP+vr6/////////////v7+//n5+f/yAgIP8wMDD//////2Bg
+        YP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/8/P
+        z///////////////////////////z////wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8x////7/////////////////////+fn5//AAAA/wAAAP8AAAD/AAAA/wAAAP8QEBD/v7+/////
+        //+Pj4//AAAA/wAAAP8AAAD/AAAA/wAAAP8QEBD/z8/P/+/v7/9wcHD/AAAA/wAAAP8AAAD/AAAA/xAQ
+        EP+AgID//////5+fn/8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/5+fn///////////////////////////7////zH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///2H//////////////////////////5+fn/8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP+AgID/7+/v/+/v
+        7/+/v7//v7+//7+/v///////39/f/1BQUP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/5+fn////////////////////////////////2H///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////n///////////////////
+        ////////n5+f/xAQEP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/xAQEP9QUFD/gICA/4CAgP+AgID/QEBA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/EBAQ/6+vr///////////////////////////////
+        /5////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///+f///////////////////////////Pz8//ICAg/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/MDAw/8/Pz///////////////
+        /////////////////5////8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///5///////////////////////////+/v7/9gYGD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/cHBw/+/v
+        7////////////////////////////////5////8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////n///////////////////
+        /////////////7+/v/8gICD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8wMDD/v7+//////////////////////////////////////5////8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///+P/////////////////////////////////////5+fn/8gICD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/zAwMP+fn5///////////////////////////////////////////4////8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///1H////v/////////////////////////////////////7+/
+        v/9gYGD/EBAQ/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8QEBD/YGBg/7+/v///////////////////////////////////////////7///
+        /1H///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////If///7//////////////
+        //////////////////////////////////+/v7//gICA/0BAQP8QEBD/AAAA/wAAAP8AAAD/AAAA/wAA
+        AP8AAAD/AAAA/wAAAP8QEBD/QEBA/4CAgP+/v7//////////////////////////////////////////
+        ////////////v////yH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Yf///9//////////////////////////////////////////////////////////////
+        ///Pz8//v7+//7+/v/+/v7//v7+//8/Pz///////////////////////////////////////////////
+        ///////////////////////f////Yf///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8R////gf///+//////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////+////+B////Ef///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Yf//
+        /8//////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////z////2H///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////If///3H///+/////////////////////////////////////////
+        /////////////////////////////////////////////////7////9x////If///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///9B////cf//
+        /4////+/////v////7////+/////v////7////+/////v////4H///9x////Qf///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>740, 579</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>639, 328</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ParameterForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

@@ -16,9 +16,9 @@ namespace Automix_Data_Management.Model
 
         public Settings()
         {
-            TempDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "//AutomixSoftware";
+            TempDir = System.IO.Path.GetTempPath() + "\\AutomixSoftware";
             TransitionDuration = "10";
-            MixDuration = "30";
+            MixDuration = "60";
             BpmPriority = "10";
             KeyNumberPriority = "10";
             KeyTonalityPriority = "10";
