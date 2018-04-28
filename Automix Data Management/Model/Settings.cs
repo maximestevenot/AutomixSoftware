@@ -1,5 +1,4 @@
-﻿using System;
-using Automix_Data_Management.Storage;
+﻿using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management.Model
 {

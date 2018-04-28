@@ -21,7 +21,6 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Automix_AI.Distances;
-using Automix_Data_Management;
 
 namespace Automix_UI.Forms
 {

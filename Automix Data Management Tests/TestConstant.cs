@@ -1,8 +1,4 @@
-﻿using System.IO;
-using static Automix_Data_Management.Utils;
-using static Automix_Data_Management.Storage.SettingsManager;
-
-namespace Automix_Data_Management_Tests
+﻿namespace Automix_Data_Management_Tests
 {
     internal static class TestConstant
     {

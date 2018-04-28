@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Automix_Data_Management.Model;
 using Automix_AI.Distances;
 using Automix_UI.Forms;
 using Automix_Data_Management.Exportation;
-using static Automix_Data_Management.Storage.SettingsManager;
 using Automix_Data_Management;
 using Automix_Data_Management.Storage;
 using NAudio.Lame;

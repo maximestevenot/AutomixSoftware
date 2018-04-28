@@ -1,7 +1,6 @@
 ﻿using Automix_AI.Distances;
 using System;
 using System.Windows.Forms;
-using Automix_Data_Management.Model;
 using Automix_Data_Management;
 using NAudio.Lame;
 
