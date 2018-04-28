@@ -12,9 +12,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -26,7 +28,7 @@ namespace Automix_Data_Management.Extraction
         private readonly ProcessStartInfo _startInfoFade;
         private readonly DirectoryInfo _tempDirectory;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ExecutableExtraction(DirectoryInfo tempDirectory)
         {

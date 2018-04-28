@@ -8,9 +8,12 @@
 
 using System;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Automix_Data_Management.Model;
+using log4net;
 
 namespace Automix_Data_Management.Storage
 {
@@ -18,7 +21,7 @@ namespace Automix_Data_Management.Storage
     {
         private SQLiteConnection _dbConnection;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public DataBase()
         {
@@ -55,7 +58,7 @@ namespace Automix_Data_Management.Storage
             catch (Exception e)
             {
                 log.Debug("DB ERROR when trying to insert :" + track.Path + e.Message, e);
-                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to insert :" + track.Path + e.Message);
+                Debug.WriteLine("DB ERROR when trying to insert :" + track.Path + e.Message);
             }
 
             _dbConnection.Close();
@@ -78,7 +81,7 @@ namespace Automix_Data_Management.Storage
             {
 
                 log.Debug("DB ERROR when trying to clean database" + e.Message, e);
-                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to clean database" + e.Message);
+                Debug.WriteLine("DB ERROR when trying to clean database" + e.Message);
             }
             _dbConnection.Close();
         }
@@ -114,7 +117,7 @@ namespace Automix_Data_Management.Storage
             catch (Exception e)
             {
                 log.Debug("DB ERROR when trying to extract data of : " + track.Path + e.Message, e);
-                System.Diagnostics.Debug.WriteLine(
+                Debug.WriteLine(
                     "DB ERROR when trying to extract data of : " + track.Path + e.Message);
 
                 _dbConnection.Close();
@@ -145,7 +148,7 @@ namespace Automix_Data_Management.Storage
             catch (Exception e)
             {
                 log.Debug("DB ERROR when trying to isPresent: " + track.Path + e.Message, e);
-                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to isPresent : " + track.Path + e.Message);
+                Debug.WriteLine("DB ERROR when trying to isPresent : " + track.Path + e.Message);
             }
 
             _dbConnection.Close();
@@ -185,7 +188,7 @@ namespace Automix_Data_Management.Storage
             catch (Exception e)
             {
                 log.Debug("DB ERROR when trying to create tracks table" + e.Message, e);
-                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
+                Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
             }
 
             _dbConnection.Close();
@@ -198,7 +201,7 @@ namespace Automix_Data_Management.Storage
             return values.Select(value => Convert.ToInt32(value)).ToArray();
         }
 
-        public void ImportDataBase(String pathDbUser)
+        public void ImportDataBase(string pathDbUser)
         {
             _dbConnection.Open();
             SQLiteConnection dbUserConnection = new SQLiteConnection("Data Source=" + pathDbUser + ";Version=3;");
@@ -232,7 +235,7 @@ namespace Automix_Data_Management.Storage
             }
             else
             {
-                throw new System.ArgumentException("User database to import hasn't the same format than the software database\n");
+                throw new ArgumentException("User database to import hasn't the same format than the software database\n");
             }
 
             dbUserConnection.Close();
@@ -334,7 +337,7 @@ namespace Automix_Data_Management.Storage
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
+                Debug.WriteLine("DB ERROR when trying to create tracks table" + e.Message);
             }
 
             // Copy the software database in the database user

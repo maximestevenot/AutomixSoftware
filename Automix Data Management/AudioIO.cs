@@ -6,14 +6,15 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-using Automix_Data_Management.Model;
-using NAudio.Lame;
-using NAudio.Wave;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Automix_Data_Management.Model;
+using NAudio.Lame;
+using NAudio.Wave;
 
 namespace Automix_Data_Management
 {
@@ -138,8 +139,8 @@ namespace Automix_Data_Management
             }
             catch (InvalidOperationException ex)
             {
-                System.Diagnostics.Debug.WriteLine($@"Error when reading {path}");
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                Debug.WriteLine($@"Error when reading {path}");
+                Debug.WriteLine(ex.Message);
                 return string.Empty;
             }
 

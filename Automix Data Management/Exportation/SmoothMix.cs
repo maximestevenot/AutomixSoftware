@@ -6,14 +6,17 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using Automix_Data_Management.Model;
+using Automix_Data_Management.Storage;
+using log4net;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
-using System;
-using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management.Exportation
 {
@@ -31,7 +34,7 @@ namespace Automix_Data_Management.Exportation
         private readonly List<string> _tempFileList;
         private WaveFileWriter _waveFileWriter;
         private float[] _savedOverlay;
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private int _currentMixDuration;
 
         public SmoothMix() : this(10) { }
@@ -41,7 +44,7 @@ namespace Automix_Data_Management.Exportation
             var settingsManager = new SettingsManager();
 
             TransitionDuration = transitionDuration;
-            MixDuration = Convert.ToInt32(60000 * (Int32.Parse(settingsManager.GetSetting(SettingsManager.SettingTypes.MixDuration))));
+            MixDuration = Convert.ToInt32(60000 * (int.Parse(settingsManager.GetSetting(SettingsManager.SettingTypes.MixDuration))));
             _tempDirPath = settingsManager.GetSetting(SettingsManager.SettingTypes.TempDir);
             _tempFileList = new List<string>();
         }
@@ -97,15 +100,15 @@ namespace Automix_Data_Management.Exportation
                     }
                 }
 
-                bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
+                bw.ReportProgress(1000 * count++ / (collection.Count + 2));
             }
 
             if (!bw.CancellationPending)
             {
                 FinalizeLastTempFile();
-                bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
+                bw.ReportProgress(1000 * count++ / (collection.Count + 2));
                 AudioIO.WavToMp3(_tempFileList, outputFile, AudioIO.CreateId3TagData(outputFile));
-                bw.ReportProgress((int)(1000 * count++) / (collection.Count + 2));
+                bw.ReportProgress(1000 * count++ / (collection.Count + 2));
             }
             DeleteTempFiles();
             Console.WriteLine(_currentMixDuration);
@@ -281,7 +284,7 @@ namespace Automix_Data_Management.Exportation
                 catch (IOException e)
                 {
                     log.Debug(e.Message, e);
-                    System.Diagnostics.Debug.WriteLine(e.Message);
+                    Debug.WriteLine(e.Message);
                 }
             }
         }

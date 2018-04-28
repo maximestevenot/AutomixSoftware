@@ -7,20 +7,22 @@
 // You should have received a copy of the License along with this program.
 
 using System;
+using System.Reflection;
 using Automix_Data_Management.Model;
+using log4net;
 
 namespace Automix_AI.Distances
 {
     public class SimpleTracksDistance : AbstractTracksDistance
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public SimpleTracksDistance(IProfileDistance sortProfile) : base(sortProfile)
         {
 
         }
 
-        public SimpleTracksDistance() : base()
+        public SimpleTracksDistance()
         {
 
         }

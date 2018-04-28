@@ -1,4 +1,5 @@
-﻿using Automix_Data_Management.Storage;
+﻿using System.IO;
+using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management.Model
 {
@@ -15,7 +16,7 @@ namespace Automix_Data_Management.Model
 
         public Settings()
         {
-            TempDir = System.IO.Path.GetTempPath() + "\\AutomixSoftware";
+            TempDir = Path.GetTempPath() + "\\AutomixSoftware";
             TransitionDuration = "10";
             MixDuration = "60";
             BpmPriority = "10";

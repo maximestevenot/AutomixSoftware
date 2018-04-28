@@ -6,8 +6,8 @@
 // Unauthorized copying of this file, via any medium is strictly prohibited.
 // You should have received a copy of the License along with this program.
 
-using System.Threading;
 using System.ComponentModel;
+using System.Threading;
 using Automix_Data_Management.Model;
 
 namespace Automix_Data_Management.Extraction

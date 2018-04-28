@@ -7,10 +7,10 @@
 // You should have received a copy of the License along with this program.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Automix_AI.Distances;
 using Automix_Data_Management.Model;
-using System.Collections.Generic;
 
 namespace Automix_AI.Sort_Algorithms
 {
@@ -164,22 +164,19 @@ namespace Automix_AI.Sort_Algorithms
             {
                 return current;
             }
-            else
+            var newTrackCollection = new TrackCollection();
+            for (var i = 0; i < current.Count; i++)
             {
-                var newTrackCollection = new TrackCollection();
-                for (var i = 0; i < current.Count; i++)
+                if (i == track1)
                 {
-                    if (i == track1)
-                    {
-                        newTrackCollection.Add(current[track2]);
-                    }
-                    else
-                    {
-                        newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
-                    }
+                    newTrackCollection.Add(current[track2]);
                 }
-                return newTrackCollection;
+                else
+                {
+                    newTrackCollection.Add(i == track2 ? current[track1] : current[i]);
+                }
             }
+            return newTrackCollection;
         }
     }
 }

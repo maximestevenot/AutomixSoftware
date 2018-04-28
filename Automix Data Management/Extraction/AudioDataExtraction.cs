@@ -7,13 +7,15 @@
 // You should have received a copy of the License along with this program.
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using log4net;
 
 namespace Automix_Data_Management.Extraction
 {
@@ -22,7 +24,7 @@ namespace Automix_Data_Management.Extraction
         private DirectoryInfo _tempDirectory;
         public static int ExploredTracks;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public AudioDataExtraction()
         {
@@ -43,7 +45,7 @@ namespace Automix_Data_Management.Extraction
 
             try
             {
-                Parallel.ForEach(trackCollection, options, (track) =>
+                Parallel.ForEach(trackCollection, options, track =>
                 {
                     if (cancellationTokenSource.IsCancellationRequested)
                     {
