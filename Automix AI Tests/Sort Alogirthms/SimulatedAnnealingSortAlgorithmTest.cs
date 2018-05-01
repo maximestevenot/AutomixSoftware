@@ -20,38 +20,38 @@ namespace Automix_AI_Tests.Sort_Alogirthms
         private static TrackCollection _trackCollection;
         private static BackgroundWorker _backgroundWorker;
 
-        [ClassInitialize()]
+        [ClassInitialize]
         public static void InitializeFields(TestContext testContext)
         {
-            var track1 = new Track()
+            var track1 = new Track
             {
                 Bpm = 128,
                 Key = "6d",
                 IsFixed = false
             };
 
-            var track2 = new Track()
+            var track2 = new Track
             {
                 Bpm = 150,
                 Key = "6m",
                 IsFixed = true
             };
 
-            var track3 = new Track()
+            var track3 = new Track
             {
                 Bpm = 128,
                 Key = "6m",
                 IsFixed = false
             };
 
-            var track4 = new Track()
+            var track4 = new Track
             {
                 Bpm = 120,
                 Key = "3m",
                 IsFixed = true
             };
 
-            var track5 = new Track()
+            var track5 = new Track
             {
                 Bpm = 60,
                 Key = "1d",

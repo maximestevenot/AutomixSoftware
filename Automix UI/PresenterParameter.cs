@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Automix_Data_Management.Model;
+﻿using System.Collections.Generic;
 using Automix_AI.Distances;
-using Automix_UI.Forms;
-using Automix_Data_Management.Exportation;
-using static Automix_Data_Management.Storage.SettingsManager;
 using Automix_Data_Management;
+using Automix_Data_Management.Exportation;
+using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using Automix_UI.Forms;
 using NAudio.Lame;
 
 namespace Automix_UI
@@ -23,10 +21,10 @@ namespace Automix_UI
             _views = new List<IViewWithParameters>();
             _settings = new SettingsManager().LoadParametersFromFile();
             _actualProfile = new ManualProfile(
-                Int32.Parse(_settings.BpmPriority),
-                Int32.Parse(_settings.KeyNumberPriority),
-                Int32.Parse(_settings.KeyTonalityPriority),
-                Int32.Parse(_settings.DanceabilityPriority)
+                int.Parse(_settings.BpmPriority),
+                int.Parse(_settings.KeyNumberPriority),
+                int.Parse(_settings.KeyTonalityPriority),
+                int.Parse(_settings.DanceabilityPriority)
                 );
         }
 

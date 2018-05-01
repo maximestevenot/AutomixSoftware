@@ -19,8 +19,8 @@ namespace Automix_Data_Management_Tests.Extraction
         public void TestExtractionInitialization()
         {
             new AudioDataExtractionProxy();
-            //Assert.IsTrue(Directory.Exists(TestConstant.TempDirPath));
-            //Assert.IsTrue(File.Exists(TestConstant.TempDirPath + "\\profile.yaml"));
+            Assert.IsTrue(Directory.Exists(TestConstant.TempDirPath));
+            Assert.IsTrue(File.Exists(TestConstant.TempDirPath + "\\profile.yaml"));
         }
     }
 }

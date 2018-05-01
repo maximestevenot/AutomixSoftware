@@ -7,21 +7,20 @@
 // You should have received a copy of the License along with this program.
 
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
+using Automix_AI.Distances;
 using Automix_Data_Management.Model;
+using Automix_Data_Management.Storage;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using Automix_Data_Management.Storage;
-using System.Resources;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Automix_AI.Distances;
-using Automix_Data_Management;
 
 namespace Automix_UI.Forms
 {
@@ -46,7 +45,7 @@ namespace Automix_UI.Forms
         {
             Before,
             After
-        };
+        }
 
         private int _insertionIndex;
         private InsertionModeType _insertionMode;
@@ -501,8 +500,8 @@ namespace Automix_UI.Forms
 
         private void UpdateLockedTracks()
         {
-            List<String> checkedTracks = new List<String>();
-            List<String> uncheckedTracks = new List<String>();
+            List<string> checkedTracks = new List<string>();
+            List<string> uncheckedTracks = new List<string>();
 
             foreach (ListViewItem item in _musicListView.Items)
             {

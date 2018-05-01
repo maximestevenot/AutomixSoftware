@@ -47,9 +47,12 @@ namespace Automix_Data_Management.Storage
             if (settingType == SettingTypes.TempDir)
             {
                 if (!Directory.Exists(param))
+                {
                     Directory.CreateDirectory(param);
+                }
                 MakeSettlement(settingType.ToText(), param + "\\AutomixSoftware");
             }
+
             else if (settingType == SettingTypes.TransitionDuration || settingType == SettingTypes.MixDuration ||
                      settingType == SettingTypes.BpmPriority || settingType == SettingTypes.KeyNumberPriority ||
                      settingType == SettingTypes.KeyTonalityPriority ||
@@ -102,7 +105,7 @@ namespace Automix_Data_Management.Storage
             {
                 file.Load(AppDataDirectory + ConfigFileName);
             }
-            catch (XmlException e)
+            catch (XmlException)
             {
                 CreateDefaultConfigFile();
                 //log this

@@ -94,7 +94,7 @@ namespace Automix_Data_Management_Tests.Model
         [TestMethod]
         public void TestSortByName()
         {
-            var myCollection = new TrackCollection()
+            var myCollection = new TrackCollection
             {
                 new Track("test1.mp3", TestConstant.TestCheckSum),
                 new Track("test3.mp3", TestConstant.TestCheckSum + "1"),

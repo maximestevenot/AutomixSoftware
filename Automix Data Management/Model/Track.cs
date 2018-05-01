@@ -116,7 +116,7 @@ namespace Automix_Data_Management.Model
 
         public bool Equals(Track other)
         {
-            return (this.Name.Equals(other.Name));
+            return (Name.Equals(other.Name));
         }
     }
 }

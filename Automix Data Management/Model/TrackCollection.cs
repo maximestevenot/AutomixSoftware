@@ -84,21 +84,18 @@ namespace Automix_Data_Management.Model
 
         public bool Equals(TrackCollection other)
         {
-            if (this.Count != other.Count) { return false;  }
-            else
+            if (Count != other.Count) { return false;  }
+            for (var k = 0; k < Count; k++)
             {
-                for (var k = 0; k < this.Count; k++)
-                {
-                    if ( !(this[k].Equals(other[k])) ) { return false; }
-                }
-                return true;
+                if ( !(this[k].Equals(other[k])) ) { return false; }
             }
+            return true;
         }
 
         public int computeTotalTime()
         {
             var sum = 0;
-            for (var i = 0; i < this.Count; i++)
+            for (var i = 0; i < Count; i++)
             {
                 sum += this[i].Duration;
             }

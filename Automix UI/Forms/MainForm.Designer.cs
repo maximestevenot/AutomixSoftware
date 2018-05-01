@@ -76,10 +76,10 @@
             this._reloadButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this._playerTrackBar = new System.Windows.Forms.TrackBar();
+            this._circularProgressBar = new AltoControls.CircularPB();
             this._playerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._trackBarTimer = new System.Windows.Forms.Timer(this.components);
-            this._circularProgressBar = new AltoControls.CircularPB();
             this._menuStrip.SuspendLayout();
             this._statusStrip.SuspendLayout();
             this._trackContextMenu.SuspendLayout();
@@ -489,19 +489,6 @@
             this._playerTrackBar.Name = "_playerTrackBar";
             this._playerTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
-            // _playerBackgroundWorker
-            // 
-            this._playerBackgroundWorker.WorkerReportsProgress = true;
-            this._playerBackgroundWorker.WorkerSupportsCancellation = true;
-            this._playerBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PlayerBackgroundWorker_DoWork);
-            this._playerBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.PlayerBackgroundWorker_ProgressChanged);
-            this._playerBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlayerBackgroundWorker_RunWorkerCompleted);
-            // 
-            // _trackBarTimer
-            // 
-            this._trackBarTimer.Interval = 500;
-            this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
-            // 
             // _circularProgressBar
             // 
             this._circularProgressBar.AllowText = true;
@@ -516,6 +503,19 @@
             this._circularProgressBar.Stroke = 10;
             this._circularProgressBar.Transparency = true;
             this._circularProgressBar.Value = 0;
+            // 
+            // _playerBackgroundWorker
+            // 
+            this._playerBackgroundWorker.WorkerReportsProgress = true;
+            this._playerBackgroundWorker.WorkerSupportsCancellation = true;
+            this._playerBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.PlayerBackgroundWorker_DoWork);
+            this._playerBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.PlayerBackgroundWorker_ProgressChanged);
+            this._playerBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.PlayerBackgroundWorker_RunWorkerCompleted);
+            // 
+            // _trackBarTimer
+            // 
+            this._trackBarTimer.Interval = 500;
+            this._trackBarTimer.Tick += new System.EventHandler(this.TrackBarTimer_Tick);
             // 
             // MainForm
             // 
