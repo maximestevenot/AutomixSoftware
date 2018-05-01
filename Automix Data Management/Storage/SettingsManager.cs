@@ -105,7 +105,7 @@ namespace Automix_Data_Management.Storage
             {
                 file.Load(AppDataDirectory + ConfigFileName);
             }
-            catch (XmlException e)
+            catch (XmlException)
             {
                 CreateDefaultConfigFile();
                 //log this
