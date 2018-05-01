@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Automix Software"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.3.0"
 #define MyAppPublisher "LesProjecteurs"
 #define MyAppURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/"
 #define MyAppDownloadURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/download"
