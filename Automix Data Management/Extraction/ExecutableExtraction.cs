@@ -1,10 +1,5 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
 using System;
 using System.Collections.Generic;
@@ -12,9 +7,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -26,7 +23,7 @@ namespace Automix_Data_Management.Extraction
         private readonly ProcessStartInfo _startInfoFade;
         private readonly DirectoryInfo _tempDirectory;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public ExecutableExtraction(DirectoryInfo tempDirectory)
         {

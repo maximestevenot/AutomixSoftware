@@ -119,10 +119,14 @@
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>Automix Software {0}
-Copyright © 2016-2017 LesProjecteurs - Tous droits réservés
+Copyright © 2016 - 2018 LesProjecteurs
+Ce logiciel est distribué sous licence MIT.
 
-Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, 
-Louis CARLIER, Pierre GABON</value>
+Auteurs : Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, 
+Louis CARLIER, Pierre GABON.
+
+Principaux contributeurs : Niels HECQUARD, Raphaël HERBERT, 
+Cédric MASSON, Richard NICOLAS, Anaelle TROADEC.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

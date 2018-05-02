@@ -1,16 +1,11 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
+using System.Data.SQLite;
 using System.IO;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Data.SQLite;
 
 namespace Automix_Data_Management_Tests.Storage
 {

@@ -1,26 +1,23 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
 using System;
+using System.Reflection;
 using Automix_Data_Management.Model;
+using log4net;
 
 namespace Automix_AI.Distances
 {
     public class SimpleTracksDistance : AbstractTracksDistance
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public SimpleTracksDistance(IProfileDistance sortProfile) : base(sortProfile)
         {
 
         }
 
-        public SimpleTracksDistance() : base()
+        public SimpleTracksDistance()
         {
 
         }

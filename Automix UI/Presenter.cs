@@ -1,14 +1,11 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using Automix_AI.Distances;
 using Automix_AI.Sort_Algorithms;
 using Automix_Data_Management;
@@ -16,6 +13,7 @@ using Automix_Data_Management.Audio_Playing;
 using Automix_Data_Management.Extraction;
 using Automix_Data_Management.Model;
 using Automix_Data_Management.Storage;
+using log4net;
 
 namespace Automix_UI
 {
@@ -29,7 +27,7 @@ namespace Automix_UI
         private AbstractSortAlgorithm _sortAlgorithm;
         private Mp3Player _mp3Player;
 
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Presenter()
         {
@@ -204,7 +202,7 @@ namespace Automix_UI
             {
                 return _mp3Player.GetPosition();
             }
-            catch (System.NullReferenceException e)
+            catch (NullReferenceException e)
             {
                 log.Debug("Exception in presenter --> TODO correct error", e);
                 throw e;

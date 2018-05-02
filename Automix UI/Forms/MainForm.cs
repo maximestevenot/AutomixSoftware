@@ -1,26 +1,21 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
+using Automix_AI.Distances;
 using Automix_Data_Management.Model;
+using Automix_Data_Management.Storage;
 using Automix_UI.Drawing;
 using Automix_UI.Properties;
-using Automix_Data_Management.Storage;
-using System.Resources;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Automix_AI.Distances;
 
 namespace Automix_UI.Forms
 {
@@ -45,7 +40,7 @@ namespace Automix_UI.Forms
         {
             Before,
             After
-        };
+        }
 
         private int _insertionIndex;
         private InsertionModeType _insertionMode;
@@ -74,8 +69,9 @@ namespace Automix_UI.Forms
             _parameterForm = new ParameterForm(this);
 
             _lockpadImageList = new ImageList();
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
+
+            _lockpadImageList.Images.Add(new Bitmap(Resources.UnlockedIcon));
+            _lockpadImageList.Images.Add(new Bitmap(Resources.LockedIcon));
 
             _musicListView.StateImageList = _lockpadImageList;
 
@@ -500,8 +496,8 @@ namespace Automix_UI.Forms
 
         private void UpdateLockedTracks()
         {
-            List<String> checkedTracks = new List<String>();
-            List<String> uncheckedTracks = new List<String>();
+            List<string> checkedTracks = new List<string>();
+            List<string> uncheckedTracks = new List<string>();
 
             foreach (ListViewItem item in _musicListView.Items)
             {
@@ -555,7 +551,7 @@ namespace Automix_UI.Forms
             }
             OnWorkerStop();
             StopPlayer();
-            
+
         }
 
         private static void ShowErrorDialog(string errorMessage)
@@ -761,7 +757,7 @@ namespace Automix_UI.Forms
                 return;
             }
 
-            Automix_Data_Management.SettingsAccessor.SetSetting(Automix_Data_Management.SettingsAccessor.Settings.tempDir, dialog.SelectedPath);
+            new SettingsManager().SetSetting(SettingsManager.SettingTypes.TempDir, dialog.SelectedPath);
 
             ResourceManager rm = new ResourceManager("Automix_UI.Properties.TextResources", Assembly.GetExecutingAssembly());
             string msg = rm.GetString("ChooseTempDir");
@@ -818,7 +814,7 @@ namespace Automix_UI.Forms
             _presenter.UpdateSortAlgorithm(profileChosen);
         }
 
-        
+
     }
 }
 

@@ -1,4 +1,7 @@
-﻿namespace Automix_AI.Distances
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
+
+namespace Automix_AI.Distances
 {
     public class ManualProfile : IProfileDistance
     {

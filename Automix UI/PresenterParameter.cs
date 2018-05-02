@@ -1,11 +1,13 @@
-﻿using System;
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
+
 using System.Collections.Generic;
-using Automix_Data_Management.Model;
 using Automix_AI.Distances;
-using Automix_UI.Forms;
-using Automix_Data_Management.Exportation;
-using static Automix_Data_Management.SettingsAccessor;
 using Automix_Data_Management;
+using Automix_Data_Management.Exportation;
+using Automix_Data_Management.Model;
+using Automix_Data_Management.Storage;
+using Automix_UI.Forms;
 using NAudio.Lame;
 
 namespace Automix_UI
@@ -13,19 +15,19 @@ namespace Automix_UI
     public class PresenterParameter
     {
         private readonly List<IViewWithParameters> _views;
-        private Parameters _parameters;
+        private Settings _settings;
         private IProfileDistance _actualProfile;
         private MainForm _mainForm;
 
         public PresenterParameter()
         {
             _views = new List<IViewWithParameters>();
-            _parameters = LoadParametersFromFile();
+            _settings = new SettingsManager().LoadParametersFromFile();
             _actualProfile = new ManualProfile(
-                Int32.Parse(_parameters.BpmPriority),
-                Int32.Parse(_parameters.KeyNumberPriority),
-                Int32.Parse(_parameters.KeyTonalityPriority),
-                Int32.Parse(_parameters.DanceabilityPriority)
+                int.Parse(_settings.BpmPriority),
+                int.Parse(_settings.KeyNumberPriority),
+                int.Parse(_settings.KeyTonalityPriority),
+                int.Parse(_settings.DanceabilityPriority)
                 );
         }
 
@@ -42,10 +44,10 @@ namespace Automix_UI
         public void SetProfile(IProfileDistance profile)
         {
             _actualProfile = profile;
-            _parameters.BpmPriority = profile.BpmPriority.ToString();
-            _parameters.KeyNumberPriority = profile.KeyNumberPriority.ToString();
-            _parameters.KeyTonalityPriority = profile.KeyTonalityPriority.ToString();
-            _parameters.DanceabilityPriority = profile.DanceabilityPriority.ToString();
+            _settings.BpmPriority = profile.BpmPriority.ToString();
+            _settings.KeyNumberPriority = profile.KeyNumberPriority.ToString();
+            _settings.KeyTonalityPriority = profile.KeyTonalityPriority.ToString();
+            _settings.DanceabilityPriority = profile.DanceabilityPriority.ToString();
 
             UpdateViews();
         }
@@ -55,22 +57,22 @@ namespace Automix_UI
             _mainForm.UpdateSortProfile(_actualProfile);
         }
 
-        public void SaveParameters() => _parameters.Save();
+        public void SaveParameters() => _settings.Save();
 
         internal void SetTransitionDuration(decimal value)
         {
-            _parameters.TransitionDuration = value.ToString();
+            _settings.TransitionDuration = value.ToString();
             SmoothMix.DEFAULTTRANSITIONDURATION = (int) value;
         }
 
         internal void SetMixDuration(decimal value)
         {
-            _parameters.MixDuration = value.ToString();
+            _settings.MixDuration = value.ToString();
         }
 
         internal void SetMP3Quality(int value)
         {
-            _parameters.MP3Quality = value.ToString();
+            _settings.Mp3Quality = value.ToString();
             AudioIO.ExportQuality = (LAMEPreset)value;
         } 
 
@@ -78,7 +80,7 @@ namespace Automix_UI
         {
             foreach (IViewWithParameters view in _views)
             {
-                view.LoadParameters(_parameters);
+                view.LoadParameters(_settings);
             }
         }
     }
