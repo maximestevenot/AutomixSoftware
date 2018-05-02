@@ -4,8 +4,7 @@
 #define MyAppName "Automix Software"
 #define MyAppVersion "1.3.0"
 #define MyAppPublisher "LesProjecteurs"
-#define MyAppURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/"
-#define MyAppDownloadURL "http://www.ecole.ensicaen.fr/~stevenot/automix-software/download"
+#define MyAppURL "https://automix-software.herokuapp.com/"
 #define MyAppExeName "Automix Software.exe"
 
 [Setup]
@@ -22,7 +21,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppDownloadURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-LicenseFile=..\COPYING
+LicenseFile=..\LICENSE
 OutputDir=bin
 OutputBaseFilename={#MyAppName}
 SetupIconFile=..\Automix UI\logo.ico
