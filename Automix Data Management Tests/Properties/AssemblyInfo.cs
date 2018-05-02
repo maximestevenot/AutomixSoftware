@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("LesProjecteurs")]
 [assembly: AssemblyProduct("Automix Software")]
-[assembly: AssemblyCopyright("Copyright © 2016-2017 LesProjecteurs - All Rights Reserved")]
+[assembly: AssemblyCopyright("Copyright © 2016-2017 LesProjecteurs")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,5 +15,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("2e8da77f-f7b5-44e7-a359-907a8c73ec46")]
 
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.3.0.0")]
+[assembly: AssemblyFileVersion("1.3.0.0")]

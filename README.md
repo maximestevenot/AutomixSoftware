@@ -2,10 +2,6 @@
 
 This project aims to create a virtual and intelligent DJ to help customers create their own mix so they can enjoy any music without interruption.
 
-## Development version
-
-[![build status](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/badges/develop/build.svg)](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/commits/develop)
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.  
@@ -22,7 +18,7 @@ Get Visual Studio [here](https://www.visualstudio.com/downloads/).
 Clone the repository on your computer.
 
 ```
-git clone https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a.git
+git clone https://github.com/LesProjecteurs/AutomixSoftware.git
 ```
 
 Open solution in Visual Studio.
@@ -45,13 +41,6 @@ The .exe file will be built in the *Release* directory.
 
 ----------
 
-## Project Follow-Up
-
-To view the project meetings reports or any other document not relative to the source code and documentation, please checkout to the **[suivi_projet](https://gitlab.ecole.ensicaen.fr/stevenot/projet_2a/tree/suivi_projet/Suivi%20de%20projet)** branch.  
-This branch contains all the needed files for the project follow-up.
-
-----------
-
 ## Built With
 
  - [Visual Studio](https://www.visualstudio.com/) - The IDE used.
@@ -66,21 +55,27 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our coding style, 
 
 ## Authors
 
- - **Maxime STEVENOT** - *Project Manager* - <maxime.stevenot@ecole.ensicaen.fr>
- - **Guillaume HANNES** - <hannes@ecole.ensicaen.fr>
- - **Jordan ERNULT** - <ernult@ecole.ensicaen.fr>
- - **Louis CARLIER** - <lcarlier@ecole.ensicaen.fr>
- - **Pierre GABON** - <gabon@ecole.ensicaen.fr>
+ - **Maxime STEVENOT** - *Project Manager* - <stevenot@ecole.ensicaen.fr>
+ - **Guillaume HANNES** - *DevOps* - <hannes@ecole.ensicaen.fr>
+ - **Jordan ERNULT** - *Developer* - <ernult@ecole.ensicaen.fr>
+ - **Louis CARLIER** - *Developer* - <lcarlier@ecole.ensicaen.fr>
+ - **Pierre GABON** - *Developer* - <gabon@ecole.ensicaen.fr>
 
-### Tutors
+## Contributors
 
- - **Baptiste HEMERY** - <baptiste.hemery@ensicaen.fr>
- - **Estelle CHERRIER** - <estelle.cherrier@ensicaen.fr>
+ - **Niels HECQUARD** - *Developer* - <hecquard@ecole.ensicaen.fr>
+ - **Raphael HERBERT** - *Developer* - <herbert@ecole.ensicaen.fr>
+ - **Cedric MASSON** - *Developer* - <masson@ecole.ensicaen.fr>
+ - **Richard NICOLAS** - *Developer* - <rnicolas@ecole.ensicaen.fr>
+ - **Anaelle TROADEC** - *Developer* - <atroadec@ecole.ensicaen.fr>
 
 ----------
 
 ## License
 
-For Automix Software  
-Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-This project is licensed under Proprietary License - see the [LICENSE.md](LICENSE.md) file for details.
+Copyright (C) 2016 - 2018 LesProjecteurs
+
+LesProjecteurs is a partnership between Maxime STEVENOT,
+Guillaume HANNES, Jordan ERNULT, Louis CARLIER & Pierre GABON.
+
+This project is licensed under MIT License - see the [LICENSE](LICENSE) file for details.

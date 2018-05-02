@@ -1,4 +1,7 @@
-﻿using Automix_Data_Management.Storage;
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
+
+using Automix_Data_Management.Storage;
 
 namespace Automix_Data_Management_Tests
 {

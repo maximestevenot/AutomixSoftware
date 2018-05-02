@@ -63,6 +63,16 @@ namespace Automix_UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LockedIcon {
+            get {
+                object obj = ResourceManager.GetObject("LockedIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PauseIcon {
             get {
                 object obj = ResourceManager.GetObject("PauseIcon", resourceCulture);
@@ -96,6 +106,16 @@ namespace Automix_UI.Properties {
         internal static System.Drawing.Bitmap SeekIcon {
             get {
                 object obj = ResourceManager.GetObject("SeekIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UnlockedIcon {
+            get {
+                object obj = ResourceManager.GetObject("UnlockedIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

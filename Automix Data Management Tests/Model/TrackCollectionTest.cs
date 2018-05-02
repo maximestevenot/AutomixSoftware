@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
+
+using System;
 using Automix_Data_Management.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

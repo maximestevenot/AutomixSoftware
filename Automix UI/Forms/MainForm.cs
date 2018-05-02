@@ -1,10 +1,5 @@
-﻿// Copyright (C) 2016-2017 LesProjecteurs - All Rights Reserved
-// Maxime STEVENOT, Guillaume HANNES, Jordan ERNULT, Louis CARLIER, Pierre GABON
-// 
-// This file is part of Automix Software.
-// 
-// Unauthorized copying of this file, via any medium is strictly prohibited.
-// You should have received a copy of the License along with this program.
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
 
 using System;
 using System.Collections.Generic;
@@ -74,8 +69,9 @@ namespace Automix_UI.Forms
             _parameterForm = new ParameterForm(this);
 
             _lockpadImageList = new ImageList();
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
+
+            _lockpadImageList.Images.Add(new Bitmap(Resources.UnlockedIcon));
+            _lockpadImageList.Images.Add(new Bitmap(Resources.LockedIcon));
 
             _musicListView.StateImageList = _lockpadImageList;
 
