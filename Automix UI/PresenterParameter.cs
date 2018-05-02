@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (C) 2016 - 2018 LesProjecteurs
+// This file is part of Automix Software licensed under MIT License.
+
+using System.Collections.Generic;
 using Automix_AI.Distances;
 using Automix_Data_Management;
 using Automix_Data_Management.Exportation;
