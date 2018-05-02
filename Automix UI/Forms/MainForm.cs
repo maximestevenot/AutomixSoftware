@@ -69,8 +69,9 @@ namespace Automix_UI.Forms
             _parameterForm = new ParameterForm(this);
 
             _lockpadImageList = new ImageList();
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\UnlockedIcon.png"));
-            _lockpadImageList.Images.Add(Image.FromFile(Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"..\..\..\Resources\LockedIcon.png"));
+
+            _lockpadImageList.Images.Add(new Bitmap(Resources.UnlockedIcon));
+            _lockpadImageList.Images.Add(new Bitmap(Resources.LockedIcon));
 
             _musicListView.StateImageList = _lockpadImageList;
 
