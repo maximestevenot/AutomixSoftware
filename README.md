@@ -55,14 +55,13 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our coding style, 
 
 ## Authors
 
- - **Maxime STEVENOT** - *Project Manager* - <stevenot@ecole.ensicaen.fr>
- - **Guillaume HANNES** - *DevOps* - <hannes@ecole.ensicaen.fr>
- - **Jordan ERNULT** - *Developer* - <ernult@ecole.ensicaen.fr>
- - **Louis CARLIER** - *Developer* - <lcarlier@ecole.ensicaen.fr>
- - **Pierre GABON** - *Developer* - <gabon@ecole.ensicaen.fr>
-
-## Contributors
-
+ - **Maxime STEVENOT** - *Lead Developer* - <stevenot@ecole.ensicaen.fr>
+ - **Guillaume HANNES** - *Lead DevOps* - <hannes@ecole.ensicaen.fr>
+ - 
+ - **Jordan ERNULT** - *Main Developer* - <ernult@ecole.ensicaen.fr>
+ - **Louis CARLIER** - *Main Developer* - <lcarlier@ecole.ensicaen.fr>
+ - **Pierre GABON** - *Main Developer* - <gabon@ecole.ensicaen.fr>
+ - 
  - **Niels HECQUARD** - *Developer* - <hecquard@ecole.ensicaen.fr>
  - **Raphael HERBERT** - *Developer* - <herbert@ecole.ensicaen.fr>
  - **Cedric MASSON** - *Developer* - <masson@ecole.ensicaen.fr>
@@ -73,7 +72,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our coding style, 
 
 ## License
 
-Copyright (C) 2016 - 2018 LesProjecteurs
+Copyright (C) 2016 - 2021 LesProjecteurs
 
 LesProjecteurs is a partnership between Maxime STEVENOT,
 Guillaume HANNES, Jordan ERNULT, Louis CARLIER & Pierre GABON.
